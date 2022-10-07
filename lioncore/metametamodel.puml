@@ -1,0 +1,98 @@
+@startuml
+
+' classes
+
+class Metamodel implements NamespaceProvider {
+  qualifiedName: String
+}
+
+class Concept extends AbstractConcept {
+  abstract: boolean
+}
+
+class ConceptInterface extends AbstractConcept
+
+class Enum extends PrimitiveType implements NamespaceProvider
+
+class Datatype extends PrimitiveType
+
+class Annotation extends MetamodelElement implements NamespaceProvider, FeaturesContainer {
+  platformSpecific: String?
+}
+
+class Containment extends Link
+
+class Reference extends Link
+
+class EnumLiteral implements NamespacedEntity
+
+class Property extends Feature
+
+' Abstract classes
+
+abstract class MetamodelElement implements NamespacedEntity
+
+abstract class AbstractConcept extends MetamodelElement implements FeaturesContainer, NamespaceProvider {
+  allFeatures(): List<Feature>
+}
+
+abstract class PrimitiveType extends MetamodelElement
+
+abstract class Feature implements NamespacedEntity {
+  multiplicity: Multiplicity
+  calculated: boolean
+}
+
+abstract class Link extends Feature {
+  type: AbstractConcept
+}
+
+' Interfaces
+
+interface NamespaceProvider {
+   namespaceQualifier(): String
+}
+
+interface NamespacedEntity {
+  simpleName: String
+  qualifiedName(): String
+}
+
+interface FeaturesContainer
+
+' Enums
+
+enum Multiplicity {
+  Optional
+  Single
+  ZeroOrMore
+  OneOrMore
+}
+
+' Relations
+
+Metamodel "1" o-- "*" MetamodelElement: elements
+Metamodel "*" -- "*" Metamodel: dependsOn
+
+Concept "0..1" -- "*" Concept: extends
+Concept "*" -- "*" ConceptInterface: implements
+
+ConceptInterface "*" -- "*" ConceptInterface: extends
+
+Enum "1" o-- "1..*" EnumLiteral: literals
+
+Annotation "*" -- "1" AbstractConcept: target
+
+Containment "1" -- "*" Containment: specializes
+
+Reference "1" -- "*" Reference: specializes
+
+Property "*" -- "1" PrimitiveType: type
+
+Link "*" -- "1" AbstractConcept: type
+
+NamespacedEntity "*" -- "1" NamespaceProvider: container
+
+FeaturesContainer "1" o-- "*" Feature: features
+
+@enduml
