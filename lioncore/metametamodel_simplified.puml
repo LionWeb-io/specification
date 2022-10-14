@@ -40,7 +40,6 @@ abstract class Feature {
 }
 
 abstract class Link extends Feature {
-  type: AbstractConcept
 }
 
 ' Relations

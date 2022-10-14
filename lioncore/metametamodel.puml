@@ -40,7 +40,6 @@ abstract class Feature implements NamespacedEntity {
 }
 
 abstract class Link extends Feature {
-  type: AbstractConcept
 }
 
 ' Interfaces
