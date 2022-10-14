@@ -14,6 +14,8 @@ class ConceptInterface extends AbstractConcept
 
 class PrimitiveType extends Datatype
 
+class Typedef extends Datatype
+
 class Annotation extends AbstractConcept implements NamespaceProvider, FeaturesContainer {
   platformSpecific: String?
 }
@@ -87,5 +89,7 @@ Link "*" -- "1" AbstractConcept: type
 NamespacedEntity "*" -- "1" NamespaceProvider: container
 
 FeaturesContainer "1" o-- "*" Feature: features
+
+Typedef "*" -- "1" PrimitiveType: constraints
 
 @enduml
