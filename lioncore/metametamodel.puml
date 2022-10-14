@@ -14,7 +14,7 @@ class ConceptInterface extends AbstractConcept
 
 class PrimitiveType extends Datatype
 
-class Annotation extends MetamodelElement implements NamespaceProvider, FeaturesContainer {
+class Annotation extends AbstractConcept implements NamespaceProvider, FeaturesContainer {
   platformSpecific: String?
 }
 

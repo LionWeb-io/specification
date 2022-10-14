@@ -14,7 +14,7 @@ class ConceptInterface extends AbstractConcept
 
 class PrimitiveType extends Datatype
 
-class Annotation extends MetamodelElement  {
+class Annotation extends AbstractConcept  {
   platformSpecific: String?
 }
 
