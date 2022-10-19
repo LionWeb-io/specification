@@ -1,7 +1,9 @@
 @startuml
 
 
-' (concrete) classes
+abstract class AbstractConcept extends MetamodelElement implements FeaturesContainer, NamespaceProvider {
+  allFeatures(): List<Feature>
+}
 
 class Annotation extends AbstractConcept implements NamespaceProvider, FeaturesContainer {
   platformSpecific: String?
@@ -15,25 +17,6 @@ class ConceptInterface extends AbstractConcept
 
 class Containment extends Link
 
-class Metamodel implements NamespaceProvider {
-  qualifiedName: String
-}
-
-class PrimitiveType extends Datatype
-
-class Property extends Feature
-
-class Reference extends Link
-
-class Typedef extends Datatype
-
-
-' abstract classes
-
-abstract class AbstractConcept extends MetamodelElement implements FeaturesContainer, NamespaceProvider {
-  allFeatures(): List<Feature>
-}
-
 abstract class Datatype extends MetamodelElement
 
 abstract class Feature implements NamespacedEntity {
@@ -41,14 +24,22 @@ abstract class Feature implements NamespacedEntity {
   calculated: boolean
 }
 
+interface FeaturesContainer
+
 abstract class Link extends Feature
+
+class Metamodel implements NamespaceProvider {
+  qualifiedName: String
+}
 
 abstract class MetamodelElement implements NamespacedEntity
 
-
-' interfaces
-
-interface FeaturesContainer
+enum Multiplicity {
+  Optional
+  Single
+  ZeroOrMore
+  OneOrMore
+}
 
 interface NamespaceProvider {
    namespaceQualifier(): String
@@ -59,15 +50,13 @@ interface NamespacedEntity {
   qualifiedName(): String
 }
 
+class PrimitiveType extends Datatype
 
-' enums
+class Property extends Feature
 
-enum Multiplicity {
-  Optional
-  Single
-  ZeroOrMore
-  OneOrMore
-}
+class Reference extends Link
+
+class Typedef extends Datatype
 
 
 ' relations
