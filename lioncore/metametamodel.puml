@@ -5,7 +5,7 @@ abstract class AbstractConcept extends MetamodelElement implements FeaturesConta
   allFeatures(): List<Feature>
 }
 
-class Annotation extends AbstractConcept implements NamespaceProvider, FeaturesContainer {
+class Annotation extends AbstractConcept {
   platformSpecific: String?
 }
 
@@ -21,7 +21,7 @@ abstract class Datatype extends MetamodelElement
 
 abstract class Feature implements NamespacedEntity {
   multiplicity: Multiplicity
-  calculated: boolean
+  derived: boolean
 }
 
 interface FeaturesContainer
@@ -42,7 +42,7 @@ enum Multiplicity {
 }
 
 interface NamespaceProvider {
-   namespaceQualifier(): String
+  namespaceQualifier(): String
 }
 
 interface NamespacedEntity {
@@ -59,16 +59,16 @@ class Reference extends Link
 class Typedef extends Datatype
 
 
-' relations
+' relations:
 
 Annotation "*" -- "1" AbstractConcept: target
 
-Concept "0..1" -- "*" Concept: extends
+Concept "*" -- "0..1" Concept: extends
 Concept "*" -- "*" ConceptInterface: implements
 
 ConceptInterface "*" -- "*" ConceptInterface: extends
 
-Containment "1" -- "*" Containment: specializes
+Containment "*" -- "0..1" Containment: specializes
 
 FeaturesContainer "1" o-- "*" Feature: features
 
@@ -81,7 +81,7 @@ NamespacedEntity "*" -- "1" NamespaceProvider: container
 
 Property "*" -- "1" Datatype: type
 
-Reference "1" -- "*" Reference: specializes
+Reference "*" -- "0..1" Reference: specializes
 
 Typedef "*" -- "1" PrimitiveType: constraints
 
