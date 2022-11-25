@@ -1,4 +1,7 @@
 = Meta-Metamodel
+:toc: preamble
+:toclevels: 3
+:sectnums:
 
 In this document we describe the Meta-Metamodel to be used by LionWeb.
 The Meta-Metamodel is called LionCore.
@@ -36,89 +39,7 @@ Let’s first see a representation of the meta-metamodel using (a tiny subset of
 
 [plantuml, metametamodel, svg]
 ----
-abstract class AbstractConcept extends MetamodelElement implements FeaturesContainer, NamespaceProvider {
-  allFeatures(): List<Feature>
-}
-
-class Annotation extends AbstractConcept {
-  platformSpecific: String?
-}
-
-class Concept extends AbstractConcept {
-  abstract: boolean
-}
-
-class ConceptInterface extends AbstractConcept
-
-class Containment extends Link
-
-abstract class Datatype extends MetamodelElement
-
-abstract class Feature implements NamespacedEntity {
-  multiplicity: Multiplicity
-  derived: boolean
-}
-
-interface FeaturesContainer
-
-abstract class Link extends Feature
-
-class Metamodel implements NamespaceProvider {
-  qualifiedName: String
-}
-
-abstract class MetamodelElement implements NamespacedEntity
-
-enum Multiplicity {
-  Optional
-  Single
-  ZeroOrMore
-  OneOrMore
-}
-
-interface NamespaceProvider {
-  namespaceQualifier(): String
-}
-
-interface NamespacedEntity {
-  simpleName: String
-  qualifiedName(): String
-}
-
-class PrimitiveType extends Datatype
-
-class Property extends Feature
-
-class Reference extends Link
-
-class Typedef extends Datatype
-
-
-' relations:
-
-Annotation "*" -- "1" AbstractConcept: target
-
-Concept "*" -- "0..1" Concept: extends
-Concept "*" -- "*" ConceptInterface: implements
-
-ConceptInterface "*" -- "*" ConceptInterface: extends
-
-Containment "*" -- "0..1" Containment: specializes
-
-FeaturesContainer "1" o-- "*" Feature: features
-
-Link "*" -- "1" AbstractConcept: type
-
-Metamodel "1" o-- "*" MetamodelElement: elements
-Metamodel "*" -- "*" Metamodel: dependsOn
-
-NamespacedEntity "*" -- "1" NamespaceProvider: container
-
-Property "*" -- "1" Datatype: type
-
-Reference "*" -- "0..1" Reference: specializes
-
-Typedef "*" -- "1" PrimitiveType: constraints
+include::metametamodel.puml[]
 ----
 
 image::metametamodel.svg[]
@@ -324,7 +245,7 @@ A Reference can optionally be a _specialization_ of another Reference.
 In that case, the original Reference must appear in a <<Concept>> extended by the Concept containing the specializing Reference or in an <<ConceptInterface>> implemented by the specializing Reference.
 A Reference can only specialize a Reference with the same name.
 
-A Reference should have <<Multiplicity>> `Optional` or `Single` but not `0..\*` or `1..*`.
+A Reference should have <<Multiplicity>> `Optional` or `Single` but not `ZeroOrMore` or `OneOrMore`.
 
 ==== Property
 This indicates a simple value associated to an entity.
@@ -340,7 +261,7 @@ Differently from an `EAttribute`, a Property has no `ID` flag.
 A Property is a <<Feature>>.
 It is indirectly a <<NamespacedEntity>>.
 
-A Property should have <<Multiplicity>> `Optional` or `Single` but `not 0..\*` or `1..*`.
+A Property should have <<Multiplicity>> `Optional` or `Single` but not `ZeroOrMore` or `OneOrMore`.
 
 === Abstract Classes
 
