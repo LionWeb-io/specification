@@ -84,8 +84,8 @@ EnumerationLiteral "*" -* "1" Enumeration : literals
 Typedef "*" -> "1" PrimitiveType #orange;text:orange : constraints
 
 legend
-  <#LightGray,#LightGray>| <#LightGreen>Feature Container |
-  | <#LightBlue>Feature |
+  <#LightGray,#LightGray>| <#LightBlue>Feature |
+  | <#LightGreen>Feature Container |
   | <#LightPink>DataType |
   | <#orange>Not agreed yet |
 end legend
