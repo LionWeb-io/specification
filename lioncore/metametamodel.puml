@@ -20,26 +20,21 @@ class Containment extends Link
 abstract class Datatype extends MetamodelElement
 
 abstract class Feature implements NamespacedEntity {
-  multiplicity: Multiplicity
   derived: boolean
+  optional: boolean
 }
 
 interface FeaturesContainer
 
-abstract class Link extends Feature
+abstract class Link extends Feature {
+  multiple: boolean
+}
 
 class Metamodel implements NamespaceProvider {
   qualifiedName: String
 }
 
 abstract class MetamodelElement implements NamespacedEntity
-
-enum Multiplicity {
-  Optional
-  Single
-  ZeroOrMore
-  OneOrMore
-}
 
 interface NamespaceProvider {
   namespaceQualifier(): String
