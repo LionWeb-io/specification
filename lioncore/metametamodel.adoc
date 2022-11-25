@@ -1,4 +1,7 @@
 = Meta-Metamodel
+:toc: preamble
+:toclevels: 3
+:sectnums:
 
 In this document we describe the Meta-Metamodel to be used by LionWeb.
 The Meta-Metamodel is called LionCore.
