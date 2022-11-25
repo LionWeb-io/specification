@@ -16,7 +16,7 @@ class Metamodel implements NamespaceProvider {
 
 abstract class MetamodelElement implements NamespacedEntity
 
-abstract class FeaturesContainer extends MetamodelElement implements NamespaceProvider {
+abstract class FeaturesContainer #LightGreen extends MetamodelElement implements NamespaceProvider {
   allFeatures(): List<Feature>
 }
 
@@ -24,36 +24,36 @@ class Annotation #orange extends FeaturesContainer  {
   platformSpecific: String?
 }
 
-class Concept extends FeaturesContainer {
+class Concept #LightGreen extends FeaturesContainer {
   abstract: boolean
 }
 
-class ConceptInterface extends FeaturesContainer
+class ConceptInterface #LightGreen extends FeaturesContainer
 
-abstract class Feature implements NamespacedEntity {
+abstract class Feature #LightBlue implements NamespacedEntity {
   <color:#orange>derived: boolean</color>
   optional: boolean
 }
 
-class Property extends Feature
+class Property #LightBlue extends Feature
 
 class Typedef #orange extends DataType
 
-abstract class DataType extends MetamodelElement
+abstract class DataType #LightPink extends MetamodelElement
 
-class PrimitiveType extends DataType
+class PrimitiveType #LightPink extends DataType
 
-class Enumeration extends DataType implements NamespaceProvider
+class Enumeration #LightPink extends DataType implements NamespaceProvider
 
-class EnumerationLiteral implements NamespacedEntity
+class EnumerationLiteral #LightPink implements NamespacedEntity
 
-abstract class Link extends Feature {
+abstract class Link #LightBlue extends Feature {
   multiple: boolean
 }
 
-class Containment extends Link
+class Containment #LightBlue extends Link
 
-class Reference extends Link
+class Reference #LightBlue extends Link
 
 ' relations:
 
@@ -83,4 +83,10 @@ EnumerationLiteral "*" -* "1" Enumeration : literals
 
 Typedef "*" -> "1" PrimitiveType #orange;text:orange : constraints
 
+legend
+  <#LightGray,#LightGray>| <#LightGreen>Feature Container |
+  | <#LightBlue>Feature |
+  | <#LightPink>DataType |
+  | <#orange>Not agreed yet |
+end legend
 @enduml
