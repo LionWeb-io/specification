@@ -1,6 +1,21 @@
 @startuml
 
 
+interface NamespacedEntity {
+  simpleName: String
+  qualifiedName(): String
+}
+
+interface NamespaceProvider {
+  namespaceQualifier(): String
+}
+
+class Metamodel implements NamespaceProvider {
+  qualifiedName: String
+}
+
+abstract class MetamodelElement implements NamespacedEntity
+
 abstract class FeaturesContainer extends MetamodelElement implements NamespaceProvider {
   allFeatures(): List<Feature>
 }
@@ -15,75 +30,57 @@ class Concept extends FeaturesContainer {
 
 class ConceptInterface extends FeaturesContainer
 
-class Containment extends Link
-
-abstract class DataType extends MetamodelElement
-
 abstract class Feature implements NamespacedEntity {
   derived: boolean
   optional: boolean
 }
 
-abstract class Link extends Feature {
-  multiple: boolean
-}
-
-class Metamodel implements NamespaceProvider {
-  qualifiedName: String
-}
-
-abstract class MetamodelElement implements NamespacedEntity
-
-interface NamespaceProvider {
-  namespaceQualifier(): String
-}
-
-interface NamespacedEntity {
-  simpleName: String
-  qualifiedName(): String
-}
-
-class PrimitiveType extends DataType
-
 class Property extends Feature
 
-class Reference extends Link
+class Typedef extends DataType
+
+abstract class DataType extends MetamodelElement
+
+class PrimitiveType extends DataType
 
 class Enumeration extends DataType implements NamespaceProvider
 
 class EnumerationLiteral implements NamespacedEntity
 
-class Typedef extends DataType
+abstract class Link extends Feature {
+  multiple: boolean
+}
 
+class Containment extends Link
+
+class Reference extends Link
 
 ' relations:
 
-Annotation "*" -- "1" FeaturesContainer: target
+Annotation "*" --> "1" FeaturesContainer: target
 
-Concept "*" -- "0..1" Concept: extends
-Concept "*" -- "*" ConceptInterface: implements
+Concept "*" -> "0..1" Concept: extends
+Concept "*" --> "*" ConceptInterface: implements
 
-ConceptInterface "*" -- "*" ConceptInterface: extends
+ConceptInterface "*" --> "*" ConceptInterface: extends
 
-Containment "*" -- "0..1" Containment: specializes
+Containment "*" -> "0..1" Containment: specializes
 
-FeaturesContainer "1" o-- "*" Feature: features
+Feature "*" -* "1" FeaturesContainer: features
 
-Link "*" -- "1" FeaturesContainer: type
+Link "*" --> "1" FeaturesContainer: type
 
-Metamodel "1" o-- "*" MetamodelElement: elements
-Metamodel "*" -- "*" Metamodel: dependsOn
+MetamodelElement "*" -* "1" Metamodel: elements
+Metamodel "*" --> "*" Metamodel: dependsOn
 
-NamespacedEntity "*" -- "1" NamespaceProvider: container
+NamespacedEntity "*" --> "1" NamespaceProvider: container
 
-Property "*" -- "1" DataType: type
+Property "*" -> "1" DataType: type
 
-Reference "*" -- "0..1" Reference: specializes
+Reference "*" -> "0..1" Reference: specializes
 
-Enumeration "*" -- "*" EnumerationLiteral: literals
+EnumerationLiteral "*" -* "1" Enumeration : literals
 
-Typedef "*" -- "1" PrimitiveType: constraints
-
-
+Typedef "*" -> "1" PrimitiveType: constraints
 
 @enduml
