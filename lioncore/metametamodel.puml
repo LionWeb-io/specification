@@ -17,7 +17,7 @@ class ConceptInterface extends AbstractConcept
 
 class Containment extends Link
 
-abstract class Datatype extends MetamodelElement
+abstract class DataType extends MetamodelElement
 
 abstract class Feature implements NamespacedEntity {
   derived: boolean
@@ -45,13 +45,17 @@ interface NamespacedEntity {
   qualifiedName(): String
 }
 
-class PrimitiveType extends Datatype
+class PrimitiveType extends DataType
 
 class Property extends Feature
 
 class Reference extends Link
 
-class Typedef extends Datatype
+class Enumeration extends DataType implements NamespaceProvider
+
+class EnumerationLiteral implements NamespacedEntity
+
+class Typedef extends DataType
 
 
 ' relations:
@@ -74,11 +78,14 @@ Metamodel "*" -- "*" Metamodel: dependsOn
 
 NamespacedEntity "*" -- "1" NamespaceProvider: container
 
-Property "*" -- "1" Datatype: type
+Property "*" -- "1" DataType: type
 
 Reference "*" -- "0..1" Reference: specializes
 
+Enumeration "*" -- "*" EnumerationLiteral: literals
+
 Typedef "*" -- "1" PrimitiveType: constraints
+
 
 
 @enduml
