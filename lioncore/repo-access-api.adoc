@@ -1,0 +1,193 @@
+= Repo Access API
+
+The repository API is used to store and retrieve models, where "model" is a somehow bounded subset of the repo contents.
+It is intended for bulk access (read, modify a couple of times on the client then store again).
+it is *not* intended as a delta-oriented API that takes "modification commands" as arguments.
+
+== Use Cases
+
+=== MPS Backend
+Access all modules (ie. languages / solutions / generators / devkits), models, nodes, properties and links present in an MPS repository when using an MPS-based backend.
+No access control, i.e. everything is readable and writable.
+
+=== MPS Client
+Access all models provided by the connected backend.
+In a first version, we can assume the languages are already present in MPS, i.e. we only read/write M1 models.
+
+=== EMF Backend
+Retrieve/store repo contents from a bunch of `.ecore` / `.genmodel` / `.xmi` files.
+No access control.
+
+=== EMF Client
+Access repo contents as EClass / EFeature / EEnum / EObject / etc.
+No access control.
+
+=== Web Display
+Access all (M1) models provided by the connected backend read-only from a web server written in Java.
+Access all (M1/2) models read/write from a different client.
+
+=== Web Editing
+Read and write access to all M1 models provided by the connected backend.
+
+=== File Backed for Testing
+Complete contents of repo are read from a file.
+By a configuration flag, it’s read-only or read/write; in the latter case writes are only in-memory (i.e. not persisted).
+
+=== Services
+Services or components which access all/parts of the model to compute specific derived knowledge (e.g. typesystem, scopes, BI or pre-computing/analysis for web displays).
+
+=== Generator-out
+Generator takes (big part of) the model, turns it into some output outside the model (e.g. text).
+
+=== Model-to-Model Transformation
+Mapper takes part of model and writes/replaces other part of the model.
+
+== Non-Use cases
+* Store other things than models, e.g. images, (binary files), etc.
+* Custom persistence (automatic parsing or unparsing)
+
+== APIs
+
+retrieve part of model::
+* in: (list of) node ID
+* in: mode \{node, subtree, closure}
+* out: (list of) subgraph(s)
+
+store part of model::
+* in: (list of) subgraph(s)
+
+give me a range of IDs I can use::
+* tbd
+
+Next: versioning, node referencing/URL
+
+Note: how do we represent nodes and lists of subgraphs. (Sascha Map serialization)
+
+== REST API
+A model is just represented as a list of nodes.
+Each node has an ID and can be referenced using that ID.
+
+A model implementation on the client side just has to maintain a Map<NodeId, NodeData>.
+When it receives data from the server it’s as simple as putting it into the map and overriding the existing node data.
+There is no difference between loading an initial version or applying an incremental update.
+
+The server is responsible for doing the difficult algorithmic part.
+This minimizes the code required on the client side, making it easy to provide implementations for different platforms.
+
+[source, httprequest]
+----
+GET /lion/\{repositoryID}/
+
+GET /lion/\{repositoryID}/\{versionHash}/
+
+GET /lion/\{repositoryID}/\{branchName}/
+----
+
+Response:
+
+[source, json]
+----
+{
+  "versionHash": "af945d129c476",
+  "nodes": [
+    {
+      "id": 1,
+      "properties": {
+        "some": "something",
+        "values": "42",
+        "here": "161.21"
+      },
+      "references": { "entities": [735001, 769001] },
+      "children": {}
+    },
+    {
+      "id": 735001,
+      "properties": {
+        "name": "Entity1"
+      },
+      "references": {},
+      "children": { "properties": [735002, 735003, 735004] }
+    }
+  ]
+}
+----
+
+If the server doesn’t support branches or versioning then it only implements the first endpoint.
+The client can fallback to the first endpoint, if the others return 404.
+
+[source, httprequest]
+----
+GET /lion/\{repositoryID}/delta/\{baseVersionHash}/
+
+GET /lion/\{repositoryID}/\{versionHash}/delta/\{baseVersionHash}/
+
+GET /lion/\{repositoryID}/\{branchName}/delta/\{baseVersionHash}/
+----
+
+Response:
+
+[source, json]
+----
+{
+  "versionHash": "af945d129c476",
+  "baseVersionHash": "39a15fd49c867",
+  "nodes": [
+    // only nodes that changed between the two versions
+  ]
+}
+----
+
+Also optional.
+If the server only supports bulk model read/write operations then it returns 404 and the client will fallback to the bulk endpoints.
+
+[source, httprequest]
+----
+POST /lion/\{repositoryID}/\{branchName}/\{baseVersionHash}/update
+
+POST /lion/\{repositoryID}/\{branchName}/update
+----
+
+Request body:
+
+[source, json]
+----
+[
+  // list of modified nodes
+  {
+    "id": 735001,
+    "properties": { "name": "EntityA" }
+    // unmodified content of the node can be omitted
+  }
+]
+----
+
+Response:
+
+[source, json]
+----
+{
+  "versionHash": "af945d129c476",
+  "baseVersionHash": "39a15fd49c867",
+  "nodes": []
+}
+----
+
+The response is similar to the `…/delta/…` endpoint.
+If there were concurrent changes and conflicts were resolved by the server then it may contain a list of the nodes that need to be updated on the client, otherwise the list of nodes is empty.
+
+Servers that don’t support versioning can provide only the second endpoint without a `baseVersion`.
+The response then doesn’t contain any version hashes.
+
+Reading the concrete rest API, this reminds me that there are (at least) five aspects about which we have to discuss:
+
+. What is the vocabulary (set of operations) that we want to support?
+** what is the granularity/size of the "unit of stuff" we read and write?
+** how flexibly can we express the query to determine that size?
+** can we layer a query API on top of a simpler API?
+
+. How do we represent the models (fragments) across the wire? JSON, YAML, etc?
+
+. How do we represent the actual operations? Which transport protocol do we use?
+
+I think 1) is independent of 3).
+Which is why I would like to discuss this initially without discussing the REST details.
