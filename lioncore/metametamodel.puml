@@ -1,19 +1,19 @@
 @startuml
 
 
-abstract class AbstractConcept extends MetamodelElement implements FeaturesContainer, NamespaceProvider {
+abstract class FeaturesContainer extends MetamodelElement implements NamespaceProvider {
   allFeatures(): List<Feature>
 }
 
-class Annotation extends AbstractConcept {
+class Annotation extends FeaturesContainer {
   platformSpecific: String?
 }
 
-class Concept extends AbstractConcept {
+class Concept extends FeaturesContainer {
   abstract: boolean
 }
 
-class ConceptInterface extends AbstractConcept
+class ConceptInterface extends FeaturesContainer
 
 class Containment extends Link
 
@@ -23,8 +23,6 @@ abstract class Feature implements NamespacedEntity {
   derived: boolean
   optional: boolean
 }
-
-interface FeaturesContainer
 
 abstract class Link extends Feature {
   multiple: boolean
@@ -60,7 +58,7 @@ class Typedef extends DataType
 
 ' relations:
 
-Annotation "*" -- "1" AbstractConcept: target
+Annotation "*" -- "1" FeaturesContainer: target
 
 Concept "*" -- "0..1" Concept: extends
 Concept "*" -- "*" ConceptInterface: implements
@@ -71,7 +69,7 @@ Containment "*" -- "0..1" Containment: specializes
 
 FeaturesContainer "1" o-- "*" Feature: features
 
-Link "*" -- "1" AbstractConcept: type
+Link "*" -- "1" FeaturesContainer: type
 
 Metamodel "1" o-- "*" MetamodelElement: elements
 Metamodel "*" -- "*" Metamodel: dependsOn
