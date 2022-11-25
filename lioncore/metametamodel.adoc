@@ -242,7 +242,7 @@ A Reference can optionally be a _specialization_ of another Reference.
 In that case, the original Reference must appear in a <<Concept>> extended by the Concept containing the specializing Reference or in an <<ConceptInterface>> implemented by the specializing Reference.
 A Reference can only specialize a Reference with the same name.
 
-A Reference should have <<Multiplicity>> `Optional` or `Single` but not `0..\*` or `1..*`.
+A Reference should have <<Multiplicity>> `Optional` or `Single` but not `ZeroOrMore` or `OneOrMore`.
 
 ==== Property
 This indicates a simple value associated to an entity.
@@ -258,7 +258,7 @@ Differently from an `EAttribute`, a Property has no `ID` flag.
 A Property is a <<Feature>>.
 It is indirectly a <<NamespacedEntity>>.
 
-A Property should have <<Multiplicity>> `Optional` or `Single` but `not 0..\*` or `1..*`.
+A Property should have <<Multiplicity>> `Optional` or `Single` but not `ZeroOrMore` or `OneOrMore`.
 
 === Abstract Classes
 
