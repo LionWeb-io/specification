@@ -121,6 +121,8 @@ Reference "*" -- "0..1" Reference: specializes
 Typedef "*" -- "1" PrimitiveType: constraints
 ----
 
+image::metametamodel.svg[]
+
 == Definition of the Meta-Metamodel
 
 In this section we describe the single elements composing the Meta-Metamodel.
