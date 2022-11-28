@@ -1,7 +1,7 @@
 @startuml
 hide empty members
 
-interface NamespacedEntity {
+abstract class NamespacedEntity {
   simpleName: String
   qualifiedName(): String
 }
