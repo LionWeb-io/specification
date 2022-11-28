@@ -1,25 +1,6 @@
 @startuml
 hide empty members
 
-abstract class NamespacedEntity {
-  simpleName: String
-  qualifiedName(): String
-}
-
-interface NamespaceProvider {
-  namespaceQualifier(): String
-}
-
-class Metamodel implements NamespaceProvider {
-  qualifiedName: String
-}
-
-abstract class MetamodelElement implements NamespacedEntity
-
-abstract class FeaturesContainer #LightGreen extends MetamodelElement implements NamespaceProvider {
-  allFeatures(): List<Feature>
-}
-
 class Annotation #orange extends FeaturesContainer  {
   platformSpecific: String?
 }
@@ -30,30 +11,49 @@ class Concept #LightGreen extends FeaturesContainer {
 
 class ConceptInterface #LightGreen extends FeaturesContainer
 
-abstract class Feature #LightBlue implements NamespacedEntity {
-  <color:#orange>derived: boolean</color>
-  optional: boolean
-}
-
-class Property #LightBlue extends Feature
-
-class Typedef #orange extends DataType
+class Containment #LightBlue extends Link
 
 abstract class DataType #LightPink extends MetamodelElement
-
-class PrimitiveType #LightPink extends DataType
 
 class Enumeration #LightPink extends DataType implements NamespaceProvider
 
 class EnumerationLiteral #LightPink implements NamespacedEntity
 
+abstract class Feature #LightBlue implements NamespacedEntity {
+  <color:#orange>derived: boolean</color>
+  optional: boolean
+}
+
+abstract class FeaturesContainer #LightGreen extends MetamodelElement implements NamespaceProvider {
+  allFeatures(): List<Feature>
+}
+
 abstract class Link #LightBlue extends Feature {
   multiple: boolean
 }
 
-class Containment #LightBlue extends Link
+class Metamodel implements NamespaceProvider {
+  qualifiedName: String
+}
+
+abstract class MetamodelElement implements NamespacedEntity
+
+abstract class NamespacedEntity {
+  simpleName: String
+  qualifiedName(): String
+}
+
+interface NamespaceProvider {
+  namespaceQualifier(): String
+}
+
+class PrimitiveType #LightPink extends DataType
+
+class Property #LightBlue extends Feature
 
 class Reference #LightBlue extends Link
+
+class Typedef #orange extends DataType
 
 ' relations:
 
@@ -66,20 +66,20 @@ ConceptInterface "*" --> "*" ConceptInterface: extends
 
 Containment "*" -> "0..1" Containment #orange;text:orange : specializes
 
+EnumerationLiteral "*" -* "1" Enumeration : literals
+
 Feature "*" -* "1" FeaturesContainer: features
 
 Link "*" --> "1" FeaturesContainer: type
 
-MetamodelElement "*" -* "1" Metamodel: elements
 Metamodel "*" --> "*" Metamodel: dependsOn
+MetamodelElement "*" -* "1" Metamodel: elements
 
 NamespacedEntity "*" --> "1" NamespaceProvider: container
 
 Property "*" -> "1" DataType: type
 
 Reference "*" -> "0..1" Reference #orange;text:orange : specializes
-
-EnumerationLiteral "*" -* "1" Enumeration : literals
 
 Typedef "*" -> "1" PrimitiveType #orange;text:orange : constraints
 
