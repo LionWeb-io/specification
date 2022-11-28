@@ -1,32 +1,31 @@
 @startuml
+hide empty members
 
-
-abstract class AbstractConcept extends MetamodelElement implements FeaturesContainer, NamespaceProvider {
-  allFeatures(): List<Feature>
-}
-
-class Annotation extends AbstractConcept {
-  platformSpecific: String?
-}
-
-class Concept extends AbstractConcept {
+class Concept #LightGreen extends FeaturesContainer {
   abstract: boolean
 }
 
-class ConceptInterface extends AbstractConcept
+class ConceptInterface #LightGreen extends FeaturesContainer
 
-class Containment extends Link
+class Containment #LightBlue extends Link
 
-abstract class Datatype extends MetamodelElement
+abstract class DataType #LightPink extends MetamodelElement
 
-abstract class Feature implements NamespacedEntity {
-  multiplicity: Multiplicity
-  derived: boolean
+class Enumeration #LightPink extends DataType implements NamespaceProvider
+
+class EnumerationLiteral #LightPink implements NamespacedEntity
+
+abstract class Feature #LightBlue implements NamespacedEntity {
+  optional: boolean
 }
 
-interface FeaturesContainer
+abstract class FeaturesContainer #LightGreen extends MetamodelElement implements NamespaceProvider {
+  allFeatures(): List<Feature>
+}
 
-abstract class Link extends Feature
+abstract class Link #LightBlue extends Feature {
+  multiple: boolean
+}
 
 class Metamodel implements NamespaceProvider {
   qualifiedName: String
@@ -34,56 +33,44 @@ class Metamodel implements NamespaceProvider {
 
 abstract class MetamodelElement implements NamespacedEntity
 
-enum Multiplicity {
-  Optional
-  Single
-  ZeroOrMore
-  OneOrMore
+abstract class NamespacedEntity {
+  simpleName: String
+  qualifiedName(): String
 }
 
 interface NamespaceProvider {
   namespaceQualifier(): String
 }
 
-interface NamespacedEntity {
-  simpleName: String
-  qualifiedName(): String
-}
+class PrimitiveType #LightPink extends DataType
 
-class PrimitiveType extends Datatype
+class Property #LightBlue extends Feature
 
-class Property extends Feature
-
-class Reference extends Link
-
-class Typedef extends Datatype
-
+class Reference #LightBlue extends Link
 
 ' relations:
 
-Annotation "*" -- "1" AbstractConcept: target
+Concept "*" -> "0..1" Concept: extends
+Concept "*" --> "*" ConceptInterface: implements
 
-Concept "*" -- "0..1" Concept: extends
-Concept "*" -- "*" ConceptInterface: implements
+ConceptInterface "*" --> "*" ConceptInterface: extends
 
-ConceptInterface "*" -- "*" ConceptInterface: extends
+EnumerationLiteral "*" -* "1" Enumeration : literals
 
-Containment "*" -- "0..1" Containment: specializes
+Feature "*" -* "1" FeaturesContainer: features
 
-FeaturesContainer "1" o-- "*" Feature: features
+Link "*" --> "1" FeaturesContainer: type
 
-Link "*" -- "1" AbstractConcept: type
+Metamodel "*" --> "*" Metamodel: dependsOn
+MetamodelElement "*" -* "1" Metamodel: elements
 
-Metamodel "1" o-- "*" MetamodelElement: elements
-Metamodel "*" -- "*" Metamodel: dependsOn
+NamespacedEntity "*" --> "1" NamespaceProvider: container
 
-NamespacedEntity "*" -- "1" NamespaceProvider: container
+Property "*" -> "1" DataType: type
 
-Property "*" -- "1" Datatype: type
-
-Reference "*" -- "0..1" Reference: specializes
-
-Typedef "*" -- "1" PrimitiveType: constraints
-
-
+legend
+  <#LightGray,#LightGray>| <#LightBlue>Feature |
+  | <#LightGreen>Feature Container |
+  | <#LightPink>DataType |
+end legend
 @enduml
