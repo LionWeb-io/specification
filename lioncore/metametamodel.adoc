@@ -2,6 +2,8 @@
 :toc: preamble
 :toclevels: 3
 :sectnums:
+:experimental: This part of LionCore is still under discussion.
+
 
 In this document we describe the Meta-Metamodel to be used by LionWeb.
 The Meta-Metamodel is called LionCore.
@@ -12,8 +14,8 @@ The goal is to define a meta-metamodel that can be used in different contexts an
 
 The approach taken would be conservative: we want to provide boring and proven infrastructure, so that innovation can be built on top of it.
 
-This will be based on the experience that we as a community had with the Meta-Metamodel used in EMF and MPS mainly.
-Suggestions based on the experience obtained with other Meta-Metamodels are also very welcome.
+This will be based on the experience that we as a community had with the meta-metamodel used in EMF and MPS mainly.
+Suggestions based on the experience obtained with other meta-metamodels are also very welcome.
 
 == Languages supported
 
@@ -31,7 +33,7 @@ For example, metamodels should be expressed to define:
 * The Abstract Syntax Tree (AST) of existing textual programming languages such as Java, RPG, Python, or SAS
 
 * The Abstract Syntax Tree (AST) of DSLs backed by projectional editors.
-For examples, DSLs used to define tax calculations or automation rules for email marketing systems
+For example, DSLs used to define tax calculations or automation rules for email marketing systems
 
 == Overview
 
@@ -75,16 +77,19 @@ EPackages have instead sub-packages and MPS Languages have virtual folders.
 For this use case, different Metamodels could be used instead.
 
 .Characteristics
-Each Metamodel will have a qualified name, similarly to MPS Languages.
+A Metamodel has a `qualifiedName` and an `id`, similarly to MPS Languages.
 
-Each Metamodel will contain an ordered list of Metamodel elements.
-
-A Metamodel can depend on other Metamodels.
-Dependencies must be explicitly declared.
-Metamodel elements contained in a Metamodel are allowed to refer exclusively to Metamodel elements contained in the same Metamodel or in Metamodel explicitly declared as dependencies by the current metamodel.
-Dependencies are not transitive: e.g., if A declares a dependency on B, and B declares a dependency on C, still references to C cannot appear within A, unless C is added to the list of dependencies of A.
+Each Metamodel will contain a list of <<MetamodelElement, Metamodel elements>> in `elements` containment.
 
 A Metamodel is a <<NamespaceProvider>> as it provides a Namespace to all its elements.
+
+A Metamodel can depend on other Metamodels via `dependsOn` reference.
+Dependencies must be explicitly declared.
+
+.Constraints
+Metamodel elements contained in a Metamodel are allowed to refer exclusively to Metamodel elements contained in the same Metamodel or in Metamodel explicitly declared as dependencies by the current metamodel.
+
+Dependencies are not transitive: e.g., if A declares a dependency on B, and B declares a dependency on C, still references to C cannot appear within A, unless C is added to the list of dependencies of A.
 
 ==== Concept
 A Concept represents a category of entities sharing the same structure.
@@ -97,18 +102,25 @@ Single entities could be Concept instances, such as Invoice #1/2022.
 A Concept in LionWeb will be roughly equivalent to an `EClass` (with the `isInterface` flag set to `false`) or an MPS’s `Concept`.
 
 .Characteristics
-A Concept is an <<AbstractConcept>>.
-It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel), a <<NamespaceProvider>> (as it act as the namespace for its features), and a <<FeaturesContainer>> (as it has features).
+A Concept has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A Concept has a reference <<container, `container`>> to the containing <<NamespaceProvider>>.
 
-A Concept can be concrete (i.e., instantiable) or abstract.
+[[abstract]]
+A Concept can be concrete (i.e., instantiable) or abstract, marked by boolean `abstract` property.
 
-Each Concept can extend zero or one Concepts.
+A Concept is a <<FeaturesContainer>>  (as it has features).
+It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel), and a <<NamespaceProvider>> (as it act as the namespace for its features).
+
+Each Concept can `extend` zero or one Concepts.
 If no Concepts are explicitly extended, the Concept will implicitly extend the Concept named `BaseConcept`.
 `BaseConcept` is the only concept that truly does not extend any Concept.
 
-It can implement zero or more <<ConceptInterface, ConceptInterfaces>>.
+A Concept `implements` zero or more <<ConceptInterface, ConceptInterfaces>>.
 
-A Concept can have any number of features, given it is a <<FeaturesContainer>>.
+A Concept can have any number of <<features, `features`>>, given it is a <<FeaturesContainer>>.
+
+.Constraints
+TBD
 
 ==== ConceptInterface
 A ConceptInterface represents a category of entities sharing some similar characteristics.
@@ -120,12 +132,20 @@ For example, `Named` would be a ConceptInterface.
 A ConceptInterface in LionWeb will be roughly equivalent to an `EClass` (with the `isInterface` flag set to `true`) or an MPS’s `ConceptInterface`.
 
 .Characteristics
-A ConceptInterface is an <<AbstractConcept>>.
-It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel), a <<NamespaceProvider>> (as it act as the namespace for its features), and a <<FeaturesContainer>> (as it has features).
+A ConceptInterface has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A ConceptInterface has a reference <<container, `container`>> to the containing <<NamespaceProvider>>.
 
-Each ConceptInterface can extend zero or more ConceptInterfaces.
+A ConceptInterface is an <<FeaturesContainer>>  (as it has features).
+It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel), and a <<NamespaceProvider>> (as it act as the namespace for its features).
 
-A ConceptInterface can have any number of features.
+Each ConceptInterface `extends` zero or more ConceptInterfaces.
+
+A ConceptInterface can have any number of <<features, `features`>>, given it is a <<FeaturesContainer>>.
+
+.Constraints
+{empty}
+
+WARNING: {experimental}
 
 A ConceptInterface can only declare features marked as derived.
 
@@ -169,12 +189,21 @@ A PrimitiveType is similar to Ecore’s `EDataType` and to MPS’ `PrimitiveData
 Differently from ECore’s `EDataType` PrimitiveType has no flag `serializable`, and it does not inherit fields such as `instanceClassName`, `instanceClass`, or `defaultValue`.
 
 .Characteristics
+A PrimitiveType has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A MetamodelElement has a reference <<container, `container`>> to the containing <<NamespaceProvider>>.
+
 A PrimitiveType is a <<DataType>>.
 It is indirectly a <<MetamodelElement>>, and a <<NamespacedEntity>>.
 
 The correspondence between a PrimitiveType an implementation class on a specific platforms can be specified through annotations, but it is not specified on the PrimitiveType itself.
 
+.Constraints
+TBD
+
 ==== Annotation
+
+WARNING: {experimental}
+
 This represents additional metadata relative to some orthogonal concern.
 
 .Example
@@ -195,16 +224,16 @@ An annotation can be meaningful for a specific platform, identified by a name.
 For this reason Annotation has a field `platformSpecific` of type String?.
 
 An Annotation is a <<MetamodelElement>>, a <<NamespaceProvider>>, and a <<FeaturesContainer>>.
-However it is forbidden for Annotations to have <<Containment, Containments>>.
+However, it is forbidden for Annotations to have <<Containment, Containments>>.
 An Annotation can have as <<Feature, Features>> only <<Reference, References>> and <<Property, Properties>>.
 
-An Annotation is related to its `target`, which is an <<AbstractConcept>>.
+An Annotation is related to its `target`, which is an <<FeaturesContainer>>.
 It indicates that the Annotation can be applied to instances of that specific AbstractConcept.
 A `target` must be always specified, and it can possibly be the `BaseConcept`, representing all concepts.
 
 
 ==== Containment
-Represents a relation between a containing <<FeaturesContainer>> and a contained <<AbstractConcept>>.
+Represents a relation between a containing <<FeaturesContainer>> and a contained <<FeaturesContainer>>.
 
 .Example
 Between an _IfStatement_ and its _condition_ there is a Containment relation.
@@ -214,18 +243,29 @@ A Containment is similar to an ECore’s `EReference` with the `containment` fla
 Differently from an `EReference` there is no `container` flag and `resolveProxies` flag.
 
 A Containment is similar to an MPS’s `LinkDeclaration` with `metaClass` having value `aggregation`.
-Differently from a `LinkDeclaration` there are no fields `unordered` or `linkId`.
+Differently from a `LinkDeclaration` there is no field `unordered`.
 
 .Characteristics
+A Containment has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A Containment has a reference <<container, `container`>> to the containing <<NamespaceProvider>>.
+It can be marked as <<optional, `optional`>> and <<multiple, `multiple`>>.
+
+A Containment refers its <<linkType, `type`>>, which is a <<FeaturesContainer>>.
+
 A Containment is a <<Link>>.
 A Containment is indirectly a <<Feature>> and a <<NamespacedEntity>>.
+
+WARNING: {experimental}
 
 A Containment can optionally be a _specialization_ of another Containment.
 In that case, the original Containment must appear in a <<Concept>> extended by the Concept containing the specializing Containment or in an <<ConceptInterface>> implemented by the specializing Containment.
 A Containment can only specialize a Containment with the same name.
 
+.Constraints
+TBD
+
 ==== Reference
-Represents a relation between an <<FeaturesContainer>> and referred <<AbstractConcept>>.
+Represents a relation between a referring <<FeaturesContainer>> and referred <<FeaturesContainer>>.
 
 .Example
 _VariableReference_ may have a Reference to a _VariableDeclaration_.
@@ -235,17 +275,26 @@ A Containment is similar to an ECore’s `EReference` with the `containment` fla
 Differently from an `EReference` there is no `container` flag and `resolveProxies` flag.
 
 A Containment is similar to an MPS’s `LinkDeclaration` with `metaClass` having value `reference`.
-Differently from a `LinkDeclaration` there are no fields `unordered` or `linkId`.
+Differently from a `LinkDeclaration` there is no field `unordered`.
 
 .Characteristics
+A Reference has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A Reference has a reference <<container, `container`>> to the containing <<NamespaceProvider>>.
+It can be marked as <<optional, `optional`>> and <<multiple, `multiple`>>.
+
+A Containment refers its <<linkType, `type`>>, which is a <<FeaturesContainer>>.
+
 A Reference is a <<Link>>.
 A Reference is indirectly a <<Feature>> and a <<NamespacedEntity>>.
+
+WARNING: {experimental}
 
 A Reference can optionally be a _specialization_ of another Reference.
 In that case, the original Reference must appear in a <<Concept>> extended by the Concept containing the specializing Reference or in an <<ConceptInterface>> implemented by the specializing Reference.
 A Reference can only specialize a Reference with the same name.
 
-A Reference should have <<Multiplicity>> `Optional` or `Single` but not `ZeroOrMore` or `OneOrMore`.
+.Constraints
+TBD
 
 ==== Property
 This indicates a simple value associated to an entity.
@@ -255,17 +304,52 @@ For example, an _Invoice_ could have a _date_ or an _amount_.
 
 .EMF & MPS equivalent
 A Property is similar to Ecore’s `EAttribute`.
-Differently from an `EAttribute`, a Property has no `ID` flag.
+
+A Property is similar to MPS’s `AttributeDeclaration`.
 
 .Characteristics
+A Property has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A Property has a reference <<container, `container`>> to the containing <<NamespaceProvider>>.
+It can be marked as <<optional, `optional`>>.
+
+[[propertyType]]
+A Property refers its `type`, which is a <<DataType>>.
+
 A Property is a <<Feature>>.
 It is indirectly a <<NamespacedEntity>>.
 
-A Property should have <<Multiplicity>> `Optional` or `Single` but not `ZeroOrMore` or `OneOrMore`.
+.Constraints
+TBD
 
 === Abstract Classes
 
-The abstract classes are <<MetamodelElement>>, <<AbstractConcept>>, <<DataType>>, <<Feature>>, and <<Link>>.
+The abstract classes are <<NamespacedEntity>>, <<MetamodelElement>>, <<FeaturesContainer>>, <<DataType>>, <<Feature>>, and <<Link>>.
+
+
+==== NamespacedEntity
+Something with a name and contained in a Namespace.
+
+.Example
+A Concept _Invoice_, contained in a Metamodel `com.foo.Accounting`.
+Therefore, _Invoice_ will have the qualifiedName `com.foo.Accounting.Invoice`.
+
+.EMF & MPS equivalent
+n/a
+
+.Characteristics
+[[simpleName]]
+A NamespacedEntity has a `simpleName`.
+
+[[id]]
+A NamespacedEntity has an `id`.
+
+It can calculate the `qualifiedName` by combining the name of the namespace, which it can obtain from its own <<NamespaceProvider>>.
+
+[[container]]
+A NamespacedEntity has a reference `container` to the containing <<NamespaceProvider>>.
+
+.Constraints
+A NamespaceEntity's `simpleName` must be unique within the NamespaceProvider.
 
 ==== MetamodelElement
 A MetamodelElement is an element with an identity within a <<Metamodel>>.
@@ -280,38 +364,51 @@ MetamodelElement is similar to MPS’ `IStructureElement`.
 The difference is that `IStructureElement` includes also elements that cannot appear as top level elements of a structure aspects, such as `LinkDeclaration`, `PropertyDeclaration`, and `EnumerationMemberDeclaration`.
 
 .Characteristics
-A MetamodelElement can be one of:
-
-* <<AbstractConcept>>
-* <<PrimitiveType>>
-* <<Annotation>>
+A MetamodelElement has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A MetamodelElement has a reference <<container, `container`>> to the containing <<NamespaceProvider>>.
 
 A MetamodelElement is a <<NamespacedEntity>>.
 
-A MetamodelElement has a `simpleName`.
-The _qualified name_ of a MetamodelElement can be obtained by combining the name of the containing Metamodel with the name of the Concept.
+A MetamodelElement can be one of:
 
-Each MetamodelElement must have a unique name within the Metamodel.
+* <<FeaturesContainer>>
+* <<PrimitiveType>>
+* <<Annotation>> (experimental)
+
+The `qualifiedName` of a MetamodelElement can be obtained by combining the name of the containing <<Metamodel>> with the name of the Concept.
+
+.Constraints
+Each MetamodelElement must have a unique `simpleName` within the Metamodel.
 
 Each MetamodelElement belongs to one and only one Metamodel.
 
-==== AbstractConcept
-A group of elements that shares some characteristics.
+==== FeaturesContainer
+Something which can own <<Feature, Features>>.
 
-.For example, _Dated_ and _Invoice_ could be both AbstractConcepts, while having different levels of tightness in the groups.
+.Example
+A Concept can have several features.
 
 .EMF & MPS equivalent
-AbstractConcept is similar to `EClass` in Ecore (which is used both for classes and interfaces) and to `AbstractConcept` in MPS.
+FeaturesContainer is similar to `EClass` in Ecore (which is used both for classes and interfaces) and to `AbstractConcept` in MPS.
 
 .Characteristics
-An AbstractConcept can be one of:
+A FeaturesContainer has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A FeaturesContainer has a reference <<container, `container`>> to the containing <<NamespaceProvider>>.
+
+[[features]]
+A FeaturesContainer owns any number of <<Feature, Features>> in `features` containment.
+
+A FeaturesContainer can be one of:
 
 * <<Concept>>
 * <<ConceptInterface>>
-* <<Annotation>>
+* <<Annotation>> (experimental)
 
-An AbstractConcept is a <<MetamodelElement>>, a <<NamespaceProvider>> and a <<FeaturesContainer>>.
-It is indirectly a <<NamespacedEntity>>.
+A FeaturesContainer is a <<MetamodelElement>>.
+It is a <<NamespaceProvider>> and indirectly a <<NamespacedEntity>>.
+
+.Constraints
+TBD
 
 ==== DataType
 A type of value which has not a relevant identity in the context of a model.
@@ -325,9 +422,14 @@ It is similar to Ecore’s `EDataType`.
 It is similar to MPS’ `DataTypeDeclaration`.
 
 .Characteristics
+A DataType has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A DataType has a reference <<container, `container`>> to the containing <<NamespaceProvider>>.
+
 A DataType is a <<MetamodelElement>>.
 It is indirectly a <<NamespacedEntity>>.
 
+.Constraints
+TBD
 
 ==== Feature
 A Feature represents a characteristic or some form of data associated with a particular concept.
@@ -339,29 +441,36 @@ All of this information is represented by features.
 .EMF & MPS equivalent
 A Feature in LionWeb will be roughly equivalent to an `EStructuralFeature` or to the combination of `Properties` and `Links` (both containment and reference links) in MPS.
 
+Differently from Ecore’s `EStructureFeature`, Features do not have flags such as `changeable`, `volatile`, `transient`, or `unsettable`.
+They have no `default value`.
+
 .Characteristics
-All Features have ``name``s.
+A Feature has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A Feature has a reference <<container, `container`>> to the containing <<NamespaceProvider>>.
 
-All Features have a <<Multiplicity>>.
-
-A Feature can be _derived_ if its value is not stored in the Node itself but it can be obtained by accessing the other features’ values or other sources of information.
-Properties and References can be derived but not Containments.
-
-Each Feature must have a unique name within a specific Concept, also considering all inherited features which are not specialized.
-
-A Feature can either be a <<Property>> or a <<Link>>.
-
-Differently from Ecore’s `EStructureFeatures`, Features do not have flags such as `changeable`, `volatile`, `transient`, or `unsettable`.
-They have neither a `FeatureID` nor a `default value`.
+[[optional]]
+A Feature can be set to `optional` or required.
 
 A Feature is a <<NamespacedEntity>>.
 
+A Feature can either be a <<Property>> or a <<Link>>.
+
+WARNING: {experimental}
+
 .Derived Features (aka Calculated Features)
+A Feature can be _derived_ if its value is not stored in the Node itself but it can be obtained by accessing the other features’ values or other sources of information.
+Properties and References can be derived but not Containments.
+
 * Implemented in host language (i.e. there's no way to define Derive Feature semantics in LionWebCore)
 * If derived feature with same signature is inherited from several interfaces, need to override it explicitly.
 
+.Constraints
+TBD
+
+Each Feature must have a unique name within a specific <<FeaturesContainer>>, also considering all inherited features which are not specialized.
+
 ==== Link
-Represent a connection to an <<AbstractConcept>>.
+Represent a connection to an <<FeaturesContainer>>.
 
 .Example
 An _Invoice_ can be connected to its _InvoiceLines_ and to a _Customer_.
@@ -372,14 +481,24 @@ It is similar to Ecore’s `EReference`.
 It is similar to MPS’ `LinkDeclaration`.
 
 .Characteristics
-A Link can be either a <<Containment>>, or a <<Reference>>.
+A Link has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A Link has a reference <<container, `container`>> to the containing <<NamespaceProvider>>.
+It can be marked as <<optional, `optional`>>.
+
+[[multiple]]
+A Link can have `multiple` or only a single targets.
+
+[[linkType]]
+A Link refers its `type`, which is a <<FeaturesContainer>>.
 
 A Link is a <<Feature>>.
 It is indirectly a <<NamespacedEntity>>.
 
+A Link can be either a <<Containment>>, or a <<Reference>>.
+
 === Interfaces
 
-The interfaces are <<NamespaceProvider>>, <<NamespacedEntity>>, and <<FeaturesContainer>>.
+The interfaces are <<NamespaceProvider>>.
 
 ==== NamespaceProvider
 Something which can act as the namespace for contained named things.
@@ -393,34 +512,6 @@ n/a
 .Characteristics
 A NamespaceProvider can calculate the `namespaceQualifier` exposed to its children.
 This is typically calculated by combining the namespaces of all the ancestors up to the top level ancestor.
-
-==== NamespacedEntity
-Something with a name and contained in a Namespace.
-
-.Example
-A Concept _Invoice_, contained in a Metamodel `com.foo.Accounting`.
-Therefore, _Invoice_ will have the qualifiedName `com.foo.Accounting.Invoice`.
-
-.EMF & MPS equivalent
-n/a
-
-.Characteristics
-A NamespacedEntity has a unique name within the container.
-It can calculate the qualifiedName by combining the name of the namespace, which it can obtain from its own <<NamespaceProvider>>.
-
-A NamespacedEntity has a reference to the containing NamespaceProvider.
-
-==== FeaturesContainer
-Something which can own <<Feature, Features>>.
-
-.Example
-A Concept can have several features.
-
-.EMF & MPS equivalent
-In Ecore there is no equivalent as only `EClasses` can have features, while in LionCore, also Annotations can.
-
-.Characteristics
-A FeaturesContainer owns any number of <<Feature, Features>>.
 
 === Enums
 
