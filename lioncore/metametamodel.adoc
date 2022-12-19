@@ -390,8 +390,10 @@ A MetamodelElement is a <<NamespacedEntity>> (as it has an identity and it is co
 
 A MetamodelElement can be one of:
 
-* <<FeaturesContainer>>
+* <<Concept>>
+* <<ConceptInterface>>
 * <<PrimitiveType>>
+* <<Enumeration>>
 * <<Annotation>> ({experimental})
 
 The `qualifiedName` of a MetamodelElement can be obtained by combining the name of the containing <<Metamodel>> with the name of the Concept.
@@ -447,6 +449,11 @@ A DataType has a reference <<container, `container`>> to the containing <<Metamo
 A DataType is a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>).
 It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel).
 
+A DataType can be one of:
+
+* <<PrimitiveType>>
+* <<Enumeration>>
+
 .Constraints
 TBD
 
@@ -472,7 +479,11 @@ A Feature can be set to `optional` or required.
 
 A Feature is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the <<FeaturesContainer>>).
 
-A Feature can either be a <<Property>> or a <<Link>>.
+A Feature can either be one of:
+
+* <<Property>>
+* <<Containment>>
+* <<Reference>>
 
 WARNING: {experimental}
 
