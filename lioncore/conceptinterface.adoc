@@ -27,8 +27,6 @@ The problem might be <<name-clashes>>.
 
 <<derived, Derived features>> are behaviors in this sense, as there might be different implementations in the hierarchy.
 #TODO is this correct?#
-
-#TODO How about specializations?#
 ====
 
 .Example M2
@@ -115,6 +113,30 @@ Pro::
 Con::
 * Not supported by all languages
 
+=== Renamed specializations
+(Provided by Alex)
+
+This problem resides somewhere in-between diamond inheritance and name clashes.
+
+.Example M2
+[source]
+----
+concept Place
+    containment address: Address[1]
+
+concept PrivatePlace extends Place
+    containment homeAddress: Address[1]     specializes Place.address
+
+concept CompanyPlace extends Place
+    containment factoryAddress: Address[1]  specializes Place.address
+
+concept FreelancerPlace extends PrivatePlace, CompanyPlace
+----
+
+Problem: inside `FreelancerPlace`, what's the name of `Place.address`?
+
+Would be even more of a problem if both `PrivatePlace.homeAddress` and `CompanyPlace.factoryAddress` would use more specific types of `Address`.
+
 
 [#name-clashes]
 === Name clashes
@@ -192,7 +214,7 @@ Con::
 * Might limit possible combinations: If `E` and `F` had very different ideas what to put in field `name` (and only accidentally use compatible features), `G` had to chose which semantics to follow.
 
 [#_rename_conflicting_names]
-===== Rename conflicting names
+==== Rename conflicting names
 On name clashes, we have to rename all but one of the conflicts.
 
 .Adjusted M2
