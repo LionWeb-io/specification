@@ -113,10 +113,10 @@ Pro::
 Con::
 * Not supported by all languages
 
-=== Renamed specializations
+=== Diamond inheritance and specializations
 (Provided by Alex)
 
-This problem resides somewhere in-between diamond inheritance and name clashes.
+What happens if we specialize the type of a link in diamond inheritance?
 
 .Example M2
 [source]
@@ -125,18 +125,30 @@ concept Place
     containment address: Address[1]
 
 concept PrivatePlace extends Place
-    containment homeAddress: Address[1]     specializes Place.address
+    containment homeAddress: PersonalAddress[1]     specializes Place.address
 
 concept CompanyPlace extends Place
-    containment factoryAddress: Address[1]  specializes Place.address
+    containment factoryAddress: OfficeAddress[1]  specializes Place.address
 
 concept FreelancerPlace extends PrivatePlace, CompanyPlace
+
+concept Address
+
+concept PersonalAddress extends Address
+
+concept OfficeAddress extends Address
 ----
 
-Problem: inside `FreelancerPlace`, what's the name of `Place.address`?
+For `FreelancerPlace`, if we do _not_ "hide" original link (`address`) then it'll be unclear what to put into original `address` link (`PersonalAddress` or `OfficeAddress`).
 
-Would be even more of a problem if both `PrivatePlace.homeAddress` and `CompanyPlace.factoryAddress` would use more specific types of `Address`.
+If we do hide original link then there will be two "independent" links with different names, but internally working with the same original one, so storing instances into the original field.
+In this case following code should throw exception:
 
+[source]
+----
+freelancerPlace.homeAddress = <myHome>;
+node<OfficeAddress> officeAddress = freelancerPlace.factoryAddress;
+----
 
 [#name-clashes]
 === Name clashes
