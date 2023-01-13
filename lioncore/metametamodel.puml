@@ -66,8 +66,6 @@ Link "*" --> "1" FeaturesContainer: type
 Metamodel "*" --> "*" Metamodel: dependsOn
 MetamodelElement "*" -* "1" Metamodel: elements
 
-NamespacedEntity "*" --> "1" NamespaceProvider: container
-
 Property "*" -> "1" DataType: type
 
 legend
