@@ -125,7 +125,7 @@ concept Place
     containment address: Address[1]
 
 concept PrivatePlace extends Place
-    containment homeAddress: PersonalAddress[1]     specializes Place.address
+    containment homeAddress: PersonalAddress[1]   specializes Place.address
 
 concept CompanyPlace extends Place
     containment factoryAddress: OfficeAddress[1]  specializes Place.address
