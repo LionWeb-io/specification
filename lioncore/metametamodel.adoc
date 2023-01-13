@@ -8,6 +8,7 @@
 In this document we describe the Meta-Metamodel to be used by LionWeb.
 The Meta-Metamodel is called LionCore.
 
+[[goals]]
 == Goals
 
 The goal is to define a meta-metamodel that can be used in different contexts and implemented from different languages.
@@ -277,6 +278,7 @@ It is indirectly a <<Feature>> (as it describes the characteristics of a <<Featu
 
 WARNING: {experimental}
 
+[[specialization]]
 A Containment can optionally be a _specialization_ of another Containment.
 In that case, the original Containment must appear in a <<Concept>> extended by the Concept containing the specializing Containment or in an <<ConceptInterface>> implemented by the specializing Containment.
 A Containment can only specialize a Containment with the same name.
@@ -487,6 +489,7 @@ A Feature can either be one of:
 
 WARNING: {experimental}
 
+[[derived]]
 .Derived Features (aka Calculated Features)
 A Feature can be _derived_ if its value is not stored in the Node itself but it can be obtained by accessing the other features’ values or other sources of information.
 Properties and References can be derived but not Containments.
