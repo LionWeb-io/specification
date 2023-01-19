@@ -45,7 +45,7 @@ as this makes a statement about how the Data type can (should?/must?) be impleme
 
 For a Data Interchange Meta-Metamodel this annotation is not relevant as this is programming language independent.
 From this point of view it does make sense to define e.g. that a Date property value will always be a string in the ISO 8601 format.
-When using a LionWeb compliant sserver, clients should then expect such a format and ensure that a Date sent is in this format.
+When using a LionWeb compliant server, clients should then expect such a format and ensure that a Date sent is in this format.
 Clients are free how to implement this in their programming language, but this is not part of the Data Interchange Meta-Metamodel.
 
 == LionWeb Goal Discussion
@@ -55,7 +55,7 @@ LionWeb has several goals.
 1. LionWeb provides one or more API's that support interoperability of models on the web.
    Such a model is an instance of a language (let's call it L) that has been defined by a language engineer.
 2. LionWeb is *open*, allowing any client to use it.
-   Client are free to be implemented any wway they like, as long aas the use the LionWeb API's for external communication.
+   Client are free to be implemented any way they like, as long aas the use the LionWeb API's for external communication.
 
 Currently, we have identified the following API's:
 - a repository access API for storing and retrieveing models (or submodels)
@@ -120,7 +120,7 @@ This defined client *intra*-operability instead of *inter*-operability.
 An important question is whether we want to include this in the LionWeb scope.
 If we decide to include this, it should at least be done as a separate compliance point.
 
-Even then it should probably just be a very lean 1-to-1 mapping from trhe Data Interchange Metamodel,
+Even then it should probably just be a very lean 1-to-1 mapping from the Data Interchange Metamodel,
 This is along the lines of what Federico suggests in the slack channel (@Federico: correct me if I am wrong):
 _"I would lean toward having very lean Java/TS interfaces for things
 like navigating trees, observing them, serializing them, and validating them."_.
