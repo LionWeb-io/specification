@@ -6,7 +6,7 @@ skinparam object {
     BackgroundColor<<TypedNode>> LightGreen
     BackgroundColor<<TypedReference>> LightSkyBlue
 }
-skinparam object {
+skinparam map {
     BackgroundColor<<TypedProperty>> LightPink
     BackgroundColor<<TypedChild>> LightBlue
 }
@@ -15,11 +15,10 @@ object "<T = Library> Bob's Library" as library<<TypedNode>> {
     concept = → idLibrary
 }
 
-object "<T = String>" as libraryName<<TypedProperty>> {
-    value = "Bob's Library"
-    property = → idLibraryName
+map " " as libraryProperties<<TypedProperty>> {
+    → idLibraryName => <T = String> "Bob's Library"
 }
-library *-- libraryName: properties
+library *-- libraryProperties: properties
 
 ' Explorer book
 
@@ -27,23 +26,17 @@ object "<T = Book> Explorer Book" as explorerBook<<TypedNode>> {
     concept = → idBook
 }
 
-object "<T = Integer> pages" as explorerBookPages<<TypedProperty>> {
-    value = 123
-    property = → idPages
+map " " as explorerBookProperties<<TypedProperty>> {
+    → idTitle => <T = String> "Explorer Book"
+    → idPages => <T = Integer> 123
 }
-explorerBook *-- explorerBookPages: properties
+explorerBook *-- explorerBookProperties: properties
 
-object "<T = String> title" as explorerBookTitle<<TypedProperty>> {
-    value = "Explorer Book"
-    property = → idTitle
+map " " as libraryChildren<<TypedChild>> {
+    idLibraryBooks => <T = Book*> → idLibraryBooks
 }
-explorerBook *-- explorerBookTitle: properties
-
-object "<T = Book*>" as libraryBooks<<TypedChild>> {
-    containment = → idLibraryBooks
-}
-library *-- libraryBooks: children
-libraryBooks --> explorerBook
+library *-- libraryChildren: children
+libraryChildren::idLibraryBooks -> explorerBook
 
 
 object "<T = Writer>" as explorerBookAuthor<<TypedReference>> {
@@ -56,17 +49,11 @@ object "<T = GuideBookWriter> Jack London" as jackLondon<<TypedNode>> {
     concept = → idGuideBookWriter
 }
 
-object "<T = String>" as jackLondonName<<TypedProperty>> {
-    value = "Jack London"
-    property = → idWriterName
+map " " as jackLondonProperties<<TypedProperty>> {
+    → idWriterName => <T = String> "Jack London"
+    → idGuideBookWriterCountries => <T = String> "Alaska"
 }
-jackLondon *-- jackLondonName: properties
-
-object "<T = String>" as jackLondonCountries<<TypedProperty>> {
-    value = "Alaska"
-    property = → idGuideBookWriterCountries
-}
-jackLondon *-- jackLondonCountries: properties
+jackLondon *-- jackLondonProperties: properties
 
 explorerBookAuthor --> jackLondon: target
 @enduml

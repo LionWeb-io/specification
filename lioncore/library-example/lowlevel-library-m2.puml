@@ -159,7 +159,7 @@ map " " as bookChildren<<ChildTarget>> {
      features => → features
 }
 Book *-- bookChildren: children
-bookChildren::features --> title: target
+bookChildren::features -> title: target
 
 map " " as titleName<<PropertyValue>> {
     → simpleName => "title"
@@ -258,7 +258,7 @@ map " " as LibraryNodeChildren<<ChildTarget>> {
      features => → features
 }
 Library *-- LibraryNodeChildren: children
-LibraryNodeChildren::features --> libraryNameNode: target
+LibraryNodeChildren::features -> libraryNameNode: target
 
 map " " as libraryNameName<<PropertyValue>> {
     → simpleName =>  "name"
@@ -333,7 +333,7 @@ map " " as WriterChildren<<ChildTarget>> {
      features => → features
 }
 Writer *-- WriterChildren: children
-WriterChildren::features --> writerName: target
+WriterChildren::features -> writerName: target
 
 map " " as writerNameName<<PropertyValue>> {
     → simpleName => "name"
@@ -387,7 +387,7 @@ map " " as GuideBookWriterChildren<<ChildTarget>> {
      features => → features
 }
 GuideBookWriter *-- GuideBookWriterChildren: children
-GuideBookWriterChildren::features --> countries: target
+GuideBookWriterChildren::features -> countries: target
 
 map " " as countriesName<<PropertyValue>> {
     → simpleName => "countries"
@@ -441,7 +441,7 @@ map " " as SpecialistBookWriterChildren<<ChildTarget>> {
      features => → features
 }
 SpecialistBookWriter *-- SpecialistBookWriterChildren: children
-SpecialistBookWriterChildren::features --> subject: target
+SpecialistBookWriterChildren::features -> subject: target
 
 map " " as subjectName<<PropertyValue>> {
     → simpleName => "subject"
