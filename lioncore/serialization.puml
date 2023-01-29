@@ -10,7 +10,7 @@ class SerializationChunk {
     version: String
 }
 
-SerializationChunk -> "0..*" Node: nodes
+SerializationChunk --> "0..*" Node: nodes
 
 class Node {
     concept: Id

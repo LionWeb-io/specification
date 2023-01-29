@@ -1,0 +1,54 @@
+@startuml
+
+title Low-level Nodes
+
+package meta {
+    class Concept
+    Concept -[hidden]-> Property
+    class Property
+    Property -[hidden]-> Containment
+    class Containment
+    Containment -[hidden]-> Reference
+    class Reference
+}
+
+meta -[hidden]> Node
+
+class Node {
+    id: Id
+}
+
+Node -> "0..1" Node: parent
+Concept "1" <- Node: concept
+
+Node --> "0..*" PropertyValue: properties
+class PropertyValue {
+    value: String
+}
+
+
+Property "1" <- PropertyValue: property
+
+Node --> "0..*" ChildTarget: children
+
+PropertyValue -[hidden]-> ChildTarget
+
+class ChildTarget {
+
+}
+
+ChildTarget -> "1" Node: target
+Containment "1" <- ChildTarget: containment
+
+Node --> "0..*" ReferenceTarget: references
+
+ChildTarget -[hidden]-> ReferenceTarget
+
+class ReferenceTarget {
+    resolveInfo: String
+}
+
+ReferenceTarget -> "1" Node: target
+Reference "1" <- ReferenceTarget: reference
+
+@enduml
