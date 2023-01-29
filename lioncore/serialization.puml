@@ -11,7 +11,7 @@ class SerializationChunk {
     version: String
 }
 
-SerializationChunk --> "0..*" Node: nodes
+SerializationChunk *--> "0..*" Node: nodes
 
 class Node {
     concept: Id
@@ -19,32 +19,32 @@ class Node {
     parent: Id
 }
 
-Node --> "0..*" ChildrenValues: children
+Node *--> "0..*" ChildrenValues: children
 
 class ChildrenValues {
     containment: Id [key]
 }
 
-ChildrenValues --> "0..*" ChildTarget: [value]
+ChildrenValues *--> "0..*" ChildTarget: [value]
 
 class ChildTarget {
     target: Id
 }
 
-Node --> "0..*" ReferenceValues: references
+Node *--> "0..*" ReferenceValues: references
 
 class ReferenceValues {
     reference: Id [key]
 }
 
-ReferenceValues --> "0..*" ReferenceTarget: [value]
+ReferenceValues *--> "0..*" ReferenceTarget: [value]
 
 class ReferenceTarget {
     target: Id [key]
     resolveInfo: String [value]
 }
 
-Node --> "0..*" PropertyValue: properties
+Node *--> "0..*" PropertyValue: properties
 
 class PropertyValue {
     property: Id [key]

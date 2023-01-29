@@ -26,31 +26,31 @@ package meta {
     Reference -[hidden]-> Property
 }
 
-meta -[hidden]> Node
+meta -[hidden]> TypedNode
 
 'Node
 
-class Node<T: concept> {
+class TypedNode<T: concept> {
 '    getLowlevel(): lowlevel:Node
 }
 
-Node -> "0..1" Node: parent
-Concept "1" <- Node: concept
+TypedNode -> "0..1" TypedNode: parent
+Concept "1" <- TypedNode: concept
 
 'Children
 
-Node --> "0..*" TypedChild: children
+TypedNode *--> "0..*" TypedChild: children
 
 class TypedChild {
 '    getLowlevel(): lowlevel:ChildTarget
 }
 
-TypedChild -> "1" Node: target\n<i>T = containment.type</i>
+TypedChild -> "1" TypedNode: target\n<i>T = containment.type</i>
 Containment "1" <- TypedChild: containment
 
 'References
 
-Node --> "0..*" TypedReference: references
+TypedNode *--> "0..*" TypedReference: references
 
 TypedChild -[hidden]-> TypedReference
 
@@ -58,12 +58,12 @@ class TypedReference {
 '    getLowlevel(): lowlevel:ReferenceTarget
 }
 
-TypedReference -> "1" Node: target\n<i>T = reference.type</i>
+TypedReference -> "1" TypedNode: target\n<i>T = reference.type</i>
 Reference "1" <- TypedReference: reference
 
 'Properties
 
-Node --> "0..*" TypedProperty: properties
+TypedNode *--> "0..*" TypedProperty: properties
 class TypedProperty<T: property.type> {
     value: T
 '    getLowlevel(): lowlevel:PropertyValue

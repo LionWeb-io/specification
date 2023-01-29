@@ -26,7 +26,7 @@ Concept "1" <- Node: concept
 
 'Children
 
-Node --> "0..*" ChildTarget: children
+Node *--> "0..*" ChildTarget: children
 
 class ChildTarget {
 
@@ -38,7 +38,7 @@ Containment "1" <- ChildTarget: containment
 
 'References
 
-Node --> "0..*" ReferenceTarget: references
+Node *--> "0..*" ReferenceTarget: references
 
 class ReferenceTarget {
     resolveInfo: String
@@ -49,7 +49,7 @@ Reference "1" <- ReferenceTarget: reference
 
 'Properties
 
-Node --> "0..*" PropertyValue: properties
+Node *--> "0..*" PropertyValue: properties
 class PropertyValue {
     value: String
 }
