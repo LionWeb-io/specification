@@ -84,52 +84,52 @@ map " " as libraryChildren<<TypedChild>> {
     elements => <T = MetamodelElement*> → elements
 }
 library *-- libraryChildren: children
-'elements <- libraryString #lightgray: containment
+'elements <- libraryLibString #lightgray: containment
 
-' String
+' LibString
 
-object "<T = PrimitiveType> String" as String<<TypedNode>> {
+object "<T = PrimitiveType> LibString" as LibString<<TypedNode>> {
     concept = → PrimitiveType
 }
-'primitiveType <- String #lightgray: concept
+'primitiveType <- LibString #lightgray: concept
 
-libraryChildren::elements --> String: target
+libraryChildren::elements --> LibString: target
 
-map " " as StringName<<TypedProperty>> {
-    → simpleName => <T = String> "String"
+map " " as LibStringName<<TypedProperty>> {
+    → simpleName => <T = String> "LibString"
 }
-String *-- StringName: properties
-'simpleName <- StringName #lightgray: property
+LibString *-- LibStringName: properties
+'simpleName <- LibStringName #lightgray: property
 
-' Boolean
+' LibBoolean
 
-object "<T = PrimitiveType> Boolean" as Boolean<<TypedNode>> {
+object "<T = PrimitiveType> LibBoolean" as LibBoolean<<TypedNode>> {
     concept = → PrimitiveType
 }
-'primitiveType <- Boolean #lightgray: concept
+'primitiveType <- LibBoolean #lightgray: concept
 
-libraryChildren::elements --> Boolean: target
+libraryChildren::elements --> LibBoolean: target
 
-map " " as BooleanName<<TypedProperty>> {
-    → simpleName => <T = String> "Boolean"
+map " " as LibBooleanName<<TypedProperty>> {
+    → simpleName => <T = String> "LibBoolean"
 }
-Boolean *-- BooleanName: properties
-'simpleName <- BooleanName #lightgray: property
+LibBoolean *-- LibBooleanName: properties
+'simpleName <- LibBooleanName #lightgray: property
 
-' Integer
+' LibInteger
 
-object "<T = PrimitiveType> Integer" as Integer<<TypedNode>> {
+object "<T = PrimitiveType> LibInteger" as LibInteger<<TypedNode>> {
     concept = → PrimitiveType
 }
-'primitiveType <- Integer #lightgray: concept
+'primitiveType <- LibInteger #lightgray: concept
 
-libraryChildren::elements --> Integer: target
+libraryChildren::elements --> LibInteger: target
 
-map " " as IntegerName<<TypedProperty>> {
-    → simpleName => <T = String> "Integer"
+map " " as LibIntegerName<<TypedProperty>> {
+    → simpleName => <T = String> "LibInteger"
 }
-Integer *-- IntegerName: properties
-'simpleName <- IntegerName #lightgray: property
+LibInteger *-- LibIntegerName: properties
+'simpleName <- LibIntegerName #lightgray: property
 
 ' Book
 
@@ -171,7 +171,7 @@ object "<T = String>" as titleType<<TypedReference>> {
 }
 title *-- titleType: references
 'propertyType <- titleType #lightgray: reference
-titleType -> String: target
+titleType -> LibString: target
 
 ' Book.pages
 
@@ -194,7 +194,7 @@ object "<T = propertyType>" as pagesType<<TypedReference>> {
 }
 pages *-- pagesType: references
 'propertyType <- pagesType #lightgray: reference
-pagesType -> Integer: target
+pagesType -> LibInteger: target
 
 ' Book.author
 
@@ -263,7 +263,7 @@ object "<T = propertyType>" as libraryNameNodeType<<TypedReference>> {
 }
 libraryNameNode *-- libraryNameNodeType: references
 'propertyType <- libraryNameNodeType #lightgray: reference
-libraryNameNodeType -> String: target
+libraryNameNodeType -> LibString: target
 
 ' Library.books
 
@@ -333,7 +333,7 @@ object "<T = propertyType>" as writerNameType<<TypedReference>> {
 }
 writerName *-- writerNameType: references
 'propertyType <- writerNameType #lightgray: reference
-writerNameType -> String: target
+writerNameType -> LibString: target
 
 ' GuideBookWriter
 
@@ -383,7 +383,7 @@ object "<T = propertyType>" as countriesType<<TypedReference>> {
 }
 countries *-- countriesType: references
 'propertyType <- countriesType #lightgray: reference
-countriesType -> String: target
+countriesType -> LibString: target
 
 ' SpecialistBookWriter
 
@@ -433,6 +433,6 @@ object "<T = propertyType>" as subjectType<<TypedReference>> {
 }
 subject *-- subjectType: references
 'propertyType <- subjectType #lightgray: reference
-subjectType -> String: target
+subjectType -> LibString: target
 
 @enduml

@@ -81,55 +81,55 @@ map " " as libraryChildren<<ChildTarget>> {
     elements => → elements
 }
 library *-- libraryChildren: children
-'elements <- libraryString #lightgray: containment
+'elements <- libraryLibString #lightgray: containment
 
-' String
+' LibString
 
-object "String" as String<<Node>> {
-    id = "idString"
+object "LibString" as LibString<<Node>> {
+    id = "idLibString"
     concept = → PrimitiveType
 }
-'primitiveType <- String #lightgray: concept
+'primitiveType <- LibString #lightgray: concept
 
-libraryChildren::elements --> String: target
+libraryChildren::elements --> LibString: target
 
-map " " as StringName<<PropertyValue>> {
-    → simpleName => "String"
+map " " as LibStringName<<PropertyValue>> {
+    → simpleName => "LibString"
 }
-String *-- StringName: properties
-'simpleName <- StringName #lightgray: property
+LibString *-- LibStringName: properties
+'simpleName <- LibStringName #lightgray: property
 
-' Boolean
+' LibBoolean
 
-object "Boolean" as Boolean<<Node>> {
-    id = "idBoolean"
+object "LibBoolean" as LibBoolean<<Node>> {
+    id = "idLibBoolean"
     concept = → PrimitiveType
 }
-'primitiveType <- Boolean #lightgray: concept
+'primitiveType <- LibBoolean #lightgray: concept
 
-libraryChildren::elements --> Boolean: target
+libraryChildren::elements --> LibBoolean: target
 
-map " " as BooleanName<<PropertyValue>> {
-    → simpleName => "Boolean"
+map " " as LibBooleanName<<PropertyValue>> {
+    → simpleName => "LibBoolean"
 }
-Boolean *-- BooleanName: properties
-'simpleName <- BooleanName #lightgray: property
+LibBoolean *-- LibBooleanName: properties
+'simpleName <- LibBooleanName #lightgray: property
 
-' Integer
+' LibInteger
 
-object "Integer" as Integer<<Node>> {
-    id = "idInteger"
+object "LibInteger" as LibInteger<<Node>> {
+    id = "idLibInteger"
     concept = → PrimitiveType
 }
-'primitiveType <- Integer #lightgray: concept
+'primitiveType <- LibInteger #lightgray: concept
 
-libraryChildren::elements --> Integer: target
+libraryChildren::elements --> LibInteger: target
 
-map " " as IntegerName<<PropertyValue>> {
-    → simpleName => "Integer"
+map " " as LibIntegerName<<PropertyValue>> {
+    → simpleName => "LibInteger"
 }
-Integer *-- IntegerName: properties
-'simpleName <- IntegerName #lightgray: property
+LibInteger *-- LibIntegerName: properties
+'simpleName <- LibIntegerName #lightgray: property
 
 ' Book
 
@@ -169,12 +169,12 @@ title *-- titleName: properties
 'simpleName <- titleName #lightgray: property
 
 object " " as titleType<<ReferenceTarget>> {
-    resolveInfo = "String"
+    resolveInfo = "LibString"
     reference = → propertyType
 }
 title *-- titleType: references
 'propertyType <- titleType #lightgray: reference
-titleType -> String: target
+titleType -> LibString: target
 
 ' Book.pages
 
@@ -194,12 +194,12 @@ pages *-- pagesName: properties
 'simpleName <- pagesName #lightgray: property
 
 object " " as pagesType<<ReferenceTarget>> {
-    resolveInfo = "Integer"
+    resolveInfo = "LibInteger"
     reference = → propertyType
 }
 pages *-- pagesType: references
 'propertyType <- pagesType #lightgray: reference
-pagesType -> Integer: target
+pagesType -> LibInteger: target
 
 ' Book.author
 
@@ -268,12 +268,12 @@ libraryNameNode *-- libraryNameName: properties
 'simpleName <- libraryNameName #lightgray: property
 
 object " " as libraryNameNodeType<<ReferenceTarget>> {
-    resolveInfo = "String"
+    resolveInfo = "LibString"
     reference = → propertyType
 }
 libraryNameNode *-- libraryNameNodeType: references
 'propertyType <- libraryNameNodeType #lightgray: reference
-libraryNameNodeType -> String: target
+libraryNameNodeType -> LibString: target
 
 ' Library.books
 
@@ -343,12 +343,12 @@ writerName *-- writerNameName: properties
 'simpleName <- writerNameName #lightgray: property
 
 object " " as writerNameType<<ReferenceTarget>> {
-    resolveInfo = "String"
+    resolveInfo = "LibString"
     reference = → propertyType
 }
 writerName *-- writerNameType: references
 'propertyType <- writerNameType #lightgray: reference
-writerNameType -> String: target
+writerNameType -> LibString: target
 
 ' GuideBookWriter
 
@@ -397,12 +397,12 @@ countries *-- countriesName: properties
 'simpleName <- countriesName #lightgray: property
 
 object " " as countriesType<<ReferenceTarget>> {
-    resolveInfo = "String"
+    resolveInfo = "LibString"
     reference = → propertyType
 }
 countries *-- countriesType: references
 'propertyType <- countriesType #lightgray: reference
-countriesType -> String: target
+countriesType -> LibString: target
 
 ' SpecialistBookWriter
 
@@ -451,11 +451,11 @@ subject *-- subjectName: properties
 'simpleName <- subjectName #lightgray: property
 
 object " " as subjectType<<ReferenceTarget>> {
-    resolveInfo = "String"
+    resolveInfo = "LibString"
     reference = → propertyType
 }
 subject *-- subjectType: references
 'propertyType <- subjectType #lightgray: reference
-subjectType -> String: target
+subjectType -> LibString: target
 
 @enduml

@@ -12,23 +12,23 @@ object "library" as library<<Metamodel>> {
     qualifiedName: String = "library"
 }
 
-object "Boolean" as Boolean<<PrimitiveType>> {
-    simpleName: String = "Boolean"
+object "LibBoolean" as LibBoolean<<PrimitiveType>> {
+    simpleName: String = "LibBoolean"
     abstract: Boolean = false
 }
-library *-- Boolean: elements
+library *-- LibBoolean: elements
 
-object "String" as String<<PrimitiveType>> {
-    simpleName: String = "String"
+object "LibString" as LibString<<PrimitiveType>> {
+    simpleName: String = "LibString"
     abstract: Boolean = false
 }
-library *-- String: elements
+library *-- LibString: elements
 
-object "Integer" as Integer<<PrimitiveType>> {
-    simpleName: String = "Integer"
+object "LibInteger" as LibInteger<<PrimitiveType>> {
+    simpleName: String = "LibInteger"
     abstract: Boolean = false
 }
-library *-- Integer: elements
+library *-- LibInteger: elements
 
 object "Library" as Library<<Concept>> {
     simpleName: String = "Library"
@@ -41,7 +41,7 @@ object "LibraryName" as LibraryName<<Property>> {
     optional: Boolean = false
 }
 library *-- LibraryName: features
-LibraryName -> String: type
+LibraryName -> LibString: type
 
 object "LibraryBooks" as LibraryBooks<<Containment>> {
     simpleName: String = "books"
@@ -63,14 +63,14 @@ object "BookTitle" as BookTitle<<Property>> {
     optional: Boolean = false
 }
 Book *-- BookTitle: features
-BookTitle -> String: type
+BookTitle -> LibString: type
 
 object "BookPages" as BookPages<<Property>> {
     simpleName: String = "pages"
     optional: Boolean = false
 }
 Book *-- BookPages: features
-BookPages -> Integer: type
+BookPages -> LibInteger: type
 
 object "BookAuthor" as BookAuthor<<Reference>> {
     simpleName: String = "author"
@@ -92,7 +92,7 @@ object "WriterName" as WriterName<<Property>> {
     optional: Boolean = false
 }
 Writer *-- WriterName: features
-WriterName -> String: type
+WriterName -> LibString: type
 
 object "SpecialistBookWriter" as SpecialistBookWriter<<Concept>> {
     simpleName: String = "SpecialistBookWriter"
@@ -105,7 +105,7 @@ object "SpecialistBookWriterSubject" as SpecialistBookWriterSubject<<Property>> 
     optional: Boolean = false
 }
 SpecialistBookWriter *-- SpecialistBookWriterSubject: features
-SpecialistBookWriterSubject -> String: type
+SpecialistBookWriterSubject -> LibString: type
 
 object "GuideBookWriter" as GuideBookWriter<<Concept>> {
     simpleName: String = "GuideBookWriter"
@@ -118,7 +118,7 @@ object "GuideBookWriterCountries" as GuideBookWriterCountries<<Property>> {
     optional: Boolean = false
 }
 GuideBookWriter *-- GuideBookWriterCountries: features
-GuideBookWriterCountries -> String: type
+GuideBookWriterCountries -> LibString: type
 
 
 @enduml
