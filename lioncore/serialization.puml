@@ -1,6 +1,7 @@
 @startuml
-
 title Serialization Format
+
+hide empty members
 
 legend
     <#transparent,#transparent>| [key] / [value] | representation as JSON object |
@@ -16,13 +17,6 @@ class Node {
     concept: Id
     id: Id
     parent: Id
-}
-
-Node --> "0..*" PropertyValue: properties
-
-class PropertyValue {
-    property: Id [key]
-    value: String [value]
 }
 
 Node --> "0..*" ChildrenValues: children
@@ -48,6 +42,13 @@ ReferenceValues --> "0..*" ReferenceTarget: [value]
 class ReferenceTarget {
     target: Id [key]
     resolveInfo: String [value]
+}
+
+Node --> "0..*" PropertyValue: properties
+
+class PropertyValue {
+    property: Id [key]
+    value: String [value]
 }
 
 @enduml

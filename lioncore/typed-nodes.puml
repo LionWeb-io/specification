@@ -1,0 +1,74 @@
+@startuml
+title Typed Nodes
+
+hide empty members
+
+package meta {
+    class Concept
+
+    Concept <-- Link: type
+    abstract class Link
+
+    Link <|-- Containment
+
+    class Containment
+    Containment -[hidden]-> Reference
+
+    Link <|-- Reference
+
+    class Reference
+
+    abstract class DataType
+
+    DataType <- Property: type
+
+    class Property
+    Reference -[hidden]-> Property
+}
+
+meta -[hidden]> Node
+
+'Node
+
+class Node<T: concept> {
+'    getLowlevel(): lowlevel:Node
+}
+
+Node -> "0..1" Node: parent
+Concept "1" <- Node: concept
+
+'Children
+
+Node --> "0..*" TypedChild: children
+
+class TypedChild {
+'    getLowlevel(): lowlevel:ChildTarget
+}
+
+TypedChild -> "1" Node: target\n<i>T = containment.type</i>
+Containment "1" <- TypedChild: containment
+
+'References
+
+Node --> "0..*" TypedReference: references
+
+TypedChild -[hidden]-> TypedReference
+
+class TypedReference {
+'    getLowlevel(): lowlevel:ReferenceTarget
+}
+
+TypedReference -> "1" Node: target\n<i>T = reference.type</i>
+Reference "1" <- TypedReference: reference
+
+'Properties
+
+Node --> "0..*" TypedProperty: properties
+class TypedProperty<T: property.type> {
+    value: T
+'    getLowlevel(): lowlevel:PropertyValue
+}
+
+Property "1" <- TypedProperty: property
+
+@enduml
