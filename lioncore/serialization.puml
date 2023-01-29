@@ -1,0 +1,53 @@
+@startuml
+
+title Serialization Format
+
+legend
+    <#transparent,#transparent>| [key] / [value] | representation as JSON object |
+end legend
+
+class SerializationChunk {
+    version: String
+}
+
+SerializationChunk -> "0..*" Node: nodes
+
+class Node {
+    concept: Id
+    id: Id
+    parent: Id
+}
+
+Node --> "0..*" PropertyValue: properties
+
+class PropertyValue {
+    property: Id [key]
+    value: String [value]
+}
+
+Node --> "0..*" ChildrenValues: children
+
+class ChildrenValues {
+    containment: Id [key]
+}
+
+ChildrenValues --> "0..*" ChildTarget: [value]
+
+class ChildTarget {
+    target: Id
+}
+
+Node --> "0..*" ReferenceValues: references
+
+class ReferenceValues {
+    reference: Id [key]
+}
+
+ReferenceValues --> "0..*" ReferenceTarget: [value]
+
+class ReferenceTarget {
+    target: Id [key]
+    resolveInfo: String [value]
+}
+
+@enduml
