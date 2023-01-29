@@ -12,46 +12,46 @@ skinparam map {
 }
 
 object "<T = Library> Bob's Library" as library<<TypedNode>> {
-    concept = → idLibrary
+    concept = → runtime::Library
 }
 
 map " " as libraryProperties<<TypedProperty>> {
-    → idLibraryName => <T = String> "Bob's Library"
+    → runtime::LibraryName => <T = String> "Bob's Library"
 }
 library *-- libraryProperties: properties
 
 ' Explorer book
 
 object "<T = Book> Explorer Book" as explorerBook<<TypedNode>> {
-    concept = → idBook
+    concept = → runtime::Book
 }
 
 map " " as explorerBookProperties<<TypedProperty>> {
-    → idTitle => <T = String> "Explorer Book"
-    → idPages => <T = Integer> 123
+    → runtime::BookTitle => <T = String> "Explorer Book"
+    → runtime::BookPages => <T = Integer> 123
 }
 explorerBook *-- explorerBookProperties: properties
 
 map " " as libraryChildren<<TypedChild>> {
-    idLibraryBooks => <T = Book*> → idLibraryBooks
+    LibraryBooks => <T = Book*> → runtime::LibraryBooks
 }
 library *-- libraryChildren: children
-libraryChildren::idLibraryBooks -> explorerBook
+libraryChildren::LibraryBooks -> explorerBook
 
 
 object "<T = Writer>" as explorerBookAuthor<<TypedReference>> {
-    reference = → idAuthor
+    reference = → runtime::BookAuthor
 }
 explorerBook *-- explorerBookAuthor: references
 
 ' Jack London
 object "<T = GuideBookWriter> Jack London" as jackLondon<<TypedNode>> {
-    concept = → idGuideBookWriter
+    concept = → runtime::GuideBookWriter
 }
 
 map " " as jackLondonProperties<<TypedProperty>> {
-    → idWriterName => <T = String> "Jack London"
-    → idGuideBookWriterCountries => <T = String> "Alaska"
+    → runtime::WriterName => <T = String> "Jack London"
+    → runtime::GuideBookWriterCountries => <T = String> "Alaska"
 }
 jackLondon *-- jackLondonProperties: properties
 

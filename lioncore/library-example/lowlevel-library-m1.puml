@@ -14,11 +14,11 @@ skinparam map {
 
 object "Bob's Library" as library<<Node>> {
     id = "idBobLib"
-    concept = → idLibrary
+    concept = → runtime::Library
 }
 
 map " " as libraryProperties<<PropertyValue>> {
-    → idLibraryName => "Bob's library"
+    → runtime::LibraryName => "Bob's library"
 }
 library *-- libraryProperties: properties
 
@@ -26,37 +26,37 @@ library *-- libraryProperties: properties
 
 object "Explorer Book" as explorerBook<<Node>> {
     id = "idExplorer"
-    concept = → idBook
+    concept = → runtime::Book
 }
 
 map " " as explorerBookProperties<<PropertyValue>> {
-    → idPages => "123"
-    → idTitle => "Explorer Book"
+    → runtime::BookPages => "123"
+    → runtime::BookTitle => "Explorer Book"
 }
 explorerBook *-- explorerBookProperties: properties
 
 map " " as libraryChildren<<ChildTarget>> {
-    libraryExplorerBook => → idLibraryBooks
+    LibraryBooks => → runtime::LibraryBooks
 }
 library *-- libraryChildren: children
-libraryChildren::libraryExplorerBook -> explorerBook
+libraryChildren::LibraryBooks -> explorerBook
 
 
 object " " as explorerBookAuthor<<ReferenceTarget>> {
     resolveInfo = "Jack London"
-    reference = → idAuthor
+    reference = → runtime::WriterAuthor
 }
 explorerBook *-- explorerBookAuthor: references
 
 ' Jack London
 object "Jack London" as jackLondon<<Node>> {
     id = "idJack"
-    concept = → idGuideBookWriter
+    concept = → runtime::GuideBookWriter
 }
 
 map " " as jackLondonProperties<<PropertyValue>> {
-    → idWriterName => "Jack London"
-    → idGuideBookWriterCountries => "Alaska"
+    → runtime::WriterName => "Jack London"
+    → runtime::GuideBookWriterCountries => "Alaska"
 }
 jackLondon *-- jackLondonProperties: properties
 

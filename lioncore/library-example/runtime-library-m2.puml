@@ -1,0 +1,124 @@
+@startuml
+title Runtime M2 Library Example
+
+skinparam object {
+    BackgroundColor<<Concept>> LightGreen
+    BackgroundColor<<Reference>> LightSkyBlue
+    BackgroundColor<<Property>> LightPink
+    BackgroundColor<<Containment>> LightBlue
+}
+
+object "library" as library<<Metamodel>> {
+    qualifiedName: String = "library"
+}
+
+object "Boolean" as Boolean<<PrimitiveType>> {
+    simpleName: String = "Boolean"
+    abstract: Boolean = false
+}
+library *-- Boolean: elements
+
+object "String" as String<<PrimitiveType>> {
+    simpleName: String = "String"
+    abstract: Boolean = false
+}
+library *-- String: elements
+
+object "Integer" as Integer<<PrimitiveType>> {
+    simpleName: String = "Integer"
+    abstract: Boolean = false
+}
+library *-- Integer: elements
+
+object "Library" as Library<<Concept>> {
+    simpleName: String = "Library"
+    abstract: Boolean = false
+}
+library *-- Library: elements
+
+object "LibraryName" as LibraryName<<Property>> {
+    simpleName: String = "name"
+    optional: Boolean = false
+}
+library *-- LibraryName: features
+LibraryName -> String: type
+
+object "LibraryBooks" as LibraryBooks<<Containment>> {
+    simpleName: String = "books"
+    optional: Boolean = false
+    multiple: Boolean = true
+}
+Library *-- LibraryBooks: features
+
+object "Book" as Book<<Concept>> {
+    simpleName: String = "Book"
+    abstract: Boolean = false
+}
+library *-- Book: elements
+
+LibraryBooks -> Book: type
+
+object "BookTitle" as BookTitle<<Property>> {
+    simpleName: String = "title"
+    optional: Boolean = false
+}
+Book *-- BookTitle: features
+BookTitle -> String: type
+
+object "BookPages" as BookPages<<Property>> {
+    simpleName: String = "pages"
+    optional: Boolean = false
+}
+Book *-- BookPages: features
+BookPages -> Integer: type
+
+object "BookAuthor" as BookAuthor<<Reference>> {
+    simpleName: String = "author"
+    optional: Boolean = false
+    multiple: Boolean = true
+}
+Book *-- BookAuthor: features
+
+object "Writer" as Writer<<Concept>> {
+    simpleName: String = "Writer"
+    abstract: Boolean = false
+}
+library *-- Writer: elements
+
+BookAuthor -> Writer: type
+
+object "WriterName" as WriterName<<Property>> {
+    simpleName: String = "name"
+    optional: Boolean = false
+}
+Writer *-- WriterName: features
+WriterName -> String: type
+
+object "SpecialistBookWriter" as SpecialistBookWriter<<Concept>> {
+    simpleName: String = "SpecialistBookWriter"
+    abstract: Boolean = false
+}
+library *-- SpecialistBookWriter: elements
+
+object "SpecialistBookWriterSubject" as SpecialistBookWriterSubject<<Property>> {
+    simpleName: String = "subject"
+    optional: Boolean = false
+}
+SpecialistBookWriter *-- SpecialistBookWriterSubject: features
+SpecialistBookWriterSubject -> String: type
+
+object "GuideBookWriter" as GuideBookWriter<<Concept>> {
+    simpleName: String = "GuideBookWriter"
+    abstract: Boolean = false
+}
+library *-- GuideBookWriter: elements
+
+object "GuideBookWriterCountries" as GuideBookWriterCountries<<Property>> {
+    simpleName: String = "countries"
+    optional: Boolean = false
+}
+GuideBookWriter *-- GuideBookWriterCountries: features
+GuideBookWriterCountries -> String: type
+
+
+@enduml
