@@ -30,7 +30,7 @@ meta -[hidden]> TypedNode
 
 'Node
 
-class TypedNode<T: concept> {
+class TypedNode<T: concept> #lightGreen {
 '    getLowlevel(): lowlevel:Node
 }
 
@@ -41,7 +41,7 @@ Concept "1" <- TypedNode: concept
 
 TypedNode *--> "0..*" TypedChild: children
 
-class TypedChild {
+class TypedChild #lightBlue {
 '    getLowlevel(): lowlevel:ChildTarget
 }
 
@@ -54,7 +54,7 @@ TypedNode *--> "0..*" TypedReference: references
 
 TypedChild -[hidden]-> TypedReference
 
-class TypedReference {
+class TypedReference #lightSkyBlue {
 '    getLowlevel(): lowlevel:ReferenceTarget
 }
 
@@ -64,7 +64,7 @@ Reference "1" <- TypedReference: reference
 'Properties
 
 TypedNode *--> "0..*" TypedProperty: properties
-class TypedProperty<T: property.type> {
+class TypedProperty<T: property.type> #lightPink {
     value: T
 '    getLowlevel(): lowlevel:PropertyValue
 }

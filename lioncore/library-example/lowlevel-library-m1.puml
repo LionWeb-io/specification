@@ -1,53 +1,65 @@
 @startuml
 ' Library
 
-object "<<Node>> Bob's Library" as library {
+title Low-level M1 Library Example
+
+skinparam object {
+    BackgroundColor<<Node>> LightGreen
+    BackgroundColor<<ReferenceTarget>> LightSkyBlue
+}
+skinparam map {
+    BackgroundColor<<PropertyValue>> LightPink
+    BackgroundColor<<ChildTarget>> LightBlue
+}
+
+object "Bob's Library" as library<<Node>> {
     id = "idBobLib"
     concept = → idLibrary
 }
 
-map "<<PropertyValue>>" as libraryProperties {
+map " " as libraryProperties<<PropertyValue>> {
     → idLibraryName => "Bob's library"
 }
 library *-- libraryProperties: properties
 
 ' Explorer book
 
-object "<<Node>> Explorer Book" as explorerBook {
+object "Explorer Book" as explorerBook<<Node>> {
     id = "idExplorer"
     concept = → idBook
 }
 
-map "<<PropertyValue>>" as explorerBookProperties {
+map " " as explorerBookProperties<<PropertyValue>> {
     → idPages => "123"
     → idTitle => "Explorer Book"
 }
 explorerBook *-- explorerBookProperties: properties
 
-map "<<ChildTarget>>" as libraryChildren {
+map " " as libraryChildren<<ChildTarget>> {
     libraryExplorerBook => → idLibraryBooks
 }
 library *-- libraryChildren: children
 libraryChildren::libraryExplorerBook -> explorerBook
 
 
-object "<<ReferenceTarget>>" as explorerBookAuthor {
+object " " as explorerBookAuthor<<ReferenceTarget>> {
     resolveInfo = "Jack London"
     reference = → idAuthor
 }
 explorerBook *-- explorerBookAuthor: references
 
 ' Jack London
-object "<<Node>> Jack London" as jackLondon {
+object "Jack London" as jackLondon<<Node>> {
     id = "idJack"
     concept = → idGuideBookWriter
 }
 
-map "<<PropertyValue>>" as jackLondonProperties {
+map " " as jackLondonProperties<<PropertyValue>> {
     → idWriterName => "Jack London"
     → idGuideBookWriterCountries => "Alaska"
 }
 jackLondon *-- jackLondonProperties: properties
 
 explorerBookAuthor --> jackLondon: target
+
 @enduml

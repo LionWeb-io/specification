@@ -17,7 +17,7 @@ meta -[hidden]> Node
 
 'Node
 
-class Node {
+class Node #lightGreen{
     id: Id
 }
 
@@ -28,7 +28,7 @@ Concept "1" <- Node: concept
 
 Node *--> "0..*" ChildTarget: children
 
-class ChildTarget {
+class ChildTarget #lightBlue {
 
 }
 
@@ -40,7 +40,7 @@ Containment "1" <- ChildTarget: containment
 
 Node *--> "0..*" ReferenceTarget: references
 
-class ReferenceTarget {
+class ReferenceTarget #lightSkyBlue {
     resolveInfo: String
 }
 
@@ -50,7 +50,7 @@ Reference "1" <- ReferenceTarget: reference
 'Properties
 
 Node *--> "0..*" PropertyValue: properties
-class PropertyValue {
+class PropertyValue #lightPink {
     value: String
 }
 

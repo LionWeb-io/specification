@@ -1,4 +1,15 @@
 @startuml
+title Low-level M2 Library Example
+
+skinparam object {
+    BackgroundColor<<Node>> LightGreen
+    BackgroundColor<<ReferenceTarget>> LightSkyBlue
+}
+skinparam map {
+    BackgroundColor<<PropertyValue>> LightPink
+    BackgroundColor<<ChildTarget>> LightBlue
+}
+
 package meta {
     object "Metamodel" as metamodel
 
@@ -53,174 +64,111 @@ package meta {
 
 ' library (metamodel)
 
-object "<<Node>> library" as library {
+object "library" as library<<Node>> {
     id = "idLibMm"
     concept = → Metamodel
 }
 'metamodel <- library #lightgray: concept
 
 
-object "<<PropertyValue>>" as libraryQualifiedName {
-    value = "library"
-    property = → qualifiedName
+map " " as libraryQualifiedName<<PropertyValue>> {
+    → qualifiedName => "library"
 }
 library *-- libraryQualifiedName: properties
 'qualifiedName <- libraryQualifiedName #lightgray: property
 
-object "<<ChildTarget>>" as libraryString {
-    containment = → elements
+map " " as libraryChildren<<ChildTarget>> {
+    elements => → elements
 }
-library *-- libraryString: children
+library *-- libraryChildren: children
 'elements <- libraryString #lightgray: containment
-
-object "<<ChildTarget>>" as libraryBoolean {
-    containment = → elements
-}
-library *-- libraryBoolean: children
-'elements <- libraryBoolean #lightgray: containment
-
-object "<<ChildTarget>>" as libraryInteger {
-    containment = → elements
-}
-library *-- libraryInteger: children
-'elements <- libraryInteger #lightgray: containment
-
-object "<<ChildTarget>>" as libraryBook {
-    containment = → elements
-}
-library *-- libraryBook: children
-'elements <- libraryBook #lightgray: containment
-
-object "<<ChildTarget>>" as libraryLibrary {
-    containment = → elements
-}
-library *-- libraryLibrary: children
-'elements <- libraryLibrary #lightgray: containment
-
-object "<<ChildTarget>>" as libraryWriter {
-    containment = → elements
-}
-library *-- libraryWriter: children
-'elements <- libraryWriter #lightgray: containment
-
-object "<<ChildTarget>>" as libraryGuideBookWriter {
-    containment = → elements
-}
-library *-- libraryGuideBookWriter: children
-'elements <- libraryGuideBookWriter #lightgray: containment
-
-object "<<ChildTarget>>" as librarySpecialistBookWriter {
-    containment = → elements
-}
-library *-- librarySpecialistBookWriter: children
-'elements <- librarySpecialistBookWriter #lightgray: containment
-
 
 ' String
 
-object "<<Node>> String" as String {
+object "String" as String<<Node>> {
     id = "idString"
     concept = → PrimitiveType
 }
 'primitiveType <- String #lightgray: concept
 
-libraryString --> String: target
+libraryChildren::elements --> String: target
 
-object "<<PropertyValue>>" as StringName {
-    value = "String"
-    property = → simpleName
+map " " as StringName<<PropertyValue>> {
+    → simpleName => "String"
 }
-String *--- StringName: properties
+String *-- StringName: properties
 'simpleName <- StringName #lightgray: property
 
 ' Boolean
 
-object "<<Node>> Boolean" as Boolean {
+object "Boolean" as Boolean<<Node>> {
     id = "idBoolean"
     concept = → PrimitiveType
 }
 'primitiveType <- Boolean #lightgray: concept
 
-libraryBoolean --> Boolean: target
+libraryChildren::elements --> Boolean: target
 
-object "<<PropertyValue>>" as BooleanName {
-    value = "Boolean"
-    property = → simpleName
+map " " as BooleanName<<PropertyValue>> {
+    → simpleName => "Boolean"
 }
-Boolean *--- BooleanName: properties
+Boolean *-- BooleanName: properties
 'simpleName <- BooleanName #lightgray: property
 
 ' Integer
 
-object "<<Node>> Integer" as Integer {
+object "Integer" as Integer<<Node>> {
     id = "idInteger"
     concept = → PrimitiveType
 }
 'primitiveType <- Integer #lightgray: concept
 
-libraryInteger --> Integer: target
+libraryChildren::elements --> Integer: target
 
-object "<<PropertyValue>>" as IntegerName {
-    value = "Integer"
-    property = → simpleName
+map " " as IntegerName<<PropertyValue>> {
+    → simpleName => "Integer"
 }
-Integer *--- IntegerName: properties
+Integer *-- IntegerName: properties
 'simpleName <- IntegerName #lightgray: property
 
 ' Book
 
-object "<<Node>> Book" as Book {
+object "Book" as Book<<Node>> {
     id = "idBook"
     concept = → Concept
 }
 'concept <- Book #lightgray: concept
 
-libraryBook --> Book: target
+libraryChildren::elements --> Book: target
 
-object "<<PropertyValue>>" as bookName {
-    value = "Book"
-    property = → simpleName
+map " " as bookName<<PropertyValue>> {
+    → simpleName => "Book"
+    → abstract => "false"
 }
-Book *--- bookName: properties
-'simpleName <- bookName #lightgray: property
-
-object "<<PropertyValue>>" as bookAbstract {
-    value = "false"
-    property = → abstract
-}
-Book *--- bookAbstract: properties
-'abstract <- bookAbstract #lightgray: property
+Book *-- bookName: properties
 
 ' Book.title
 
-object "<<Node>> title" as title {
+object "title" as title<<Node>> {
     id = "idTitle"
     concept = → Property
 }
 'property <- title #lightgray: concept
 
-object "<<ChildTarget>>" as bookTitle {
-    containment = → features
+map " " as bookChildren<<ChildTarget>> {
+     features => → features
 }
-Book *-- bookTitle: children
-'features <- bookTitle #lightgray: containment
-bookTitle --> title: target
+Book *-- bookChildren: children
+bookChildren::features --> title: target
 
-object "<<PropertyValue>>" as titleName {
-    value = "title"
-    property = → simpleName
+map " " as titleName<<PropertyValue>> {
+    → simpleName => "title"
+    → optional => "false"
 }
 title *-- titleName: properties
 'simpleName <- titleName #lightgray: property
 
-object "<<PropertyValue>>" as titleOptional {
-    value = "false"
-    property = → optional
-}
-title *-- titleOptional: properties
-'optional <- titleOptional #lightgray: property
-
-object "<<ReferenceTarget>>" as titleType {
+object " " as titleType<<ReferenceTarget>> {
     resolveInfo = "String"
     reference = → propertyType
 }
@@ -230,34 +178,22 @@ titleType -> String: target
 
 ' Book.pages
 
-object "<<Node>> pages" as pages {
+object "pages" as pages<<Node>> {
     id = "idPages"
     concept = → Property
 }
 'property <- pages #lightgray: concept
 
-object "<<ChildTarget>>" as bookPages {
-    containment = → features
-}
-Book *-- bookPages: children
-'features <- bookPages #lightgray: containment
-bookPages --> pages: target
+bookChildren::features --> pages: target
 
-object "<<PropertyValue>>" as pagesName {
-    value = "pages"
-    property = → SimpleName
+map " " as pagesName<<PropertyValue>> {
+    → SimpleName => "pages"
+    → optional => "false"
 }
 pages *-- pagesName: properties
 'simpleName <- pagesName #lightgray: property
 
-object "<<PropertyValue>>" as pagesOptional {
-    value = "false"
-    property = → optional
-}
-pages *--- pagesOptional: properties
-'optional <- pagesOptional #lightgray: property
-
-object "<<ReferenceTarget>>" as pagesType {
+object " " as pagesType<<ReferenceTarget>> {
     resolveInfo = "Integer"
     reference = → propertyType
 }
@@ -267,103 +203,71 @@ pagesType -> Integer: target
 
 ' Book.author
 
-object "<<Node>> author" as author {
+object "author" as author<<Node>> {
     id = "idAuthor"
     concept = → Reference
 }
 'reference <- author #lightgray: concept
 
-object "<<ChildTarget>>" as bookAuthor {
-    containment = → features
-}
-Book *-- bookAuthor: children
-'features <- bookAuthor #lightgray: containment
-bookAuthor --> author: target
+bookChildren::features --> author: target
 
-object "<<PropertyValue>>" as authorName {
-    value = "author"
-    property = → simpleName
+map " " as authorName<<PropertyValue>> {
+    → simpleName => "author"
+    → optional => "false"
+    → multiple => "false"
 }
-author *--- authorName: properties
+author *-- authorName: properties
 'simpleName <- authorName #lightgray: property
 
-object "<<PropertyValue>>" as authorOptional {
-    value = "false"
-    property = → optional
-}
-author *--- authorOptional: properties
-'optional <- authorOptional #lightgray: property
 
-object "<<PropertyValue>>" as authorMultiple {
-    value = "false"
-    property = → multiple
-}
-author *--- authorMultiple: properties
-'multiple <- authorMultiple #lightgray: property
-
-object "<<ReferenceTarget>>" as authorType {
+object " " as authorType<<ReferenceTarget>> {
     resolveInfo = "Writer"
     reference = → linkType
 }
 author *-- authorType: references
 'linkType <- authorType #lightgray: reference
-authorType -> Writer: target
 
 
 ' Library (node)
 
-object "<<Node>> Library" as Library {
+object "Library" as Library<<Node>> {
     id = "idLibrary"
     concept = → Concept
 }
 'concept <- Library #lightgray: concept
 
-libraryLibrary --> Library: target
+libraryChildren::elements --> Library: target
 
-object "<<PropertyValue>>" as libraryName {
-    value = "Library"
-    property = → simpleName
+map " " as libraryName<<PropertyValue>> {
+    → simpleName => "Library"
+    → abstract => "false"
+
 }
-Library *--- libraryName: properties
+Library *-- libraryName: properties
 'simpleName <- libraryName #lightgray: property
-
-object "<<PropertyValue>>" as libraryAbstract {
-    value = "false"
-    property = → abstract
-}
-Library *--- libraryAbstract: properties
-'abstract <- libraryAbstract #lightgray: property
 
 ' Library.name
 
-object "<<Node>> name" as libraryNameNode {
+object "name" as libraryNameNode<<Node>> {
     id = "idLibraryName"
     concept = → Property
 }
 'property <- libraryNameNode #lightgray: concept
 
-object "<<ChildTarget>>" as LibraryLibraryNameNode {
-    containment = → features
+map " " as LibraryNodeChildren<<ChildTarget>> {
+     features => → features
 }
-Library *--- LibraryLibraryNameNode: children
-'features <- LibraryLibraryNameNode #lightgray: containment
-LibraryLibraryNameNode --> libraryNameNode: target
+Library *-- LibraryNodeChildren: children
+LibraryNodeChildren::features --> libraryNameNode: target
 
-object "<<PropertyValue>>" as libraryNameName {
-    value = "name"
-    property = → simpleName
+map " " as libraryNameName<<PropertyValue>> {
+    → simpleName =>  "name"
+    → optional => "false"
 }
-libraryNameNode *--- libraryNameName: properties
+libraryNameNode *-- libraryNameName: properties
 'simpleName <- libraryNameName #lightgray: property
 
-object "<<PropertyValue>>" as libraryNameOptional {
-    value = "false"
-    property = → optional
-}
-libraryNameNode *--- libraryNameOptional: properties
-'optional <- libraryNameOptional #lightgray: property
-
-object "<<ReferenceTarget>>" as libraryNameNodeType {
+object " " as libraryNameNodeType<<ReferenceTarget>> {
     resolveInfo = "String"
     reference = → propertyType
 }
@@ -373,42 +277,24 @@ libraryNameNodeType -> String: target
 
 ' Library.books
 
-object "<<Node>> books" as books {
+object "books" as books<<Node>> {
     id = "idLibraryBooks"
     concept = → Containment
 }
 'containment <- books #lightgray: concept
 
-object "<<ChildTarget>>" as LibraryBooks {
-    containment = → features
-}
-Library *--- LibraryBooks: children
-'features <- LibraryBooks #lightgray: containment
-LibraryBooks --> books: target
+LibraryNodeChildren::features --> books: target
 
 
-object "<<PropertyValue>>" as booksName {
-    value = "books"
-    property = → simpleName
+map " " as booksName<<PropertyValue>> {
+    → simpleName => "books"
+    → optional => "false"
+    → multiple => "true"
 }
-books *--- booksName: properties
+books *-- booksName: properties
 'simpleName <- booksName #lightgray: property
 
-object "<<PropertyValue>>" as booksOptional {
-    value = "false"
-    property = → optional
-}
-books *--- booksOptional: properties
-'optional <- booksOptional #lightgray: property
-
-object "<<PropertyValue>>" as booksMultiple {
-    value = "true"
-    property = → multiple
-}
-books *--- booksMultiple: properties
-'multiple <- booksMultiple #lightgray: property
-
-object "<<ReferenceTarget>>" as booksType {
+object " " as booksType<<ReferenceTarget>> {
     resolveInfo = "Book"
     reference = → linkType
 }
@@ -418,59 +304,46 @@ booksType -> Book: target
 
 ' Writer
 
-object "<<Node>> Writer" as Writer {
+object "Writer" as Writer<<Node>> {
     id = "idWriter"
     concept = → Concept
 }
 'concept <- Writer #lightgray: concept
 
-libraryWriter --> Writer: target
 
-object "<<PropertyValue>>" as Writer_Name {
-    value = "Writer"
-    property = → simpleName
+libraryChildren::elements --> Writer: target
+authorType -> Writer: target
+
+map " " as Writer_Name<<PropertyValue>> {
+    → simpleName => "Writer"
+    → abstract => "false"
 }
-Writer *--- Writer_Name: properties
+Writer *-- Writer_Name: properties
 'simpleName <- Writer_Name #lightgray: property
-
-object "<<PropertyValue>>" as WriterAbstract {
-    value = "false"
-    property = → abstract
-}
-Writer *--- WriterAbstract: properties
-'abstract <- WriterAbstract #lightgray: property
 
 ' Writer.name
 
-object "<<Node>> name" as writerName {
+object "name" as writerName<<Node>> {
     id = "idWriterName"
     concept = → Property
 }
 'property <- writerName #lightgray: concept
 
-object "<<ChildTarget>>" as WriterWriterName {
-    containment = → features
+map " " as WriterChildren<<ChildTarget>> {
+     features => → features
 }
-Writer *--- WriterWriterName: children
-'features <- WriterWriterName #lightgray: containment
-WriterWriterName --> writerName: target
+Writer *-- WriterChildren: children
+WriterChildren::features --> writerName: target
 
-object "<<PropertyValue>>" as writerNameName {
-    value = "name"
-    property = → simpleName
+map " " as writerNameName<<PropertyValue>> {
+    → simpleName => "name"
+    → optional => "false"
 }
-writerName *--- writerNameName: properties
+writerName *-- writerNameName: properties
 'simpleName <- writerNameName #lightgray: property
 
-object "<<PropertyValue>>" as writerNameOptional {
-    value = "false"
-    property = → optional
-}
-writerName *--- writerNameOptional: properties
-'optional <- writerNameOptional #lightgray: property
-
-object "<<ReferenceTarget>>" as writerNameType {
-    resolveInfo = "Book"
+object " " as writerNameType<<ReferenceTarget>> {
+    resolveInfo = "String"
     reference = → propertyType
 }
 writerName *-- writerNameType: references
@@ -479,29 +352,22 @@ writerNameType -> String: target
 
 ' GuideBookWriter
 
-object "<<Node>> GuideBookWriter" as GuideBookWriter {
+object "GuideBookWriter" as GuideBookWriter<<Node>> {
     id = "idGuideBookWriter"
     concept = → Concept
 }
 'concept <- GuideBookWriter #lightgray: concept
 
-libraryGuideBookWriter --> GuideBookWriter: target
+libraryChildren::elements --> GuideBookWriter: target
 
-object "<<PropertyValue>>" as GuideBookWriterName {
-    value = "GuideBookWriter"
-    property = → simpleName
+map " " as GuideBookWriterName<<PropertyValue>> {
+    → simpleName => "GuideBookWriter"
+    → abstract => "false"
 }
-GuideBookWriter *--- GuideBookWriterName: properties
+GuideBookWriter *-- GuideBookWriterName: properties
 'simpleName <- GuideBookWriterName #lightgray: property
 
-object "<<PropertyValue>>" as GuideBookWriterAbstract {
-    value = "false"
-    property = → abstract
-}
-GuideBookWriter *--- GuideBookWriterAbstract: properties
-'abstract <- GuideBookWriterAbstract #lightgray: property
-
-object "<<ReferenceTarget>>" as GuideBookWriterExtends {
+object " " as GuideBookWriterExtends<<ReferenceTarget>> {
     resolveInfo = "Writer"
     reference = → extends
 }
@@ -511,34 +377,26 @@ GuideBookWriterExtends -> Writer: target
 
 ' GuideBookWriter.countries
 
-object "<<Node>> countries" as countries {
+object "countries" as countries<<Node>> {
     id = "idGuideBookWriterCountries"
     concept = → Property
 }
 'simpleName <- countries #lightgray: property
 
-object "<<ChildTarget>>" as GuideBookWriterCountries {
-    containment = → features
+map " " as GuideBookWriterChildren<<ChildTarget>> {
+     features => → features
 }
-GuideBookWriter *--- GuideBookWriterCountries: children
-'features <- GuideBookWriterCountries #lightgray: containment
-GuideBookWriterCountries --> countries: target
+GuideBookWriter *-- GuideBookWriterChildren: children
+GuideBookWriterChildren::features --> countries: target
 
-object "<<PropertyValue>>" as countriesName {
-    value = "countries"
-    property = → simpleName
+map " " as countriesName<<PropertyValue>> {
+    → simpleName => "countries"
+    → optional => "false"
 }
-countries *--- countriesName: properties
+countries *-- countriesName: properties
 'simpleName <- countriesName #lightgray: property
 
-object "<<PropertyValue>>" as countriesOptional {
-    value = "false"
-    property = → optional
-}
-countries *--- countriesOptional: properties
-'optional <- countriesOptional #lightgray: property
-
-object "<<ReferenceTarget>>" as countriesType {
+object " " as countriesType<<ReferenceTarget>> {
     resolveInfo = "String"
     reference = → propertyType
 }
@@ -548,29 +406,22 @@ countriesType -> String: target
 
 ' SpecialistBookWriter
 
-object "<<Node>> SpecialistBookWriter" as SpecialistBookWriter {
+object "SpecialistBookWriter" as SpecialistBookWriter<<Node>> {
     id = "idSpecialistBookWriter"
     concept = → Concept
 }
 'concept <- SpecialistBookWriter #lightgray: concept
 
-librarySpecialistBookWriter --> SpecialistBookWriter: target
+libraryChildren::elements --> SpecialistBookWriter: target
 
-object "<<PropertyValue>>" as SpecialistBookWriterName {
-    value = "SpecialistBookWriter"
-    property = → simpleName
+map " " as SpecialistBookWriterName<<PropertyValue>> {
+    → simpleName => "SpecialistBookWriter"
+    → abstract => "false"
 }
-SpecialistBookWriter *--- SpecialistBookWriterName: properties
+SpecialistBookWriter *-- SpecialistBookWriterName: properties
 'simpleName <- SpecialistBookWriterName #lightgray: property
 
-object "<<PropertyValue>>" as SpecialistBookWriterAbstract {
-    value = "false"
-    property = → abstract
-}
-SpecialistBookWriter *--- SpecialistBookWriterAbstract: properties
-'abstract <- SpecialistBookWriterAbstract #lightgray: property
-
-object "<<ReferenceTarget>>" as SpecialistBookWriterExtends {
+object " " as SpecialistBookWriterExtends<<ReferenceTarget>> {
     resolveInfo = "Writer"
     reference = → extends
 }
@@ -580,34 +431,26 @@ SpecialistBookWriterExtends -> Writer: target
 
 ' SpecialistBookWriter.subject
 
-object "<<Node>> subject" as subject {
+object "subject" as subject<<Node>> {
     id = "idSpecialistBookWriterSubject"
     concept = → Property
 }
 'simpleName <- subject #lightgray: property
 
-object "<<ChildTarget>>" as SpecialistBookWriterSubject {
-    containment = → features
+map " " as SpecialistBookWriterChildren<<ChildTarget>> {
+     features => → features
 }
-SpecialistBookWriter *--- SpecialistBookWriterSubject: children
-'features <- SpecialistBookWriterSubject #lightgray: containment
-SpecialistBookWriterSubject --> subject: target
+SpecialistBookWriter *-- SpecialistBookWriterChildren: children
+SpecialistBookWriterChildren::features --> subject: target
 
-object "<<PropertyValue>>" as subjectName {
-    value = "subject"
-    property = → simpleName
+map " " as subjectName<<PropertyValue>> {
+    → simpleName => "subject"
+    → optional => "false"
 }
-subject *--- subjectName: properties
+subject *-- subjectName: properties
 'simpleName <- subjectName #lightgray: property
 
-object "<<PropertyValue>>" as subjectOptional {
-    value = "false"
-    property = → optional
-}
-subject *--- subjectOptional: properties
-'optional <- subjectOptional #lightgray: property
-
-object "<<ReferenceTarget>>" as subjectType {
+object " " as subjectType<<ReferenceTarget>> {
     resolveInfo = "String"
     reference = → propertyType
 }

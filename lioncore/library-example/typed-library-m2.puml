@@ -1,4 +1,15 @@
 @startuml
+title Low-level M2 Library Example
+
+skinparam object {
+    BackgroundColor<<Node>> LightGreen
+    BackgroundColor<<ReferenceTarget>> LightSkyBlue
+}
+skinparam object {
+    BackgroundColor<<PropertyValue>> LightPink
+    BackgroundColor<<ChildTarget>> LightBlue
+}
+
 package meta {
     object "Metamodel" as metamodel
 

@@ -1,0 +1,72 @@
+@startuml
+' Library
+title Typed M1 Library Example
+
+skinparam object {
+    BackgroundColor<<TypedNode>> LightGreen
+    BackgroundColor<<TypedReference>> LightSkyBlue
+}
+skinparam object {
+    BackgroundColor<<TypedProperty>> LightPink
+    BackgroundColor<<TypedChild>> LightBlue
+}
+
+object "<T = Library> Bob's Library" as library<<TypedNode>> {
+    concept = → idLibrary
+}
+
+object "<T = String>" as libraryName<<TypedProperty>> {
+    value = "Bob's Library"
+    property = → idLibraryName
+}
+library *-- libraryName: properties
+
+' Explorer book
+
+object "<T = Book> Explorer Book" as explorerBook<<TypedNode>> {
+    concept = → idBook
+}
+
+object "<T = Integer> pages" as explorerBookPages<<TypedProperty>> {
+    value = 123
+    property = → idPages
+}
+explorerBook *-- explorerBookPages: properties
+
+object "<T = String> title" as explorerBookTitle<<TypedProperty>> {
+    value = "Explorer Book"
+    property = → idTitle
+}
+explorerBook *-- explorerBookTitle: properties
+
+object "<T = Book*>" as libraryBooks<<TypedChild>> {
+    containment = → idLibraryBooks
+}
+library *-- libraryBooks: children
+libraryBooks --> explorerBook
+
+
+object "<T = Writer>" as explorerBookAuthor<<TypedReference>> {
+    reference = → idAuthor
+}
+explorerBook *-- explorerBookAuthor: references
+
+' Jack London
+object "<T = GuideBookWriter> Jack London" as jackLondon<<TypedNode>> {
+    concept = → idGuideBookWriter
+}
+
+object "<T = String>" as jackLondonName<<TypedProperty>> {
+    value = "Jack London"
+    property = → idWriterName
+}
+jackLondon *-- jackLondonName: properties
+
+object "<T = String>" as jackLondonCountries<<TypedProperty>> {
+    value = "Alaska"
+    property = → idGuideBookWriterCountries
+}
+jackLondon *-- jackLondonCountries: properties
+
+explorerBookAuthor --> jackLondon: target
+@enduml
