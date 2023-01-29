@@ -1,0 +1,66 @@
+@startuml
+' Library
+
+object "<<Node>> Bob's Library" as library {
+    id = "idBobLib"
+    concept = → idLibrary
+}
+
+object "<<PropertyValue>>" as libraryName {
+    value = "Bob's library"
+    property = → idLibraryName
+}
+
+library *-- libraryName: properties
+
+' Explorer book
+
+object "<<Node>> Explorer Book" as explorerBook {
+    id = "idExplorer"
+    concept = → idBook
+}
+
+object "<<ChildTarget>>" as libraryExplorerBook {
+    containment = → idLibraryBooks
+}
+library *-- libraryExplorerBook: children
+libraryExplorerBook -> explorerBook: target
+
+object "<<PropertyValue>>" as explorerBookPages {
+    value = "123"
+    property = → idPages
+}
+explorerBook *-- explorerBookPages: properties
+
+object "<<PropertyValue>>" as explorerBookTitle {
+    value = "Explorer Book"
+    property = → idTitle
+}
+explorerBook *-- explorerBookTitle: properties
+
+object "<<ReferenceTarget>>" as explorerBookAuthor {
+    resolveInfo = "Jack London"
+    reference = → idAuthor
+}
+explorerBook *-- explorerBookAuthor: properties
+
+' Jack London
+object "<<Node>> Jack London" as jackLondon {
+    id = "idJack"
+    concept = → idGuideBookWriter
+}
+
+object "<<PropertyValue>>" as jackLondonName {
+    value = "Jack London"
+    property = → idWriterName
+}
+jackLondon *-- jackLondonName: properties
+
+object "<<PropertyValue>>" as jackLondonCountries {
+    value = "Alaska"
+    property = → idGuideBookWriterCountries
+}
+jackLondon *-- jackLondonCountries: properties
+
+explorerBookAuthor -> jackLondon: target
+@enduml
