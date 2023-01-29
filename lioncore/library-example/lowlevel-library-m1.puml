@@ -6,12 +6,10 @@ object "<<Node>> Bob's Library" as library {
     concept = → idLibrary
 }
 
-object "<<PropertyValue>>" as libraryName {
-    value = "Bob's library"
-    property = → idLibraryName
+map "<<PropertyValue>>" as libraryProperties {
+    → idLibraryName => "Bob's library"
 }
-
-library *-- libraryName: properties
+library *-- libraryProperties: properties
 
 ' Explorer book
 
@@ -20,29 +18,24 @@ object "<<Node>> Explorer Book" as explorerBook {
     concept = → idBook
 }
 
-object "<<ChildTarget>>" as libraryExplorerBook {
-    containment = → idLibraryBooks
+map "<<PropertyValue>>" as explorerBookProperties {
+    → idPages => "123"
+    → idTitle => "Explorer Book"
 }
-library *-- libraryExplorerBook: children
-libraryExplorerBook -> explorerBook: target
+explorerBook *-- explorerBookProperties: properties
 
-object "<<PropertyValue>>" as explorerBookPages {
-    value = "123"
-    property = → idPages
+map "<<ChildTarget>>" as libraryChildren {
+    libraryExplorerBook => → idLibraryBooks
 }
-explorerBook *-- explorerBookPages: properties
+library *-- libraryChildren: children
+libraryChildren::libraryExplorerBook -> explorerBook
 
-object "<<PropertyValue>>" as explorerBookTitle {
-    value = "Explorer Book"
-    property = → idTitle
-}
-explorerBook *-- explorerBookTitle: properties
 
 object "<<ReferenceTarget>>" as explorerBookAuthor {
     resolveInfo = "Jack London"
     reference = → idAuthor
 }
-explorerBook *-- explorerBookAuthor: properties
+explorerBook *-- explorerBookAuthor: references
 
 ' Jack London
 object "<<Node>> Jack London" as jackLondon {
@@ -50,17 +43,11 @@ object "<<Node>> Jack London" as jackLondon {
     concept = → idGuideBookWriter
 }
 
-object "<<PropertyValue>>" as jackLondonName {
-    value = "Jack London"
-    property = → idWriterName
+map "<<PropertyValue>>" as jackLondonProperties {
+    → idWriterName => "Jack London"
+    → idGuideBookWriterCountries => "Alaska"
 }
-jackLondon *-- jackLondonName: properties
+jackLondon *-- jackLondonProperties: properties
 
-object "<<PropertyValue>>" as jackLondonCountries {
-    value = "Alaska"
-    property = → idGuideBookWriterCountries
-}
-jackLondon *-- jackLondonCountries: properties
-
-explorerBookAuthor -> jackLondon: target
+explorerBookAuthor --> jackLondon: target
 @enduml
