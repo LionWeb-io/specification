@@ -1,6 +1,6 @@
 @startjson
 {
-    "version": "1",
+    "serializationFormatVersion": "1",
     "nodes": [
       {
         "type": "Library",
