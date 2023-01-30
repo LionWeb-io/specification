@@ -22,19 +22,16 @@ object "library : <u>MetamodelDescriptor</u>" as library<<Metamodel>> {
 
 object "LibBoolean : <u>PrimitiveTypeDescriptor</u>" as LibBoolean<<PrimitiveType>> {
     simpleName = "LibBoolean"
-    abstract = false
 }
 library *-- LibBoolean: elements
 
 object "LibString : <u>PrimitiveTypeDescriptor</u>" as LibString<<PrimitiveType>> {
     simpleName = "LibString"
-    abstract = false
 }
 library *-- LibString: elements
 
 object "LibInteger : <u>PrimitiveTypeDescriptor</u>" as LibInteger<<PrimitiveType>> {
     simpleName = "LibInteger"
-    abstract = false
 }
 library *-- LibInteger: elements
 
