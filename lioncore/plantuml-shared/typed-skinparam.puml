@@ -1,0 +1,10 @@
+@startuml
+skinparam object {
+    BackgroundColor<<TypedNode>> LightGreen
+    BackgroundColor<<TypedReference>> LightSkyBlue
+}
+skinparam map {
+    BackgroundColor<<TypedProperty>> LightPink
+    BackgroundColor<<TypedChild>> LightBlue
+}
+@enduml

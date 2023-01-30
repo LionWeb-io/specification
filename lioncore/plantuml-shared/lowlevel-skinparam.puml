@@ -1,0 +1,10 @@
+@startuml
+skinparam object {
+    BackgroundColor<<Node>> LightGreen
+    BackgroundColor<<ReferenceTarget>> LightSkyBlue
+}
+skinparam map {
+    BackgroundColor<<PropertyValue>> LightPink
+    BackgroundColor<<ChildTarget>> LightBlue
+}
+@enduml

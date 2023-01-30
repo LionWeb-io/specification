@@ -1,0 +1,59 @@
+@startuml
+title Low-level Nodes
+
+hide empty members
+
+package meta {
+    class Concept
+    Concept -[hidden]-> Containment
+    class Containment
+    Containment -[hidden]-> Reference
+    class Reference
+    Reference -[hidden]-> Property
+    class Property
+}
+
+meta -[hidden]> Node
+
+'Node
+
+class Node #lightGreen{
+    id: Id
+}
+
+Node -> "0..1" Node: parent
+Concept "1" <- Node: concept
+
+'Children
+
+Node *--> "0..*" ChildTarget: children
+
+class ChildTarget #lightBlue {
+
+}
+
+ChildTarget --> "1" Node: target
+Containment "1" <- ChildTarget: containment
+
+
+'References
+
+Node *--> "0..*" ReferenceTarget: references
+
+class ReferenceTarget #lightSkyBlue {
+    resolveInfo: String
+}
+
+ReferenceTarget --> "1" Node: target
+Reference "1" <- ReferenceTarget: reference
+
+'Properties
+
+Node *--> "0..*" PropertyValue: properties
+class PropertyValue #lightPink {
+    value: String
+}
+
+Property "1" <- PropertyValue: property
+
+@enduml
