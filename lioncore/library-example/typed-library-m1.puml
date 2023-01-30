@@ -11,7 +11,7 @@ skinparam map {
     BackgroundColor<<TypedChild>> LightBlue
 }
 
-object "<T = Library> Bob's Library" as library<<TypedNode>> {
+object "<T = generated::Library> Bob's Library" as library<<TypedNode>> {
     concept = → runtime::Library
 }
 
@@ -22,7 +22,7 @@ library *-- libraryProperties: properties
 
 ' Explorer book
 
-object "<T = Book> Explorer Book" as explorerBook<<TypedNode>> {
+object "<T = generated::Book> Explorer Book" as explorerBook<<TypedNode>> {
     concept = → runtime::Book
 }
 
@@ -33,19 +33,19 @@ map " " as explorerBookProperties<<TypedProperty>> {
 explorerBook *-- explorerBookProperties: properties
 
 map " " as libraryChildren<<TypedChild>> {
-    LibraryBooks => <T = Book*> → runtime::LibraryBooks
+    LibraryBooks => <T = generated::Book*> → runtime::LibraryBooks
 }
 library *-- libraryChildren: children
 libraryChildren::LibraryBooks -> explorerBook
 
 
-object "<T = Writer>" as explorerBookAuthor<<TypedReference>> {
+object "<T = generated::Writer>" as explorerBookAuthor<<TypedReference>> {
     reference = → runtime::BookAuthor
 }
 explorerBook *-- explorerBookAuthor: references
 
 ' Jack London
-object "<T = GuideBookWriter> Jack London" as jackLondon<<TypedNode>> {
+object "<T = generated::GuideBookWriter> Jack London" as jackLondon<<TypedNode>> {
     concept = → runtime::GuideBookWriter
 }
 

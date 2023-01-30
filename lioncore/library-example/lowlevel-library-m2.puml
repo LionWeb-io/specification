@@ -10,7 +10,7 @@ skinparam map {
     BackgroundColor<<ChildTarget>> LightBlue
 }
 
-package meta {
+package "M3 runtime" as meta {
     object "Metamodel" as metamodel
 
     object "qualifiedName" as qualifiedName
@@ -66,19 +66,19 @@ package meta {
 
 object "library" as library<<Node>> {
     id = "idLibMm"
-    concept = → Metamodel
+    concept = → m3runtime::Metamodel
 }
 'metamodel <- library #lightgray: concept
 
 
 map " " as libraryQualifiedName<<PropertyValue>> {
-    → qualifiedName => "library"
+    → m3runtime::qualifiedName => "library"
 }
 library *-- libraryQualifiedName: properties
 'qualifiedName <- libraryQualifiedName #lightgray: property
 
 map " " as libraryChildren<<ChildTarget>> {
-    elements => → elements
+    elements => → m3runtime::elements
 }
 library *-- libraryChildren: children
 'elements <- libraryLibString #lightgray: containment
@@ -87,14 +87,14 @@ library *-- libraryChildren: children
 
 object "LibString" as LibString<<Node>> {
     id = "idLibString"
-    concept = → PrimitiveType
+    concept = → m3runtime::PrimitiveType
 }
 'primitiveType <- LibString #lightgray: concept
 
 libraryChildren::elements --> LibString: target
 
 map " " as LibStringName<<PropertyValue>> {
-    → simpleName => "LibString"
+    → m3runtime::simpleName => "LibString"
 }
 LibString *-- LibStringName: properties
 'simpleName <- LibStringName #lightgray: property
@@ -103,14 +103,14 @@ LibString *-- LibStringName: properties
 
 object "LibBoolean" as LibBoolean<<Node>> {
     id = "idLibBoolean"
-    concept = → PrimitiveType
+    concept = → m3runtime::PrimitiveType
 }
 'primitiveType <- LibBoolean #lightgray: concept
 
 libraryChildren::elements --> LibBoolean: target
 
 map " " as LibBooleanName<<PropertyValue>> {
-    → simpleName => "LibBoolean"
+    → m3runtime::simpleName => "LibBoolean"
 }
 LibBoolean *-- LibBooleanName: properties
 'simpleName <- LibBooleanName #lightgray: property
@@ -119,14 +119,14 @@ LibBoolean *-- LibBooleanName: properties
 
 object "LibInteger" as LibInteger<<Node>> {
     id = "idLibInteger"
-    concept = → PrimitiveType
+    concept = → m3runtime::PrimitiveType
 }
 'primitiveType <- LibInteger #lightgray: concept
 
 libraryChildren::elements --> LibInteger: target
 
 map " " as LibIntegerName<<PropertyValue>> {
-    → simpleName => "LibInteger"
+    → m3runtime::simpleName => "LibInteger"
 }
 LibInteger *-- LibIntegerName: properties
 'simpleName <- LibIntegerName #lightgray: property
@@ -135,15 +135,15 @@ LibInteger *-- LibIntegerName: properties
 
 object "Book" as Book<<Node>> {
     id = "idBook"
-    concept = → Concept
+    concept = → m3runtime::Concept
 }
 'concept <- Book #lightgray: concept
 
 libraryChildren::elements --> Book: target
 
 map " " as bookName<<PropertyValue>> {
-    → simpleName => "Book"
-    → abstract => "false"
+    → m3runtime::simpleName => "Book"
+    → m3runtime::abstract => "false"
 }
 Book *-- bookName: properties
 
@@ -151,26 +151,26 @@ Book *-- bookName: properties
 
 object "title" as title<<Node>> {
     id = "idTitle"
-    concept = → Property
+    concept = → m3runtime::Property
 }
 'property <- title #lightgray: concept
 
 map " " as bookChildren<<ChildTarget>> {
-     features => → features
+     features => → m3runtime::features
 }
 Book *-- bookChildren: children
 bookChildren::features -> title: target
 
 map " " as titleName<<PropertyValue>> {
-    → simpleName => "title"
-    → optional => "false"
+    → m3runtime::simpleName => "title"
+    → m3runtime::optional => "false"
 }
 title *-- titleName: properties
 'simpleName <- titleName #lightgray: property
 
 object " " as titleType<<ReferenceTarget>> {
     resolveInfo = "LibString"
-    reference = → propertyType
+    reference = → m3runtime::propertyType
 }
 title *-- titleType: references
 'propertyType <- titleType #lightgray: reference
@@ -180,22 +180,22 @@ titleType -> LibString: target
 
 object "pages" as pages<<Node>> {
     id = "idPages"
-    concept = → Property
+    concept = → m3runtime::Property
 }
 'property <- pages #lightgray: concept
 
 bookChildren::features --> pages: target
 
 map " " as pagesName<<PropertyValue>> {
-    → SimpleName => "pages"
-    → optional => "false"
+    → m3runtime::SimpleName => "pages"
+    → m3runtime::optional => "false"
 }
 pages *-- pagesName: properties
 'simpleName <- pagesName #lightgray: property
 
 object " " as pagesType<<ReferenceTarget>> {
     resolveInfo = "LibInteger"
-    reference = → propertyType
+    reference = → m3runtime::propertyType
 }
 pages *-- pagesType: references
 'propertyType <- pagesType #lightgray: reference
@@ -205,16 +205,16 @@ pagesType -> LibInteger: target
 
 object "author" as author<<Node>> {
     id = "idAuthor"
-    concept = → Reference
+    concept = → m3runtime::Reference
 }
 'reference <- author #lightgray: concept
 
 bookChildren::features --> author: target
 
 map " " as authorName<<PropertyValue>> {
-    → simpleName => "author"
-    → optional => "false"
-    → multiple => "false"
+    → m3runtime::simpleName => "author"
+    → m3runtime::optional => "false"
+    → m3runtime::multiple => "false"
 }
 author *-- authorName: properties
 'simpleName <- authorName #lightgray: property
@@ -222,7 +222,7 @@ author *-- authorName: properties
 
 object " " as authorType<<ReferenceTarget>> {
     resolveInfo = "Writer"
-    reference = → linkType
+    reference = → m3runtime::linkType
 }
 author *-- authorType: references
 'linkType <- authorType #lightgray: reference
@@ -232,15 +232,15 @@ author *-- authorType: references
 
 object "Library" as Library<<Node>> {
     id = "idLibrary"
-    concept = → Concept
+    concept = → m3runtime::Concept
 }
 'concept <- Library #lightgray: concept
 
 libraryChildren::elements --> Library: target
 
 map " " as libraryName<<PropertyValue>> {
-    → simpleName => "Library"
-    → abstract => "false"
+    → m3runtime::simpleName => "Library"
+    → m3runtime::abstract => "false"
 
 }
 Library *-- libraryName: properties
@@ -250,26 +250,26 @@ Library *-- libraryName: properties
 
 object "name" as libraryNameNode<<Node>> {
     id = "idLibraryName"
-    concept = → Property
+    concept = → m3runtime::Property
 }
 'property <- libraryNameNode #lightgray: concept
 
 map " " as LibraryNodeChildren<<ChildTarget>> {
-     features => → features
+     features => → m3runtime::features
 }
 Library *-- LibraryNodeChildren: children
 LibraryNodeChildren::features -> libraryNameNode: target
 
 map " " as libraryNameName<<PropertyValue>> {
-    → simpleName =>  "name"
-    → optional => "false"
+    → m3runtime::simpleName =>  "name"
+    → m3runtime::optional => "false"
 }
 libraryNameNode *-- libraryNameName: properties
 'simpleName <- libraryNameName #lightgray: property
 
 object " " as libraryNameNodeType<<ReferenceTarget>> {
     resolveInfo = "LibString"
-    reference = → propertyType
+    reference = → m3runtime::propertyType
 }
 libraryNameNode *-- libraryNameNodeType: references
 'propertyType <- libraryNameNodeType #lightgray: reference
@@ -279,7 +279,7 @@ libraryNameNodeType -> LibString: target
 
 object "books" as books<<Node>> {
     id = "idLibraryBooks"
-    concept = → Containment
+    concept = → m3runtime::Containment
 }
 'containment <- books #lightgray: concept
 
@@ -287,16 +287,16 @@ LibraryNodeChildren::features --> books: target
 
 
 map " " as booksName<<PropertyValue>> {
-    → simpleName => "books"
-    → optional => "false"
-    → multiple => "true"
+    → m3runtime::simpleName => "books"
+    → m3runtime::optional => "false"
+    → m3runtime::multiple => "true"
 }
 books *-- booksName: properties
 'simpleName <- booksName #lightgray: property
 
 object " " as booksType<<ReferenceTarget>> {
     resolveInfo = "Book"
-    reference = → linkType
+    reference = → m3runtime::linkType
 }
 books *-- booksType: references
 'linkType <- booksType #lightgray: reference
@@ -306,7 +306,7 @@ booksType -> Book: target
 
 object "Writer" as Writer<<Node>> {
     id = "idWriter"
-    concept = → Concept
+    concept = → m3runtime::Concept
 }
 'concept <- Writer #lightgray: concept
 
@@ -315,8 +315,8 @@ libraryChildren::elements --> Writer: target
 authorType -> Writer: target
 
 map " " as Writer_Name<<PropertyValue>> {
-    → simpleName => "Writer"
-    → abstract => "false"
+    → m3runtime::simpleName => "Writer"
+    → m3runtime::abstract => "false"
 }
 Writer *-- Writer_Name: properties
 'simpleName <- Writer_Name #lightgray: property
@@ -325,26 +325,26 @@ Writer *-- Writer_Name: properties
 
 object "name" as writerName<<Node>> {
     id = "idWriterName"
-    concept = → Property
+    concept = → m3runtime::Property
 }
 'property <- writerName #lightgray: concept
 
 map " " as WriterChildren<<ChildTarget>> {
-     features => → features
+     features => → m3runtime::features
 }
 Writer *-- WriterChildren: children
 WriterChildren::features -> writerName: target
 
 map " " as writerNameName<<PropertyValue>> {
-    → simpleName => "name"
-    → optional => "false"
+    → m3runtime::simpleName => "name"
+    → m3runtime::optional => "false"
 }
 writerName *-- writerNameName: properties
 'simpleName <- writerNameName #lightgray: property
 
 object " " as writerNameType<<ReferenceTarget>> {
     resolveInfo = "LibString"
-    reference = → propertyType
+    reference = → m3runtime::propertyType
 }
 writerName *-- writerNameType: references
 'propertyType <- writerNameType #lightgray: reference
@@ -354,22 +354,22 @@ writerNameType -> LibString: target
 
 object "GuideBookWriter" as GuideBookWriter<<Node>> {
     id = "idGuideBookWriter"
-    concept = → Concept
+    concept = → m3runtime::Concept
 }
 'concept <- GuideBookWriter #lightgray: concept
 
 libraryChildren::elements --> GuideBookWriter: target
 
 map " " as GuideBookWriterName<<PropertyValue>> {
-    → simpleName => "GuideBookWriter"
-    → abstract => "false"
+    → m3runtime::simpleName => "GuideBookWriter"
+    → m3runtime::abstract => "false"
 }
 GuideBookWriter *-- GuideBookWriterName: properties
 'simpleName <- GuideBookWriterName #lightgray: property
 
 object " " as GuideBookWriterExtends<<ReferenceTarget>> {
     resolveInfo = "Writer"
-    reference = → extends
+    reference = → m3runtime::extends
 }
 GuideBookWriter *-- GuideBookWriterExtends: references
 'extends <- GuideBookWriterExtends #lightgray: reference
@@ -379,26 +379,26 @@ GuideBookWriterExtends -> Writer: target
 
 object "countries" as countries<<Node>> {
     id = "idGuideBookWriterCountries"
-    concept = → Property
+    concept = → m3runtime::Property
 }
 'simpleName <- countries #lightgray: property
 
 map " " as GuideBookWriterChildren<<ChildTarget>> {
-     features => → features
+     features => → m3runtime::features
 }
 GuideBookWriter *-- GuideBookWriterChildren: children
 GuideBookWriterChildren::features -> countries: target
 
 map " " as countriesName<<PropertyValue>> {
-    → simpleName => "countries"
-    → optional => "false"
+    → m3runtime::simpleName => "countries"
+    → m3runtime::optional => "false"
 }
 countries *-- countriesName: properties
 'simpleName <- countriesName #lightgray: property
 
 object " " as countriesType<<ReferenceTarget>> {
     resolveInfo = "LibString"
-    reference = → propertyType
+    reference = → m3runtime::propertyType
 }
 countries *-- countriesType: references
 'propertyType <- countriesType #lightgray: reference
@@ -408,22 +408,22 @@ countriesType -> LibString: target
 
 object "SpecialistBookWriter" as SpecialistBookWriter<<Node>> {
     id = "idSpecialistBookWriter"
-    concept = → Concept
+    concept = → m3runtime::Concept
 }
 'concept <- SpecialistBookWriter #lightgray: concept
 
 libraryChildren::elements --> SpecialistBookWriter: target
 
 map " " as SpecialistBookWriterName<<PropertyValue>> {
-    → simpleName => "SpecialistBookWriter"
-    → abstract => "false"
+    → m3runtime::simpleName => "SpecialistBookWriter"
+    → m3runtime::abstract => "false"
 }
 SpecialistBookWriter *-- SpecialistBookWriterName: properties
 'simpleName <- SpecialistBookWriterName #lightgray: property
 
 object " " as SpecialistBookWriterExtends<<ReferenceTarget>> {
     resolveInfo = "Writer"
-    reference = → extends
+    reference = → m3runtime::extends
 }
 SpecialistBookWriter *-- SpecialistBookWriterExtends: references
 'extends <- SpecialistBookWriterExtends #lightgray: reference
@@ -433,19 +433,19 @@ SpecialistBookWriterExtends -> Writer: target
 
 object "subject" as subject<<Node>> {
     id = "idSpecialistBookWriterSubject"
-    concept = → Property
+    concept = → m3runtime::Property
 }
 'simpleName <- subject #lightgray: property
 
 map " " as SpecialistBookWriterChildren<<ChildTarget>> {
-     features => → features
+     features => → m3runtime::features
 }
 SpecialistBookWriter *-- SpecialistBookWriterChildren: children
 SpecialistBookWriterChildren::features -> subject: target
 
 map " " as subjectName<<PropertyValue>> {
-    → simpleName => "subject"
-    → optional => "false"
+    → m3runtime::simpleName => "subject"
+    → m3runtime::optional => "false"
 }
 subject *-- subjectName: properties
 'simpleName <- subjectName #lightgray: property

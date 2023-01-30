@@ -1,0 +1,109 @@
+@startuml
+title Generated M2 Library Example
+
+hide empty members
+
+skinparam class {
+    BackgroundColor<<concept>> LightGreen
+    BackgroundColor<<reference>> LightSkyBlue
+    BackgroundColor<<property>> LightPink
+    BackgroundColor<<containment>> LightBlue
+}
+
+package "M3 generated" as meta {
+    interface Metamodel
+    interface PrimitiveType
+    interface Concept
+    interface Property<T>
+    interface Containment<T>
+    interface Reference<T>
+}
+
+interface library<<metamodel>> extends Metamodel {
+    runtime = runtime::library
+}
+
+interface LibBoolean<<PrimitiveType>> extends PrimitiveType {
+    runtime = runtime::LibBoolean
+}
+
+interface LibString<<PrimitiveType>> extends PrimitiveType {
+    runtime = runtime::LibString
+}
+
+interface LibInteger<<PrimitiveType>> extends PrimitiveType {
+    runtime = runtime::LibInteger
+}
+
+interface Library<<concept>> extends Concept {
+    runtime = runtime::Library
+}
+
+interface LibraryName<<property>> {
+    runtime = runtime::LibraryName
+}
+Property <|-- LibraryName: <i>T = String</i>
+Library -> "1" LibraryName
+
+interface LibraryBooks<<containment>> {
+    runtime = runtime::LibraryBooks
+}
+Containment <|-- LibraryBooks: <i>T = Book*</i>
+Library --> "*" LibraryBooks
+
+interface Book<<concept>> extends Concept {
+    runtime = runtime::Book
+}
+LibraryBooks --> "1" Book
+
+interface BookTitle<<property>> {
+    runtime = runtime::BookTitle
+}
+Property <|-- BookTitle: <i>T = String</i>
+Book --> "1" BookTitle
+
+interface BookPages<<property>> {
+    runtime = runtime::BookPages
+}
+Property <|-- BookPages: <i>T = Integer</i>
+Book --> "1" BookPages
+
+interface BookAuthor<<reference>> {
+    runtime = runtime::BookAuthor
+}
+Reference <|-- BookAuthor: <i>T = Writer*</i>
+Book --> "*" BookAuthor
+
+interface Writer<<concept>> extends Concept {
+    runtime = runtime::Writer
+}
+
+BookAuthor --> "1" Writer
+
+interface WriterName<<property>> {
+    runtime = runtime::WriterName
+}
+Property <|-- WriterName: <i>T = String</i>
+Writer --> "1" WriterName
+
+interface SpecialistBookWriter<<concept>> extends Concept, Writer {
+    runtime = runtime::SpecialistBookWriter
+}
+
+interface SpecialistBookWriterSubject<<property>> {
+    runtime = runtime::SpecialistBookWriterSubject
+}
+Property <|-- SpecialistBookWriterSubject: <i>T = String</i>
+SpecialistBookWriter --> "1" SpecialistBookWriterSubject
+
+interface GuideBookWriter<<concept>> extends Concept, Writer {
+    runtime = runtime::GuideBookWriter
+}
+
+interface GuideBookWriterCountries<<property>> {
+    runtime = runtime::GuideBookWriterCountries
+}
+Property <|-- GuideBookWriterCountries: <i>T = String</i>
+GuideBookWriter --> "1" GuideBookWriterCountries
+
+@enduml
