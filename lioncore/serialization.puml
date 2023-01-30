@@ -9,7 +9,7 @@ legend
 end legend
 
 class SerializationChunk {
-    version: String
+    serializationFormatVersion: String
 }
 
 SerializationChunk *--> "0..*" Node: nodes
