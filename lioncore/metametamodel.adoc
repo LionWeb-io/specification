@@ -45,7 +45,7 @@ Let’s first see a representation of the meta-metamodel using (a tiny subset of
 include::metametamodel.puml[]
 ----
 
-image::metametamodel.svg[]
+image::rendered/metametamodel.svg[]
 
 == Definition of the Meta-Metamodel
 
