@@ -3,9 +3,10 @@
 title Typed M1 Library Example
 
 hide empty members
+hide stereotypes
 
 !include ../plantuml-shared/typed-skinparam.puml
-!include ../plantuml-shared/map-legend.puml
+!include ../plantuml-shared/typed-map-legend.puml
 
 package "typed Node" as typedNode {
     class TypedNode<T : Concept>

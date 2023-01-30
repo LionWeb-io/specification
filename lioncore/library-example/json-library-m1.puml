@@ -1,0 +1,46 @@
+@startjson
+{
+    "version": "1",
+    "nodes": [
+      {
+        "type": "Library",
+        "id": "idBobLib",
+        "properties": {
+          "LibraryName": "Bob's library"
+        },
+        "children": {
+          "LibraryBooks": [
+            "idExplorer"
+          ]
+        },
+        "parent": null
+      },
+      {
+        "type": "Book",
+        "id": "idExplorer",
+        "properties": {
+          "BookTitle": "Explorer Book",
+          "BookPages": "123"
+        },
+        "references": {
+            "WriterAuthor": [
+                {
+                    "resolveInfo": "Jack London",
+                    "reference": "idJack"
+                }
+            ]
+        },
+        "parent": "idBobLib"
+      },
+      {
+        "type": "GuideBookWriter",
+        "id": "idJack",
+        "properties": {
+          "WriterName": "Jack London",
+          "GuideBookWriterCountries": "Alaska"
+        },
+        "parent": null
+      }
+    ]
+}
+@endjson

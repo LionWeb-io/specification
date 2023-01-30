@@ -1,116 +1,129 @@
 @startuml
 title Runtime M2 Library Example
 
+hide empty members
+hide stereotypes
+
 !include ../plantuml-shared/runtime-skinparam.puml
 
-object "library" as library<<Metamodel>> {
-    qualifiedName: String = "library"
+package "M3 descriptors" {
+    class MetamodelDescriptor
+    class PrimitiveTypeDescriptor
+    class ConceptDescriptor
+    class PropertyDescriptor
+    class ContainmentDescriptor
+    class ReferenceDescriptor
+    
 }
 
-object "LibBoolean" as LibBoolean<<PrimitiveType>> {
-    simpleName: String = "LibBoolean"
-    abstract: Boolean = false
+object "library : <u>MetamodelDescriptor</u>" as library<<Metamodel>> {
+    qualifiedName = "library"
+}
+
+object "LibBoolean : <u>PrimitiveTypeDescriptor</u>" as LibBoolean<<PrimitiveType>> {
+    simpleName = "LibBoolean"
+    abstract = false
 }
 library *-- LibBoolean: elements
 
-object "LibString" as LibString<<PrimitiveType>> {
-    simpleName: String = "LibString"
-    abstract: Boolean = false
+object "LibString : <u>PrimitiveTypeDescriptor</u>" as LibString<<PrimitiveType>> {
+    simpleName = "LibString"
+    abstract = false
 }
 library *-- LibString: elements
 
-object "LibInteger" as LibInteger<<PrimitiveType>> {
-    simpleName: String = "LibInteger"
-    abstract: Boolean = false
+object "LibInteger : <u>PrimitiveTypeDescriptor</u>" as LibInteger<<PrimitiveType>> {
+    simpleName = "LibInteger"
+    abstract = false
 }
 library *-- LibInteger: elements
 
-object "Library" as Library<<Concept>> {
-    simpleName: String = "Library"
-    abstract: Boolean = false
+object "Library : <u>ConceptDescriptor</u>" as Library<<Concept>> {
+    simpleName = "Library"
+    abstract = false
 }
 library *-- Library: elements
 
-object "LibraryName" as LibraryName<<Property>> {
-    simpleName: String = "name"
-    optional: Boolean = false
+object "LibraryName : <u>PropertyDescriptor</u>" as LibraryName<<Property>> {
+    simpleName = "name"
+    optional = false
 }
 library *-- LibraryName: features
 LibraryName -> LibString: type
 
-object "LibraryBooks" as LibraryBooks<<Containment>> {
-    simpleName: String = "books"
-    optional: Boolean = false
-    multiple: Boolean = true
+object "LibraryBooks : <u>ContainmentDescriptor</u>" as LibraryBooks<<Containment>> {
+    simpleName = "books"
+    optional = false
+    multiple = true
 }
 Library *-- LibraryBooks: features
 
-object "Book" as Book<<Concept>> {
-    simpleName: String = "Book"
-    abstract: Boolean = false
+object "Book : <u>ConceptDescriptor</u>" as Book<<Concept>> {
+    simpleName = "Book"
+    abstract = false
 }
 library *-- Book: elements
 
 LibraryBooks -> Book: type
 
-object "BookTitle" as BookTitle<<Property>> {
-    simpleName: String = "title"
-    optional: Boolean = false
+object "BookTitle : <u>PropertyDescriptor</u>" as BookTitle<<Property>> {
+    simpleName = "title"
+    optional = false
 }
 Book *-- BookTitle: features
 BookTitle -> LibString: type
 
-object "BookPages" as BookPages<<Property>> {
-    simpleName: String = "pages"
-    optional: Boolean = false
+object "BookPages : <u>PropertyDescriptor</u>" as BookPages<<Property>> {
+    simpleName = "pages"
+    optional = false
 }
 Book *-- BookPages: features
 BookPages -> LibInteger: type
 
-object "BookAuthor" as BookAuthor<<Reference>> {
-    simpleName: String = "author"
-    optional: Boolean = false
-    multiple: Boolean = true
+object "BookAuthor : <u>ReferenceDescriptor</u>" as BookAuthor<<Reference>> {
+    simpleName = "author"
+    optional = false
+    multiple = true
 }
 Book *-- BookAuthor: features
 
-object "Writer" as Writer<<Concept>> {
-    simpleName: String = "Writer"
-    abstract: Boolean = false
+object "Writer : <u>ConceptDescriptor</u>" as Writer<<Concept>> {
+    simpleName = "Writer"
+    abstract = false
 }
 library *-- Writer: elements
 
 BookAuthor -> Writer: type
 
-object "WriterName" as WriterName<<Property>> {
-    simpleName: String = "name"
-    optional: Boolean = false
+object "WriterName : <u>PropertyDescriptor</u>" as WriterName<<Property>> {
+    simpleName = "name"
+    optional = false
 }
 Writer *-- WriterName: features
 WriterName -> LibString: type
 
-object "SpecialistBookWriter" as SpecialistBookWriter<<Concept>> {
-    simpleName: String = "SpecialistBookWriter"
-    abstract: Boolean = false
+object "SpecialistBookWriter : <u>ConceptDescriptor</u>" as SpecialistBookWriter<<Concept>> {
+    simpleName = "SpecialistBookWriter"
+    abstract = false
 }
 library *-- SpecialistBookWriter: elements
 
-object "SpecialistBookWriterSubject" as SpecialistBookWriterSubject<<Property>> {
-    simpleName: String = "subject"
-    optional: Boolean = false
+object "SpecialistBookWriterSubject : <u>PropertyDescriptor</u>" as SpecialistBookWriterSubject<<Property>> {
+    simpleName = "subject"
+    optional = false
 }
 SpecialistBookWriter *-- SpecialistBookWriterSubject: features
 SpecialistBookWriterSubject -> LibString: type
 
-object "GuideBookWriter" as GuideBookWriter<<Concept>> {
-    simpleName: String = "GuideBookWriter"
-    abstract: Boolean = false
+object "GuideBookWriter : <u>ConceptDescriptor</u>" as GuideBookWriter<<Concept>> {
+    simpleName = "GuideBookWriter"
+    abstract = false
 }
 library *-- GuideBookWriter: elements
 
-object "GuideBookWriterCountries" as GuideBookWriterCountries<<Property>> {
-    simpleName: String = "countries"
-    optional: Boolean = false
+object "GuideBookWriterCountries : <u>PropertyDescriptor</u>" as GuideBookWriterCountries<<Property>> {
+    simpleName = "countries"
+    optional = false
 }
 GuideBookWriter *-- GuideBookWriterCountries: features
 GuideBookWriterCountries -> LibString: type

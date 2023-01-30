@@ -4,7 +4,8 @@ title Serialization Format
 hide empty members
 
 legend
-    <#transparent,#transparent>| [key] / [value] | representation as JSON object |
+    <#transparent,#transparent>|= Legend |= |
+    | [key] / [value] | representation as JSON object |
 end legend
 
 class SerializationChunk {

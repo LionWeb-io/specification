@@ -2,9 +2,10 @@
 title Typed M2 Library Example
 
 hide empty members
+hide stereotypes
 
 !include ../plantuml-shared/typed-skinparam.puml
-!include ../plantuml-shared/map-legend.puml
+!include ../plantuml-shared/typed-map-legend.puml
 
 package "M3 runtime" {
     object "Metamodel" as metamodel
@@ -59,46 +60,48 @@ package "M3 runtime" {
 }
 
 package "M3 generated" {
-    object "Metamodel" as genMetamodel
+    interface "Metamodel" as genMetamodel
 
-    object "MetamodelElement" as genMetamodelElement
+    interface "MetamodelElement" as genMetamodelElement
 
-    object "Concept" as genConcept
+    interface "Concept" as genConcept extends genMetamodelElement
 
-    object "PrimitiveType" as genPrimitiveType
+    interface "DataType" as genDataType extends genMetamodelElement
 
-    object "Feature" as genFeature
+    interface "PrimitiveType" as genPrimitiveType extends genDataType
 
-    object "Property" as genProperty
+    interface "Feature" as genFeature
 
-    object "Reference" as genReference
+    interface "Property" as genProperty extends genFeature
 
-    object "Containment" as genContainment
+    interface "Reference" as genReference extends genFeature
+
+    interface "Containment" as genContainment extends genFeature
 }
 
 ' library (metamodel)
 
-object "<T = generated::Metamodel> library" as library<<TypedNode>> {
+object "library : <u>TypedNode<T = generated::Metamodel></u>" as library<<TypedNode>> {
     concept = → m3runtime::Metamodel
 }
 'metamodel <- library #lightgray: concept
 
 
 map " " as libraryQualifiedName<<TypedProperty>> {
-    → m3runtime::qualifiedName => <T = String> "library"
+    → m3runtime::qualifiedName => "library" : <u>TypedProperty<T = String></u>
 }
 library *-- libraryQualifiedName: properties
 'qualifiedName <- libraryQualifiedName #lightgray: property
 
 map " " as libraryChildren<<TypedChild>> {
-    elements => <T = generated::MetamodelElement*> → m3runtime::elements
+    elements => → m3runtime::elements : <u>TypedChild<T = generated::MetamodelElement*></u>
 }
 library *-- libraryChildren: children
 'elements <- libraryLibString #lightgray: containment
 
 ' LibString
 
-object "<T = PrimitiveType> LibString" as LibString<<TypedNode>> {
+object "LibString : <u>TypedNode<T = PrimitiveType></u>" as LibString<<TypedNode>> {
     concept = → m3runtime::PrimitiveType
 }
 'primitiveType <- LibString #lightgray: concept
@@ -106,14 +109,14 @@ object "<T = PrimitiveType> LibString" as LibString<<TypedNode>> {
 libraryChildren::elements --> LibString: target
 
 map " " as LibStringName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "LibString"
+    → m3runtime::simpleName => "LibString" : <u>TypedProperty<T = String></u>
 }
 LibString *-- LibStringName: properties
 'simpleName <- LibStringName #lightgray: property
 
 ' LibBoolean
 
-object "<T = generated::PrimitiveType> LibBoolean" as LibBoolean<<TypedNode>> {
+object "LibBoolean : <u>TypedNode<T = generated::PrimitiveType></u>" as LibBoolean<<TypedNode>> {
     concept = → m3runtime::PrimitiveType
 }
 'primitiveType <- LibBoolean #lightgray: concept
@@ -121,14 +124,14 @@ object "<T = generated::PrimitiveType> LibBoolean" as LibBoolean<<TypedNode>> {
 libraryChildren::elements --> LibBoolean: target
 
 map " " as LibBooleanName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "LibBoolean"
+    → m3runtime::simpleName => "LibBoolean" : <u>TypedProperty<T = String></u>
 }
 LibBoolean *-- LibBooleanName: properties
 'simpleName <- LibBooleanName #lightgray: property
 
 ' LibInteger
 
-object "<T = generated::PrimitiveType> LibInteger" as LibInteger<<TypedNode>> {
+object "LibInteger : <u>TypedNode<T = generated::PrimitiveType></u>" as LibInteger<<TypedNode>> {
     concept = → m3runtime::PrimitiveType
 }
 'primitiveType <- LibInteger #lightgray: concept
@@ -136,14 +139,14 @@ object "<T = generated::PrimitiveType> LibInteger" as LibInteger<<TypedNode>> {
 libraryChildren::elements --> LibInteger: target
 
 map " " as LibIntegerName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "LibInteger"
+    → m3runtime::simpleName => "LibInteger" : <u>TypedProperty<T = String></u>
 }
 LibInteger *-- LibIntegerName: properties
 'simpleName <- LibIntegerName #lightgray: property
 
 ' Book
 
-object "<T = generated::Concept> Book" as Book<<TypedNode>> {
+object "Book : <u>TypedNode<T = generated::Concept></u>" as Book<<TypedNode>> {
     concept = → m3runtime::Concept
 }
 'concept <- Book #lightgray: concept
@@ -151,32 +154,32 @@ object "<T = generated::Concept> Book" as Book<<TypedNode>> {
 libraryChildren::elements --> Book: target
 
 map " " as bookName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "Book"
-    → m3runtime::abstract => <T = Boolean> false
+    → m3runtime::simpleName => "Book" : <u>TypedProperty<T = String></u>
+    → m3runtime::abstract => false : <u>TypedProperty<T = Boolean></u>
 }
 Book *-- bookName: properties
 
 ' Book.title
 
-object "<T = Property> title" as title<<TypedNode>> {
+object "title : <u>TypedNode<T = Property></u>" as title<<TypedNode>> {
     concept = → m3runtime::Property
 }
 'property <- title #lightgray: concept
 
 map " " as bookChildren<<TypedChild>> {
-     features => <T = generated::Feature*> → m3runtime::features
+     features => → m3runtime::features : <u>TypedChild<T = generated::Feature*></u>
 }
 Book *-- bookChildren: children
 bookChildren::features -> title: target
 
 map " " as titleName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "title"
-    → m3runtime::optional => <T = Boolean> false
+    → m3runtime::simpleName => "title" : <u>TypedProperty<T = String></u>
+    → m3runtime::optional => false : <u>TypedProperty<T = Boolean></u>
 }
 title *-- titleName: properties
 'simpleName <- titleName #lightgray: property
 
-object "<T = String>" as titleType<<TypedReference>> {
+object ": <u>TypedReference<T = generated::DataType></u>" as titleType<<TypedReference>> {
     reference = → m3runtime::propertyType
 }
 title *-- titleType: references
@@ -185,7 +188,7 @@ titleType -> LibString: target
 
 ' Book.pages
 
-object "<T = generated::Property> pages" as pages<<TypedNode>> {
+object "pages : <u>TypedNode<T = generated::Property></u>" as pages<<TypedNode>> {
     concept = → m3runtime::Property
 }
 'property <- pages #lightgray: concept
@@ -193,13 +196,13 @@ object "<T = generated::Property> pages" as pages<<TypedNode>> {
 bookChildren::features --> pages: target
 
 map " " as pagesName<<TypedProperty>> {
-    → m3runtime::SimpleName => <T = String> "pages"
-    → m3runtime::optional => <T = Boolean> false
+    → m3runtime::SimpleName => "pages" : <u>TypedProperty<T = String></u>
+    → m3runtime::optional => false : <u>TypedProperty<T = Boolean></u>
 }
 pages *-- pagesName: properties
 'simpleName <- pagesName #lightgray: property
 
-object "<T = String>" as pagesType<<TypedReference>> {
+object ": <u>TypedReference<T = generated::DataType></u>" as pagesType<<TypedReference>> {
     reference = → m3runtime::propertyType
 }
 pages *-- pagesType: references
@@ -208,7 +211,7 @@ pagesType -> LibInteger: target
 
 ' Book.author
 
-object "<T = generated::Reference> author" as author<<TypedNode>> {
+object "author : <u>TypedNode<T = generated::Reference></u>" as author<<TypedNode>> {
     concept = → m3runtime::Reference
 }
 'reference <- author #lightgray: concept
@@ -216,15 +219,15 @@ object "<T = generated::Reference> author" as author<<TypedNode>> {
 bookChildren::features --> author: target
 
 map " " as authorName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "author"
-    → m3runtime::optional => <T = Boolean> false
-    → m3runtime::multiple => <T = Boolean> false
+    → m3runtime::simpleName => "author" : <u>TypedProperty<T = String></u>
+    → m3runtime::optional => false : <u>TypedProperty<T = Boolean></u>
+    → m3runtime::multiple => false : <u>TypedProperty<T = Boolean></u>
 }
 author *-- authorName: properties
 'simpleName <- authorName #lightgray: property
 
 
-object "<T = generated::Concept>" as authorType<<TypedReference>> {
+object ": <u>TypedReference<T = generated::Concept></u>" as authorType<<TypedReference>> {
     reference = → m3runtime::linkType
 }
 author *-- authorType: references
@@ -233,7 +236,7 @@ author *-- authorType: references
 
 ' Library (node)
 
-object "<T = generated::Concept> Library" as Library<<TypedNode>> {
+object "Library : <u>TypedNode<T = generated::Concept></u>" as Library<<TypedNode>> {
     concept = → m3runtime::Concept
 }
 'concept <- Library #lightgray: concept
@@ -241,8 +244,8 @@ object "<T = generated::Concept> Library" as Library<<TypedNode>> {
 libraryChildren::elements --> Library: target
 
 map " " as libraryName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "Library"
-    → m3runtime::abstract => <T = Boolean> false
+    → m3runtime::simpleName => "Library" : <u>TypedProperty<T = String></u>
+    → m3runtime::abstract => false : <u>TypedProperty<T = Boolean></u>
 
 }
 Library *-- libraryName: properties
@@ -250,25 +253,25 @@ Library *-- libraryName: properties
 
 ' Library.name
 
-object "<T = generated::Property> name" as libraryNameNode<<TypedNode>> {
+object "name : <u>TypedNode<T = generated::Property></u>" as libraryNameNode<<TypedNode>> {
     concept = → m3runtime::Property
 }
 'property <- libraryNameNode #lightgray: concept
 
 map " " as LibraryNodeChildren<<TypedChild>> {
-     features => <T = generated::Feature*> → m3runtime::features
+     features => → m3runtime::features : <u>TypedChild<T = generated::Feature*></u>
 }
 Library *-- LibraryNodeChildren: children
 LibraryNodeChildren::features --> libraryNameNode: target
 
 map " " as libraryNameName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "name"
-    → m3runtime::optional => <T = Boolean> false
+    → m3runtime::simpleName => "name" : <u>TypedProperty<T = String></u>
+    → m3runtime::optional => false : <u>TypedProperty<T = Boolean></u>
 }
 libraryNameNode *-- libraryNameName: properties
 'simpleName <- libraryNameName #lightgray: property
 
-object "<T = String>" as libraryNameNodeType<<TypedReference>> {
+object ": <u>TypedReference<T = generated::DataType></u>" as libraryNameNodeType<<TypedReference>> {
     reference = → m3runtime::propertyType
 }
 libraryNameNode *-- libraryNameNodeType: references
@@ -277,7 +280,7 @@ libraryNameNodeType -> LibString: target
 
 ' Library.books
 
-object "<T = generated::Containment> books" as books<<TypedNode>> {
+object "books : <u>TypedNode<T = generated::Containment></u>" as books<<TypedNode>> {
     concept = → m3runtime::Containment
 }
 'containment <- books #lightgray: concept
@@ -286,14 +289,14 @@ LibraryNodeChildren::features --> books: target
 
 
 map " " as booksName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "books"
-    → m3runtime::optional => <T = Boolean> false
-    → m3runtime::multiple => <T = Boolean> true
+    → m3runtime::simpleName => "books" : <u>TypedProperty<T = String></u>
+    → m3runtime::optional => false : <u>TypedProperty<T = Boolean></u>
+    → m3runtime::multiple => true : <u>TypedProperty<T = Boolean></u>
 }
 books *-- booksName: properties
 'simpleName <- booksName #lightgray: property
 
-object "<T = generated::Concept>" as booksType<<TypedReference>> {
+object ": <u>TypedReference<T = generated::Concept></u>" as booksType<<TypedReference>> {
     reference = → m3runtime::linkType
 }
 books *-- booksType: references
@@ -302,7 +305,7 @@ booksType -> Book: target
 
 ' Writer
 
-object "<T = generated::Concept> Writer" as Writer<<TypedNode>> {
+object "Writer : <u>TypedNode<T = generated::Concept></u>" as Writer<<TypedNode>> {
     concept = → m3runtime::Concept
 }
 'concept <- Writer #lightgray: concept
@@ -312,33 +315,33 @@ libraryChildren::elements --> Writer: target
 authorType -> Writer: target
 
 map " " as Writer_Name<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "Writer"
-    → m3runtime::abstract => <T = Boolean> false
+    → m3runtime::simpleName => "Writer" : <u>TypedProperty<T = String></u>
+    → m3runtime::abstract => false : <u>TypedProperty<T = Boolean></u>
 }
 Writer *-- Writer_Name: properties
 'simpleName <- Writer_Name #lightgray: property
 
 ' Writer.name
 
-object "<T = generated::Property> name" as writerName<<TypedNode>> {
+object "name : <u>TypedNode<T = generated::Property></u>" as writerName<<TypedNode>> {
     concept = → m3runtime::Property
 }
 'property <- writerName #lightgray: concept
 
 map " " as WriterChildren<<TypedChild>> {
-     features => <T = generated::Feature*> → m3runtime::features
+     features => → m3runtime::features : <u>TypedChild<T = generated::Feature*></u>
 }
 Writer *-- WriterChildren: children
 WriterChildren::features --> writerName: target
 
 map " " as writerNameName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "name"
-    → m3runtime::optional => <T = Boolean> false
+    → m3runtime::simpleName => "name" : <u>TypedProperty<T = String></u>
+    → m3runtime::optional => false : <u>TypedProperty<T = Boolean></u>
 }
 writerName *-- writerNameName: properties
 'simpleName <- writerNameName #lightgray: property
 
-object "<T = String>" as writerNameType<<TypedReference>> {
+object ": <u>TypedReference<T = generated::DataType></u>" as writerNameType<<TypedReference>> {
     reference = → m3runtime::propertyType
 }
 writerName *-- writerNameType: references
@@ -347,7 +350,7 @@ writerNameType -> LibString: target
 
 ' GuideBookWriter
 
-object "<T = generated::Concept> GuideBookWriter" as GuideBookWriter<<TypedNode>> {
+object "GuideBookWriter : <u>TypedNode<T = generated::Concept></u>" as GuideBookWriter<<TypedNode>> {
     concept = → m3runtime::Concept
 }
 'concept <- GuideBookWriter #lightgray: concept
@@ -355,13 +358,13 @@ object "<T = generated::Concept> GuideBookWriter" as GuideBookWriter<<TypedNode>
 libraryChildren::elements --> GuideBookWriter: target
 
 map " " as GuideBookWriterName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "GuideBookWriter"
-    → m3runtime::abstract => <T = Boolean> false
+    → m3runtime::simpleName => "GuideBookWriter" : <u>TypedProperty<T = String></u>
+    → m3runtime::abstract => false : <u>TypedProperty<T = Boolean></u>
 }
 GuideBookWriter *-- GuideBookWriterName: properties
 'simpleName <- GuideBookWriterName #lightgray: property
 
-object "<T = generated::Concept>" as GuideBookWriterExtends<<TypedReference>> {
+object ": <u>TypedReference<T = generated::Concept></u>" as GuideBookWriterExtends<<TypedReference>> {
     reference = → m3runtime::extends
 }
 GuideBookWriter *-- GuideBookWriterExtends: references
@@ -370,25 +373,25 @@ GuideBookWriterExtends -> Writer: target
 
 ' GuideBookWriter.countries
 
-object "<T = generated::Property> countries" as countries<<TypedNode>> {
+object "countries : <u>TypedNode<T = generated::Property></u>" as countries<<TypedNode>> {
     concept = → m3runtime::Property
 }
 'simpleName <- countries #lightgray: property
 
 map " " as GuideBookWriterChildren<<TypedChild>> {
-     features => <T + generated::Feature*> → m3runtime::features
+     features => → m3runtime::features : <u>TypedChild<T = generated::Feature*></u>
 }
 GuideBookWriter *-- GuideBookWriterChildren: children
 GuideBookWriterChildren::features -> countries: target
 
 map " " as countriesName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "countries"
-    → m3runtime::optional => <T = Boolean> false
+    → m3runtime::simpleName => "countries" : <u>TypedProperty<T = String></u>
+    → m3runtime::optional => false : <u>TypedProperty<T = Boolean></u>
 }
 countries *-- countriesName: properties
 'simpleName <- countriesName #lightgray: property
 
-object "<T = String>" as countriesType<<TypedReference>> {
+object ": <u>TypedReference<T = generated::PrimitiveType></u>" as countriesType<<TypedReference>> {
     reference = → m3runtime::propertyType
 }
 countries *-- countriesType: references
@@ -397,7 +400,7 @@ countriesType -> LibString: target
 
 ' SpecialistBookWriter
 
-object "<T = generated::Concept> SpecialistBookWriter" as SpecialistBookWriter<<TypedNode>> {
+object "SpecialistBookWriter : <u>TypedNode<T = generated::Concept></u>" as SpecialistBookWriter<<TypedNode>> {
     concept = → m3runtime::Concept
 }
 'concept <- SpecialistBookWriter #lightgray: concept
@@ -405,13 +408,13 @@ object "<T = generated::Concept> SpecialistBookWriter" as SpecialistBookWriter<<
 libraryChildren::elements --> SpecialistBookWriter: target
 
 map " " as SpecialistBookWriterName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "SpecialistBookWriter"
-    → m3runtime::abstract => <T = Boolean> false
+    → m3runtime::simpleName => "SpecialistBookWriter" : <u>TypedProperty<T = String></u>
+    → m3runtime::abstract => false : <u>TypedProperty<T = Boolean></u>
 }
 SpecialistBookWriter *-- SpecialistBookWriterName: properties
 'simpleName <- SpecialistBookWriterName #lightgray: property
 
-object "<T = generated::Concept>" as SpecialistBookWriterExtends<<TypedReference>> {
+object ": <u>TypedReference<T = generated::Concept></u>" as SpecialistBookWriterExtends<<TypedReference>> {
     reference = → m3runtime::extends
 }
 SpecialistBookWriter *-- SpecialistBookWriterExtends: references
@@ -420,25 +423,25 @@ SpecialistBookWriterExtends -> Writer: target
 
 ' SpecialistBookWriter.subject
 
-object "<T = generated::Property> subject" as subject<<TypedNode>> {
+object "subject : <u>TypedNode<T = generated::Property></u>" as subject<<TypedNode>> {
     concept = → m3runtime::Property
 }
 'simpleName <- subject #lightgray: property
 
 map " " as SpecialistBookWriterChildren<<TypedChild>> {
-     features => <T = generated::Feature*> → m3runtime::features
+     features => → m3runtime::features : <u>TypedChild<T = generated::Feature*></u>
 }
 SpecialistBookWriter *-- SpecialistBookWriterChildren: children
 SpecialistBookWriterChildren::features --> subject: target
 
 map " " as subjectName<<TypedProperty>> {
-    → m3runtime::simpleName => <T = String> "subject"
-    → m3runtime::optional => <T = Boolean> false
+    → m3runtime::simpleName => "subject" : <u>TypedProperty<T = String></u>
+    → m3runtime::optional => false : <u>TypedProperty<T = Boolean></u>
 }
 subject *-- subjectName: properties
 'simpleName <- subjectName #lightgray: property
 
-object "<T = String>" as subjectType<<TypedReference>> {
+object ": <u>TypedReference<T = String></u>" as subjectType<<TypedReference>> {
     reference = → m3runtime::propertyType
 }
 subject *-- subjectType: references

@@ -1,0 +1,247 @@
+@startjson
+{
+    "version": "1",
+    "nodes": [
+  {
+    "type": "Metamodel",
+    "id": "idLibMm",
+    "properties": {
+      "qualifiedName": "library"
+    },
+    "children": {
+      "elements": [
+        "idLibString",
+        "idLibBoolean",
+        "idLibInteger",
+        "idBook",
+        "idLibrary",
+        "idWriter",
+        "idGuideBookWriter",
+        "idSpecialistBookWriter"
+      ]
+    }
+  },
+  {
+    "type": "PrimitiveType",
+    "id": "idLibString",
+    "properties": {
+      "simpleName": "String"
+    },
+    "parent": "idLibMm"
+  },
+  {
+    "type": "PrimitiveType",
+    "id": "idLibBoolean",
+    "properties": {
+      "simpleName": "boolean"
+    },
+    "parent": "idLibMm"
+  },
+  {
+    "type": "PrimitiveType",
+    "id": "idLibInteger",
+    "properties": {
+      "simpleName": "int"
+    },
+    "parent": "idLibMm"
+  },
+  {
+    "type": "Concept",
+    "id": "idBook",
+    "properties": {
+      "simpleName": "Book",
+      "abstract": "false"
+    },
+    "children": {
+      "features": [
+        "idTitle",
+        "idPages",
+        "idAuthor"
+      ]
+    },
+    "parent": "idLibMm"
+  },
+  {
+    "type": "Property",
+    "id": "idTitle",
+    "properties": {
+      "simpleName": "title",
+      "optional": "false"
+    },
+    "references": {
+      "Property_type": [
+        "idLibString"
+      ]
+    },
+    "parent": "idBook"
+  },
+  {
+    "type": "Property",
+    "id": "idPages",
+    "properties": {
+      "simpleName": "pages",
+      "optional": "false"
+    },
+    "references": {
+      "Property_type": [
+        "idLibInteger"
+      ]
+    },
+    "parent": "idBook"
+  },
+  {
+    "type": "Reference",
+    "id": "idAuthor",
+    "properties": {
+      "simpleName": "author",
+      "optional": "false",
+      "Link_multiple": "true"
+    },
+    "references": {
+      "Link_type": [
+        "idWriter"
+      ]
+    },
+    "parent": "idBook"
+  },
+  {
+    "type": "Concept",
+    "id": "idLibrary",
+    "properties": {
+      "simpleName": "Library",
+      "abstract": "false"
+    },
+    "children": {
+      "features": [
+        "idLibraryName",
+        "idLibraryBooks"
+      ]
+    },
+    "parent": "idLibMm"
+  },
+  {
+    "type": "Property",
+    "id": "idLibraryName",
+    "properties": {
+      "simpleName": "name",
+      "optional": "false"
+    },
+    "references": {
+      "Property_type": [
+        "idLibString"
+      ]
+    },
+    "parent": "idLibrary"
+  },
+  {
+    "type": "Containment",
+    "id": "idLibraryBooks",
+    "properties": {
+      "simpleName": "books",
+      "optional": "false",
+      "Link_multiple": "true"
+    },
+    "references": {
+      "Link_type": [
+        "idBook"
+      ]
+    },
+    "parent": "idLibrary"
+  },
+  {
+    "type": "Concept",
+    "id": "idWriter",
+    "properties": {
+      "simpleName": "Writer",
+      "abstract": "false"
+    },
+    "children": {
+      "features": [
+        "idWriterName"
+      ]
+    },
+    "parent": "idLibMm"
+  },
+  {
+    "type": "Property",
+    "id": "idWriterName",
+    "properties": {
+      "simpleName": "name",
+      "optional": "false"
+    },
+    "references": {
+      "Property_type": [
+        "idLibString"
+      ]
+    },
+    "parent": "idWriter"
+  },
+  {
+    "type": "Concept",
+    "id": "idGuideBookWriter",
+    "properties": {
+      "simpleName": "GuideBookWriter",
+      "abstract": "false"
+    },
+    "children": {
+      "features": [
+        "idGuideBookWriterCountries"
+      ]
+    },
+    "references": {
+      "extends": [
+        "idWriter"
+      ]
+    },
+    "parent": "idLibMm"
+  },
+  {
+    "type": "Property",
+    "id": "idGuideBookWriterCountries",
+    "properties": {
+      "simpleName": "countries",
+      "optional": "false"
+    },
+    "references": {
+      "Property_type": [
+        "idLibString"
+      ]
+    },
+    "parent": "idGuideBookWriter"
+  },
+  {
+    "type": "Concept",
+    "id": "idSpecialistBookWriter",
+    "properties": {
+      "simpleName": "SpecialistBookWriter",
+      "abstract": "false"
+    },
+    "children": {
+      "features": [
+        "idSpecialistBookWriterSubject"
+      ]
+    },
+    "references": {
+      "extends": [
+        "idWriter"
+      ]
+    },
+    "parent": "idLibMm"
+  },
+  {
+    "type": "Property",
+    "id": "idSpecialistBookWriterSubject",
+    "properties": {
+      "simpleName": "subject",
+      "optional": "false"
+    },
+    "references": {
+      "Property_type": [
+        "idLibString"
+      ]
+    },
+    "parent": "idSpecialistBookWriter"
+  }
+]
+}
+@endjson
