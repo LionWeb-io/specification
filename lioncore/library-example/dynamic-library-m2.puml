@@ -1,0 +1,124 @@
+@startuml
+title Dynamic M2 Library Example
+
+hide empty members
+
+!include ../plantuml-shared/runtime-skinparam.puml
+
+package "M3 runtime" {
+    interface Metamodel
+
+    interface PrimitiveType
+
+    interface Concept
+
+    interface Property<T>
+
+    interface Containment<T>
+
+    interface Reference<T>
+}
+
+package "M3 dynamic" {
+    class DynamicMetamodel implements Metamodel
+
+    class DynamicPrimitiveType implements PrimitiveType
+
+    class DynamicConcept implements Concept
+
+    class DynamicProperty
+    Property <|.. DynamicProperty: <i>T = DynamicConcept</i>
+
+    class DynamicContainment
+    Containment <|.. DynamicContainment: <i>T = DynamicConcept</i>
+
+    class DynamicReference
+    Reference <|.. DynamicReference: <i>T = DynamicConcept</i>
+}
+
+object "library : <u>DynamicMetamodel</u>" as library<<metamodel>> {
+    runtime = runtime::library
+}
+DynamicMetamodel <.. library: <<instanceof>>
+
+object "LibBoolean: <u>DynamicPrimitiveType</u> " as LibBoolean<<PrimitiveType>> {
+    runtime = runtime::LibBoolean
+}
+DynamicPrimitiveType <.. LibBoolean: <<instanceof>>
+
+object "LibString : <u>DynamicPrimitiveType</u>" as LibString<<PrimitiveType>> {
+    runtime = runtime::LibString
+}
+DynamicPrimitiveType <.. LibString: <<instanceof>>
+
+object "LibInteger : <u>DynamicPrimitiveType</u>" as LibInteger<<PrimitiveType>> {
+    runtime = runtime::LibInteger
+}
+DynamicPrimitiveType <.. LibInteger: <<instanceof>>
+
+object "Library : <u>DynamicConcept</u>" as Library<<concept>> {
+    runtime = runtime::Library
+}
+DynamicConcept <.. Library: <<instanceof>>
+
+object "LibraryName : <u>DynamicProperty</u>" as LibraryName<<property>> {
+    runtime = runtime::LibraryName
+}
+DynamicProperty <.. LibraryName: <<instanceof>>
+
+object "LibraryBooks : <u>DynamicContainment</u>" as LibraryBooks<<containment>> {
+    runtime = runtime::LibraryBooks
+}
+DynamicContainment <.. LibraryBooks: <<instanceof>>
+
+object "Book : <u>DynamicConcept</u>" as Book<<concept>> {
+    runtime = runtime::Book
+}
+DynamicConcept <.. Book: <<instanceof>>
+
+object "BookTitle : <u>DynamicProperty</u>" as BookTitle<<property>> {
+    runtime = runtime::BookTitle
+}
+DynamicProperty <.. BookTitle: <<instanceof>>
+
+object "BookPages : <u>DynamicProperty</u>" as BookPages<<property>> {
+    runtime = runtime::BookPages
+}
+DynamicProperty <.. BookPages: <<instanceof>>
+
+object "BookAuthor : <u>DynamicReference</u>" as BookAuthor<<reference>> {
+    runtime = runtime::BookAuthor
+}
+DynamicReference <.. BookAuthor: <<instanceof>>
+
+object "Writer : <u>DynamicConcept</u>" as Writer<<concept>> {
+    runtime = runtime::Writer
+}
+DynamicConcept <.. Writer: <<instanceof>>
+
+object "WriterName : <u>DynamicProperty</u>" as WriterName<<property>> {
+    runtime = runtime::WriterName
+}
+DynamicProperty <.. WriterName: <<instanceof>>
+
+object "SpecialistBookWriter : <u>DynamicConcept</u>" as SpecialistBookWriter<<concept>> {
+    runtime = runtime::SpecialistBookWriter
+}
+DynamicConcept <.. SpecialistBookWriter: <<instanceof>>
+
+object "SpecialistBookWriterSubject : <u>DynamicProperty</u>" as SpecialistBookWriterSubject<<property>> {
+    runtime = runtime::SpecialistBookWriterSubject
+}
+DynamicProperty <.. SpecialistBookWriterSubject: <<instanceof>>
+
+object "GuideBookWriter : <u>DynamicConcept</u>" as GuideBookWriter<<concept>> {
+    runtime = runtime::GuideBookWriter
+}
+DynamicConcept <.. GuideBookWriter: <<instanceof>>
+
+object "GuideBookWriterCountries : <u>DynamicProperty</u>" as GuideBookWriterCountries<<property>> {
+    runtime = runtime::GuideBookWriterCountries
+}
+DynamicProperty <.. GuideBookWriterCountries: <<instanceof>>
+
+@enduml

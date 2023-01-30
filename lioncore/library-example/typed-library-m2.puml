@@ -3,14 +3,8 @@ title Typed M2 Library Example
 
 hide empty members
 
-skinparam object {
-    BackgroundColor<<TypedNode>> LightGreen
-    BackgroundColor<<TypedReference>> LightSkyBlue
-}
-skinparam map {
-    BackgroundColor<<TypedProperty>> LightPink
-    BackgroundColor<<TypedChild>> LightBlue
-}
+!include ../plantuml-shared/typed-skinparam.puml
+!include ../plantuml-shared/map-legend.puml
 
 package "M3 runtime" {
     object "Metamodel" as metamodel

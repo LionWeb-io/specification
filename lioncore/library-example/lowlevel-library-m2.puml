@@ -1,14 +1,9 @@
 @startuml
 title Low-level M2 Library Example
 
-skinparam object {
-    BackgroundColor<<Node>> LightGreen
-    BackgroundColor<<ReferenceTarget>> LightSkyBlue
-}
-skinparam map {
-    BackgroundColor<<PropertyValue>> LightPink
-    BackgroundColor<<ChildTarget>> LightBlue
-}
+!include ../plantuml-shared/lowlevel-skinparam.puml
+!include ../plantuml-shared/map-legend.puml
+
 
 package "M3 runtime" as meta {
     object "Metamodel" as metamodel

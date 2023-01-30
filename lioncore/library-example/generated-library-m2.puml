@@ -3,12 +3,7 @@ title Generated M2 Library Example
 
 hide empty members
 
-skinparam class {
-    BackgroundColor<<concept>> LightGreen
-    BackgroundColor<<reference>> LightSkyBlue
-    BackgroundColor<<property>> LightPink
-    BackgroundColor<<containment>> LightBlue
-}
+!include ../plantuml-shared/generated-skinparam.puml
 
 package "M3 generated" as meta {
     interface Metamodel

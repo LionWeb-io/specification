@@ -1,12 +1,7 @@
 @startuml
 title Runtime M2 Library Example
 
-skinparam object {
-    BackgroundColor<<Concept>> LightGreen
-    BackgroundColor<<Reference>> LightSkyBlue
-    BackgroundColor<<Property>> LightPink
-    BackgroundColor<<Containment>> LightBlue
-}
+!include ../plantuml-shared/runtime-skinparam.puml
 
 object "library" as library<<Metamodel>> {
     qualifiedName: String = "library"
