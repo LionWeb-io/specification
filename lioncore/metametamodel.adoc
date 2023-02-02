@@ -45,7 +45,7 @@ Let’s first see a representation of the meta-metamodel using (a tiny subset of
 include::metametamodel.puml[]
 ----
 
-image::metametamodel.svg[]
+image::rendered/metametamodel.svg[]
 
 == Definition of the Meta-Metamodel
 
@@ -104,7 +104,6 @@ A Concept is roughly equivalent to an `EClass` (with the `isInterface` flag set 
 
 .Characteristics
 A Concept has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-A Concept has a reference <<container, `container`>> to the containing <<Metamodel>>.
 
 [[abstract]]
 A Concept can be concrete (i.e., instantiable) or abstract, marked by boolean `abstract` property.
@@ -134,7 +133,6 @@ A ConceptInterface in LionWeb will be roughly equivalent to an `EClass` (with th
 
 .Characteristics
 A ConceptInterface has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-A ConceptInterface has a reference <<container, `container`>> to the containing <<Metamodel>>.
 
 A ConceptInterface is an <<FeaturesContainer>>  (as it has features).
 It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel), and a <<NamespaceProvider>> (as it act as the namespace for its features).
@@ -163,7 +161,6 @@ Differently from ECore’s `EDataType` PrimitiveType has no flag `serializable`,
 
 .Characteristics
 A PrimitiveType has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-A PrimitiveType has a reference <<container, `container`>> to the containing <<Metamodel>>.
 
 A PrimitiveType is a <<DataType>> (as it can be used as <<propertyType, type>> of a <<Property>>).
 It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel).
@@ -186,7 +183,6 @@ Differently from ECore’s `EEnum` Enumeration has no flag `serializable`, and i
 
 .Characteristics
 An Enumeration has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-An Enumeration has a reference <<container, `container`>> to the containing <<Metamodel>>.
 
 [[literals]]
 An Enumeration contains <<EnumerationLiteral, EnumerationLiterals>> in its `literals` containment.
@@ -208,7 +204,6 @@ An EnumerationLiteral is similar to Ecore’s `EEnumLiteral` and to MPS’ `Enum
 
 .Characteristics
 An EnumerationLiteral has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-An Enumeration has a reference <<container, `container`>> to the containing <<Enumeration>>.
 
 An Enumeration is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its <<Enumeration>>).
 
@@ -268,7 +263,6 @@ Differently from a `LinkDeclaration` there is no field `unordered`.
 
 .Characteristics
 A Containment has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-A Containment has a reference <<container, `container`>> to the containing <<FeaturesContainer>>.
 It can be marked as <<optional, `optional`>> and <<multiple, `multiple`>>.
 
 A Containment refers its <<linkType, `type`>>, which is a <<FeaturesContainer>>.
@@ -301,7 +295,6 @@ Differently from a `LinkDeclaration` there is no field `unordered`.
 
 .Characteristics
 A Reference has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-A Reference has a reference <<container, `container`>> to the containing <<FeaturesContainer>>.
 It can be marked as <<optional, `optional`>> and <<multiple, `multiple`>>.
 
 A Containment refers its <<linkType, `type`>>, which is a <<FeaturesContainer>>.
@@ -331,7 +324,6 @@ A Property is similar to MPS’s `AttributeDeclaration`.
 
 .Characteristics
 A Property has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-A Property has a reference <<container, `container`>> to the containing <<FeaturesContainer>>.
 It can be marked as <<optional, `optional`>>.
 
 [[propertyType]]
@@ -366,9 +358,6 @@ A NamespacedEntity has an `id`.
 
 It can calculate the `qualifiedName` by combining the name of the namespace, which it can obtain from its own <<NamespaceProvider>>.
 
-[[container]]
-A NamespacedEntity has a reference `container` to the containing <<NamespaceProvider>>.
-
 .Constraints
 A NamespaceEntity's `simpleName` must be unique within the NamespaceProvider.
 
@@ -386,7 +375,6 @@ The difference is that `IStructureElement` includes also elements that cannot ap
 
 .Characteristics
 A MetamodelElement has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-A MetamodelElement has a reference <<container, `container`>> to the containing <<Metamodel>>.
 
 A MetamodelElement is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its <<Metamodel>>).
 
@@ -416,7 +404,6 @@ FeaturesContainer is similar to `EClass` in Ecore (which is used both for classe
 
 .Characteristics
 A FeaturesContainer has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-A FeaturesContainer has a reference <<container, `container`>> to the containing <<Metamodel>>.
 
 [[features]]
 A FeaturesContainer owns any number of <<Feature, Features>> in `features` containment.
@@ -446,7 +433,6 @@ It is similar to MPS’ `DataTypeDeclaration`.
 
 .Characteristics
 A DataType has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-A DataType has a reference <<container, `container`>> to the containing <<Metamodel>>.
 
 A DataType is a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>).
 It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel).
@@ -474,7 +460,6 @@ They have no `default value`.
 
 .Characteristics
 A Feature has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-A Feature has a reference <<container, `container`>> to the containing <<FeaturesContainer>>.
 
 [[optional]]
 A Feature can be set to `optional` or required.
@@ -513,7 +498,6 @@ It is similar to MPS’ `LinkDeclaration`.
 
 .Characteristics
 A Link has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-A Link has a reference <<container, `container`>> to the containing <<FeaturesContainer>>.
 It can be marked as <<optional, `optional`>>.
 
 [[multiple]]

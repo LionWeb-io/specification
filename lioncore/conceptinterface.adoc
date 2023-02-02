@@ -27,8 +27,6 @@ The problem might be <<name-clashes>>.
 
 <<derived, Derived features>> are behaviors in this sense, as there might be different implementations in the hierarchy.
 #TODO is this correct?#
-
-#TODO How about specializations?#
 ====
 
 .Example M2
@@ -115,6 +113,42 @@ Pro::
 Con::
 * Not supported by all languages
 
+=== Diamond inheritance and specializations
+(Provided by Alex)
+
+What happens if we specialize the type of a link in diamond inheritance?
+
+.Example M2
+[source]
+----
+concept Place
+    containment address: Address[1]
+
+concept PrivatePlace extends Place
+    containment homeAddress: PersonalAddress[1]   specializes Place.address
+
+concept CompanyPlace extends Place
+    containment factoryAddress: OfficeAddress[1]  specializes Place.address
+
+concept FreelancerPlace extends PrivatePlace, CompanyPlace
+
+concept Address
+
+concept PersonalAddress extends Address
+
+concept OfficeAddress extends Address
+----
+
+For `FreelancerPlace`, if we do _not_ "hide" original link (`address`) then it'll be unclear what to put into original `address` link (`PersonalAddress` or `OfficeAddress`).
+
+If we do hide original link then there will be two "independent" links with different names, but internally working with the same original one, so storing instances into the original field.
+In this case following code should throw exception:
+
+[source]
+----
+freelancerPlace.homeAddress = <myHome>;
+node<OfficeAddress> officeAddress = freelancerPlace.factoryAddress;
+----
 
 [#name-clashes]
 === Name clashes
@@ -192,7 +226,7 @@ Con::
 * Might limit possible combinations: If `E` and `F` had very different ideas what to put in field `name` (and only accidentally use compatible features), `G` had to chose which semantics to follow.
 
 [#_rename_conflicting_names]
-===== Rename conflicting names
+==== Rename conflicting names
 On name clashes, we have to rename all but one of the conflicts.
 
 .Adjusted M2
