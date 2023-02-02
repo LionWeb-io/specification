@@ -18,6 +18,8 @@ This structure is described using node types (concepts), node properties (featue
 w
 This is similar to a schema for e.g. XML or JSON as it is programming language agnostic.
 
+Also see issue https://github.com/LIonWeb-org/organization/issues/61
+
 === Goal 2: Programming Meta-Metamodel
 The goal of the meta-metamodel is to define a meta-language with which to describe a programming interface to a model,
 which can be used in programming languages like TypeScript, C#, Java, Python, etc..
