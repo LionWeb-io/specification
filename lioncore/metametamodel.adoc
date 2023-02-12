@@ -45,6 +45,11 @@ Let’s first see a representation of the meta-metamodel using (a tiny subset of
 include::metametamodel.puml[]
 ----
 
+[mermaid, metametamodel-mermaid, svg]
+----
+include::metametamodel.mermaid[]
+----
+
 image::rendered/metametamodel.svg[]
 
 == Definition of the Meta-Metamodel

@@ -2,7 +2,7 @@
 hide empty members
 
 class Concept #LightGreen extends FeaturesContainer {
-  abstract: boolean
+  abstract: Boolean
 }
 
 class ConceptInterface #LightGreen extends FeaturesContainer
@@ -16,7 +16,7 @@ class Enumeration #LightPink extends DataType implements NamespaceProvider
 class EnumerationLiteral #LightPink implements NamespacedEntity
 
 abstract class Feature #LightBlue implements NamespacedEntity {
-  optional: boolean
+  optional: Boolean
 }
 
 abstract class FeaturesContainer #LightGreen extends MetamodelElement implements NamespaceProvider {
@@ -24,7 +24,7 @@ abstract class FeaturesContainer #LightGreen extends MetamodelElement implements
 }
 
 abstract class Link #LightBlue extends Feature {
-  multiple: boolean
+  multiple: Boolean
 }
 
 class Metamodel implements NamespaceProvider {
