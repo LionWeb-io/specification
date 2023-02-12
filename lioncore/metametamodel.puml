@@ -28,7 +28,7 @@ abstract class Link #LightBlue extends Feature {
 }
 
 class Metamodel implements NamespaceProvider {
-  qualifiedName: String
+  name: String
   id: Id
 }
 
