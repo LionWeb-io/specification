@@ -605,6 +605,7 @@ Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense t
 * [[Boolean, Boolean]] `Boolean`
 * [[String, String]] `String`
 * [[Integer, Integer]] `Integer`
+* [[JSON, JSON]] `JSON`
 
 WARNING: {experimental}
 
@@ -652,7 +653,7 @@ Also, in StarLasu we never encountered the need for them so far.
 
 ==== Valid characters
 
-ids can only contain these symbols:
+Ids can only contain these symbols:
 
 * lowercase latin characters: `a`..`z`
 * uppercase latin characters: `A`..`Z`
@@ -664,7 +665,7 @@ This is the same character set as https://en.wikipedia.org/wiki/Base64#Variants_
 
 ==== Representation
 
-ids are represented by a string, containing only valid characters (as defined above).
+Ids are represented by a string, containing only valid characters (as defined above).
 An id string is NOT padded, also not by whitespaces.
 An id string does NOT contain any terminating symbols (compared to some BASE64 variants); this does not affect internal representation in a specific implementation language, e.g. C-style \0-terminated strings.
 
@@ -675,7 +676,7 @@ Node ids MUST be unique within their id-space.
 ===== Id-space
 
 An id-space is a realm that guarantees the uniqueness of all ids within.
-Typically, this means one node repository instance.
+Typically, this means one repository.
 
 An id-space has an id as defined above.
 Uniqueness of id-space ids is out of scope of LIonWeb specification.
@@ -708,8 +709,9 @@ To globally identify a node, we use the combination of the id-space id and the n
 |<<Feature>> |Concept |LIonCore_M3_Feature
 |<<Feature.optional>> |Property |LIonCore_M3_Feature_optional
 |<<FeaturesContainer>> |Concept |LIonCore_M3_FeaturesContainer
-|<<FeaturesContainer.features>> |Containment |LIonCore_M3_Feature_FeaturesContainer_features
+|<<FeaturesContainer.features>> |Containment |LIonCore_M3_FeaturesContainer_features
 |<<Link>> |Concept |LIonCore_M3_Link
+|<<Link.multiple>> |Property |LIonCore_M3_Link_multiple
 |<<Link.type>> |Reference |LIonCore_M3_Link_type
 |<<Metamodel>> |Concept |LIonCore_M3_Metamodel
 |<<Metamodel.name>> |Property |LIonCore_M3_Metamodel_name
@@ -736,6 +738,7 @@ To globally identify a node, we use the combination of the id-space id and the n
 |<<String>> |PrimitiveType |LIonCore_M3_String
 |<<Boolean>> |PrimitiveType |LIonCore_M3_Boolean
 |<<Integer>> |PrimitiveType |LIonCore_M3_Integer
+|<<JSON>> |PrimitiveType |LIonCore_M3_JSON
 |===
 
 
