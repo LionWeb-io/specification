@@ -1,0 +1,482 @@
+= LIonWeb Serialization Format
+
+== Conventions used in this document
+* _italic_ words refer to concepts defined by JSONfootnote:json[https://datatracker.ietf.org/doc/html/rfc8259[RFC 8259]]
+* *bold* words refer to concepts defined in this document.
+* `monospaced` words describe verbatim contents of the serialization.
+
+
+== Description
+LIonWeb node serialization format is defined in JSONfootnote:json[].
+
+=== Root structure
+
+Root level MUST be an _object_ with two members.
+
+The first member MUST be _key_ `serializationFormatVersion` with a _string_ _value_.
+The value MUST be a decimal integer describing the serialization format version used to create the processed document, according to <<versions>>.
+
+The second member MUST be _key_ `nodes` with an _array_ _value_.
+Each _element_ in the value array MUST adhere to <<node>>.
+The order of _elements_ is undefined.
+
+[[node]]
+=== Node structure
+Each *node* MUST be an _object_.
+The order of _members_ is undefined.
+
+The _object_ MUST contain the following _members_:
+
+* _key_ `id` with _string_ _value_, adhering to <<id>>.
+* _key_ `concept` with _string_ _value_, adhering to <<concept>>.
+* _key_ `properties` with _object_ _value_, adhering to <<properties>>.
+* _key_ `children` with _object_ _value_, adhering to <<children>>.
+* _key_ `references` with _object_ _value_, adhering to <<references>>.
+* _key_ `parent` with _string_ or _null_ _value_, adhering to <<parent>>.
+
+
+[[id]]
+=== Id value
+A _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
+Defines the *id* of this *node*.
+
+[[concept]]
+=== Node concept
+A _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
+Refers to the id ##TODO: which id## of the *concept* this *node* is an instance of.
+
+[[properties]]
+=== Properties
+An _object_ with zero or more _members_.
+The order of _members_ is undefined.
+
+Each _member_ adheres to:
+
+* _key_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
+Refers to the id ##TODO: which id## of the *property* this _member_ specifies the value of.
+* _value_ as one of
+** _string_ containing the value of the property referenced by the _key_.
+CAN be an empty _string_.
+** _null_ to explicitly specify the property to be unset.
+
+
+[[children]]
+=== Children
+An _object_ with zero or more _members_.
+The order of _members_ is undefined.
+
+Each _member_ adheres to:
+
+* _key_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
+Refers to the id ##TODO: which id## of the *containment* this _member_ specifies the *node* *id* of.
+* _array_ _value_ with _string_ _elements_.
+Each _element_ adheres to <<metametamodel.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained *node*.
+The order of _elements_ is undefined.
++
+NOTE: Each *child* element is the inverse relation of *parent*.
++
+NOTE: The contained *node* CAN be contained in this document, but also CAN be beyond.
+
+[[references]]
+=== References
+An _object_ with zero or more _members_.
+The order of _members_ is undefined.
+
+Each _member_ adheres to:
+
+* _key_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
+Refers to the id ##TODO: which id## of the *reference* this _member_ specifies the target id of.
+
+* _array_ _value_ with _object_ _elements_.
+Each _element_ MUST have the following _members_ in undefined order:
+** _key_ `resolveInfo` with _value_ as one of:
+*** _string_ containing *resolveInfo*, a textual hint that might be used to find the target *node* of this reference.
+The exact value depends on the implementation.
+CAN be an empty _string_.
+*** _null_ if no *resolveInfo* is available.
+
+** _key_ `reference` with _value_ as one of:
+*** _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
+Refers to the *id* of the target *node*.
++
+NOTE: The referred *node* CAN be contained in this document, but also CAN be beyond.
+*** _null_ if the *id* of the target *node* is not known.
+
+[[parent]]
+=== Parent
+One of
+
+* _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
+Refers to the *id* of the *node* containing this *node*.
++
+NOTE: *parent* is the inverse relation of one *child*.
++
+NOTE: The referred *node* CAN be contained in this document, but also CAN be beyond.
+
+* _null_ if
+** This *node* is a *root node*, i.e. this node does not have a parent.
+** This serialization is sent as an update request.
+
+== Examples
+
+=== Minimal
+[source,json]
+----
+{
+  "serializationFormatVersion": "1",
+  "nodes": []
+}
+----
+
+=== Minimal node
+[source,json]
+----
+{
+  "serializationFormatVersion": "1",
+  "nodes": [
+    {
+      "id": "aaa",
+      "concept": "myConceptId",
+      "properties": {},
+      "children": {},
+      "references": {}
+    }
+  ]
+}
+----
+
+=== Property variants
+[source,json]
+----
+{
+  "serializationFormatVersion": "1",
+  "nodes": [
+    {
+      "id": "bbb",
+      "concept": "myConceptId",
+      "properties": {
+        "stringPropertyId": "my string value",
+        "integerPropertyId": "123",
+        "booleanPropertyId": "true",
+        "jsonPropertyId": "{ \"name\": \"Bob\" }",
+        "unsetPropertyId": null
+      },
+      "children": {},
+      "references": {}
+    }
+  ]
+}
+----
+
+=== Children variants
+[source,json]
+----
+{
+  "serializationFormatVersion": "1",
+  "nodes": [
+    {
+      "id": "ccc",
+      "concept": "myConceptId",
+      "properties": {},
+      "children": {
+        "emptyContainmentId": [],
+        "singleContainmentId": [
+          "cdd"
+        ],
+        "multiContainmentId": [
+          "cee",
+          "cff",
+          "cgg"
+        ]
+      },
+      "references": {}
+    },
+    {
+      "id": "cgg",
+      "concept": "differentConceptId",
+      "properties": {},
+      "children": {},
+      "references": {}
+    },
+    {
+      "id": "cdd",
+      "concept": "otherConceptId",
+      "properties": {},
+      "children": {},
+      "references": {}
+    },
+    {
+      "id": "cee",
+      "concept": "differentConceptId",
+      "properties": {},
+      "children": {},
+      "references": {}
+    }
+  ]
+}
+----
+
+*node* with *id* `cff` is outside the processed document.
+
+=== Reference variants
+[source,json]
+----
+{
+  "serializationFormatVersion": "1",
+  "nodes": [
+    {
+      "id": "ddd",
+      "concept": "myConceptId",
+      "properties": {},
+      "children": {},
+      "references": {
+        "emptyReferenceId": [],
+        "singleReferenceId": [
+          {
+            "resolveInfo": "some name",
+            "reference": "dee"
+          }
+        ],
+        "multiReferenceId": [
+          {
+            "resolveInfo": "self-reference",
+            "reference": "ddd"
+          },
+          {
+            "resolveInfo": "only resolve info",
+            "reference": null
+          }
+        ],
+        "noResolveInfoReferenceId": [
+          {
+            "resolveInfo": null,
+            "reference": "dee"
+          }
+        ],
+        "neitherResolveInfoNorReferenceId": [
+          {
+            "resolveInfo": null,
+            "reference": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "dee",
+      "concept": "differentConceptId",
+      "properties": {},
+      "children": {},
+      "references": {}
+    }
+  ]
+}
+----
+
+
+[[versions]]
+== Versions
+=== 1
+Initial version.
+
+
+[[possible-values]]
+== Possible values for `properties`, `children`, and `references`
+Only bold entries are valid.
+[%header,cols="1a,1,1,1"]
+|===
+|1 A +
+Contents
+|B +
+``properties: {``_ _ _``}``
+|C +
+``children: {``_ _ _``}``
+|D  +
+``references: {``_ _ _``}``
+
+|2 `"a": "b"`
+|*property with id `a` has value `b`*
+.4+.^|`children` value must be array
+.4+.^|`references` value must be array
+
+|3 `"c": ""`
+|*property with id `c` has value (empty string)*
+// |`children` value must be array
+// |`references` value must be array
+
+|4 `"d": " "`
+|*property with id `d` has value ` `(one space)*
+// |`children`value must be array
+// |`references`value must be array
+
+|5 `"e": null`
+|*property with id `e` has no value*
+// |`children` value must be array
+// |`references` value must be array
+
+|6 (key `f` not present)
+|*property with id `f` has no value*
+|*containment with id `f` does not contain any nodes*
+|*reference with id `f` does not point to any nodes*
+
+|7 `"g": []`
+.9+.^|`properties` value must be string
+|*containment with id `g` does not contain any nodes*
+|*reference with id `g` does not point to any nodes*
+
+|8 `"h": [ "i" ]`
+// |`properties`value must be string
+|*containment with id `h` contains node with id`i`*
+|`references` value array element must be object
+
+|9
+
+[source%nowrap]
+----
+"j": [
+ {
+   "resolveInfo": "k",
+   "reference": "l"
+ }
+]
+----
+// |`properties` value must be string
+.2+.^|`children` value array element must be string
+|*reference with id `j` points to node with id `l`, re-binding supported by text `k`*
+
+|10 `"m": [ null ]`
+// |`properties` value must be string
+// |`children` value array element must be a string
+|`references` value array element must be an object
+
+|11 `"n": true`
+// |`properties` value must be string
+.5+.^|`children` value must be array
+.5+.^|`references` value must be array
+
+|12 `"o": 12`
+// |`properties` value must be string
+// |`children` value must be array
+// |`references` value must be array
+
+|13 `"p": 34.56`
+// |`properties` value must be string
+// |`children` value must be array
+// |`references` value must be array
+
+|14 `"q": {}`
+// |`properties` value must be string
+// |`children` value must be array
+// |`references` value must be array
+
+|15 `"r": {`...`}`
+// |`properties` value must be string
+// |`children` value must be array
+// |`references` value must be array
+
+|16 `"s": foo`
+3.2+^.^|JSON syntax error
+// |JSON syntax error
+// |JSON syntax error
+
+|17 `"t": undefined`
+// |JSON syntax error
+// |JSON syntax error
+// |JSON syntax error
+|===
+
+
+== Meaning and rationale of `null` values for reference id and resolveInfo
+
+NOTE: We only consider low-level model structure here.
+If we had a reference of type `Car`, but the id points to an existing `Wheel`, we would _still_ consider the reference valid on this low level.
+
+In the following matrix, the columns describe _reference_, the rows _resolveInfo_.
+
+reference:
+
+* _valid_ means there it is known that a node with the target id exists.
+Undefined whether the targeted node is part of the same model fragment, known locally, or only known to the repository.
+* _unknown_ means we don't know whether a node with the target id exists.
+* _invalid_ means we know that no node with the target id exists.
+
+resolveInfo:
+
+* _uniquely resolvable_ means that the resolver[1] can find exactly one existing node that could match the given resolve info.
+* _ambiguously resolvable_ means that the resolver[1] can find more than one existing node that could match the given resolve info.
+* _non-resolvable_ means that the resolver[1] can not find any existing node that could match the given resolve info.
+
+ad [1]: It's currently undefined who the resolver is.
+We just assume it can somehow interpret the resolve info, and can return [0..*] valid target nodes.
+
+[%header,cols=">h,<,<,<,<"]
+|===
+|id &rarr; +
+resolveInfo &darr;
+^|non-null, valid
+^|non-null, unknown
+^|non-null, invalid
+^|null
+
+|non-null, uniquely resolvable
+|happy case
+|transient, resolvable
+|brittle
+|brittle
+
+|non-null, ambiguously resolvable
+|mostly happy
+|transient
+|external selection required
+|external selection required
+
+|non-null, non-resolvable
+|mostly happy
+|transient
+|external help required
+|external help required
+
+|null
+|mostly happy
+|transient
+|broken
+|broken
+|===
+
+.Happy case
+We know and can reach the target node of the reference.
+We also have information how to find the target in case the target is not reachable (e.g. because it has been deleted).
+
+.Transient
+We know a target node id, but don't know yet whether that node exists.
+
+.Resolvable
+Either through node id or resolveInfo, we're sure we can eventually find our target.
+
+.Brittle
+We cannot find the target node by id, but via resolveInfo.
+However, resolveInfo might stop working at some point (e.g. if the target gets renamed before resolving the nodeInfo).
+
+.Mostly happy
+We know and can reach the target node of the reference.
+But we could not re-establish the reference if the target is not reachable (e.g. because the user cuts+pastes the target node, and the pasted one gets a new id).
+
+.External selection required
+We don't know the target node.
+However, we can present the user with a list of options to chose from.
+We populate this list with the potential targets of the resolveInfo.
+
+.External help required
+We don't know the target node, and cannot make sense of resolveInfo.
+The user might use the resolveInfo to find the actual target.
+
+.Broken
+We have no technical way to find the target node, or meaningful ways to support the user to find it.
+
+[NOTE]
+====
+Instead of the user helping out, we might also infer the same information from metamodel specifics.
+
+Example: Assume a function with only one parameter.
+If we had a reference that can only target a parameter, we can infer that target to be the one parameter.
+In practice, that means scoping could help us out here (but that's out of scope as of the first remark above).
+====
