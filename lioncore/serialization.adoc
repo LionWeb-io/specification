@@ -1,39 +1,66 @@
+:fn-java33: footnote:java33[https://github.com/LIonWeb-org/lioncore-java/issues/33[Require empty members in serialization #33]]
+
+:fn-org33: footnote:org33[https://github.com/LIonWeb-org/organization/issues/33[Repo API: Node representation #33]]
+:fn-org34: footnote:org34[https://github.com/LIonWeb-org/organization/issues/34[Repo API: Property value encondings #34]]
+:fn-org35: footnote:org35[https://github.com/LIonWeb-org/organization/issues/35[Repo API: Represent dangling pointers #35]]
+:fn-org36: footnote:org36[https://github.com/LIonWeb-org/organization/issues/36[Repo API: Store additional resolve info? #36]]
+:fn-org37: footnote:org37[https://github.com/LIonWeb-org/organization/issues/37[Repo API: Node serialization #37]]
+:fn-org37-name: footnote:org37[https://github.com/LIonWeb-org/organization/issues/37#issuecomment-1411857068[Discussion on name `concept`]]
+:fn-org55: footnote:org55[https://github.com/LIonWeb-org/organization/issues/55[Always provide both containment and parent id in serialization #55]]
+:fn-org55-name: footnote:org55[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1415994431[Discussion on names `references` and `reference`]]
+:fn-org58: footnote:org58[https://github.com/LIonWeb-org/organization/issues/58[Include serialization format version in serialization #58]]
+:fn-org59: footnote:org59[https://github.com/LIonWeb-org/organization/issues/59[Require empty members in serialization #59]]
+:fn-org62: footnote:org62[https://github.com/LIonWeb-org/organization/issues/62[How to store invalid text typed at arbitrary places? #62]]
+:fn-org67: footnote:org67[https://github.com/LIonWeb-org/organization/issues/67[Allow additional info in serialization #67]]
+:fn-org73: footnote:org73[https://github.com/LIonWeb-org/organization/issues/73[We don't care about serialization verbosity #73]]
+:fn-org76: footnote:org76[https://github.com/LIonWeb-org/organization/issues/76[Should serialization contain a list of used metamodels? #76]]
+
 = LIonWeb Serialization Format
 
 == Conventions used in this document
-* _italic_ words refer to concepts defined by JSONfootnote:json[https://datatracker.ietf.org/doc/html/rfc8259[RFC 8259]]
+* _italic_ words refer to concepts defined by JSON.
 * *bold* words refer to concepts defined in this document.
 * `monospaced` words describe verbatim contents of the serialization.
+* Footnotes refer to more discussions and rationale, but are non-normative.
+
+== Design Goals
+We do not take any measures to reduce the amount of transmitted data.{fn-org73}
 
 
 == Description
-LIonWeb node serialization format is defined in JSONfootnote:json[].
+LIonWeb node serialization format is defined in JSON (https://datatracker.ietf.org/doc/html/rfc8259[RFC 8259]).
 
 === Root structure
 
 Root level MUST be an _object_ with two members.
 
-The first member MUST be _key_ `serializationFormatVersion` with a _string_ _value_.
+##TODO: Are more members allowed?{fn-org67}##
+
+##TODO: Do we include a list of metamodels?{fn-org76}##
+
+The first member MUST be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}
 The value MUST be a decimal integer describing the serialization format version used to create the processed document, according to <<versions>>.
 
-The second member MUST be _key_ `nodes` with an _array_ _value_.
+The second member MUST be _key_ `nodes` with an _array_ _value_.{fn-org33}
 Each _element_ in the value array MUST adhere to <<node>>.
 The order of _elements_ is undefined.
 
 [[node]]
 === Node structure
-Each *node* MUST be an _object_.
+Each *node* MUST be an _object_.{fn-org37}
 The order of _members_ is undefined.
 
-The _object_ MUST contain the following _members_:
+The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55}
 
 * _key_ `id` with _string_ _value_, adhering to <<id>>.
-* _key_ `concept` with _string_ _value_, adhering to <<concept>>.
+* _key_ `concept`{fn-org37-name}
+ with _string_ _value_, adhering to <<concept>>.
 * _key_ `properties` with _object_ _value_, adhering to <<properties>>.
 * _key_ `children` with _object_ _value_, adhering to <<children>>.
 * _key_ `references` with _object_ _value_, adhering to <<references>>.
 * _key_ `parent` with _string_ or _null_ _value_, adhering to <<parent>>.
 
+##TODO: How to store invalid text?{fn-org62}##
 
 [[id]]
 === Id value
@@ -55,7 +82,7 @@ Each _member_ adheres to:
 * _key_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
 Refers to the id ##TODO: which id## of the *property* this _member_ specifies the value of.
 * _value_ as one of
-** _string_ containing the value of the property referenced by the _key_.
+** _string_{fn-org34} containing the value of the property referenced by the _key_.
 CAN be an empty _string_.
 ** _null_ to explicitly specify the property to be unset.
 
@@ -88,14 +115,14 @@ Each _member_ adheres to:
 Refers to the id ##TODO: which id## of the *reference* this _member_ specifies the target id of.
 
 * _array_ _value_ with _object_ _elements_.
-Each _element_ MUST have the following _members_ in undefined order:
-** _key_ `resolveInfo` with _value_ as one of:
+Each _element_ MUST have the following _members_ in undefined order:{fn-org55-name}
+** _key_ `resolveInfo`{fn-org36} with _value_ as one of:
 *** _string_ containing *resolveInfo*, a textual hint that might be used to find the target *node* of this reference.
 The exact value depends on the implementation.
 CAN be an empty _string_.
 *** _null_ if no *resolveInfo* is available.
 
-** _key_ `reference` with _value_ as one of:
+** _key_ `reference`{fn-org35} with _value_ as one of:
 *** _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
 Refers to the *id* of the target *node*.
 +
@@ -281,7 +308,8 @@ Initial version.
 
 [[possible-values]]
 == Possible values for `properties`, `children`, and `references`
-Only bold entries are valid.
+Only bold entries are valid.{fn-java33}
+
 [%header,cols="1a,1,1,1"]
 |===
 |1 A +
