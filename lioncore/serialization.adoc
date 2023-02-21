@@ -4,10 +4,13 @@
 :fn-org34: footnote:org34[https://github.com/LIonWeb-org/organization/issues/34[Repo API: Property value encondings #34]]
 :fn-org35: footnote:org35[https://github.com/LIonWeb-org/organization/issues/35[Repo API: Represent dangling pointers #35]]
 :fn-org36: footnote:org36[https://github.com/LIonWeb-org/organization/issues/36[Repo API: Store additional resolve info? #36]]
+:fn-org36-null: footnote:org36null[https://github.com/LIonWeb-org/organization/issues/36#issuecomment-1384070433[Meaning and rationale of `null` values for reference id and resolveInfo]]
 :fn-org37: footnote:org37[https://github.com/LIonWeb-org/organization/issues/37[Repo API: Node serialization #37]]
-:fn-org37-name: footnote:org37[https://github.com/LIonWeb-org/organization/issues/37#issuecomment-1411857068[Discussion on name `concept`]]
+:fn-org37-name: footnote:org37conc[https://github.com/LIonWeb-org/organization/issues/37#issuecomment-1411857068[Discussion on name `concept`]]
 :fn-org55: footnote:org55[https://github.com/LIonWeb-org/organization/issues/55[Always provide both containment and parent id in serialization #55]]
-:fn-org55-name: footnote:org55[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1415994431[Discussion on names `references` and `reference`]]
+:fn-org55-name-references: footnote:org55ref[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1415994431[Discussion on names `references` and `reference`]]
+:fn-org55-name-children: footnote:org55child[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1409321113[Discussion on name `children`]]
+:fn-org57: footnote:org57[https://github.com/LIonWeb-org/organization/issues/57[Supported reference targets #57]]
 :fn-org58: footnote:org58[https://github.com/LIonWeb-org/organization/issues/58[Include serialization format version in serialization #58]]
 :fn-org59: footnote:org59[https://github.com/LIonWeb-org/organization/issues/59[Require empty members in serialization #59]]
 :fn-org62: footnote:org62[https://github.com/LIonWeb-org/organization/issues/62[How to store invalid text typed at arbitrary places? #62]]
@@ -56,8 +59,8 @@ The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55
 * _key_ `concept`{fn-org37-name}
  with _string_ _value_, adhering to <<concept>>.
 * _key_ `properties` with _object_ _value_, adhering to <<properties>>.
-* _key_ `children` with _object_ _value_, adhering to <<children>>.
-* _key_ `references` with _object_ _value_, adhering to <<references>>.
+* _key_ `children`{fn-org55-name-children} with _object_ _value_, adhering to <<children>>.
+* _key_ `references`{fn-org55-name-references} with _object_ _value_, adhering to <<references>>.
 * _key_ `parent` with _string_ or _null_ _value_, adhering to <<parent>>.
 
 ##TODO: How to store invalid text?{fn-org62}##
@@ -115,7 +118,7 @@ Each _member_ adheres to:
 Refers to the id ##TODO: which id## of the *reference* this _member_ specifies the target id of.
 
 * _array_ _value_ with _object_ _elements_.
-Each _element_ MUST have the following _members_ in undefined order:{fn-org55-name}
+Each _element_ MUST have the following _members_ in undefined order:{fn-org55-name-references}
 ** _key_ `resolveInfo`{fn-org36} with _value_ as one of:
 *** _string_ containing *resolveInfo*, a textual hint that might be used to find the target *node* of this reference.
 The exact value depends on the implementation.
@@ -246,6 +249,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
 *node* with *id* `cff` is outside the processed document.
 
 === Reference variants
+We support different kinds of targets.{fn-org57}
 [source,json]
 ----
 {
@@ -412,8 +416,10 @@ Contents
 // |JSON syntax error
 |===
 
-
+[[ref-resolve-null]]
 == Meaning and rationale of `null` values for reference id and resolveInfo
+
+Based on{fn-org36-null}
 
 NOTE: We only consider low-level model structure here.
 If we had a reference of type `Car`, but the id points to an existing `Wheel`, we would _still_ consider the reference valid on this low level.
