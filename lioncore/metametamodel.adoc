@@ -649,6 +649,7 @@ We could alternatively also imagine using specific annotations for supporting th
 In general Generics complicate the solution and MPS can live without them.
 Also, in StarLasu we never encountered the need for them so far.
 
+[[identifiers]]
 === Identifiers
 
 ==== Valid characters
