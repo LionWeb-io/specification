@@ -1,0 +1,7 @@
+@startuml
+legend
+<#transparent,#transparent>|= Legend |
+|<#lightPink> each row represents one PropertyValue instance |
+|<#lightBlue> each row represents one ChildTarget instance |
+end legend
+@enduml

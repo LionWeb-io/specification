@@ -1,0 +1,8 @@
+@startuml
+skinparam object {
+    BackgroundColor<<Concept>> LightGreen
+    BackgroundColor<<Reference>> LightSkyBlue
+    BackgroundColor<<Property>> LightPink
+    BackgroundColor<<Containment>> LightBlue
+}
+@enduml

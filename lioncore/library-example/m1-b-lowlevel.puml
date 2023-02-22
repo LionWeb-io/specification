@@ -1,0 +1,60 @@
+@startuml
+
+title Low-level M1 Library Example
+hide stereotypes
+
+!include ../plantuml-shared/lowlevel-skinparam.puml
+!include ../plantuml-shared/lowlevel-map-legend.puml
+
+' Library
+object "Bob's Library : <u>Node</u>" as library<<Node>> {
+    id = "idBobLib"
+    concept = → runtime::Library
+}
+
+map " " as libraryProperties<<PropertyValue>> {
+    → runtime::LibraryName => "Bob's library" : <u>PropertyValue</u>
+}
+library *-- libraryProperties: properties
+
+' Explorer book
+
+object "Explorer Book : <u>Node</u>" as explorerBook<<Node>> {
+    id = "idExplorer"
+    concept = → runtime::Book
+}
+
+map " " as explorerBookProperties<<PropertyValue>> {
+    → runtime::BookPages => "123" : <u>PropertyValue</u>
+    → runtime::BookTitle => "Explorer Book" : <u>PropertyValue</u>
+}
+explorerBook *-- explorerBookProperties: properties
+
+map " " as libraryChildren<<ChildTarget>> {
+    LibraryBooks => → runtime::LibraryBooks : <u>ChildTarget</u>
+}
+library *-- libraryChildren: children
+libraryChildren::LibraryBooks -> explorerBook
+
+
+object ": <u>ReferenceTarget</u>" as explorerBookAuthor<<ReferenceTarget>> {
+    resolveInfo = "Jack London"
+    reference = → runtime::WriterAuthor
+}
+explorerBook *-- explorerBookAuthor: references
+
+' Jack London
+object "Jack London : <u>Node</u>" as jackLondon<<Node>> {
+    id = "idJack"
+    concept = → runtime::GuideBookWriter
+}
+
+map " " as jackLondonProperties<<PropertyValue>> {
+    → runtime::WriterName => "Jack London" : <u>PropertyValue</u>
+    → runtime::GuideBookWriterCountries => "Alaska" : <u>PropertyValue</u>
+}
+jackLondon *-- jackLondonProperties: properties
+
+explorerBookAuthor --> jackLondon: target
+
+@enduml

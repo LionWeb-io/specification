@@ -45,7 +45,12 @@ Let’s first see a representation of the meta-metamodel using (a tiny subset of
 include::metametamodel.puml[]
 ----
 
-image::metametamodel.svg[]
+[mermaid, metametamodel-mermaid, svg]
+----
+include::metametamodel.mermaid[]
+----
+
+image::rendered/metametamodel.svg[]
 
 == Definition of the Meta-Metamodel
 
@@ -56,6 +61,7 @@ We will list elements by their type: classes, abstract classes and interfaces.
 
 The classes are <<Metamodel>>, <<Concept>>, <<ConceptInterface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Typedef>>, <<Annotation>>, <<Containment>>, <<Reference>>, and <<Property>>.
 
+[[Metamodel]]
 ==== Metamodel
 A Metamodel will provide the Concepts necessary to describe ideas in a particular domain together with supporting elements necessary for the definition of those Concepts.
 
@@ -78,12 +84,14 @@ EPackages have instead sub-packages and MPS Languages have virtual folders.
 For this use case, different Metamodels could be used instead.
 
 .Characteristics
-A Metamodel has a `qualifiedName` and an `id`, similarly to MPS Languages.
+A Metamodel has a [[Metamodel.name, Metamodel.name]]`name` and an [[Metamodel.id, Metamodel.id]]`id`, similarly to MPS Languages.
 
+[[Metamodel.elements, Metamodel.elements]]
 Each Metamodel will contain a list of <<MetamodelElement, Metamodel elements>> in its `elements` containment.
 
 A Metamodel is a <<NamespaceProvider>> (as it provides a Namespace to all its elements).
 
+[[Metamodel.dependsOn, Metamodel.dependsOn]]
 A Metamodel can depend on other Metamodels via `dependsOn` reference.
 Dependencies must be explicitly declared.
 
@@ -92,6 +100,7 @@ Metamodel elements contained in a Metamodel are allowed to refer exclusively to 
 
 Dependencies are not transitive: e.g., if A declares a dependency on B, and B declares a dependency on C, still references to C cannot appear within A, unless C is added to the list of dependencies of A.
 
+[[Concept]]
 ==== Concept
 A Concept represents a category of entities sharing the same structure.
 
@@ -103,25 +112,28 @@ Single entities could be Concept instances, such as Invoice #1/2022.
 A Concept is roughly equivalent to an `EClass` (with the `isInterface` flag set to `false`) or an MPS’s `ConceptDeclaration`.
 
 .Characteristics
-A Concept has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A Concept has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
 
-[[abstract]]
+[[Concept.abstract, Concept.abstract]]
 A Concept can be concrete (i.e., instantiable) or abstract, marked by boolean `abstract` property.
 
 A Concept is a <<FeaturesContainer>>  (as it has features).
 It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel), and a <<NamespaceProvider>> (as it act as the namespace for its features).
 
-Each Concept can `extend` zero or one Concepts.
+[[Concept.extends, Concept.extends]]
+Each Concept `extends` zero or one Concepts.
 If no Concepts are explicitly extended, the Concept will implicitly extend the Concept named `BaseConcept`.
 `BaseConcept` is the only concept that truly does not extend any Concept.
 
+[[Concept.implements, , Concept.implements]]
 A Concept `implements` zero or more <<ConceptInterface, ConceptInterfaces>>.
 
-A Concept can have any number of <<features, `features`>>, given it is a <<FeaturesContainer>>.
+A Concept can have any number of <<FeaturesContainer.features, `features`>>, given it is a <<FeaturesContainer>>.
 
 .Constraints
 TBD
 
+[[ConceptInterface]]
 ==== ConceptInterface
 A ConceptInterface represents a category of entities sharing some similar characteristics.
 
@@ -132,14 +144,15 @@ For example, `Named` would be a ConceptInterface.
 A ConceptInterface in LionWeb will be roughly equivalent to an `EClass` (with the `isInterface` flag set to `true`) or an MPS’s `ConceptInterfaceDeclaration`.
 
 .Characteristics
-A ConceptInterface has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A ConceptInterface has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
 
 A ConceptInterface is an <<FeaturesContainer>>  (as it has features).
 It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel), and a <<NamespaceProvider>> (as it act as the namespace for its features).
 
+[[ConceptInterface.extends, ConceptInterface.extends]]
 Each ConceptInterface `extends` zero or more ConceptInterfaces.
 
-A ConceptInterface can have any number of <<features, `features`>>, given it is a <<FeaturesContainer>>.
+A ConceptInterface can have any number of <<FeaturesContainer.features, `features`>>, given it is a <<FeaturesContainer>>.
 
 .Constraints
 {empty}
@@ -148,6 +161,7 @@ WARNING: {experimental}
 
 A ConceptInterface can only declare features marked as derived.
 
+[[PrimitiveType]]
 ==== PrimitiveType
 This represents an arbitrary primitive value, which is not an <<Enumeration>>.
 
@@ -160,9 +174,9 @@ A PrimitiveType is similar to Ecore’s `EDataType` and to MPS’ `PrimitiveData
 Differently from ECore’s `EDataType` PrimitiveType has no flag `serializable`, and it does not inherit fields such as `instanceClassName`, `instanceClass`, or `defaultValue`.
 
 .Characteristics
-A PrimitiveType has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A PrimitiveType has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
 
-A PrimitiveType is a <<DataType>> (as it can be used as <<propertyType, type>> of a <<Property>>).
+A PrimitiveType is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>).
 It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel).
 
 The correspondence between a PrimitiveType an implementation class on a specific platforms can be specified through annotations, but it is not specified on the PrimitiveType itself.
@@ -170,6 +184,7 @@ The correspondence between a PrimitiveType an implementation class on a specific
 .Constraints
 TBD
 
+[[Enumeration]]
 ==== Enumeration
 A primitive value with finite, pre-defined, known set of possible values.
 
@@ -182,17 +197,18 @@ An Enumeration is similar to Ecore’s `EEnum` and to MPS’ `EnumerationDeclara
 Differently from ECore’s `EEnum` Enumeration has no flag `serializable`, and it does not inherit fields such as `instanceClassName`, `instanceClass`, or `defaultValue`.
 
 .Characteristics
-An Enumeration has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+An Enumeration has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
 
-[[literals]]
+[[Enumeration.literals, Enumeration.literals]]
 An Enumeration contains <<EnumerationLiteral, EnumerationLiterals>> in its `literals` containment.
 
-An Enumeration is a <<DataType>> (as it can be used as <<propertyType, type>> of a <<Property>>) and a <<NamespaceProvider>> (as it act as the namespace for its literals).
+An Enumeration is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>) and a <<NamespaceProvider>> (as it act as the namespace for its literals).
 It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel).
 
 .Constraints
 TBD
 
+[[EnumerationLiteral]]
 ==== EnumerationLiteral
 One of the possible values of an <<Enumeration>>.
 
@@ -203,19 +219,21 @@ _Monday_, _Tuesday_, _Wednesday_, _Thursday_, _Friday_, _Saturday_ and _Sunday_ 
 An EnumerationLiteral is similar to Ecore’s `EEnumLiteral` and to MPS’ `EnumerationMemberDeclaration`.
 
 .Characteristics
-An EnumerationLiteral has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+An EnumerationLiteral has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
 
 An Enumeration is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its <<Enumeration>>).
 
 .Constraints
 TBD
 
+[[Typedef]]
 ==== Typedef
 
 WARNING: {experimental}
 
 TODO: add an entry
 
+[[Annotation]]
 ==== Annotation
 
 WARNING: {experimental}
@@ -236,6 +254,7 @@ It contains tagged values.
 `NodeAttribute` is a particular abstract Concept, which can be extended and have properties and links like other Concepts.
 
 .Characteristics
+[[Annotation.platformSpecific, Annotation.platformSpecific]]
 An annotation can be meaningful for a specific platform, identified by a name.
 For this reason Annotation has a field `platformSpecific` of type String?.
 
@@ -243,11 +262,13 @@ An Annotation is a <<MetamodelElement>>, a <<NamespaceProvider>>, and a <<Featur
 However, it is forbidden for Annotations to have <<Containment, Containments>>.
 An Annotation can have as <<Feature, Features>> only <<Reference, References>> and <<Property, Properties>>.
 
+[[Annotation.target, Annotation.target]]
 An Annotation is related to its `target`, which is an <<FeaturesContainer>>.
 It indicates that the Annotation can be applied to instances of that specific AbstractConcept.
 A `target` must be always specified, and it can possibly be the `BaseConcept`, representing all concepts.
 
 
+[[Containment]]
 ==== Containment
 Represents a relation between a containing <<FeaturesContainer>> and a contained <<FeaturesContainer>>.
 
@@ -262,10 +283,10 @@ A Containment is similar to an MPS’s `LinkDeclaration` with `metaClass` having
 Differently from a `LinkDeclaration` there is no field `unordered`.
 
 .Characteristics
-A Containment has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-It can be marked as <<optional, `optional`>> and <<multiple, `multiple`>>.
+A Containment has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+It can be marked as <<Feature.optional, `optional`>> and <<Link.multiple, `multiple`>>.
 
-A Containment refers its <<linkType, `type`>>, which is a <<FeaturesContainer>>.
+A Containment refers its <<Link.type, `type`>>, which is a <<FeaturesContainer>>.
 
 A Containment is a <<Link>> (as it describes a relation between two FeaturesContainers).
 It is indirectly a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its FeaturesContainer).
@@ -280,6 +301,7 @@ A Containment can only specialize a Containment with the same name.
 .Constraints
 TBD
 
+[[Reference]]
 ==== Reference
 Represents a relation between a referring <<FeaturesContainer>> and referred <<FeaturesContainer>>.
 
@@ -287,17 +309,17 @@ Represents a relation between a referring <<FeaturesContainer>> and referred <<F
 _VariableReference_ may have a Reference to a _VariableDeclaration_.
 
 .EMF & MPS equivalent
-A Containment is similar to an ECore’s `EReference` with the `containment` flag set to `false`.
+A Reference is similar to an ECore’s `EReference` with the `containment` flag set to `false`.
 Differently from an `EReference` there is no `container` flag and `resolveProxies` flag.
 
-A Containment is similar to an MPS’s `LinkDeclaration` with `metaClass` having value `reference`.
+A Reference is similar to an MPS’s `LinkDeclaration` with `metaClass` having value `reference`.
 Differently from a `LinkDeclaration` there is no field `unordered`.
 
 .Characteristics
-A Reference has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-It can be marked as <<optional, `optional`>> and <<multiple, `multiple`>>.
+A Reference has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+It can be marked as <<Feature.optional, `optional`>> and <<Link.multiple, `multiple`>>.
 
-A Containment refers its <<linkType, `type`>>, which is a <<FeaturesContainer>>.
+A Containment refers its <<Link.type, `type`>>, which is a <<FeaturesContainer>>.
 
 A Reference is a <<Link>> (as it describes a relation between two FeaturesContainers).
 It is indirectly a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its FeaturesContainer).
@@ -311,6 +333,7 @@ A Reference can only specialize a Reference with the same name.
 .Constraints
 TBD
 
+[[Property]]
 ==== Property
 This indicates a simple value associated to an entity.
 
@@ -323,10 +346,10 @@ A Property is similar to Ecore’s `EAttribute`.
 A Property is similar to MPS’s `AttributeDeclaration`.
 
 .Characteristics
-A Property has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-It can be marked as <<optional, `optional`>>.
+A Property has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+It can be marked as <<Feature.optional, `optional`>>.
 
-[[propertyType]]
+[[Property.type, Property.type]]
 A Property refers its `type`, which is a <<DataType>>.
 
 A Property is a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>).
@@ -339,6 +362,7 @@ TBD
 
 The abstract classes are <<NamespacedEntity>>, <<MetamodelElement>>, <<FeaturesContainer>>, <<DataType>>, <<Feature>>, and <<Link>>.
 
+[[NamespacedEntity]]
 ==== NamespacedEntity
 Something with a name and contained in a Namespace.
 
@@ -350,10 +374,10 @@ Therefore, _Invoice_ will have the qualifiedName `com.foo.Accounting.Invoice`.
 n/a
 
 .Characteristics
-[[simpleName]]
+[[NamespacedEntity.simpleName, NamespacedEntity.simpleName]]
 A NamespacedEntity has a `simpleName`.
 
-[[id]]
+[[NamespacedEntity.id, NamespacedEntity.id]]
 A NamespacedEntity has an `id`.
 
 It can calculate the `qualifiedName` by combining the name of the namespace, which it can obtain from its own <<NamespaceProvider>>.
@@ -361,6 +385,7 @@ It can calculate the `qualifiedName` by combining the name of the namespace, whi
 .Constraints
 A NamespaceEntity's `simpleName` must be unique within the NamespaceProvider.
 
+[[MetamodelElement]]
 ==== MetamodelElement
 A MetamodelElement is an element with an identity within a <<Metamodel>>.
 
@@ -374,7 +399,7 @@ MetamodelElement is similar to MPS’ `IStructureElement`.
 The difference is that `IStructureElement` includes also elements that cannot appear as top level elements of a structure aspects, such as `LinkDeclaration`, `PropertyDeclaration`, and `EnumerationMemberDeclaration`.
 
 .Characteristics
-A MetamodelElement has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A MetamodelElement has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
 
 A MetamodelElement is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its <<Metamodel>>).
 
@@ -393,6 +418,7 @@ Each MetamodelElement must have a unique `simpleName` within the Metamodel.
 
 Each MetamodelElement belongs to one and only one Metamodel.
 
+[[FeaturesContainer]]
 ==== FeaturesContainer
 Something which can own <<Feature, Features>>.
 
@@ -403,9 +429,9 @@ A Concept can have several features.
 FeaturesContainer is similar to `EClass` in Ecore (which is used both for classes and interfaces) and to `AbstractConceptDeclaration` in MPS.
 
 .Characteristics
-A FeaturesContainer has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A FeaturesContainer has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
 
-[[features]]
+[[FeaturesContainer.features, FeaturesContainer.features]]
 A FeaturesContainer owns any number of <<Feature, Features>> in `features` containment.
 
 A FeaturesContainer can be one of:
@@ -420,6 +446,7 @@ It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contain
 .Constraints
 TBD
 
+[[DataType]]
 ==== DataType
 A type of value which has not a relevant identity in the context of a model.
 
@@ -432,7 +459,7 @@ It is similar to Ecore’s `EDataType`.
 It is similar to MPS’ `DataTypeDeclaration`.
 
 .Characteristics
-A DataType has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A DataType has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
 
 A DataType is a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>).
 It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel).
@@ -445,6 +472,7 @@ A DataType can be one of:
 .Constraints
 TBD
 
+[[Feature]]
 ==== Feature
 A Feature represents a characteristic or some form of data associated with a particular concept.
 
@@ -459,9 +487,9 @@ Differently from Ecore’s `EStructureFeature`, Features do not have flags such 
 They have no `default value`.
 
 .Characteristics
-A Feature has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
+A Feature has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
 
-[[optional]]
+[[Feature.optional, Feature.optional]]
 A Feature can be set to `optional` or required.
 
 A Feature is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the <<FeaturesContainer>>).
@@ -474,7 +502,7 @@ A Feature can either be one of:
 
 WARNING: {experimental}
 
-[[derived]]
+[[Feature.derived, Feature.derived]]
 .Derived Features (aka Calculated Features)
 A Feature can be _derived_ if its value is not stored in the Node itself but it can be obtained by accessing the other features’ values or other sources of information.
 Properties and References can be derived but not Containments.
@@ -485,6 +513,7 @@ Properties and References can be derived but not Containments.
 .Constraints
 Each Feature must have a unique name within a specific <<FeaturesContainer>>, also considering all inherited features which are not specialized.
 
+[[Link]]
 ==== Link
 Represent a connection to an <<FeaturesContainer>>.
 
@@ -497,13 +526,13 @@ It is similar to Ecore’s `EReference`.
 It is similar to MPS’ `LinkDeclaration`.
 
 .Characteristics
-A Link has a <<simpleName, `simpleName`>> and an <<id, `id`>>.
-It can be marked as <<optional, `optional`>>.
+A Link has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+It can be marked as <<Feature.optional, `optional`>>.
 
-[[multiple]]
+[[Link.multiple, Link.multiple]]
 A Link can have `multiple` or only a single targets.
 
-[[linkType]]
+[[Link.type, Link.type]]
 A Link refers its `type`, which is a <<FeaturesContainer>>.
 
 A Link is a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>).
@@ -518,6 +547,7 @@ TBD
 
 The interfaces are <<NamespaceProvider>>.
 
+[[NamespaceProvider]]
 ==== NamespaceProvider
 Something which can act as the namespace for contained named things.
 
@@ -528,7 +558,7 @@ A Metamodel `com.foo.Accounting` can be the NamespaceProvider for a Concept _Inv
 n/a
 
 .Characteristics
-[[namespaceQualifier]]
+[[NamespaceProvider.namespaceQualifier, NamespaceProvider.namespaceQualifier]]
 A NamespaceProvider can calculate the `namespaceQualifier` exposed to its children.
 This is typically calculated by combining the namespaces of all the ancestors up to the top level ancestor.
 
@@ -548,7 +578,7 @@ In Ecore there is no equivalent as `lowerBound` and `upperBound` can be set inde
 This is equivalent to MPS’ `Cardinality`, which has the four values mentioned as example.
 
 .Characteristics
-LionCore represents multiplicity as the two booleans <<optional, `optional`>> (whether there MUST be at least one target) and <<multiple, `multiple`>> (whether there CAN be more than one target).
+LionCore represents multiplicity as the two booleans <<Feature.optional, `optional`>> (whether there MUST be at least one target) and <<Link.multiple, `multiple`>> (whether there CAN be more than one target).
 
 [%autowidth]
 |===
@@ -572,9 +602,10 @@ TBD
 
 Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense to pre-define them.
 
-* `Boolean`
-* `String`
-* `Integer`
+* [[Boolean, Boolean]] `Boolean`
+* [[String, String]] `String`
+* [[Integer, Integer]] `Integer`
+* [[JSON, JSON]] `JSON`
 
 WARNING: {experimental}
 
@@ -618,11 +649,99 @@ We could alternatively also imagine using specific annotations for supporting th
 In general Generics complicate the solution and MPS can live without them.
 Also, in StarLasu we never encountered the need for them so far.
 
+[[identifiers]]
 === Identifiers
 
-WARNING: {experimental}
+==== Valid characters
 
-Identifiers must start with a letter and can be followed by underscores, letters, and digits.
+Ids can only contain these symbols:
+
+* lowercase latin characters: `a`..`z`
+* uppercase latin characters: `A`..`Z`
+* arabic numerals: `0`..`9`
+* underscore: `_`
+* hyphen: `-`
+
+This is the same character set as https://en.wikipedia.org/wiki/Base64#Variants_summary_table[Base64url variant].
+
+==== Representation
+
+Ids are represented by a string, containing only valid characters (as defined above).
+An id string is NOT padded, also not by whitespaces.
+An id string does NOT contain any terminating symbols (compared to some BASE64 variants); this does not affect internal representation in a specific implementation language, e.g. C-style \0-terminated strings.
+
+==== Scope
+
+Node ids MUST be unique within their id-space.
+
+===== Id-space
+
+An id-space is a realm that guarantees the uniqueness of all ids within.
+Typically, this means one repository.
+
+An id-space has an id as defined above.
+Uniqueness of id-space ids is out of scope of LIonWeb specification.
+
+In LIonWeb (the protocol), id-spaces are NOT hierarchical.
+An implementation might choose to use hierarchical id-spaces internally.
+
+==== Identification
+
+A node can be identified relative to its id-space by the node's id.
+To globally identify a node, we use the combination of the id-space id and the node id.
+
+==== Ids of M3 Elements
+
+[cols="d,d,m"]
+|===
+|M3 element |Concept |Id
+
+|<<Concept>> |Concept |LIonCore_M3_Concept
+|<<Concept.abstract>> |Property |LIonCore_M3_Concept_abstract
+|<<Concept.extends>> |Reference |LIonCore_M3_Concept_extends
+|<<Concept.implements>> |Reference |LIonCore_M3_Concept_implements
+|<<ConceptInterface>> |Concept |LIonCore_M3_ConceptInterface
+|<<ConceptInterface.extends>> |Reference |LIonCore_M3_ConceptInterface_extends
+|<<Containment>> |Concept |LIonCore_M3_Containment
+|<<DataType>> |Concept |LIonCore_M3_DataType
+|<<Enumeration>> |Concept |LIonCore_M3_Enumeration
+|<<Enumeration.literals>> |Containment |LIonCore_M3_Enumeration_literals
+|<<EnumerationLiteral>> |Concept |LIonCore_M3_EnumerationLiteral
+|<<Feature>> |Concept |LIonCore_M3_Feature
+|<<Feature.optional>> |Property |LIonCore_M3_Feature_optional
+|<<FeaturesContainer>> |Concept |LIonCore_M3_FeaturesContainer
+|<<FeaturesContainer.features>> |Containment |LIonCore_M3_FeaturesContainer_features
+|<<Link>> |Concept |LIonCore_M3_Link
+|<<Link.multiple>> |Property |LIonCore_M3_Link_multiple
+|<<Link.type>> |Reference |LIonCore_M3_Link_type
+|<<Metamodel>> |Concept |LIonCore_M3_Metamodel
+|<<Metamodel.name>> |Property |LIonCore_M3_Metamodel_name
+|<<Metamodel.id>> |Property |LIonCore_M3_Metamodel_id
+|<<Metamodel.dependsOn>> |Reference |LIonCore_M3_Metamodel_dependsOn
+|<<Metamodel.elements>> |Containment |LIonCore_M3_Metamodel_elements
+|<<MetamodelElement>> |Concept |LIonCore_M3_MetamodelElement
+|<<NamespacedEntity>> |Concept |LIonCore_M3_NamespacedEntity
+|<<NamespacedEntity.simpleName>> |Property |LIonCore_M3_NamespacedEntity_simpleName
+|<<NamespacedEntity.id>> |Property |LIonCore_M3_NamespacedEntity_id
+|<<NamespaceProvider>> |Concept |LIonCore_M3_NamespaceProvider
+|<<PrimitiveType>> |Concept |LIonCore_M3_PrimitiveType
+|<<Property>> |Concept |LIonCore_M3_Property
+|<<Property.type>> |Reference |LIonCore_M3_Property_type
+|<<Reference>> |Concept |LIonCore_M3_Reference
+|===
+
+==== Ids of Built-in Instances
+
+[cols="d,d,m"]
+|===
+|Instance |Concept |Id
+
+|<<String>> |PrimitiveType |LIonCore_M3_String
+|<<Boolean>> |PrimitiveType |LIonCore_M3_Boolean
+|<<Integer>> |PrimitiveType |LIonCore_M3_Integer
+|<<JSON>> |PrimitiveType |LIonCore_M3_JSON
+|===
+
 
 === Union or Intersection Types
 

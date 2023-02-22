@@ -1,0 +1,74 @@
+@startuml
+' Library
+title Typed M1 Library Example
+
+hide empty members
+hide stereotypes
+
+!include ../plantuml-shared/typed-skinparam.puml
+!include ../plantuml-shared/typed-map-legend.puml
+
+package "typed Node" as typedNode {
+    class TypedNode<T : Concept>
+    class TypedProperty<T>
+    class TypedChild<T : Concept>
+    class TypedReference<T : Concept>
+}
+
+package "generated Library" as generatedLibrary {
+    class Library<<Concept>>
+    class Book<<Concept>>
+    class LibraryBooks<<Containment>>
+    class BookAuthor<<Reference>>
+    class Writer<<Concept>>
+    class GuideBookWriter<<Concept>>
+}
+
+
+object "Bob's Library : <u>TypedNode<T = generated::Library></u>" as library<<TypedNode>> {
+    concept = → runtime::Library
+}
+
+map " " as libraryProperties<<TypedProperty>> {
+    → runtime::LibraryName => "Bob's Library" : <u>TypedProperty<T = String></u>
+}
+library *-- libraryProperties: properties
+
+' Explorer book
+
+object "Explorer Book : <u>TypedNode<T = generated::Book></u>" as explorerBook<<TypedNode>> {
+    concept = → runtime::Book
+}
+
+map " " as explorerBookProperties<<TypedProperty>> {
+    → runtime::BookTitle => "Explorer Book" : <u>TypedProperty<T = String></u>
+    → runtime::BookPages => 123 : <u>TypedProperty<T = Integer></u>
+}
+explorerBook *-- explorerBookProperties: properties
+
+map " " as libraryChildren<<TypedChild>> {
+    LibraryBooks => → runtime::LibraryBooks : <u>TypedChild<T = generated::Book*></u>
+}
+library *-- libraryChildren: children
+libraryChildren::LibraryBooks -> explorerBook
+
+
+object ": <u>TypedReference<T = generated::Writer></u>" as explorerBookAuthor<<TypedReference>> {
+    reference = → runtime::BookAuthor
+}
+explorerBook *-- explorerBookAuthor: references
+
+' Jack London
+object "Jack London : <u>TypedNode<T = generated::GuideBookWriter></u>" as jackLondon<<TypedNode>> {
+    concept = → runtime::GuideBookWriter
+}
+
+map " " as jackLondonProperties<<TypedProperty>> {
+    → runtime::WriterName => "Jack London" : <u>TypedProperty<T = String></u>
+    → runtime::GuideBookWriterCountries => "Alaska" : <u>TypedProperty<T = String></u>
+}
+jackLondon *-- jackLondonProperties: properties
+
+explorerBookAuthor --> jackLondon: target
+
+@enduml

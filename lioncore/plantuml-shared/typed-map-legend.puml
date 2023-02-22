@@ -1,0 +1,7 @@
+@startuml
+legend
+<#transparent,#transparent>|= Legend |
+|<#lightPink> each row represents one TypedProperty instance |
+|<#lightBlue> each row represents one TypedChild instance |
+end legend
+@enduml
