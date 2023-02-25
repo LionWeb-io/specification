@@ -76,6 +76,7 @@ All of the initial participants have a history of working with or on [Jetbrains 
 * JetBrains Projectional Web Editor (Alex) [short description, URL]
 * [StarLasu](https://github.com/Strumenta/starlasu) by Strumenta. It is a set of libraries to define and work with ASTs in Kotlin, Java, Python, TypeScript. They have been used in production for years
 * Markus' [vision paper](http://voelter.de/data/pub/APlatformForSystemsAndBusinessModeling.pdf). 
+* [MPS](http://jetbrains.com/mps/) itself; it should also be integratable into LIonWeb-based systems.
 
 These tools are independent and do not provide out-of-the-box interoperability. This is unfortunate because 
 * None of them provides everything that's needed for an LWB in the cloud 
