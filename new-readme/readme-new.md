@@ -10,7 +10,6 @@ and modeling tools on the web.
 3. A third goal of LIonWeb is to serve as a collaboration hub for the developers of such components and to empower other software developers to develop web-based modeling solutions.
 
 
-
 ## Reference Architecture
 
 ![Reference Architecture Diagram](ref-arch.png)
@@ -61,7 +60,7 @@ During the first half of 2023, we will slowly grow the set of participants based
 
 ## Legal
 
-All our specifications and code is released as open source under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). It explicitly allows commercial use. LIonWeb is currently not its own legal entity, it's just a voluntary collabortion of people.
+All our specifications and code is released as open source under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). It explicitly allows commercial use. LIonWeb is currently not its own legal entity, it's just a voluntary collaboration of people.
 
 
 ## History
@@ -84,6 +83,5 @@ These tools are independent and do not provide out-of-the-box interoperability. 
 * Some provide similar functionality with different interfaces for the same kind of problem (M3 layer, model loading, e.g.)
 
 The lack of interoperability discourages others from developing additional components. It is also hard to explain to potential users, customers, contributors, and funders why this small community hasn't been able coordinate better. We have started LIonWeb to fix these problem: **The LIonWeb initiative aims to facilitate the community-based development of language-engineering and modeling tools on the web.**
-
 
 
