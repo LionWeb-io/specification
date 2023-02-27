@@ -1,11 +1,10 @@
 # LIonWeb -- Language Interfaces on the Web 
 
 <strong>
-The LIonWeb initiative aims to facilitate the community-based development of language-engineering
-and modeling tools on the web. 
+The LIonWeb initiative aims to facilitate the community-based development of language engineering and modeling tools on the web. 
 </strong>
 
-1. The main focus is the definition of protocols for the communication between participating software components such as repositories and clients. To make this feasible, we also define a meta metamodel as well as a reference architecture. 
+1. The main focus is the definition of protocols for the communication between participating software components such as repositories and clients. To make this feasible, we also define a meta-metamodel as well as a reference architecture. 
 2. Where appropriate, in order to support the protocols, LIonWeb defines programming language-level APIs to access models and metamodels and to encapsulate the protocols.  
 3. A third goal of LIonWeb is to serve as a collaboration hub for the developers of such components and to empower other software developers to develop web-based modeling solutions.
 
@@ -14,7 +13,7 @@ and modeling tools on the web.
 
 ![Reference Architecture Diagram](ref-arch.png)
 
-A **model** is a graph structure with nodes and edges and one primary containment hierarchy [B]. Nodes are typed by a reference to a concept (a node in the metamodel of the language) and edges are named and typed (another concept). Nodes also have properties which have names and primitive types. Nodes are identified by unique IDs. A LIonWeb language -- or its metamodel -- is an instance of the LIonWeb meta metamodel.
+A **model** is a graph structure with nodes and edges and one primary containment hierarchy [B]. Nodes are typed by a reference to a concept (a node in the metamodel of the language) and edges are named and typed (another concept). Nodes also have properties which have names and primitive types. Nodes are identified by unique IDs. A LIonWeb language -- or its metamodel -- is an instance of the LIonWeb meta-metamodel.
 
 A **repository** [A] stores models and provides clients [C,D,E,F,G] access to the nodes in a model. Conceptually, it is the center of a LIonWeb system, with clients connected to it in a star topology.
 
@@ -31,7 +30,7 @@ Clients can communicate with the repository in two ways: bulk and delta. **Bulk*
 
 We aim to create the following work products (in order of descending priority):
 
-* [Document] Specifications for the communication protocols; this also requries the definition of a meta-meta model 
+* [Document] Specifications for the communication protocols; this also requries the definition of a meta-metamodel 
 * [Document] A reference architecture for cloud-based modeling tools (necessarily mainly to be able to produce the others)
 * [Code] Where appropriate, bindings for these protocols in several programming languages
 * [Code] Reference implementations and examples of how to build systems using the LIonWeb protocols (in particular, using some of the systems mentioned in the History section)
@@ -82,6 +81,6 @@ These tools are independent and do not provide out-of-the-box interoperability. 
 * Many aren't broken down into components that are exposed through a well-defined API and can be used independently
 * Some provide similar functionality with different interfaces for the same kind of problem (M3 layer, model loading, e.g.)
 
-The lack of interoperability discourages others from developing additional components. It is also hard to explain to potential users, customers, contributors, and funders why this small community hasn't been able coordinate better. We have started LIonWeb to fix these problem: **The LIonWeb initiative aims to facilitate the community-based development of language-engineering and modeling tools on the web.**
+The lack of interoperability discourages others from developing additional components. It is also hard to explain to potential users, customers, contributors, and funders why this small community hasn't been able coordinate better. We have started LIonWeb to fix these problem: **The LIonWeb initiative aims to facilitate the community-based development of language engineering and modeling tools on the web.**
 
 
