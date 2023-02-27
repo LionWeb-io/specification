@@ -18,13 +18,13 @@ A **model** is a graph structure with nodes and edges and one primary containmen
  
 A **repository** [A] stores models and provides clients [C,D,E,F,G] access to the nodes in a model. Conceptually, it is the center of a LIonWeb  system, with clients connected to it in a star topology.
  
-**Original models** are models that cannot be (re-)computed from other models. They are CRUDed by users (mediatedby tools). Typically, they are  what we'd call (a collection of) ASTs. They have to be persisted in the repository because they cannot be recomputed. **Derived models** are calculated from other (original or derived) models without direct human interaction. They are usually some form of analysis result, such as one related to a type system. Nodes in derived models are typically associated with an original node -- e.g., the type computed for an AST node. The repository manages this association. Derived models may be persisted or be recalculated on the fly.
+**Original models** are models that cannot be (re-)computed from other models. They are CRUDed by users (mediated by tools). Typically, they are  what we'd call (a collection of) ASTs. They have to be persisted in the repository because they cannot be recomputed. **Derived models** are calculated from other (original or derived) models without direct human interaction. They are usually some form of analysis result, such as one related to a type system. Nodes in derived models are typically associated with an original node -- e.g., the type computed for an AST node. The repository manages this association. Derived models may be persisted or be recalculated on the fly.
  
 A **client** is any program that works with models and nodes in the repository. We identify two kinds of clients, although there might be more:  editors [F,G] and processors [C,D,E]. An **editor** CRUDs original models based on its direct interactions with users. A **processor** is a client that CRUDs models without direct user interaction. Processors can CRUD original models (e.g., importers [D] or generators [E]) or derived models [C] (e.g., compute type systems, desugar models, or interpret models).
  
 One important design guideline for LIonWeb is that we treat original and derived models similarly in terms of how they are transported to and  from clients and/or how they are updated.
  
-Clients can communicate with the repository in two ways: bulk and delta. **Bulk** communication means that a client requests a set of nodes  from the repository, processes those in isolation (e.g., import or otherwise crearte new nodes, modifies existing nodes, or generates output) and then writes the changed set of nodes. **Delta** communication means that, after receiving an initial snapshot similar to the bulk case, the client continues to receive changes (aka deltas) from the repo; it also writes back changes continuously. Delta communication is also the basis for multi-client realtime collaboration.
+Clients can communicate with the repository in two ways: bulk and delta. **Bulk** communication means that a client requests a set of nodes  from the repository, processes those in isolation (e.g., import or otherwise create new nodes, modifies existing nodes, or generates output) and then writes the changed set of nodes. **Delta** communication means that, after receiving an initial snapshot similar to the bulk case, the client continues to receive changes (aka deltas) from the repo; it also writes back changes continuously. Delta communication is also the basis for multi-client realtime collaboration.
  
  
 ## Work Products 
@@ -49,7 +49,7 @@ Currently, LIonWeb consists of nine developers, all with a long history in langu
 * [Sergej Koscejev](https://specificlanguages.com), Freelancer, Czech Republic 
 * Sascha Lisson, [itemis](http://itemis.de), Germany 
 * Alex Shatalin, [Jetbrains (MPS Team)](https://www.jetbrains.com), Czech Republic 
-* Niko Stotz, [F1re](https://www.f1re.io), The Netherlands 
+* Niko Stotz, [F1RE](https://www.f1re.io), The Netherlands 
 * Federico Tomassetti, [Strumenta](https://strumenta.com), Italy 
 * [Markus Voelter](http://voelter.de), Freelancer, Germany 
 * Jos Warmer, [openmodeling](https://openmodeling.nl), The Netherlands 
