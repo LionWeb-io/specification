@@ -6,16 +6,16 @@ The LIonWeb initiative aims to facilitate the community-based development of lan
 
 1. The main focus is the definition of protocols for the communication between participating software components such as repositories and clients. To make this feasible, we also define a meta-metamodel as well as a reference architecture. 
 2. Where appropriate, in order to support the protocols, LIonWeb defines programming language-level APIs to access models and metamodels and to encapsulate the protocols.  
-3. A third goal of LIonWeb is to serve as a collaboration hub for the developers of such components and to empower other software developers to develop web-based modeling solutions.
+3. A third goal of LIonWeb is to serve as a collaboration hub for the developers of such components, to empower other software developers to develop web-based modeling solutions, and to educate public about the benefits of this approach.
 
 
 ## Reference Architecture
 
 ![Reference Architecture Diagram](ref-arch.png)
 
-A **model** is a graph structure with nodes and edges and one primary containment hierarchy [B]. Nodes are typed by a reference to a concept (a node in the metamodel of the language) and edges are named and typed (another concept). Nodes also have properties which have names and primitive types. Nodes are identified by unique IDs. A LIonWeb language -- or its metamodel -- is an instance of the LIonWeb meta-metamodel.
+A **model** is a graph structure with nodes and edges and one primary containment hierarchy [B]. Nodes are typed by a reference to a concept (a node in the metamodel of the language) and edges are named and typed (with a primitive type or a concept). Nodes also have properties which have names and primitive types. Nodes are identified by unique IDs. A LIonWeb language -- or its metamodel -- is an instance of the LIonWeb meta-metamodel.
 
-A **repository** [A] stores models and provides clients [C,D,E,F,G] access to the nodes in a model. Conceptually, it is the center of a LIonWeb system, with clients connected to it in a star topology.
+A **repository** [A] stores models and provides clients [C,D,E,F,G] access to the nodes in a model. Conceptually, it is the center of a LIonWeb system, with clients connected to it in a star topology (although the technical architecture may be different).
 
 **Original models** are models that cannot be (re-)computed from other models. They are CRUDed by users (mediatedby tools). Typically, they are what we'd call (a collection of) ASTs. They have to be persisted in the repository because they cannot be recomputed. **Derived models** are calculated from other (original or derived) models without direct human interaction. They are usually some form of analysis result, such as one related to a type system. Nodes in derived models are typically associated with an original node -- e.g., the type computed for an AST node. The repository manages this association. Derived models may be persisted or be recalculated on the fly.
 
@@ -64,16 +64,14 @@ All our specifications and code is released as open source under the [Apache 2.0
 
 ## History
 
-All of the initial participants have a history of working with or on [Jetbrains MPS](http://jetbrains.com/mps/) and we all appreciate its revolutionary approach of projectional editing. However, over the last few years, the need to run "something like MPS" in the browser has increased, and many of the LIonWeb founders have started developing ideas and tools around web-based language workbenches:
+All of the initial participants have a history of working with or on [Jetbrains MPS](http://jetbrains.com/mps/) and we all appreciate its revolutionary approach of projectional editing. Most of us have also worked with [EMF](https://www.eclipse.org/modeling/emf/) and tools on top of it, in particular, [Xtext](https://www.eclipse.org/Xtext/). However, over the last few years, the need to run "something like MPS" in the browser has increased, and many of the LIonWeb founders have started developing ideas and tools around web-based language workbenches:
 
-* ProjectIt/Freon by Jos Warmer, Anneke Kleppe (https://www.projectit.org/), a set of components and associated 
+* [Freon](https://www.projectit.org/) by Jos Warmer, Anneke Kleppe
 * [MPSServer](https://github.com/Strumenta/MPSServer) by Strumenta. It is an http and websockets server that can be started from standard and headless MPS to permit interaction with MPS from outside it. It permits to read and modify models, trigger builds, get typesystem information, etc. There is also a TypeScript client library available on NPM. It is called [MPSServer-client](https://github.com/Strumenta/mpsserver-client)
 * [WebEditKit](https://github.com/Strumenta/webeditkit) by Strumenta. It is a prototypal framework for defining projectional editors that can interact with MPS through MPSServer
 * [Modelix](https://github.com/modelix) by itemis, an open Source platform for models on the Web
-* Sergej's Service APIs (Sergej) [short description, URL]
-* JetBrains Projectional Web Editor (Alex) [short description, URL]
 * [StarLasu](https://github.com/Strumenta/starlasu) by Strumenta. It is a set of libraries to define and work with ASTs in Kotlin, Java, Python, TypeScript. They have been used in production for years
-* Markus' [vision paper](http://voelter.de/data/pub/APlatformForSystemsAndBusinessModeling.pdf). 
+* Markus' [vision paper](http://voelter.de/data/pub/APlatformForSystemsAndBusinessModeling.pdf) about the future of web-based language workbenches
 * [MPS](http://jetbrains.com/mps/) itself; it should also be integratable into LIonWeb-based systems.
 
 These tools are independent and do not provide out-of-the-box interoperability. This is unfortunate because 
