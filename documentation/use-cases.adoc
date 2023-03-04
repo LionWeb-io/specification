@@ -1,0 +1,21 @@
+= Use cases
+
+
+== Federated modeling
+
+I (=Meinte) have several projects which would benefit from a modeling environment, but for which it's unrealistic to try and set up any kind of central repository.
+This has various reasons: in one situation (EU DCC / eHN), modeling takes place in wildly-differing organizations in separate countries under heavy restrictions (such as: no network access), while in another situation it's politically undesirable to install tooling and inject additional steps into an existing deployment pipeline.
+
+In such contexts, an offline modeling environment running in the browser would be beneficial.
+It can be run locally, without needing to install anything, just by transporting a ZIP with the modeling environment as a HTML file.
+There'd be no connection to a repository - instead, users perform explicit loads from, and saves to files.
+Typically, imports from and exports to existing, non-model-like artifacts also play a role.
+The drawback of this situation is that there's not much control over which version of the modeling environment users happen to have.
+
+Such a modeling environment would benefit from LIonWeb in the following ways:
+
+* It provides a stable basis for the serialization of models.
+* That serialization would be pretty robust against format changes because of the built-in fault tolerance and resilience.
+* Using LIonWeb standards and protocols would be politically more palatable than some bespoke, ad-hoc format.
+* The reference architecture applies just as well to a “fat client”-style Web app (ran from a local file).
+
