@@ -17,21 +17,28 @@ Low-level syntactic:: The serialization is parsable as JSON.
 Note that “parsable” doesn't necessarily mean “syntax-correct”.
 E.g., trailing commas are not syntax-correct, but don't necessarily prevent the JSON from being parsable, nor deserializable.
 
-Structural syntactic:: The JSON conforms to (the relevant version of) https://github.com/LIonWeb-org/lioncore-typescript/blob/main/schemas/generic-serialization.schema.json[the general JSON Schema for the serialization format].
-The relevant version should be read off from the value of the `serializationFormatVersion` property of the root object.
+Structural syntactic:: The JSON conforms to link:../schemas/serialization.schema.json[the JSON Schema for the serialization format]footnote:[This file should match link:https://github.com/LIonWeb-org/lioncore-typescript/blob/main/schemas/generic-serialization.schema.json[the one in the `lioncore-typescript` repository].].
+The `serializationFormatVersion` property of the root object of the serialization indicates which version to use (or should do so).
+Currently, there's only one version, which is identified as: `"1"` (i.e., a string containing the integer 1).
++
 Note that JSON Schema isn't powerful enough to express more high-level, nor referential constraints on the model serialized as JSON.
+In particular, it's not possible to specify constraints such as that an ID points to an object having that ID.
+An example of such a constraint is the `parent` property of a serialized node.
 
 Hierarchical:: The JSON doesn't violate the following constraints.
 +
-* No double containments, i.e. nodes are not the children of multiple other nodes, nor of themselves.
-* The `parent` property of a serialized node matches the `id` of the containing node (whenever that node is present).
-* No (incompatible) double serializations.
 * Node IDs are unique (within the serialization).
+* No double serializations (even if the serializations are identical).
+* The `parent` property of a serialized node matches the `id` of the containing node (whenever that containing node is present in the serialization).
+Concretely: if a node `N` is a child of a node `P` then `N.parent` should equal `P`.
+* No double containments, i.e. nodes are not the children of multiple other nodes, nor of themselves.
 +
-Note that links don't have to resolve, so no additional constraints are imposed.
+At this points, links (so: containments and references) don't have to resolve.
+Concretely, this means that IDs that are values of pairs in `children` and `containments` don't need to resolve to a serialized node in the same JSON serialization.
+(They could in another serialization.)
 
 Meta-referential:: The metamodels specified in the serialization are known and _available_ in the sense that the client('s deserializer) knows how to deserialize models conforming to them.
-That might include aspects like type definitions, and metamodel-specific APIs.
+That would typically imply the presence of type definitions.
 
 Meta-structural:: The seralization matches the metamodels - in particular:
 +
