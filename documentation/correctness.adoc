@@ -55,7 +55,7 @@ Instead, we need another means of referencing a specific location in the seriali
 == Correctness of the deserialized model
 
 [horizontal]
-Referential:: All references resolve.
+Referential:: All links resolve.
 Constraints:: No constraint violations.
 
 Incorrectness can be reported as a model with references to nodes.
