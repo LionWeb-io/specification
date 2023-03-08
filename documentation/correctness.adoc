@@ -13,6 +13,7 @@ image::../resources/correctness-diagrams/levels.svg[]
 A JSON serialization of a model is considered to be deserializable (precisely) if it's correct with respect to all these levels.
 
 [horizontal]
+
 Low-level syntactic:: The serialization is parsable as JSON.
 Note that “parsable” doesn't necessarily mean “syntax-correct”.
 E.g., trailing commas are not syntax-correct, but don't necessarily prevent the JSON from being parsable, nor deserializable.
@@ -42,11 +43,12 @@ That would typically imply the presence of type definitions.
 
 Meta-structural:: The seralization matches the metamodels - in particular:
 +
-* Concept IDs are (uniquely) resolvable.
-* Every key in the `properties`, `children`, or `references` sub objects of the object corresponding to a serialized node is the ID of a feature of the concept pointed to by the `concept` ID value.
-* No additional key-value pairs are present in those sub objects.
-* A key in the `properties` sub object corresponds to ID of a `Property` feature, etc.
-* For each key-value pair in the `properties` sub object: the value has a type matching the `type` specified by the `Property` feature corresponding to the key.
+* Concept identifiers (tuples with a `key` value) are uniquely resolvable to a concept in a metamodel.
+* For every object corresponding to a serialized node:
+** Every key of key-value pairs in the `properties`, `children`, or `references` sub objects is the `key` of a feature of the concept pointed to by the `concept` identifier.
+** No additional key-value pairs are present in those sub objects.
+** A key in the `properties` sub object corresponds to key of a `Property` feature, etc.
+** For each key-value pair in the `properties` sub object: the value has a type matching the `type` specified by the `Property` feature corresponding to the key.
 +
 Because the model hasn't been deserialized at this point, incorrectness can't be reported yet as a model with references to nodes.
 Instead, we need another means of referencing a specific location in the serialization, such as an XPath and/or a line/column identification.
@@ -55,8 +57,12 @@ Instead, we need another means of referencing a specific location in the seriali
 == Correctness of the deserialized model
 
 [horizontal]
-Referential:: All links resolve.
+
+Referential:: All links (on M1/instance-level) resolve.
+Note that the model prior to deserialization doesn't need to be meta-referential or meta-structural!
+
 Constraints:: No constraint violations.
+Constraints can only be checked with full knowledge of all metamodels involved, so meta-referential and meta-structural correctness is necessary for this.
 
 Incorrectness can be reported as a model with references to nodes.
 For multi-valued features, an index has to be included as well.
