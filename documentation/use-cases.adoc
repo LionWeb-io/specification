@@ -19,3 +19,10 @@ Such a modeling environment would benefit from LIonWeb in the following ways:
 * Using LIonWeb standards and protocols would be politically more palatable than some bespoke, ad-hoc format.
 * The reference architecture applies just as well to a “fat client”-style Web app (ran from a local file).
 
+== Code bases analysis and migration
+
+In some situations we may need to process large codebases with tens of thousands of files and tens of millions of lines. In this situations it would be convenient to have a model repository where to upload the single ASTs obtained parsing single files and then perform symbol resolution across files. We may also imagining having symbol resolution being re-performed as files are changes. Once the ASTs are stored in the model repository we could calculate statistics, navigate the code, generate diagrams, etc. We could also perform model transformation as part of language migrations.
+
+In this situation we would benefit from LIonWeb because:
+* We could store the ASTs and not have to parse all the files and keep them in memory to perform symbol resolution
+* We could have parsers, symbol resolvers, language migrators, and code generators written in different languages and coordinate through the model repository. LIonWeb would provide the lingua franca for interoperability
