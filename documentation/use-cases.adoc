@@ -28,7 +28,7 @@ In this situation we would benefit from LIonWeb because:
 * We could store the ASTs and not have to parse all the files and keep them in memory to perform symbol resolution
 * We could have parsers, symbol resolvers, language migrators, and code generators written in different languages and coordinate through the model repository. LIonWeb would provide the lingua franca for interoperability
 
-== Connecting existing (web) apps
+== Connecting new and existing (web) apps
 
 In brownfield scenarios, several tools that implement editors for certain (more precise or less precise) modeling or specification purposes already exist. If one doesn't want to redevelop each of these tools, there needs to be a way to connect such (let's call them) legacy tools. Connections can be relatively simple connections, where a LIonWeb repository component could be treated as a simple database that the tool can connect to in order to exchange information in a simple way ("model-bus scenario"), just dumping or retrieving data. More complicated (and way more interesting) scenarios would be ones where we can talk about (various forms of) semantic interoperability. (How) should LIonWeb help with such interoperability? Let's have a look at some examples to give a bit more body to this use case.
 
