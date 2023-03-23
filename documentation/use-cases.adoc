@@ -59,3 +59,25 @@ The above things could also be done by a single technology like MPS for web or M
 
 * Select best-of-breed for a specific need
 * Spread the risk of certain components by allowing for exchanging (up to a certain level) one component by an equivalent component that is good enough to meet the needs.
+
+== Rapid language prototyping / deployment with async user feedback
+When developing new languages, we might separate a few phases:
+
+1. Core build-up in direct cooperation with domain experts
+2. Refinement with larger group of experts, less direct interaction
+3. Roll-out
+
+LIonWeb would be useful for phase one, and especially helpful for phase two.
+
+Phase one could be done with MPS, deployment is not much of an issue, as there's close collaboration and language engineers can help out.
+Whatever is done in this phase benefits from LIonWeb compatibility so that we can move smoothly to phase two.
+
+LIonWeb shines in phase two: It provides the plumbing for web-based deployment, and possibly more:
+
+* default implementations for different clients (repository, generic web editor, interpretation engine, model checking engine, ...)
+* language evolution facilities
+* versioning/collaboration
+* ...
+
+Implementing any of them independently would be infeasible, so the alternative would be shipping 2 GB fat clients to all users every week.
+This would not inspire high involvement, so LIonWeb enables more and faster feedback.
