@@ -59,3 +59,10 @@ The above things could also be done by a single technology like MPS for web or M
 
 * Select best-of-breed for a specific need
 * Spread the risk of certain components by allowing for exchanging (up to a certain level) one component by an equivalent component that is good enough to meet the needs.
+
+Some more detailed sub-use cases would be:
+* A web-based editor for an MPS language running form a web server
+* A python-based (or Visual Basic-based) plugin in an off-the-shelf tool (desktop application) that needs exchange information (some graph of nodes) with a LIonWeb model repository
+* A custom web application (e.g. 3D visualization/animation of some aspect of a system) that needs to exchange (soft-)realtime information with a LIonWeb model repository
+* Several (possibly big amounts of) models with dependencies between them (with several different languages behind them - a language stack/ecosystem) are editable and run in a web-based fashion (e.g. in-client, served from some web server) - "megamodels"?
+* One or more server-based processors (e.g. MPS with typesystem and constraint checks, etc.) interact with a web-based editor as a client in a web browser
