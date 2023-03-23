@@ -66,3 +66,25 @@ Some more detailed sub-use cases would be:
 * A custom web application (e.g. 3D visualization/animation of some aspect of a system) that needs to exchange (soft-)realtime information with a LIonWeb model repository
 * Several (possibly big amounts of) models with dependencies between them (with several different languages behind them - a language stack/ecosystem) are editable and run in a web-based fashion (e.g. in-client, served from some web server) - "megamodels"?
 * One or more server-based processors (e.g. MPS with typesystem and constraint checks, etc.) interact with a web-based editor as a client in a web browser
+
+== Rapid language prototyping / deployment with async user feedback
+When developing new languages, we might separate a few phases:
+
+1. Core build-up in direct cooperation with domain experts
+2. Refinement with larger group of experts, less direct interaction
+3. Roll-out
+
+LIonWeb would be useful for phase one, and especially helpful for phase two.
+
+Phase one could be done with MPS, deployment is not much of an issue, as there's close collaboration and language engineers can help out.
+Whatever is done in this phase benefits from LIonWeb compatibility so that we can move smoothly to phase two.
+
+LIonWeb shines in phase two: It provides the plumbing for web-based deployment, and possibly more:
+
+* default implementations for different clients (repository, generic web editor, interpretation engine, model checking engine, ...)
+* language evolution facilities
+* versioning/collaboration
+* ...
+
+Implementing any of them independently would be infeasible, so the alternative would be shipping 2 GB fat clients to all users every week.
+This would not inspire high involvement, so LIonWeb enables more and faster feedback.
