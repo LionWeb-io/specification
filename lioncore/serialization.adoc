@@ -17,6 +17,9 @@
 :fn-org67: footnote:org67[https://github.com/LIonWeb-org/organization/issues/67[Allow additional info in serialization #67]]
 :fn-org73: footnote:org73[https://github.com/LIonWeb-org/organization/issues/73[We don't care about serialization verbosity #73]]
 :fn-org76: footnote:org76[https://github.com/LIonWeb-org/organization/issues/76[Should serialization contain a list of used metamodels? #76]]
+:fn-org89: footnote:org89[https://github.com/LIonWeb-org/organization/issues/89[Establish term meta-pointer #89]]
+
+:fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
 
 = LIonWeb Serialization Format
 
@@ -35,18 +38,59 @@ LIonWeb node serialization format is defined in JSON (https://datatracker.ietf.o
 
 === Root structure
 
-Root level MUST be an _object_ with two members.
+Root level MUST be an _object_ with three members.
 
 ##TODO: Are more members allowed?{fn-org67}##
 
-##TODO: Do we include a list of metamodels?{fn-org76}##
-
 The first member MUST be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}
-The value MUST be a decimal integer describing the serialization format version used to create the processed document, according to <<versions>>.
+The value MUST be a decimal integer (without leading or trailing whitespace) describing the serialization format version used to create the processed document, according to <<versions>>.
+
+The second member MUST be _key_ `metamodels` with an _array_ _value_.{fn-org76}
+Each _element_ in the value array MUST adhere to <<metamodel>>.
+The order of _elements_ is undefined.
+_elements_ MUST contain all metamodel/version referred to by any <<meta-pointer>> in the processed document.
+Each _element_ must be unique with respect to all its _members_.
 
 The second member MUST be _key_ `nodes` with an _array_ _value_.{fn-org33}
 Each _element_ in the value array MUST adhere to <<node>>.
 The order of _elements_ is undefined.
+Each _element_ must be unique with respect to the value of its _key_ `id`.
+
+[[metamodel]]
+=== Metamodel structure
+Each *used metamodel* MUST be an _object_.
+The order of _members_ is undefined.
+
+The _object_ MUST contain the following _members_:{fn-org76}
+
+* _key_ `key` with _string_ _value_, adhering to <<metamodel-key>>.
+* _key_ `version` with _string_ _value_, adhering to <<metamodel-version>>.
+
+[[metamodel-key]]
+==== Metamodel key
+A _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
+Refers to the <<metametamodel.adoc#Metamodel.key, key>> of the metamodel.
+
+[[metamodel-version]]
+==== Metamodel version
+A _string_ containing a decimal integer (without leading or trailing whitespace).
+Refers to the <<metametamodel.adoc#Metamodel.version, version>> of the metamodel.
+
+[[meta-pointer]]
+=== Meta-pointer
+A *meta-pointer* is a reference from M1 to M2.{fn-org89}{fn-mof}
+It's used at several places within <<node>>.
+
+Each meta-pointer MUST be an _object_.
+The order of _members_ is undefined.
+
+The _object_ MUST contain the following members:
+
+* _key_ `metamodel` with _string_ _value_, adhering to <<metamodel-key>>.
+* _key_ `version` with _string_ _value_, adhering to <<metamodel-version>>.
+* _key_ `key` with _string_ _value_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
+Refers to some <<metametamodel.adoc#NamespacedEntity, element in the metamodel>>.
+Which element exactly is specified for each usage of meta-pointer.
 
 [[node]]
 === Node structure
@@ -57,7 +101,7 @@ The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55
 
 * _key_ `id` with _string_ _value_, adhering to <<id>>.
 * _key_ `concept`{fn-org37-name}
- with _string_ _value_, adhering to <<concept>>.
+ with _object_ _value_, adhering to <<concept>>.
 * _key_ `properties` with _object_ _value_, adhering to <<properties>>.
 * _key_ `children`{fn-org55-name-children} with _object_ _value_, adhering to <<children>>.
 * _key_ `references`{fn-org55-name-references} with _object_ _value_, adhering to <<references>>.
@@ -66,17 +110,17 @@ The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55
 ##TODO: How to store invalid text?{fn-org62}##
 
 [[id]]
-=== Id value
+==== Id value
 A _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
 Defines the *id* of this *node*.
 
 [[concept]]
-=== Node concept
-A _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
-Refers to the id ##TODO: which id## of the *concept* this *node* is an instance of.
+==== Node concept
+An _object_ adhering to <<meta-pointer>>.
+The meta-pointer's ``key``'s _value_ refers to the <<metametamodel.adoc#NamespacedEntity.key, *key*>> of the <<metametamodel.adoc#Concept, *Concept*>> this *node* is an instance of.
 
 [[properties]]
-=== Properties
+==== Properties
 An _object_ with zero or more _members_.
 The order of _members_ is undefined.
 
@@ -91,7 +135,7 @@ CAN be an empty _string_.
 
 
 [[children]]
-=== Children
+==== Children
 An _object_ with zero or more _members_.
 The order of _members_ is undefined.
 
@@ -108,7 +152,7 @@ NOTE: Each *child* element is the inverse relation of *parent*.
 NOTE: The contained *node* CAN be contained in this document, but also CAN be beyond.
 
 [[references]]
-=== References
+==== References
 An _object_ with zero or more _members_.
 The order of _members_ is undefined.
 
@@ -133,7 +177,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
 *** _null_ if the *id* of the target *node* is not known.
 
 [[parent]]
-=== Parent
+==== Parent
 One of
 
 * _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
@@ -154,6 +198,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
 ----
 {
   "serializationFormatVersion": "1",
+  "metamodels": [],
   "nodes": []
 }
 ----
@@ -163,10 +208,20 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
 ----
 {
   "serializationFormatVersion": "1",
+  "metamodels": [
+    {
+      "key": "myMetamodel",
+      "version": "2"
+    }
+  ],
   "nodes": [
     {
       "id": "aaa",
-      "concept": "myConceptId",
+      "concept": {
+        "metamodel": "myMetamodel",
+        "version": "2",
+        "key": "myConceptId"
+      },
       "properties": {},
       "children": {},
       "references": {}
@@ -180,17 +235,62 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
 ----
 {
   "serializationFormatVersion": "1",
+  "metamodels": [
+    {
+      "key": "myMetamodel",
+      "version": "2"
+    }
+  ],
   "nodes": [
     {
       "id": "bbb",
-      "concept": "myConceptId",
-      "properties": {
-        "stringPropertyId": "my string value",
-        "integerPropertyId": "123",
-        "booleanPropertyId": "true",
-        "jsonPropertyId": "{ \"name\": \"Bob\" }",
-        "unsetPropertyId": null
+      "concept": {
+        "metamodel": "myMetamodel",
+        "version": "2",
+        "key": "myConceptId"
       },
+      "properties": [
+        {
+          "property": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "stringPropertyId"
+          },
+          "value": "my string value"
+        },
+        {
+          "property": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "integerPropertyId"
+          },
+          "value": "123"
+        },
+        {
+          "property": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "booleanPropertyId"
+          },
+          "value": "true"
+        },
+        {
+          "property": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "jsonPropertyId"
+          },
+          "value": "{ \"name\": \"Bob\" }"
+        },
+        {
+          "property": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "unsetPropertyId"
+          },
+          "value": null
+        }
+      ],
       "children": {},
       "references": {}
     }
@@ -203,41 +303,84 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
 ----
 {
   "serializationFormatVersion": "1",
+  "metamodels": [
+    {
+      "key": "myMetamodel",
+      "version": "2"
+    }
+  ],
   "nodes": [
     {
       "id": "ccc",
-      "concept": "myConceptId",
-      "properties": {},
-      "children": {
-        "emptyContainmentId": [],
-        "singleContainmentId": [
-          "cdd"
-        ],
-        "multiContainmentId": [
-          "cee",
-          "cff",
-          "cgg"
-        ]
+      "concept": {
+        "metamodel": "myMetamodel",
+        "version": "2",
+        "key": "myConceptId"
       },
+      "properties": {},
+      "children": [
+        {
+          "containment": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "emptyContainmentId"
+          },
+          "children": []
+        },
+        {
+          "containment": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "singleContainmentId"
+          },
+          "children": [
+            "cdd"
+          ]
+        },
+        {
+          "containment": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "multiContainmentId"
+          },
+          "children": [
+            "cee",
+            "cff",
+            "cgg"
+          ]
+        }
+      ],
       "references": {}
     },
     {
       "id": "cgg",
-      "concept": "differentConceptId",
+      "concept": {
+        "metamodel": "myMetamodel",
+        "version": "2",
+        "key": "differentConceptId"
+      },
       "properties": {},
       "children": {},
       "references": {}
     },
     {
       "id": "cdd",
-      "concept": "otherConceptId",
+      "concept": {
+        "metamodel": "myMetamodel",
+        "version": "2",
+        "key": "otherConceptId"
+      },
       "properties": {},
       "children": {},
       "references": {}
     },
     {
       "id": "cee",
-      "concept": "differentConceptId",
+      "concept": {
+        "metamodel": "myMetamodel",
+        "version": "2",
+        "key": "differentConceptId"
+      },
       "properties": {},
       "children": {},
       "references": {}
@@ -254,47 +397,96 @@ We support different kinds of targets.{fn-org57}
 ----
 {
   "serializationFormatVersion": "1",
+  "metamodels": [
+    {
+      "key": "myMetamodel",
+      "version": "2"
+    }
+  ],
   "nodes": [
     {
       "id": "ddd",
-      "concept": "myConceptId",
+      "concept": {
+        "metamodel": "myMetamodel",
+        "version": "2",
+        "key": "myConceptId"
+      },
       "properties": {},
       "children": {},
-      "references": {
-        "emptyReferenceId": [],
-        "singleReferenceId": [
-          {
-            "resolveInfo": "some name",
-            "reference": "dee"
-          }
-        ],
-        "multiReferenceId": [
-          {
-            "resolveInfo": "self-reference",
-            "reference": "ddd"
+      "references": [
+        {
+          "reference": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "emptyReferenceId"
           },
-          {
-            "resolveInfo": "only resolve info",
-            "reference": null
-          }
-        ],
-        "noResolveInfoReferenceId": [
-          {
-            "resolveInfo": null,
-            "reference": "dee"
-          }
-        ],
-        "neitherResolveInfoNorReferenceId": [
-          {
-            "resolveInfo": null,
-            "reference": null
-          }
-        ]
-      }
+          "targets": []
+        },
+        {
+          "reference": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "singleReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": "some name",
+              "reference": "dee"
+            }
+          ]
+        },
+        {
+          "reference": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "multiReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": "self-reference",
+              "reference": "ddd"
+            },
+            {
+              "resolveInfo": "only resolve info",
+              "reference": null
+            }
+          ]
+        },
+        {
+          "reference": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "noResolveInfoReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": null,
+              "reference": "dee"
+            }
+          ]
+        },
+        {
+          "reference": {
+            "metamodel": "myMetamodel",
+            "version": "2",
+            "key": "neitherResolveInfoNorReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": null,
+              "reference": null
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "dee",
-      "concept": "differentConceptId",
+      "concept": {
+        "metamodel": "myMetamodel",
+        "version": "2",
+        "key": "differentConceptId"
+      },
       "properties": {},
       "children": {},
       "references": {}
