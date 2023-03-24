@@ -5,7 +5,7 @@ Let's keep [the `organization` repo](https://github.com/LIonWeb-org/organization
 Top-level = [GitHub organization](https://github.com/LIonWeb-org/) = [in this repo](https://github.com/LIonWeb-org/.github), starting at the `README`:
 
 * Aim of LIonWeb (as it is now)
-* High-over summary of core concepts and their relations
+* Summary of core concepts and their relations (from the reference architecture) - just to build up an initial mental model
 * Use cases - currently [here](https://github.com/LIonWeb-org/organization/blob/meinte/use-case/documentation/use-cases.adoc)
 * Getting started
 	* Implementations (- each implementation should have their own short “Getting started” in their respective `README`s):
@@ -30,7 +30,8 @@ Top-level = [GitHub organization](https://github.com/LIonWeb-org/) = [in this re
 		* (Reuse)
 		* What does a “typical” multi-language architecture look like (Would be good to have a worked-out example for this)
 * Reference
-	* Layering principle
+	* Working principles
+	* Layering: data interchange “vs.” programmatic
 	* Reference architecture - currently in both the top-level README and in [this GDoc](https://docs.google.com/document/d/1_dsGs6RxcFEuTfnKmTDckllOLqzhsvwfKvmCZThBexs/edit#heading=h.j4l4qci8q98p)
 	* Serialization format (incl. links to schemas) - currently [here](https://github.com/LIonWeb-org/organization/blob/main/lioncore/serialization.adoc)
 	* LIonCore/M3:
@@ -38,8 +39,10 @@ Top-level = [GitHub organization](https://github.com/LIonWeb-org/) = [in this re
 		* Description including constraints - currently [here](https://github.com/LIonWeb-org/organization/blob/main/lioncore/metametamodel.adoc)
 	* Model correctness - currently [here](https://github.com/LIonWeb-org/organization/blob/meinte/correctness/documentation/correctness.adoc)
 	* API (bulk mode) - currently [here](https://github.com/LIonWeb-org/organization/blob/main/lioncore/repo-access-api.adoc)
+* Roadmap (of sorts, non-committal)
 
-Other points on the “Getting started” part:
+
+Additional remarks on the “Getting started” part:
 
 * It'd be good if documentation had a certain level of “liveness” e.g. through the use of [GitHub Blocks](https://blocks.githubnext.com/).
 * Be able to switch between GPL (TypeScript, Java, C#?).
