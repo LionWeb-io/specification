@@ -96,6 +96,11 @@ A Language can depend on other Languages via `dependsOn` reference.
 Dependencies must be explicitly declared.
 
 .Constraints
+``key``s must a valid <<identifiers>>.
+
+`version` must be >= 1, and never decrease.
+It should increment linearly by one.
+
 Language elements contained in a Language are allowed to refer exclusively to Language elements contained in the same Language or in Language explicitly declared as dependencies by the current Language.
 
 Dependencies are not transitive: e.g., if A declares a dependency on B, and B declares a dependency on C, still references to C cannot appear within A, unless C is added to the list of dependencies of A.
@@ -382,7 +387,9 @@ A NamespacedEntity has an `key`.
 
 .Constraints
 A NamespaceEntity's `name` must be unique within the NamespaceProvider.
+
 A NamespaceEntity's `key` must be unique within the Language.
+``key``s must a valid <<identifiers>>.
 
 
 [[LanguageElement]]
