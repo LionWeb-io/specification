@@ -45,10 +45,10 @@ Root level MUST be an _object_ with three members.
 The first member MUST be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}
 The value MUST be a decimal integer (without leading or trailing whitespace) describing the serialization format version used to create the processed document, according to <<versions>>.
 
-The second member MUST be _key_ `metamodels` with an _array_ _value_.{fn-org76}
-Each _element_ in the value array MUST adhere to <<metamodel>>.
+The second member MUST be _key_ `languages` with an _array_ _value_.{fn-org76}
+Each _element_ in the value array MUST adhere to <<language>>.
 The order of _elements_ is undefined.
-_elements_ MUST contain all metamodel/version referred to by any <<meta-pointer>> in the processed document.
+_elements_ MUST contain all language/version referred to by any <<meta-pointer>> in the processed document.
 Each _element_ must be unique with respect to all its _members_.
 
 The second member MUST be _key_ `nodes` with an _array_ _value_.{fn-org33}
@@ -56,25 +56,25 @@ Each _element_ in the value array MUST adhere to <<node>>.
 The order of _elements_ is undefined.
 Each _element_ must be unique with respect to the value of its _key_ `id`.
 
-[[metamodel]]
-=== Metamodel structure
-Each *used metamodel* MUST be an _object_.
+[[language]]
+=== Language structure
+Each *used language* MUST be an _object_.
 The order of _members_ is undefined.
 
 The _object_ MUST contain the following _members_:{fn-org76}
 
-* _key_ `key` with _string_ _value_, adhering to <<metamodel-key>>.
-* _key_ `version` with _string_ _value_, adhering to <<metamodel-version>>.
+* _key_ `key` with _string_ _value_, adhering to <<language-key>>.
+* _key_ `version` with _string_ _value_, adhering to <<language-version>>.
 
-[[metamodel-key]]
-==== Metamodel key
+[[language-key]]
+==== Language key
 A _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
-Refers to the <<metametamodel.adoc#Metamodel.key, key>> of the metamodel.
+Refers to the <<metametamodel.adoc#Language.key, key>> of the language.
 
-[[metamodel-version]]
-==== Metamodel version
+[[language-version]]
+==== Language version
 A _string_ containing a decimal integer (without leading or trailing whitespace).
-Refers to the <<metametamodel.adoc#Metamodel.version, version>> of the metamodel.
+Refers to the <<metametamodel.adoc#Language.version, version>> of the language.
 
 [[meta-pointer]]
 === Meta-pointer
@@ -86,10 +86,10 @@ The order of _members_ is undefined.
 
 The _object_ MUST contain the following members:
 
-* _key_ `metamodel` with _string_ _value_, adhering to <<metamodel-key>>.
-* _key_ `version` with _string_ _value_, adhering to <<metamodel-version>>.
+* _key_ `language` with _string_ _value_, adhering to <<language-key>>.
+* _key_ `version` with _string_ _value_, adhering to <<language-version>>.
 * _key_ `key` with _string_ _value_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
-Refers to some <<metametamodel.adoc#NamespacedEntity, element in the metamodel>>.
+Refers to some <<metametamodel.adoc#NamespacedEntity, element in the language>>.
 Which element exactly is specified for each usage of meta-pointer.
 
 [[node]]
@@ -198,7 +198,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
 ----
 {
   "serializationFormatVersion": "1",
-  "metamodels": [],
+  "languages": [],
   "nodes": []
 }
 ----
@@ -208,9 +208,9 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
 ----
 {
   "serializationFormatVersion": "1",
-  "metamodels": [
+  "languages": [
     {
-      "key": "myMetamodel",
+      "key": "myLanguage",
       "version": "2"
     }
   ],
@@ -218,7 +218,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
     {
       "id": "aaa",
       "concept": {
-        "metamodel": "myMetamodel",
+        "language": "myLanguage",
         "version": "2",
         "key": "myConceptId"
       },
@@ -235,9 +235,9 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
 ----
 {
   "serializationFormatVersion": "1",
-  "metamodels": [
+  "languages": [
     {
-      "key": "myMetamodel",
+      "key": "myLanguage",
       "version": "2"
     }
   ],
@@ -245,14 +245,14 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
     {
       "id": "bbb",
       "concept": {
-        "metamodel": "myMetamodel",
+        "language": "myLanguage",
         "version": "2",
         "key": "myConceptId"
       },
       "properties": [
         {
           "property": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "stringPropertyId"
           },
@@ -260,7 +260,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
         },
         {
           "property": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "integerPropertyId"
           },
@@ -268,7 +268,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
         },
         {
           "property": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "booleanPropertyId"
           },
@@ -276,7 +276,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
         },
         {
           "property": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "jsonPropertyId"
           },
@@ -284,7 +284,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
         },
         {
           "property": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "unsetPropertyId"
           },
@@ -303,9 +303,9 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
 ----
 {
   "serializationFormatVersion": "1",
-  "metamodels": [
+  "languages": [
     {
-      "key": "myMetamodel",
+      "key": "myLanguage",
       "version": "2"
     }
   ],
@@ -313,7 +313,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
     {
       "id": "ccc",
       "concept": {
-        "metamodel": "myMetamodel",
+        "language": "myLanguage",
         "version": "2",
         "key": "myConceptId"
       },
@@ -321,7 +321,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
       "children": [
         {
           "containment": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "emptyContainmentId"
           },
@@ -329,7 +329,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
         },
         {
           "containment": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "singleContainmentId"
           },
@@ -339,7 +339,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
         },
         {
           "containment": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "multiContainmentId"
           },
@@ -355,7 +355,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
     {
       "id": "cgg",
       "concept": {
-        "metamodel": "myMetamodel",
+        "language": "myLanguage",
         "version": "2",
         "key": "differentConceptId"
       },
@@ -366,7 +366,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
     {
       "id": "cdd",
       "concept": {
-        "metamodel": "myMetamodel",
+        "language": "myLanguage",
         "version": "2",
         "key": "otherConceptId"
       },
@@ -377,7 +377,7 @@ NOTE: The referred *node* CAN be contained in this document, but also CAN be bey
     {
       "id": "cee",
       "concept": {
-        "metamodel": "myMetamodel",
+        "language": "myLanguage",
         "version": "2",
         "key": "differentConceptId"
       },
@@ -397,9 +397,9 @@ We support different kinds of targets.{fn-org57}
 ----
 {
   "serializationFormatVersion": "1",
-  "metamodels": [
+  "languages": [
     {
-      "key": "myMetamodel",
+      "key": "myLanguage",
       "version": "2"
     }
   ],
@@ -407,7 +407,7 @@ We support different kinds of targets.{fn-org57}
     {
       "id": "ddd",
       "concept": {
-        "metamodel": "myMetamodel",
+        "language": "myLanguage",
         "version": "2",
         "key": "myConceptId"
       },
@@ -416,7 +416,7 @@ We support different kinds of targets.{fn-org57}
       "references": [
         {
           "reference": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "emptyReferenceId"
           },
@@ -424,7 +424,7 @@ We support different kinds of targets.{fn-org57}
         },
         {
           "reference": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "singleReferenceId"
           },
@@ -437,7 +437,7 @@ We support different kinds of targets.{fn-org57}
         },
         {
           "reference": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "multiReferenceId"
           },
@@ -454,7 +454,7 @@ We support different kinds of targets.{fn-org57}
         },
         {
           "reference": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "noResolveInfoReferenceId"
           },
@@ -467,7 +467,7 @@ We support different kinds of targets.{fn-org57}
         },
         {
           "reference": {
-            "metamodel": "myMetamodel",
+            "language": "myLanguage",
             "version": "2",
             "key": "neitherResolveInfoNorReferenceId"
           },
@@ -483,7 +483,7 @@ We support different kinds of targets.{fn-org57}
     {
       "id": "dee",
       "concept": {
-        "metamodel": "myMetamodel",
+        "language": "myLanguage",
         "version": "2",
         "key": "differentConceptId"
       },
@@ -700,7 +700,7 @@ We have no technical way to find the target node, or meaningful ways to support 
 
 [NOTE]
 ====
-Instead of the user helping out, we might also infer the same information from metamodel specifics.
+Instead of the user helping out, we might also infer the same information from language specifics.
 
 Example: Assume a function with only one parameter.
 If we had a reference that can only target a parameter, we can infer that target to be the one parameter.

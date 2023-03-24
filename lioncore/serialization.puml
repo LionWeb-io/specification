@@ -12,9 +12,9 @@ class SerializationChunk {
     serializationFormatVersion: String
 }
 
-SerializationChunk *--> "0..*" UsedMetamodel: metamodels
+SerializationChunk *--> "0..*" UsedLanguage: languages
 
-class UsedMetamodel {
+class UsedLanguage {
     key: Id
     version: String
 }
@@ -29,7 +29,7 @@ class Node {
 Node *--> "1" MetaPointer: concept
 
 class MetaPointer {
-    metamodel: Id
+    language: Id
     version: String
     key: Id
 }
