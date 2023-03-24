@@ -1,3 +1,5 @@
+include::issue-footnotes.adoc[]
+
 = Meta-Metamodel
 :toc: preamble
 :toclevels: 3
@@ -63,7 +65,7 @@ The classes are <<Language>>, <<Concept>>, <<ConceptInterface>>, <<PrimitiveType
 
 [[Language]]
 ==== Language
-A Language will provide the Concepts necessary to describe ideas in a particular domain together with supporting elements necessary for the definition of those Concepts.
+A Language{fn-org78} will provide the Concepts necessary to describe ideas in a particular domain together with supporting elements necessary for the definition of those Concepts.
 
 It also represents the namespace within which Concepts and other supporting elements are organized.
 
@@ -84,7 +86,7 @@ EPackages have instead sub-packages and MPS Languages have virtual folders.
 For this use case, different Languages could be used instead.
 
 .Characteristics
-A Language has a [[Language.name, Language.name]]`name`, a [[Language.key, Language.key]]`key`, and a [[Language.version, Language.version]]`version`, similar to MPS Languages.
+A Language has a [[Language.name, Language.name]]`name`{fn-org77}, a [[Language.key, Language.key]]`key`{fn-org90}, and a [[Language.version, Language.version]]`version`{fn-org7}{fn-org92}, similar to MPS Languages.
 
 [[Language.elements, Language.elements]]
 Each Language will contain a list of <<LanguageElement, Language elements>> in its `elements` containment.
@@ -97,6 +99,9 @@ Dependencies must be explicitly declared.
 
 .Constraints
 ``key``s must a valid <<identifiers>>.
+`key` SHOULD be globally unique, and MUST be unique within an <<id-space>>.{fn-org91}
+For approximate global uniqueness, we SHOULD adopt Java's package naming scheme, based on domain names.
+As we don't allow dots (`.`) in ids, we SHOULD use dashes (`-`) instead.
 
 `version` must be >= 1, and never decrease.
 It should increment linearly by one.
@@ -380,15 +385,15 @@ n/a
 
 .Characteristics
 [[NamespacedEntity.name, NamespacedEntity.name]]
-A NamespacedEntity has a `name`.
+A NamespacedEntity has a `name`.{fn-org84}
 
 [[NamespacedEntity.key, NamespacedEntity.key]]
-A NamespacedEntity has an `key`.
+A NamespacedEntity has an `key`.{fn-org90}
 
 .Constraints
 A NamespaceEntity's `name` must be unique within the NamespaceProvider.
 
-A NamespaceEntity's `key` must be unique within the Language.
+A NamespaceEntity's `key` must be unique within the Language.{fn-org91}
 ``key``s must a valid <<identifiers>>.
 
 
@@ -510,7 +515,7 @@ A Feature can either be one of:
 WARNING: {experimental}
 
 [[Feature.derived, Feature.derived]]
-.Derived Features (aka Calculated Features)
+.Derived Features (aka Calculated Features){fn-org6}
 A Feature can be _derived_ if its value is not stored in the Node itself but it can be obtained by accessing the other features’ values or other sources of information.
 Properties and References can be derived but not Containments.
 
@@ -546,6 +551,8 @@ A Link is a <<Feature>> (as it describes the characteristics of a <<FeaturesCont
 It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its FeaturesContainer).
 
 A Link can be either a <<Containment>>, or a <<Reference>>.
+
+We do NOT support link specialization.{fn-org8}
 
 .Constraints
 TBD
@@ -604,11 +611,11 @@ TBD
 === Pre-defined concepts
 
 [[Node]]
-`Node`, an _abstract_ <<Concept>> that's the (explicit or implicit) the ancestor of all concepts.
+`Node`{fn-org71}, an _abstract_ <<Concept>> that's the (explicit or implicit) the ancestor of all concepts.
 
 === Pre-defined primitive types
 
-Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense to pre-define them.
+Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense to pre-define them.{fn-org9}
 
 * [[Boolean, Boolean]] `Boolean`
 * [[String, String]] `String`
@@ -682,6 +689,7 @@ An id string does NOT contain any terminating symbols (compared to some BASE64 v
 
 Node ids MUST be unique within their id-space.
 
+[[id-space]]
 ===== Id-space
 
 An id-space is a realm that guarantees the uniqueness of all ids within.

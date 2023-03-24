@@ -1,24 +1,4 @@
-:fn-java33: footnote:java33[https://github.com/LIonWeb-org/lioncore-java/issues/33[Require empty members in serialization #33]]
-
-:fn-org33: footnote:org33[https://github.com/LIonWeb-org/organization/issues/33[Repo API: Node representation #33]]
-:fn-org34: footnote:org34[https://github.com/LIonWeb-org/organization/issues/34[Repo API: Property value encondings #34]]
-:fn-org35: footnote:org35[https://github.com/LIonWeb-org/organization/issues/35[Repo API: Represent dangling pointers #35]]
-:fn-org36: footnote:org36[https://github.com/LIonWeb-org/organization/issues/36[Repo API: Store additional resolve info? #36]]
-:fn-org36-null: footnote:org36null[https://github.com/LIonWeb-org/organization/issues/36#issuecomment-1384070433[Meaning and rationale of `null` values for reference id and resolveInfo]]
-:fn-org37: footnote:org37[https://github.com/LIonWeb-org/organization/issues/37[Repo API: Node serialization #37]]
-:fn-org37-name: footnote:org37conc[https://github.com/LIonWeb-org/organization/issues/37#issuecomment-1411857068[Discussion on name `concept`]]
-:fn-org55: footnote:org55[https://github.com/LIonWeb-org/organization/issues/55[Always provide both containment and parent id in serialization #55]]
-:fn-org55-name-references: footnote:org55ref[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1415994431[Discussion on names `references` and `reference`]]
-:fn-org55-name-children: footnote:org55child[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1409321113[Discussion on name `children`]]
-:fn-org57: footnote:org57[https://github.com/LIonWeb-org/organization/issues/57[Supported reference targets #57]]
-:fn-org58: footnote:org58[https://github.com/LIonWeb-org/organization/issues/58[Include serialization format version in serialization #58]]
-:fn-org59: footnote:org59[https://github.com/LIonWeb-org/organization/issues/59[Require empty members in serialization #59]]
-:fn-org62: footnote:org62[https://github.com/LIonWeb-org/organization/issues/62[How to store invalid text typed at arbitrary places? #62]]
-:fn-org67: footnote:org67[https://github.com/LIonWeb-org/organization/issues/67[Allow additional info in serialization #67]]
-:fn-org73: footnote:org73[https://github.com/LIonWeb-org/organization/issues/73[We don't care about serialization verbosity #73]]
-:fn-org76: footnote:org76[https://github.com/LIonWeb-org/organization/issues/76[Should serialization contain a list of used metamodels? #76]]
-:fn-org78: footnote:org78[https://github.com/LIonWeb-org/organization/issues/78[Rename M3 Metamodel to Language? #78]]
-:fn-org89: footnote:org89[https://github.com/LIonWeb-org/organization/issues/89[Establish term meta-pointer #89]]
+include::issue-footnotes.adoc[]
 
 :fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
 
@@ -194,11 +174,11 @@ NOTE: The referred *node* CAN be contained in the processed document, but also C
 
 [[property-values]]
 === Property serialization
-All property values MUST be serialized as JSON _string_.{fn-org34}.
+All property values MUST be serialized as JSON _string_.{fn-org34}{fn-org9}.
 An unset property CAN be serialized as JSON _null_.
 
 ==== String
-<<metametamodel.adoc#String, LIonCore Strings>> might be any string, including (but not limited to):
+<<metametamodel.adoc#String, LIonCore Strings>> might be any string, of any length, including (but not limited to):
 
 * empty string: `""`
 * only containing whitespace: `" "`
@@ -216,11 +196,16 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 
 ==== Integer
 <<metametamodel.adoc#Integer, LIonCore Integers>> MUST be encoded as JSON _string_.
-Integers MUST be represented in base-10.
-The digits CAN be prefixed with either `+` (plus) or `-` (minus).
-##TODO do we allow plus prefix?##
-Integers MUST NOT be prefixed by leading zeros.
-Integers MUST NOT contain leading or trailing whitespace.
+
+* Integers MUST be represented in base-10.
+* The digits CAN be prefixed with either `+` (plus) or `-` (minus).
+  ##TODO do we allow plus prefix?##{fn-org100}
+* Integers MUST NOT be prefixed by leading zeros.
+* Integers MUST NOT contain leading or trailing whitespace.
+* LIonWeb does NOT limit the range of the integer value.
+  An implementation MAY refuse a model containing an integer value outside the supported range.
+  Every implementation MUST support at least 32 bit signed integer range.
+  ##TODO supported integer range?##{fn-org9-intrange}
 
 Examples of valid Integer encodings:
 
@@ -230,6 +215,8 @@ Examples of valid Integer encodings:
 * `"123"`
 * `"-100000"`
 * `"+999"`
+* `"100000000200000000300000000400000000500000000600000000700000000800000000900000000999999999"`
+* `"-999999999900000000800000000700000000600000000500000000400000000300000000200000000100000000"`
 
 Examples of invalid Integer encodings:
 
