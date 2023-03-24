@@ -68,6 +68,7 @@ Some more detailed sub-use cases would be:
 * A custom web application (e.g. 3D visualization/animation of some aspect of a system) that needs to exchange (soft-)realtime information with a LIonWeb model repository
 * Several (possibly big amounts of) models with dependencies between them (with several different languages behind them - a language stack/ecosystem) are editable and run in a web-based fashion (e.g. in-client, served from some web server) - "megamodels"?
 * One or more server-based processors (e.g. MPS with typesystem and constraint checks, etc.) interact with a web-based editor as a client in a web browser
+* Resources and authorization: shield off certain internal information in a model and only expose derived values/attributes/behavior due to secrecy (e.g. secret company information, sharing of models with suppliers that can't have access to all information, etc.).
 
 == Rapid language prototyping / deployment with async user feedback
 When developing new languages, we might separate a few phases:
