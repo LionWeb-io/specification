@@ -8,9 +8,12 @@ Top-level = [GitHub organization](https://github.com/LIonWeb-org/) = [in this re
 * High-over summary of core concepts and their relations
 * Use cases - currently [here](https://github.com/LIonWeb-org/organization/blob/meinte/use-case/documentation/use-cases.adoc)
 * Getting started
-	* Implementations
+	* Implementations (- each implementation should have their own short “Getting started” in their respective `README`s):
 		* [TypeScript](https://github.com/LIonWeb-org/lioncore-typescript) (JavaScript)
 		* [Java](https://github.com/LIonWeb-org/lioncore-java)
+		* [MPS](https://github.com/LIonWeb-org/lioncore-mps)
+		* C#?
+		* Kotlin?
 	* How to create a metamodel
 		(Would be cool to have a Freon implementation of LIonCore at this point, running in the browser.)
 	* How to use the API (bulk mode)
