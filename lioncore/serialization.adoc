@@ -17,6 +17,7 @@
 :fn-org67: footnote:org67[https://github.com/LIonWeb-org/organization/issues/67[Allow additional info in serialization #67]]
 :fn-org73: footnote:org73[https://github.com/LIonWeb-org/organization/issues/73[We don't care about serialization verbosity #73]]
 :fn-org76: footnote:org76[https://github.com/LIonWeb-org/organization/issues/76[Should serialization contain a list of used metamodels? #76]]
+:fn-org78: footnote:org78[https://github.com/LIonWeb-org/organization/issues/78[Rename M3 Metamodel to Language? #78]]
 :fn-org89: footnote:org89[https://github.com/LIonWeb-org/organization/issues/89[Establish term meta-pointer #89]]
 
 :fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
@@ -45,7 +46,7 @@ Root level MUST be an _object_ with three members.
 The first member MUST be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}
 The value MUST be a decimal integer (without leading or trailing whitespace) describing the serialization format version used to create the processed document, according to <<versions>>.
 
-The second member MUST be _key_ `languages` with an _array_ _value_.{fn-org76}
+The second member MUST be _key_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}
 Each _element_ in the value array MUST adhere to <<language>>.
 The order of _elements_ is undefined.
 _elements_ MUST contain all language/version referred to by any <<meta-pointer>> in the processed document.
@@ -100,68 +101,68 @@ The order of _members_ is undefined.
 The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55}
 
 * _key_ `id` with _string_ _value_, adhering to <<id>>.
-* _key_ `concept`{fn-org37-name}
- with _object_ _value_, adhering to <<concept>>.
-* _key_ `properties` with _object_ _value_, adhering to <<properties>>.
-* _key_ `children`{fn-org55-name-children} with _object_ _value_, adhering to <<children>>.
-* _key_ `references`{fn-org55-name-references} with _object_ _value_, adhering to <<references>>.
+* _key_ `concept`{fn-org37-name} with _object_ _value_, adhering to <<meta-pointer>>.
+  The *meta-pointer*'s ``key``'s _value_ refers to the <<metametamodel.adoc#NamespacedEntity.key, *key*>> of the <<metametamodel.adoc#Concept, *Concept*>> this *node* is an instance of.
+* _key_ `properties` with _array_ _value_, each _element_ adhering to <<property>>.
+The order of _elements_ is undefined.
+* _key_ `children`{fn-org55-name-children} with _array_ _value_, each _element_ adhering to <<child>>.
+The order of _elements_ is undefined.
+* _key_ `references`{fn-org55-name-references} with _array_ _value_, each _element_ adhering to <<reference>>.
+The order of _elements_ is undefined.
 * _key_ `parent` with _string_ or _null_ _value_, adhering to <<parent>>.
 
 ##TODO: How to store invalid text?{fn-org62}##
+
 
 [[id]]
 ==== Id value
 A _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
 Defines the *id* of this *node*.
 
-[[concept]]
-==== Node concept
-An _object_ adhering to <<meta-pointer>>.
-The meta-pointer's ``key``'s _value_ refers to the <<metametamodel.adoc#NamespacedEntity.key, *key*>> of the <<metametamodel.adoc#Concept, *Concept*>> this *node* is an instance of.
 
-[[properties]]
-==== Properties
-An _object_ with zero or more _members_.
+[[property]]
+==== Property
+Each *property* MUST be an _object_.
 The order of _members_ is undefined.
 
-Each _member_ adheres to:
+The _object_ MUST contain the following _members_:
 
-* _key_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
-Refers to the id ##TODO: which id## of the *property* this _member_ specifies the value of.
-* _value_ as one of
-** _string_{fn-org34} containing the value of the property referenced by the _key_.
+* _key_ `property` with _object_ _value_, adhering to <<meta-pointer>>.
+  The *meta-pointer*'s ``key``'s _value_ refers to the <<metametamodel.adoc#NamespacedEntity.key, *key*>> of the <<metametamodel.adoc#Property, *Property*>> this *property* is an instance of.
+* _key_ `value` with _value_ as one of
+** _string_{fn-org34} containing the value of the property referenced by the `property`.
+Refer to <<property-values>> for the specification of the value format.
 CAN be an empty _string_.
 ** _null_ to explicitly specify the property to be unset.
 
 
-[[children]]
-==== Children
-An _object_ with zero or more _members_.
+[[child]]
+==== Child
+Each *child* MUST be an _object_.
 The order of _members_ is undefined.
 
-Each _member_ adheres to:
+The _object_ MUST contain the following _members_:
 
-* _key_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
-Refers to the id ##TODO: which id## of the *containment* this _member_ specifies the *node* *id* of.
-* _array_ _value_ with _string_ _elements_.
+* _key_ `containment` with _object_ _value_, adhering to <<meta-pointer>>.
+The *meta-pointer*'s ``key``'s _value_ refers to the <<metametamodel.adoc#NamespacedEntity.key, *key*>> of the <<metametamodel.adoc#Containment, *Containment*>> this *child* is an instance of.
+* _key_ `children` with _array_ _value_ with _string_ _elements_.
 Each _element_ adheres to <<metametamodel.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained *node*.
 The order of _elements_ is undefined.
 +
 NOTE: Each *child* element is the inverse relation of *parent*.
 +
-NOTE: The contained *node* CAN be contained in this document, but also CAN be beyond.
+NOTE: The children *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
 
-[[references]]
-==== References
-An _object_ with zero or more _members_.
+[[reference]]
+==== Reference
+Each *reference* MUST be an _object_.
 The order of _members_ is undefined.
 
-Each _member_ adheres to:
+The _object_ MUST contain the following _members_:
 
-* _key_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
-Refers to the id ##TODO: which id## of the *reference* this _member_ specifies the target id of.
-
-* _array_ _value_ with _object_ _elements_.
+* _key_ `reference` with _object_ _value_, adhering to <<meta-pointer>>.
+The *meta-pointer*'s ``key``'s _value_ refers to the <<metametamodel.adoc#NamespacedEntity.key, *key*>> of the <<metametamodel.adoc#Reference, *Reference*>> this *reference* is an instance of.
+* _key_ `targets` with __object_ _elements_.
 Each _element_ MUST have the following _members_ in undefined order:{fn-org55-name-references}
 ** _key_ `resolveInfo`{fn-org36} with _value_ as one of:
 *** _string_ containing *resolveInfo*, a textual hint that might be used to find the target *node* of this reference.
@@ -173,7 +174,7 @@ CAN be an empty _string_.
 *** _string_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
 Refers to the *id* of the target *node*.
 +
-NOTE: The referred *node* CAN be contained in this document, but also CAN be beyond.
+NOTE: The referred *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
 *** _null_ if the *id* of the target *node* is not known.
 
 [[parent]]
@@ -185,11 +186,72 @@ Refers to the *id* of the *node* containing this *node*.
 +
 NOTE: *parent* is the inverse relation of one *child*.
 +
-NOTE: The referred *node* CAN be contained in this document, but also CAN be beyond.
+NOTE: The referred *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
 
 * _null_ if
 ** This *node* is a *root node*, i.e. this node does not have a parent.
 ** This serialization is sent as an update request.
+
+[[property-values]]
+=== Property serialization
+All property values MUST be serialized as JSON _string_.{fn-org34}.
+An unset property CAN be serialized as JSON _null_.
+
+==== String
+<<metametamodel.adoc#String, LIonCore Strings>> might be any string, including (but not limited to):
+
+* empty string: `""`
+* only containing whitespace: `" "`
+* containing escaped characters as per JSON spec: `"They said:\n \"Hello!\""`
+* containing extended Unicode characters: `"😐"`
+* containing escaped Unicode characters: `"\uD83D\uDE10"`
+
+==== Boolean
+<<metametamodel.adoc#Boolean, LIonCore Booleans>> MUST be encoded as one of these JSON _strings_:
+
+* `"true"`
+* `"false"`
+
+Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase characters, short forms (like `t` or `f`), or decimal representation (like `1`, `0`, `-1`).
+
+==== Integer
+<<metametamodel.adoc#Integer, LIonCore Integers>> MUST be encoded as JSON _string_.
+Integers MUST be represented in base-10.
+The digits CAN be prefixed with either `+` (plus) or `-` (minus).
+##TODO do we allow plus prefix?##
+Integers MUST NOT be prefixed by leading zeros.
+Integers MUST NOT contain leading or trailing whitespace.
+
+Examples of valid Integer encodings:
+
+* `"0"`
+* `"+0"`
+* `"-0"`
+* `"123"`
+* `"-100000"`
+* `"+999"`
+
+Examples of invalid Integer encodings:
+
+* `""`
+* `123`
+* `-1`
+* `"+-0"`
+* `"++1"`
+* `"00002"`
+* `"0xAA12"`
+* `" 5"`
+* `"-6 "`
+
+==== JSON
+<<metametamodel.adoc#JSON, LIonCore JSON>> MUST be encoded as JSON _string_.
+All double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
+The value MUST adhere to JSON spec (RFC 8259).
+
+Valid example: `"{ \"key\": \"my value\",\n\"myArray\": [1, -2, true] }"`
+
+Invalid example: `{ "key": "my value", "myArray": [1, -2, true] }`
+
 
 == Examples
 
