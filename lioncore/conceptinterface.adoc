@@ -112,6 +112,7 @@ Pro::
 
 Con::
 * Not supported by all languages
+* Changing a superclass can break a subclass
 
 === Diamond inheritance and specializations
 (Provided by Alex)
