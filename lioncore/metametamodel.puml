@@ -29,15 +29,15 @@ abstract class Link #LightBlue extends Feature {
 
 class Metamodel implements NamespaceProvider {
   name: String
-  id: Id
+  key: Id
+  version: Integer
 }
 
 abstract class MetamodelElement implements NamespacedEntity
 
 abstract class NamespacedEntity {
-  simpleName: String
-  qualifiedName(): String
-  id: Id
+  name: String
+  key: Id
 }
 
 interface NamespaceProvider {

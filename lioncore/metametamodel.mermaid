@@ -43,7 +43,8 @@ Feature <|-- Link
 
 class Metamodel {
     String name
-    Id id
+    Id key
+    Integer version
 }
 NamespaceProvider <|.. Metamodel
 
@@ -52,9 +53,8 @@ class MetamodelElement
 NamespacedEntity <|-- MetamodelElement
 
 class NamespacedEntity {
-    String simpleName
-    qualifiedName() String
-    Id id
+    String name
+    Id key
 }
 <<abstract>> NamespacedEntity
 
