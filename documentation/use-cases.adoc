@@ -90,3 +90,44 @@ LIonWeb shines in phase two: It provides the plumbing for web-based deployment, 
 
 Implementing any of them independently would be infeasible, so the alternative would be shipping 2 GB fat clients to all users every week.
 This would not inspire high involvement, so LIonWeb enables more and faster feedback.
+
+== Technical (not very helpful) use-cases
+=== MPS Backend
+Access all modules (ie. languages / solutions / generators / devkits), models, nodes, properties and links present in an MPS repository when using an MPS-based backend.
+No access control, i.e. everything is readable and writable.
+
+=== MPS Client
+Access all models provided by the connected backend.
+In a first version, we can assume the languages are already present in MPS, i.e. we only read/write M1 models.
+
+=== EMF Backend
+Retrieve/store repo contents from a bunch of `.ecore` / `.genmodel` / `.xmi` files.
+No access control.
+
+=== EMF Client
+Access repo contents as EClass / EFeature / EEnum / EObject / etc.
+No access control.
+
+=== Web Display
+Access all (M1) models provided by the connected backend read-only from a web server written in Java.
+Access all (M1/2) models read/write from a different client.
+
+=== Web Editing
+Read and write access to all M1 models provided by the connected backend.
+
+=== File Backed for Testing
+Complete contents of repo are read from a file.
+By a configuration flag, it’s read-only or read/write; in the latter case writes are only in-memory (i.e. not persisted).
+
+=== Services
+Services or components which access all/parts of the model to compute specific derived knowledge (e.g. typesystem, scopes, BI or pre-computing/analysis for web displays).
+
+=== Generator-out
+Generator takes (big part of) the model, turns it into some output outside the model (e.g. text).
+
+=== Model-to-Model Transformation
+Mapper takes part of model and writes/replaces other part of the model.
+
+== Non-Use cases
+* Store other things than models, e.g. images, (binary files), etc.
+* Custom persistence (automatic parsing or unparsing)
