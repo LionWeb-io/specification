@@ -4,9 +4,11 @@ Let's keep [the `organization` repo](https://github.com/LIonWeb-org/organization
 
 Top-level = [GitHub organization](https://github.com/LIonWeb-org/) = [in this repo](https://github.com/LIonWeb-org/.github), starting at the `README`:
 
-* Aim of LIonWeb (as it is now)
+* Aim of LIonWeb (most of the current `README`, as it is now)
 * Summary of core concepts and their relations (from the reference architecture) - just to build up an initial mental model
 * Use cases - currently [here](https://github.com/LIonWeb-org/organization/blob/meinte/use-case/documentation/use-cases.adoc)
+* Roadmap (of sorts, non-committal)
+* Contributing - how to contribute to this initiative (issues, PRs, etc.)
 * Getting started
 	* Implementations (- each implementation should have their own short “Getting started” in their respective `README`s):
 		* [TypeScript](https://github.com/LIonWeb-org/lioncore-typescript) (JavaScript)
@@ -39,11 +41,20 @@ Top-level = [GitHub organization](https://github.com/LIonWeb-org/) = [in this re
 		* Description including constraints - currently [here](https://github.com/LIonWeb-org/organization/blob/main/lioncore/metametamodel.adoc)
 	* Model correctness - currently [here](https://github.com/LIonWeb-org/organization/blob/meinte/correctness/documentation/correctness.adoc)
 	* API (bulk mode) - currently [here](https://github.com/LIonWeb-org/organization/blob/main/lioncore/repo-access-api.adoc)
-* Roadmap (of sorts, non-committal)
 
 
 Additional remarks on the “Getting started” part:
 
 * It'd be good if documentation had a certain level of “liveness” e.g. through the use of [GitHub Blocks](https://blocks.githubnext.com/).
 * Be able to switch between GPL (TypeScript, Java, C#?).
+
+Plan:
+
+* Make an issue for every item above (and link to the issue in the list above)
+* Reorder according to _usefulness to a new reader_
+* Have a look at the [Diátaxis](https://diataxis.fr/) framework for additional inspiration and guidance
+* Use the issues to organize the work
+	* Use PRs when/where it makes sense
+	* Edit PRs directly to give feedback
+* Make the `organization` repo public, but readonly (including the Issues section) for outsiders
 
