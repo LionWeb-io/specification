@@ -79,7 +79,7 @@ A Language in LionWeb will be roughly equivalent to an `EPackage` or the content
 
 A Language will not have a URI or a prefix, differently from EPackages.
 
-A Language will not have a version number, differently from MPS Languages.
+A Language will have a version string, different from MPS Languages' version number.
 
 Differently from EPackages and MPS Languages, there is no way to group language elements.
 EPackages have instead sub-packages and MPS Languages have virtual folders.
@@ -103,8 +103,7 @@ Dependencies must be explicitly declared.
 For approximate global uniqueness, we SHOULD adopt Java's package naming scheme, based on domain names.
 As we don't allow dots (`.`) in ids, we SHOULD use dashes (`-`) instead.
 
-`version` must be >= 1, and never decrease.
-It should increment linearly by one.
+`version` can be any non-empty string.{fn-org128}{fn-org130}
 
 Language elements contained in a Language are allowed to refer exclusively to Language elements contained in the same Language or in Language explicitly declared as dependencies by the current Language.
 

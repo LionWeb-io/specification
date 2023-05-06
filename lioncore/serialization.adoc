@@ -32,7 +32,7 @@ The order of _elements_ is undefined.
 _elements_ MUST contain all language/version referred to by any <<meta-pointer>> in the processed document.
 Each _element_ must be unique with respect to all its _members_.
 
-The second member MUST be _key_ `nodes` with an _array_ _value_.{fn-org33}
+The third member MUST be _key_ `nodes` with an _array_ _value_.{fn-org33}
 Each _element_ in the value array MUST adhere to <<node>>.
 The order of _elements_ is undefined.
 Each _element_ must be unique with respect to the value of its _key_ `id`.
@@ -54,7 +54,7 @@ Refers to the <<metametamodel.adoc#Language.key, key>> of the language.
 
 [[language-version]]
 ==== Language version
-A _string_ containing a decimal integer (without leading or trailing whitespace).
+A _string_ with any contents{fn-org128}{fn-org130}, MUST NOT be empty.{fn-org92}
 Refers to the <<metametamodel.adoc#Language.version, version>> of the language.
 
 [[meta-pointer]]
@@ -198,16 +198,16 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 <<metametamodel.adoc#Integer, LIonCore Integers>> MUST be encoded as JSON _string_.
 
 * Integers MUST be represented in base-10.
-* The digits CAN be prefixed with either `+` (plus) or `-` (minus).
-  ##TODO do we allow plus prefix?##{fn-org100}
+* The digits CAN be prefixed with either `+` (plus) or `-` (minus).{fn-org100}
 * Integers MUST NOT be prefixed by leading zeros.
+* Integers CAN contain value zero with any prefix, i.e. `0`, `-0`, or `+0`.
 * Integers MUST NOT contain leading or trailing whitespace.
 * LIonWeb does NOT limit the range of the integer value.
   An implementation MAY refuse a model containing an integer value outside the supported range.
   Every implementation MUST support at least 32 bit signed integer range.
   ##TODO supported integer range?##{fn-org9-intrange}
 
-Examples of valid Integer encodings:
+.Examples of valid Integer encodings
 
 * `"0"`
 * `"+0"`
@@ -218,7 +218,7 @@ Examples of valid Integer encodings:
 * `"100000000200000000300000000400000000500000000600000000700000000800000000900000000999999999"`
 * `"-999999999900000000800000000700000000600000000500000000400000000300000000200000000100000000"`
 
-Examples of invalid Integer encodings:
+.Examples of invalid Integer encodings
 
 * `""`
 * `123`
@@ -235,10 +235,15 @@ Examples of invalid Integer encodings:
 All double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
 The value MUST adhere to JSON spec (RFC 8259).
 
-Valid example: `"{ \"key\": \"my value\",\n\"myArray\": [1, -2, true] }"`
+.Valid example
+`"{ \"key\": \"my value\",\n\"myArray\": [1, -2, true] }"`
 
-Invalid example: `{ "key": "my value", "myArray": [1, -2, true] }`
+.Invalid example
+`{ "key": "my value", "myArray": [1, -2, true] }`
 
+==== Enumeration Literals
+<<metametamodel.adoc#EnumerationLiteral, LIonCore Enumeration literals>> MUST be encoded as JSON _string_ _value_ according to <<metametamodel.adoc#identifiers, Identifier spec>>.
+MUST refer to the <<metametamodel.adoc#NamespacedEntity.key, key>> of an <<metametamodel.adoc#EnumerationLiteral, EnumerationLiteral>> of the <<metametamodel.adoc#Enumeration, Enumeration>> defined as <<metametamodel.adoc#Property.type, type>> of this *Property*.{fn-org128}
 
 == Examples
 
@@ -273,13 +278,38 @@ Invalid example: `{ "key": "my value", "myArray": [1, -2, true] }`
       },
       "properties": {},
       "children": {},
-      "references": {}
+      "references": {},
+      "parent": null
     }
   ]
 }
 ----
 
 === Property variants
+
+For this example, we need to define an enumeration and a concept that uses the enumeration.
+
+NOTE: The format used in this example is non-normative.
+
+Assume this enumeration:
+[source]
+----
+enumeration DaysOfWeek [id 23, key days-of-week]
+
+  literal Monday       [id 34, key monday]
+  literal Tuesday      [id 2,  key tttt]
+  literal Wednesday    [id 55, key 12398712]
+----
+
+And this concept:
+[source]
+----
+concept OpeningTime           [id 44, key time_to_open]
+  property day: DaysOfWeek    [id 42, key day]
+  property startHour: Integer [id 22, key starthour]
+  property endHour: Integer   [id 89, key endhour]
+----
+
 [source,json]
 ----
 {
@@ -341,7 +371,45 @@ Invalid example: `{ "key": "my value", "myArray": [1, -2, true] }`
         }
       ],
       "children": {},
-      "references": {}
+      "references": {},
+      "parent": null
+    },
+    {
+      "id": "21",
+      "concept": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "time_to_open"
+      },
+      "properties": [
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "day"
+          },
+          "value": "tttt"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "starthour"
+          },
+          "value": "9"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "endhour"
+          },
+          "value": "5"
+        }
+      ],
+      "children": [],
+      "references": [],
+      "parent": null
     }
   ]
 }
@@ -399,7 +467,8 @@ Invalid example: `{ "key": "my value", "myArray": [1, -2, true] }`
           ]
         }
       ],
-      "references": {}
+      "references": {},
+      "parent": null
     },
     {
       "id": "cgg",
@@ -410,7 +479,8 @@ Invalid example: `{ "key": "my value", "myArray": [1, -2, true] }`
       },
       "properties": {},
       "children": {},
-      "references": {}
+      "references": {},
+      "parent": null
     },
     {
       "id": "cdd",
@@ -432,7 +502,8 @@ Invalid example: `{ "key": "my value", "myArray": [1, -2, true] }`
       },
       "properties": {},
       "children": {},
-      "references": {}
+      "references": {},
+      "parent": null
     }
   ]
 }
@@ -527,7 +598,8 @@ We support different kinds of targets.{fn-org57}
             }
           ]
         }
-      ]
+      ],
+      "parent": null
     },
     {
       "id": "dee",
@@ -538,7 +610,8 @@ We support different kinds of targets.{fn-org57}
       },
       "properties": {},
       "children": {},
-      "references": {}
+      "references": {},
+      "parent": null
     }
   ]
 }
