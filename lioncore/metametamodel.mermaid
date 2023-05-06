@@ -13,7 +13,7 @@ Link <|-- Containment
 
 class DataType
 <<abstract>> DataType
-MetamodelElement <|-- DataType
+LanguageElement <|-- DataType
 
 class Enumeration
 DataType <|-- Enumeration
@@ -32,7 +32,7 @@ class FeaturesContainer {
     allFeatures() List~Feature~
 }
 <<abstract>> FeaturesContainer
-MetamodelElement <|-- FeaturesContainer
+LanguageElement <|-- FeaturesContainer
 NamespaceProvider <|.. FeaturesContainer
 
 class Link {
@@ -41,20 +41,20 @@ class Link {
 <<abstract>> Link
 Feature <|-- Link
 
-class Metamodel {
+class Language {
     String name
-    Id id
+    Id key
+    Integer version
 }
-NamespaceProvider <|.. Metamodel
+NamespaceProvider <|.. Language
 
-class MetamodelElement
-<<abstract>> MetamodelElement
-NamespacedEntity <|-- MetamodelElement
+class LanguageElement
+<<abstract>> LanguageElement
+NamespacedEntity <|-- LanguageElement
 
 class NamespacedEntity {
-    String simpleName
-    qualifiedName() String
-    Id id
+    String name
+    Id key
 }
 <<abstract>> NamespacedEntity
 
@@ -86,7 +86,7 @@ Feature "*" --* "1" FeaturesContainer: features
 
 Link "*" --> "1" FeaturesContainer: type
 
-Metamodel "*" --> "*" Metamodel: dependsOn
-MetamodelElement "*" --* "1" Metamodel: elements
+Language "*" --> "*" Language: dependsOn
+LanguageElement "*" --* "1" Language: elements
 
 Property "*" --> "1" DataType: type

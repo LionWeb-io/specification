@@ -1,3 +1,5 @@
+include::issue-footnotes.adoc[]
+
 = Meta-Metamodel
 :toc: preamble
 :toclevels: 3
@@ -59,44 +61,51 @@ We will list elements by their type: classes, abstract classes and interfaces.
 
 === Classes
 
-The classes are <<Metamodel>>, <<Concept>>, <<ConceptInterface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Typedef>>, <<Annotation>>, <<Containment>>, <<Reference>>, and <<Property>>.
+The classes are <<Language>>, <<Concept>>, <<ConceptInterface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Typedef>>, <<Annotation>>, <<Containment>>, <<Reference>>, and <<Property>>.
 
-[[Metamodel]]
-==== Metamodel
-A Metamodel will provide the Concepts necessary to describe ideas in a particular domain together with supporting elements necessary for the definition of those Concepts.
+[[Language]]
+==== Language
+A Language{fn-org78} will provide the Concepts necessary to describe ideas in a particular domain together with supporting elements necessary for the definition of those Concepts.
 
 It also represents the namespace within which Concepts and other supporting elements are organized.
 
 .Example
-For example, a Metamodel for accounting could collect several Concepts such as _Invoice_, _Customer_, _InvoiceLine_, _Product_.
+For example, a Language for accounting could collect several Concepts such as _Invoice_, _Customer_, _InvoiceLine_, _Product_.
 It could also contain related elements necessary for the definitions of the concepts.
 For example, a DataType named Currency.
 
 .EMF & MPS equivalent
-A Metamodel in LionWeb will be roughly equivalent to an `EPackage` or the contents of the _structure aspect_ of an MPS Language.
+A Language in LionWeb will be roughly equivalent to an `EPackage` or the contents of the _structure aspect_ of an MPS Language.
 
-A Metamodel will not have a URI or a prefix, differently from EPackages.
+A Language will not have a URI or a prefix, differently from EPackages.
 
-A Metamodel will not have a version number, differently from MPS Languages.
+A Language will have a version string, different from MPS Languages' version number.
 
-Differently from EPackages and MPS Languages, there is no way to group metamodel elements.
+Differently from EPackages and MPS Languages, there is no way to group language elements.
 EPackages have instead sub-packages and MPS Languages have virtual folders.
-For this use case, different Metamodels could be used instead.
+For this use case, different Languages could be used instead.
 
 .Characteristics
-A Metamodel has a [[Metamodel.name, Metamodel.name]]`name` and an [[Metamodel.id, Metamodel.id]]`id`, similarly to MPS Languages.
+A Language has a [[Language.name, Language.name]]`name`{fn-org77}, a [[Language.key, Language.key]]`key`{fn-org90}, and a [[Language.version, Language.version]]`version`{fn-org7}{fn-org92}, similar to MPS Languages.
 
-[[Metamodel.elements, Metamodel.elements]]
-Each Metamodel will contain a list of <<MetamodelElement, Metamodel elements>> in its `elements` containment.
+[[Language.elements, Language.elements]]
+Each Language will contain a list of <<LanguageElement, Language elements>> in its `elements` containment.
 
-A Metamodel is a <<NamespaceProvider>> (as it provides a Namespace to all its elements).
+A Language is a <<NamespaceProvider>> (as it provides a Namespace to all its elements).
 
-[[Metamodel.dependsOn, Metamodel.dependsOn]]
-A Metamodel can depend on other Metamodels via `dependsOn` reference.
+[[Language.dependsOn, Language.dependsOn]]
+A Language can depend on other Languages via `dependsOn` reference.
 Dependencies must be explicitly declared.
 
 .Constraints
-Metamodel elements contained in a Metamodel are allowed to refer exclusively to Metamodel elements contained in the same Metamodel or in Metamodel explicitly declared as dependencies by the current metamodel.
+``key``s must a valid <<identifiers>>.
+`key` SHOULD be globally unique, and MUST be unique within an <<id-space>>.{fn-org91}
+For approximate global uniqueness, we SHOULD adopt Java's package naming scheme, based on domain names.
+As we don't allow dots (`.`) in ids, we SHOULD use dashes (`-`) instead.
+
+`version` can be any non-empty string.{fn-org128}{fn-org130}
+
+Language elements contained in a Language are allowed to refer exclusively to Language elements contained in the same Language or in Language explicitly declared as dependencies by the current Language.
 
 Dependencies are not transitive: e.g., if A declares a dependency on B, and B declares a dependency on C, still references to C cannot appear within A, unless C is added to the list of dependencies of A.
 
@@ -112,13 +121,13 @@ Single entities could be Concept instances, such as Invoice #1/2022.
 A Concept is roughly equivalent to an `EClass` (with the `isInterface` flag set to `false`) or an MPS’s `ConceptDeclaration`.
 
 .Characteristics
-A Concept has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+A Concept has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 [[Concept.abstract, Concept.abstract]]
 A Concept can be concrete (i.e., instantiable) or abstract, marked by boolean `abstract` property.
 
 A Concept is a <<FeaturesContainer>>  (as it has features).
-It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel), and a <<NamespaceProvider>> (as it act as the namespace for its features).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language), and a <<NamespaceProvider>> (as it act as the namespace for its features).
 
 [[Concept.extends, Concept.extends]]
 Each Concept `extends` zero or one Concepts.
@@ -144,10 +153,10 @@ For example, `Named` would be a ConceptInterface.
 A ConceptInterface in LionWeb will be roughly equivalent to an `EClass` (with the `isInterface` flag set to `true`) or an MPS’s `ConceptInterfaceDeclaration`.
 
 .Characteristics
-A ConceptInterface has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+A ConceptInterface has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 A ConceptInterface is an <<FeaturesContainer>>  (as it has features).
-It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel), and a <<NamespaceProvider>> (as it act as the namespace for its features).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language), and a <<NamespaceProvider>> (as it act as the namespace for its features).
 
 [[ConceptInterface.extends, ConceptInterface.extends]]
 Each ConceptInterface `extends` zero or more ConceptInterfaces.
@@ -174,10 +183,10 @@ A PrimitiveType is similar to Ecore’s `EDataType` and to MPS’ `PrimitiveData
 Differently from ECore’s `EDataType` PrimitiveType has no flag `serializable`, and it does not inherit fields such as `instanceClassName`, `instanceClass`, or `defaultValue`.
 
 .Characteristics
-A PrimitiveType has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+A PrimitiveType has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 A PrimitiveType is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>).
-It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language).
 
 The correspondence between a PrimitiveType an implementation class on a specific platforms can be specified through annotations, but it is not specified on the PrimitiveType itself.
 
@@ -197,13 +206,13 @@ An Enumeration is similar to Ecore’s `EEnum` and to MPS’ `EnumerationDeclara
 Differently from ECore’s `EEnum` Enumeration has no flag `serializable`, and it does not inherit fields such as `instanceClassName`, `instanceClass`, or `defaultValue`.
 
 .Characteristics
-An Enumeration has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+An Enumeration has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 [[Enumeration.literals, Enumeration.literals]]
 An Enumeration contains <<EnumerationLiteral, EnumerationLiterals>> in its `literals` containment.
 
 An Enumeration is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>) and a <<NamespaceProvider>> (as it act as the namespace for its literals).
-It is indirectly a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language).
 
 .Constraints
 TBD
@@ -219,7 +228,7 @@ _Monday_, _Tuesday_, _Wednesday_, _Thursday_, _Friday_, _Saturday_ and _Sunday_ 
 An EnumerationLiteral is similar to Ecore’s `EEnumLiteral` and to MPS’ `EnumerationMemberDeclaration`.
 
 .Characteristics
-An EnumerationLiteral has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+An EnumerationLiteral has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 An Enumeration is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its <<Enumeration>>).
 
@@ -258,7 +267,7 @@ It contains tagged values.
 An annotation can be meaningful for a specific platform, identified by a name.
 For this reason Annotation has a field `platformSpecific` of type String?.
 
-An Annotation is a <<MetamodelElement>>, a <<NamespaceProvider>>, and a <<FeaturesContainer>>.
+An Annotation is a <<LanguageElement>>, a <<NamespaceProvider>>, and a <<FeaturesContainer>>.
 However, it is forbidden for Annotations to have <<Containment, Containments>>.
 An Annotation can have as <<Feature, Features>> only <<Reference, References>> and <<Property, Properties>>.
 
@@ -283,7 +292,7 @@ A Containment is similar to an MPS’s `LinkDeclaration` with `metaClass` having
 Differently from a `LinkDeclaration` there is no field `unordered`.
 
 .Characteristics
-A Containment has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+A Containment has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 It can be marked as <<Feature.optional, `optional`>> and <<Link.multiple, `multiple`>>.
 
 A Containment refers its <<Link.type, `type`>>, which is a <<FeaturesContainer>>.
@@ -316,7 +325,7 @@ A Reference is similar to an MPS’s `LinkDeclaration` with `metaClass` having v
 Differently from a `LinkDeclaration` there is no field `unordered`.
 
 .Characteristics
-A Reference has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+A Reference has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 It can be marked as <<Feature.optional, `optional`>> and <<Link.multiple, `multiple`>>.
 
 A Containment refers its <<Link.type, `type`>>, which is a <<FeaturesContainer>>.
@@ -346,7 +355,7 @@ A Property is similar to Ecore’s `EAttribute`.
 A Property is similar to MPS’s `AttributeDeclaration`.
 
 .Characteristics
-A Property has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+A Property has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 It can be marked as <<Feature.optional, `optional`>>.
 
 [[Property.type, Property.type]]
@@ -360,50 +369,52 @@ TBD
 
 === Abstract Classes
 
-The abstract classes are <<NamespacedEntity>>, <<MetamodelElement>>, <<FeaturesContainer>>, <<DataType>>, <<Feature>>, and <<Link>>.
+The abstract classes are <<NamespacedEntity>>, <<LanguageElement>>, <<FeaturesContainer>>, <<DataType>>, <<Feature>>, and <<Link>>.
 
 [[NamespacedEntity]]
 ==== NamespacedEntity
 Something with a name and contained in a Namespace.
 
 .Example
-A Concept _Invoice_, contained in a Metamodel `com.foo.Accounting`.
+A Concept _Invoice_, contained in a Language `com.foo.Accounting`.
 Therefore, _Invoice_ will have the qualifiedName `com.foo.Accounting.Invoice`.
 
 .EMF & MPS equivalent
 n/a
 
 .Characteristics
-[[NamespacedEntity.simpleName, NamespacedEntity.simpleName]]
-A NamespacedEntity has a `simpleName`.
+[[NamespacedEntity.name, NamespacedEntity.name]]
+A NamespacedEntity has a `name`.{fn-org84}
 
-[[NamespacedEntity.id, NamespacedEntity.id]]
-A NamespacedEntity has an `id`.
-
-It can calculate the `qualifiedName` by combining the name of the namespace, which it can obtain from its own <<NamespaceProvider>>.
+[[NamespacedEntity.key, NamespacedEntity.key]]
+A NamespacedEntity has an `key`.{fn-org90}
 
 .Constraints
-A NamespaceEntity's `simpleName` must be unique within the NamespaceProvider.
+A NamespaceEntity's `name` must be unique within the NamespaceProvider.
 
-[[MetamodelElement]]
-==== MetamodelElement
-A MetamodelElement is an element with an identity within a <<Metamodel>>.
+A NamespaceEntity's `key` must be unique within the Language.{fn-org91}
+``key``s must a valid <<identifiers>>.
+
+
+[[LanguageElement]]
+==== LanguageElement
+A LanguageElement is an element with an identity within a <<Language>>.
 
 .Example
-For example, _Invoice_, _Currency_, _Named_, or _String_ could be MetamodelElements.
+For example, _Invoice_, _Currency_, _Named_, or _String_ could be LanguageElements.
 
 .EMF & MPS equivalent
-MetamodelElement is similar to Ecore’s `EClassifier`.
+LanguageElement is similar to Ecore’s `EClassifier`.
 
-MetamodelElement is similar to MPS’ `IStructureElement`.
+LanguageElement is similar to MPS’ `IStructureElement`.
 The difference is that `IStructureElement` includes also elements that cannot appear as top level elements of a structure aspects, such as `LinkDeclaration`, `PropertyDeclaration`, and `EnumerationMemberDeclaration`.
 
 .Characteristics
-A MetamodelElement has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+A LanguageElement has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
-A MetamodelElement is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its <<Metamodel>>).
+A LanguageElement is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its <<Language>>).
 
-A MetamodelElement can be one of:
+A LanguageElement can be one of:
 
 * <<Concept>>
 * <<ConceptInterface>>
@@ -411,12 +422,12 @@ A MetamodelElement can be one of:
 * <<Enumeration>>
 * <<Annotation>> ({experimental})
 
-The `qualifiedName` of a MetamodelElement can be obtained by combining the name of the containing <<Metamodel>> with the name of the Concept.
+The `qualifiedName` of a LanguageElement can be obtained by combining the name of the containing <<Language>> with the name of the Concept.
 
 .Constraints
-Each MetamodelElement must have a unique `simpleName` within the Metamodel.
+Each LanguageElement must have a unique `name` within the Language.
 
-Each MetamodelElement belongs to one and only one Metamodel.
+Each LanguageElement belongs to one and only one Language.
 
 [[FeaturesContainer]]
 ==== FeaturesContainer
@@ -429,7 +440,7 @@ A Concept can have several features.
 FeaturesContainer is similar to `EClass` in Ecore (which is used both for classes and interfaces) and to `AbstractConceptDeclaration` in MPS.
 
 .Characteristics
-A FeaturesContainer has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+A FeaturesContainer has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 [[FeaturesContainer.features, FeaturesContainer.features]]
 A FeaturesContainer owns any number of <<Feature, Features>> in `features` containment.
@@ -440,8 +451,8 @@ A FeaturesContainer can be one of:
 * <<ConceptInterface>>
 * <<Annotation>> ({experimental})
 
-A FeaturesContainer is a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>) and a <<NamespaceProvider>> (as it act as the namespace for its features).
-It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel).
+A FeaturesContainer is a <<LanguageElement>> (as it is a top level element in a <<Language>>) and a <<NamespaceProvider>> (as it act as the namespace for its features).
+It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language).
 
 .Constraints
 TBD
@@ -459,10 +470,10 @@ It is similar to Ecore’s `EDataType`.
 It is similar to MPS’ `DataTypeDeclaration`.
 
 .Characteristics
-A DataType has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+A DataType has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
-A DataType is a <<MetamodelElement>> (as it is a top level element in a <<Metamodel>>).
-It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Metamodel).
+A DataType is a <<LanguageElement>> (as it is a top level element in a <<Language>>).
+It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language).
 
 A DataType can be one of:
 
@@ -487,7 +498,7 @@ Differently from Ecore’s `EStructureFeature`, Features do not have flags such 
 They have no `default value`.
 
 .Characteristics
-A Feature has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+A Feature has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 [[Feature.optional, Feature.optional]]
 A Feature can be set to `optional` or required.
@@ -503,7 +514,7 @@ A Feature can either be one of:
 WARNING: {experimental}
 
 [[Feature.derived, Feature.derived]]
-.Derived Features (aka Calculated Features)
+.Derived Features (aka Calculated Features){fn-org6}
 A Feature can be _derived_ if its value is not stored in the Node itself but it can be obtained by accessing the other features’ values or other sources of information.
 Properties and References can be derived but not Containments.
 
@@ -526,7 +537,7 @@ It is similar to Ecore’s `EReference`.
 It is similar to MPS’ `LinkDeclaration`.
 
 .Characteristics
-A Link has a <<NamespacedEntity.simpleName, `simpleName`>> and an <<NamespacedEntity.id, `id`>>.
+A Link has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 It can be marked as <<Feature.optional, `optional`>>.
 
 [[Link.multiple, Link.multiple]]
@@ -540,6 +551,8 @@ It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contain
 
 A Link can be either a <<Containment>>, or a <<Reference>>.
 
+We do NOT support link specialization.{fn-org8}
+
 .Constraints
 TBD
 
@@ -552,7 +565,7 @@ The interfaces are <<NamespaceProvider>>.
 Something which can act as the namespace for contained named things.
 
 .Example
-A Metamodel `com.foo.Accounting` can be the NamespaceProvider for a Concept _Invoice_, which will therefore have the qualifiedName `com.foo.Accounting.Invoice`.
+A Language `com.foo.Accounting` can be the NamespaceProvider for a Concept _Invoice_, which will therefore have the qualifiedName `com.foo.Accounting.Invoice`.
 
 .EMF & MPS equivalent
 n/a
@@ -596,11 +609,12 @@ TBD
 
 === Pre-defined concepts
 
-`BaseConcept`, a <<Concept>> that's the (explicit or implicit) the ancestor of all concepts.
+[[Node]]
+`Node`{fn-org71}, an _abstract_ <<Concept>> that's the (explicit or implicit) the ancestor of all concepts.
 
 === Pre-defined primitive types
 
-Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense to pre-define them.
+Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense to pre-define them.{fn-org9}
 
 * [[Boolean, Boolean]] `Boolean`
 * [[String, String]] `String`
@@ -674,6 +688,7 @@ An id string does NOT contain any terminating symbols (compared to some BASE64 v
 
 Node ids MUST be unique within their id-space.
 
+[[id-space]]
 ===== Id-space
 
 An id-space is a realm that guarantees the uniqueness of all ids within.
@@ -690,11 +705,11 @@ An implementation might choose to use hierarchical id-spaces internally.
 A node can be identified relative to its id-space by the node's id.
 To globally identify a node, we use the combination of the id-space id and the node id.
 
-==== Ids of M3 Elements
+==== Keys of M3 Elements
 
 [cols="d,d,m"]
 |===
-|M3 element |Concept |Id
+|M3 element |Concept |Key
 
 |<<Concept>> |Concept |LIonCore_M3_Concept
 |<<Concept.abstract>> |Property |LIonCore_M3_Concept_abstract
@@ -714,15 +729,15 @@ To globally identify a node, we use the combination of the id-space id and the n
 |<<Link>> |Concept |LIonCore_M3_Link
 |<<Link.multiple>> |Property |LIonCore_M3_Link_multiple
 |<<Link.type>> |Reference |LIonCore_M3_Link_type
-|<<Metamodel>> |Concept |LIonCore_M3_Metamodel
-|<<Metamodel.name>> |Property |LIonCore_M3_Metamodel_name
-|<<Metamodel.id>> |Property |LIonCore_M3_Metamodel_id
-|<<Metamodel.dependsOn>> |Reference |LIonCore_M3_Metamodel_dependsOn
-|<<Metamodel.elements>> |Containment |LIonCore_M3_Metamodel_elements
-|<<MetamodelElement>> |Concept |LIonCore_M3_MetamodelElement
+|<<Language>> |Concept |LIonCore_M3_Language
+|<<Language.name>> |Property |LIonCore_M3_Language_name
+|<<Language.key>> |Property |LIonCore_M3_Language_key
+|<<Language.dependsOn>> |Reference |LIonCore_M3_Language_dependsOn
+|<<Language.elements>> |Containment |LIonCore_M3_Language_elements
+|<<LanguageElement>> |Concept |LIonCore_M3_LanguageElement
 |<<NamespacedEntity>> |Concept |LIonCore_M3_NamespacedEntity
-|<<NamespacedEntity.simpleName>> |Property |LIonCore_M3_NamespacedEntity_simpleName
-|<<NamespacedEntity.id>> |Property |LIonCore_M3_NamespacedEntity_id
+|<<NamespacedEntity.name>> |Property |LIonCore_M3_NamespacedEntity_name
+|<<NamespacedEntity.key>> |Property |LIonCore_M3_NamespacedEntity_key
 |<<NamespaceProvider>> |Concept |LIonCore_M3_NamespaceProvider
 |<<PrimitiveType>> |Concept |LIonCore_M3_PrimitiveType
 |<<Property>> |Concept |LIonCore_M3_Property
@@ -740,6 +755,7 @@ To globally identify a node, we use the combination of the id-space id and the n
 |<<Boolean>> |PrimitiveType |LIonCore_M3_Boolean
 |<<Integer>> |PrimitiveType |LIonCore_M3_Integer
 |<<JSON>> |PrimitiveType |LIonCore_M3_JSON
+|<<Node>> |Concept |LIonCore_M3_Node
 |===
 
 
@@ -759,7 +775,7 @@ Main difference: we aim for multiple implementations on different platforms, we 
 |===
 |LIonCore |Ecore |MPS
 
-|<<Metamodel>>
+|<<Language>>
 |link:https://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EPackage.html[EPackage]
 |Language's structure aspect
 (link:https://www.jetbrains.com/help/mps/structure.html[docs],
@@ -816,7 +832,7 @@ link:https://alexanderpann.github.io/mps-openapi-doc/javadoc_2021.2/org/jetbrain
 |--
 |--
 
-|<<MetamodelElement>>
+|<<LanguageElement>>
 |link:https://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EClassifier.html[EClassifier]
 |link:http://127.0.0.1:63320/node?ref=r%3A00000000-0000-4000-0000-011c89590292%28jetbrains.mps.lang.structure.structure%29%2F1588368162880706270[IStructureElement]
 (link:https://alexanderpann.github.io/mps-openapi-doc/javadoc_2021.2/org/jetbrains/mps/openapi/language/SElement.html[javadoc])

@@ -12,44 +12,61 @@ class SerializationChunk {
     serializationFormatVersion: String
 }
 
+SerializationChunk *--> "0..*" UsedLanguage: languages
+
+class UsedLanguage {
+    key: Id
+    version: String
+}
+
 SerializationChunk *--> "0..*" Node: nodes
 
 class Node {
-    concept: Id
     id: Id
     parent: Id
 }
 
-Node *--> "0..*" ChildrenValues: children
+Node *--> "1" MetaPointer: concept
 
-class ChildrenValues {
-    containment: Id [key]
+class MetaPointer {
+    language: Id
+    version: String
+    key: Id
 }
 
-ChildrenValues *--> "0..*" ChildTarget: [value]
+Node *--> "0..*" Children: children
+
+class Children {
+}
+
+Children *--> "1" MetaPointer: containment
+
+Children *--> "0..1" ChildTarget: children
 
 class ChildTarget {
     target: Id
 }
 
-Node *--> "0..*" ReferenceValues: references
+Node *--> "0..*" References: references
 
-class ReferenceValues {
-    reference: Id [key]
+class References {
 }
 
-ReferenceValues *--> "0..*" ReferenceTarget: [value]
+References *--> "1" MetaPointer: reference
+
+References *--> "0..*" ReferenceTarget: targets
 
 class ReferenceTarget {
-    target: Id [key]
-    resolveInfo: String [value]
+    reference: Id
+    resolveInfo: String
 }
 
 Node *--> "0..*" PropertyValue: properties
 
 class PropertyValue {
-    property: Id [key]
-    value: String [value]
+    value: String
 }
+
+PropertyValue *--> "1" MetaPointer: property
 
 @enduml

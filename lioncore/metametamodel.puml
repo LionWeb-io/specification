@@ -9,7 +9,7 @@ class ConceptInterface #LightGreen extends FeaturesContainer
 
 class Containment #LightBlue extends Link
 
-abstract class DataType #LightPink extends MetamodelElement
+abstract class DataType #LightPink extends LanguageElement
 
 class Enumeration #LightPink extends DataType implements NamespaceProvider
 
@@ -19,7 +19,7 @@ abstract class Feature #LightBlue implements NamespacedEntity {
   optional: Boolean
 }
 
-abstract class FeaturesContainer #LightGreen extends MetamodelElement implements NamespaceProvider {
+abstract class FeaturesContainer #LightGreen extends LanguageElement implements NamespaceProvider {
   allFeatures(): List<Feature>
 }
 
@@ -27,17 +27,17 @@ abstract class Link #LightBlue extends Feature {
   multiple: Boolean
 }
 
-class Metamodel implements NamespaceProvider {
+class Language implements NamespaceProvider {
   name: String
-  id: Id
+  key: Id
+  version: Integer
 }
 
-abstract class MetamodelElement implements NamespacedEntity
+abstract class LanguageElement implements NamespacedEntity
 
 abstract class NamespacedEntity {
-  simpleName: String
-  qualifiedName(): String
-  id: Id
+  name: String
+  key: Id
 }
 
 interface NamespaceProvider {
@@ -63,8 +63,8 @@ Feature "*" -* "1" FeaturesContainer: features
 
 Link "*" --> "1" FeaturesContainer: type
 
-Metamodel "*" --> "*" Metamodel: dependsOn
-MetamodelElement "*" -* "1" Metamodel: elements
+Language "*" --> "*" Language: dependsOn
+LanguageElement "*" -* "1" Language: elements
 
 Property "*" -> "1" DataType: type
 
