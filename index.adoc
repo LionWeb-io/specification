@@ -1,0 +1,7 @@
+= LIonWeb Documentation
+
+* link:documentation/use-cases.adoc[Use cases]
+* link:lioncore/metametamodel.adoc[Meta-meta-model (M3)]
+// * link:lioncore/model-representations.adoc[Models representations]
+* link:lioncore/serialization.adoc[Serialization format]
+
