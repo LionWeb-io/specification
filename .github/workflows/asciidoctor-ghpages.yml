@@ -30,4 +30,4 @@ jobs:
           # source_dir: docs/ # default is .
           # slides_build: true
           # pre_build:
-          # post_build:
+          post_build: "git add -f *.svg"
