@@ -12,6 +12,7 @@
 :fn-org36-null: footnote:org36null[https://github.com/LIonWeb-org/organization/issues/36#issuecomment-1384070433[Meaning and rationale of `null` values for reference id and resolveInfo]]
 :fn-org37: footnote:org37[https://github.com/LIonWeb-org/organization/issues/37[Repo API: Node serialization #37]]
 :fn-org37-name: footnote:org37conc[https://github.com/LIonWeb-org/organization/issues/37#issuecomment-1411857068[Discussion on name `concept`]]
+:fn-org50: footnote:org50[https://github.com/LIonWeb-org/organization/issues/50[ Metamodel dependencies: explicit, transitive? #50]]
 :fn-org55: footnote:org55[https://github.com/LIonWeb-org/organization/issues/55[Always provide both containment and parent id in serialization #55]]
 :fn-org55-name-references: footnote:org55ref[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1415994431[Discussion on names `references` and `reference`]]
 :fn-org55-name-children: footnote:org55child[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1409321113[Discussion on name `children`]]
