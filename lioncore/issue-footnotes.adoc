@@ -36,3 +36,4 @@
 :fn-org101: footnote:org101[https://github.com/LIonWeb-org/organization/issues/101[Rename MetamodelElement to LanguageElement? #101]]
 :fn-org128: footnote:org128[https://github.com/LIonWeb-org/organization/issues/128[Refer to EnumLiteral by key? #128]]
 :fn-org130: footnote:org130[https://github.com/LIonWeb-org/organization/issues/130[What does Language.version mean semantically? #130]]
+:fn-org131: footnote:org131[https://github.com/LIonWeb-org/organization/issues/131[How to refer from one language to another? #131]]

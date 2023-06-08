@@ -735,11 +735,35 @@ Uniqueness of id-space ids is out of scope of LIonWeb specification.
 In LIonWeb (the protocol), id-spaces are NOT hierarchical.
 An implementation might choose to use hierarchical id-spaces internally.
 
+[[node-id]]
 ==== Identification
 
 A node can be identified relative to its id-space by the node's id.
 To globally identify a node, we use the combination of the id-space id and the node id.
 
+=== References to Language Elements
+From a language, we refer to all language elements by their <<node-id, id>>.{fn-org131}
+This includes references to
+
+* <<Language.dependsOn, other languages>>
+* extended <<Concept.extends, Concepts>>
+* <<ConceptInterface.extends, extended>> or <<Concept.implements, implemented>> Interfaces
+* Types of <<Property.type, Properties>> or <<Link.type, Links>>
+
+From an instance, we refer to its defining language element by the language element's <<NamespacedEntity.key, key>>.
+This includes references to
+
+* <<Language>> usage
+* <<Concept>> instance
+* <<Property>> assignment
+* <<Containment>> assignment
+* <<Reference>> assignment
+* <<EnumerationLiteral>> value
+
+
+We refer to all metamodel elements by their id
+
+=== Pre-defined Ids and Keys
 ==== Keys of M3 Elements
 
 [cols="d,d,m"]
