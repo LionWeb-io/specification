@@ -134,7 +134,7 @@ Each Concept `extends` zero or one Concepts.
 If no Concepts are explicitly extended, the Concept will implicitly extend the Concept named `BaseConcept`.
 `BaseConcept` is the only concept that truly does not extend any Concept.
 
-[[Concept.implements, , Concept.implements]]
+[[Concept.implements, Concept.implements]]
 A Concept `implements` zero or more <<ConceptInterface, ConceptInterfaces>>.
 
 A Concept can have any number of <<FeaturesContainer.features, `features`>>, given it is a <<FeaturesContainer>>.
@@ -497,6 +497,8 @@ A Feature in LionWeb will be roughly equivalent to an `EStructuralFeature` or to
 Differently from Ecore’s `EStructureFeature`, Features do not have flags such as `changeable`, `volatile`, `transient`, or `unsettable`.
 They have no `default value`.
 
+Different from MPS' `Link`, Features CANNOT be specialized.{fn-org8}
+
 .Characteristics
 A Feature has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
@@ -511,6 +513,7 @@ A Feature can either be one of:
 * <<Containment>>
 * <<Reference>>
 
+
 WARNING: {experimental}
 
 [[Feature.derived, Feature.derived]]
@@ -522,7 +525,39 @@ Properties and References can be derived but not Containments.
 * If derived feature with same signature is inherited from several interfaces, need to override it explicitly.
 
 .Constraints
-Each Feature must have a unique name within a specific <<FeaturesContainer>>, also considering all inherited features which are not specialized.
+Each Feature MUST have a unique name within a specific <<FeaturesContainer>>.
+
+#TODO: Can we define features with the same name as an inherited one?#
+
+We CAN have non-unique _inherited_ feature _names_, as in this example:
+
+[plantuml, name-clash, svg]
+----
+class A {
+  <i>id = 123</i>
+  <i>key = MyLang-A</i>
+  --
+  f: string <i>id=332, key=A-f</i>
+}
+
+class B {
+  <i>id = 12</i>
+  <i>key = MyLang-B</i>
+  --
+  f: integer <i>id=27, key=B-f</i>
+}
+
+class X extends A, B {
+  <i>id = 79</i>
+  <i>key = MyLang-X</i>
+  --
+}
+----
+
+However, within LIonWeb we always use a Feature's _id_ or _key_ to for identification.
+Thus, LIonWeb can deal with the name clash.
+
+If a host language cannot handle this situation, the generator towards that language needs to resolve it.{fn-org97}
 
 [[Link]]
 ==== Link
