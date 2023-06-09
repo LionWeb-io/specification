@@ -569,12 +569,16 @@ TBD
 
 == Other considerations
 
-=== Pre-defined concepts
+[[stdlib, standard library]]
+=== Pre-defined elements
+Each LIonWeb implementation ships with a set of pre-defined elements, akin to a _standard library_.
+
+==== Concepts
 
 [[Node, Node]]
-`Node`{fn-org71}, an _abstract_ <<Concept>> that's the (explicit or implicit) the ancestor of all concepts.
+* `Node`{fn-org71}, an _abstract_ <<Concept>> that's the (explicit or implicit) the ancestor of all concepts.
 
-=== Pre-defined primitive types
+==== Primitive types
 
 Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense to pre-define them.{fn-org9}
 
@@ -664,8 +668,7 @@ This includes references to
 * <<Reference>> assignment
 * <<EnumerationLiteral>> value
 
-
-We refer to all metamodel elements by their id
+We refer to all <<stdlib>> elements by their <<node-id, id>>.
 
 === Pre-defined Ids and Keys
 ==== Keys of M3 Elements
