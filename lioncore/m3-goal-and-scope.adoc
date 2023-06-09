@@ -13,7 +13,7 @@ Two of the main goals that we can distinguish are as follows:
 
 === Goal 1: Data Interchange Meta-Metamodel
 The goal of the meta-metamodel is to define a meta-language with which to conveniently describe the structure of the model data that is produced and consumed by the LionWeb API.
-This structure is described using node types (concepts), node properties (features) and node relationships (containment and references).
+This structure is described using node types (concepts), node properties (features) and node links (containment and references).
 This is similar to a schema for e.g. XML or JSON as it is programming language agnostic.
 
 Also see issue https://github.com/LIonWeb-org/organization/issues/61
