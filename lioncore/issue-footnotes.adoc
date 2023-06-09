@@ -30,7 +30,7 @@
 :fn-org89: footnote:org89[https://github.com/LIonWeb-org/organization/issues/89[Establish term meta-pointer #89]]
 :fn-org90: footnote:org90[https://github.com/LIonWeb-org/organization/issues/90[Rename M3 property id -> key #90]]
 :fn-org91: footnote:org91[https://github.com/LIonWeb-org/organization/issues/91[Requirements on metamodel keys #91]]
-:fn-org92: footnote:org92[https://github.com/LIonWeb-org/organization/issues/92[Add version property to M3 Metamodel #92]]:fn-org91: footnote:org91[https://github.com/LIonWeb-org/organization/issues/91[Requirements on metamodel keys #91]]
+:fn-org92: footnote:org92[https://github.com/LIonWeb-org/organization/issues/92[Add version property to M3 Metamodel #92]]
 :fn-org97: footnote:org97[https://github.com/LIonWeb-org/organization/issues/97[Name clashes during inheritance #97]]
 :fn-org100: footnote:org100[https://github.com/LIonWeb-org/organization/issues/100[Do we allow + prefix for integer property values? #100]]
 :fn-org101: footnote:org101[https://github.com/LIonWeb-org/organization/issues/101[Rename MetamodelElement to LanguageElement? #101]]
