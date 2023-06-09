@@ -88,7 +88,7 @@ A Language is a <<NamespaceProvider>> (as it provides a Namespace to all its ele
 
 [[Language.dependsOn, Language.dependsOn]]
 A Language can depend on other Languages via `dependsOn` reference.
-Dependencies must be explicitly declared.
+Dependencies must be explicitly declared.{fn-org50}
 
 .Constraints
 ``key``s must a valid <<identifiers>>.
@@ -98,9 +98,16 @@ As we don't allow dots (`.`) in ids, we SHOULD use dashes (`-`) instead.
 
 `version` can be any non-empty string.{fn-org128}{fn-org130}
 
-Language elements contained in a Language are allowed to refer exclusively to Language elements contained in the same Language or in Language explicitly declared as dependencies by the current Language.
+Language elements contained in a Language are allowed to refer to these other Language elements:{fn-org50}
 
-Dependencies are not transitive: e.g., if A declares a dependency on B, and B declares a dependency on C, still references to C cannot appear within A, unless C is added to the list of dependencies of A.
+* within the same language
+* within declared dependencies
+* within _transitive_ dependencies.
++
+Example: if Language B depends on Language A, and Language C depends on B, then Language C can also refer to members of Language A without explicitly declaring a dependency.
+
+A Language CAN declare a transitive dependency explicitly.
+In the example above, Language C CAN declare an explicit dependency on Language A.
 
 [[Concept]]
 ==== Concept
@@ -124,10 +131,10 @@ It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Lang
 
 [[Concept.extends, Concept.extends]]
 Each Concept `extends` zero or one Concepts.
-If no Concepts are explicitly extended, the Concept will implicitly extend the Concept named `BaseConcept`.
-`BaseConcept` is the only concept that truly does not extend any Concept.
+If no Concepts are explicitly extended, the Concept will implicitly extend the Concept named `Node`.
+`Node` is the only concept that truly does not extend any Concept.
 
-[[Concept.implements, , Concept.implements]]
+[[Concept.implements, Concept.implements]]
 A Concept `implements` zero or more <<ConceptInterface, ConceptInterfaces>>.
 
 A Concept can have any number of <<FeaturesContainer.features, `features`>>, given it is a <<FeaturesContainer>>.
@@ -267,7 +274,7 @@ An Annotation can have as <<Feature, Features>> only <<Reference, References>> a
 [[Annotation.target, Annotation.target]]
 An Annotation is related to its `target`, which is an <<FeaturesContainer>>.
 It indicates that the Annotation can be applied to instances of that specific AbstractConcept.
-A `target` must be always specified, and it can possibly be the `BaseConcept`, representing all concepts.
+A `target` must be always specified, and it can possibly be the `Node`, representing all concepts.
 
 
 [[Containment]]
@@ -490,6 +497,8 @@ A Feature in LionWeb will be roughly equivalent to an `EStructuralFeature` or to
 Differently from Ecore’s `EStructureFeature`, Features do not have flags such as `changeable`, `volatile`, `transient`, or `unsettable`.
 They have no `default value`.
 
+Different from MPS' `Link`, Features CANNOT be specialized.{fn-org8}
+
 .Characteristics
 A Feature has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
@@ -504,6 +513,7 @@ A Feature can either be one of:
 * <<Containment>>
 * <<Reference>>
 
+
 WARNING: {experimental}
 
 [[Feature.derived, Feature.derived]]
@@ -515,7 +525,39 @@ Properties and References can be derived but not Containments.
 * If derived feature with same signature is inherited from several interfaces, need to override it explicitly.
 
 .Constraints
-Each Feature must have a unique name within a specific <<FeaturesContainer>>, also considering all inherited features which are not specialized.
+Each Feature MUST have a unique name within a specific <<FeaturesContainer>>.
+
+#TODO: Can we define features with the same name as an inherited one?#
+
+We CAN have non-unique _inherited_ feature _names_, as in this example:
+
+[plantuml, name-clash, svg]
+----
+class A {
+  <i>id = 123</i>
+  <i>key = MyLang-A</i>
+  --
+  f: string <i>id=332, key=A-f</i>
+}
+
+class B {
+  <i>id = 12</i>
+  <i>key = MyLang-B</i>
+  --
+  f: integer <i>id=27, key=B-f</i>
+}
+
+class X extends A, B {
+  <i>id = 79</i>
+  <i>key = MyLang-X</i>
+  --
+}
+----
+
+However, within LIonWeb we always use a Feature's _id_ or _key_ to for identification.
+Thus, LIonWeb can deal with the name clash.
+
+If a host language cannot handle this situation, the generator towards that language needs to resolve it.{fn-org97}
 
 [[Link]]
 ==== Link
@@ -602,7 +644,7 @@ TBD
 
 === Pre-defined concepts
 
-[[Node]]
+[[Node, Node]]
 `Node`{fn-org71}, an _abstract_ <<Concept>> that's the (explicit or implicit) the ancestor of all concepts.
 
 === Pre-defined primitive types
@@ -693,11 +735,35 @@ Uniqueness of id-space ids is out of scope of LIonWeb specification.
 In LIonWeb (the protocol), id-spaces are NOT hierarchical.
 An implementation might choose to use hierarchical id-spaces internally.
 
+[[node-id]]
 ==== Identification
 
 A node can be identified relative to its id-space by the node's id.
 To globally identify a node, we use the combination of the id-space id and the node id.
 
+=== References to Language Elements
+From a language, we refer to all language elements by their <<node-id, id>>.{fn-org131}
+This includes references to
+
+* <<Language.dependsOn, other languages>>
+* extended <<Concept.extends, Concepts>>
+* <<ConceptInterface.extends, extended>> or <<Concept.implements, implemented>> Interfaces
+* Types of <<Property.type, Properties>> or <<Link.type, Links>>
+
+From an instance, we refer to its defining language element by the language element's <<NamespacedEntity.key, key>>.
+This includes references to
+
+* <<Language>> usage
+* <<Concept>> instance
+* <<Property>> assignment
+* <<Containment>> assignment
+* <<Reference>> assignment
+* <<EnumerationLiteral>> value
+
+
+We refer to all metamodel elements by their id
+
+=== Pre-defined Ids and Keys
 ==== Keys of M3 Elements
 
 [cols="d,d,m"]
