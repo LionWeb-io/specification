@@ -671,44 +671,46 @@ This includes references to
 #TODO: How to refer to stdlib elements? By id or key?#
 
 === Pre-defined Ids and Keys
+The metamodel itself has key `LIonCore-M3`.{fn-org91}
+
 ==== Keys of M3 Elements
 
 [cols="d,d,m"]
 |===
 |M3 element |Concept |Key
 
-|<<Concept>> |Concept |LIonCore_M3_Concept
-|<<Concept.abstract>> |Property |LIonCore_M3_Concept_abstract
-|<<Concept.extends>> |Reference |LIonCore_M3_Concept_extends
-|<<Concept.implements>> |Reference |LIonCore_M3_Concept_implements
-|<<ConceptInterface>> |Concept |LIonCore_M3_ConceptInterface
-|<<ConceptInterface.extends>> |Reference |LIonCore_M3_ConceptInterface_extends
-|<<Containment>> |Concept |LIonCore_M3_Containment
-|<<DataType>> |Concept |LIonCore_M3_DataType
-|<<Enumeration>> |Concept |LIonCore_M3_Enumeration
-|<<Enumeration.literals>> |Containment |LIonCore_M3_Enumeration_literals
-|<<EnumerationLiteral>> |Concept |LIonCore_M3_EnumerationLiteral
-|<<Feature>> |Concept |LIonCore_M3_Feature
-|<<Feature.optional>> |Property |LIonCore_M3_Feature_optional
-|<<FeaturesContainer>> |Concept |LIonCore_M3_FeaturesContainer
-|<<FeaturesContainer.features>> |Containment |LIonCore_M3_FeaturesContainer_features
-|<<Link>> |Concept |LIonCore_M3_Link
-|<<Link.multiple>> |Property |LIonCore_M3_Link_multiple
-|<<Link.type>> |Reference |LIonCore_M3_Link_type
-|<<Language>> |Concept |LIonCore_M3_Language
-|<<Language.name>> |Property |LIonCore_M3_Language_name
-|<<Language.key>> |Property |LIonCore_M3_Language_key
-|<<Language.dependsOn>> |Reference |LIonCore_M3_Language_dependsOn
-|<<Language.elements>> |Containment |LIonCore_M3_Language_elements
-|<<LanguageElement>> |Concept |LIonCore_M3_LanguageElement
-|<<NamespacedEntity>> |Concept |LIonCore_M3_NamespacedEntity
-|<<NamespacedEntity.name>> |Property |LIonCore_M3_NamespacedEntity_name
-|<<NamespacedEntity.key>> |Property |LIonCore_M3_NamespacedEntity_key
-|<<NamespaceProvider>> |Concept |LIonCore_M3_NamespaceProvider
-|<<PrimitiveType>> |Concept |LIonCore_M3_PrimitiveType
-|<<Property>> |Concept |LIonCore_M3_Property
-|<<Property.type>> |Reference |LIonCore_M3_Property_type
-|<<Reference>> |Concept |LIonCore_M3_Reference
+|<<Concept>> |Concept |Concept
+|<<Concept.abstract>> |Property |Concept-abstract
+|<<Concept.extends>> |Reference |Concept-extends
+|<<Concept.implements>> |Reference |Concept-implements
+|<<ConceptInterface>> |Concept |ConceptInterface
+|<<ConceptInterface.extends>> |Reference |ConceptInterface-extends
+|<<Containment>> |Concept |Containment
+|<<DataType>> |Concept |DataType
+|<<Enumeration>> |Concept |Enumeration
+|<<Enumeration.literals>> |Containment |Enumeration-literals
+|<<EnumerationLiteral>> |Concept |EnumerationLiteral
+|<<Feature>> |Concept |Feature
+|<<Feature.optional>> |Property |Feature-optional
+|<<FeaturesContainer>> |Concept |FeaturesContainer
+|<<FeaturesContainer.features>> |Containment |FeaturesContainer-features
+|<<Link>> |Concept |Link
+|<<Link.multiple>> |Property |Link-multiple
+|<<Link.type>> |Reference |Link-type
+|<<Language>> |Concept |Language
+|<<Language.name>> |Property |Language-name
+|<<Language.key>> |Property |Language-key
+|<<Language.dependsOn>> |Reference |Language-dependsOn
+|<<Language.elements>> |Containment |Language-elements
+|<<LanguageElement>> |Concept |LanguageElement
+|<<NamespacedEntity>> |Concept |NamespacedEntity
+|<<NamespacedEntity.name>> |Property |NamespacedEntity-name
+|<<NamespacedEntity.key>> |Property |NamespacedEntity-key
+|<<NamespaceProvider>> |Concept |NamespaceProvider
+|<<PrimitiveType>> |Concept |PrimitiveType
+|<<Property>> |Concept |Property
+|<<Property.type>> |Reference |Property-type
+|<<Reference>> |Concept |Reference
 |===
 
 ==== Ids of Built-in Instances
@@ -717,11 +719,11 @@ This includes references to
 |===
 |Instance |Concept |Id
 
-|<<String>> |PrimitiveType |LIonCore_M3_String
-|<<Boolean>> |PrimitiveType |LIonCore_M3_Boolean
-|<<Integer>> |PrimitiveType |LIonCore_M3_Integer
-|<<JSON>> |PrimitiveType |LIonCore_M3_JSON
-|<<Node>> |Concept |LIonCore_M3_Node
+|<<String>> |PrimitiveType |LIonCore-M3-String
+|<<Boolean>> |PrimitiveType |LIonCore-M3-Boolean
+|<<Integer>> |PrimitiveType |LIonCore-M3-Integer
+|<<JSON>> |PrimitiveType |LIonCore-M3-JSON
+|<<Node>> |Concept |LIonCore-M3-Node
 |===
 
 
