@@ -668,7 +668,7 @@ This includes references to
 * <<Reference>> assignment
 * <<EnumerationLiteral>> value
 
-We refer to all <<stdlib>> elements by their <<node-id, id>>.
+#TODO: How to refer to stdlib elements? By id or key?#
 
 === Pre-defined Ids and Keys
 ==== Keys of M3 Elements
