@@ -4,7 +4,6 @@ include::issue-footnotes.adoc[]
 :toc: preamble
 :toclevels: 3
 :sectnums:
-:experimental: This part of LionCore is still under discussion.
 
 
 In this document we describe the Meta-Metamodel to be used by LionWeb.
@@ -54,7 +53,7 @@ We will list elements by their type: classes, abstract classes and interfaces.
 
 === Classes
 
-The classes are <<Language>>, <<Concept>>, <<ConceptInterface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Typedef>>, <<Annotation>>, <<Containment>>, <<Reference>>, and <<Property>>.
+The classes are <<Language>>, <<Concept>>, <<ConceptInterface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Containment>>, <<Reference>>, and <<Property>>.
 
 [[Language]]
 ==== Language
@@ -127,7 +126,7 @@ A Concept has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key,
 A Concept can be concrete (i.e., instantiable) or abstract, marked by boolean `abstract` property.
 
 A Concept is a <<FeaturesContainer>>  (as it has features).
-It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language), and a <<NamespaceProvider>> (as it act as the namespace for its features).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language), and a <<NamespaceProvider>> (as it act as the namespace for its features).
 
 [[Concept.extends, Concept.extends]]
 Each Concept `extends` zero or one Concepts.
@@ -156,7 +155,7 @@ A ConceptInterface in LionWeb will be roughly equivalent to an `EClass` (with th
 A ConceptInterface has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 A ConceptInterface is an <<FeaturesContainer>>  (as it has features).
-It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language), and a <<NamespaceProvider>> (as it act as the namespace for its features).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language), and a <<NamespaceProvider>> (as it act as the namespace for its features).
 
 [[ConceptInterface.extends, ConceptInterface.extends]]
 Each ConceptInterface `extends` zero or more ConceptInterfaces.
@@ -165,10 +164,6 @@ A ConceptInterface can have any number of <<FeaturesContainer.features, `feature
 
 .Constraints
 {empty}
-
-WARNING: {experimental}
-
-A ConceptInterface can only declare features marked as derived.
 
 [[PrimitiveType]]
 ==== PrimitiveType
@@ -186,7 +181,7 @@ Differently from ECore’s `EDataType` PrimitiveType has no flag `serializable`,
 A PrimitiveType has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 A PrimitiveType is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>).
-It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language).
 
 The correspondence between a PrimitiveType an implementation class on a specific platforms can be specified through annotations, but it is not specified on the PrimitiveType itself.
 
@@ -212,7 +207,7 @@ An Enumeration has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity
 An Enumeration contains <<EnumerationLiteral, EnumerationLiterals>> in its `literals` containment.
 
 An Enumeration is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>) and a <<NamespaceProvider>> (as it act as the namespace for its literals).
-It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language).
 
 .Constraints
 TBD
@@ -230,52 +225,10 @@ An EnumerationLiteral is similar to Ecore’s `EEnumLiteral` and to MPS’ `Enum
 .Characteristics
 An EnumerationLiteral has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
-An Enumeration is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its <<Enumeration>>).
+An Enumeration is a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its <<Enumeration>>).
 
 .Constraints
 TBD
-
-[[Typedef]]
-==== Typedef
-
-WARNING: {experimental}
-
-TODO: add an entry
-
-[[Annotation]]
-==== Annotation
-
-WARNING: {experimental}
-
-This represents additional metadata relative to some orthogonal concern.
-
-.Example
-_DocumentationComment_ could be specified as an annotation.
-
-.EMF & MPS equivalent
-This is similar to Ecore’s `EAnnotation`, and to MPS’s `NodeAttribute`.
-
-`EcoreAnnotation` has a `source` of type string.
-This will typically be a full URI representing the type of the annotation.
-It also has a details field, which is a map from String to String.
-It contains tagged values.
-
-`NodeAttribute` is a particular abstract Concept, which can be extended and have properties and links like other Concepts.
-
-.Characteristics
-[[Annotation.platformSpecific, Annotation.platformSpecific]]
-An annotation can be meaningful for a specific platform, identified by a name.
-For this reason Annotation has a field `platformSpecific` of type String?.
-
-An Annotation is a <<LanguageElement>>, a <<NamespaceProvider>>, and a <<FeaturesContainer>>.
-However, it is forbidden for Annotations to have <<Containment, Containments>>.
-An Annotation can have as <<Feature, Features>> only <<Reference, References>> and <<Property, Properties>>.
-
-[[Annotation.target, Annotation.target]]
-An Annotation is related to its `target`, which is an <<FeaturesContainer>>.
-It indicates that the Annotation can be applied to instances of that specific AbstractConcept.
-A `target` must be always specified, and it can possibly be the `Node`, representing all concepts.
-
 
 [[Containment]]
 ==== Containment
@@ -298,14 +251,7 @@ It can be marked as <<Feature.optional, `optional`>> and <<Link.multiple, `multi
 A Containment refers its <<Link.type, `type`>>, which is a <<FeaturesContainer>>.
 
 A Containment is a <<Link>> (as it describes a relation between two FeaturesContainers).
-It is indirectly a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its FeaturesContainer).
-
-WARNING: {experimental}
-
-[[specialization]]
-A Containment can optionally be a _specialization_ of another Containment.
-In that case, the original Containment must appear in a <<Concept>> extended by the Concept containing the specializing Containment or in an <<ConceptInterface>> implemented by the specializing Containment.
-A Containment can only specialize a Containment with the same name.
+It is indirectly a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer).
 
 .Constraints
 TBD
@@ -331,13 +277,7 @@ It can be marked as <<Feature.optional, `optional`>> and <<Link.multiple, `multi
 A Containment refers its <<Link.type, `type`>>, which is a <<FeaturesContainer>>.
 
 A Reference is a <<Link>> (as it describes a relation between two FeaturesContainers).
-It is indirectly a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>) and a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its FeaturesContainer).
-
-WARNING: {experimental}
-
-A Reference can optionally be a _specialization_ of another Reference.
-In that case, the original Reference must appear in a <<Concept>> extended by the Concept containing the specializing Reference or in an <<ConceptInterface>> implemented by the specializing Reference.
-A Reference can only specialize a Reference with the same name.
+It is indirectly a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer).
 
 .Constraints
 TBD
@@ -362,7 +302,7 @@ It can be marked as <<Feature.optional, `optional`>>.
 A Property refers its `type`, which is a <<DataType>>.
 
 A Property is a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>).
-It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its FeaturesContainer).
+It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer).
 
 .Constraints
 TBD
@@ -412,7 +352,7 @@ The difference is that `IStructureElement` includes also elements that cannot ap
 .Characteristics
 A LanguageElement has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
-A LanguageElement is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its <<Language>>).
+A LanguageElement is a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its <<Language>>).
 
 A LanguageElement can be one of:
 
@@ -420,7 +360,6 @@ A LanguageElement can be one of:
 * <<ConceptInterface>>
 * <<PrimitiveType>>
 * <<Enumeration>>
-* <<Annotation>> ({experimental})
 
 The `qualifiedName` of a LanguageElement can be obtained by combining the name of the containing <<Language>> with the name of the Concept.
 
@@ -449,10 +388,9 @@ A FeaturesContainer can be one of:
 
 * <<Concept>>
 * <<ConceptInterface>>
-* <<Annotation>> ({experimental})
 
 A FeaturesContainer is a <<LanguageElement>> (as it is a top level element in a <<Language>>) and a <<NamespaceProvider>> (as it act as the namespace for its features).
-It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language).
+It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language).
 
 .Constraints
 TBD
@@ -473,7 +411,7 @@ It is similar to MPS’ `DataTypeDeclaration`.
 A DataType has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 A DataType is a <<LanguageElement>> (as it is a top level element in a <<Language>>).
-It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the Language).
+It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language).
 
 A DataType can be one of:
 
@@ -505,24 +443,13 @@ A Feature has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key,
 [[Feature.optional, Feature.optional]]
 A Feature can be set to `optional` or required.
 
-A Feature is a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of the <<FeaturesContainer>>).
+A Feature is a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the <<FeaturesContainer>>).
 
 A Feature can either be one of:
 
 * <<Property>>
 * <<Containment>>
 * <<Reference>>
-
-
-WARNING: {experimental}
-
-[[Feature.derived, Feature.derived]]
-.Derived Features (aka Calculated Features){fn-org6}
-A Feature can be _derived_ if its value is not stored in the Node itself but it can be obtained by accessing the other features’ values or other sources of information.
-Properties and References can be derived but not Containments.
-
-* Implemented in host language (i.e. there's no way to define Derive Feature semantics in LionWebCore)
-* If derived feature with same signature is inherited from several interfaces, need to override it explicitly.
 
 .Constraints
 Each Feature MUST have a unique name within a specific <<FeaturesContainer>>.
@@ -582,7 +509,7 @@ A Link can have `multiple` or only a single targets.
 A Link refers its `type`, which is a <<FeaturesContainer>>.
 
 A Link is a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>).
-It is indirectly a <<NamespacedEntity>> (as it has an identity and it is contained in the namespace of its FeaturesContainer).
+It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer).
 
 A Link can be either a <<Containment>>, or a <<Reference>>.
 
@@ -656,32 +583,9 @@ Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense t
 * [[Integer, Integer]] `Integer`
 * [[JSON, JSON]] `JSON`
 
-WARNING: {experimental}
+=== Annotations
 
-* `Date`
-* `DateTime`
-* `Character`
-* `Number`: this is a problem as we have different ways to represent numbers with different levels of precision on different platforms.
-Our proposed solution is to indicate numbers purely as numbers and to specify constraints and implementation details through annotations
-
-=== Pre-defined annotations
-
-WARNING: {experimental}
-
-We will ship a set of predefined annotations whose semantics can be relied on by tools.
-At this point, we will not yet standardize them, but here are some ideas:
-
-[horizontal]
-`@doc`:: Documentation
-`@todo`:: Something to be fixed later
-`@deprecated(string)`:: please don't use
-`@origin`:: location pointer for textual files in a parsed scenario
-`@helpercrap`:: not a real domain concept, just a technical artifact
-`@merge(policy)`:: avoid merge conflicts for things like layout position (always accept theirs)
-`@main`:: main slot à la Intentional: default for wrapping and unwrapping in editors
-Constraints:: annotation can be used also to define constraints on strings like ID or qualified ID or @unsigned
-platform specific annotations:: for things like number sizes. E.g., @java:int,
-`@java:class`:: to indicate to which Java class to map a primitiveType
+We intend to support annotations in a future release.{fn-org13}
 
 === Reflection
 
