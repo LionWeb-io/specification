@@ -2,20 +2,18 @@
 :toc: preamble
 :toclevels: 3
 :sectnums:
-:experimental: This part of LionCore is still under discussion.
 
 This document describe different goals and scope of the Meta-Metamodel to be used by LionWeb.
 
 == Goals
 The core question is: "What is the goal of the lionweb meta-metamodel?"
 
-Thera are multiple goals that we can think of.
+There are multiple goals that we can think of.
 Two of the main goals that we can distinguish are as follows:
 
 === Goal 1: Data Interchange Meta-Metamodel
 The goal of the meta-metamodel is to define a meta-language with which to conveniently describe the structure of the model data that is produced and consumed by the LionWeb API.
-This structure is described using node types (concepts), node properties (featues) and node relationships (containment and references).
-w
+This structure is described using node types (concepts), node properties (features) and node links (containment and references).
 This is similar to a schema for e.g. XML or JSON as it is programming language agnostic.
 
 Also see issue https://github.com/LIonWeb-org/organization/issues/61
@@ -39,7 +37,7 @@ For the Model Interchange Meta-Metamodel, this case is irrelevant, as the derive
 
 The same holds for <<conceptinterface#ex-set-name, Set name of all named things>>.
 
-Also see <<https://github.com/LIonWeb-org/organization/issues/16, Have a default way to manage derived properties of nodes>>
+Also see https://github.com/LIonWeb-org/organization/issues/16[Have a default way to manage derived properties of nodes]
 
 ==== Example Date Primitive
 If Date is a primitive type in the Meta-Metamodel, then a standard annotations like `java:Date` is relevant to a Programming Meta-Metamodel,
@@ -54,22 +52,22 @@ Clients are free how to implement this in their programming language, but this i
 
 LionWeb has several goals.
 
-1. LionWeb provides one or more API's that support interoperability of models on the web.
+1. LionWeb provides one or more APIs that support interoperability of models on the web.
    Such a model is an instance of a language (let's call it L) that has been defined by a language engineer.
 2. LionWeb is *open*, allowing any client to use it.
-   Client are free to be implemented any way they like, as long aas the use the LionWeb API's for external communication.
+   Client are free to be implemented any way they like, as long aas the use the LionWeb APIs for external communication.
 
-Currently, we have identified the following API's:
-- a repository access API for storing and retrieveing models (or submodels)
+Currently, we have identified the following APIs:
+- a repository access API for storing and retrieving models (or submodels)
 - a delta API that allows subscription to model changes
 - more... ?
 
-The Data Interchange Meta-Metamodel supports describing the model data that is used (produced or consumed) by these API's.
-Therefore a Data Interchange Meta-Metamodel is enough to support the goal of LionWeb.
+The Data Interchange Meta-Metamodel supports describing the model data that is used (produced or consumed) by these APIs.
+Therefore, a Data Interchange Meta-Metamodel is enough to support the goal of LionWeb.
 
 The Programming Meta-Metamodel supports the LionWeb goals as well.
 However, a Programming Meta-Metamodel also specifies implementation constraints about the way a client (of the API) should represent models.
-This goes beyond the goal for LionWeb, as LionWeb only specifies API's.
+This goes beyond the goal for LionWeb, as LionWeb only specifies APIs.
 
 Furthermore, the more LionWeb prescribes how clients need to be implemented, the less "open" it becomes.
 For LionWeb to be fully open, clients should have complete freedom to represent and process models the way they see fit.
@@ -78,18 +76,18 @@ The internal representation of a model within a (client) tool has no consequence
 The only things that a tool must have to be interoperable are:
 
 - Being able to consume a (sub)model from a LionWeb API.
-  Typically this means that the tool will have a mapping from the JSON model provided by the LionWeb APi to it's internal structure.
+  Typically, this means that the tool will have a mapping from the JSON model provided by the LionWeb APi to its internal structure.
 - Being able to send a (sub)model to LionWeb conforming to the defined LionWeb structure.
-  Typically this means that the tool will have a mapping from it's internal structure to the JSON model provided
+  Typically, this means that the tool will have a mapping from its internal structure to the JSON model provided
   by the LionWeb API.
 
-===== Example Client
+== Example Client
 In a project I am currently working on, we have a client whose only purpose is to interpret expression in a model.
 For this client, we do not have any classes or interfaces, nor do we have inheritance or interface implementations.
 Technically we simply take the JSON of the model *as-is* in TypeScript and provide TypeScript Types for each node on top of it.
 For the purpose of the interpreter, this works perfectly well.
 
-If the interpreter would use LionWeb with a Programming Meta-Metamodel, the current implementation would be non-compliant.
+If the interpreter used LionWeb with a Programming Meta-Metamodel, the current implementation would be non-compliant.
 Which makes no sense, as the internal representation of the interpreter is irrelevant to its interoperability.
 
 == Conclusion
@@ -110,7 +108,7 @@ including (de)serialization code, for a language defined by a Metamodel specifie
 
 This would be very similar to the various existing (and popular) tools that generate e.g. Java classes from an XML
 Schema or a JSON schema.
-However these tools don't need to be part of the LionWeb specification, but can be provided as separate (optional)
+However, these tools don't need to be part of the LionWeb specification, but can be provided as separate (optional)
 supporting tools.
 People using existing language workbenches (MPS, EMF, Freon, ...) will probably ignore these tools and create their
 own mapping from/to their own specific metamodels.
@@ -153,8 +151,8 @@ As the types to be used to represent properties in a programming language might 
 it might be better to provide the supporting tools (as proposed in the previous section) parameterized with a mapping for each primitive type.
 That allows clients to tune their implementation to their needs.
 
-Another question is whether we shuold have an abstract programming API, which can be implemented in different languages,
-or instead have laanguage specifcic APIs.
+Another question is whether we should have an abstract programming API, which can be implemented in different languages,
+or instead have language specific APIs.
 For example Java and TypeScript are quite different and often use different idioms.
 To make such an API seamlessly usable the programming APIs might need to be language specific.
 
@@ -162,5 +160,5 @@ To make such an API seamlessly usable the programming APIs might need to be lang
 Inm principle a Data Interchange Meta-Metamodel is independent of any programming language.
 For pragmatic reasons, the constructs we define in the Data Interchange Meta-Metamodel should be implementable relatively straight forward in common programming languages.
 E.g. purely for data interchange, we might not need interfaces, but could use multiple inheritance between concept.
-However, doing this would make a mapping to a Programming Meta-Metamodel for languages like Java, TypeeScript, etc. quite hard,
+However, doing this would make a mapping to a Programming Meta-Metamodel for languages like Java, TypeScript, etc. quite hard,
 so we should probably not make such a choice, but instead use interfaces and single inheritance in the Data Interchange Meta-Metamodel.
