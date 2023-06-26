@@ -6,6 +6,7 @@
 :fn-org9: footnote:org9[https://github.com/LIonWeb-org/organization/issues/9[Supported built-in primitive types #9]]
 :fn-org9-intrange: footnote:org9[https://github.com/LIonWeb-org/organization/issues/9#issuecomment-1288624098[Discussion on supported integer range]]
 :fn-org13: footnote:org13[https://github.com/LIonWeb-org/organization/issues/13[If and how to represent Annotations in M3 #13]]
+:fn-org29: footnote:org29[https://github.com/LIonWeb-org/organization/issues/29[Repo API: Do we need model partitions? #29]]
 :fn-org33: footnote:org33[https://github.com/LIonWeb-org/organization/issues/33[Repo API: Node representation #33]]
 :fn-org34: footnote:org34[https://github.com/LIonWeb-org/organization/issues/34[Repo API: Property value encondings #34]]
 :fn-org35: footnote:org35[https://github.com/LIonWeb-org/organization/issues/35[Repo API: Represent dangling pointers #35]]

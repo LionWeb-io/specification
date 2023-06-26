@@ -125,6 +125,9 @@ A Concept has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key,
 [[Concept.abstract, Concept.abstract]]
 A Concept can be concrete (i.e., instantiable) or abstract, marked by boolean `abstract` property.
 
+[[Concept.partition, Concept.partition]]
+A concept can be marked as <<partition>> via the boolean `partition` property.{fn-org29}
+
 A Concept is a <<FeaturesContainer>>  (as it has features).
 It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language), and a <<NamespaceProvider>> (as it act as the namespace for its features).
 
@@ -605,6 +608,16 @@ We could alternatively also imagine using specific annotations for supporting th
 
 In general Generics complicate the solution and MPS can live without them.
 Also, in StarLasu we never encountered the need for them so far.
+
+[[partition]]
+=== Partitions
+Each node that does not have a parent node must be of a Concept with <<Concept.partition, partition>> flag set to `true`.
+This implies that every node is contained in exactly one partition, namely the partition defined by its root node.{fn-org29}
+
+.EMF & MPS equivalent
+A partition is similar to ECore's `Resource`.
+
+A partition is similar to MPS' `model`.
 
 [[identifiers]]
 === Identifiers

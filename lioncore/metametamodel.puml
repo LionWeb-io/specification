@@ -3,6 +3,7 @@ hide empty members
 
 class Concept #LightGreen extends FeaturesContainer {
   abstract: Boolean
+  partition: Boolean
 }
 
 class ConceptInterface #LightGreen extends FeaturesContainer
@@ -27,7 +28,7 @@ abstract class Link #LightBlue extends Feature {
   multiple: Boolean
 }
 
-class Language implements NamespaceProvider {
+class Language <<partition>> implements NamespaceProvider {
   name: String
   key: Id
   version: Integer
