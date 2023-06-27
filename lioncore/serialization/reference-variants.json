@@ -1,0 +1,100 @@
+{
+  "serializationFormatVersion": "1",
+  "languages": [
+    {
+      "key": "myLanguage",
+      "version": "2"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ddd",
+      "concept": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "myConceptId"
+      },
+      "properties": {},
+      "children": {},
+      "references": [
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "emptyReferenceId"
+          },
+          "targets": []
+        },
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "singleReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": "some name",
+              "reference": "dee"
+            }
+          ]
+        },
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "multiReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": "self-reference",
+              "reference": "ddd"
+            },
+            {
+              "resolveInfo": "only resolve info",
+              "reference": null
+            }
+          ]
+        },
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "noResolveInfoReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": null,
+              "reference": "dee"
+            }
+          ]
+        },
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "neitherResolveInfoNorReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": null,
+              "reference": null
+            }
+          ]
+        }
+      ],
+      "parent": null
+    },
+    {
+      "id": "dee",
+      "concept": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "differentConceptId"
+      },
+      "properties": {},
+      "children": {},
+      "references": {},
+      "parent": null
+    }
+  ]
+}

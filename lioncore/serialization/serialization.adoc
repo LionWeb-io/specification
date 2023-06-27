@@ -1,4 +1,4 @@
-include::issue-footnotes.adoc[]
+include::../issue-footnotes.adoc[]
 
 :fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
 
@@ -13,13 +13,19 @@ include::issue-footnotes.adoc[]
 == Design Goals
 We do not take any measures to reduce the amount of transmitted data.{fn-org73}
 
-
 == Description
 LIonWeb node serialization format is defined in JSON (https://datatracker.ietf.org/doc/html/rfc8259[RFC 8259]).
 
+== Overview of structures
+
+[plantuml, serialization, svg]
+----
+include::serialization.puml[]
+----
+
 === Root structure
 
-Root level MUST be an _object_ with three members.
+Root level MUST be an _object_ with three members, called *serialization chunk*.
 
 ##TODO: Are more members allowed?{fn-org67}##
 
@@ -39,7 +45,7 @@ Each _element_ must be unique with respect to the value of its _key_ `id`.
 
 [[language]]
 === Language structure
-Each *used language* MUST be an _object_.
+Each *used language* MUST be an _object_.{fn-org129}
 The order of _members_ is undefined.
 
 The _object_ MUST contain the following _members_:{fn-org76}
@@ -65,7 +71,7 @@ It's used at several places within <<node>>.
 Each meta-pointer MUST be an _object_.
 The order of _members_ is undefined.
 
-The _object_ MUST contain the following members:
+The _object_ MUST contain the following _members_:
 
 * _key_ `language` with _string_ _value_, adhering to <<language-key>>.
 * _key_ `version` with _string_ _value_, adhering to <<language-version>>.
@@ -187,7 +193,7 @@ An unset property CAN be serialized as JSON _null_.
 * containing escaped Unicode characters: `"\uD83D\uDE10"`
 
 ==== Boolean
-<<metametamodel.adoc#Boolean, LIonCore Booleans>> MUST be encoded as one of these JSON _strings_:
+<<metametamodel.adoc#Boolean, LIonCore Booleans>> MUST be encoded as exactly one of these JSON _strings_:
 
 * `"true"`
 * `"false"`
@@ -250,39 +256,13 @@ MUST refer to the <<metametamodel.adoc#NamespacedEntity.key, key>> of an <<metam
 === Minimal
 [source,json]
 ----
-{
-  "serializationFormatVersion": "1",
-  "languages": [],
-  "nodes": []
-}
+include::minimal.json[]
 ----
 
 === Minimal node
 [source,json]
 ----
-{
-  "serializationFormatVersion": "1",
-  "languages": [
-    {
-      "key": "myLanguage",
-      "version": "2"
-    }
-  ],
-  "nodes": [
-    {
-      "id": "aaa",
-      "concept": {
-        "language": "myLanguage",
-        "version": "2",
-        "key": "myConceptId"
-      },
-      "properties": {},
-      "children": {},
-      "references": {},
-      "parent": null
-    }
-  ]
-}
+include::minimal-node.json[]
 ----
 
 === Property variants
@@ -312,201 +292,13 @@ concept OpeningTime           [id 44, key time_to_open]
 
 [source,json]
 ----
-{
-  "serializationFormatVersion": "1",
-  "languages": [
-    {
-      "key": "myLanguage",
-      "version": "2"
-    }
-  ],
-  "nodes": [
-    {
-      "id": "bbb",
-      "concept": {
-        "language": "myLanguage",
-        "version": "2",
-        "key": "myConceptId"
-      },
-      "properties": [
-        {
-          "property": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "stringPropertyId"
-          },
-          "value": "my string value"
-        },
-        {
-          "property": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "integerPropertyId"
-          },
-          "value": "123"
-        },
-        {
-          "property": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "booleanPropertyId"
-          },
-          "value": "true"
-        },
-        {
-          "property": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "jsonPropertyId"
-          },
-          "value": "{ \"name\": \"Bob\" }"
-        },
-        {
-          "property": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "unsetPropertyId"
-          },
-          "value": null
-        }
-      ],
-      "children": {},
-      "references": {},
-      "parent": null
-    },
-    {
-      "id": "21",
-      "concept": {
-        "language": "myLanguage",
-        "version": "2",
-        "key": "time_to_open"
-      },
-      "properties": [
-        {
-          "property": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "day"
-          },
-          "value": "tttt"
-        },
-        {
-          "property": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "starthour"
-          },
-          "value": "9"
-        },
-        {
-          "property": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "endhour"
-          },
-          "value": "5"
-        }
-      ],
-      "children": [],
-      "references": [],
-      "parent": null
-    }
-  ]
-}
+include::property-variants.json[]
 ----
 
 === Children variants
 [source,json]
 ----
-{
-  "serializationFormatVersion": "1",
-  "languages": [
-    {
-      "key": "myLanguage",
-      "version": "2"
-    }
-  ],
-  "nodes": [
-    {
-      "id": "ccc",
-      "concept": {
-        "language": "myLanguage",
-        "version": "2",
-        "key": "myConceptId"
-      },
-      "properties": {},
-      "children": [
-        {
-          "containment": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "emptyContainmentId"
-          },
-          "children": []
-        },
-        {
-          "containment": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "singleContainmentId"
-          },
-          "children": [
-            "cdd"
-          ]
-        },
-        {
-          "containment": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "multiContainmentId"
-          },
-          "children": [
-            "cee",
-            "cff",
-            "cgg"
-          ]
-        }
-      ],
-      "references": {},
-      "parent": null
-    },
-    {
-      "id": "cgg",
-      "concept": {
-        "language": "myLanguage",
-        "version": "2",
-        "key": "differentConceptId"
-      },
-      "properties": {},
-      "children": {},
-      "references": {},
-      "parent": null
-    },
-    {
-      "id": "cdd",
-      "concept": {
-        "language": "myLanguage",
-        "version": "2",
-        "key": "otherConceptId"
-      },
-      "properties": {},
-      "children": {},
-      "references": {}
-    },
-    {
-      "id": "cee",
-      "concept": {
-        "language": "myLanguage",
-        "version": "2",
-        "key": "differentConceptId"
-      },
-      "properties": {},
-      "children": {},
-      "references": {},
-      "parent": null
-    }
-  ]
-}
+include::children-variants.json[]
 ----
 
 *node* with *id* `cff` is outside the processed document.
@@ -515,106 +307,7 @@ concept OpeningTime           [id 44, key time_to_open]
 We support different kinds of targets.{fn-org57}
 [source,json]
 ----
-{
-  "serializationFormatVersion": "1",
-  "languages": [
-    {
-      "key": "myLanguage",
-      "version": "2"
-    }
-  ],
-  "nodes": [
-    {
-      "id": "ddd",
-      "concept": {
-        "language": "myLanguage",
-        "version": "2",
-        "key": "myConceptId"
-      },
-      "properties": {},
-      "children": {},
-      "references": [
-        {
-          "reference": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "emptyReferenceId"
-          },
-          "targets": []
-        },
-        {
-          "reference": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "singleReferenceId"
-          },
-          "targets": [
-            {
-              "resolveInfo": "some name",
-              "reference": "dee"
-            }
-          ]
-        },
-        {
-          "reference": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "multiReferenceId"
-          },
-          "targets": [
-            {
-              "resolveInfo": "self-reference",
-              "reference": "ddd"
-            },
-            {
-              "resolveInfo": "only resolve info",
-              "reference": null
-            }
-          ]
-        },
-        {
-          "reference": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "noResolveInfoReferenceId"
-          },
-          "targets": [
-            {
-              "resolveInfo": null,
-              "reference": "dee"
-            }
-          ]
-        },
-        {
-          "reference": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "neitherResolveInfoNorReferenceId"
-          },
-          "targets": [
-            {
-              "resolveInfo": null,
-              "reference": null
-            }
-          ]
-        }
-      ],
-      "parent": null
-    },
-    {
-      "id": "dee",
-      "concept": {
-        "language": "myLanguage",
-        "version": "2",
-        "key": "differentConceptId"
-      },
-      "properties": {},
-      "children": {},
-      "references": {},
-      "parent": null
-    }
-  ]
-}
+include::reference-variants.json[]
 ----
 
 
