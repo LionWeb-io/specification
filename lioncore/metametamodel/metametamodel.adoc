@@ -1,4 +1,4 @@
-include::issue-footnotes.adoc[]
+include::../issue-footnotes.adoc[]
 
 = Meta-Metamodel
 :toc: preamble
@@ -88,6 +88,10 @@ A Language is a <<NamespaceProvider>> (as it provides a Namespace to all its ele
 [[Language.dependsOn, Language.dependsOn]]
 A Language can depend on other Languages via `dependsOn` reference.
 Dependencies must be explicitly declared.{fn-org50}
+
+// [[UsedLanguage]]
+// For each dependency, a Language contains one `UsedLanguage` instance.
+// A UsedLanguage has a [[UsedLanguage.key, UsedLanguage.key]]`key` and a [[UsedLanguage.version, UsedLanguage.version]]`version` property, pointing to the other Language this Language depends on.{fn-org129}
 
 .Constraints
 ``key``s must a valid <<identifiers>>.
