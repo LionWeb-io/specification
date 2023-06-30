@@ -612,6 +612,7 @@ This means the id MUST be identical to the key for each node in this language.
 |<<JSON>> |PrimitiveType |LIonCore-builtins-JSON
 |<<Node>> |Concept |LIonCore-builtins-Node
 |<<INamed>> |ConceptInterface |LIonCore-builtins-INamed
+|<<INamed.name, INamed.name>> |Property |LIonCore-builtins-INamed-name
 |===
 
 
@@ -627,7 +628,7 @@ Each LIonWeb implementation ships with a set of built-in elements, akin to a _st
 ==== Interfaces
 
 [[INamed, INamed]]
-* `INamed`{fn-org86}, an <<ConceptInterface>> with one <<Property>> called `name` of type <<String>>.
+* `INamed`{fn-org86}, an <<ConceptInterface>> with one <<Property>> called [[INamed.name]]`name` of type <<String>>.
 +
 This interface CAN be used to resolve references by name.
 #TODO link to explanation#

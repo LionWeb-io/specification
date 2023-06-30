@@ -19,7 +19,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "Language-name"
+            "key": "LIonCore-builtins-INamed-name"
           },
           "value": "LIonCore.builtins"
         },
@@ -81,7 +81,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-name"
+            "key": "LIonCore-builtins-INamed-name"
           },
           "value": "String"
         },
@@ -110,7 +110,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-name"
+            "key": "LIonCore-builtins-INamed-name"
           },
           "value": "Boolean"
         },
@@ -139,7 +139,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-name"
+            "key": "LIonCore-builtins-INamed-name"
           },
           "value": "Integer"
         },
@@ -168,7 +168,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-name"
+            "key": "LIonCore-builtins-INamed-name"
           },
           "value": "JSON"
         },
@@ -213,7 +213,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-name"
+            "key": "LIonCore-builtins-INamed-name"
           },
           "value": "Node"
         },
@@ -268,7 +268,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-name"
+            "key": "LIonCore-builtins-INamed-name"
           },
           "value": "INamed"
         },
@@ -325,7 +325,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-name"
+            "key": "LIonCore-builtins-INamed-name"
           },
           "value": "name"
         },
