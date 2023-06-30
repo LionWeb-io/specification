@@ -42,7 +42,7 @@ class Language <<partition>> implements NamespaceProvider, builtins.INamed {
 
 abstract class LanguageElement implements NamespacedEntity
 
-abstract class NamespacedEntity implements builtins.INamed {
+interface NamespacedEntity extends builtins.INamed {
 '  name: String
   key: Id
 }

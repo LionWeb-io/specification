@@ -318,34 +318,7 @@ TBD
 
 === Abstract Classes
 
-The abstract classes are <<NamespacedEntity>>, <<LanguageElement>>, <<FeaturesContainer>>, <<DataType>>, <<Feature>>, and <<Link>>.
-
-[[NamespacedEntity]]
-==== NamespacedEntity
-Something with a name and contained in a Namespace.
-
-.Example
-A Concept _Invoice_, contained in a Language `com.foo.Accounting`.
-Therefore, _Invoice_ will have the qualifiedName `com.foo.Accounting.Invoice`.
-
-.EMF & MPS equivalent
-n/a
-
-.Characteristics
-[[NamespacedEntity.name, NamespacedEntity.name]]
-A NamespacedEntity has a `name`.{fn-org84}
-
-#TODO Change `NamespacedEntity.name` to `INamed.name` and mention implementation relation.#
-
-[[NamespacedEntity.key, NamespacedEntity.key]]
-A NamespacedEntity has an `key`.{fn-org90}
-
-.Constraints
-A NamespaceEntity's `name` must be unique within the NamespaceProvider.
-
-A NamespaceEntity's `key` must be unique within the Language.{fn-org91}
-``key``s must a valid <<identifiers>>.
-
+The abstract classes are <<LanguageElement>>, <<FeaturesContainer>>, <<DataType>>, <<Feature>>, and <<Link>>.
 
 [[LanguageElement]]
 ==== LanguageElement
@@ -531,7 +504,34 @@ TBD
 
 === Interfaces
 
-The interfaces are <<NamespaceProvider>>.
+The interfaces are <<NamespacedEntity>> and <<NamespaceProvider>>.
+
+[[NamespacedEntity]]
+==== NamespacedEntity
+Something with a name and contained in a Namespace.
+
+.Example
+A Concept _Invoice_, contained in a Language `com.foo.Accounting`.
+Therefore, _Invoice_ will have the qualifiedName `com.foo.Accounting.Invoice`.
+
+.EMF & MPS equivalent
+n/a
+
+.Characteristics
+[[NamespacedEntity.name, NamespacedEntity.name]]
+A NamespacedEntity has a `name`.{fn-org84}
+
+#TODO Change `NamespacedEntity.name` to `INamed.name` and mention implementation relation.#
+
+[[NamespacedEntity.key, NamespacedEntity.key]]
+A NamespacedEntity has an `key`.{fn-org90}
+
+.Constraints
+A NamespaceEntity's `name` must be unique within the NamespaceProvider.
+
+A NamespaceEntity's `key` must be unique within the Language.{fn-org91}
+``key``s must a valid <<identifiers>>.
+
 
 [[NamespaceProvider]]
 ==== NamespaceProvider

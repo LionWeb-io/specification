@@ -868,12 +868,7 @@
             "version": "1",
             "key": "Concept-extends"
           },
-          "targets": [
-            {
-              "resolveInfo": "NamespacedEntity",
-              "reference": "-id-NamespacedEntity"
-            }
-          ]
+          "targets": []
         },
         {
           "reference": {
@@ -881,7 +876,12 @@
             "version": "1",
             "key": "Concept-implements"
           },
-          "targets": []
+          "targets": [
+            {
+              "resolveInfo": "NamespacedEntity",
+              "reference": "-id-NamespacedEntity"
+            }
+          ]
         }
       ],
       "parent": "-id-LIonCore-M3"
@@ -946,12 +946,7 @@
             "version": "1",
             "key": "Concept-extends"
           },
-          "targets": [
-            {
-              "resolveInfo": "NamespacedEntity",
-              "reference": "-id-NamespacedEntity"
-            }
-          ]
+          "targets": []
         },
         {
           "reference": {
@@ -959,7 +954,12 @@
             "version": "1",
             "key": "implements"
           },
-          "targets": []
+          "targets": [
+            {
+              "resolveInfo": "NamespacedEntity",
+              "reference": "-id-NamespacedEntity"
+            }
+          ]
         }
       ],
       "parent": "-id-LIonCore-M3"
@@ -1718,12 +1718,7 @@
             "version": "1",
             "key": "Concept-extends"
           },
-          "targets": [
-            {
-              "resolveInfo": "NamespacedEntity",
-              "reference": "-id-NamespacedEntity"
-            }
-          ]
+          "targets": []
         },
         {
           "reference": {
@@ -1731,7 +1726,12 @@
             "version": "1",
             "key": "Concept-implements"
           },
-          "targets": []
+          "targets": [
+            {
+              "resolveInfo": "NamespacedEntity",
+              "reference": "-id-NamespacedEntity"
+            }
+          ]
         }
       ],
       "parent": "-id-LIonCore-M3"
@@ -1741,7 +1741,7 @@
       "concept": {
         "language": "LIonCore-M3",
         "version": "1",
-        "key": "Concept"
+        "key": "ConceptInterface"
       },
       "properties": [
         {
