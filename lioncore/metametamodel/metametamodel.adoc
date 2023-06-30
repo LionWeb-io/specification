@@ -80,6 +80,8 @@ For this use case, different Languages could be used instead.
 .Characteristics
 A Language has a [[Language.name, Language.name]]`name`{fn-org77}, a [[Language.key, Language.key]]`key`{fn-org90}, and a [[Language.version, Language.version]]`version`{fn-org7}{fn-org92}, similar to MPS Languages.
 
+#TODO Change `Language.name` to `INamed.name` and mention implementation relation.#
+
 [[Language.elements, Language.elements]]
 Each Language will contain a list of <<LanguageElement, Language elements>> in its `elements` containment.
 
@@ -332,6 +334,8 @@ n/a
 .Characteristics
 [[NamespacedEntity.name, NamespacedEntity.name]]
 A NamespacedEntity has a `name`.{fn-org84}
+
+#TODO Change `NamespacedEntity.name` to `INamed.name` and mention implementation relation.#
 
 [[NamespacedEntity.key, NamespacedEntity.key]]
 A NamespacedEntity has an `key`.{fn-org90}

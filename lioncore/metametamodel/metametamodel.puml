@@ -1,6 +1,12 @@
 @startuml
 hide empty members
 
+'package builtins {
+  interface builtins.INamed {
+    name: String
+  }
+'}
+
 class Concept #LightGreen extends FeaturesContainer {
   abstract: Boolean
   partition: Boolean
@@ -28,16 +34,16 @@ abstract class Link #LightBlue extends Feature {
   multiple: Boolean
 }
 
-class Language <<partition>> implements NamespaceProvider {
-  name: String
+class Language <<partition>> implements NamespaceProvider, builtins.INamed {
+'  name: String
   key: Id
   version: Integer
 }
 
 abstract class LanguageElement implements NamespacedEntity
 
-abstract class NamespacedEntity {
-  name: String
+abstract class NamespacedEntity implements builtins.INamed {
+'  name: String
   key: Id
 }
 
