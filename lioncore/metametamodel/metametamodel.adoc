@@ -1,5 +1,5 @@
 include::../issue-footnotes.adoc[]
-
+:serialization: ../serialization/serialization
 = Meta-Metamodel
 :toc: preamble
 :toclevels: 3
@@ -78,22 +78,16 @@ EPackages have instead sub-packages and MPS Languages have virtual folders.
 For this use case, different Languages could be used instead.
 
 .Characteristics
-A Language has a [[Language.name, Language.name]]`name`{fn-org77}, a [[Language.key, Language.key]]`key`{fn-org90}, and a [[Language.version, Language.version]]`version`{fn-org7}{fn-org92}, similar to MPS Languages.
-
-#TODO Change `Language.name` to `INamed.name` and mention implementation relation.#
+A Language has a <<INamed.name, `name`>>, a [[Language.key, Language.key]]`key`{fn-org90}, and a [[Language.version, Language.version]]`version`{fn-org7}{fn-org92}, similar to MPS Languages.
 
 [[Language.elements, Language.elements]]
 Each Language will contain a list of <<LanguageElement, Language elements>> in its `elements` containment.
 
-A Language is a <<NamespaceProvider>> (as it provides a Namespace to all its elements).
+A Language is a <<NamespaceProvider>> (as it provides a Namespace to all its elements) and indirectly an <<INamed>> (as it has a name).
 
 [[Language.dependsOn, Language.dependsOn]]
-A Language can depend on other Languages via `dependsOn` reference.
+A Language can depend on other Languages via `dependsOn` reference.{fn-org145}
 Dependencies must be explicitly declared.{fn-org50}
-
-// [[UsedLanguage]]
-// For each dependency, a Language contains one `UsedLanguage` instance.
-// A UsedLanguage has a [[UsedLanguage.key, UsedLanguage.key]]`key` and a [[UsedLanguage.version, UsedLanguage.version]]`version` property, pointing to the other Language this Language depends on.{fn-org129}
 
 .Constraints
 ``key``s must a valid <<identifiers>>.
@@ -126,7 +120,7 @@ Single entities could be Concept instances, such as Invoice #1/2022.
 A Concept is roughly equivalent to an `EClass` (with the `isInterface` flag set to `false`) or an MPS’s `ConceptDeclaration`.
 
 .Characteristics
-A Concept has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+A Concept has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 [[Concept.abstract, Concept.abstract]]
 A Concept can be concrete (i.e., instantiable) or abstract, marked by boolean `abstract` property.
@@ -135,7 +129,7 @@ A Concept can be concrete (i.e., instantiable) or abstract, marked by boolean `a
 A concept can be marked as <<partition>> via the boolean `partition` property.{fn-org29}
 
 A Concept is a <<FeaturesContainer>>  (as it has features).
-It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language), and a <<NamespaceProvider>> (as it act as the namespace for its features).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name), a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language), and a <<NamespaceProvider>> (as it act as the namespace for its features).
 
 [[Concept.extends, Concept.extends]]
 Each Concept `extends` zero or one Concepts.
@@ -161,10 +155,10 @@ For example, `Named` would be a ConceptInterface.
 A ConceptInterface in LionWeb will be roughly equivalent to an `EClass` (with the `isInterface` flag set to `true`) or an MPS’s `ConceptInterfaceDeclaration`.
 
 .Characteristics
-A ConceptInterface has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+A ConceptInterface has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 A ConceptInterface is an <<FeaturesContainer>>  (as it has features).
-It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language), and a <<NamespaceProvider>> (as it act as the namespace for its features).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name), a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language), and a <<NamespaceProvider>> (as it act as the namespace for its features).
 
 [[ConceptInterface.extends, ConceptInterface.extends]]
 Each ConceptInterface `extends` zero or more ConceptInterfaces.
@@ -187,10 +181,10 @@ A PrimitiveType is similar to Ecore’s `EDataType` and to MPS’ `PrimitiveData
 Differently from ECore’s `EDataType` PrimitiveType has no flag `serializable`, and it does not inherit fields such as `instanceClassName`, `instanceClass`, or `defaultValue`.
 
 .Characteristics
-A PrimitiveType has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+A PrimitiveType has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 A PrimitiveType is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>).
-It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language).
 
 The correspondence between a PrimitiveType an implementation class on a specific platforms can be specified through annotations, but it is not specified on the PrimitiveType itself.
 
@@ -210,13 +204,13 @@ An Enumeration is similar to Ecore’s `EEnum` and to MPS’ `EnumerationDeclara
 Differently from ECore’s `EEnum` Enumeration has no flag `serializable`, and it does not inherit fields such as `instanceClassName`, `instanceClass`, or `defaultValue`.
 
 .Characteristics
-An Enumeration has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+An Enumeration has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 [[Enumeration.literals, Enumeration.literals]]
 An Enumeration contains <<EnumerationLiteral, EnumerationLiterals>> in its `literals` containment.
 
 An Enumeration is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>) and a <<NamespaceProvider>> (as it act as the namespace for its literals).
-It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language).
+It is indirectly a <<LanguageElement>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language).
 
 .Constraints
 TBD
@@ -232,9 +226,9 @@ _Monday_, _Tuesday_, _Wednesday_, _Thursday_, _Friday_, _Saturday_ and _Sunday_ 
 An EnumerationLiteral is similar to Ecore’s `EEnumLiteral` and to MPS’ `EnumerationMemberDeclaration`.
 
 .Characteristics
-An EnumerationLiteral has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+An EnumerationLiteral has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
-An Enumeration is a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its <<Enumeration>>).
+An Enumeration is a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its <<Enumeration>>) and indirectly an <<INamed>> (as it has a name).
 
 .Constraints
 TBD
@@ -254,13 +248,13 @@ A Containment is similar to an MPS’s `LinkDeclaration` with `metaClass` having
 Differently from a `LinkDeclaration` there is no field `unordered`.
 
 .Characteristics
-A Containment has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+A Containment has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 It can be marked as <<Feature.optional, `optional`>> and <<Link.multiple, `multiple`>>.
 
 A Containment refers its <<Link.type, `type`>>, which is a <<FeaturesContainer>>.
 
 A Containment is a <<Link>> (as it describes a relation between two FeaturesContainers).
-It is indirectly a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer).
+It is indirectly a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>), an <<INamed>> (as it has a name) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer).
 
 .Constraints
 TBD
@@ -280,13 +274,13 @@ A Reference is similar to an MPS’s `LinkDeclaration` with `metaClass` having v
 Differently from a `LinkDeclaration` there is no field `unordered`.
 
 .Characteristics
-A Reference has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+A Reference has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 It can be marked as <<Feature.optional, `optional`>> and <<Link.multiple, `multiple`>>.
 
 A Containment refers its <<Link.type, `type`>>, which is a <<FeaturesContainer>>.
 
 A Reference is a <<Link>> (as it describes a relation between two FeaturesContainers).
-It is indirectly a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer).
+It is indirectly a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>), an <<INamed>> (as it has a name) and a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer).
 
 .Constraints
 TBD
@@ -304,14 +298,14 @@ A Property is similar to Ecore’s `EAttribute`.
 A Property is similar to MPS’s `AttributeDeclaration`.
 
 .Characteristics
-A Property has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+A Property has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 It can be marked as <<Feature.optional, `optional`>>.
 
 [[Property.type, Property.type]]
 A Property refers its `type`, which is a <<DataType>>.
 
 A Property is a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>).
-It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer).
+It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer) and an <<INamed>> (as it has a name).
 
 .Constraints
 TBD
@@ -334,9 +328,9 @@ LanguageElement is similar to MPS’ `IStructureElement`.
 The difference is that `IStructureElement` includes also elements that cannot appear as top level elements of a structure aspects, such as `LinkDeclaration`, `PropertyDeclaration`, and `EnumerationMemberDeclaration`.
 
 .Characteristics
-A LanguageElement has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+A LanguageElement has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
-A LanguageElement is a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its <<Language>>).
+A LanguageElement is a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its <<Language>>), and indirectly an <<INamed>> (as it has a name).
 
 A LanguageElement can be one of:
 
@@ -345,7 +339,7 @@ A LanguageElement can be one of:
 * <<PrimitiveType>>
 * <<Enumeration>>
 
-The `qualifiedName` of a LanguageElement can be obtained by combining the name of the containing <<Language>> with the name of the Concept.
+The `qualifiedName` of a LanguageElement can be obtained by combining the name of the containing <<Language>> with the name of the LanguageElement.
 
 .Constraints
 Each LanguageElement must have a unique `name` within the Language.
@@ -363,7 +357,7 @@ A Concept can have several features.
 FeaturesContainer is similar to `EClass` in Ecore (which is used both for classes and interfaces) and to `AbstractConceptDeclaration` in MPS.
 
 .Characteristics
-A FeaturesContainer has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+A FeaturesContainer has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 [[FeaturesContainer.features, FeaturesContainer.features]]
 A FeaturesContainer owns any number of <<Feature, Features>> in `features` containment.
@@ -374,7 +368,7 @@ A FeaturesContainer can be one of:
 * <<ConceptInterface>>
 
 A FeaturesContainer is a <<LanguageElement>> (as it is a top level element in a <<Language>>) and a <<NamespaceProvider>> (as it act as the namespace for its features).
-It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language).
+It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language) and an <<INamed>> (as it has a name).
 
 .Constraints
 TBD
@@ -392,10 +386,10 @@ It is similar to Ecore’s `EDataType`.
 It is similar to MPS’ `DataTypeDeclaration`.
 
 .Characteristics
-A DataType has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+A DataType has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 A DataType is a <<LanguageElement>> (as it is a top level element in a <<Language>>).
-It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language).
+It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the Language) and an <<INamed>> (as it has a name).
 
 A DataType can be one of:
 
@@ -422,12 +416,12 @@ They have no `default value`.
 Different from MPS' `Link`, Features CANNOT be specialized.{fn-org8}
 
 .Characteristics
-A Feature has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+A Feature has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 
 [[Feature.optional, Feature.optional]]
 A Feature can be set to `optional` or required.
 
-A Feature is a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the <<FeaturesContainer>>).
+A Feature is a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of the <<FeaturesContainer>>) and indirectly an <<INamed>> (as it has a name).
 
 A Feature can either be one of:
 
@@ -436,9 +430,7 @@ A Feature can either be one of:
 * <<Reference>>
 
 .Constraints
-Each Feature MUST have a unique name within a specific <<FeaturesContainer>>.
-
-#TODO: Can we define features with the same name as an inherited one?#
+Each Feature MUST have a unique name within a specific <<FeaturesContainer>>, including all (directly or indirectly) inherited Features.{fn-org139}
 
 We CAN have non-unique _inherited_ feature _names_, as in this example:
 
@@ -483,7 +475,7 @@ It is similar to Ecore’s `EReference`.
 It is similar to MPS’ `LinkDeclaration`.
 
 .Characteristics
-A Link has a <<NamespacedEntity.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
+A Link has a <<INamed.name, `name`>> and an <<NamespacedEntity.key, `key`>>.
 It can be marked as <<Feature.optional, `optional`>>.
 
 [[Link.multiple, Link.multiple]]
@@ -493,7 +485,7 @@ A Link can have `multiple` or only a single targets.
 A Link refers its `type`, which is a <<FeaturesContainer>>.
 
 A Link is a <<Feature>> (as it describes the characteristics of a <<FeaturesContainer>>).
-It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer).
+It is indirectly a <<NamespacedEntity>> (as it has an identity, and it is contained in the namespace of its FeaturesContainer) and an <<INamed>> (as it has a name).
 
 A Link can be either a <<Containment>>, or a <<Reference>>.
 
@@ -508,7 +500,7 @@ The interfaces are <<NamespacedEntity>> and <<NamespaceProvider>>.
 
 [[NamespacedEntity]]
 ==== NamespacedEntity
-Something with a name and contained in a Namespace.
+Something with a name and contained in a Namespace.{fn-org143}
 
 .Example
 A Concept _Invoice_, contained in a Language `com.foo.Accounting`.
@@ -518,13 +510,10 @@ Therefore, _Invoice_ will have the qualifiedName `com.foo.Accounting.Invoice`.
 n/a
 
 .Characteristics
-[[NamespacedEntity.name, NamespacedEntity.name]]
-A NamespacedEntity has a `name`.{fn-org84}
-
-#TODO Change `NamespacedEntity.name` to `INamed.name` and mention implementation relation.#
-
 [[NamespacedEntity.key, NamespacedEntity.key]]
-A NamespacedEntity has an `key`.{fn-org90}
+A NamespacedEntity has a <<INamed.name, `name`>> and an `key`.{fn-org90}
+
+A NamespacedEntity is an <<INamed>> (as it has a name).
 
 .Constraints
 A NamespaceEntity's `name` must be unique within the NamespaceProvider.
@@ -579,14 +568,12 @@ The language itself has key `LIonCore-M3`.{fn-org91}
 |<<Link.multiple>> |Property |Link-multiple
 |<<Link.type>> |Reference |Link-type
 |<<Language>> |Concept |Language
-|<<Language.name>> |Property |Language-name
 |<<Language.key>> |Property |Language-key
 |<<Language.dependsOn>> |Reference |Language-dependsOn
 |<<Language.elements>> |Containment |Language-elements
 |<<Language.version>> |Property |Language-version
 |<<LanguageElement>> |Concept |LanguageElement
 |<<NamespacedEntity>> |Concept |NamespacedEntity
-|<<NamespacedEntity.name>> |Property |NamespacedEntity-name
 |<<NamespacedEntity.key>> |Property |NamespacedEntity-key
 |<<NamespaceProvider>> |Concept |NamespaceProvider
 |<<PrimitiveType>> |Concept |PrimitiveType
@@ -596,7 +583,7 @@ The language itself has key `LIonCore-M3`.{fn-org91}
 |===
 
 ==== Ids of Built-in elements
-The language hosting built-in elements has key `LIonCore-builtins`.
+The language hosting built-in elements has key `LIonCore-builtins`.{fn-org141}
 
 Every language implicitly depends on this language.{fn-org9-implicit}
 Thus, the ids in this language MUST be stable.
@@ -630,8 +617,7 @@ Each LIonWeb implementation ships with a set of built-in elements, akin to a _st
 [[INamed, INamed]]
 * `INamed`{fn-org86}, an <<ConceptInterface>> with one <<Property>> called [[INamed.name]]`name` of type <<String>>.
 +
-This interface CAN be used to resolve references by name.
-#TODO link to explanation#
+If a <<Link.type, Reference.type>> targets a FeaturesContainer that implements INamed, implementations SHOULD use the target's `name` property as default <<{serialization}.adoc#Reference.reference.resolveInfo, resolveInfo>> value.
 
 ==== Primitive types
 
@@ -772,7 +758,9 @@ This includes references to
 * <<ConceptInterface.extends, extended>> or <<Concept.implements, implemented>> Interfaces
 * Types of <<Property.type, Properties>> or <<Link.type, Links>>
 
-From an instance, we refer to its defining language element by the language element's <<NamespacedEntity.key, key>>.
+As the <<stdlib>> is just another language, we refer to its members by their id, just as any other language members.
+
+From an instance, we refer to its defining language element by the language element's <<NamespacedEntity.key, key>>.{fn-org80}
 This includes references to
 
 * <<Language>> usage
@@ -782,7 +770,6 @@ This includes references to
 * <<Reference>> assignment
 * <<EnumerationLiteral>> value
 
-#TODO: How to refer to stdlib elements? By id or key?#
 
 === Union or Intersection Types
 
