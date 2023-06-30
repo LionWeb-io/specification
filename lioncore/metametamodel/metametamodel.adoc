@@ -727,7 +727,7 @@ To globally identify a node, we use the combination of the id-space id and the n
 
 === Meta-meta model
 The LIonCore model, aka LIonWeb M3.
-It is defined by means of itself, as outlined by link:https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility].
+It is link:lioncore.json[defined] by means of itself, as outlined by link:https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility].
 
 [source, json]
 ----
@@ -735,7 +735,7 @@ include::lioncore.json[]
 ----
 
 === Pre-defined elements
-The LIonCore built-in elements.
+The LIonCore link:builtins.json[built-in] elements.
 
 [source, json]
 ----
