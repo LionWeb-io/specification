@@ -17,7 +17,7 @@
       "properties": [
         {
           "property": {
-            "language": "LIonCore-M3",
+            "language": "LIonCore-builtins",
             "version": "1",
             "key": "LIonCore-builtins-INamed-name"
           },
@@ -79,7 +79,7 @@
       "properties": [
         {
           "property": {
-            "language": "LIonCore-M3",
+            "language": "LIonCore-builtins",
             "version": "1",
             "key": "LIonCore-builtins-INamed-name"
           },
@@ -108,7 +108,7 @@
       "properties": [
         {
           "property": {
-            "language": "LIonCore-M3",
+            "language": "LIonCore-builtins",
             "version": "1",
             "key": "LIonCore-builtins-INamed-name"
           },
@@ -137,7 +137,7 @@
       "properties": [
         {
           "property": {
-            "language": "LIonCore-M3",
+            "language": "LIonCore-builtins",
             "version": "1",
             "key": "LIonCore-builtins-INamed-name"
           },
@@ -166,7 +166,7 @@
       "properties": [
         {
           "property": {
-            "language": "LIonCore-M3",
+            "language": "LIonCore-builtins",
             "version": "1",
             "key": "LIonCore-builtins-INamed-name"
           },
@@ -211,7 +211,7 @@
         },
         {
           "property": {
-            "language": "LIonCore-M3",
+            "language": "LIonCore-builtins",
             "version": "1",
             "key": "LIonCore-builtins-INamed-name"
           },
@@ -266,7 +266,7 @@
       "properties": [
         {
           "property": {
-            "language": "LIonCore-M3",
+            "language": "LIonCore-builtins",
             "version": "1",
             "key": "LIonCore-builtins-INamed-name"
           },
@@ -323,7 +323,7 @@
         },
         {
           "property": {
-            "language": "LIonCore-M3",
+            "language": "LIonCore-builtins",
             "version": "1",
             "key": "LIonCore-builtins-INamed-name"
           },
