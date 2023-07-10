@@ -7,44 +7,39 @@ package builtins {
   }
 }
 
-class Concept #LightGreen extends FeaturesContainer {
+class Concept #LightGreen extends Classifier {
   abstract: Boolean
   partition: Boolean
 }
 
-class ConceptInterface #LightGreen extends FeaturesContainer
+class ConceptInterface #LightGreen extends Classifier
 
 class Containment #LightBlue extends Link
 
-abstract class DataType #LightPink extends LanguageElement
+abstract class DataType #LightPink extends LanguageEntity
 
-class Enumeration #LightPink extends DataType implements NamespaceProvider
+class Enumeration #LightPink extends DataType
 
-class EnumerationLiteral #LightPink implements NamespacedEntity
+class EnumerationLiteral #LightPink implements IKeyed
 
-abstract class Feature #LightBlue implements NamespacedEntity {
+abstract class Feature #LightBlue implements IKeyed {
   optional: Boolean
 }
 
-abstract class FeaturesContainer #LightGreen extends LanguageElement implements NamespaceProvider {
-}
+abstract class Classifier #LightGreen extends LanguageEntity
 
 abstract class Link #LightBlue extends Feature {
   multiple: Boolean
 }
 
-class Language <<partition>> implements NamespaceProvider, builtins.INamed {
-  key: Id
+class Language <<partition>> implements IKeyed {
   version: Integer
 }
 
-abstract class LanguageElement implements NamespacedEntity
+abstract class LanguageEntity implements IKeyed
 
-interface NamespacedEntity extends builtins.INamed {
+interface IKeyed extends builtins.INamed {
   key: Id
-}
-
-interface NamespaceProvider {
 }
 
 class PrimitiveType #LightPink extends DataType
@@ -62,18 +57,18 @@ ConceptInterface "*" --> "*" ConceptInterface: extends
 
 EnumerationLiteral "*" -* "1" Enumeration : literals
 
-Feature "*" -* "1" FeaturesContainer: features
+Feature "*" -* "1" Classifier: features
 
-Link "*" --> "1" FeaturesContainer: type
+Link "*" --> "1" Classifier: type
 
 Language "*" --> "*" Language: dependsOn
-LanguageElement "*" -* "1" Language: elements
+LanguageEntity "*" -* "1" Language: entities
 
 Property "*" -> "1" DataType: type
 
 legend
   <#LightGray,#LightGray>| <#LightBlue>Feature |
-  | <#LightGreen>Feature Container |
+  | <#LightGreen>Classifier |
   | <#LightPink>DataType |
 end legend
 @enduml

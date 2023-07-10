@@ -35,7 +35,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "Language-key"
+            "key": "IKeyed-key"
           },
           "value": "LIonCore-builtins"
         }
@@ -89,7 +89,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-key"
+            "key": "IKeyed-key"
           },
           "value": "LIonCore-builtins-String"
         }
@@ -118,7 +118,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-key"
+            "key": "IKeyed-key"
           },
           "value": "LIonCore-builtins-Boolean"
         }
@@ -147,7 +147,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-key"
+            "key": "IKeyed-key"
           },
           "value": "LIonCore-builtins-Integer"
         }
@@ -176,7 +176,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-key"
+            "key": "IKeyed-key"
           },
           "value": "LIonCore-builtins-JSON"
         }
@@ -221,7 +221,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-key"
+            "key": "IKeyed-key"
           },
           "value": "LIonCore-builtins-Node"
         }
@@ -231,7 +231,7 @@
           "containment": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "FeaturesContainer-features"
+            "key": "Classifier-features"
           },
           "children": []
         }
@@ -276,7 +276,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-key"
+            "key": "IKeyed-key"
           },
           "value": "LIonCore-builtins-INamed"
         }
@@ -286,7 +286,7 @@
           "containment": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "FeaturesContainer-features"
+            "key": "Classifier-features"
           },
           "children": [
             "LIonCore-builtins-INamed-name"
@@ -333,7 +333,7 @@
           "property": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "NamespacedEntity-key"
+            "key": "IKeyed-key"
           },
           "value": "LIonCore-builtins-INamed-name"
         }
