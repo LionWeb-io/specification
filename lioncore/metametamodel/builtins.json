@@ -45,7 +45,7 @@
           "containment": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "Language-elements"
+            "key": "Language-entities"
           },
           "children": [
             "LIonCore-builtins-String",
@@ -349,7 +349,7 @@
           "targets": [
             {
               "resolveInfo": "String",
-              "reference": "LIonCore-M3-String"
+              "reference": "LIonCore-builtins-String"
             }
           ]
         }
