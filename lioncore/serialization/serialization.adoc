@@ -1,0 +1,434 @@
+include::../issue-footnotes.adoc[]
+
+:m3: ../metametamodel/metametamodel
+:fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
+
+= LIonWeb Serialization Format
+
+== Conventions used in this document
+* _italic_ words refer to concepts defined by JSON.
+* *bold* words refer to concepts defined in this document.
+* `monospaced` words describe verbatim contents of the serialization.
+* Footnotes refer to more discussions and rationale, but are non-normative.
+
+== Design Goals
+We do not take any measures to reduce the amount of transmitted data.{fn-org73}
+
+== Description
+LIonWeb node serialization format is defined in JSON (https://datatracker.ietf.org/doc/html/rfc8259[RFC 8259]).
+
+== Overview of structures
+
+[plantuml, serialization, svg]
+----
+include::serialization.puml[]
+----
+
+=== Root structure
+
+[[SerializationChunk]]
+Root level MUST be an _object_ with three members, called *serialization chunk*.
+
+##TODO: Are more members allowed?{fn-org67}##
+
+[[SerializationChunk.serializationFormatVersion]]
+The first member MUST be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}
+The value MUST be a decimal integer (without leading or trailing whitespace) describing the serialization format version used to create the processed document, according to <<versions>>.
+
+[[SerializationChunk.languages]]
+The second member MUST be _key_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}
+Each _element_ in the value array MUST adhere to <<language>>.
+The order of _elements_ is undefined.
+_elements_ MUST contain all language/version referred to by any <<meta-pointer>> in the processed document.
+Each _element_ must be unique with respect to all its _members_.
+
+[[SerializationChunk.nodes]]
+The third member MUST be _key_ `nodes` with an _array_ _value_.{fn-org33}
+Each _element_ in the value array MUST adhere to <<node>>.
+The order of _elements_ is undefined.
+Each _element_ must be unique with respect to the value of its _key_ `id`.
+
+[[language]]
+=== Language structure
+[[UsedLanguage]]
+Each *used language* MUST be an _object_.{fn-org129}
+The order of _members_ is undefined.
+
+The _object_ MUST contain the following _members_:{fn-org76}
+
+* [[UsedLanguage.key]] _key_ `key` with _string_ _value_, adhering to <<language-key>>.
+* [[UsedLanguage.version]] _key_ `version` with _string_ _value_, adhering to <<language-version>>.
+
+[[language-key]]
+==== Language key
+A _string_ according to <<{m3}.adoc#keys, Key spec>>.
+Refers to the <<{m3}.adoc#IKeyed.key, key>> of the language.
+
+[[language-version]]
+==== Language version
+A _string_ with any contents{fn-org128}{fn-org130}, MUST NOT be empty.{fn-org92}
+Refers to the <<{m3}.adoc#Language.version, version>> of the language.
+
+[[meta-pointer]]
+=== Meta-pointer
+[[MetaPointer]]
+A *meta-pointer* is a reference from M1 to M2.{fn-org89}{fn-mof}
+It's used at several places within <<node>>.
+
+Each meta-pointer MUST be an _object_.
+The order of _members_ is undefined.
+
+The _object_ MUST contain the following _members_:
+
+* [[MetaPointer.lanuage]] _key_ `language` with _string_ _value_, adhering to <<language-key>>.
+* [[MetaPointer.version]] _key_ `version` with _string_ _value_, adhering to <<language-version>>.
+* [[MetaPointer.key]] _key_ `key` with _string_ _value_ according to <<{m3}.adoc#keys, Keys spec>>.
+Refers to some <<{m3}.adoc#IKeyed, element in the language>>.
+Which element exactly is specified for each usage of meta-pointer.
+
+[[node]]
+=== Node structure
+[[Node]]
+Each *node* MUST be an _object_.{fn-org37}
+The order of _members_ is undefined.
+
+The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55}
+
+* [[Node.id]] _key_ `id` with _string_ _value_, adhering to <<id>>.
+* [[Node.concept]] _key_ `concept`{fn-org37-name} with _object_ _value_, adhering to <<meta-pointer>>.
+  The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> this *node* is an instance of.
+* [[Node.properties]] _key_ `properties` with _array_ _value_, each _element_ adhering to <<property>>.
+The order of _elements_ is undefined.
+* [[Node.children]] _key_ `children`{fn-org55-name-children} with _array_ _value_, each _element_ adhering to <<child>>.
+The order of _elements_ is undefined.
+* [[Node.references]] _key_ `references`{fn-org55-name-references} with _array_ _value_, each _element_ adhering to <<reference>>.
+The order of _elements_ is undefined.
+* [[Node.parent]] _key_ `parent` with _string_ or _null_ _value_, adhering to <<parent>>.
+
+##TODO: How to store invalid text?{fn-org62}##
+
+
+[[id]]
+==== Id value
+A _string_ according to <<{m3}.adoc#identifiers, Identifier spec>>.
+Defines the *id* of this *node*.
+
+
+[[property]]
+==== Property
+[[Property]]
+Each *property* MUST be an _object_.
+The order of _members_ is undefined.
+
+The _object_ MUST contain the following _members_:
+
+* [[Property.property]] _key_ `property` with _object_ _value_, adhering to <<meta-pointer>>.
+  The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Property, *Property*>> this *property* is an instance of.
+* [[Property.value]] _key_ `value` with _value_ as one of
+** _string_{fn-org34} containing the value of the property referenced by the `property`.
+Refer to <<property-values>> for the specification of the value format.
+CAN be an empty _string_.
+** _null_ to explicitly specify the property to be unset.
+
+
+[[child]]
+==== Child
+[[Child]]
+Each *child* MUST be an _object_.
+The order of _members_ is undefined.
+
+The _object_ MUST contain the following _members_:
+
+* [[Child.containment]] _key_ `containment` with _object_ _value_, adhering to <<meta-pointer>>.
+The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Containment, *Containment*>> this *child* is an instance of.
+* [[Child.children]] _key_ `children` with _array_ _value_ with _string_ _elements_.
+Each _element_ adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained *node*.
+The order of _elements_ is undefined.
++
+NOTE: Each *child* element is the inverse relation of *parent*.
++
+NOTE: The children *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
+
+[[reference]]
+==== Reference
+[[Reference]]
+Each *reference* MUST be an _object_.
+The order of _members_ is undefined.
+
+The _object_ MUST contain the following _members_:
+
+* [[Reference.reference]] _key_ `reference` with _object_ _value_, adhering to <<meta-pointer>>.
+The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Reference, *Reference*>> this *reference* is an instance of.
+* [[Reference.targets]] _key_ `targets` with __object_ _elements_.
+Each _element_ MUST have the following _members_ in undefined order:{fn-org55-name-references}
+** [[Reference.reference.resolveInfo]] _key_ `resolveInfo`{fn-org36} with _value_ as one of:
+*** _string_ containing *resolveInfo*, a textual hint that might be used to find the target *node* of this reference.
+Interface <<{m3}.adoc#INamed, INamed>> SHOULD be used as a default, if available.
+The exact value depends on the implementation.
+CAN be an empty _string_.
+*** _null_ if no *resolveInfo* is available.
+
+** [[Reference.reference.reference]] _key_ `reference`{fn-org35} with _value_ as one of:
+*** _string_ according to <<{m3}.adoc#identifiers, Identifier spec>>.
+Refers to the *id* of the target *node*.
++
+NOTE: The referred *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
+*** _null_ if the *id* of the target *node* is not known.
+
+[[parent]]
+==== Parent
+One of
+
+* _string_ according to <<{m3.acoc}#identifiers, Identifier spec>>.
+Refers to the *id* of the *node* containing this *node*.
++
+NOTE: *parent* is the inverse relation of one *child*.
++
+NOTE: The referred *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
+
+* _null_ if
+** This *node* is a *root node*, i.e. this node does not have a parent.
+** This serialization is sent as an update request.
+
+[[property-values]]
+=== Property serialization
+All property values MUST be serialized as JSON _string_.{fn-org34}{fn-org9}.
+An unset property CAN be serialized as JSON _null_.
+
+==== String
+<<{m3}.adoc#String, LIonCore Strings>> might be any string, of any length, including (but not limited to):
+
+* empty string: `""`
+* only containing whitespace: `" "`
+* containing escaped characters as per JSON spec: `"They said:\n \"Hello!\""`
+* containing extended Unicode characters: `"😐"`
+* containing escaped Unicode characters: `"\uD83D\uDE10"`
+
+==== Boolean
+<<{m3}.adoc#Boolean, LIonCore Booleans>> MUST be encoded as exactly one of these JSON _strings_:
+
+* `"true"`
+* `"false"`
+
+Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase characters, short forms (like `t` or `f`), or decimal representation (like `1`, `0`, `-1`).
+
+==== Integer
+<<{m3}.adoc#Integer, LIonCore Integers>> MUST be encoded as JSON _string_.
+
+* Integers MUST be represented in base-10.
+* The digits CAN be prefixed with either `+` (plus) or `-` (minus).{fn-org100}
+* Integers MUST NOT be prefixed by leading zeros.
+* Integers CAN contain value zero with any prefix, i.e. `0`, `-0`, or `+0`.
+* Integers MUST NOT contain leading or trailing whitespace.
+* LIonWeb does NOT limit the range of the integer value.{fn-org149}
+  An implementation MAY refuse a model containing an integer value outside the supported range.
+
+.Examples of valid Integer encodings
+
+* `"0"`
+* `"+0"`
+* `"-0"`
+* `"123"`
+* `"-100000"`
+* `"+999"`
+* `"100000000200000000300000000400000000500000000600000000700000000800000000900000000999999999"`
+* `"-999999999900000000800000000700000000600000000500000000400000000300000000200000000100000000"`
+
+.Examples of invalid Integer encodings
+
+* `""`
+* `123`
+* `-1`
+* `"+-0"`
+* `"++1"`
+* `"00002"`
+* `"0xAA12"`
+* `" 5"`
+* `"-6 "`
+
+==== JSON
+<<{m3}.adoc#JSON, LIonCore JSON>> MUST be encoded as JSON _string_.
+All double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
+The value MUST adhere to JSON spec (RFC 8259).
+
+.Valid example
+`"{ \"key\": \"my value\",\n\"myArray\": [1, -2, true] }"`
+
+.Invalid example
+`{ "key": "my value", "myArray": [1, -2, true] }`
+
+==== Enumeration Literals
+<<{m3}.adoc#EnumerationLiteral, LIonCore Enumeration literals>> MUST be encoded as JSON _string_ _value_ according to <<{m3}.adoc#keys, Key spec>>.
+MUST refer to the <<{m3}.adoc#IKeyed.key, key>> of an <<{m3}.adoc#EnumerationLiteral, EnumerationLiteral>> of the <<{m3}.adoc#Enumeration, Enumeration>> defined as <<{m3}.adoc#Property.type, type>> of this *Property*.{fn-org128}
+
+== Examples
+
+=== Minimal
+[source,json]
+----
+include::minimal.json[]
+----
+
+=== Minimal node
+[source,json]
+----
+include::minimal-node.json[]
+----
+
+=== Property variants
+
+For this example, we need to define an enumeration and a concept that uses the enumeration.
+
+NOTE: The format used in this example is non-normative.
+
+Assume this enumeration:
+[source]
+----
+enumeration DaysOfWeek [id 23, key days-of-week]
+
+  literal Monday       [id 34, key monday]
+  literal Tuesday      [id 2,  key tttt]
+  literal Wednesday    [id 55, key 12398712]
+----
+
+And this concept:
+[source]
+----
+concept OpeningTime           [id 44, key time_to_open]
+  property day: DaysOfWeek    [id 42, key day]
+  property startHour: Integer [id 22, key starthour]
+  property endHour: Integer   [id 89, key endhour]
+----
+
+[source,json]
+----
+include::property-variants.json[]
+----
+
+=== Children variants
+[source,json]
+----
+include::children-variants.json[]
+----
+
+*node* with *id* `cff` is outside the processed document.
+
+=== Reference variants
+We support different kinds of targets.{fn-org57}
+[source,json]
+----
+include::reference-variants.json[]
+----
+
+
+[[versions]]
+== Versions
+=== 1
+Initial version.
+
+
+[[possible-values]]
+== Possible values for `properties`, `children`, and `references`
+Only bold entries are valid.{fn-java33}
+
+[%header,cols="1a,1,1,1"]
+|===
+|1 A +
+Contents
+|B +
+``properties: {``_ _ _``}``
+|C +
+``children: {``_ _ _``}``
+|D  +
+``references: {``_ _ _``}``
+
+|2 `"a": "b"`
+|*property with id `a` has value `b`*
+.4+.^|`children` value must be array
+.4+.^|`references` value must be array
+
+|3 `"c": ""`
+|*property with id `c` has value (empty string)*
+// |`children` value must be array
+// |`references` value must be array
+
+|4 `"d": " "`
+|*property with id `d` has value ` `(one space)*
+// |`children`value must be array
+// |`references`value must be array
+
+|5 `"e": null`
+|*property with id `e` has no value*
+// |`children` value must be array
+// |`references` value must be array
+
+|6 (key `f` not present)
+|*property with id `f` has no value*
+|*containment with id `f` does not contain any nodes*
+|*reference with id `f` does not point to any nodes*
+
+|7 `"g": []`
+.9+.^|`properties` value must be string
+|*containment with id `g` does not contain any nodes*
+|*reference with id `g` does not point to any nodes*
+
+|8 `"h": [ "i" ]`
+// |`properties`value must be string
+|*containment with id `h` contains node with id`i`*
+|`references` value array element must be object
+
+|9
+
+[source%nowrap]
+----
+"j": [
+ {
+   "resolveInfo": "k",
+   "reference": "l"
+ }
+]
+----
+// |`properties` value must be string
+.2+.^|`children` value array element must be string
+|*reference with id `j` points to node with id `l`, re-binding supported by text `k`*
+
+|10 `"m": [ null ]`
+// |`properties` value must be string
+// |`children` value array element must be a string
+|`references` value array element must be an object
+
+|11 `"n": true`
+// |`properties` value must be string
+.5+.^|`children` value must be array
+.5+.^|`references` value must be array
+
+|12 `"o": 12`
+// |`properties` value must be string
+// |`children` value must be array
+// |`references` value must be array
+
+|13 `"p": 34.56`
+// |`properties` value must be string
+// |`children` value must be array
+// |`references` value must be array
+
+|14 `"q": {}`
+// |`properties` value must be string
+// |`children` value must be array
+// |`references` value must be array
+
+|15 `"r": {`...`}`
+// |`properties` value must be string
+// |`children` value must be array
+// |`references` value must be array
+
+|16 `"s": foo`
+3.2+^.^|JSON syntax error
+// |JSON syntax error
+// |JSON syntax error
+
+|17 `"t": undefined`
+// |JSON syntax error
+// |JSON syntax error
+// |JSON syntax error
+|===
