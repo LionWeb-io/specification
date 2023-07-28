@@ -3,7 +3,7 @@ title Generated M2 Library Example
 
 hide empty members
 
-!include ../plantuml-shared/generated-skinparam.puml
+!include ../shared/generated-skinparam.puml
 
 package "M3 generated" as meta {
     interface Metamodel

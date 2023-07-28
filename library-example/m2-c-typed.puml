@@ -4,8 +4,8 @@ title Typed M2 Library Example
 hide empty members
 hide stereotypes
 
-!include ../plantuml-shared/typed-skinparam.puml
-!include ../plantuml-shared/typed-map-legend.puml
+!include ../shared/typed-skinparam.puml
+!include ../shared/typed-map-legend.puml
 
 package "M3 runtime" {
     object "Metamodel" as metamodel

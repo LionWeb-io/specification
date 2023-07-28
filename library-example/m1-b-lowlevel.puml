@@ -3,8 +3,8 @@
 title Low-level M1 Library Example
 hide stereotypes
 
-!include ../plantuml-shared/lowlevel-skinparam.puml
-!include ../plantuml-shared/lowlevel-map-legend.puml
+!include ../shared/lowlevel-skinparam.puml
+!include ../shared/lowlevel-map-legend.puml
 
 ' Library
 object "Bob's Library : <u>Node</u>" as library<<Node>> {

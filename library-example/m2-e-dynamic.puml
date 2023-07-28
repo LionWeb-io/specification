@@ -4,7 +4,7 @@ title Dynamic M2 Library Example
 hide empty members
 hide stereotypes
 
-!include ../plantuml-shared/runtime-skinparam.puml
+!include ../shared/runtime-skinparam.puml
 
 package "M3 runtime" {
     interface Metamodel

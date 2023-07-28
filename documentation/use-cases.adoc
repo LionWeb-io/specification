@@ -1,4 +1,4 @@
-= Use cases
+= Use Cases
 
 
 == Federated modeling
@@ -131,6 +131,6 @@ Generator takes (big part of) the model, turns it into some output outside the m
 === Model-to-Model Transformation
 Mapper takes part of model and writes/replaces other part of the model.
 
-== Non-Use cases
+== Non-use cases
 * Store other things than models, e.g. images, (binary files), etc.
 * Custom persistence (automatic parsing or unparsing)

@@ -75,7 +75,7 @@ Response:
 ----
 
 If the server doesn’t support branches or versioning then it only implements the first endpoint.
-The client can fallback to the first endpoint, if the others return 404.
+The client can fall back to the first endpoint, if the others return 404.
 
 [source, httprequest]
 ----
@@ -100,7 +100,7 @@ Response:
 ----
 
 Also optional.
-If the server only supports bulk model read/write operations then it returns 404 and the client will fallback to the bulk endpoints.
+If the server only supports bulk model read/write operations then it returns 404 and the client will fall back to the bulk endpoints.
 
 [source, httprequest]
 ----
@@ -147,7 +147,7 @@ Reading the concrete rest API, this reminds me that there are (at least) five as
 ** how flexibly can we express the query to determine that size?
 ** can we layer a query API on top of a simpler API?
 
-. How do we represent the models (fragments) across the wire? JSON, YAML, etc?
+. How do we represent the models (fragments) across the wire? JSON, YAML, etc.?
 
 . How do we represent the actual operations? Which transport protocol do we use?
 

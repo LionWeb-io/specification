@@ -20,7 +20,7 @@ Also see issue https://github.com/LIonWeb-org/organization/issues/61
 
 === Goal 2: Programming Meta-Metamodel
 The goal of the meta-metamodel is to define a meta-language with which to describe a programming interface to a model,
-which can be used in programming languages like TypeScript, C#, Java, Python, etc..
+which can be used in programming languages like TypeScript, C#, Java, Python, etc.
 
 A Programming Meta-Metamodel is usually more elaborate that a Data Interchange Metamodel,
 as there are more concerns that need to be taken into account in programming.
@@ -121,7 +121,7 @@ An important question is whether we want to include this in the LionWeb scope.
 If we decide to include this, it should at least be done as a separate compliance point.
 
 Even then it should probably just be a very lean 1-to-1 mapping from the Data Interchange Metamodel,
-This is along the lines of what Federico suggests in the slack channel (@Federico: correct me if I am wrong):
+This is along the lines of what Federico suggests in the Slack channel (@Federico: correct me if I am wrong):
 _"I would lean toward having very lean Java/TS interfaces for things
 like navigating trees, observing them, serializing them, and validating them."_.
 I would find observing and validating already more than lean.

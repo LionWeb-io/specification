@@ -1,4 +1,4 @@
-== Models representations
+== Models Representations
 
 I am not sure this should be covered here but regarding models the propositions is to have:
 

@@ -1,6 +1,6 @@
-include::../issue-footnotes.adoc[]
+include::../shared/issue-footnotes.adoc[]
 :serialization: ../serialization/serialization
-= Meta-Metamodel
+= Meta-Metamodel (M3)
 :toc: preamble
 :toclevels: 3
 :sectnums:
@@ -46,7 +46,7 @@ Let’s first see a representation of the meta-metamodel using (a tiny subset of
 include::metametamodel.puml[]
 ----
 
-== Definition of the Meta-Metamodel
+== Definition of the meta-metamodel
 
 In this section we describe the single elements composing the Meta-Metamodel.
 We will list elements by their type: classes, abstract classes and interfaces.
@@ -309,7 +309,7 @@ It is indirectly a <<IKeyed>> (as it has a key) and an <<INamed>> (as it has a n
 .Constraints
 TBD
 
-=== Abstract Classes
+=== Abstract classes
 
 The abstract classes are <<LanguageEntity>>, <<Classifier>>, <<DataType>>, <<Feature>>, and <<Link>>.
 
@@ -537,10 +537,10 @@ Any language that uses `INamed` on its own can establish their own constraints.
 
 Refer to <<keys>> for more constraints.
 
-=== Pre-defined Ids and Keys
+=== Pre-defined ids and keys
 The language itself has key `LIonCore-M3`.{fn-org91}
 
-==== Keys of M3 Elements
+==== Keys of M3 elements
 
 [cols="d,d,m"]
 |===
@@ -577,7 +577,7 @@ The language itself has key `LIonCore-M3`.{fn-org91}
 |<<Reference>> |Concept |Reference
 |===
 
-==== Ids of Built-in elements
+==== Ids of built-in elements
 The language hosting built-in elements has key `LIonCore-builtins`.{fn-org141}
 
 Every language implicitly depends on this language.{fn-org9-implicit}
@@ -624,7 +624,7 @@ Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense t
 * [[JSON, JSON]] `JSON`
 
 
-=== Supporting Terminology
+=== Supporting terminology
 ==== Multiplicity
 Multiplicity describes how many targets a link must and can have.
 
@@ -748,7 +748,7 @@ In general Generics complicate the solution and MPS can live without them.
 Also, in StarLasu we never encountered the need for them so far.
 
 [[references-to-language-elements]]
-=== References to Language Elements
+=== References to language elements
 From a language, we refer to all language elements by their <<node-id, id>>.{fn-org131}
 This includes references to
 
@@ -770,7 +770,7 @@ This includes references to
 * <<EnumerationLiteral>> value
 
 
-=== Union or Intersection Types
+=== Union or intersection types
 
 These are not supported.
 
