@@ -82,6 +82,7 @@
           ]
         }
       ],
+      "annotations": [],
       "parent": null
     },
     {
@@ -94,6 +95,7 @@
       "properties": {},
       "children": {},
       "references": {},
+      "annotations": [],
       "parent": null
     }
   ]

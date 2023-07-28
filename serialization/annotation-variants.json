@@ -15,54 +15,25 @@
         "key": "myConceptId"
       },
       "properties": {},
-      "children": [
-        {
-          "containment": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "emptyContainmentId"
-          },
-          "children": []
-        },
-        {
-          "containment": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "singleContainmentId"
-          },
-          "children": [
-            "cdd"
-          ]
-        },
-        {
-          "containment": {
-            "language": "myLanguage",
-            "version": "2",
-            "key": "multiContainmentId"
-          },
-          "children": [
-            "cee",
-            "cff",
-            "cgg"
-          ]
-        }
-      ],
+      "children": [],
       "references": {},
-      "annotations": [],
+      "annotations": [
+        "emptyAnnotation"
+      ],
       "parent": null
     },
     {
-      "id": "cgg",
+      "id": "emptyAnnotation",
       "concept": {
         "language": "myLanguage",
         "version": "2",
-        "key": "differentConceptId"
+        "key": "annotationKey"
       },
       "properties": {},
       "children": {},
       "references": {},
       "annotations": [],
-      "parent": null
+      "parent": "ccc"
     },
     {
       "id": "cdd",

@@ -7,6 +7,10 @@ package builtins {
   }
 }
 
+class Annotation #LightGreen extends Concept {
+  multiple: Boolean
+}
+
 class Concept #LightGreen extends Classifier {
   abstract: Boolean
   partition: Boolean
@@ -50,7 +54,9 @@ class Reference #LightBlue extends Link
 
 ' relations:
 
-Concept "*" -> "0..1" Concept: extends
+Annotation "*" --> "1" Classifier: annotates
+
+Concept "*" --> "0..1" Concept: extends
 Concept "*" --> "*" ConceptInterface: implements
 
 ConceptInterface "*" --> "*" ConceptInterface: extends
