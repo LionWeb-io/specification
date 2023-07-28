@@ -1,4 +1,4 @@
-include::../issue-footnotes.adoc[]
+include::../shared/issue-footnotes.adoc[]
 
 :m3: ../metametamodel/metametamodel
 :fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
@@ -11,7 +11,7 @@ include::../issue-footnotes.adoc[]
 * `monospaced` words describe verbatim contents of the serialization.
 * Footnotes refer to more discussions and rationale, but are non-normative.
 
-== Design Goals
+== Design goals
 We do not take any measures to reduce the amount of transmitted data.{fn-org73}
 
 == Description
@@ -257,7 +257,7 @@ The value MUST adhere to JSON spec (RFC 8259).
 .Invalid example
 `{ "key": "my value", "myArray": [1, -2, true] }`
 
-==== Enumeration Literals
+==== Enumeration literals
 <<{m3}.adoc#EnumerationLiteral, LIonCore Enumeration literals>> MUST be encoded as JSON _string_ _value_ according to <<{m3}.adoc#keys, Key spec>>.
 MUST refer to the <<{m3}.adoc#IKeyed.key, key>> of an <<{m3}.adoc#EnumerationLiteral, EnumerationLiteral>> of the <<{m3}.adoc#Enumeration, Enumeration>> defined as <<{m3}.adoc#Property.type, type>> of this *Property*.{fn-org128}
 
