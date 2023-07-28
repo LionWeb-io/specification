@@ -1,7 +1,7 @@
-= LIonWeb documentation
+= LIonWeb Documentation
 
 // * xref:documentation/documentation-structure.adoc[Documentation structure]
-* xref:documentation/use-cases.adoc[Use cases]
+* xref:documentation/use-cases.adoc[Use Cases]
 * xref:metametamodel/metametamodel.adoc[Meta-Metamodel (M3)]
 * xref:serialization/serialization.adoc[Serialization Format]
 

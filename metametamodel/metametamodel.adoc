@@ -1,6 +1,6 @@
 include::../shared/issue-footnotes.adoc[]
 :serialization: ../serialization/serialization
-= Meta-Metamodel
+= Meta-Metamodel (M3)
 :toc: preamble
 :toclevels: 3
 :sectnums:
