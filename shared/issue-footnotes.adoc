@@ -142,3 +142,4 @@
 :fn-org147: footnote:org147[https://github.com/LIonWeb-org/organization/issues/147[Rename LanguageElement to LanguageEntity #147]]
 :fn-org148: footnote:org148[https://github.com/LIonWeb-org/organization/issues/148[Level of detail on API specifications #148]]
 :fn-org149: footnote:org149[https://github.com/LIonWeb-org/organization/issues/149[Don't specify minimum supported range for integer #149]]
+:fn-org150: footnote:org150[https://github.com/LIonWeb-org/organization/issues/150[How to represent annotations in serialization #150]]
