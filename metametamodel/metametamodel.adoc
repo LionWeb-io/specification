@@ -51,9 +51,9 @@ plantuml::metametamodel.puml[format=svg]
 In this section we describe the single elements composing the Meta-Metamodel.
 We will list elements by their type: classes, abstract classes and interfaces.
 
-=== Classes
+=== Concepts
 
-The classes are <<Language>>, <<Concept>>, <<Annotation>>, <<ConceptInterface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Containment>>, <<Reference>>, and <<Property>>.
+The concepts are <<Language>>, <<Concept>>, <<Annotation>>, <<ConceptInterface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Containment>>, <<Reference>>, and <<Property>>.
 
 [[Language]]
 ==== Language
@@ -510,9 +510,9 @@ It is indirectly a <<IKeyed>> (as it has a key) and an <<INamed>> (as it has a n
 .Constraints
 TBD
 
-=== Abstract classes
+=== Abstract concepts
 
-The abstract classes are <<LanguageEntity>>, <<Classifier>>, <<DataType>>, <<Feature>>, and <<Link>>.
+The abstract concepts are <<LanguageEntity>>, <<Classifier>>, <<DataType>>, <<Feature>>, and <<Link>>.
 
 [[LanguageEntity]]
 ==== LanguageEntity

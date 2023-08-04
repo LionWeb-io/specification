@@ -7,8 +7,8 @@ package builtins {
   }
 }
 
-class Annotation #LightGreen extends Concept {
-  multiple: Boolean
+class Annotation #LightGreen extends Classifier {
+  multiple: Boolean <<optional>>
 }
 
 class Concept #LightGreen extends Classifier {
@@ -37,7 +37,7 @@ abstract class Link #LightBlue extends Feature {
 }
 
 class Language <<partition>> implements IKeyed {
-  version: Integer
+  version: String
 }
 
 abstract class LanguageEntity implements IKeyed
@@ -54,7 +54,9 @@ class Reference #LightBlue extends Link
 
 ' relations:
 
-Annotation "*" --> "1" Classifier: annotates
+Annotation "*" --> "0..1" Classifier: annotates
+Annotation "*" --> "0..1" Annotation: extends
+Annotation "*" --> "*" ConceptInterface: implements
 
 Concept "*" --> "0..1" Concept: extends
 Concept "*" --> "*" ConceptInterface: implements
