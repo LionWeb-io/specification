@@ -14,8 +14,8 @@
         "version": "2",
         "key": "myConceptId"
       },
-      "properties": {},
-      "children": {},
+      "properties": [],
+      "children": [],
       "references": [
         {
           "reference": {
@@ -92,9 +92,9 @@
         "version": "2",
         "key": "differentConceptId"
       },
-      "properties": {},
-      "children": {},
-      "references": {},
+      "properties": [],
+      "children": [],
+      "references": [],
       "annotations": [],
       "parent": null
     }

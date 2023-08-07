@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lionweb.io/serialization.schema.json",
+  "title": "LIonWeb Serialization",
+  "type": "object",
+  "properties": {
+    "serializationFormatVersion": {
+      "$ref": "#/$defs/version"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "$ref": "#/$defs/key"
+          },
+          "version": {
+            "$ref": "#/$defs/version"
+          }
+        },
+        "required": [
+          "key",
+          "version"
+        ],
+        "additionalProperties": false,
+        "minProperties": 2,
+        "maxProperties": 2
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "concept": {
+            "$ref": "#/$defs/metaPointer"
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "property": {
+                  "$ref": "#/$defs/metaPointer"
+                },
+                "value": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "property",
+                "value"
+              ],
+              "additionalProperties": false,
+              "minProperties": 2,
+              "maxProperties": 2
+            }
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "containment": {
+                  "$ref": "#/$defs/metaPointer"
+                },
+                "children": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/id"
+                  }
+                }
+              },
+              "required": [
+                "containment",
+                "children"
+              ],
+              "additionalProperties": false,
+              "minProperties": 2,
+              "maxProperties": 2
+            }
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "reference": {
+                  "$ref": "#/$defs/metaPointer"
+                },
+                "targets": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "resolveInfo": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "reference": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/$defs/id"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "resolveInfo",
+                      "reference"
+                    ],
+                    "additionalProperties": false,
+                    "minProperties": 2,
+                    "maxProperties": 2
+                  }
+                }
+              },
+              "required": [
+                "reference",
+                "targets"
+              ],
+              "additionalProperties": false,
+              "minProperties": 2,
+              "maxProperties": 2
+            }
+          },
+          "annotations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "parent": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "concept",
+          "properties",
+          "children",
+          "references",
+          "annotations",
+          "parent"
+        ],
+        "additionalProperties": false,
+        "minProperties": 7,
+        "maxProperties": 7
+      }
+    }
+  },
+  "required": [
+    "serializationFormatVersion",
+    "languages",
+    "nodes"
+  ],
+  "additionalProperties": false,
+  "minProperties": 3,
+  "maxProperties": 3,
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "key": {
+      "$ref": "#/$defs/id"
+    },
+    "version": {
+      "type": "string"
+    },
+    "metaPointer": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/$defs/key"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "key": {
+          "$ref": "#/$defs/key"
+        }
+      },
+      "required": [
+        "language",
+        "version",
+        "key"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    }
+  }
+}

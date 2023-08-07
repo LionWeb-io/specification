@@ -14,7 +14,7 @@
         "version": "2",
         "key": "myConceptId"
       },
-      "properties": {},
+      "properties": [],
       "children": [
         {
           "containment": {
@@ -47,7 +47,7 @@
           ]
         }
       ],
-      "references": {},
+      "references": [],
       "annotations": [],
       "parent": null
     },
@@ -58,9 +58,9 @@
         "version": "2",
         "key": "differentConceptId"
       },
-      "properties": {},
-      "children": {},
-      "references": {},
+      "properties": [],
+      "children": [],
+      "references": [],
       "annotations": [],
       "parent": null
     },
@@ -71,10 +71,11 @@
         "version": "2",
         "key": "otherConceptId"
       },
-      "properties": {},
-      "children": {},
-      "references": {},
-      "annotations": []
+      "properties": [],
+      "children": [],
+      "references": [],
+      "annotations": [],
+      "parent": "ccc"
     },
     {
       "id": "cee",
@@ -83,9 +84,9 @@
         "version": "2",
         "key": "differentConceptId"
       },
-      "properties": {},
-      "children": {},
-      "references": {},
+      "properties": [],
+      "children": [],
+      "references": [],
       "annotations": [],
       "parent": null
     }
