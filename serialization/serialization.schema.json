@@ -194,7 +194,8 @@
       "$ref": "#/$defs/id"
     },
     "version": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "metaPointer": {
       "type": "object",

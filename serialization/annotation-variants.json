@@ -4,6 +4,14 @@
     {
       "key": "myLanguage",
       "version": "2"
+    },
+    {
+      "key": "BaseLanguage",
+      "version": "1"
+    },
+    {
+      "key": "LIonWeb-M3",
+      "version": "1"
     }
   ],
   "nodes": [
@@ -12,51 +20,240 @@
       "concept": {
         "language": "myLanguage",
         "version": "2",
-        "key": "myConceptId"
+        "key": "61"
       },
-      "properties": {},
+      "properties": [],
       "children": [],
-      "references": {},
+      "references": [],
       "annotations": [
-        "emptyAnnotation"
+        "marker",
+        "docu1",
+        "docu2",
+        "localTrash"
       ],
       "parent": null
     },
     {
-      "id": "emptyAnnotation",
+      "id": "marker",
       "concept": {
         "language": "myLanguage",
         "version": "2",
-        "key": "annotationKey"
+        "key": "myMarker"
       },
-      "properties": {},
-      "children": {},
-      "references": {},
+      "properties": [],
+      "children": [],
+      "references": [],
       "annotations": [],
-      "parent": "ccc"
+      "parent": "61"
     },
     {
-      "id": "cdd",
+      "id": "docu1",
       "concept": {
         "language": "myLanguage",
         "version": "2",
-        "key": "otherConceptId"
+        "key": "docuAnn"
       },
-      "properties": {},
-      "children": {},
-      "references": {},
-      "annotations": []
+      "properties": [
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "Docu-docu"
+          },
+          "value": "This is a very important BaseLanguageClass"
+        }
+      ],
+      "children": [],
+      "references": [],
+      "annotations": [],
+      "parent": "61"
     },
     {
-      "id": "cee",
+      "id": "docu2",
       "concept": {
         "language": "myLanguage",
         "version": "2",
-        "key": "differentConceptId"
+        "key": "docuExtended"
       },
-      "properties": {},
-      "children": {},
-      "references": {},
+      "properties": [
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "Docu-docu"
+          },
+          "value": "We want to say a few more things about this BaseLanguageClass"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "MDS"
+          },
+          "value": "Here be dragons"
+        }
+      ],
+      "children": [],
+      "references": [],
+      "annotations": [],
+      "parent": "61"
+    },
+    {
+      "id": "localTrash",
+      "concept": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "throwAway"
+      },
+      "properties": [],
+      "children": [
+        {
+          "containment": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "tat"
+          },
+          "children": [
+            "old1",
+            "old2"
+          ]
+        }
+      ],
+      "references": [],
+      "annotations": [],
+      "parent": "61"
+    },
+    {
+      "id": "old1",
+      "concept": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "SomeConcept"
+      },
+      "properties": [],
+      "children": [],
+      "references": [],
+      "annotations": [],
+      "parent": "localTrash"
+    },
+    {
+      "id": "old2",
+      "concept": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "YetAnotherConcept"
+      },
+      "properties": [],
+      "children": [],
+      "references": [],
+      "annotations": [],
+      "parent": "localTrash"
+    },
+    {
+      "id": "bbb",
+      "concept": {
+        "language": "LIonWeb-M3",
+        "version": "1",
+        "key": "Concept"
+      },
+      "properties": [],
+      "children": [
+        {
+          "containment": {
+            "language": "LIonWeb-M3",
+            "version": "1",
+            "key": "Classifier-features"
+          },
+          "children": [
+            "bbb-prop"
+          ]
+        }
+      ],
+      "references": [],
+      "annotations": [
+        "javaMapping"
+      ],
+      "parent": null
+    },
+    {
+      "id": "bbb-prop",
+      "concept": {
+        "language": "LIonWeb-M3",
+        "version": "1",
+        "key": "Property"
+      },
+      "properties": [],
+      "children": [],
+      "references": [],
+      "annotations": [
+        "typeUseMapping"
+      ],
+      "parent": "bbb"
+    },
+    {
+      "id": "javaMapping",
+      "concept": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "MTC"
+      },
+      "properties": [],
+      "children": [],
+      "references": [
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "JJJ"
+          },
+          "targets": [
+            {
+              "resolveInfo": null,
+              "reference": "javaClass"
+            }
+          ]
+        }
+      ],
+      "annotations": [],
+      "parent": "bbb"
+    },
+    {
+      "id": "typeUseMapping",
+      "concept": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "UM"
+      },
+      "properties": [],
+      "children": [],
+      "references": [
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "JJJ1"
+          },
+          "targets": [
+            {
+              "resolveInfo": null,
+              "reference": "javaMapping"
+            }
+          ]
+        }
+      ],
+      "annotations": [],
+      "parent": "bbb-prop"
+    },
+    {
+      "id": "javaClass",
+      "concept": {
+        "language": "BaseLanguage",
+        "version": "1",
+        "key": "ClassConcept"
+      },
+      "properties": [],
+      "children": [],
+      "references": [],
       "annotations": [],
       "parent": null
     }
