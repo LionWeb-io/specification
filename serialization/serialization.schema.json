@@ -5,7 +5,8 @@
   "type": "object",
   "properties": {
     "serializationFormatVersion": {
-      "$ref": "#/$defs/version"
+      "type": "string",
+      "pattern": "^[0-9]+$"
     },
     "languages": {
       "type": "array",
@@ -26,7 +27,8 @@
         "additionalProperties": false,
         "minProperties": 2,
         "maxProperties": 2
-      }
+      },
+      "uniqueItems": true
     },
     "nodes": {
       "type": "array",
@@ -79,7 +81,8 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/$defs/id"
-                  }
+                  },
+                  "uniqueItems": true
                 }
               },
               "required": [
