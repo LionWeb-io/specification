@@ -19,7 +19,7 @@ LIonWeb node serialization format is defined in JSON (https://datatracker.ietf.o
 
 == Overview of structures
 
-plantuml:serialization.puml[format=svg]
+plantuml::serialization.puml[format=svg]
 
 === Root structure
 
@@ -49,6 +49,7 @@ Each _element_ must be unique with respect to the value of its _key_ `id`.
 === Language structure
 [[UsedLanguage]]
 Each *used language* MUST be an _object_.{fn-org129}
+##TODO: include builtins in used language? {fn-org153}##
 The order of _members_ is undefined.
 
 The _object_ MUST contain the following _members_:{fn-org76}

@@ -103,6 +103,8 @@ Example: if Language B depends on Language A, and Language C depends on B, then 
 A Language CAN declare a transitive dependency explicitly.
 In the example above, Language C CAN declare an explicit dependency on Language A.
 
+##TODO: Dependency on builtins {fn-org153}##
+
 [[Concept]]
 ==== Concept
 A Concept represents a category of entities sharing the same structure.
@@ -153,23 +155,21 @@ In EMF, an `Adapter` can be used for similar purposes.
 
 .Characteristics
 An Annotation has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
-It can be concrete (i.e., instantiable) or abstract, marked by boolean <<Concept.abstract, `abstract`>> property.
 
 [[Annotation.multiple, Annotation.multiple]]
 An Annotation can specify whether an annotated node can have more than one annotation via the boolean `multiple` property.
 
-An Annotation is a <<Concept>>, and indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name), a <<IKeyed>> (as it has a key).
+An Annotation is a <<Classifier>>, and indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name), a <<IKeyed>> (as it has a key).
 
 [[Annotation.annotates, Annotation.annotates]]
 Each Annotation specifies which <<Classifier, `Classifiers`>> it `annotates`.
 If it should be applicable to any node, it annotates <<Node>>.
 
-As Annotations are Concepts, they can specify which Concept or Annotation it <<Concept.extends, `extends`>> and which interfaces it <<Concept.implements, `implements`>>.
+As Annotations can specify which Concept or Annotation it [[Annotation.extends, Annotation.extends]]`extends` and which interfaces it [[Annotation.implements, Annotation.implements]] `implements`.
 An Annotation can have any number of <<Classifier.features, `features`>>, given it is a <<Classifier>>.
 
 .Constraints
-Although Annotation inherits <<Concept.partition, `partition`>> property, this flag MUST always be `false`.
-Annotations as <<partition>> makes no sense, as they annotate another node (and never stand for themselves as root).
+We CANNOT redefine `multiple` and `annotates` in a sub-annotation (i.e. an annotation that `extends` another).{fn-org154}
 
 We can attach an instance of an Annotation only to instances of the Concept the Annotation `annotates` (and sub-concepts thereof).
 
@@ -291,50 +291,6 @@ class CompanyRole <<a, orange>><<OrgRoleAnnotation>> ##red {
 CompanyAddress <-[#red]- CompanyRole
 ----
 --
-
-We SHOULD avoid mixing Annotations and Concepts in an inheritance hierarchy, and containing Annotations as regular children.
-It is technically possible, but confusing.
-
-.Undesired (but possible) example of mixing Annotations and Concepts inheritance, and annotations as children
-[plantuml, mixed-annotation-concept-inheritance, svg]
-----
-hide empty members
-
-class NatureTree <<C, lightgreen>><<Concept>> {
-  preferredSeason: String
-}
-
-class StrangeWood <<C, lightgreen>><<Concept>>
-
-StrangeWood "1" *- "*" StrangeTree: trees
-
-
-
-annotation StrangeTree <<A, orange>><<Annotation>> extends NatureTree {
-  multiple = true
-  --
-  color: String
-}
-
-class Toy <<C, lightgreen>><<Concept>> {
-  minAge: Integer
-}
-
-StrangeTree -> Toy: annotates
-
-
-class SmallTree <<C, lightgreen>><<Concept>> extends StrangeTree
-
-annotation VerySmallTree <<A, orange>><<Annotation>> extends SmallTree {
-  multiple = false
-}
-
-class Pet <<C, lightgreen>><<Concept>>
-
-VerySmallTree -> Pet: annotates
-----
-
-
 
 .Remarks
 [*] "limited" because the more complex the annotation is, the more likely it should not be part of the annotated node's lifecycle -- We might want to reuse the complex annotation somewhere else.
@@ -752,6 +708,8 @@ The language itself has key `LIonCore-M3`.{fn-org91}
 |<<Annotation>> |Concept |Annotation
 |<<Annotation.annotates>> |Reference |Annotation-annotates
 |<<Annotation.multiple>> |Property |Annotation-multiple
+|<<Annotation.extends>> |Reference |Annotation-extends
+|<<Annotation.implements>> |Reference |Annotation-implements
 |<<Concept>> |Concept |Concept
 |<<Concept.abstract>> |Property |Concept-abstract
 |<<Concept.extends>> |Reference |Concept-extends

@@ -1,4 +1,4 @@
-// To update
+﻿// To update
 // 1. `gh issue list --state all --limit 1000 > issues.txt` in `organizations` repo dir
 // 2. Use Excel to delete all columns except id and title
 // 3. Paste here
@@ -10,6 +10,12 @@
 //   b) Edit | Line Operations | Remove Duplicate Lines
 
 :fn-java33: footnote:java33[https://github.com/LIonWeb-org/lioncore-java/issues/33[Require empty members in serialization #33]]
+:fn-org9-implicit: footnote:org9implicit[https://github.com/LIonWeb-org/organization/issues/9#issuecomment-1381934044[Discussion on implicitly importing stdlib]]
+:fn-org9-intrange: footnote:org9intrange[https://github.com/LIonWeb-org/organization/issues/9#issuecomment-1288624098[Discussion on supported integer range]]
+:fn-org36-null: footnote:org36null[https://github.com/LIonWeb-org/organization/issues/36#issuecomment-1384070433[Meaning and rationale of `null` values for reference id and resolveInfo]]
+:fn-org37-name: footnote:org37conc[https://github.com/LIonWeb-org/organization/issues/37#issuecomment-1411857068[Discussion on name `concept`]]
+:fn-org55-name-children: footnote:org55child[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1409321113[Discussion on name `children`]]
+:fn-org55-name-references: footnote:org55ref[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1415994431[Discussion on names `references` and `reference`]]
 :fn-org3: footnote:org3[https://github.com/LIonWeb-org/organization/issues/3[Use Cases for Repo Access API #3]]
 :fn-org4: footnote:org4[https://github.com/LIonWeb-org/organization/issues/4[If and how to represent ordered / unordered containments in M3 #4]]
 :fn-org5: footnote:org5[https://github.com/LIonWeb-org/organization/issues/5[First-class support of Enums in M3 #5]]
@@ -17,8 +23,6 @@
 :fn-org7: footnote:org7[https://github.com/LIonWeb-org/organization/issues/7[Is version part of M3 Metamodel? #7]]
 :fn-org8: footnote:org8[https://github.com/LIonWeb-org/organization/issues/8[Which parts of a link can be specialized? #8]]
 :fn-org9: footnote:org9[https://github.com/LIonWeb-org/organization/issues/9[Supported built-in primitive types #9]]
-:fn-org9-implicit: footnote:org9implicit[https://github.com/LIonWeb-org/organization/issues/9#issuecomment-1381934044[Discussion on implicitly importing stdlib]]
-:fn-org9-intrange: footnote:org9intrange[https://github.com/LIonWeb-org/organization/issues/9#issuecomment-1288624098[Discussion on supported integer range]]
 :fn-org10: footnote:org10[https://github.com/LIonWeb-org/organization/issues/10[Support custom DataTypes? #10]]
 :fn-org11: footnote:org11[https://github.com/LIonWeb-org/organization/issues/11[Which M3 things can be annotated? #11]]
 :fn-org12: footnote:org12[https://github.com/LIonWeb-org/organization/issues/12[Annotation instances shipped by default #12]]
@@ -45,9 +49,7 @@
 :fn-org34: footnote:org34[https://github.com/LIonWeb-org/organization/issues/34[Repo API: Property value encondings #34]]
 :fn-org35: footnote:org35[https://github.com/LIonWeb-org/organization/issues/35[Repo API: Represent dangling pointers #35]]
 :fn-org36: footnote:org36[https://github.com/LIonWeb-org/organization/issues/36[Repo API: Store additional resolve info? #36]]
-:fn-org36-null: footnote:org36null[https://github.com/LIonWeb-org/organization/issues/36#issuecomment-1384070433[Meaning and rationale of `null` values for reference id and resolveInfo]]
 :fn-org37: footnote:org37[https://github.com/LIonWeb-org/organization/issues/37[Repo API: Node serialization #37]]
-:fn-org37-name: footnote:org37conc[https://github.com/LIonWeb-org/organization/issues/37#issuecomment-1411857068[Discussion on name `concept`]]
 :fn-org38: footnote:org38[https://github.com/LIonWeb-org/organization/issues/38[Additional API: Deliver repo contents according to M2-based JSON schema #38]]
 :fn-org39: footnote:org39[https://github.com/LIonWeb-org/organization/issues/39[Additional API: Complex queries #39]]
 :fn-org40: footnote:org40[https://github.com/LIonWeb-org/organization/issues/40[Define a standard way to represent model diffs #40]]
@@ -60,14 +62,12 @@
 :fn-org53: footnote:org53[https://github.com/LIonWeb-org/organization/issues/53[Ids for M3 Elements #53]]
 :fn-org54: footnote:org54[https://github.com/LIonWeb-org/organization/issues/54[Remove `NamespaceEntity.container` from M3 #54]]
 :fn-org55: footnote:org55[https://github.com/LIonWeb-org/organization/issues/55[Always provide both containment and parent id in serialization #55]]
-:fn-org55-name-children: footnote:org55child[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1409321113[Discussion on name `children`]]
-:fn-org55-name-references: footnote:org55ref[https://github.com/LIonWeb-org/organization/issues/55#issuecomment-1415994431[Discussion on names `references` and `reference`]]
 :fn-org57: footnote:org57[https://github.com/LIonWeb-org/organization/issues/57[Supported reference targets #57]]
 :fn-org58: footnote:org58[https://github.com/LIonWeb-org/organization/issues/58[Include serialization format version in serialization #58]]
 :fn-org59: footnote:org59[https://github.com/LIonWeb-org/organization/issues/59[Require empty members in serialization #59]]
 :fn-org61: footnote:org61[https://github.com/LIonWeb-org/organization/issues/61[Goal and Scope of LionWeb #61]]
 :fn-org62: footnote:org62[https://github.com/LIonWeb-org/organization/issues/62[How to store invalid text typed at arbitrary places? #62]]
-:fn-org63: footnote:org63[https://github.com/LIonWeb-org/organization/issues/63[Formulate minimal integration path - the â€œdemo appâ€ #63]]
+:fn-org63: footnote:org63[https://github.com/LIonWeb-org/organization/issues/63[Formulate minimal integration path - the "demo app" #63]]
 :fn-org64: footnote:org64[https://github.com/LIonWeb-org/organization/issues/64[How should serialization work? #64]]
 :fn-org66: footnote:org66[https://github.com/LIonWeb-org/organization/issues/66[Migrate diagrams from PlantUML to Mermaid #66]]
 :fn-org67: footnote:org67[https://github.com/LIonWeb-org/organization/issues/67[Allow additional info in serialization #67]]
@@ -118,7 +118,7 @@
 :fn-org119: footnote:org119[https://github.com/LIonWeb-org/organization/issues/119[[documentation: Explanation] How do references work #119]]
 :fn-org120: footnote:org120[https://github.com/LIonWeb-org/organization/issues/120[[documentation: Explanation] How does language reuse work #120]]
 :fn-org121: footnote:org121[https://github.com/LIonWeb-org/organization/issues/121[[documentation: Reference] Working principles #121]]
-:fn-org122: footnote:org122[https://github.com/LIonWeb-org/organization/issues/122[[documentation: Reference] Layering: data interchange â€œvs.â€ programmatic #122]]
+:fn-org122: footnote:org122[https://github.com/LIonWeb-org/organization/issues/122[[documentation: Reference] Layering: data interchange "vs." programmatic #122]]
 :fn-org123: footnote:org123[https://github.com/LIonWeb-org/organization/issues/123[[documentation: Reference] Reference architecture #123]]
 :fn-org124: footnote:org124[https://github.com/LIonWeb-org/organization/issues/124[[documentation: Reference] Serialization format #124]]
 :fn-org125: footnote:org125[https://github.com/LIonWeb-org/organization/issues/125[[documentation: Reference] LIonCore/M3 #125]]
@@ -143,3 +143,5 @@
 :fn-org148: footnote:org148[https://github.com/LIonWeb-org/organization/issues/148[Level of detail on API specifications #148]]
 :fn-org149: footnote:org149[https://github.com/LIonWeb-org/organization/issues/149[Don't specify minimum supported range for integer #149]]
 :fn-org150: footnote:org150[https://github.com/LIonWeb-org/organization/issues/150[How to represent annotations in serialization #150]]
+:fn-org153: footnote:org153[https://github.com/LIonWeb-org/organization/issues/153[Details on builtin language #153]]
+:fn-org154: footnote:org154[https://github.com/LIonWeb-org/organization/issues/154[Details on Annotations #154]]
