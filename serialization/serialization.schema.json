@@ -151,7 +151,8 @@
             "type": "array",
             "items": {
               "$ref": "#/$defs/id"
-            }
+            },
+            "uniqueItems": true
           },
           "parent": {
             "oneOf": [
