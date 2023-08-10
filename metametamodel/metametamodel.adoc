@@ -151,7 +151,8 @@ We design a fancy documentation language, and can annotate any other node with s
 
 .EMF & MPS equivalent
 An Annotation is equivalent to MPS' `NodeAttribute`.
-In EMF, an `Adapter` can be used for similar purposes.
+In EMF, an `Adapter` can be used for similar purposes on M1 models.
+On M2 models (i.e. Ecore), an Annotation corresponds to an `EAnnotation`.
 
 .Characteristics
 An Annotation has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
@@ -973,7 +974,7 @@ Main difference: we aim for multiple implementations on different platforms, we 
 link:https://alexanderpann.github.io/mps-openapi-doc/javadoc_2021.2/org/jetbrains/mps/openapi/language/SLanguage.html[javadoc])
 
 |<<Annotation>>
-|link:https://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/common/notify/Adapter.html[Adapter]
+|link:https://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/common/notify/Adapter.html[Adapter] (M1) / link:https://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EAnnotation.html[EAnnotation] (M2)
 |link:http://127.0.0.1:63320/node?ref=r%3A00000000-0000-4000-0000-011c89590288%28jetbrains.mps.lang.core.structure%29%2F3364660638048049748[NodeAttribute] (link:https://www.jetbrains.com/help/mps/structure.html#attributes[docs])
 
 |<<Concept>>
