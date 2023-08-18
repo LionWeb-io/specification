@@ -9,8 +9,11 @@ include::../shared/issue-footnotes.adoc[]
 In this document we describe the Meta-Metamodel to be used by LIonWeb.
 The Meta-Metamodel is called LIonCore.
 
+[[introduction]]
+== Introduction
+
 [[goals]]
-== Goals
+=== Goals
 
 The goal is to define a meta-metamodel that can be used in different contexts and implemented from different languages.
 
@@ -19,12 +22,12 @@ The approach taken would be conservative: we want to provide boring and proven i
 This will be based on the experience that we as a community had with the meta-metamodel used in EMF and MPS mainly.
 Suggestions based on the experience obtained with other meta-metamodels are also very welcome.
 
-== Languages supported
+=== Languages supported
 
 We aim to have the initial implementations being available in Java and Typescript.
 We are interested in implementing it in other languages too, but not as part of the initial effort.
 
-== What kind of models should be expressible?
+=== What kind of models should be expressible?
 
 Any kind of model.
 In other words, models specified using metamodels expressed through this Meta-Metamodel should not make any assumptions on the node being obtained from parsing text or a graphical modeling tool or a projectional editor.
@@ -41,19 +44,16 @@ For example, DSLs used to define tax calculations or automation rules for email 
 
 Let’s first see a representation of the meta-metamodel using (a tiny subset of) the UML’s class diagram notation.
 
-[plantuml, metametamodel, svg]
-----
-include::metametamodel.puml[]
-----
+plantuml::metametamodel.puml[format=svg]
 
 == Definition of the meta-metamodel
 
 In this section we describe the single elements composing the Meta-Metamodel.
 We will list elements by their type: classes, abstract classes and interfaces.
 
-=== Classes
+=== Concepts
 
-The classes are <<Language>>, <<Concept>>, <<ConceptInterface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Containment>>, <<Reference>>, and <<Property>>.
+The concepts are <<Language>>, <<Concept>>, <<Annotation>>, <<ConceptInterface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Containment>>, <<Reference>>, and <<Property>>.
 
 [[Language]]
 ==== Language
@@ -103,6 +103,8 @@ Example: if Language B depends on Language A, and Language C depends on B, then 
 A Language CAN declare a transitive dependency explicitly.
 In the example above, Language C CAN declare an explicit dependency on Language A.
 
+##TODO: Dependency on builtins {fn-org153}##
+
 [[Concept]]
 ==== Concept
 A Concept represents a category of entities sharing the same structure.
@@ -121,7 +123,7 @@ A Concept has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
 A Concept can be concrete (i.e., instantiable) or abstract, marked by boolean `abstract` property.
 
 [[Concept.partition, Concept.partition]]
-A concept can be marked as <<partition, partition>> via the boolean `partition` property.{fn-org29}
+A Concept can be marked as <<partition, partition>> via the boolean `partition` property.{fn-org29}
 
 A Concept is a <<Classifier>>  (as it has features).
 It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name), a <<IKeyed>> (as it has a key).
@@ -138,6 +140,162 @@ A Concept can have any number of <<Classifier.features, `features`>>, given it i
 
 .Constraints
 TBD
+
+[[Annotation]]
+==== Annotation
+An Annotation is a limited[*] additional, orthogonal information attached to potentially any node, sharing the node’s lifecycle.
+The annotated node (or its concept) does not need to know about the annotation.{fn-org13}
+
+.Example
+We design a fancy documentation language, and can annotate any other node with such documentation.
+
+.EMF & MPS equivalent
+An Annotation is equivalent to MPS' `NodeAttribute`.
+In EMF, an `Adapter` can be used for similar purposes on M1 models.
+On M2 models (i.e. Ecore), an Annotation corresponds to an `EAnnotation`.
+
+.Characteristics
+An Annotation has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
+
+[[Annotation.multiple, Annotation.multiple]]
+An Annotation can specify whether an annotated node can have more than one annotation via the boolean `multiple` property.
+
+An Annotation is a <<Classifier>>, and indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name), a <<IKeyed>> (as it has a key).
+
+[[Annotation.annotates, Annotation.annotates]]
+Each Annotation specifies which <<Classifier, `Classifiers`>> it `annotates`.
+If it should be applicable to any node, it annotates <<Node>>.
+
+As Annotations can specify which Concept or Annotation it [[Annotation.extends, Annotation.extends]]`extends` and which interfaces it [[Annotation.implements, Annotation.implements]] `implements`.
+An Annotation can have any number of <<Classifier.features, `features`>>, given it is a <<Classifier>>.
+
+.Constraints
+We CANNOT redefine `multiple` and `annotates` in a sub-annotation (i.e. an annotation that `extends` another).{fn-org154}
+
+We can attach an instance of an Annotation only to instances of the Concept the Annotation `annotates` (and sub-concepts thereof).
+
+.Annotation examples
+--
+.Language
+[plantuml, valid-annotation, svg]
+----
+hide empty members
+
+annotation DocumentationAnnotation <<A, orange>><<Annotation>> {
+  multiple = false
+  --
+  docu: String
+}
+
+DocumentationAnnotation -> Builtins.Node: annotates
+
+annotation OrgRoleAnnotation <<A, orange>><<Annotation>> {
+  multiple = true
+  --
+  role: String
+}
+
+OrgRoleAnnotation -> Person: annotates
+
+package Builtins {
+  class Node <<C, lightgreen>><<Concept>>
+}
+
+class Person <<C, lightgreen>><<Concept>> extends Builtins.Node {
+  partition = false
+  --
+  name: String
+  age: Integer
+}
+
+Person *- Address
+
+class Address <<C, lightgreen>><<Concept>> extends Builtins.Node {
+  partition = false
+  --
+  street: String
+  zipcode: String
+}
+----
+
+.Valid instance
+[plantuml, valid-annotation-m1, svg]
+----
+hide empty members
+
+class Alice <<c, lightgreen>><<Person>> {
+  name = "Alison"
+  age = 23
+}
+
+Alice *- CompanyAddress
+
+class CompanyAddress <<c, lightgreen>><<Address>> {
+  street = "main st."
+  zipcode = "3212"
+}
+
+class AliceRole1 <<a, orange>><<OrgRoleAnnotation>> {
+  role = "CEO"
+}
+Alice <-- AliceRole1
+
+class AliceRole2 <<a, orange>><<OrgRoleAnnotation>> {
+  role = "Founder"
+}
+Alice <-- AliceRole2
+
+class AliceDocu <<a, orange>><<DocumentationAnnotation>> {
+  docu = "Loves dogs"
+}
+Alice <-- AliceDocu
+
+class CompanyAddrDocu <<a, orange>><<DocumentationAnnotation>> {
+  docu = "The place where work happens"
+}
+
+CompanyAddress <-- CompanyAddrDocu
+----
+
+.Invalid instance
+[plantuml, invalid-annotation-m1, svg]
+----
+hide empty members
+
+class Alice <<c, lightgreen>><<Person>> {
+  name = "Alison"
+  age = 23
+}
+
+Alice *- CompanyAddress
+
+class CompanyAddress <<c, lightgreen>><<Address>> {
+  street = "main st."
+  zipcode = "3212"
+}
+
+class AliceDocu1 <<a, orange>><<DocumentationAnnotation>> ##red {
+  role = "Loves dogs"
+}
+Alice <-[#red]- AliceDocu1
+class AliceDocu2 <<a, orange>><<DocumentationAnnotation>> ##red {
+  role = "invalid because\nDocumentationAnnotation.multiple=false"
+}
+Alice <-[#red]- AliceDocu2
+
+
+
+class CompanyRole <<a, orange>><<OrgRoleAnnotation>> ##red {
+  role = "invalid because\nOrgRoleAnnotation.annotates!=Address"
+}
+
+CompanyAddress <-[#red]- CompanyRole
+----
+--
+
+.Remarks
+[*] "limited" because the more complex the annotation is, the more likely it should not be part of the annotated node's lifecycle -- We might want to reuse the complex annotation somewhere else.
+Example: In MPS, the editor of a concept can be seen as an annotation of that concept. But even if we deleted the concept, we might want to reuse the editor for another (similar) concept.
 
 [[ConceptInterface]]
 ==== ConceptInterface
@@ -309,9 +467,9 @@ It is indirectly a <<IKeyed>> (as it has a key) and an <<INamed>> (as it has a n
 .Constraints
 TBD
 
-=== Abstract classes
+=== Abstract concepts
 
-The abstract classes are <<LanguageEntity>>, <<Classifier>>, <<DataType>>, <<Feature>>, and <<Link>>.
+The abstract concepts are <<LanguageEntity>>, <<Classifier>>, <<DataType>>, <<Feature>>, and <<Link>>.
 
 [[LanguageEntity]]
 ==== LanguageEntity
@@ -333,10 +491,11 @@ A LanguageEntity is a <<IKeyed>> (as it has a key), and indirectly an <<INamed>>
 
 A LanguageEntity can be one of:
 
+* <<Annotation>>
 * <<Concept>>
 * <<ConceptInterface>>
-* <<PrimitiveType>>
 * <<Enumeration>>
+* <<PrimitiveType>>
 
 .Constraints
 Each LanguageEntity must have a unique `name` within the Language.
@@ -364,6 +523,7 @@ A Classifier owns any number of <<Feature, Features>> in `features` containment.
 
 A Classifier can be one of:
 
+* <<Annotation>>
 * <<Concept>>
 * <<ConceptInterface>>
 
@@ -546,6 +706,11 @@ The language itself has key `LIonCore-M3`.{fn-org91}
 |===
 |M3 element |Concept |Key
 
+|<<Annotation>> |Concept |Annotation
+|<<Annotation.annotates>> |Reference |Annotation-annotates
+|<<Annotation.multiple>> |Property |Annotation-multiple
+|<<Annotation.extends>> |Reference |Annotation-extends
+|<<Annotation.implements>> |Reference |Annotation-implements
 |<<Concept>> |Concept |Concept
 |<<Concept.abstract>> |Property |Concept-abstract
 |<<Concept.extends>> |Reference |Concept-extends
@@ -728,10 +893,6 @@ Future versions might support this directly.{fn-org146}
 
 == Other considerations
 
-=== Annotations
-
-We intend to support annotations in a future release.{fn-org13}
-
 === Reflection
 
 Reflection describes the ability of each Meta-Metamodel instance to access the definition of the Meta-Metamodel element from which it has been instantiated.
@@ -763,7 +924,7 @@ From an instance, we refer to its defining language element by the language elem
 This includes references to
 
 * <<Language>> usage
-* <<Concept>> instance
+* <<Annotation>> or <<Concept>> instance
 * <<Property>> assignment
 * <<Containment>> assignment
 * <<Reference>> assignment
@@ -811,6 +972,10 @@ Main difference: we aim for multiple implementations on different platforms, we 
 |Language's structure aspect
 (link:https://www.jetbrains.com/help/mps/structure.html[docs],
 link:https://alexanderpann.github.io/mps-openapi-doc/javadoc_2021.2/org/jetbrains/mps/openapi/language/SLanguage.html[javadoc])
+
+|<<Annotation>>
+|link:https://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/common/notify/Adapter.html[Adapter] (M1) / link:https://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EAnnotation.html[EAnnotation] (M2)
+|link:http://127.0.0.1:63320/node?ref=r%3A00000000-0000-4000-0000-011c89590288%28jetbrains.mps.lang.core.structure%29%2F3364660638048049748[NodeAttribute] (link:https://www.jetbrains.com/help/mps/structure.html#attributes[docs])
 
 |<<Concept>>
 |link:https://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EClass.html[EClass]

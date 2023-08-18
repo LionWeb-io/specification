@@ -56,8 +56,9 @@
           "value": null
         }
       ],
-      "children": {},
-      "references": {},
+      "children": [],
+      "references": [],
+      "annotations": [],
       "parent": null
     },
     {
@@ -95,6 +96,7 @@
       ],
       "children": [],
       "references": [],
+      "annotations": [],
       "parent": null
     }
   ]
