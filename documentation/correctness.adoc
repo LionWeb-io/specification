@@ -99,7 +99,7 @@ Note that this doesn't require any knowledge of the metamodels, as it just invol
 This means that the serialization chunk doesn't need to be correct in the meta-referential nor in the meta-structural sense!
 It should be alway possible to deserialize the serialization chunk into "`dynamic`"/"`reflective`" nodes, which could be useful in its own right.
 
-// TODO  describe when and how links should be resolved, etc.
+**TODO:** describe when and how links should be resolved, etc.
 
 === Constraints
 
@@ -107,17 +107,17 @@ No constraint violations.
 Constraints can only be checked with full knowledge of all metamodels involved, so meta-referential, meta-structural correctness is necessary for this.
 Also: the more "`interesting`" constraints typically navigate across references, so structure-referential correctness would also be necessary.
 It should be possible to come up with some kind of "`partial constraint checking`" that deals with unresolved references in a meaningful way -- possibly reporting warnings, rather than outright constraint violations.
-// TODO  come up with a "partial evaluation"-style semantics for navigating over an unresolved link, and e.g. type computation
+**TODO:** come up with a "partial evaluation"-style semantics for navigating over an unresolved link, and e.g. type computation
 
 Incorrectness is to be reported as a model with references to nodes, as well as an appropriate error message.
 For multi-valued features, an index has to be included as well.
 Recovery is more-or-less irrelevant from a technical standpoint, but incorrectness might obstruct/impede code generation, interpretation, type computation, etc.
 
 
-// TODO  example of how to report violations of all stated kinds
+**TODO:** example of how to report violations of all stated kinds
 
 
-**TODO**  improve following diagram:
+**TODO:** improve following diagram:
 
 image::../resources/correctness-diagrams/levels.svg[align="center"]
 
