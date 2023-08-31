@@ -1,6 +1,7 @@
 include::../shared/issue-footnotes.adoc[]
 
 :m3: ../metametamodel/metametamodel
+:refarch: ../reference-architecture/reference-architecture
 :fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
 
 = LIonWeb Serialization Format
@@ -49,8 +50,10 @@ Each _element_ must be unique with respect to the value of its _key_ `id`.
 === Language structure
 [[UsedLanguage]]
 Each *used language* MUST be an _object_.{fn-org129}
-##TODO: include builtins in used language? {fn-org153}##
 The order of _members_ is undefined.
+
+NOTE: If the chunk describes a language (M2), it might include instances of builtins' language entities.
+In this case, builtins MUST be listed as *used language* like any other language.{fn-org153}
 
 The _object_ MUST contain the following _members_:{fn-org76}
 
@@ -96,13 +99,13 @@ The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55
 * [[Node.concept]] _key_ `concept`{fn-org37-name} with _object_ _value_, adhering to <<meta-pointer>>.
   The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> this *node* is an instance of.
 * [[Node.properties]] _key_ `properties` with _array_ _value_, each _element_ adhering to <<property>>.
-The order of _elements_ is undefined.
+The order of _elements_ is undefined.{fn-org156}
 * [[Node.children]] _key_ `children`{fn-org55-name-children} with _array_ _value_, each _element_ adhering to <<child>>.
-The order of _elements_ is undefined.
+The order of _elements_ is undefined.{fn-org156}
 * [[Node.references]] _key_ `references`{fn-org55-name-references} with _array_ _value_, each _element_ adhering to <<reference>>.
-The order of _elements_ is undefined.
+The order of _elements_ is undefined.{fn-org156}
 * [[Node.annotations]] _key_ `annotations`{fn-org150} with _array_ _value_, each _element_ adhering to <<annotation>>.
-The order of _elements_ is undefined.
+The order of _elements_ MUST be maintained as set by <<{refarch}.adoc#client, model client>>.{fn-org157}
 * [[Node.parent]] _key_ `parent` with _string_ or _null_ _value_, adhering to <<parent>>.
 
 ##TODO: How to store invalid text?{fn-org62}##
@@ -143,7 +146,7 @@ The _object_ MUST contain the following _members_:
 The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Containment, *Containment*>> this *child* is an instance of.
 * [[Child.children]] _key_ `children` with _array_ _value_ with _string_ _elements_.
 Each _element_ adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained *node*.
-The order of _elements_ is undefined.
+The order of _elements_ MUST be maintained as set by <<{refarch}.adoc#client, model client>>.{fn-org157}
 +
 NOTE: Each *child* element is the inverse relation of a *parent*.
 +
@@ -159,7 +162,8 @@ The _object_ MUST contain the following _members_:
 
 * [[Reference.reference]] _key_ `reference` with _object_ _value_, adhering to <<meta-pointer>>.
 The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Reference, *Reference*>> this *reference* is an instance of.
-* [[Reference.targets]] _key_ `targets` with __object_ _elements_.
+* [[Reference.targets]] _key_ `targets` with _array_ _value_ with __object_ _elements_.
+The order of _elements_ MUST be maintained as set by <<{refarch}.adoc#client, model client>>.{fn-org157}
 Each _element_ MUST have the following _members_ in undefined order:{fn-org55-name-references}
 ** [[Reference.reference.resolveInfo]] _key_ `resolveInfo`{fn-org36} with _value_ as one of:
 *** _string_ containing *resolveInfo*, a textual hint that might be used to find the target *node* of this reference.
@@ -178,17 +182,11 @@ NOTE: The referred *node* CAN be contained in the processed document, but also C
 [[annotation]]
 ==== Annotation
 [[Annotation]]
-Each *annotation* MUST be an _object_.
-The order of _members_ is undefined.
+Each *annotation* MUST be a _string_.
+It adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained annotation *node*.
 
-The _object_ MUST contain the following _members_:
-
-* [[Annotation.annotations]] _key_ `annotations` with _array_ _value_ with _string_ _elements_.
-Each _element_ adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained *node*.
-The order of _elements_ is undefined.
-+
 NOTE: Each *annotation* element is the inverse relation of a *parent*.
-+
+
 NOTE: The annotation *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
 
 [[parent]]
