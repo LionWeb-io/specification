@@ -5,6 +5,10 @@ include::../shared/issue-footnotes.adoc[]
 :fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
 
 = LIonWeb Serialization Format
+:toc: preamble
+:toclevels: 3
+
+This document describes the serialization format for LIonWeb chunks.
 
 == Conventions used in this document
 * _italic_ words refer to concepts defined by JSON.
@@ -209,6 +213,7 @@ NOTE: The referred *node* CAN be contained in the processed document, but also C
 All property values MUST be serialized as JSON _string_.{fn-org34}{fn-org9}.
 An unset property CAN be serialized as JSON _null_.
 
+[[string]]
 ==== String
 <<{m3}.adoc#String, LIonCore Strings>> might be any string, of any length, including (but not limited to):
 
@@ -218,6 +223,7 @@ An unset property CAN be serialized as JSON _null_.
 * containing extended Unicode characters: `"😐"`
 * containing escaped Unicode characters: `"\uD83D\uDE10"`
 
+[[boolean]]
 ==== Boolean
 <<{m3}.adoc#Boolean, LIonCore Booleans>> MUST be encoded as exactly one of these JSON _strings_:
 
@@ -226,6 +232,7 @@ An unset property CAN be serialized as JSON _null_.
 
 Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase characters, short forms (like `t` or `f`), or decimal representation (like `1`, `0`, `-1`).
 
+[[integer]]
 ==== Integer
 <<{m3}.adoc#Integer, LIonCore Integers>> MUST be encoded as JSON _string_.
 
@@ -260,6 +267,7 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 * `" 5"`
 * `"-6 "`
 
+[[json]]
 ==== JSON
 <<{m3}.adoc#JSON, LIonCore JSON>> MUST be encoded as JSON _string_.
 All double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
@@ -271,6 +279,7 @@ The value MUST adhere to JSON spec (RFC 8259).
 .Invalid example
 `{ "key": "my value", "myArray": [1, -2, true] }`
 
+[[literal]]
 ==== Enumeration literals
 <<{m3}.adoc#EnumerationLiteral, LIonCore Enumeration literals>> MUST be encoded as JSON _string_ _value_ according to <<{m3}.adoc#keys, Key spec>>.
 MUST refer to the <<{m3}.adoc#IKeyed.key, key>> of an <<{m3}.adoc#EnumerationLiteral, EnumerationLiteral>> of the <<{m3}.adoc#Enumeration, Enumeration>> defined as <<{m3}.adoc#Property.type, type>> of this *Property*.{fn-org128}
