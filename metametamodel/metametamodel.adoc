@@ -143,9 +143,18 @@ A Concept MUST NOT extend itself, or form circles via `extends`.
 
 [[Annotation]]
 ==== Annotation
-An Annotation is a limitedfootnote:["limited" because the more complex the annotation is, the more likely it should not be part of the annotated node's lifecycle -- We might want to reuse the complex annotation somewhere else.
-Example: In MPS, the editor of a concept can be seen as an annotation of that concept. But even if we deleted the concept, we might want to reuse the editor for another (similar) concept.] additional, orthogonal information attached to potentially any node, sharing the node’s lifecycle.
+An Annotation is an additional piece of information attached to potentially any node, sharing the node’s lifecycle.
 The annotated node (or its concept) does not need to know about the annotation.{fn-org13}
+Annotations CAN be attached to other Annotations (although this structure is hard to comprehend, and should be used with caution).
+
+Annotations should only have limited content because the more complex the annotation is, the more likely it should not be part of the annotated node's lifecycle -- We might want to reuse the complex annotation somewhere else. +
+Example: In MPS, the editor of a concept can be seen as an annotation of that concept.
+But even if we deleted the concept, we might want to reuse the editor for another (similar) concept.
+
+Annotations' contents should be orthogonal to the annotated node, because actual content should be part of the original concepts, and unrelated contents should be somewhere else. +
+Example: Let's assume our Language defines a `Date` PrimitiveType.
+We might annotate `Date` with `@JavaImplementation(java.util.Date)` and `@TypeScriptImplementation(JsJoda.LocalDate)`.
+Our core model stays platform-independent, but we maintain the implementation details at the right place -- if we ever deleted `Date`, all related information would be gone without further cleanup.
 
 .Example
 We design a fancy documentation language, and can annotate any other node with such documentation.
