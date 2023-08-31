@@ -98,12 +98,12 @@ Language elements contained in a Language are allowed to refer to these other La
 * within declared dependencies
 * within _transitive_ dependencies.
 +
-Example: if Language B depends on Language A, and Language C depends on B, then Language C can also refer to members of Language A without explicitly declaring a dependency.
+Example: if Language _B_ depends on Language _A_, and Language _C_ depends on _B_, then Language _C_ can also refer to members of Language _A_ without explicitly declaring a dependency.
 
 A Language CAN declare a transitive dependency explicitly.
-In the example above, Language C CAN declare an explicit dependency on Language A.
+In the example above, Language _C_ CAN declare an explicit dependency on Language _A_.
 
-##TODO: Dependency on builtins {fn-org153}##
+As any Language depends (at least transitively and <<Concept.extends, implicitly>>) on <<stdlib>> elements, a Language CAN declare a dependency on builtins -- but _does not_ need to.{fn-org153}
 
 [[Concept]]
 ==== Concept
@@ -139,12 +139,22 @@ A Concept `implements` zero or more <<ConceptInterface, ConceptInterfaces>>.
 A Concept can have any number of <<Classifier.features, `features`>>, given it is a <<Classifier>>.
 
 .Constraints
-TBD
+A Concept MUST NOT extend itself, or form circles via `extends`.
 
 [[Annotation]]
 ==== Annotation
-An Annotation is a limited[*] additional, orthogonal information attached to potentially any node, sharing the node’s lifecycle.
+An Annotation is an additional piece of information attached to potentially any node, sharing the node’s lifecycle.
 The annotated node (or its concept) does not need to know about the annotation.{fn-org13}
+Annotations CAN be attached to other Annotations (although this structure is hard to comprehend, and should be used with caution).
+
+Annotations should only have limited content because the more complex the annotation is, the more likely it should not be part of the annotated node's lifecycle -- We might want to reuse the complex annotation somewhere else. +
+Example: In MPS, the editor of a concept can be seen as an annotation of that concept.
+But even if we deleted the concept, we might want to reuse the editor for another (similar) concept.
+
+Annotations' contents should be orthogonal to the annotated node, because actual content should be part of the original concepts, and unrelated contents should be somewhere else. +
+Example: Let's assume our Language defines a `Date` PrimitiveType.
+We might annotate `Date` with `@JavaImplementation(java.util.Date)` and `@TypeScriptImplementation(JsJoda.LocalDate)`.
+Our core model stays platform-independent, but we maintain the implementation details at the right place -- if we ever deleted `Date`, all related information would be gone without further cleanup.
 
 .Example
 We design a fancy documentation language, and can annotate any other node with such documentation.
@@ -166,13 +176,13 @@ An Annotation is a <<Classifier>>, and indirectly a <<LanguageEntity>> (as it is
 Each Annotation specifies which <<Classifier, `Classifiers`>> it `annotates`.
 If it should be applicable to any node, it annotates <<Node>>.
 
-As Annotations can specify which Concept or Annotation it [[Annotation.extends, Annotation.extends]]`extends` and which interfaces it [[Annotation.implements, Annotation.implements]] `implements`.
-An Annotation can have any number of <<Classifier.features, `features`>>, given it is a <<Classifier>>.
+Annotations can specify which Annotation it [[Annotation.extends, Annotation.extends]]`extends` and which interfaces it [[Annotation.implements, Annotation.implements]] `implements`.
+An Annotation CAN have any number of <<Classifier.features, `features`>>, given it is a <<Classifier>>.
 
 .Constraints
 We CANNOT redefine `multiple` and `annotates` in a sub-annotation (i.e. an annotation that `extends` another).{fn-org154}
 
-We can attach an instance of an Annotation only to instances of the Concept the Annotation `annotates` (and sub-concepts thereof).
+We MUST attach an instance of an Annotation only to instances of the Concept the Annotation `annotates` (and sub-concepts thereof).
 
 .Annotation examples
 --
@@ -292,10 +302,6 @@ class CompanyRole <<a, orange>><<OrgRoleAnnotation>> ##red {
 CompanyAddress <-[#red]- CompanyRole
 ----
 --
-
-.Remarks
-[*] "limited" because the more complex the annotation is, the more likely it should not be part of the annotated node's lifecycle -- We might want to reuse the complex annotation somewhere else.
-Example: In MPS, the editor of a concept can be seen as an annotation of that concept. But even if we deleted the concept, we might want to reuse the editor for another (similar) concept.
 
 [[ConceptInterface]]
 ==== ConceptInterface

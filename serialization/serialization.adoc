@@ -1,9 +1,14 @@
 include::../shared/issue-footnotes.adoc[]
 
 :m3: ../metametamodel/metametamodel
+:refarch: ../reference-architecture/reference-architecture
 :fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
 
 = LIonWeb Serialization Format
+:toc: preamble
+:toclevels: 3
+
+This document describes the serialization format for LIonWeb chunks.
 
 == Conventions used in this document
 * _italic_ words refer to concepts defined by JSON.
@@ -29,18 +34,18 @@ Root level MUST be an _object_ with three members, called *serialization chunk*.
 ##TODO: Are more members allowed?{fn-org67}##
 
 [[SerializationChunk.serializationFormatVersion]]
-The first member MUST be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}
+The first member SHOULD be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}
 The value MUST be a decimal integer (without leading or trailing whitespace) describing the serialization format version used to create the processed document, according to <<versions>>.
 
 [[SerializationChunk.languages]]
-The second member MUST be _key_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}
+The second member SHOULD be _key_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}
 Each _element_ in the value array MUST adhere to <<language>>.
 The order of _elements_ is undefined.
 _elements_ MUST contain all language/version referred to by any <<meta-pointer>> in the processed document.
 Each _element_ must be unique with respect to all its _members_.
 
 [[SerializationChunk.nodes]]
-The third member MUST be _key_ `nodes` with an _array_ _value_.{fn-org33}
+The third member SHOULD be _key_ `nodes` with an _array_ _value_.{fn-org33}
 Each _element_ in the value array MUST adhere to <<node>>.
 The order of _elements_ is undefined.
 Each _element_ must be unique with respect to the value of its _key_ `id`.
@@ -49,8 +54,10 @@ Each _element_ must be unique with respect to the value of its _key_ `id`.
 === Language structure
 [[UsedLanguage]]
 Each *used language* MUST be an _object_.{fn-org129}
-##TODO: include builtins in used language? {fn-org153}##
 The order of _members_ is undefined.
+
+NOTE: If the chunk describes a language (M2), it might include instances of builtins' language entities.
+In this case, builtins MUST be listed as *used language* like any other language.{fn-org153}
 
 The _object_ MUST contain the following _members_:{fn-org76}
 
@@ -96,13 +103,13 @@ The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55
 * [[Node.concept]] _key_ `concept`{fn-org37-name} with _object_ _value_, adhering to <<meta-pointer>>.
   The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> this *node* is an instance of.
 * [[Node.properties]] _key_ `properties` with _array_ _value_, each _element_ adhering to <<property>>.
-The order of _elements_ is undefined.
+The order of _elements_ is undefined.{fn-org156}
 * [[Node.children]] _key_ `children`{fn-org55-name-children} with _array_ _value_, each _element_ adhering to <<child>>.
-The order of _elements_ is undefined.
+The order of _elements_ is undefined.{fn-org156}
 * [[Node.references]] _key_ `references`{fn-org55-name-references} with _array_ _value_, each _element_ adhering to <<reference>>.
-The order of _elements_ is undefined.
+The order of _elements_ is undefined.{fn-org156}
 * [[Node.annotations]] _key_ `annotations`{fn-org150} with _array_ _value_, each _element_ adhering to <<annotation>>.
-The order of _elements_ is undefined.
+The order of _elements_ MUST be maintained as set by <<{refarch}.adoc#client, model client>>.{fn-org157}
 * [[Node.parent]] _key_ `parent` with _string_ or _null_ _value_, adhering to <<parent>>.
 
 ##TODO: How to store invalid text?{fn-org62}##
@@ -143,7 +150,7 @@ The _object_ MUST contain the following _members_:
 The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Containment, *Containment*>> this *child* is an instance of.
 * [[Child.children]] _key_ `children` with _array_ _value_ with _string_ _elements_.
 Each _element_ adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained *node*.
-The order of _elements_ is undefined.
+The order of _elements_ MUST be maintained as set by <<{refarch}.adoc#client, model client>>.{fn-org157}
 +
 NOTE: Each *child* element is the inverse relation of a *parent*.
 +
@@ -159,7 +166,8 @@ The _object_ MUST contain the following _members_:
 
 * [[Reference.reference]] _key_ `reference` with _object_ _value_, adhering to <<meta-pointer>>.
 The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Reference, *Reference*>> this *reference* is an instance of.
-* [[Reference.targets]] _key_ `targets` with __object_ _elements_.
+* [[Reference.targets]] _key_ `targets` with _array_ _value_ with __object_ _elements_.
+The order of _elements_ MUST be maintained as set by <<{refarch}.adoc#client, model client>>.{fn-org157}
 Each _element_ MUST have the following _members_ in undefined order:{fn-org55-name-references}
 ** [[Reference.reference.resolveInfo]] _key_ `resolveInfo`{fn-org36} with _value_ as one of:
 *** _string_ containing *resolveInfo*, a textual hint that might be used to find the target *node* of this reference.
@@ -178,17 +186,11 @@ NOTE: The referred *node* CAN be contained in the processed document, but also C
 [[annotation]]
 ==== Annotation
 [[Annotation]]
-Each *annotation* MUST be an _object_.
-The order of _members_ is undefined.
+Each *annotation* MUST be a _string_.
+It adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained annotation *node*.
 
-The _object_ MUST contain the following _members_:
-
-* [[Annotation.annotations]] _key_ `annotations` with _array_ _value_ with _string_ _elements_.
-Each _element_ adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained *node*.
-The order of _elements_ is undefined.
-+
 NOTE: Each *annotation* element is the inverse relation of a *parent*.
-+
+
 NOTE: The annotation *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
 
 [[parent]]
@@ -211,6 +213,7 @@ NOTE: The referred *node* CAN be contained in the processed document, but also C
 All property values MUST be serialized as JSON _string_.{fn-org34}{fn-org9}.
 An unset property CAN be serialized as JSON _null_.
 
+[[string]]
 ==== String
 <<{m3}.adoc#String, LIonCore Strings>> might be any string, of any length, including (but not limited to):
 
@@ -220,6 +223,7 @@ An unset property CAN be serialized as JSON _null_.
 * containing extended Unicode characters: `"😐"`
 * containing escaped Unicode characters: `"\uD83D\uDE10"`
 
+[[boolean]]
 ==== Boolean
 <<{m3}.adoc#Boolean, LIonCore Booleans>> MUST be encoded as exactly one of these JSON _strings_:
 
@@ -228,6 +232,7 @@ An unset property CAN be serialized as JSON _null_.
 
 Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase characters, short forms (like `t` or `f`), or decimal representation (like `1`, `0`, `-1`).
 
+[[integer]]
 ==== Integer
 <<{m3}.adoc#Integer, LIonCore Integers>> MUST be encoded as JSON _string_.
 
@@ -262,6 +267,7 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 * `" 5"`
 * `"-6 "`
 
+[[json]]
 ==== JSON
 <<{m3}.adoc#JSON, LIonCore JSON>> MUST be encoded as JSON _string_.
 All double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
@@ -273,6 +279,7 @@ The value MUST adhere to JSON spec (RFC 8259).
 .Invalid example
 `{ "key": "my value", "myArray": [1, -2, true] }`
 
+[[literal]]
 ==== Enumeration literals
 <<{m3}.adoc#EnumerationLiteral, LIonCore Enumeration literals>> MUST be encoded as JSON _string_ _value_ according to <<{m3}.adoc#keys, Key spec>>.
 MUST refer to the <<{m3}.adoc#IKeyed.key, key>> of an <<{m3}.adoc#EnumerationLiteral, EnumerationLiteral>> of the <<{m3}.adoc#Enumeration, Enumeration>> defined as <<{m3}.adoc#Property.type, type>> of this *Property*.{fn-org128}

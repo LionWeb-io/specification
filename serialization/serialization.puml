@@ -19,6 +19,7 @@ SerializationChunk *--> "0..*" Node: nodes
 class Node {
     id: Id
     parent: Id
+    annotations: Id[] <<ordered>>
 }
 
 Node *--> "1" MetaPointer: concept
@@ -31,7 +32,7 @@ class MetaPointer {
 
 Node *--> "0..*" Child: children
 class Child {
-  children: String[]
+  children: Id[] <<ordered>>
 }
 Child *--> "1" MetaPointer: containment
 
@@ -45,15 +46,10 @@ Property *--> "1" MetaPointer: property
 Node *--> "0..*" Reference: references
 class Reference
 Reference *--> "1" MetaPointer: reference
-Reference *--> "0..*" ReferenceTarget: targets
+Reference *--> "0..*" ReferenceTarget: <<ordered>>\ntargets
 class ReferenceTarget {
     reference: Id
     resolveInfo: String
-}
-
-Node *--> "0..*" Annotation: annotations
-class Annotation {
-  annotations: String[]
 }
 
 @enduml
