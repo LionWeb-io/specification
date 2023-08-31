@@ -145,3 +145,5 @@
 :fn-org150: footnote:org150[https://github.com/LIonWeb-org/organization/issues/150[How to represent annotations in serialization #150]]
 :fn-org153: footnote:org153[https://github.com/LIonWeb-org/organization/issues/153[Details on builtin language #153]]
 :fn-org154: footnote:org154[https://github.com/LIonWeb-org/organization/issues/154[Details on Annotations #154]]
+:fn-org156: footnote:org156[https://github.com/LIonWeb-org/organization/issues/156[Keep serialization order between different features? #156]]
+:fn-org157: footnote:org157[https://github.com/LIonWeb-org/organization/issues/157[Maintain order in serialization of each containment / reference / annotation #157]]
