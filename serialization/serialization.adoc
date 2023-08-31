@@ -29,18 +29,18 @@ Root level MUST be an _object_ with three members, called *serialization chunk*.
 ##TODO: Are more members allowed?{fn-org67}##
 
 [[SerializationChunk.serializationFormatVersion]]
-The first member MUST be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}
+The first member SHOULD be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}
 The value MUST be a decimal integer (without leading or trailing whitespace) describing the serialization format version used to create the processed document, according to <<versions>>.
 
 [[SerializationChunk.languages]]
-The second member MUST be _key_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}
+The second member SHOULD be _key_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}
 Each _element_ in the value array MUST adhere to <<language>>.
 The order of _elements_ is undefined.
 _elements_ MUST contain all language/version referred to by any <<meta-pointer>> in the processed document.
 Each _element_ must be unique with respect to all its _members_.
 
 [[SerializationChunk.nodes]]
-The third member MUST be _key_ `nodes` with an _array_ _value_.{fn-org33}
+The third member SHOULD be _key_ `nodes` with an _array_ _value_.{fn-org33}
 Each _element_ in the value array MUST adhere to <<node>>.
 The order of _elements_ is undefined.
 Each _element_ must be unique with respect to the value of its _key_ `id`.
