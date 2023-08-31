@@ -22,6 +22,9 @@ We do not take any measures to reduce the amount of transmitted data.{fn-org73}
 == Description
 LIonWeb node serialization format is defined in JSON (https://datatracker.ietf.org/doc/html/rfc8259[RFC 8259]).
 
+We follow the advice of RFC 8259 to be "interoperable", i.e. we assume object keys are unique, and their order is undefined.
+Any violations SHOULD be reported as error.{fn-org159}
+
 == Overview of structures
 
 plantuml::serialization.puml[format=svg]
@@ -34,18 +37,18 @@ Root level MUST be an _object_ with three members, called *serialization chunk*.
 ##TODO: Are more members allowed?{fn-org67}##
 
 [[SerializationChunk.serializationFormatVersion]]
-The first member SHOULD be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}
+The first member SHOULD be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}{fn-org159}
 The value MUST be a decimal integer (without leading or trailing whitespace) describing the serialization format version used to create the processed document, according to <<versions>>.
 
 [[SerializationChunk.languages]]
-The second member SHOULD be _key_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}
+The second member SHOULD be _key_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}{fn-org159}
 Each _element_ in the value array MUST adhere to <<language>>.
 The order of _elements_ is undefined.
 _elements_ MUST contain all language/version referred to by any <<meta-pointer>> in the processed document.
 Each _element_ must be unique with respect to all its _members_.
 
 [[SerializationChunk.nodes]]
-The third member SHOULD be _key_ `nodes` with an _array_ _value_.{fn-org33}
+The third member SHOULD be _key_ `nodes` with an _array_ _value_.{fn-org33}{fn-org159}
 Each _element_ in the value array MUST adhere to <<node>>.
 The order of _elements_ is undefined.
 Each _element_ must be unique with respect to the value of its _key_ `id`.
