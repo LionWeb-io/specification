@@ -261,7 +261,7 @@
           "reference": {
             "language": "LIonCore-M3",
             "version": "1",
-            "key": "Property-type"
+            "key": "Link-type"
           },
           "targets": [
             {
