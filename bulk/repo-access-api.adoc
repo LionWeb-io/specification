@@ -2,18 +2,26 @@ include::../shared/issue-footnotes.adoc[]
 :serialization: ../serialization/serialization
 :m3: ../metametamodel/metametamodel
 = Bulk Repository Access API
+:toc: preamble
+:toclevels: 3
 
 The bulk API is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
 It is intended for CRUD operations on (larger) sets of nodes.
 it is *not* intended as a delta-oriented API that takes "modification commands" as arguments.
 
 == Use Cases
+We describe the use cases from a client's perspective.
 
-Moved to link:../documentation/use-cases.adoc[]
+* "I'm starting up, which partitions do you know about?", i.e. list possible contents.
+* "Here is a node forest, store it as I hand it to you", i.e. actual bulk data storage.
+** Sub-case with same behavior: "I'm a very simple client who knows nothing about deltas, so whatever I send you is the truth", i.e. click-save-button.
+* "I'm starting up, get me the current partition contents", i.e. initial load.
+* "You've sent me a chunk referring to languages x and y. Give me the details about these languages", i.e. language reflection.
+* "List all languages you know", i.e. language enumeration.
 
 == APIs
 
-[[partitions]]
+[[partitions, partitions]]
 === partitions: List available partitions
 Lists all non-language partitions accessible in the repository.
 
@@ -44,13 +52,13 @@ GET /bulk/partitions
 // include::partitions.json[]
 // ----
 
-[[retrieve]]
+[[retrieve, retrieve]]
 === retrieve: Get nodes from repository
 Retrieves parts of the repository based on the listed node ids.
 
 Calling this API MUST NOT change repository contents.
 
-NOTE: We might add advanced capabilities in the future, or introduce an additional querying API.
+NOTE: We might add advanced filtering capabilities in the future, or introduce an additional querying API.
 
 .Proposed API name
 `retrieve`
@@ -61,8 +69,8 @@ NOTE: We might add advanced capabilities in the future, or introduce an addition
 
 [[retrieve.mode]]
 `mode`:: Set of nodes included for each element of `nodes` parameter.
-[[retrieve.mode.node]]
-`node`::: Only include the elements of `nodes` themselves.
+[[retrieve.mode.direct]]
+`direct`::: Only include the elements of `nodes` themselves.
 [[retrieve.mode.subtree]]
 `subtree`::: Include the elements of `nodes`, and all descendants of each element.
 [[retrieve.mode.closure]]
@@ -75,7 +83,7 @@ Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLang
 .Example request
 [source, httprequest]
 ----
-GET /bulk/retrieve?scope=node
+GET /bulk/retrieve?mode=direct
 
 [
   "first-node-id",
@@ -91,7 +99,7 @@ GET /bulk/retrieve?scope=node
 // ----
 
 
-[[store]]
+[[store, store]]
 === store: Put nodes into repository
 Creates new nodes, or updates existing nodes in the repository.
 
@@ -109,9 +117,9 @@ This way, we can move subtrees and add arbitrary references without sending unch
 
 [[store.mode]]
 `mode`:: Kind of storage accepted by the repository.
-Optional parameter, defaults to `overwrite`.
-[[store.mode.overwrite]]
-`overwrite`::: Accept both new and updated nodes.
+Optional parameter, defaults to `replace`.
+[[store.mode.replace, `replace`]]
+`replace`::: Accept both new and updated nodes.
 [[store.mode.create]]
 `create`::: Only accept new nodes.
 The call fails without any changes to the repository if any node id from `nodes` already exists in the repository.
@@ -123,7 +131,7 @@ The call fails without any changes to the repository if any node id from `nodes`
 We describe the store semantics by comparing one _sent_ node with one _repo_ node potentially already existing in the repository.{fn-org75}
 Both nodes have the same id, thus we consider them identical.{fn-org31}
 
-We describe the semantics of `overwrite` mode.
+We describe the semantics of `replace` mode.
 The other modes behave the same, except that they first compare the _sent_ nodes to the _repo_ nodes and might abort the call without any change to the repository.
 
 * If the _sent_ `A` does not yet exist (i.e. no corresponding _repo_ `A`), we create it as sent.
@@ -134,6 +142,10 @@ The other modes behave the same, except that they first compare the _sent_ nodes
 * If only _repo_ exist, we don't do anything (typically, there are a lot more nodes in the repository than the call).
 * If both _sent_ and _repo_ exist, we "overwrite" _repo_.
 That means:
+
+Concept::
+** If both _sent_ and _repo_ have the same concept MetaPointer, we don't change the repository.
+** Otherwise, this call fails.{fn-org69} #TODO correct?#
 
 Properties::
 ** If the property exists in both _sent_ and _repo_
@@ -150,10 +162,10 @@ Children::
 *** If the child is in different containments, we move the child to the _sent_ containment and position.
 ** If the child only exists in _sent_
 *** If the child node exists (either because it was sent in this call, or is already part of the repository), we add the child.
-*** Otherwise this call fails #TODO correct?#
+*** Otherwise, this call fails #TODO correct?#
 ** If the child only exists in _repo_
 *** If the child has been added as child/annotation somewhere else in this call, we move the child (as described above).
-*** Otherwise we delete the child *node* from the repository.
+*** Otherwise, we delete the child *node* from the repository.
 
 References::
 ** If the reference target exists in both _sent_ and _repo_
@@ -172,34 +184,19 @@ Annotations::
 *** If the annotation is in a different position, we move the annotation to the _sent_ position.
 ** If the annotation only exists in _sent_
 *** If the annotation node exists (either because it was sent in this call, or is already part of the repository), we add the annotation.
-*** Otherwise this call fails #TODO correct?#
+*** Otherwise, this call fails #TODO correct?#
 ** If the annotation only exists in _repo_
 *** If the annotation has been added as child/annotation somewhere else in this call, we move the annotation (as described above).
-*** Otherwise we delete the annotation *node* from the repository.
+*** Otherwise, we delete the annotation *node* from the repository.
 
 Parent::
 We have to ignore the `parent` field in the _sent_ because otherwise we always had to send the whole ancestor axis, even if unchanged. +
 #TODO double-check#
 
-#TODO: How to handle unknown node ids
-In our implementation trying to add a non-existent child ID to a parent will fail because a NodeNotFoundException will be thrown.#
+.How to handle unknown ids?
 
-.Mapping CRUD operations
-We assume `overwrite` mode.
-
-read:: Refer to <<retrieve>>.
-
-create:: Send a node with a _new id_, including all its features.
-
-update:: Send a node with an _existing id_, including all its features (both updated and unchanged).
-
-delete::
-* If node is a Partition: #TODO#
-* Otherwise: Assuming the to-be-deleted node `D`, send ``D``'s parent `P` with all its features, but omit `D` from the children.
-
-move:: Assume we want to move node `N` from its current parent `S` to its new parent `T`.
-Send `T` with all its features, including `N` in the children.
-
+* If requested by this client via <<ids>>: Create new node
+* If not requested by this client{fn-org94}{fn-org70} #TODO decide#
 
 
 .Result
@@ -208,12 +205,80 @@ Send `T` with all its features, including `N` in the children.
 .Example request
 [source, httprequest]
 ----
-GET /bulk/retrieve?scope=node
+POST /bulk/store?mode=replace
+
+TODO request body
+----
+
+// .Example response
+// [source, json]
+// ----
+// include::partitions.json[]
+// ----
+
+
+[[languages, languages]]
+=== languages: Get languages from repository
+Retrieves languages of the repository based on the listed <<{serialization}.adoc#UsedLanguage, UsedLanguages>>.
+
+Calling this API MUST NOT change repository contents.
+
+NOTE: We might add advanced filtering capabilities in the future, or introduce an additional querying API.
+
+.Proposed API name
+`languages`
+
+.Parameters
+[[languages.languages]]
+`languages`:: List of UsedLanguages we want to retrieve from the repository.
+Optional parameter, defaults to _all languages_.
+
+[[languages.mode]]
+`mode`:: Set of languages included for each element of `languages` parameter.
+Optional parameter, defaults to `direct`.
+[[languages.mode.direct]]
+`direct`::: Only include the elements of `languages` themselves.
+[[languages.mode.closure]]
+`closure`::: Include the transitive closure of all elements of `languages`, i.e. the languages themselves and all (directly or indirectly) <<{m3}.adoc#Language.dependsOn, dependsOn>> languages.
+
+.Result
+<<{serialization}.adoc#SerializationChunk, SerializationChunk>> containing all languages according to `languages` and `mode` parameters as instances of <<{m3}.adoc#Language, M3 Language>>.
+
+.Example request: List all languages known to the repository
+[source, httprequest]
+----
+GET /bulk/languages
+
+[]
+----
+
+.Example request: Get details on two languages
+[source, httprequest]
+----
+GET /bulk/languages?mode=direct
 
 [
-  "first-node-id",
-  "13123123",
-  "c2Vjb25kIG5vZGUgaWQ"
+  {
+    "key": "my-great-language",
+    "version": "1"
+  },
+  {
+    "key": "someThing_ELSE",
+    "version": "v34sdvlnq22-cc_1"
+  }
+]
+----
+
+.Example request: Get all languages I need to understand an instance of `my-great-language`
+[source, httprequest]
+----
+GET /bulk/languages?mode=closure
+
+[
+  {
+    "key": "my-great-language",
+    "version": "1"
+  }
 ]
 ----
 
@@ -224,146 +289,55 @@ GET /bulk/retrieve?scope=node
 // ----
 
 
-retrieve part of model::
-* in: (list of) node ID
-* in: mode \{node, subtree, closure}
-* out: (list of) subgraph(s)
+[[ids, ids]]
+=== ids: Get available ids
+Provides unused <<{m3}.adoc#identifiers, valid ids>>.
 
-store part of model::
-* in: (list of) subgraph(s)
+The repository MUST NOT hand out the same unused ids to any other client.
+The repository MUST NOT contain any node with any of the provided ids.
+The ids MUST exclude the <<{m3}.adoc#builtin-ids, built-in ids>>.
 
-give me a range of IDs I can use::
-* tbd
+Calling this API MUST NOT change repository contents themselves (besides the internal knowledge of reserved ids).
 
-Next: versioning, node referencing/URL
+.Proposed API name
+`ids`
 
-Note: how do we represent nodes and lists of subgraphs. (Sascha Map serialization)
+.Parameters
+[[ids.count]]
+`count`:: Number of ids requested.
+The repository MUST return between one (inclusive) and `count` (inclusive) ids.
 
-== REST API
-A model is just represented as a list of nodes.
-Each node has an ID and can be referenced using that ID.
+.Result
+List of ids guaranteed to be free.
 
-A model implementation on the client side just has to maintain a Map<NodeId, NodeData>.
-When it receives data from the server it’s as simple as putting it into the map and overriding the existing node data.
-There is no difference between loading an initial version or applying an incremental update.
-
-The server is responsible for doing the difficult algorithmic part.
-This minimizes the code required on the client side, making it easy to provide implementations for different platforms.
-
+.Example request
 [source, httprequest]
 ----
-GET /lion/\{repositoryID}/
-
-GET /lion/\{repositoryID}/\{versionHash}/
-
-GET /lion/\{repositoryID}/\{branchName}/
+GET /bulk/ids?count=10
 ----
 
-Response:
+// .Example response
+// [source, json]
+// ----
+// include::partitions.json[]
+// ----
 
-[source, json]
-----
-{
-  "versionHash": "af945d129c476",
-  "nodes": [
-    {
-      "id": 1,
-      "properties": {
-        "some": "something",
-        "values": "42",
-        "here": "161.21"
-      },
-      "references": { "entities": [735001, 769001] },
-      "children": {}
-    },
-    {
-      "id": 735001,
-      "properties": {
-        "name": "Entity1"
-      },
-      "references": {},
-      "children": { "properties": [735002, 735003, 735004] }
-    }
-  ]
-}
-----
 
-If the server doesn’t support branches or versioning then it only implements the first endpoint.
-The client can fall back to the first endpoint, if the others return 404.
+== Mapping CRUD operations
+NOTE: We assume <<store.mode.replace>> mode.
 
-[source, httprequest]
-----
-GET /lion/\{repositoryID}/delta/\{baseVersionHash}/
+read:: <<retrieve, retrieve call>> with requested node ids.
 
-GET /lion/\{repositoryID}/\{versionHash}/delta/\{baseVersionHash}/
+create:: <<store, store call>> that sends a node with a <<ids, _new id_>>, including all its features.
 
-GET /lion/\{repositoryID}/\{branchName}/delta/\{baseVersionHash}/
-----
+update:: <<store, store call>> that sends a node with an _existing id_, including all its features (both updated and unchanged).
 
-Response:
+delete::
+* If node is a Partition: #TODO#
+* Otherwise: Assume the to-be-deleted node `D`,  has parent `P`.
++
+<<store, store call>> that sends `P` with all its features, but omits `D` from the children.
 
-[source, json]
-----
-{
-  "versionHash": "af945d129c476",
-  "baseVersionHash": "39a15fd49c867",
-  "nodes": [
-    // only nodes that changed between the two versions
-  ]
-}
-----
-
-Also optional.
-If the server only supports bulk model read/write operations then it returns 404 and the client will fall back to the bulk endpoints.
-
-[source, httprequest]
-----
-POST /lion/\{repositoryID}/\{branchName}/\{baseVersionHash}/update
-
-POST /lion/\{repositoryID}/\{branchName}/update
-----
-
-Request body:
-
-[source, json]
-----
-[
-  // list of modified nodes
-  {
-    "id": 735001,
-    "properties": { "name": "EntityA" }
-    // unmodified content of the node can be omitted
-  }
-]
-----
-
-Response:
-
-[source, json]
-----
-{
-  "versionHash": "af945d129c476",
-  "baseVersionHash": "39a15fd49c867",
-  "nodes": []
-}
-----
-
-The response is similar to the `…/delta/…` endpoint.
-If there were concurrent changes and conflicts were resolved by the server then it may contain a list of the nodes that need to be updated on the client, otherwise the list of nodes is empty.
-
-Servers that don’t support versioning can provide only the second endpoint without a `baseVersion`.
-The response then doesn’t contain any version hashes.
-
-Reading the concrete rest API, this reminds me that there are (at least) five aspects about which we have to discuss:
-
-. What is the vocabulary (set of operations) that we want to support?
-** what is the granularity/size of the "unit of stuff" we read and write?
-** how flexibly can we express the query to determine that size?
-** can we layer a query API on top of a simpler API?
-
-. How do we represent the models (fragments) across the wire? JSON, YAML, etc.?
-
-. How do we represent the actual operations? Which transport protocol do we use?
-
-I think 1) is independent of 3).
-Which is why I would like to discuss this initially without discussing the REST details.
+move:: Assume we want to move node `N` from its current parent `S` to its new parent `T`.
++
+<<store, store call>> that sends `T` with all its features, including `N` in the children.
