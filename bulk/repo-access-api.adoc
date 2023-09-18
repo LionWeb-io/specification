@@ -1,7 +1,10 @@
-= Repo Access API
+include::../shared/issue-footnotes.adoc[]
+:serialization: ../serialization/serialization
+:m3: ../metametamodel/metametamodel
+= Bulk Repository Access API
 
-The repository API is used to store and retrieve models, where "model" is a somehow bounded subset of the repo contents.
-It is intended for bulk access (read, modify a couple of times on the client then store again).
+The bulk API is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
+It is intended for CRUD operations on (larger) sets of nodes.
 it is *not* intended as a delta-oriented API that takes "modification commands" as arguments.
 
 == Use Cases
@@ -9,6 +12,217 @@ it is *not* intended as a delta-oriented API that takes "modification commands" 
 Moved to link:../documentation/use-cases.adoc[]
 
 == APIs
+
+[[partitions]]
+=== partitions: List available partitions
+Lists all non-language partitions accessible in the repository.
+
+Calling this API MUST NOT change repository contents.
+
+NOTE: We might add filter capabilities in the future.
+
+.Proposed API name
+`partitions`
+
+.Parameters
+None.
+
+.Result
+<<{serialization}.adoc#SerializationChunk, SerializationChunk>> containing all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
+Does NOT include <<{m3}.adoc#Language, Languages>>
+#TODO: Correct?#
+
+.Example request
+[source, httprequest]
+----
+GET /bulk/partitions
+----
+
+// .Example response
+// [source, json]
+// ----
+// include::partitions.json[]
+// ----
+
+[[retrieve]]
+=== retrieve: Get nodes from repository
+Retrieves parts of the repository based on the listed node ids.
+
+Calling this API MUST NOT change repository contents.
+
+NOTE: We might add advanced capabilities in the future, or introduce an additional querying API.
+
+.Proposed API name
+`retrieve`
+
+.Parameters
+[[retrieve.nodes]]
+`nodes`:: List of node ids we want to retrieve from the repository.
+
+[[retrieve.mode]]
+`mode`:: Set of nodes included for each element of `nodes` parameter.
+[[retrieve.mode.node]]
+`node`::: Only include the elements of `nodes` themselves.
+[[retrieve.mode.subtree]]
+`subtree`::: Include the elements of `nodes`, and all descendants of each element.
+[[retrieve.mode.closure]]
+`closure`::: Include the transitive closure of all elements of `nodes`, i.e. the elements themselves, all their descendants, and all (directly or indirectly) referenced nodes.
+
+.Result
+<<{serialization}.adoc#SerializationChunk, SerializationChunk>> containing all nodes according to `nodes` and `mode` parameters.
+Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLanguages>>, only their <<{serialization}.adoc#MetaPointer, MetaPointers>>.
+
+.Example request
+[source, httprequest]
+----
+GET /bulk/retrieve?scope=node
+
+[
+  "first-node-id",
+  "13123123",
+  "c2Vjb25kIG5vZGUgaWQ"
+]
+----
+
+// .Example response
+// [source, json]
+// ----
+// include::partitions.json[]
+// ----
+
+
+[[store]]
+=== store: Put nodes into repository
+Creates new nodes, or updates existing nodes in the repository.
+
+We always process one node in its entirety, i.e. we cannot update parts of the node with this API.
+
+A node id referenced as child, reference, or annotation _can_ be mentioned in the same request, but _can_ be omitted if a node with that id already exists in the repository.
+This way, we can move subtrees and add arbitrary references without sending unchanged nodes.
+
+.Proposed API name
+`store`
+
+.Parameters
+[[store.nodes]]
+`nodes`:: <<{serialization}.adoc#SerializationChunk, SerializationChunk>> containing all nodes to store to the repository.
+
+[[store.mode]]
+`mode`:: Kind of storage accepted by the repository.
+Optional parameter, defaults to `overwrite`.
+[[store.mode.overwrite]]
+`overwrite`::: Accept both new and updated nodes.
+[[store.mode.create]]
+`create`::: Only accept new nodes.
+The call fails without any changes to the repository if any node id from `nodes` already exists in the repository.
+[[store.mode.update]]
+`update`::: Only accept existing nodes.
+The call fails without any changes to the repository if any node id from `nodes` does not exist in the repository.
+
+.Semantics
+We describe the store semantics by comparing one _sent_ node with one _repo_ node potentially already existing in the repository.{fn-org75}
+Both nodes have the same id, thus we consider them identical.{fn-org31}
+
+We describe the semantics of `overwrite` mode.
+The other modes behave the same, except that they first compare the _sent_ nodes to the _repo_ nodes and might abort the call without any change to the repository.
+
+* If the _sent_ `A` does not yet exist (i.e. no corresponding _repo_ `A`), we create it as sent.
+** If any other _sent_ `B` mentions `A` as child/annotation, we create `A` as child/annotation of `B`. +
+#TODO do we validate that `A` is an annotation instance in case it's mentioned as annotation?#
+** If `A` is not mentioned anywhere, we create it as new partition. +
+#TODO do we validate that `A` is an partition instance?#
+* If only _repo_ exist, we don't do anything (typically, there are a lot more nodes in the repository than the call).
+* If both _sent_ and _repo_ exist, we "overwrite" _repo_.
+That means:
+
+Properties::
+** If the property exists in both _sent_ and _repo_
+*** If they have the same value, we don't change the repository.
+*** If they have a different value, we change the property to the _sent_ value.
+** If the property only exists in _sent_, we add the property.
+** If the property only exists in _repo_ we delete the property.
+
+Children::
+** If the child exists in both _sent_ and _repo_
+*** If the child is in the same containment
+**** If the child is in the same position, we don't change the repository.
+**** If the child is in a different position, we move the child to the _sent_ position.
+*** If the child is in different containments, we move the child to the _sent_ containment and position.
+** If the child only exists in _sent_
+*** If the child node exists (either because it was sent in this call, or is already part of the repository), we add the child.
+*** Otherwise this call fails #TODO correct?#
+** If the child only exists in _repo_
+*** If the child has been added as child/annotation somewhere else in this call, we move the child (as described above).
+*** Otherwise we delete the child *node* from the repository.
+
+References::
+** If the reference target exists in both _sent_ and _repo_
+*** If the target is in the same reference
+**** If the target is in the same position, we don't change the repository.
+**** If the target is in a different position, we move the target to the _sent_ position.
+*** {empty}
++
+NOTE: We don't need to consider if the target is in different references specially -- the target can be referenced from two references within the same parent.
+** If the reference target only exists in _sent_, we add the target.
+** If the reference target only exists in _repo_, we remove the target.
+
+Annotations::
+** If the annotation exists in both _sent_ and _repo_
+*** If the annotation is in the same position, we don't change the repository.
+*** If the annotation is in a different position, we move the annotation to the _sent_ position.
+** If the annotation only exists in _sent_
+*** If the annotation node exists (either because it was sent in this call, or is already part of the repository), we add the annotation.
+*** Otherwise this call fails #TODO correct?#
+** If the annotation only exists in _repo_
+*** If the annotation has been added as child/annotation somewhere else in this call, we move the annotation (as described above).
+*** Otherwise we delete the annotation *node* from the repository.
+
+Parent::
+We have to ignore the `parent` field in the _sent_ because otherwise we always had to send the whole ancestor axis, even if unchanged. +
+#TODO double-check#
+
+#TODO: How to handle unknown node ids
+In our implementation trying to add a non-existent child ID to a parent will fail because a NodeNotFoundException will be thrown.#
+
+.Mapping CRUD operations
+We assume `overwrite` mode.
+
+read:: Refer to <<retrieve>>.
+
+create:: Send a node with a _new id_, including all its features.
+
+update:: Send a node with an _existing id_, including all its features (both updated and unchanged).
+
+delete::
+* If node is a Partition: #TODO#
+* Otherwise: Assuming the to-be-deleted node `D`, send ``D``'s parent `P` with all its features, but omit `D` from the children.
+
+move:: Assume we want to move node `N` from its current parent `S` to its new parent `T`.
+Send `T` with all its features, including `N` in the children.
+
+
+
+.Result
+#TODO#
+
+.Example request
+[source, httprequest]
+----
+GET /bulk/retrieve?scope=node
+
+[
+  "first-node-id",
+  "13123123",
+  "c2Vjb25kIG5vZGUgaWQ"
+]
+----
+
+// .Example response
+// [source, json]
+// ----
+// include::partitions.json[]
+// ----
+
 
 retrieve part of model::
 * in: (list of) node ID
