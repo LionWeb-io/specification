@@ -148,3 +148,8 @@
 :fn-org156: footnote:org156[https://github.com/LIonWeb-org/organization/issues/156[Keep serialization order between different features? #156]]
 :fn-org157: footnote:org157[https://github.com/LIonWeb-org/organization/issues/157[Maintain order in serialization of each containment / reference / annotation #157]]
 :fn-org159: footnote:org159[https://github.com/LIonWeb-org/organization/issues/159[Don't rely on valid, but ambiguous JSON structures #159]]
+:fn-org163: footnote:org163[https://github.com/LIonWeb-org/organization/issues/163[Rename organization repo? #163]]
+:fn-org164: footnote:org164[https://github.com/LIonWeb-org/organization/issues/164[Annotation instances are stored under nodes #164]]
+:fn-org165: footnote:org165[https://github.com/LIonWeb-org/organization/issues/165[Version scheme for LionWeb? #165]]
+:fn-org168: footnote:org168[https://github.com/LIonWeb-org/organization/issues/168[Change spelling: LIonWeb -> LionWeb (lowercase i) #168]]
+:fn-org169: footnote:org169[https://github.com/LIonWeb-org/organization/issues/169[Create first release 2023.1 #169]]
