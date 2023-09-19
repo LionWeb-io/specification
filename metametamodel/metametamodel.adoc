@@ -773,6 +773,8 @@ This means the id MUST be identical to the key for each node in this language.
 === Built-in elements
 Each LIonWeb implementation ships with a set of built-in elements, akin to a _standard library_.
 
+plantuml::builtins.puml[format=svg]
+
 ==== Concepts
 
 [[Node, Node]]
