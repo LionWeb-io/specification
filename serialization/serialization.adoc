@@ -4,11 +4,11 @@ include::../shared/issue-footnotes.adoc[]
 :refarch: ../reference-architecture/reference-architecture
 :fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
 
-= LIonWeb Serialization Format
+= LionWeb Serialization Format
 :toc: preamble
 :toclevels: 3
 
-This document describes the serialization format for LIonWeb chunks.
+This document describes the serialization format for LionWeb chunks.
 
 == Conventions used in this document
 * _italic_ words refer to concepts defined by JSON.
@@ -20,7 +20,7 @@ This document describes the serialization format for LIonWeb chunks.
 We do not take any measures to reduce the amount of transmitted data.{fn-org73}
 
 == Description
-LIonWeb node serialization format is defined in JSON (https://datatracker.ietf.org/doc/html/rfc8259[RFC 8259]).
+LionWeb node serialization format is defined in JSON (https://datatracker.ietf.org/doc/html/rfc8259[RFC 8259]).
 
 We follow the advice of RFC 8259 to be "interoperable", i.e. we assume object keys are unique, and their order is undefined.
 Any violations SHOULD be reported as error.{fn-org159}
@@ -218,7 +218,7 @@ An unset property CAN be serialized as JSON _null_.
 
 [[string]]
 ==== String
-<<{m3}.adoc#String, LIonCore Strings>> might be any string, of any length, including (but not limited to):
+<<{m3}.adoc#String, LionCore Strings>> might be any string, of any length, including (but not limited to):
 
 * empty string: `""`
 * only containing whitespace: `" "`
@@ -228,7 +228,7 @@ An unset property CAN be serialized as JSON _null_.
 
 [[boolean]]
 ==== Boolean
-<<{m3}.adoc#Boolean, LIonCore Booleans>> MUST be encoded as exactly one of these JSON _strings_:
+<<{m3}.adoc#Boolean, LionCore Booleans>> MUST be encoded as exactly one of these JSON _strings_:
 
 * `"true"`
 * `"false"`
@@ -237,14 +237,14 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 
 [[integer]]
 ==== Integer
-<<{m3}.adoc#Integer, LIonCore Integers>> MUST be encoded as JSON _string_.
+<<{m3}.adoc#Integer, LionCore Integers>> MUST be encoded as JSON _string_.
 
 * Integers MUST be represented in base-10.
 * The digits CAN be prefixed with either `+` (plus) or `-` (minus).{fn-org100}
 * Integers MUST NOT be prefixed by leading zeros.
 * Integers CAN contain value zero with any prefix, i.e. `0`, `-0`, or `+0`.
 * Integers MUST NOT contain leading or trailing whitespace.
-* LIonWeb does NOT limit the range of the integer value.{fn-org149}
+* LionWeb does NOT limit the range of the integer value.{fn-org149}
   An implementation MAY refuse a model containing an integer value outside the supported range.
 
 .Examples of valid Integer encodings
@@ -272,7 +272,7 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 
 [[json]]
 ==== JSON
-<<{m3}.adoc#JSON, LIonCore JSON>> MUST be encoded as JSON _string_.
+<<{m3}.adoc#JSON, LionCore JSON>> MUST be encoded as JSON _string_.
 All double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
 The value MUST adhere to JSON spec (RFC 8259).
 
@@ -284,7 +284,7 @@ The value MUST adhere to JSON spec (RFC 8259).
 
 [[literal]]
 ==== Enumeration literals
-<<{m3}.adoc#EnumerationLiteral, LIonCore Enumeration literals>> MUST be encoded as JSON _string_ _value_ according to <<{m3}.adoc#keys, Key spec>>.
+<<{m3}.adoc#EnumerationLiteral, LionCore Enumeration literals>> MUST be encoded as JSON _string_ _value_ according to <<{m3}.adoc#keys, Key spec>>.
 MUST refer to the <<{m3}.adoc#IKeyed.key, key>> of an <<{m3}.adoc#EnumerationLiteral, EnumerationLiteral>> of the <<{m3}.adoc#Enumeration, Enumeration>> defined as <<{m3}.adoc#Property.type, type>> of this *Property*.{fn-org128}
 
 == Examples

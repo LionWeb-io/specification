@@ -10,7 +10,7 @@
       "version": "1"
     },
     {
-      "key": "LIonWeb-M3",
+      "key": "LionWeb-M3",
       "version": "1"
     }
   ],
@@ -152,7 +152,7 @@
     {
       "id": "bbb",
       "concept": {
-        "language": "LIonWeb-M3",
+        "language": "LionWeb-M3",
         "version": "1",
         "key": "Concept"
       },
@@ -160,7 +160,7 @@
       "children": [
         {
           "containment": {
-            "language": "LIonWeb-M3",
+            "language": "LionWeb-M3",
             "version": "1",
             "key": "Classifier-features"
           },
@@ -178,7 +178,7 @@
     {
       "id": "bbb-prop",
       "concept": {
-        "language": "LIonWeb-M3",
+        "language": "LionWeb-M3",
         "version": "1",
         "key": "Property"
       },

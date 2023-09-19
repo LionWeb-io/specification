@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lionweb.io/serialization.schema.json",
-  "title": "LIonWeb Serialization",
+  "title": "LionWeb Serialization",
   "type": "object",
   "properties": {
     "serializationFormatVersion": {
