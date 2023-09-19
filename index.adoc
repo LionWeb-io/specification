@@ -1,4 +1,4 @@
-= LIonWeb Documentation
+= LionWeb Documentation
 
 // * xref:documentation/documentation-structure.adoc[Documentation structure]
 * xref:reference-architecture/reference-architecture.adoc[Reference Architecture]

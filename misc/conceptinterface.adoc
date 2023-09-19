@@ -262,7 +262,7 @@ println(myE.id) // prints "a.b.c"
 
 ==== Require qualification
 On name clashes, all access to conflicting names need to be qualified.
-If the target language does not support this, the LIonWeb implementation would auto-rename.
+If the target language does not support this, the LionWeb implementation would auto-rename.
 
 .Usage in language that supports qualified member access
 [source]
@@ -319,7 +319,7 @@ Example: <<ex-mix-decl-ref>>.
 
 .Context
 * <<metametamodel#derived, Description in M3 spec>>
-* https://github.com/LIonWeb-org/organization/issues/6[How to represent DerivedFeature in M3? #6]
+* https://github.com/LionWeb-org/organization/issues/6[How to represent DerivedFeature in M3? #6]
 
 [[specialization]]
 == Why specialization?
@@ -329,7 +329,7 @@ Example: <<ex-reuse-special>>
 
 .Context
 * <<metametamodel#specialization, Description in M3 spec>>
-* https://github.com/LIonWeb-org/organization/issues/8[Which parts of a link can be specialized? #8]
+* https://github.com/LionWeb-org/organization/issues/8[Which parts of a link can be specialized? #8]
 
 == Examples
 
@@ -444,7 +444,7 @@ foreach container in allMyContainers
 
 [[ex-special-unsound]]
 === Specialization leads to unsound typesystem
-https://github.com/LIonWeb-org/organization/issues/8[Example by Sascha]
+https://github.com/LionWeb-org/organization/issues/8[Example by Sascha]
 
 .M2
 [source]
