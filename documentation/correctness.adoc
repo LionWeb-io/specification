@@ -1,7 +1,7 @@
 = Model correctness
 
 We can identify a number of separate criteria for the correctness of a model.
-Failure to comply to one or more of these criteria doesn't imply incorrectness of the model.
+Failure to comply to one or more of these criteria doesn't imply the model as a whole is completely incorrect.
 Typically, it's quite possible to recover from such failures.
 The criteria can be visualized as follows.
 
@@ -31,12 +31,14 @@ It's desirable to be able to recover from "`simple`"/"`obvious`" syntax errors i
 
 Incorrectness is to be reported in terms of the location where parsing the JSON text failed, including an indication whether this was recoverable.
 The reporting is typically dependent on the precise JSON parser used.
+In particular, the JSON parser used might recover automatically, essentially ignoring syntax errors without reporting them in any way.
+This could be problematic, e.g. in case of duplicate keys in an object: the JSON parser is most likely to only reproduce the last value for the duplicate key, ignoring the previous ones.
 
 === Structural syntactic
 
 The JSON conforms to link:../schemas/serialization.schema.json[the JSON Schema for the serialization format]footnote:[This file should match link:https://github.com/LIonWeb-org/lioncore-typescript/blob/main/schemas/generic-serialization.schema.json[the one in the `lioncore-typescript` repository].].
 The `serializationFormatVersion` property of the root object of the serialization indicates which version to use (or should do so).
-Currently, there's only one version, which is identified as: `"1"` (i.e., a string containing the integer 1).
+Currently, there's only one version, which is identified as a string such as `"2023.1"`.
 
 Note that JSON Schema isn't powerful enough to express more high-level, nor constraints of a referential nature on the serialization chunk.
 
@@ -58,6 +60,7 @@ Concretely: if a node `N` is a child of a node `P` then `N.parent` should equal 
 Violation is to be reported in terms of the ID of the contain**ing** serialized node, the ID of the contain**ed** serialized node, and the `parent` ID stated by that.
 . No duplicate containments, i.e. nodes are not the children of multiple other nodes, nor of themselves.
 Violation is to be reported in terms of the ID of the duplicately-contained serialized node, and the IDs of all serialized nodes that claim to contain it, including the links by which this happens, as well the index in the value of those links.
+. No containment cycles, i.e. nodes are not containing themselves.
 . **TODO**  extend for annotations
 
 At this point, links (so: containments and references) don't need to resolve (yet).
@@ -68,10 +71,9 @@ If all links do resolve, we say the serialization chunk is _self-contained_.
 
 === Meta-referential
 
-All the metamodels specified in the serialization chunk are _made available_ to the client('s deserializer) in a suitable form.
-That would typically imply the presence of types or type definitions in some programming language.
+All the metamodels specified in the serialization chunk should be _made available_ to the client('s deserializer) in the form of a runtime representation that the deserializer can reconstruct from the serializatino.
 **Note** that this is a condition that pertains to the deserializing client, rather than on the serialization chunk.
-Incorrectness could be partially recovered from by partially deserializing into "`dynamic`"/"`reflective`" nodes.
+Incorrectness could be partially recovered from by partially deserializing into "`reflective`" nodes.
 
 === Meta-structural
 
@@ -87,7 +89,7 @@ Incorrectness is to be reported in terms of the ID of the serialized node, the f
 Incorrectness is to be reported in terms of the ID of the serialized node, the feature type (property/containment/reference), the index of the offending entry, and the key which can not be resolved.
 "`To resolve a key`" means that we can find a concept or feature in some metamodel with that key, and with (exactly-)matching version.
 Incorrectness is to be reported as a model with references to nodes, as well as an appropriate error message.
-Incorrectness could be partially recovered from by partially deserializing into "`dynamic`"/"`reflective`" nodes, leaving the unresolvable meta-references as-is.
+Incorrectness could be partially recovered from by partially deserializing into "`reflective`" nodes, leaving the unresolvable meta-references as-is.
 
 
 == Model (post-deserialization/in-memory)
@@ -97,7 +99,7 @@ Incorrectness could be partially recovered from by partially deserializing into 
 All links (on M1/instance-level) resolve.
 Note that this doesn't require any knowledge of the metamodels, as it just involves nodes' IDs.
 This means that the serialization chunk doesn't need to be correct in the meta-referential nor in the meta-structural sense!
-It should be alway possible to deserialize the serialization chunk into "`dynamic`"/"`reflective`" nodes, which could be useful in its own right.
+It should be alway possible to deserialize the serialization chunk into "`reflective`" nodes, which could be useful in its own right.
 
 **TODO:** describe when and how links should be resolved, etc.
 
