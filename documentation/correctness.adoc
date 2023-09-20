@@ -123,3 +123,11 @@ Recovery is more-or-less irrelevant from a technical standpoint, but incorrectne
 
 image::../resources/correctness-diagrams/levels.svg[align="center"]
 
+
+== Gradual/"`staged`" deserialization
+
+Having identified these correctness criteria, one could envision that deserialization is split up according to these criteria.
+This means that a client can be given options for recovery.
+One way to achieve this would be to report incorrectness in terms of precise objects that come with "`fix semantics`".
+That way, a client can choose whether to apply these fixes, or not deserialize that chunk entirely.
+
