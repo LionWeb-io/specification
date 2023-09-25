@@ -897,7 +897,7 @@ A Namespace implements <<INamed>> and can have descendants that implement <<INam
 Typically, a namespace enforces some constraints on the contained names, like uniqueness within the same namespace, or what's considered a valid name.
 
 We can calculate a fully qualified name by concatenating the namespaces of all the ancestors up to the top level ancestor.
-Future versions might support this directly.{fn-org146}
+Future releases might support this directly.{fn-org146}
 
 == Other considerations
 

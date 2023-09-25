@@ -36,9 +36,9 @@ Root level MUST be an _object_ with three members, called *serialization chunk*.
 
 ##TODO: Are more members allowed?{fn-org67}##
 
-[[SerializationChunk.serializationFormatVersion]]
-The first member SHOULD be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}{fn-org159}
-The value MUST be a decimal integer (without leading or trailing whitespace) describing the serialization format version used to create the processed document, according to <<versions>>.
+[[SerializationChunk.serializationFormatRelease]]
+The first member SHOULD be _key_ `serializationFormatRelease` with a _string_ _value_.{fn-org58}{fn-org159}
+The value MUST be a non-empty string (without leading or trailing whitespace) describing the serialization format release used to create the processed document, according to <<releases>>.
 
 [[SerializationChunk.languages]]
 The second member SHOULD be _key_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}{fn-org159}
@@ -403,10 +403,13 @@ concept OtherLanguageConcept [id 70, key otherLangConc]
 include::annotation-variants.json[]
 ----
 
-[[versions]]
-== Versions
-=== 1
-Initial version.
+[[releases]]
+== Releases
+=== 2023.1
+Technical name: `2023.1`
+
+Initial release.
+
 
 
 [[possible-values]]
