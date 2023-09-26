@@ -14,17 +14,17 @@ include::../shared/issue-footnotes.adoc[]
 As a volunteer-run Open Source effort, we cannot commit to a timeline.
 We're actively looking for corporate sponsors, with some prospects in sight.
 
-=== In progress
+=== In progress for _after_ release 2023.1
 
 [#bulk-protocol]
 ==== Specifying bulk protocol
 We've decided{fn-org148} to specify protocols only by their conceptual features.
 The first such protocol will be the https://github.com/LionWeb-org/organization/blob/d8a54813c6bd224ef84e53a26ac7d60a45a866b5/bulk/repo-access-api.adoc[Bulk Repository access API].
 It is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
-It is intended for CRUD operations on (larger) sets of nodes.
+It is intended for CRUD operations on (larger) sets of nodes, and enables integration with "simple" editor (i.e. no real-time collaboration).
 Additionally, this API allows to list the available <<{m3}.adoc#partition, Partitions>>, get Languages known to the repository, and request unused <<{m3}.adoc#identifiers, node ids>>.
 
-=== Planned
+=== Envisioned
 We highly encourage any participation in LionWeb.
 So if you'd like to work on some of these features, or even only have an urgent need for them: let us know!
 This will influence the feature's priority.
@@ -35,19 +35,6 @@ The list below is in no particular order.
 ==== Delta protocol
 As described in our <<{refarch}.adoc#delta, reference architecture>>, via delta protocol a client receives an initial snapshot similar to the bulk case.
 Afterwards, the client continues to receive changes (aka deltas) from the repo; it also writes back changes continuously.{fn-org28}
-
-Open questions for this protocol include
-
-* Which messages do we support?
-For example, is _move a child from position 2 to position 5 in the same list_ the same as _move a child from parent A to parent B_ the same message kind?
-
-* Is the protocol the same for client -> repository updates vs. repository -> client updates?
-That's especially relevant for (web-based) editors.
-
-* How strong do we couple the protocol to an implementation?
-Both https://en.wikipedia.org/wiki/Operational_transformation[operational transformation] and https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type[CRDTs] can be used to implement consistent clients.
-For both of them, several implementations are available.
-Additionally, we might support simpler clients that assume no conflicts or missing updates at all.
 
 ==== Standard derived models
 We intend to support several common language (workbench) functionalities via <<{refarch}.adoc#derivedModel, derived models>>.
@@ -77,14 +64,17 @@ We need to calculate the type of a node in several contexts, including validatio
 ===== Commenting / Review notes
 For any kind of collaboration, it's very helpful for reviewers to attach their remarks directly to their context -- think of the blue speech bubbles in the right margin of a Word document.
 
-
 ==== Access control
 Different users might have different level of access to the whole repository, or parts of it.
 Some users might have read-only access (e.g. via public web), whereas others can write to the repository.{fn-org27}
 
 ==== Versioning / Live collaboration
-A repository might support version control and/or live collaboration of users (both features are technically related).
+A repository might support version control and/or live collaboration of users.
+
 The repository might have a version control backend like git, or support live collaboration like Google Docs.{fn-org26}
+
+NOTE: These two features are lumped into one because from an implementation point of view, both need a history of all edit actions to actually work.
+
 
 ==== Locking
 A repository might support locking the whole repository, partitions, or subtrees.
