@@ -139,7 +139,7 @@ The standard library contains <<{m3}.adoc#Node, Node>> and <<{m3}.adoc#INamed, I
 == History
 
 === 2023
-==== November
+==== Maybe November
 * Initial release `2023.1`
 
 ==== May
