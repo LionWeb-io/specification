@@ -113,6 +113,8 @@ A user might define their own <<{m3}.adoc#DataType, DataTypes>> and support thei
 
 ==== Shared annotations in standard library
 We might add some <<{m3}.adoc#Annotation, Annotations>> to the <<{m3}.adoc#stdlib, built-in standard library>>, e.g. range constraints on integers, implementation per platform, `@Deprecated`, etc.{fn-org12}
+Another useful set of annotations would be review comments: For any kind of collaboration, it's very helpful for reviewers to attach their remarks directly to their context -- think of the blue speech bubbles in the right margin of a Word document.{fn-org175}
+
 
 ==== Support ordered / unordered containments / references
 For some use cases (e.g. merging), it might be useful to know that the order of featues does not matter.{fn-org4}
