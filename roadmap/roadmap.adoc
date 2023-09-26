@@ -52,17 +52,14 @@ This includes:
 ===== Validation
 Checking a model for consistency and other errors is one of the most common operations on models.
 It might also be expensive: if we wanted to assure globally unique names, we had to check all named things in our model on every name change.
-The basic structure of validation is very similar in most systems: any issue has a severity level, refers to a node, might relate to a feature, and provides an error message.
+The basic structure of validation is very similar in most systems: any issue has a severity level, refers to a node, might relate to a feature, and provides an error message.{fn-org176}
 
 ===== Scoping
 Calculating the scope of visible targets at any given place is necessary for both parser-based clients (for name binding / linking) and projectional clients / IDEs (for auto-completion).
-Similar to validation, the baseic structure of scoping is very similar in most systems; this _base language_ would condense the common concepts.
+Similar to validation, the basic structure of scoping is very similar in most systems; this _base language_ would condense the common concepts.{fn-org177}
 
 ===== Typesystem
-We need to calculate the type of a node in several contexts, including validation (e.g. "do the types of these assigned nodes match?") and scoping (e.g. "which members does the thing on the left side of the dot have?").
-
-===== Commenting / Review notes
-For any kind of collaboration, it's very helpful for reviewers to attach their remarks directly to their context -- think of the blue speech bubbles in the right margin of a Word document.
+We need to calculate the type of a node in several contexts, including validation (e.g. "do the types of these assigned nodes match?") and scoping (e.g. "which members does the thing on the left side of the dot have?").{fn-org178}
 
 ==== Access control
 Different users might have different level of access to the whole repository, or parts of it.
@@ -122,7 +119,7 @@ For some use cases (e.g. merging), it might be useful to know that the order of 
 
 ==== Interpretation API
 In most advanced DSLs, we want to evaluate or "execute" models directly, i.e. without intermediate generation step.
-Interpreters can be implemented in various ways, but usually have a very standard interface.
+Interpreters can be implemented in various ways, but usually have a very standard interface.{fn-org179}
 
 == Releases
 
