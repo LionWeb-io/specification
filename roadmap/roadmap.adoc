@@ -123,6 +123,13 @@ For some use cases (e.g. merging), it might be useful to know that the order of 
 In most advanced DSLs, we want to evaluate or "execute" models directly, i.e. without intermediate generation step.
 Interpreters can be implemented in various ways, but usually have a very standard interface.{fn-org179}
 
+==== File generation API
+Most modeling systems want to create some artifacts from the model contents, for example source code, documents, or images.
+This interface can be standardized to receive some input nodes, maybe some parameters, and result in one or more files.{fn-org180}
+
+NOTE: This functionality concerns model-to-text / model-to-binary generators.
+Model-to-model generators would be implemented as <<{refarch}.adoc#processor, Processors>> that run on-demand.
+
 == Releases
 
 === 2023.1
