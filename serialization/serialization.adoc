@@ -104,7 +104,7 @@ The order of _members_ is undefined.
 The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55}
 
 * [[Node.id]] _key_ `id` with _string_ _value_, adhering to <<id>>.
-* [[Node.classifier]] _key_ `classifier`{fn-org37-name}{fn-org-184} with _object_ _value_, adhering to <<meta-pointer>>.
+* [[Node.classifier]] _key_ `classifier`{fn-org37-name}{fn-org184} with _object_ _value_, adhering to <<meta-pointer>>.
   The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> or <<{m3}.adoc#Annotation, *Annotation*>> this *node* is an instance of.
 * [[Node.properties]] _key_ `properties` with _array_ _value_, each _element_ adhering to <<property>>.
 The order of _elements_ is undefined.{fn-org156}
