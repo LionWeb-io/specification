@@ -6,7 +6,7 @@
   "properties": {
     "serializationFormatVersion": {
       "type": "string",
-      "pattern": "^[0-9]+$"
+      "pattern": "^\\S+(.*\\S)?$"
     },
     "languages": {
       "type": "array",
