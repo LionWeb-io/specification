@@ -15,6 +15,7 @@ This document describes the serialization format for LionWeb chunks.
 * _italic_ words refer to concepts defined by JSON.
 * *bold* words refer to concepts defined in this document.
 * `monospaced` words describe verbatim contents of the serialization.
+* "processed document" refers to the character sequence that's parsed or written, e.g. a file or network stream.
 * Footnotes refer to more discussions and rationale, but are non-normative.
 
 == Design goals
