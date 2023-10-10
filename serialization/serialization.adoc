@@ -15,6 +15,7 @@ This document describes the serialization format for LionWeb chunks.
 * _italic_ words refer to concepts defined by JSON.
 * *bold* words refer to concepts defined in this document.
 * `monospaced` words describe verbatim contents of the serialization.
+* "processed document" refers to the character sequence that's parsed or written, e.g. a file or network stream.
 * Footnotes refer to more discussions and rationale, but are non-normative.
 
 == Design goals
@@ -104,8 +105,8 @@ The order of _members_ is undefined.
 The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55}
 
 * [[Node.id]] _key_ `id` with _string_ _value_, adhering to <<id>>.
-* [[Node.concept]] _key_ `concept`{fn-org37-name} with _object_ _value_, adhering to <<meta-pointer>>.
-  The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> this *node* is an instance of.
+* [[Node.classifier]] _key_ `classifier`{fn-org37-name}{fn-org184} with _object_ _value_, adhering to <<meta-pointer>>.
+  The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> or <<{m3}.adoc#Annotation, *Annotation*>> this *node* is an instance of.
 * [[Node.properties]] _key_ `properties` with _array_ _value_, each _element_ adhering to <<property>>.
 The order of _elements_ is undefined.{fn-org156}
 * [[Node.children]] _key_ `children`{fn-org55-name-children} with _array_ _value_, each _element_ adhering to <<child>>.

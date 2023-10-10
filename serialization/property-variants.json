@@ -1,5 +1,5 @@
 {
-  "serializationFormatVersion": "1",
+  "serializationFormatVersion": "2023.1",
   "languages": [
     {
       "key": "myLanguage",
@@ -9,7 +9,7 @@
   "nodes": [
     {
       "id": "bbb",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "myConceptId"
@@ -63,7 +63,7 @@
     },
     {
       "id": "21",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "time_to_open"

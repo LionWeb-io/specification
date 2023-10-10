@@ -22,7 +22,7 @@ class Node {
     annotations: Id[] <<ordered>>
 }
 
-Node *--> "1" MetaPointer: concept
+Node *--> "1" MetaPointer: classifier
 
 class MetaPointer {
     language: Id

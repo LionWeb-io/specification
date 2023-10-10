@@ -1,5 +1,5 @@
 {
-  "serializationFormatVersion": "1",
+  "serializationFormatVersion": "2023.1",
   "languages": [
     {
       "key": "myLanguage",
@@ -17,7 +17,7 @@
   "nodes": [
     {
       "id": "ccc",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "61"
@@ -35,7 +35,7 @@
     },
     {
       "id": "marker",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "myMarker"
@@ -48,7 +48,7 @@
     },
     {
       "id": "docu1",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "docuAnn"
@@ -70,7 +70,7 @@
     },
     {
       "id": "docu2",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "docuExtended"
@@ -100,7 +100,7 @@
     },
     {
       "id": "localTrash",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "throwAway"
@@ -125,7 +125,7 @@
     },
     {
       "id": "old1",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "SomeConcept"
@@ -138,7 +138,7 @@
     },
     {
       "id": "old2",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "YetAnotherConcept"
@@ -151,7 +151,7 @@
     },
     {
       "id": "bbb",
-      "concept": {
+      "classifier": {
         "language": "LionWeb-M3",
         "version": "1",
         "key": "Concept"
@@ -177,7 +177,7 @@
     },
     {
       "id": "bbb-prop",
-      "concept": {
+      "classifier": {
         "language": "LionWeb-M3",
         "version": "1",
         "key": "Property"
@@ -192,7 +192,7 @@
     },
     {
       "id": "javaMapping",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "MTC"
@@ -219,7 +219,7 @@
     },
     {
       "id": "typeUseMapping",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "UM"
@@ -246,7 +246,7 @@
     },
     {
       "id": "javaClass",
-      "concept": {
+      "classifier": {
         "language": "BaseLanguage",
         "version": "1",
         "key": "ClassConcept"
