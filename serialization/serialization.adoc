@@ -2,6 +2,7 @@ include::../shared/issue-footnotes.adoc[]
 
 :m3: ../metametamodel/metametamodel
 :refarch: ../reference-architecture/reference-architecture
+:roadmap: ../roadmap/roadmap
 :fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
 
 = LionWeb Serialization Format
@@ -36,9 +37,9 @@ Root level MUST be an _object_ with three members, called *serialization chunk*.
 
 ##TODO: Are more members allowed?{fn-org67}##
 
-[[SerializationChunk.serializationFormatVersion]]
-The first member SHOULD be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}{fn-org159}
-The value MUST be a decimal integer (without leading or trailing whitespace) describing the serialization format version used to create the processed document, according to <<versions>>.
+[[SerializationChunk.serializationFormatVersion, `serializationFormatVersion`]]
+The first member SHOULD be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}{fn-org159}{fn-org172}
+The value MUST be a non-empty string (without leading or trailing whitespace){fn-org165} describing the serialization format version used to create the processed document, according to <<versions>>.
 
 [[SerializationChunk.languages]]
 The second member SHOULD be _key_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}{fn-org159}
@@ -113,7 +114,7 @@ The order of _elements_ is undefined.{fn-org156}
 The order of _elements_ is undefined.{fn-org156}
 * [[Node.annotations]] _key_ `annotations`{fn-org150} with _array_ _value_, each _element_ adhering to <<annotation>>.
 The order of _elements_ MUST be maintained as set by <<{refarch}.adoc#client, model client>>.{fn-org157}
-* [[Node.parent]] _key_ `parent` with _string_ or _null_ _value_, adhering to <<parent>>.
+* [[Node.parent]] _key_ `parent`{fn-org187} with _string_ or _null_ _value_, adhering to <<parent>>.
 
 ##TODO: How to store invalid text?{fn-org62}##
 
@@ -203,7 +204,7 @@ One of
 * _string_ according to <<{m3.acoc}#identifiers, Identifier spec>>.
 Refers to the *id* of the *node* containing this *node*.
 +
-NOTE: *parent* is the inverse relation of either one *child* or one *annotation*.
+NOTE: *parent* is the inverse relation of either one *child* or one *annotation*.{fn-org186}
 +
 NOTE: The referred *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
 
@@ -405,8 +406,15 @@ include::annotation-variants.json[]
 
 [[versions]]
 == Versions
-=== 1
+
+NOTE: The term "version" is a bit ambiguous within LionWeb.{fn-org172}
+This section lists all versions as they appear in <<SerializationChunk.serializationFormatVersion>> and <<{m3}.adoc#Language.version, `Language.version`>>.
+
+=== 2023.1
+Technical name: `2023.1`
+
 Initial version.
+Refer to <<{roadmap}.adoc#release-2023.1, roadmap>> for details.
 
 
 [[possible-values]]
