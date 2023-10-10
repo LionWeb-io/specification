@@ -9,7 +9,7 @@
   "nodes": [
     {
       "id": "ddd",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "myConceptId"
@@ -87,7 +87,7 @@
     },
     {
       "id": "dee",
-      "concept": {
+      "classifier": {
         "language": "myLanguage",
         "version": "2",
         "key": "differentConceptId"
