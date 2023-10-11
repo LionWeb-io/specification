@@ -21,7 +21,7 @@ We're actively looking for corporate sponsors, with some prospects in sight.
 [[bulk-protocol]]
 ==== Specifying bulk protocol
 We've decided{fn-org148} to specify protocols only by their conceptual features.
-The first such protocol will be the https://github.com/LionWeb-org/organization/blob/d8a54813c6bd224ef84e53a26ac7d60a45a866b5/bulk/repo-access-api.adoc[Bulk Repository access API].
+The first such protocol will be the https://github.com/LionWeb-io/specification/blob/d8a54813c6bd224ef84e53a26ac7d60a45a866b5/bulk/repo-access-api.adoc[Bulk Repository access API].
 It is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
 It is intended for CRUD operations on (larger) sets of nodes, and enables integration with "simple" editor (i.e. no real-time collaboration).
 Additionally, this API allows to list the available <<{m3}.adoc#partition, Partitions>>, get Languages known to the repository, and request unused <<{m3}.adoc#identifiers, node ids>>.
@@ -177,4 +177,4 @@ The standard library contains <<{m3}.adoc#Node, Node>> and <<{m3}.adoc#INamed, I
 
 ==== September
 * Founding Meeting at LangDevCon 2022
-* Set up LionWeb-org GitHub organization
+* Set up LionWeb-io GitHub organization

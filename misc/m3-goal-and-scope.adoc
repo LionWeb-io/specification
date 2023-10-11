@@ -16,7 +16,7 @@ The goal of the meta-metamodel is to define a meta-language with which to conven
 This structure is described using node types (concepts), node properties (features) and node links (containment and references).
 This is similar to a schema for e.g. XML or JSON as it is programming language agnostic.
 
-Also see issue https://github.com/LionWeb-org/organization/issues/61
+Also see issue https://github.com/LionWeb-io/specification/issues/61
 
 === Goal 2: Programming Meta-Metamodel
 The goal of the meta-metamodel is to define a meta-language with which to describe a programming interface to a model,
@@ -37,7 +37,7 @@ For the Model Interchange Meta-Metamodel, this case is irrelevant, as the derive
 
 The same holds for <<conceptinterface#ex-set-name, Set name of all named things>>.
 
-Also see https://github.com/LionWeb-org/organization/issues/16[Have a default way to manage derived properties of nodes]
+Also see https://github.com/LionWeb-io/specification/issues/16[Have a default way to manage derived properties of nodes]
 
 ==== Example Date Primitive
 If Date is a primitive type in the Meta-Metamodel, then a standard annotations like `java:Date` is relevant to a Programming Meta-Metamodel,
