@@ -21,7 +21,7 @@
             "version": "2023.1",
             "key": "LionCore-builtins-INamed-name"
           },
-          "value": "LionCore.builtins"
+          "value": "LionCore_builtins"
         },
         {
           "property": {
@@ -267,7 +267,7 @@
       "classifier": {
         "language": "LionCore-M3",
         "version": "2023.1",
-        "key": "ConceptInterface"
+        "key": "Interface"
       },
       "properties": [
         {
@@ -304,7 +304,7 @@
           "reference": {
             "language": "LionCore-M3",
             "version": "2023.1",
-            "key": "ConceptInterface-extends"
+            "key": "Interface-extends"
           },
           "targets": []
         }

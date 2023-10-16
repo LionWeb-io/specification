@@ -1,6 +1,6 @@
-===== Example of an ConceptInterface Implementation in Kotlin
+===== Example of an Interface Implementation in Kotlin
 
-As an example of why ConceptInterfaces are useful to have, we can see a possible implementation in Kotlin, where we have a ConceptInterface mapped to an interface and a Concept map to a Class.
+As an example of why Interfaces are useful to have, we can see a possible implementation in Kotlin, where we have a Interface mapped to an interface and a Concept map to a Class.
 
 [source, kotlin]
 ----
@@ -24,4 +24,4 @@ abstract class Constant(
 ----
 
 In this case we can easily have the `Constant` combine `DataDefinition` and `Named`.
-This approach does not require any code generation (the <<Concept>> and <<ConceptInterface>> could be obtained from the `Class` and `Interface` definition through reflection).
+This approach does not require any code generation (the <<Concept>> and <<Interface>> could be obtained from the `Class` and `Interface` definition through reflection).

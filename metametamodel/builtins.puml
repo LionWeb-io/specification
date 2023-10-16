@@ -1,6 +1,6 @@
 @startuml
 
-'class language as "LionCore.builtins" <<(L,lightgray) Language>>
+'class language as "LionCore_builtins" <<(L,lightgray) Language>>
 
 class Node <<Concept>> #LightGreen
 
