@@ -14,9 +14,9 @@
         "version": "2",
         "key": "myConceptId"
       },
-      "properties": {},
-      "children": {},
-      "references": {},
+      "properties": [],
+      "children": [],
+      "references": [],
       "annotations": [],
       "parent": null
     }

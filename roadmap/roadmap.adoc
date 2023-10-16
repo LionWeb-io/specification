@@ -102,7 +102,7 @@ The repository might support them by automatically mapping between the repositor
 
 [[language-migration-api]]
 ==== Language migration API
-Support a common way how to handle language migrations, e.g. by specific messages like "I'm about to migrate this partition" or "You must not use language X in a version older than abc".{fn-org72}
+Support a common way how to handle language migrations, e.g. by specific messages like "I'm about to migrate this partition", or "You must not use language X in a version older than abc".{fn-org72}
 
 [[store-invalid-text]]
 ==== Store invalid text typed at arbitrary place
@@ -130,8 +130,8 @@ We might come up with a standard way to support similar functionality to _commen
 A user might define their own <<{m3}.adoc#DataType, DataTypes>> and support their (de-)serialization.{fn-org10}
 
 [[shared-annotations]]
-==== Shared annotations in standard library
-We might add some <<{m3}.adoc#Annotation, Annotations>> to the <<{m3}.adoc#stdlib, built-in standard library>>, e.g. range constraints on integers, implementation per platform, `@Deprecated`, etc.{fn-org12}
+==== Shared annotations in built-ins language
+We might add some <<{m3}.adoc#Annotation, Annotations>> to the <<{m3}.adoc#builtins, built-ins language>>, e.g. range constraints on integers, implementation per platform, `@Deprecated`, etc.{fn-org12}
 Another useful set of annotations would be review comments: For any kind of collaboration, it's very helpful for reviewers to attach their remarks directly to their context -- think of the blue speech bubbles in the right margin of a Word document.{fn-org175}
 
 [[ordered-links]]
