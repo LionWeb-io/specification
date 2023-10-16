@@ -103,7 +103,7 @@ Example: if Language _B_ depends on Language _A_, and Language _C_ depends on _B
 A Language CAN declare a transitive dependency explicitly.
 In the example above, Language _C_ CAN declare an explicit dependency on Language _A_.
 
-As any Language depends (at least transitively and <<Concept.extends, implicitly>>) on <<stdlib>> elements, a Language CAN declare a dependency on builtins -- but _does not_ need to.{fn-org153}
+As any Language depends (at least transitively and <<Concept.extends, implicitly>>) on <<builtins>> elements, a Language CAN declare a dependency on builtins -- but _does not_ need to.{fn-org153}
 
 [[Concept]]
 ==== Concept
@@ -322,7 +322,7 @@ It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Langu
 [[Interface.extends, Interface.extends]]
 Each Interface `extends` zero or more Interfaces.
 
-A Interface can have any number of <<Classifier.features, `features`>>, given it is a <<Classifier>>.
+An Interface can have any number of <<Classifier.features, `features`>>, given it is a <<Classifier>>.
 
 .Constraints
 {empty}
@@ -703,8 +703,10 @@ Any language that uses `INamed` on its own can establish their own constraints.
 
 Refer to <<keys>> for more constraints.
 
-=== Pre-defined ids and keys
+[[predefined-keys]]
+=== Pre-defined keys and ids
 
+[[predefined-m3-keys]]
 ==== Keys of M3 elements
 The language itself has key `LionCore-M3`{fn-org91} and is named `LionCore_M3`{fn-org195}.
 
@@ -748,10 +750,11 @@ The language itself has key `LionCore-M3`{fn-org91} and is named `LionCore_M3`{f
 |<<Reference>> |Concept |Reference
 |===
 
+[[predefined-builtins-keys]]
 ==== Ids of built-in elements
 The language hosting built-in elements has id and key `LionCore-builtins`{fn-org141}, its name is `LionCore_builtins`{fn-org195}.
 
-Every language implicitly depends on this language.{fn-org9-implicit}
+Every language implicitly depend on this language.{fn-org9-implicit}
 Thus, the ids in this language MUST be stable.
 This means the id MUST be identical to the key for each node in this language.
 
@@ -769,10 +772,11 @@ This means the id MUST be identical to the key for each node in this language.
 |===
 
 
-[[stdlib, standard library]]
+[[builtins, built-ins]]
 === Built-in elements
-Each LionWeb implementation ships with a set of built-in elements, akin to a _standard library_.
-#TODO: Add sentence about M2 level#
+Each LionWeb implementation ships with a set of built-in elements, akin to a _standard library_.{fn-org195}
+These elements are part of the M2 language <<predefined-builtins-keys, `LionCore_builtins`>>.
+It can be used in any user-defined Language.{fn-org196}
 
 plantuml::builtins.puml[format=svg]
 
@@ -927,7 +931,7 @@ This includes references to
 * <<Interface.extends, extended>> or <<Concept.implements, implemented>> Interfaces
 * Types of <<Property.type, Properties>> or <<Link.type, Links>>
 
-As the <<stdlib>> is just another language, we refer to its members by their id, just as any other language members.
+As <<builtins>> is just another language, we refer to its members by their id, just as any other language members.
 
 From an instance, we refer to its defining language element by the language element's <<keys>>{fn-org80}
 This includes references to
