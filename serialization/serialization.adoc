@@ -117,7 +117,8 @@ The order of _elements_ is undefined.{fn-org156}
 The order of _elements_ MUST be maintained as set by <<{refarch}.adoc#client, model client>>.{fn-org157}
 * [[Node.parent]] _key_ `parent`{fn-org187} with _string_ or _null_ _value_, adhering to <<parent>>.
 
-##TODO: How to store invalid text?{fn-org62}##
+NOTE: We currently cannot store "invalid text" (i.e. user-entered text that does not adhere to the underlying structure and/or constraints) in the model.
+We will support this in a future release.{fn-org62}
 
 
 [[id]]
