@@ -32,10 +32,10 @@ This sections show several examples of discussions that depend on the chosen goa
 A derived feature is interesting for a Programming Meta-Metamodel, where access to derived properties can be defined by a derivation function.
 This way interfaces to objects(nodes) can be unified making them easier to program against.
 
-For example, the  <<conceptinterface#ex-mix-decl-ref, Mix declarations and references>> is a typical case relevant for a Programming Meta-Metamodel.
+For example, the  <<interface.adoc#ex-mix-decl-ref, Mix declarations and references>> is a typical case relevant for a Programming Meta-Metamodel.
 For the Model Interchange Meta-Metamodel, this case is irrelevant, as the derived features simply will not be in the model data.
 
-The same holds for <<conceptinterface#ex-set-name, Set name of all named things>>.
+The same holds for <<interface.adoc#ex-set-name, Set name of all named things>>.
 
 Also see https://github.com/LionWeb-io/specification/issues/16[Have a default way to manage derived properties of nodes]
 
