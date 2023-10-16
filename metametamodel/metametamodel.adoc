@@ -706,7 +706,7 @@ Refer to <<keys>> for more constraints.
 === Pre-defined ids and keys
 
 ==== Keys of M3 elements
-The language itself has key `LionCore-M3`.{fn-org91}
+The language itself has key `LionCore-M3`{fn-org91} and is named `LionCore_M3`{fn-org195}.
 
 [cols="d,d,m"]
 |===
@@ -749,7 +749,7 @@ The language itself has key `LionCore-M3`.{fn-org91}
 |===
 
 ==== Ids of built-in elements
-The language hosting built-in elements has key `LionCore-builtins`.{fn-org141}
+The language hosting built-in elements has id and key `LionCore-builtins`{fn-org141}, its name is `LionCore_builtins`{fn-org195}.
 
 Every language implicitly depends on this language.{fn-org9-implicit}
 Thus, the ids in this language MUST be stable.
