@@ -16,7 +16,7 @@ class Concept #LightGreen extends Classifier {
   partition: Boolean
 }
 
-class ConceptInterface #LightGreen extends Classifier
+class Interface #LightGreen extends Classifier
 
 class Containment #LightBlue extends Link
 
@@ -56,12 +56,12 @@ class Reference #LightBlue extends Link
 
 Annotation "*" --> "0..1" Classifier: annotates
 Annotation "*" --> "0..1" Annotation: extends
-Annotation "*" --> "*" ConceptInterface: implements
+Annotation "*" --> "*" Interface: implements
 
 Concept "*" --> "0..1" Concept: extends
-Concept "*" --> "*" ConceptInterface: implements
+Concept "*" --> "*" Interface: implements
 
-ConceptInterface "*" --> "*" ConceptInterface: extends
+Interface "*" --> "*" Interface: extends
 
 EnumerationLiteral "*" -* "1" Enumeration : literals
 

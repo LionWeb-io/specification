@@ -53,7 +53,7 @@ We will list elements by their type: classes, abstract classes and interfaces.
 
 === Concepts
 
-The concepts are <<Language>>, <<Concept>>, <<Annotation>>, <<ConceptInterface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Containment>>, <<Reference>>, and <<Property>>.
+The concepts are <<Language>>, <<Concept>>, <<Annotation>>, <<Interface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Containment>>, <<Reference>>, and <<Property>>.
 
 [[Language]]
 ==== Language
@@ -134,7 +134,7 @@ If no Concepts are explicitly extended, the Concept will implicitly extend the C
 `Node` is the only concept that truly does not extend any Concept.
 
 [[Concept.implements, Concept.implements]]
-A Concept `implements` zero or more <<ConceptInterface, ConceptInterfaces>>.
+A Concept `implements` zero or more <<Interface, Interfaces>>.
 
 A Concept can have any number of <<Classifier.features, `features`>>, given it is a <<Classifier>>.
 
@@ -303,26 +303,26 @@ CompanyAddress <-[#red]- CompanyRole
 ----
 --
 
-[[ConceptInterface]]
-==== ConceptInterface
-A ConceptInterface represents a category of entities sharing some similar characteristics.
+[[Interface]]
+==== Interface
+An Interface{fn-org190} represents a category of entities sharing some similar characteristics.
 
 .Example
-For example, `Named` would be a ConceptInterface.
+For example, `Named` would be an Interface.
 
 .EMF & MPS equivalent
-A ConceptInterface in LionWeb will be roughly equivalent to an `EClass` (with the `isInterface` flag set to `true`) or an MPS’s `ConceptInterfaceDeclaration`.
+An Interface in LionWeb will be roughly equivalent to an `EClass` (with the `isInterface` flag set to `true`) or an MPS’s `ConceptInterfaceDeclaration`.
 
 .Characteristics
-A ConceptInterface has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
+An Interface has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
 
-A ConceptInterface is an <<Classifier>>  (as it has features).
+An Interface is an <<Classifier>>  (as it has features).
 It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name), a <<IKeyed>> (as it has a key).
 
-[[ConceptInterface.extends, ConceptInterface.extends]]
-Each ConceptInterface `extends` zero or more ConceptInterfaces.
+[[Interface.extends, Interface.extends]]
+Each Interface `extends` zero or more Interfaces.
 
-A ConceptInterface can have any number of <<Classifier.features, `features`>>, given it is a <<Classifier>>.
+A Interface can have any number of <<Classifier.features, `features`>>, given it is a <<Classifier>>.
 
 .Constraints
 {empty}
@@ -499,7 +499,7 @@ A LanguageEntity can be one of:
 
 * <<Annotation>>
 * <<Concept>>
-* <<ConceptInterface>>
+* <<Interface>>
 * <<Enumeration>>
 * <<PrimitiveType>>
 
@@ -531,7 +531,7 @@ A Classifier can be one of:
 
 * <<Annotation>>
 * <<Concept>>
-* <<ConceptInterface>>
+* <<Interface>>
 
 A Classifier is a <<LanguageEntity>> (as it is a top level element in a <<Language>>).
 It is indirectly a <<IKeyed>> (as it has a key) and an <<INamed>> (as it has a name).
@@ -704,9 +704,9 @@ Any language that uses `INamed` on its own can establish their own constraints.
 Refer to <<keys>> for more constraints.
 
 === Pre-defined ids and keys
-The language itself has key `LionCore-M3`.{fn-org91}
 
 ==== Keys of M3 elements
+The language itself has key `LionCore-M3`.{fn-org91}
 
 [cols="d,d,m"]
 |===
@@ -721,8 +721,8 @@ The language itself has key `LionCore-M3`.{fn-org91}
 |<<Concept.abstract>> |Property |Concept-abstract
 |<<Concept.extends>> |Reference |Concept-extends
 |<<Concept.implements>> |Reference |Concept-implements
-|<<ConceptInterface>> |Concept |ConceptInterface
-|<<ConceptInterface.extends>> |Reference |ConceptInterface-extends
+|<<Interface>> |Concept |Interface
+|<<Interface.extends>> |Reference |Interface-extends
 |<<Containment>> |Concept |Containment
 |<<DataType>> |Concept |DataType
 |<<Enumeration>> |Concept |Enumeration
@@ -740,7 +740,7 @@ The language itself has key `LionCore-M3`.{fn-org91}
 |<<Language.entities>> |Containment |Language-entities
 |<<Language.version>> |Property |Language-version
 |<<LanguageEntity>> |Concept |LanguageEntity
-|<<IKeyed>> |ConceptInterface |IKeyed
+|<<IKeyed>> |Interface |IKeyed
 |<<IKeyed.key>> |Property |IKeyed-key
 |<<PrimitiveType>> |Concept |PrimitiveType
 |<<Property>> |Concept |Property
@@ -764,7 +764,7 @@ This means the id MUST be identical to the key for each node in this language.
 |<<Integer>> |PrimitiveType |LionCore-builtins-Integer
 |<<JSON>> |PrimitiveType |LionCore-builtins-JSON
 |<<Node>> |Concept |LionCore-builtins-Node
-|<<INamed>> |ConceptInterface |LionCore-builtins-INamed
+|<<INamed>> |Interface |LionCore-builtins-INamed
 |<<INamed.name, INamed.name>> |Property |LionCore-builtins-INamed-name
 |===
 
@@ -772,6 +772,7 @@ This means the id MUST be identical to the key for each node in this language.
 [[stdlib, standard library]]
 === Built-in elements
 Each LionWeb implementation ships with a set of built-in elements, akin to a _standard library_.
+#TODO: Add sentence about M2 level#
 
 plantuml::builtins.puml[format=svg]
 
@@ -783,7 +784,7 @@ plantuml::builtins.puml[format=svg]
 ==== Interfaces
 
 [[INamed, INamed]]
-* `INamed`{fn-org86}, an <<ConceptInterface>> with one <<Property>> called [[INamed.name]]`name` of type <<String>>.
+* `INamed`{fn-org86}, an <<Interface>> with one <<Property>> called [[INamed.name]]`name` of type <<String>>.
 +
 If a <<Link.type, Reference.type>> targets a Classifier that implements INamed, implementations SHOULD use the target's `name` property as default <<{serialization}.adoc#Reference.reference.resolveInfo, resolveInfo>> value.
 
@@ -923,7 +924,7 @@ This includes references to
 
 * <<Language.dependsOn, other languages>>
 * extended <<Concept.extends, Concepts>>
-* <<ConceptInterface.extends, extended>> or <<Concept.implements, implemented>> Interfaces
+* <<Interface.extends, extended>> or <<Concept.implements, implemented>> Interfaces
 * Types of <<Property.type, Properties>> or <<Link.type, Links>>
 
 As the <<stdlib>> is just another language, we refer to its members by their id, just as any other language members.
@@ -991,7 +992,7 @@ link:https://alexanderpann.github.io/mps-openapi-doc/javadoc_2021.2/org/jetbrain
 (link:https://www.jetbrains.com/help/mps/structure.html#conceptsandconceptinterfaces[docs],
 link:https://alexanderpann.github.io/mps-openapi-doc/javadoc_2021.2/org/jetbrains/mps/openapi/language/SConcept.html[javadoc])
 
-|<<ConceptInterface>>
+|<<Interface>>
 |link:https://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EClass.html[EClass]
 |link:http://127.0.0.1:63320/node?ref=r%3A00000000-0000-4000-0000-011c89590292%28jetbrains.mps.lang.structure.structure%29%2F1169125989551[InterfaceConceptDeclaration]
 (link:https://www.jetbrains.com/help/mps/structure.html#conceptsandconceptinterfaces[docs],

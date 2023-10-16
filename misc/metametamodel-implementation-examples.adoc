@@ -24,4 +24,4 @@ abstract class Constant(
 ----
 
 In this case we can easily have the `Constant` combine `DataDefinition` and `Named`.
-This approach does not require any code generation (the <<Concept>> and <<ConceptInterface>> could be obtained from the `Class` and `Interface` definition through reflection).
+This approach does not require any code generation (the <<Concept>> and <<Interface>> could be obtained from the `Class` and `Interface` definition through reflection).

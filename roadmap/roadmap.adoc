@@ -136,7 +136,7 @@ Another useful set of annotations would be review comments: For any kind of coll
 
 [[ordered-links]]
 ==== Support ordered / unordered containments / references
-For some use cases (e.g. merging), it might be useful to know that the order of featues does not matter.{fn-org4}
+For some use cases (e.g. merging), it might be useful to know that the order of features does not matter.{fn-org4}
 
 [[interpretation-api]]
 ==== Interpretation API
@@ -156,7 +156,7 @@ Model-to-model generators would be implemented as <<{refarch}.adoc#processor, Pr
 
 [[release-2023.1]]
 === 2023.1
-Stable <<{serialization}.adoc, serialization format>> and <<{m3}.adoc, meta-metamodel>> describing <<{m3}.adoc#Language, Languages>>, <<{m3}.adoc#Concept, Concepts>>, <<{m3}.adoc#ConceptInterface, ConceptInterfaces>>, <<{m3}.adoc#Annotation, Annotations>>, <<{m3}.adoc#Enumeration, Enumerations>>, <<{m3}.adoc#PrimitiveType, PrimitiveTypes>>, <<{m3}.adoc#Property, Properties>>, <<{m3}.adoc#Containment, Containments>>, and <<{m3}.adoc#Reference, References>>.
+Stable <<{serialization}.adoc, serialization format>> and <<{m3}.adoc, meta-metamodel>> describing <<{m3}.adoc#Language, Languages>>, <<{m3}.adoc#Concept, Concepts>>, <<{m3}.adoc#Interface, Interfaces>>, <<{m3}.adoc#Annotation, Annotations>>, <<{m3}.adoc#Enumeration, Enumerations>>, <<{m3}.adoc#PrimitiveType, PrimitiveTypes>>, <<{m3}.adoc#Property, Properties>>, <<{m3}.adoc#Containment, Containments>>, and <<{m3}.adoc#Reference, References>>.
 The standard library contains <<{m3}.adoc#Node, Node>> and <<{m3}.adoc#INamed, INamed>>.
 
 [[history]]
