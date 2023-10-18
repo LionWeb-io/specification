@@ -410,7 +410,7 @@ include::annotation-variants.json[]
 == Versions
 
 NOTE: The term "version" is a bit ambiguous within LionWeb.{fn-org172}
-This section lists all versions as they appear in <<SerializationChunk.serializationFormatVersion>> and <<{m3}.adoc#Language.version, `Language.version`>>.
+This section lists all versions as they appear in <<SerializationChunk.serializationFormatVersion>> and <<{m3}.adoc#Language.version, `Language.version`>> for languages `LionWeb_M3` and `LionWeb_builtins`.
 
 === 2023.1
 Technical name: `2023.1`
@@ -418,6 +418,12 @@ Technical name: `2023.1`
 Initial version.
 Refer to <<{roadmap}.adoc#release-2023.1, roadmap>> for details.
 
+[[json-schema]]
+== JSON Schema for serialization
+[source,json]
+----
+include::serialization.schema.json[]
+----
 
 [[possible-values]]
 == Possible values for `properties`, `children`, and `references`
