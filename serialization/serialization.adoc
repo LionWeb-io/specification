@@ -15,11 +15,14 @@ This document describes the serialization format for LionWeb chunks.
 * _italic_ words refer to concepts defined by JSON.
 * *bold* words refer to concepts defined in this document.
 * `monospaced` words describe verbatim contents of the serialization.
+* ALL-CAPS key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in https://datatracker.ietf.org/doc/html/bcp14[BCP14] (https://datatracker.ietf.org/doc/html/rfc2119[RFC2119], https://datatracker.ietf.org/doc/html/rfc8174[RFC8174]) when, and only when, they appear in all capitals, as shown here.
 * "processed document" refers to the character sequence that's parsed or written, e.g. a file or network stream.
 * Footnotes refer to more discussions and rationale, but are non-normative.
 
 == Design goals
+We want to provide boring and proven infrastructure, so that innovation can be built on top of it.
 We do not take any measures to reduce the amount of transmitted data.{fn-org73}
+We strive for shallow structures to enable stream-based processing.
 
 == Description
 LionWeb node serialization format is defined in JSON (https://datatracker.ietf.org/doc/html/rfc8259[RFC 8259]).
@@ -47,13 +50,13 @@ The second _member_ SHOULD be _key_ `languages` with an _array_ _value_.{fn-org7
 Each _element_ in the value array MUST adhere to <<language>>.
 The order of _elements_ is undefined.
 _elements_ MUST contain all language/version referred to by any <<meta-pointer>> in the processed document.
-Each _element_ must be unique with respect to all its _members_.
+Each _element_ MUST be unique with respect to all its _members_.
 
 [[SerializationChunk.nodes]]
 The third _member_ SHOULD be _key_ `nodes` with an _array_ _value_.{fn-org33}{fn-org159}
 Each _element_ in the value array MUST adhere to <<node>>.
 The order of _elements_ is undefined.
-Each _element_ must be unique with respect to the value of its _key_ `id`.
+Each _element_ MUST be unique with respect to the value of its _key_ `id`.
 
 [[language]]
 === Language structure
@@ -114,8 +117,18 @@ The order of _elements_ is undefined.{fn-org156}
 * [[Node.references]] _key_ `references`{fn-org55-name-references} with _array_ _value_, each _element_ adhering to <<reference>>.
 The order of _elements_ is undefined.{fn-org156}
 * [[Node.annotations]] _key_ `annotations`{fn-org150} with _array_ _value_, each _element_ adhering to <<annotation>>.
-The order of _elements_ MUST be maintained as set by <<{refarch}.adoc#client, model client>>.{fn-org157}
+The order of _elements_ MUST be maintained.{fn-org157}
 * [[Node.parent]] _key_ `parent`{fn-org187} with _string_ or _null_ _value_, adhering to <<parent>>.
+
+For all features (i.e. `properties`, `children`, and `references`) defined for a **node**'s classifier:{fn-org33}
+
+* During serialization, we SHOULD include every feature, even if unset.
+In the latter case:
+** the *property* MUST have `value` = _null_;
+** the *child* MUST have `children` = _empty array_;
+** the *reference* MUST have `targets` = _empty array_;
+* During deserialization, we MUST accept a *node* even if not all defined features are present.
+* We MAY accept undefined features during deserialization if we can deal with them in a meaningful manner.
 
 NOTE: We currently cannot store "invalid text" (i.e. user-entered text that does not adhere to the underlying structure and/or constraints) in the model.
 We will support this in a future release.{fn-org62}
@@ -140,7 +153,7 @@ The _object_ MUST contain the following _members_:
 * [[Property.value]] _key_ `value` with _value_ as one of
 ** _string_{fn-org34} containing the value of the property referenced by the `property`.
 Refer to <<property-values>> for the specification of the value format.
-CAN be an empty _string_.
+Can be an empty _string_.
 ** _null_ to explicitly specify the property to be unset.
 
 
@@ -156,11 +169,11 @@ The _object_ MUST contain the following _members_:
 The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Containment, *Containment*>> this *child* is an instance of.
 * [[Child.children]] _key_ `children` with _array_ _value_ with _string_ _elements_.
 Each _element_ adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained *node*.
-The order of _elements_ MUST be maintained as set by <<{refarch}.adoc#client, model client>>.{fn-org157}
+The order of _elements_ MUST be maintained.{fn-org157}
 +
 NOTE: Each *child* element is the inverse relation of a *parent*.
 +
-NOTE: The children *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
+NOTE: The children *node* can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
 
 [[reference]]
 ==== Reference
@@ -173,20 +186,20 @@ The _object_ MUST contain the following _members_:
 * [[Reference.reference]] _key_ `reference` with _object_ _value_, adhering to <<meta-pointer>>.
 The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Reference, *Reference*>> this *reference* is an instance of.
 * [[Reference.targets]] _key_ `targets` with _array_ _value_ with __object_ _elements_.
-The order of _elements_ MUST be maintained as set by <<{refarch}.adoc#client, model client>>.{fn-org157}
+The order of _elements_ MUST be maintained.{fn-org157}
 Each _element_ MUST have the following _members_ in undefined order:{fn-org55-name-references}
 ** [[Reference.reference.resolveInfo]] _key_ `resolveInfo`{fn-org36} with _value_ as one of:
 *** _string_ containing *resolveInfo*, a textual hint that might be used to find the target *node* of this reference.
 Interface <<{m3}.adoc#INamed, INamed>> SHOULD be used as a default, if available.
 The exact value depends on the implementation.
-CAN be an empty _string_.
+Can be an empty _string_.
 *** _null_ if no *resolveInfo* is available.
 
 ** [[Reference.reference.reference]] _key_ `reference`{fn-org35} with _value_ as one of:
 *** _string_ according to <<{m3}.adoc#identifiers, Identifier spec>>.
 Refers to the *id* of the target *node*.
 +
-NOTE: The referred *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
+NOTE: The referred *node* can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
 *** _null_ if the *id* of the target *node* is not known.
 
 [[annotation]]
@@ -197,7 +210,7 @@ It adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id*
 
 NOTE: Each *annotation* element is the inverse relation of a *parent*.
 
-NOTE: The annotation *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
+NOTE: The annotation *node* can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
 
 [[parent]]
 ==== Parent
@@ -208,7 +221,7 @@ Refers to the *id* of the *node* containing this *node*.
 +
 NOTE: *parent* is the inverse relation of either one *child* or one *annotation*.{fn-org186}
 +
-NOTE: The referred *node* CAN be contained in the processed document, but also CAN be outside the processed document (i.e. not contained in the processed document).
+NOTE: The referred *node* can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
 
 * _null_ if
 ** This *node* is a *root node*, i.e. this node does not have a parent.
@@ -217,7 +230,7 @@ NOTE: The referred *node* CAN be contained in the processed document, but also C
 [[property-values]]
 === Property serialization
 All property values MUST be serialized as JSON _string_.{fn-org34}{fn-org9}.
-An unset property CAN be serialized as JSON _null_.
+An unset property SHOULD be serialized as JSON _null_.
 
 [[string]]
 ==== String
@@ -243,9 +256,9 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 <<{m3}.adoc#Integer, LionCore Integers>> MUST be encoded as JSON _string_.
 
 * Integers MUST be represented in base-10.
-* The digits CAN be prefixed with either `+` (plus) or `-` (minus).{fn-org100}
+* The digits can be prefixed with either `+` (plus) or `-` (minus).{fn-org100}
 * Integers MUST NOT be prefixed by leading zeros.
-* Integers CAN contain value zero with any prefix, i.e. `0`, `-0`, or `+0`.
+* Integers can contain value zero with any prefix, i.e. `0`, `-0`, or `+0`.
 * Integers MUST NOT contain leading or trailing whitespace.
 * LionWeb does NOT limit the range of the integer value.{fn-org149}
   An implementation MAY refuse a model containing an integer value outside the supported range.
@@ -410,7 +423,7 @@ include::annotation-variants.json[]
 == Versions
 
 NOTE: The term "version" is a bit ambiguous within LionWeb.{fn-org172}
-This section lists all versions as they appear in <<SerializationChunk.serializationFormatVersion>> and <<{m3}.adoc#Language.version, `Language.version`>>.
+This section lists all versions as they appear in <<SerializationChunk.serializationFormatVersion>> and <<{m3}.adoc#Language.version, `Language.version`>> for languages `LionWeb_M3` and `LionWeb_builtins`.
 
 === 2023.1
 Technical name: `2023.1`
@@ -418,6 +431,12 @@ Technical name: `2023.1`
 Initial version.
 Refer to <<{roadmap}.adoc#release-2023.1, roadmap>> for details.
 
+[[json-schema]]
+== JSON Schema for serialization
+[source,json]
+----
+include::serialization.schema.json[]
+----
 
 [[possible-values]]
 == Possible values for `properties`, `children`, and `references`

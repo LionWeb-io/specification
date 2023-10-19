@@ -796,10 +796,10 @@ If a <<Link.type, Reference.type>> targets a Classifier that implements INamed, 
 
 Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense to pre-define them.{fn-org9}
 
-* [[Boolean, Boolean]] `Boolean`
-* [[String, String]] `String`
-* [[Integer, Integer]] `Integer`
-* [[JSON, JSON]] `JSON`
+* [[Boolean, Boolean]] `Boolean` with exactly two values: `true` and `false` (<<{serialization}.adoc#boolean, Details>>)
+* [[String, String]] `String`, an arbitrary-length series of Unicode characters (<<{serialization}.adoc#string, Details>>)
+* [[Integer, Integer]] `Integer`, an arbitrary-length positive or negative integer number (<<{serialization}.adoc#integer, Details>>)
+* [[JSON, JSON]] `JSON`, any valid JSON document (<<{serialization}.adoc#json, Details>>)
 
 
 === Supporting terminology
