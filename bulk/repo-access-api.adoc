@@ -38,8 +38,8 @@ None.
 
 .Result
 <<{serialization}.adoc#SerializationChunk, SerializationChunk>> containing all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
-Does NOT include <<{m3}.adoc#Language, Languages>>
-#TODO: Correct?#
+The partitions are sent as complete nodes.{fn-org202}
+Does NOT include <<{m3}.adoc#Language, Languages>> or partition children.
 
 .Example request
 [source, httprequest]
@@ -124,6 +124,7 @@ Optional parameter, defaults to `replace`.
 [[store.mode.create]]
 `create`::: Only accept new nodes.
 The call fails without any changes to the repository if any node id from `nodes` already exists in the repository.
+The call accepts already existing node ids only referenced as child, reference, or annotation.
 [[store.mode.update]]
 `update`::: Only accept existing nodes.
 The call fails without any changes to the repository if any node id from `nodes` does not exist in the repository.
@@ -138,7 +139,7 @@ The other modes behave the same, except that they first compare the _sent_ nodes
 * If the _sent_ `A` does not yet exist (i.e. no corresponding _repo_ `A`), we create it as sent.
 ** If any other _sent_ `B` mentions `A` as child/annotation, we create `A` as child/annotation of `B`. +
 #TODO do we validate that `A` is an annotation instance in case it's mentioned as annotation?#
-** If `A` is not mentioned anywhere, we create it as new partition. +
+** If `A` is not mentioned as child/annotation, we create it as new partition. +
 #TODO do we validate that `A` is an partition instance?#
 * If only _repo_ exist, we don't do anything (typically, there are a lot more nodes in the repository than the call).
 * If both _sent_ and _repo_ exist, we "overwrite" _repo_.
@@ -224,8 +225,12 @@ TODO request body
 === ids: Get available ids
 Provides unused <<{m3}.adoc#identifiers, valid ids>>.
 
-The repository MUST NOT hand out the same unused ids to any other client.
-The repository MUST NOT contain any node with any of the provided ids.
+The repository
+
+* MUST NOT hand out the same unused ids to any other client.
+* MAY hand out the same unused ids to the same client more than once.
+* MUST NOT contain any node with any of the provided ids.
+
 The ids MUST exclude the <<{m3}.adoc#predefined-builtins-keys, built-in ids>>.
 
 Calling this API MUST NOT change repository contents themselves (besides the internal knowledge of reserved ids).
@@ -234,6 +239,7 @@ Calling this API MUST NOT change repository contents themselves (besides the int
 [[ids.count]]
 `count`:: Number of ids requested.
 The repository MUST return between one (inclusive) and `count` (inclusive) ids.
+It MAY return less than `count` ids.
 
 .Result
 List of ids guaranteed to be free.
@@ -264,7 +270,7 @@ delete::
 * If node is a Partition: #TODO#
 * Otherwise: Assume the to-be-deleted node `D`,  has parent `P`.
 +
-<<store, store call>> that sends `P` with all its features, but omits `D` from the children.
+<<store, store call>> that sends `P` with all its features, but omits `D` from the children/annotations.
 
 move:: Assume we want to move node `N` from its current parent `S` to its new parent `T`.
 +
