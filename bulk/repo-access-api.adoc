@@ -51,7 +51,7 @@ GET /bulk/partitions
 
 [[retrieve, retrieve]]
 === retrieve: Get nodes from repository
-Retrieves parts of the repository based on the listed node ids.
+Retrieves subtrees nested in the listed node ids.{fn-org201}
 
 Calling this API MUST NOT change repository contents.
 
@@ -61,17 +61,23 @@ NOTE: We might add advanced filtering capabilities in the future, or introduce a
 [[retrieve.nodes]]
 `nodes`:: List of node ids we want to retrieve from the repository.
 
-[[retrieve.mode]]
-`mode`:: Set of nodes included for each element of `nodes` parameter.
-[[retrieve.mode.direct]]
-`direct`::: Only include the elements of `nodes` themselves.
-[[retrieve.mode.subtree]]
-`subtree`::: Include the elements of `nodes`, and all descendants of each element.
-[[retrieve.mode.closure]]
-`closure`::: Include the transitive closure of all elements of `nodes`, i.e. the elements themselves, all their descendants, and all (directly or indirectly) referenced nodes.
+[[retrieve.depthLimit]]
+`depthLimit`:: Limit the depth of retrieved subtrees.
+Optional parameter, defaults to _infinite_.
+If present, MUST be an integer >= 0, with
++
+--
+* 0 meaning "return only the nodes with ids listed in `nodes` parameter",
+* 1 meaning "return the nodes with id listed in the `nodes` parameter and their direct children/annotations",
+* 2 meaning "return the nodes with id listed in the `nodes` parameter, their direct children/annotations, and the direct children/annotations of these",
+* etc.
+--
++
+NOTE: There's no _magic value_ of `depthLimit` to express _infinite_ depth.
+We need to omit the parameter if we don't want to limit the depth.
 
 .Result
-<<{serialization}.adoc#SerializationChunk, SerializationChunk>> containing all nodes according to `nodes` and `mode` parameters.
+<<{serialization}.adoc#SerializationChunk, SerializationChunk>> containing all nodes according to `nodes` and `depthLimit` parameters.
 Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLanguages>>, only their <<{serialization}.adoc#MetaPointer, MetaPointers>>.
 
 .Example request
