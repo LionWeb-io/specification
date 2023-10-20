@@ -16,8 +16,12 @@ We describe the use cases from a client's perspective.
 * "Here is a node forest, store it as I hand it to you", i.e. actual bulk data storage.
 ** Sub-case with same behavior: "I'm a very simple client who knows nothing about deltas, so whatever I send you is the truth", i.e. click-save-button.
 * "I'm starting up, get me the current partition contents", i.e. initial load.
-* "You've sent me a chunk referring to languages x and y. Give me the details about these languages", i.e. language reflection.
-* "List all languages you know", i.e. language enumeration.
+* "I want to create a guaranteed new node, which id to use?", i.e. retrieval of unused ids.
+
+== Working Hypothesis
+Simple bulk API does not need to know the language.{fn-org203}
+
+#TODO: Do we need a paging parameter?{fn-org204}#
 
 == APIs
 
