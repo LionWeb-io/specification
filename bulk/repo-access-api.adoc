@@ -295,7 +295,7 @@ Provides unused <<{m3}.adoc#identifiers, valid ids>>.
 
 The repository MUST NOT hand out the same unused ids to any other client.
 The repository MUST NOT contain any node with any of the provided ids.
-The ids MUST exclude the <<{m3}.adoc#builtin-ids, built-in ids>>.
+The ids MUST exclude the <<{m3}.adoc#predefined-builtins-keys, built-in ids>>.
 
 Calling this API MUST NOT change repository contents themselves (besides the internal knowledge of reserved ids).
 
