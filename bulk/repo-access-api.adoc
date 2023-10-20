@@ -29,9 +29,6 @@ Calling this API MUST NOT change repository contents.
 
 NOTE: We might add filter capabilities in the future.
 
-.Proposed API name
-`partitions`
-
 .Parameters
 None.
 
@@ -59,9 +56,6 @@ Retrieves parts of the repository based on the listed node ids.
 Calling this API MUST NOT change repository contents.
 
 NOTE: We might add advanced filtering capabilities in the future, or introduce an additional querying API.
-
-.Proposed API name
-`retrieve`
 
 .Parameters
 [[retrieve.nodes]]
@@ -107,9 +101,6 @@ We always process one node in its entirety, i.e. we cannot update parts of the n
 
 A node id referenced as child, reference, or annotation _can_ be mentioned in the same request, but _can_ be omitted if a node with that id already exists in the repository.
 This way, we can move subtrees and add arbitrary references without sending unchanged nodes.
-
-.Proposed API name
-`store`
 
 .Parameters
 [[store.nodes]]
@@ -228,9 +219,6 @@ The repository MUST NOT contain any node with any of the provided ids.
 The ids MUST exclude the <<{m3}.adoc#predefined-builtins-keys, built-in ids>>.
 
 Calling this API MUST NOT change repository contents themselves (besides the internal knowledge of reserved ids).
-
-.Proposed API name
-`ids`
 
 .Parameters
 [[ids.count]]
