@@ -7,9 +7,7 @@ package builtins {
   }
 }
 
-class Annotation #LightGreen extends Classifier {
-  multiple: Boolean <<optional>>
-}
+class Annotation #LightGreen extends Classifier
 
 class Concept #LightGreen extends Classifier {
   abstract: Boolean

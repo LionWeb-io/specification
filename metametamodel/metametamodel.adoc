@@ -167,9 +167,6 @@ On M2 models (i.e. Ecore), an Annotation corresponds to an `EAnnotation`.
 .Characteristics
 An Annotation has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
 
-[[Annotation.multiple, Annotation.multiple]]
-An Annotation can specify whether an annotated node can have more than one annotation via the boolean `multiple` property.
-
 An Annotation is a <<Classifier>>, and indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name), a <<IKeyed>> (as it has a key).
 
 [[Annotation.annotates, Annotation.annotates]]
@@ -180,9 +177,10 @@ Annotations can specify which Annotation it [[Annotation.extends, Annotation.ext
 An Annotation CAN have any number of <<Classifier.features, `features`>>, given it is a <<Classifier>>.
 
 .Constraints
-We CANNOT redefine `multiple` and `annotates` in a sub-annotation (i.e. an annotation that `extends` another).{fn-org154}
+We CANNOT redefine `annotates` in a sub-annotation (i.e. an annotation that `extends` another).{fn-org154}
 
 We MUST attach an instance of an Annotation only to instances of the Concept the Annotation `annotates` (and sub-concepts thereof).
+We can attach be zero, one, or more instances to a single annotated node.{fn-org32}
 
 .Annotation examples
 --
@@ -192,16 +190,12 @@ We MUST attach an instance of an Annotation only to instances of the Concept the
 hide empty members
 
 annotation DocumentationAnnotation <<A, orange>><<Annotation>> {
-  multiple = false
-  --
   docu: String
 }
 
 DocumentationAnnotation -> Builtins.Node: annotates
 
 annotation OrgRoleAnnotation <<A, orange>><<Annotation>> {
-  multiple = true
-  --
   role: String
 }
 
@@ -288,11 +282,6 @@ class AliceDocu1 <<a, orange>><<DocumentationAnnotation>> ##red {
   role = "Loves dogs"
 }
 Alice <-[#red]- AliceDocu1
-class AliceDocu2 <<a, orange>><<DocumentationAnnotation>> ##red {
-  role = "invalid because\nDocumentationAnnotation.multiple=false"
-}
-Alice <-[#red]- AliceDocu2
-
 
 
 class CompanyRole <<a, orange>><<OrgRoleAnnotation>> ##red {
@@ -716,7 +705,6 @@ The language itself has key `LionCore-M3`{fn-org91} and is named `LionCore_M3`{f
 
 |<<Annotation>> |Concept |Annotation
 |<<Annotation.annotates>> |Reference |Annotation-annotates
-|<<Annotation.multiple>> |Property |Annotation-multiple
 |<<Annotation.extends>> |Reference |Annotation-extends
 |<<Annotation.implements>> |Reference |Annotation-implements
 |<<Concept>> |Concept |Concept
