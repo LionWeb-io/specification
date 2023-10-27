@@ -112,7 +112,7 @@ The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55
   The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> or <<{m3}.adoc#Annotation, *Annotation*>> this *node* is an instance of.
 * [[Node.properties]] _key_ `properties` with _array_ _value_, each _element_ adhering to <<property>>.
 The order of _elements_ is undefined.{fn-org156}
-* [[Node.children]] _key_ `children`{fn-org55-name-children} with _array_ _value_, each _element_ adhering to <<child>>.
+* [[Node.containments]] _key_ `containments`{fn-org55-name-children}{fn-org206} with _array_ _value_, each _element_ adhering to <<containment>>.
 The order of _elements_ is undefined.{fn-org156}
 * [[Node.references]] _key_ `references`{fn-org55-name-references} with _array_ _value_, each _element_ adhering to <<reference>>.
 The order of _elements_ is undefined.{fn-org156}
@@ -120,12 +120,12 @@ The order of _elements_ is undefined.{fn-org156}
 The order of _elements_ MUST be maintained.{fn-org157}
 * [[Node.parent]] _key_ `parent`{fn-org187} with _string_ or _null_ _value_, adhering to <<parent>>.
 
-For all features (i.e. `properties`, `children`, and `references`) defined for a **node**'s classifier:{fn-org33}
+For all features (i.e. `properties`, `containments`, and `references`) defined for a **node**'s classifier:{fn-org33}
 
 * During serialization, we SHOULD include every feature, even if unset.
 In the latter case:
 ** the *property* MUST have `value` = _null_;
-** the *child* MUST have `children` = _empty array_;
+** the *containment* MUST have `children` = _empty array_;
 ** the *reference* MUST have `targets` = _empty array_;
 * During deserialization, we MUST accept a *node* even if not all defined features are present.
 * We MAY accept undefined features during deserialization if we can deal with them in a meaningful manner.
@@ -157,23 +157,23 @@ Can be an empty _string_.
 ** _null_ to explicitly specify the property to be unset.
 
 
-[[child]]
-==== Child
-[[Child]]
-Each *child* MUST be an _object_.
+[[containment]]
+==== Containment
+[[Containment]]
+Each *containment* MUST be an _object_.
 The order of _members_ is undefined.
 
 The _object_ MUST contain the following _members_:
 
-* [[Child.containment]] _key_ `containment` with _object_ _value_, adhering to <<meta-pointer>>.
-The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Containment, *Containment*>> this *child* is an instance of.
-* [[Child.children]] _key_ `children` with _array_ _value_ with _string_ _elements_.
+* [[Containment.containment]] _key_ `containment` with _object_ _value_, adhering to <<meta-pointer>>.
+The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Containment, *Containment*>> this *containment* is an instance of.
+* [[Containment.children]] _key_ `children` with _array_ _value_ with _string_ _elements_.
 Each _element_ adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained *node*.
 The order of _elements_ MUST be maintained.{fn-org157}
 +
-NOTE: Each *child* element is the inverse relation of a *parent*.
+NOTE: Each `children` element is the inverse relation of a *parent*.
 +
-NOTE: The children *node* can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
+NOTE: The `children` *node* can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
 
 [[reference]]
 ==== Reference
@@ -219,7 +219,7 @@ One of
 * _string_ according to <<{m3.acoc}#identifiers, Identifier spec>>.
 Refers to the *id* of the *node* containing this *node*.
 +
-NOTE: *parent* is the inverse relation of either one *child* or one *annotation*.{fn-org186}
+NOTE: *parent* is the inverse relation of either one *containment* or one *annotation*.{fn-org186}
 +
 NOTE: The referred *node* can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
 
@@ -347,10 +347,10 @@ concept OpeningTime           [id 44, key time_to_open]
 include::property-variants.json[]
 ----
 
-=== Children variants
+=== Containment variants
 [source,json]
 ----
-include::children-variants.json[]
+include::containment-variants.json[]
 ----
 
 *node* with *id* `cff` is outside the processed document.
@@ -439,7 +439,7 @@ include::serialization.schema.json[]
 ----
 
 [[possible-values]]
-== Possible values for `properties`, `children`, and `references`
+== Possible values for `properties`, `containments`, and `references`
 Only bold entries are valid.{fn-java33}
 
 [%header,cols="1a,1,1,1"]
@@ -449,29 +449,23 @@ Contents
 |B +
 ``properties: {``_ _ _``}``
 |C +
-``children: {``_ _ _``}``
+``containments: {``_ _ _``}``
 |D  +
 ``references: {``_ _ _``}``
 
 |2 `"a": "b"`
 |*property with id `a` has value `b`*
-.4+.^|`children` value must be array
+.4+.^|`containments` value must be array
 .4+.^|`references` value must be array
 
 |3 `"c": ""`
 |*property with id `c` has value (empty string)*
-// |`children` value must be array
-// |`references` value must be array
 
 |4 `"d": " "`
 |*property with id `d` has value ` `(one space)*
-// |`children`value must be array
-// |`references`value must be array
 
 |5 `"e": null`
 |*property with id `e` has no value*
-// |`children` value must be array
-// |`references` value must be array
 
 |6 (key `f` not present)
 |*property with id `f` has no value*
@@ -484,7 +478,6 @@ Contents
 |*reference with id `g` does not point to any nodes*
 
 |8 `"h": [ "i" ]`
-// |`properties`value must be string
 |*containment with id `h` contains node with id`i`*
 |`references` value array element must be object
 
@@ -499,47 +492,26 @@ Contents
  }
 ]
 ----
-// |`properties` value must be string
-.2+.^|`children` value array element must be string
+.2+.^|`containments` value array element must be string
 |*reference with id `j` points to node with id `l`, re-binding supported by text `k`*
 
 |10 `"m": [ null ]`
-// |`properties` value must be string
-// |`children` value array element must be a string
 |`references` value array element must be an object
 
 |11 `"n": true`
-// |`properties` value must be string
-.5+.^|`children` value must be array
+.5+.^|`containments` value must be array
 .5+.^|`references` value must be array
 
 |12 `"o": 12`
-// |`properties` value must be string
-// |`children` value must be array
-// |`references` value must be array
 
 |13 `"p": 34.56`
-// |`properties` value must be string
-// |`children` value must be array
-// |`references` value must be array
 
 |14 `"q": {}`
-// |`properties` value must be string
-// |`children` value must be array
-// |`references` value must be array
 
 |15 `"r": {`...`}`
-// |`properties` value must be string
-// |`children` value must be array
-// |`references` value must be array
 
 |16 `"s": foo`
 3.2+^.^|JSON syntax error
-// |JSON syntax error
-// |JSON syntax error
 
 |17 `"t": undefined`
-// |JSON syntax error
-// |JSON syntax error
-// |JSON syntax error
 |===

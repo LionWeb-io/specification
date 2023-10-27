@@ -69,7 +69,7 @@
               "maxProperties": 2
             }
           },
-          "children": {
+          "containments": {
             "type": "array",
             "items": {
               "type": "object",
@@ -169,7 +169,7 @@
           "id",
           "classifier",
           "properties",
-          "children",
+          "containments",
           "references",
           "annotations",
           "parent"

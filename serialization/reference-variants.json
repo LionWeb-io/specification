@@ -15,7 +15,7 @@
         "key": "myConceptId"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [
         {
           "reference": {
@@ -93,7 +93,7 @@
         "key": "differentConceptId"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": null

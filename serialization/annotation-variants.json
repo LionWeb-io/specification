@@ -23,7 +23,7 @@
         "key": "61"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [
         "marker",
@@ -41,7 +41,7 @@
         "key": "myMarker"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": "61"
@@ -63,7 +63,7 @@
           "value": "This is a very important BaseLanguageClass"
         }
       ],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": "61"
@@ -93,7 +93,7 @@
           "value": "Here be dragons"
         }
       ],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": "61"
@@ -106,7 +106,7 @@
         "key": "throwAway"
       },
       "properties": [],
-      "children": [
+      "containments": [
         {
           "containment": {
             "language": "myLanguage",
@@ -131,7 +131,7 @@
         "key": "SomeConcept"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": "localTrash"
@@ -144,7 +144,7 @@
         "key": "YetAnotherConcept"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": "localTrash"
@@ -157,7 +157,7 @@
         "key": "Concept"
       },
       "properties": [],
-      "children": [
+      "containments": [
         {
           "containment": {
             "language": "LionWeb-M3",
@@ -183,7 +183,7 @@
         "key": "Property"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [
         "typeUseMapping"
@@ -198,7 +198,7 @@
         "key": "MTC"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [
         {
           "reference": {
@@ -225,7 +225,7 @@
         "key": "UM"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [
         {
           "reference": {
@@ -252,7 +252,7 @@
         "key": "ClassConcept"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": null
