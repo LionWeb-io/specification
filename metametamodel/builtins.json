@@ -40,7 +40,7 @@
           "value": "LionCore-builtins"
         }
       ],
-      "children": [
+      "containments": [
         {
           "containment": {
             "language": "LionCore-M3",
@@ -95,7 +95,7 @@
           "value": "LionCore-builtins-String"
         }
       ],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": "LionCore-builtins"
@@ -125,7 +125,7 @@
           "value": "LionCore-builtins-Boolean"
         }
       ],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": "LionCore-builtins"
@@ -155,7 +155,7 @@
           "value": "LionCore-builtins-Integer"
         }
       ],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": "LionCore-builtins"
@@ -185,7 +185,7 @@
           "value": "LionCore-builtins-JSON"
         }
       ],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": "LionCore-builtins"
@@ -231,7 +231,7 @@
           "value": "LionCore-builtins-Node"
         }
       ],
-      "children": [
+      "containments": [
         {
           "containment": {
             "language": "LionCore-M3",
@@ -287,7 +287,7 @@
           "value": "LionCore-builtins-INamed"
         }
       ],
-      "children": [
+      "containments": [
         {
           "containment": {
             "language": "LionCore-M3",
@@ -345,7 +345,7 @@
           "value": "LionCore-builtins-INamed-name"
         }
       ],
-      "children": [],
+      "containments": [],
       "references": [
         {
           "reference": {

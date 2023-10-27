@@ -15,7 +15,7 @@
         "key": "myConceptId"
       },
       "properties": [],
-      "children": [
+      "containments": [
         {
           "containment": {
             "language": "myLanguage",
@@ -59,7 +59,7 @@
         "key": "differentConceptId"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": null
@@ -72,7 +72,7 @@
         "key": "otherConceptId"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": "ccc"
@@ -85,7 +85,7 @@
         "key": "differentConceptId"
       },
       "properties": [],
-      "children": [],
+      "containments": [],
       "references": [],
       "annotations": [],
       "parent": null
