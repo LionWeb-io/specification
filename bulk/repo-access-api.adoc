@@ -21,7 +21,11 @@ We describe the use cases from a client's perspective.
 == Working Hypothesis
 Simple bulk API does not need to know the language.{fn-org203}
 
+We assume mapping API is separate from bulk API (variant D){fn-org94}.
+
 #TODO: Do we need a paging parameter?{fn-org204}#
+
+#TODO: Clarify we never sent partial nodes#
 
 == APIs
 
@@ -234,6 +238,12 @@ The repository
 The ids MUST exclude the <<{m3}.adoc#predefined-builtins-keys, built-in ids>>.
 
 Calling this API MUST NOT change repository contents themselves (besides the internal knowledge of reserved ids).
+
+We don't assume leases, i.e. ids handed out to one client are "owned" by that client forever.
+
+We assume infinite id space.
+
+#TODO: Take care of DOS attack to deplete id space.#
 
 .Parameters
 [[ids.count]]
