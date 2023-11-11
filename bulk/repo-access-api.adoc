@@ -134,8 +134,15 @@ The call accepts already existing node ids only referenced as child, reference, 
 The call fails without any changes to the repository if any node id from `nodes` does not exist in the repository.
 
 .Semantics
+
+Containment needs to be sent from the parent's view, because containments are part of a list (with index).
+
+#TODO: Add delete command, Q: Do we update references to that node?#
+
 We describe the store semantics by comparing one _sent_ node with one _repo_ node potentially already existing in the repository.{fn-org75}
 Both nodes have the same id, thus we consider them identical.{fn-org31}
+
+#TODO: Do we assume transactional semantics?#
 
 We describe the semantics of `replace` mode.
 The other modes behave the same, except that they first compare the _sent_ nodes to the _repo_ nodes and might abort the call without any change to the repository.
@@ -151,23 +158,24 @@ That means:
 
 Concept::
 ** If both _sent_ and _repo_ have the same concept MetaPointer, we don't change the repository.
-** Otherwise, this call fails.{fn-org69} #TODO correct?#
+** Otherwise, this call fails.{fn-org69} #TODO correct? What about changes in metapointer.version? Migration use cases?#
 
 Properties::
 ** If the property exists in both _sent_ and _repo_
 *** If they have the same value, we don't change the repository.
 *** If they have a different value, we change the property to the _sent_ value.
 ** If the property only exists in _sent_, we add the property.
-** If the property only exists in _repo_ we delete the property.
+** If the property only exists in _repo_ we delete the property.  #TODO: _add_ property or _set_ property to null?#
 
 Children::
-** If the child exists in both _sent_ and _repo_
+** If the child exists #TODO rephrase to distinguish node existence and serialization contents# in both _sent_ and _repo_
 *** If the child is in the same containment
 **** If the child is in the same position, we don't change the repository.
 **** If the child is in a different position, we move the child to the _sent_ position.
 *** If the child is in different containments, we move the child to the _sent_ containment and position.
 ** If the child only exists in _sent_
 *** If the child node exists (either because it was sent in this call, or is already part of the repository), we add the child.
+This means we move the child into this node.
 *** Otherwise, this call fails #TODO correct?#
 ** If the child only exists in _repo_
 *** If the child has been added as child/annotation somewhere else in this call, we move the child (as described above).
