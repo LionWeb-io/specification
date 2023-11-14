@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1070 892" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <g>
+        <g id="cluster_builtins" transform="matrix(1,0,0,0.829226,-0.349609,32.3918)">
+            <path d="M578.5,6L635.5,6C636.697,6.363 637.637,7.303 638,8.5L645,28.488L705.5,28.488C706.871,28.488 708,29.617 708,30.988L708,129.5C708,130.871 706.871,132 705.5,132L578.5,132C577.129,132 576,130.871 576,129.5L576,8.5C576,7.129 577.129,6 578.5,6" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1.5px;"/>
+            <path d="M576,28.488L645,28.488" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1.5px;"/>
+            <g transform="matrix(1,0,0,1,580,21.5352)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Bold', 'Helvetica';font-weight:700;font-size:14px;">builtins</text>
+            </g>
+        </g>
+        <g id="elem_INamed" transform="matrix(1,0,0,1,-0.349609,9.84961)">
+            <path id="INamed" d="M691.5,62.5C691.5,61.12 690.38,60 689,60L595,60C593.62,60 592.5,61.12 592.5,62.5L592.5,113.988C592.5,115.368 593.62,116.488 595,116.488L689,116.488C690.38,116.488 691.5,115.368 691.5,113.988L691.5,62.5Z" style="fill:rgb(241,241,241);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="614.25" cy="76" r="11" style="fill:rgb(180,167,229);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M610.178,71.765L610.178,69.607L617.557,69.607L617.557,71.765L615.092,71.765L615.092,79.842L617.557,79.842L617.557,82L610.178,82L610.178,79.842L612.643,79.842L612.643,71.765L610.178,71.765Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,629.75,81.291)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Oblique', 'Helvetica';font-style:italic;font-size:14px;">INamed</text>
+            </g>
+            <path d="M593.5,92L690.5,92" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <g transform="matrix(1,0,0,1,598.5,109.535)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">name: String</text>
+            </g>
+        </g>
+        <g id="elem_Annotation">
+            <path id="Annotation" d="M317.5,726.5C317.5,725.12 316.38,724 315,724L211,724C209.62,724 208.5,725.12 208.5,726.5L208.5,753.5C208.5,754.88 209.62,756 211,756L315,756C316.38,756 317.5,754.88 317.5,753.5L317.5,726.5Z" style="fill:rgb(144,238,144);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="223.5" cy="740" r="11" style="fill:rgb(173,209,178);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M226.473,745.643C226.086,745.842 225.679,745.992 225.253,746.091C224.827,746.191 224.379,746.241 223.908,746.241C222.237,746.241 220.961,745.69 220.082,744.589C219.202,743.488 218.762,741.897 218.762,739.816C218.762,737.73 219.202,736.136 220.082,735.035C220.961,733.933 222.237,733.383 223.908,733.383C224.379,733.383 224.83,733.433 225.261,733.532C225.693,733.632 226.097,733.781 226.473,733.981L226.473,736.703C226.053,736.316 225.644,736.032 225.249,735.852C224.853,735.672 224.445,735.583 224.024,735.583C223.128,735.583 222.451,735.938 221.995,736.649C221.538,737.36 221.31,738.416 221.31,739.816C221.31,741.21 221.538,742.263 221.995,742.974C222.451,743.685 223.128,744.041 224.024,744.041C224.445,744.041 224.853,743.951 225.249,743.771C225.644,743.591 226.053,743.308 226.473,742.92L226.473,745.643Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,237.5,745.291)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">Annotation</text>
+            </g>
+        </g>
+        <g id="elem_Classifier">
+            <path id="Classifier" d="M452.5,597C452.5,595.62 451.38,594.5 450,594.5L360,594.5C358.62,594.5 357.5,595.62 357.5,597L357.5,624C357.5,625.38 358.62,626.5 360,626.5L450,626.5C451.38,626.5 452.5,625.38 452.5,624L452.5,597Z" style="fill:rgb(144,238,144);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="372.5" cy="610.5" r="11" style="fill:rgb(169,220,223);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M372.613,605.848L371.46,610.92L373.775,610.92L372.613,605.848ZM371.119,603.607L374.116,603.607L377.461,616L375.012,616L374.248,612.937L370.97,612.937L370.223,616L367.774,616L371.119,603.607Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,386.5,615.791)">
+                <g transform="matrix(14,0,0,14,38.1172,0)">
+                </g>
+                <g transform="matrix(14,0,0,14,42.0068,0)">
+                </g>
+                <text x="0px" y="0px" style="font-family:'Helvetica-Oblique', 'Helvetica';font-style:italic;font-size:14px;">Classiﬁer</text>
+            </g>
+        </g>
+        <g id="elem_Concept">
+            <path id="Concept" d="M567,706C567,704.62 565.88,703.5 564.5,703.5L435.5,703.5C434.12,703.5 433,704.62 433,706L433,773.977C433,775.356 434.12,776.477 435.5,776.477L564.5,776.477C565.88,776.477 567,775.356 567,773.977L567,706Z" style="fill:rgb(144,238,144);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="468.25" cy="719.5" r="11" style="fill:rgb(173,209,178);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M471.223,725.143C470.836,725.342 470.429,725.492 470.003,725.591C469.577,725.691 469.129,725.741 468.658,725.741C466.987,725.741 465.711,725.19 464.832,724.089C463.952,722.988 463.512,721.397 463.512,719.316C463.512,717.23 463.952,715.636 464.832,714.535C465.711,713.433 466.987,712.883 468.658,712.883C469.129,712.883 469.58,712.933 470.011,713.032C470.443,713.132 470.847,713.281 471.223,713.481L471.223,716.203C470.803,715.816 470.394,715.532 469.999,715.352C469.603,715.172 469.195,715.083 468.774,715.083C467.878,715.083 467.201,715.438 466.745,716.149C466.288,716.86 466.06,717.916 466.06,719.316C466.06,720.71 466.288,721.763 466.745,722.474C467.201,723.185 467.878,723.541 468.774,723.541C469.195,723.541 469.603,723.451 469.999,723.271C470.394,723.091 470.803,722.808 471.223,722.42L471.223,725.143Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,486.75,724.791)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">Concept</text>
+            </g>
+            <path d="M434,735.5L566,735.5" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <g transform="matrix(1,0,0,1,439,753.035)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">abstract: Boolean</text>
+            </g>
+            <g transform="matrix(1,0,0,1,439,769.523)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">partition: Boolean</text>
+            </g>
+        </g>
+        <g id="elem_ConceptInterface">
+            <path id="ConceptInterface" d="M574.5,856C574.5,854.62 573.38,853.5 572,853.5L428,853.5C426.62,853.5 425.5,854.62 425.5,856L425.5,883C425.5,884.38 426.62,885.5 428,885.5L572,885.5C573.38,885.5 574.5,884.38 574.5,883L574.5,856Z" style="fill:rgb(144,238,144);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="440.5" cy="869.5" r="11" style="fill:rgb(173,209,178);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M443.473,875.143C443.086,875.342 442.679,875.492 442.253,875.591C441.827,875.691 441.379,875.741 440.908,875.741C439.237,875.741 437.961,875.19 437.082,874.089C436.202,872.988 435.762,871.397 435.762,869.316C435.762,867.23 436.202,865.636 437.082,864.535C437.961,863.433 439.237,862.883 440.908,862.883C441.379,862.883 441.83,862.933 442.261,863.032C442.693,863.132 443.097,863.281 443.473,863.481L443.473,866.203C443.053,865.816 442.644,865.532 442.249,865.352C441.853,865.172 441.445,865.083 441.024,865.083C440.128,865.083 439.451,865.438 438.995,866.149C438.538,866.86 438.31,867.916 438.31,869.316C438.31,870.71 438.538,871.763 438.995,872.474C439.451,873.185 440.128,873.541 441.024,873.541C441.445,873.541 441.853,873.451 442.249,873.271C442.644,873.091 443.053,872.808 443.473,872.42L443.473,875.143Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,465.262,874.73)">
+                <text x="3.89px" y="0px" style="font-family:'Helvetica';font-size:14px;">Interface</text>
+            </g>
+        </g>
+        <g id="elem_Containment">
+            <path id="Containment" d="M263.5,597C263.5,595.62 262.38,594.5 261,594.5L145,594.5C143.62,594.5 142.5,595.62 142.5,597L142.5,624C142.5,625.38 143.62,626.5 145,626.5L261,626.5C262.38,626.5 263.5,625.38 263.5,624L263.5,597Z" style="fill:rgb(173,216,230);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="157.5" cy="610.5" r="11" style="fill:rgb(173,209,178);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M160.473,616.143C160.086,616.342 159.679,616.492 159.253,616.591C158.827,616.691 158.379,616.741 157.908,616.741C156.237,616.741 154.961,616.19 154.082,615.089C153.202,613.988 152.762,612.397 152.762,610.316C152.762,608.23 153.202,606.636 154.082,605.535C154.961,604.433 156.237,603.883 157.908,603.883C158.379,603.883 158.83,603.933 159.261,604.032C159.693,604.132 160.097,604.281 160.473,604.481L160.473,607.203C160.053,606.816 159.644,606.532 159.249,606.352C158.853,606.172 158.445,606.083 158.024,606.083C157.128,606.083 156.451,606.438 155.995,607.149C155.538,607.86 155.31,608.916 155.31,610.316C155.31,611.71 155.538,612.763 155.995,613.474C156.451,614.185 157.128,614.541 158.024,614.541C158.445,614.541 158.853,614.451 159.249,614.271C159.644,614.091 160.053,613.808 160.473,613.42L160.473,616.143Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,171.5,615.791)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">Containment</text>
+            </g>
+        </g>
+        <g id="elem_Link">
+            <path id="Link" d="M209.5,464C209.5,462.62 208.38,461.5 207,461.5L81,461.5C79.62,461.5 78.5,462.62 78.5,464L78.5,515.488C78.5,516.868 79.62,517.988 81,517.988L207,517.988C208.38,517.988 209.5,516.868 209.5,515.488L209.5,464Z" style="fill:rgb(173,216,230);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="125.75" cy="477.5" r="11" style="fill:rgb(169,220,223);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M125.863,472.848L124.71,477.92L127.025,477.92L125.863,472.848ZM124.369,470.607L127.366,470.607L130.711,483L128.262,483L127.499,479.937L124.22,479.937L123.473,483L121.024,483L124.369,470.607Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,146.25,482.791)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Oblique', 'Helvetica';font-style:italic;font-size:14px;">Link</text>
+            </g>
+            <path d="M79.5,493.5L208.5,493.5" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <g transform="matrix(1,0,0,1,84.5,511.035)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">multiple: Boolean</text>
+            </g>
+        </g>
+        <g id="elem_DataType">
+            <path id="DataType" d="M660,476C660,474.62 658.88,473.5 657.5,473.5L566.5,473.5C565.12,473.5 564,474.62 564,476L564,503C564,504.38 565.12,505.5 566.5,505.5L657.5,505.5C658.88,505.5 660,504.38 660,503L660,476Z" style="fill:rgb(255,182,193);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="579" cy="489.5" r="11" style="fill:rgb(169,220,223);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M579.113,484.848L577.96,489.92L580.275,489.92L579.113,484.848ZM577.619,482.607L580.616,482.607L583.961,495L581.512,495L580.749,491.937L577.47,491.937L576.723,495L574.274,495L577.619,482.607Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,593,494.791)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Oblique', 'Helvetica';font-style:italic;font-size:14px;">DataT<tspan x="37.358px 44.358px " y="0px 0px ">yp</tspan>e</text>
+            </g>
+        </g>
+        <g id="elem_LanguageEntity">
+            <path id="LanguageEntity" d="M601.5,338.5C601.5,337.12 600.38,336 599,336L467,336C465.62,336 464.5,337.12 464.5,338.5L464.5,365.5C464.5,366.88 465.62,368 467,368L599,368C600.38,368 601.5,366.88 601.5,365.5L601.5,338.5Z" style="fill:rgb(241,241,241);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="479.5" cy="352" r="11" style="fill:rgb(169,220,223);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M479.613,347.348L478.46,352.42L480.775,352.42L479.613,347.348ZM478.119,345.107L481.116,345.107L484.461,357.5L482.012,357.5L481.248,354.437L477.97,354.437L477.223,357.5L474.774,357.5L478.119,345.107Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,493.5,357.291)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Oblique', 'Helvetica';font-style:italic;font-size:14px;">LanguageEntity</text>
+            </g>
+        </g>
+        <g id="elem_Enumeration">
+            <path id="Enumeration" d="M790,597C790,595.62 788.88,594.5 787.5,594.5L672.5,594.5C671.12,594.5 670,595.62 670,597L670,624C670,625.38 671.12,626.5 672.5,626.5L787.5,626.5C788.88,626.5 790,625.38 790,624L790,597Z" style="fill:rgb(255,182,193);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="685" cy="610.5" r="11" style="fill:rgb(173,209,178);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M687.973,616.143C687.586,616.342 687.179,616.492 686.753,616.591C686.327,616.691 685.879,616.741 685.408,616.741C683.737,616.741 682.461,616.19 681.582,615.089C680.702,613.988 680.262,612.397 680.262,610.316C680.262,608.23 680.702,606.636 681.582,605.535C682.461,604.433 683.737,603.883 685.408,603.883C685.879,603.883 686.33,603.933 686.761,604.032C687.193,604.132 687.597,604.281 687.973,604.481L687.973,607.203C687.553,606.816 687.144,606.532 686.749,606.352C686.353,606.172 685.945,606.083 685.524,606.083C684.628,606.083 683.951,606.438 683.495,607.149C683.038,607.86 682.81,608.916 682.81,610.316C682.81,611.71 683.038,612.763 683.495,613.474C683.951,614.185 684.628,614.541 685.524,614.541C685.945,614.541 686.353,614.451 686.749,614.271C687.144,614.091 687.553,613.808 687.973,613.42L687.973,616.143Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,699,615.791)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">Enumeration</text>
+            </g>
+        </g>
+        <g id="elem_EnumerationLiteral">
+            <path id="EnumerationLiteral" d="M799,338.5C799,337.12 797.88,336 796.5,336L639.5,336C638.12,336 637,337.12 637,338.5L637,365.5C637,366.88 638.12,368 639.5,368L796.5,368C797.88,368 799,366.88 799,365.5L799,338.5Z" style="fill:rgb(255,182,193);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="652" cy="352" r="11" style="fill:rgb(173,209,178);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M654.973,357.643C654.586,357.842 654.179,357.992 653.753,358.091C653.327,358.191 652.879,358.241 652.408,358.241C650.737,358.241 649.461,357.69 648.582,356.589C647.702,355.488 647.262,353.897 647.262,351.816C647.262,349.73 647.702,348.136 648.582,347.035C649.461,345.933 650.737,345.383 652.408,345.383C652.879,345.383 653.33,345.433 653.761,345.532C654.193,345.632 654.597,345.781 654.973,345.981L654.973,348.703C654.553,348.316 654.144,348.032 653.749,347.852C653.353,347.672 652.945,347.583 652.524,347.583C651.628,347.583 650.951,347.938 650.495,348.649C650.038,349.36 649.81,350.416 649.81,351.816C649.81,353.21 650.038,354.263 650.495,354.974C650.951,355.685 651.628,356.041 652.524,356.041C652.945,356.041 653.353,355.951 653.749,355.771C654.144,355.591 654.553,355.308 654.973,354.92L654.973,357.643Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,666,357.291)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">EnumerationLiteral</text>
+            </g>
+        </g>
+        <g id="elem_IKeyed">
+            <path id="IKeyed" d="M680.5,189C680.5,187.62 679.38,186.5 678,186.5L606,186.5C604.62,186.5 603.5,187.62 603.5,189L603.5,240.488C603.5,241.868 604.62,242.988 606,242.988L678,242.988C679.38,242.988 680.5,241.868 680.5,240.488L680.5,189Z" style="fill:rgb(241,241,241);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="618.5" cy="202.5" r="11" style="fill:rgb(180,167,229);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M614.428,198.265L614.428,196.107L621.807,196.107L621.807,198.265L619.342,198.265L619.342,206.342L621.807,206.342L621.807,208.5L614.428,208.5L614.428,206.342L616.893,206.342L616.893,198.265L614.428,198.265Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,632.5,207.791)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Oblique', 'Helvetica';font-style:italic;font-size:14px;">IKeyed</text>
+            </g>
+            <path d="M604.5,218.5L679.5,218.5" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <g transform="matrix(1,0,0,1,609.5,236.035)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">key: Id</text>
+            </g>
+        </g>
+        <g id="elem_Feature">
+            <path id="Feature" d="M405,326.5C405,325.12 403.88,324 402.5,324L275.5,324C274.12,324 273,325.12 273,326.5L273,377.988C273,379.368 274.12,380.488 275.5,380.488L402.5,380.488C403.88,380.488 405,379.368 405,377.988L405,326.5Z" style="fill:rgb(173,216,230);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="309.6" cy="340" r="11" style="fill:rgb(169,220,223);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M309.713,335.348L308.56,340.42L310.875,340.42L309.713,335.348ZM308.219,333.107L311.216,333.107L314.561,345.5L312.112,345.5L311.349,342.437L308.07,342.437L307.323,345.5L304.874,345.5L308.219,333.107Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,328.4,345.291)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Oblique', 'Helvetica';font-style:italic;font-size:14px;">Feature</text>
+            </g>
+            <path d="M274,356L404,356" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <g transform="matrix(1,0,0,1,279,373.535)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">optional: Boolean</text>
+            </g>
+        </g>
+        <g id="elem_Language">
+            <path id="Language" d="M945.5,322C945.5,320.62 944.38,319.5 943,319.5L837,319.5C835.62,319.5 834.5,320.62 834.5,322L834.5,382.109C834.5,383.489 835.62,384.609 837,384.609L943,384.609C944.38,384.609 945.5,383.489 945.5,382.109L945.5,322Z" style="fill:rgb(241,241,241);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="854.9" cy="339.811" r="11" style="fill:rgb(173,209,178);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M857.873,345.454C857.486,345.653 857.079,345.802 856.653,345.902C856.227,346.002 855.779,346.051 855.308,346.051C853.637,346.051 852.361,345.501 851.482,344.399C850.602,343.298 850.162,341.707 850.162,339.627C850.162,337.54 850.602,335.946 851.482,334.845C852.361,333.744 853.637,333.193 855.308,333.193C855.779,333.193 856.23,333.243 856.661,333.343C857.093,333.442 857.497,333.592 857.873,333.791L857.873,336.514C857.453,336.126 857.044,335.843 856.649,335.663C856.253,335.483 855.845,335.393 855.424,335.393C854.528,335.393 853.851,335.749 853.395,336.46C852.938,337.171 852.71,338.226 852.71,339.627C852.71,341.021 852.938,342.074 853.395,342.785C853.851,343.496 854.528,343.852 855.424,343.852C855.845,343.852 856.253,343.762 856.649,343.582C857.044,343.402 857.453,343.118 857.873,342.731L857.873,345.454Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,873.6,336.102)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Oblique', 'Helvetica';font-style:italic;font-size:12px;">«partition»</text>
+            </g>
+            <g transform="matrix(1,0,0,1,870.1,352.168)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">Language</text>
+            </g>
+            <path d="M835.5,360.121L944.5,360.121" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <g transform="matrix(1,0,0,1,840.5,377.656)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">version: String</text>
+            </g>
+        </g>
+        <g id="elem_PrimitiveType">
+            <path id="PrimitiveType" d="M635,597C635,595.62 633.88,594.5 632.5,594.5L513.5,594.5C512.12,594.5 511,595.62 511,597L511,624C511,625.38 512.12,626.5 513.5,626.5L632.5,626.5C633.88,626.5 635,625.38 635,624L635,597Z" style="fill:rgb(255,182,193);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="526" cy="610.5" r="11" style="fill:rgb(173,209,178);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M528.973,616.143C528.586,616.342 528.179,616.492 527.753,616.591C527.327,616.691 526.879,616.741 526.408,616.741C524.737,616.741 523.461,616.19 522.582,615.089C521.702,613.988 521.262,612.397 521.262,610.316C521.262,608.23 521.702,606.636 522.582,605.535C523.461,604.433 524.737,603.883 526.408,603.883C526.879,603.883 527.33,603.933 527.761,604.032C528.193,604.132 528.597,604.281 528.973,604.481L528.973,607.203C528.553,606.816 528.144,606.532 527.749,606.352C527.353,606.172 526.945,606.083 526.524,606.083C525.628,606.083 524.951,606.438 524.495,607.149C524.038,607.86 523.81,608.916 523.81,610.316C523.81,611.71 524.038,612.763 524.495,613.474C524.951,614.185 525.628,614.541 526.524,614.541C526.945,614.541 527.353,614.451 527.749,614.271C528.144,614.091 528.553,613.808 528.973,613.42L528.973,616.143Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,540,615.791)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">PrimitiveT<tspan x="61.455px 68.455px " y="0px 0px ">yp</tspan>e</text>
+            </g>
+        </g>
+        <g id="elem_Property">
+            <path id="Property" d="M335,476C335,474.62 333.88,473.5 332.5,473.5L247.5,473.5C246.12,473.5 245,474.62 245,476L245,503C245,504.38 246.12,505.5 247.5,505.5L332.5,505.5C333.88,505.5 335,504.38 335,503L335,476Z" style="fill:rgb(173,216,230);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="260" cy="489.5" r="11" style="fill:rgb(173,209,178);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M262.973,495.143C262.586,495.342 262.179,495.492 261.753,495.591C261.327,495.691 260.879,495.741 260.408,495.741C258.737,495.741 257.461,495.19 256.582,494.089C255.702,492.988 255.262,491.397 255.262,489.316C255.262,487.23 255.702,485.636 256.582,484.535C257.461,483.433 258.737,482.883 260.408,482.883C260.879,482.883 261.33,482.933 261.761,483.032C262.193,483.132 262.597,483.281 262.973,483.481L262.973,486.203C262.553,485.816 262.144,485.532 261.749,485.352C261.353,485.172 260.945,485.083 260.524,485.083C259.628,485.083 258.951,485.438 258.495,486.149C258.038,486.86 257.81,487.916 257.81,489.316C257.81,490.71 258.038,491.763 258.495,492.474C258.951,493.185 259.628,493.541 260.524,493.541C260.945,493.541 261.353,493.451 261.749,493.271C262.144,493.091 262.553,492.808 262.973,492.42L262.973,495.143Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,274,494.791)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">Property</text>
+            </g>
+        </g>
+        <g id="elem_Reference">
+            <path id="Reference" d="M107,597C107,595.62 105.88,594.5 104.5,594.5L9.5,594.5C8.12,594.5 7,595.62 7,597L7,624C7,625.38 8.12,626.5 9.5,626.5L104.5,626.5C105.88,626.5 107,625.38 107,624L107,597Z" style="fill:rgb(173,216,230);stroke:rgb(24,24,24);stroke-width:0.5px;"/>
+            <circle cx="22" cy="610.5" r="11" style="fill:rgb(173,209,178);stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M24.973,616.143C24.586,616.342 24.179,616.492 23.753,616.591C23.327,616.691 22.879,616.741 22.408,616.741C20.737,616.741 19.461,616.19 18.581,615.089C17.702,613.988 17.262,612.397 17.262,610.316C17.262,608.23 17.702,606.636 18.581,605.535C19.461,604.433 20.737,603.883 22.408,603.883C22.879,603.883 23.33,603.933 23.761,604.032C24.193,604.132 24.597,604.281 24.973,604.481L24.973,607.203C24.553,606.816 24.144,606.532 23.749,606.352C23.353,606.172 22.945,606.083 22.524,606.083C21.628,606.083 20.951,606.438 20.495,607.149C20.038,607.86 19.81,608.916 19.81,610.316C19.81,611.71 20.038,612.763 20.495,613.474C20.951,614.185 21.628,614.541 22.524,614.541C22.945,614.541 23.353,614.451 23.749,614.271C24.144,614.091 24.553,613.808 24.973,613.42L24.973,616.143Z" style="fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,36,615.791)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;">Reference</text>
+            </g>
+        </g>
+        <path d="M847,50.5L847,125.742L935,125.742L935,60.5L925,50.5L847,50.5" style="fill:rgb(245,245,245);fill-rule:nonzero;stroke:white;stroke-width:0.5px;"/>
+        <path d="M925,50.5L925,60.5L935,60.5L925,50.5" style="fill:rgb(245,245,245);fill-rule:nonzero;stroke:white;stroke-width:1px;"/>
+        <rect x="853" y="57.5" width="67" height="15.311" style="fill:rgb(245,245,245);"/>
+        <g transform="matrix(1,0,0,1,861,65.0684)">
+            <text x="0px" y="0px" style="font-family:'Helvetica-Bold', 'Helvetica';font-weight:700;font-size:13px;">Legend</text>
+        </g>
+        <rect x="853" y="72.811" width="67" height="15.311" style="fill:rgb(173,216,230);"/>
+        <g transform="matrix(1,0,0,1,857,85.3789)">
+            <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">Feature</text>
+        </g>
+        <rect x="853" y="88.121" width="67" height="15.311" style="fill:rgb(144,238,144);"/>
+        <g transform="matrix(1,0,0,1,857,100.689)">
+            <g transform="matrix(13,0,0,13,35.3945,0)">
+            </g>
+            <g transform="matrix(13,0,0,13,39.0063,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">Classiﬁer</text>
+        </g>
+        <rect x="853" y="103.432" width="67" height="15.311" style="fill:rgb(255,182,193);"/>
+        <g transform="matrix(1,0,0,1,857,116)">
+            <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">DataT<tspan x="34.69px 41.19px " y="0px 0px ">yp</tspan>e</text>
+        </g>
+        <g id="link_Classifier_Annotation">
+            <path id="Classifier-backto-Annotation" d="M343.42,635.49C332.57,641.36 321.91,648.35 313,656.5C291.98,675.71 276.83,705.79 269.02,723.83" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M340.54,629.11L361.59,626.65L346.67,641.69L340.54,629.11Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_Annotation_Classifier">
+            <path id="Annotation-to-Classifier" d="M279.82,723.89C305.86,700.52 355.85,655.63 384.14,630.23" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M388.15,626.63L378.779,629.66L384.427,629.968L384.119,635.616L388.15,626.63Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,352,670.068)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">annotates</text>
+            </g>
+            <g transform="matrix(1,0,0,1,278.571,713.396)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,354.593,647.077)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">0..1</text>
+            </g>
+        </g>
+        <g id="link_Classifier_Concept">
+            <path id="Classifier-backto-Concept" d="M428.26,642.71C441.93,661.07 459.27,684.34 473.48,703.41" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M422.61,646.85L416.27,626.63L433.83,638.48L422.61,646.85Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_Classifier_ConceptInterface">
+            <path id="Classifier-backto-ConceptInterface" d="M472.62,626.14C541.81,642.64 642.31,671.41 665,703.5C683.73,729.99 681.19,748.38 665,776.5C642.08,816.29 594.89,840.07 556.82,853.46" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M470.61,632.86L452.71,621.51L473.78,619.22L470.61,632.86Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_Link_Containment">
+            <path id="Link-backto-Containment" d="M166.32,535.51C176.59,556.23 188.09,579.43 195.43,594.24" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M160,538.53L157.39,517.5L172.54,532.31L160,538.53Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_LanguageEntity_DataType">
+            <path id="LanguageEntity-backto-DataType" d="M552,385.58C568.25,413.46 590.9,452.32 603.2,473.41" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M545.78,388.82L541.76,368.02L557.88,381.77L545.78,388.82Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_DataType_Enumeration">
+            <path id="DataType-backto-Enumeration" d="M641.15,519.9C664.48,543.42 696.25,575.47 714.8,594.18" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M636.06,524.7L626.94,505.57L646,514.84L636.06,524.7Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_IKeyed_EnumerationLiteral">
+            <path id="IKeyed-backto-EnumerationLiteral" d="M667.18,260.4C681.79,286.43 699.25,317.58 709.44,335.74" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;stroke-dasharray:7,7;"/>
+            <path d="M660.88,263.46L657.2,242.59L673.09,256.61L660.88,263.46Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_IKeyed_Feature">
+            <path id="IKeyed-backto-Feature" d="M584.71,241.12C531.75,264.8 453.32,299.88 399.39,323.99" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;stroke-dasharray:7,7;"/>
+            <path d="M582.2,234.57L603.32,232.8L587.92,247.35L582.2,234.57Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_LanguageEntity_Classifier">
+            <path id="LanguageEntity-backto-Classifier" d="M516.42,386.22C488.42,442.34 432.81,553.76 412.58,594.3" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M510.18,383.05L525.38,368.28L522.71,389.3L510.18,383.05Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_Feature_Link">
+            <path id="Feature-backto-Link" d="M283.52,391.55C251.39,413.88 211.74,441.43 182.92,461.45" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M279.59,385.76L300.01,380.09L287.58,397.26L279.59,385.76Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_IKeyed_Language">
+            <path id="IKeyed-backto-Language" d="M698.39,246.31C739.15,268.58 793.94,298.52 834.5,320.68" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;stroke-dasharray:7,7;"/>
+            <path d="M694.94,252.4L680.75,236.67L701.66,240.12L694.94,252.4Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_IKeyed_LanguageEntity">
+            <path id="IKeyed-backto-LanguageEntity" d="M607.4,258.51C586.16,284.91 560.24,317.13 545.28,335.74" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;stroke-dasharray:7,7;"/>
+            <path d="M602.21,253.79L620.2,242.59L613.12,262.57L602.21,253.79Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_INamed_IKeyed" transform="matrix(1,0,0,0.843165,0,29.1886)">
+            <path id="INamed-backto-IKeyed" d="M642,136.14L642,186.11" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M635,136.01L642,116.01L649,136.01L635,136.01Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_DataType_PrimitiveType">
+            <path id="DataType-backto-PrimitiveType" d="M600.78,524.74C593.27,547.66 583.74,576.72 578.02,594.18" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M594.18,522.4L607.06,505.57L607.48,526.76L594.18,522.4Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_Feature_Property">
+            <path id="Feature-backto-Property" d="M322.35,399.04C313.02,424.84 301.99,455.34 295.52,473.24" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M315.82,396.52L329.2,380.09L328.98,401.28L315.82,396.52Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_Link_Reference">
+            <path id="Link-backto-Reference" d="M112.25,533.93C96.82,555.04 79.26,579.06 68.16,594.24" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M106.8,529.52L124.26,517.5L118.11,537.78L106.8,529.52Z" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+        </g>
+        <g id="link_Annotation_Annotation">
+            <path id="Annotation-to-Annotation" d="M317.62,726.13C336.88,725.91 352.5,730.53 352.5,740C352.5,748.58 339.67,753.18 322.93,753.8" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M317.62,753.87L326.665,757.767L322.62,753.813L326.574,749.767L317.62,753.87Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,358.5,745.068)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">extends</text>
+            </g>
+            <g transform="matrix(1,0,0,1,325.363,720.848)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,325.323,752.193)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">0..1</text>
+            </g>
+        </g>
+        <g id="link_Annotation_ConceptInterface">
+            <path id="Annotation-to-ConceptInterface" d="M290.91,756.08C321.57,772.64 372.27,800 416,823.5C432.77,832.51 451.44,842.52 466.91,850.8" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M471.61,853.31L465.555,845.542L467.199,850.955L461.787,852.599L471.61,853.31Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,417,820.068)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">implements</text>
+            </g>
+            <g transform="matrix(1,0,0,1,293.161,776.511)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,454.82,842.788)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+        </g>
+        <g id="link_Concept_Concept">
+            <path id="Concept-to-Concept" d="M567.2,726.17C586.81,726.64 602,731.26 602,740C602,747.92 589.52,752.45 572.59,753.59" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M567.2,753.83L576.373,757.415L572.195,753.602L576.008,749.423L567.2,753.83Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,608,745.068)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">extends</text>
+            </g>
+            <g transform="matrix(1,0,0,1,574.878,721.424)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,574.996,752.038)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">0..1</text>
+            </g>
+        </g>
+        <g id="link_Concept_ConceptInterface">
+            <path id="Concept-to-ConceptInterface" d="M500,776.52L500,848.33" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M500,853.48L504,844.48L500,848.48L496,844.48L500,853.48Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,501,820.068)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">implements</text>
+            </g>
+            <g transform="matrix(1,0,0,1,493.466,796.959)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,492.931,842.725)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+        </g>
+        <g id="link_ConceptInterface_ConceptInterface">
+            <path id="ConceptInterface-to-ConceptInterface" d="M574.72,859.46C594.51,860.04 609.5,863.38 609.5,869.5C609.5,875.04 597.19,878.31 580.15,879.3" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M574.72,879.54L583.883,883.151L579.715,879.326L583.54,875.158L574.72,879.54Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,615.5,874.568)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">extends</text>
+            </g>
+            <g transform="matrix(1,0,0,1,582.735,855.236)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,582.735,877.386)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+        </g>
+        <g id="link_EnumerationLiteral_Enumeration">
+            <path id="EnumerationLiteral-to-Enumeration" d="M718.71,368.28C720.67,410.07 726.13,526.76 728.67,581.05" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M729.29,594.3L733.002,588.118L728.723,582.313L725.011,588.496L729.29,594.3Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,726,494.568)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">literals</text>
+            </g>
+            <g transform="matrix(1,0,0,1,711.98,388.478)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,719.671,583.775)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">1</text>
+            </g>
+        </g>
+        <g id="link_Feature_Classifier">
+            <path id="Feature-to-Classifier" d="M346.06,380.45C358.71,429.61 385.09,532.13 397.82,581.61" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M401.1,594.34L403.476,587.532L398.106,582.72L395.729,589.528L401.1,594.34Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,382,494.568)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">features</text>
+            </g>
+            <g transform="matrix(1,0,0,1,340.948,400.863)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,390.384,583.829)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">1</text>
+            </g>
+        </g>
+        <g id="link_Link_Classifier">
+            <path id="Link-to-Classifier" d="M203.22,517.5C253.58,540.46 324.36,572.73 367.32,592.32" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M371.9,594.41L365.362,587.044L367.348,592.341L362.051,594.327L371.9,594.41Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,307,561.068)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">type</text>
+            </g>
+            <g transform="matrix(1,0,0,1,210.924,538.7)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,350.683,583.63)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">1</text>
+            </g>
+        </g>
+        <g id="link_Language_Language">
+            <path id="Language-to-Language" d="M945.68,338.88C964.94,338.74 980.5,343.11 980.5,352C980.5,360.05 967.72,364.4 950.99,365.04" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M945.68,365.12L954.736,368.991L950.68,365.049L954.622,360.992L945.68,365.12Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,986.5,357.068)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">dependsOn</text>
+            </g>
+            <g transform="matrix(1,0,0,1,953.565,333.691)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,953.565,363.457)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+        </g>
+        <g id="link_LanguageEntity_Language">
+            <path id="LanguageEntity-to-Language" d="M545.57,335.85C559.74,319.09 584.49,293.9 612.5,283.5C682.64,257.45 766.42,285.85 823.44,313.59" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M835.19,319.48L831.622,313.214L824.465,314.098L828.033,320.364L835.19,319.48Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,613.5,286.068)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">entities</text>
+            </g>
+            <g transform="matrix(1,0,0,1,542.86,325.342)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,818.552,311.185)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">1</text>
+            </g>
+        </g>
+        <g id="link_Property_DataType">
+            <path id="Property-to-DataType" d="M311.69,473.47C345.38,450.52 412.64,412.42 472.5,425.5C512.12,434.15 553.94,455.14 581.33,470.73" style="fill:none;fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <path d="M585.94,473.38L580.136,465.423L581.607,470.885L576.145,472.357L585.94,473.38Z" style="fill:rgb(24,24,24);fill-rule:nonzero;stroke:rgb(24,24,24);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,444.5,428.068)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">type</text>
+            </g>
+            <g transform="matrix(1,0,0,1,312.348,462.711)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">*</text>
+            </g>
+            <g transform="matrix(1,0,0,1,567.607,462.882)">
+                <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;">1</text>
+            </g>
+        </g>
+    </g>
+</svg>
