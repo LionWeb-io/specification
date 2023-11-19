@@ -8,7 +8,7 @@ Finally, investigate the implementation part of use cases.
 == Use cases
 NOTE: If the repository accepted "made-up" node ids (i.e. Jos' proposal), we can omit the _Bulk.ids_ calls below.
 
-UPDATE::
+Update::
 We parse `StringUtils.java` and create an AST.
 All nodes that have a recognizable identity (i.e. can be referred to) have a `fqn` property.
 We work with the AST, and refer to some of its "identifiable" nodes from other parts of the model.
@@ -28,7 +28,7 @@ We update properties or descendants of changed "identifiable" nodes, add and rem
 #ISSUE: Step 5 very cumbersome.#
 --
 
-DIRECT BIND::
+Direct bind::
 We parse `Main.java`, find a reference to `StringUtils`, and parse `StringUtils.java` in the same parser run.
 We build cross-references between `Main` AST and `StringUtils` AST.
 +
@@ -38,7 +38,7 @@ We build cross-references between `Main` AST and `StringUtils` AST.
 2. _Bulk.store_ with `StringUtils`  and `Main` AST, reference to `StringUtils` with `[id=<id of StringUtils>>,resolveInfo=<fqn of StringUtils>]`.
 --
 
-PARSE THEN REFER::
+Parse then refer::
 We parse `StringUtils.java`, create an AST, and store it in the repository.
 +
 Some time later, we parse `Main.java`, and build an AST.
@@ -53,7 +53,7 @@ It contains a reference to `StringUtils`, which we resolve _without_ re-parsing 
 5. Invoke _Resolver_ processor.
 --
 
-REFER THEN PARSE::
+Refer then parse::
 We parse `Main.java`, and find an unresolvable reference to `StringUtils`.
 +
 Some time later, we parse `StringUtils.java`.
@@ -68,7 +68,7 @@ Then we run reference resolution on our model, and establish the reference from 
 5. Invoke _Resolver_ processor.
 --
 
-SEARCH FQN::
+Search FQN::
 We somehow got our hands on a fqn of an "identifiable" node.
 We want to know if there is a fitting entry in the repository.
 +
@@ -77,7 +77,7 @@ We want to know if there is a fitting entry in the repository.
 _Bulk.retrieve_ with `idProperty` set and send fqns instead of node ids.
 --
 
-LIST FQNS::
+List FQNs::
 We stored all our "identifiable" nodes in one partition in the repository.
 We want to list all of their fqns.
 +
@@ -86,6 +86,14 @@ We want to list all of their fqns.
 _Bulk.retrieve_ with partition's node id.
 Read `fqn` property of all children of partition.
 --
+
+Stable element URIs::
+We parsed `StringUtils.java` in repo `R1`, and link to "identifiable" nodes from an external wiki.
+The link might be https://example.com/nodes/org.apache.commons.lang3.StringUtils.toFirstUpper.
+We change the repo implementation to `R2` of another brand.
+The link should be stable.
++
+See <<stable-uri-discussion>>.
 
 == Changes
 
@@ -178,3 +186,180 @@ If we allowed `@Id(unique=true)`, the repository MUST reject nodes with the same
 retrieve::
 Add another parameter `idProperty` as described above.
 Compatible with all other capabilities.
+
+[[stable-uri-discussion]]
+== Stable URI discussion
+How would that work in existing systems?
+This is important because we want to be compatible with lots of systems.
+
+We'll look at node URIs of "identifiable elements" in these variants for each system:
+
+1. Copy existing repo `R1` from system _X_ to new instance `R2` of system _X_.
+2. Copy existing repo `R1` from system _Y_ to new instance `R2` of systems _X_.
+_Y_ might use arbitrary LionWeb-compatible node ids.
+3. Re-create existing repo `R1` in system _X_ from identical sources in same order.
+4. Re-create existing repo `R1` in system _X_ from identical sources in different order (e.g. because the file system listed the files in different order, or we use a hashmap somewhere in the processing chain).
+5. Re-create existing repo `R1` in system _X_ from slightly changed sources in same order.
+
+=== MPS
+MPS uses user-given names to identify projects, random UUIDs to identify models, and random longs to identify nodes (although it supports _foreign node ids_ consisting of arbitrary strings).
+
+NOTE: The _local_ node URLs of MPS (http://127.0.0.1:63320/node?ref=r%3A5d0bf864-ad8e-487e-9a12-36abdfcf2e40%28io.lionweb.PROPS.structure%29%2F7815373512446180605) only work because we're all working on the _same_ repository (synced via git).
+
+.Copy existing repo `R1` from system _X_ to new instance `R2` of system _X_
+Node URIs unstable because of randomly chosen model and node id.
+
+.Copy existing repo `R1` from system _Y_ to new instance `R2` of systems _X_
+Node URIs unstable because of randomly chosen model and node id.
+
+.Re-create existing repo `R1` in system _X_ from identical sources in same order
+Node URIs unstable because of randomly chosen model and node id.
+
+.Re-create existing repo `R1` in system _X_ from identical sources in different order
+Node URIs unstable because of randomly chosen model and node id.
+
+.Re-create existing repo `R1` in system _X_ from slightly changed sources in same order
+Node URIs unstable because of randomly chosen model and node id.
+
+=== Ecore
+We assume Xtext implementation: name-based URIs for "identifiable" nodes, positional URIs relative to the closest "identifiable" ancestor for the rest.
+
+Example:
+
+[source, java]
+----
+package org.apache.commons.lang3;
+
+class StringUtils {
+    // WRONG implementation!
+    String toFirstUpper(String input) {
+        char firstChar = input.charAt(0);
+        if (firstChar > 'z') {            // <1>
+            // ...
+        }
+    }
+}
+----
+<1> URI of `firstChar` would be http://example/com/nodes/org.apache.commons.lang3.StringUtils.toFirstUpper/statements/1/condition/left
+
+.Copy existing repo `R1` from system _X_ to new instance `R2` of system _X_
+Stable node URIs, as long as they are contained in some "identifiable" node.
+
+.Copy existing repo `R1` from system _Y_ to new instance `R2` of systems _X_
+Node URI could be stable if globally unique (i.e. no nested scopes).
+
+.Re-create existing repo `R1` in system _X_ from identical sources in same order
+Stable node URIs, as long as they are contained in some "identifiable" node.
+
+.Re-create existing repo `R1` in system _X_ from identical sources in different order
+Stable node URIs, as long as they are contained in some "identifiable" node.
+Non-"identifiable" nodes would change their URI (as they are positional).
+
+.Re-create existing repo `R1` in system _X_ from slightly changed sources in same order
+Stable node URIs, as long as they are contained in some "identifiable" node.
+Non-"identifiable" nodes would change their URI (as they are positional).
+
+=== Enterprise Architect
+EA identifies nodes by random UUIDs.
+
+.Copy existing repo `R1` from system _X_ to new instance `R2` of system _X_
+Node URIs unstable because of randomly chosen node id.
+
+.Copy existing repo `R1` from system _Y_ to new instance `R2` of systems _X_
+Node URIs unstable because of randomly chosen node id.
+
+.Re-create existing repo `R1` in system _X_ from identical sources in same order
+Node URIs unstable because of randomly chosen node id.
+
+.Re-create existing repo `R1` in system _X_ from identical sources in different order
+Node URIs unstable because of randomly chosen node id.
+
+.Re-create existing repo `R1` in system _X_ from slightly changed sources in same order
+Node URIs unstable because of randomly chosen node id.
+
+=== Relational Database
+We assume naive scheme: tables with numeric `id` column with `AUTO_INCREMENT` feature.
+
+.Copy existing repo `R1` from system _X_ to new instance `R2` of system _X_
+Depends highly on the implementation: If we copied table-by-table and never deleted any row, the re-created entries would probably end up with the same id and thus URI.
+Probably unstable if we didn't meet any of the conditions above.
+
+.Copy existing repo `R1` from system _Y_ to new instance `R2` of systems _X_
+Node URIs unstable because we must map external arbitrary node ids to internal integers.
+
+.Re-create existing repo `R1` in system _X_ from identical sources in same order
+Stable node URIs (assuming no deletions ever).
+
+.Re-create existing repo `R1` in system _X_ from identical sources in different order
+Node URIs unstable because they depend on processing order.
+
+.Re-create existing repo `R1` in system _X_ from slightly changed sources in same order
+Depends on the change: If we only changed names or other properties, node URIs would be stable (as they are processed in the same order).
+Any other change (add/remove nodes, change order, change nesting) would lead to unstable URIs.
+
+=== Modelix
+Modelix uses globally unique longs as node ids.
+
+.Copy existing repo `R1` from system _X_ to new instance `R2` of system _X_
+Stable node URIs only if we never deleted any node in `R1`.
+
+.Copy existing repo `R1` from system _Y_ to new instance `R2` of systems _X_
+Node URIs unstable because we must map external arbitrary node ids to internal integers.
+
+.Re-create existing repo `R1` in system _X_ from identical sources in same order
+Stable node URIs (assuming no deletions ever).
+
+.Re-create existing repo `R1` in system _X_ from identical sources in different order
+Node URIs unstable because they depend on processing order.
+
+.Re-create existing repo `R1` in system _X_ from slightly changed sources in same order
+Depends on the change: If we only changed names or other properties, node URIs would be stable (as they are processed in the same order).
+Any other change (add/remove nodes, change order, change nesting) would lead to unstable URIs.
+
+=== Rascal
+Rascal uses _SourceLocations_ into immutable sources to identify elements.
+Example (made-up from my limited understanding of Rascal): `a/b/c.java#line50column20`
+
+.Copy existing repo `R1` from system _X_ to new instance `R2` of system _X_
+Stable node URIs.
+
+.Copy existing repo `R1` from system _Y_ to new instance `R2` of systems _X_
+???
+
+.Re-create existing repo `R1` in system _X_ from identical sources in same order
+Stable node URIs.
+
+.Re-create existing repo `R1` in system _X_ from identical sources in different order
+Stable node URIs.
+
+.Re-create existing repo `R1` in system _X_ from slightly changed sources in same order
+Node URIs unstable because source location would move
+
+=== MetaEdit+
+???
+
+.Copy existing repo `R1` from system _X_ to new instance `R2` of system _X_
+
+.Copy existing repo `R1` from system _Y_ to new instance `R2` of systems _X_
+
+.Re-create existing repo `R1` in system _X_ from identical sources in same order
+
+.Re-create existing repo `R1` in system _X_ from identical sources in different order
+
+.Re-create existing repo `R1` in system _X_ from slightly changed sources in same order
+
+=== Neo4J
+???
+
+As far as I understand from link:https://neo4j.com/docs/ogm-manual/current/reference/#reference:annotating-entities:entity-identifier[Neo4J Documentation],
+by default it uses long integers -- but it supports user-defined ids.
+
+.Copy existing repo `R1` from system _X_ to new instance `R2` of system _X_
+
+.Copy existing repo `R1` from system _Y_ to new instance `R2` of systems _X_
+
+.Re-create existing repo `R1` in system _X_ from identical sources in same order
+
+.Re-create existing repo `R1` in system _X_ from identical sources in different order
+
+.Re-create existing repo `R1` in system _X_ from slightly changed sources in same order
