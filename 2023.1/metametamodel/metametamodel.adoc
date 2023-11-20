@@ -6,7 +6,7 @@ include::../../shared/issue-footnotes.adoc[]
 :sectnums:
 
 
-In this document we describe the Meta-Metamodel to be used by LionWeb.
+In this document we describe the Meta-Metamodel used by LionWeb.
 The Meta-Metamodel is called LionCore.
 
 [[introduction]]
