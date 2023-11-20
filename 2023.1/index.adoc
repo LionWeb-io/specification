@@ -1,7 +1,6 @@
 include::../shared/issue-footnotes.adoc[]
 
 :m3: ./metametamodel/metametamodel
-:refarch: ../reference-architecture/reference-architecture
 :serialization: ./serialization/serialization
 
 :emquad: &#x2001;
@@ -32,6 +31,4 @@ and <<{m3}.adoc#JSON, JSON>>.
 * Serialization format{emquad}<<{serialization}.adoc, html>>{emquad}link:metametamodel/metametamodel.pdf[pdf]
 
 * Meta-metamodel{emquad}<<{m3}.adoc, html>>{emquad}link:serialization/serialization.pdf[pdf]
-
-* #TODO: Also reference architecture?#
 

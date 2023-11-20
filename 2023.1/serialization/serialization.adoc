@@ -1,7 +1,6 @@
 include::../../shared/issue-footnotes.adoc[]
 
 :m3: ../metametamodel/metametamodel
-:refarch: ../reference-architecture/reference-architecture
 :fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
 
 = LionWeb Serialization Format Version 2023.1
