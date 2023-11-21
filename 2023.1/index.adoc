@@ -1,7 +1,7 @@
 include::../shared/issue-footnotes.adoc[]
 
-:m3: ./metametamodel/metametamodel
-:serialization: ./serialization/serialization
+:m3: metametamodel/metametamodel
+:serialization: serialization/serialization
 
 :emquad: &#x2001;
 
