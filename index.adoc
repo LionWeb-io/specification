@@ -1,5 +1,7 @@
 = LionWeb Documentation
 
+== Working documents
+
 // * xref:documentation/documentation-structure.adoc[Documentation structure]
 * xref:roadmap/roadmap.adoc[Roadmap]
 * xref:reference-architecture/reference-architecture.adoc[Reference Architecture]
@@ -7,3 +9,6 @@
 * xref:metametamodel/metametamodel.adoc[Meta-Metamodel (M3)]
 * xref:serialization/serialization.adoc[Serialization Format]
 
+== Versions
+
+* xref:2023.1/index.adoc[2023.1]

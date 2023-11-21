@@ -1,0 +1,94 @@
+{
+  "serializationFormatVersion": "2023.1",
+  "languages": [
+    {
+      "key": "myLanguage",
+      "version": "2"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ccc",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "myConceptId"
+      },
+      "properties": [],
+      "containments": [
+        {
+          "containment": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "emptyContainmentId"
+          },
+          "children": []
+        },
+        {
+          "containment": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "singleContainmentId"
+          },
+          "children": [
+            "cdd"
+          ]
+        },
+        {
+          "containment": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "multiContainmentId"
+          },
+          "children": [
+            "cee",
+            "cff",
+            "cgg"
+          ]
+        }
+      ],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    },
+    {
+      "id": "cgg",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "differentConceptId"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    },
+    {
+      "id": "cdd",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "otherConceptId"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": "ccc"
+    },
+    {
+      "id": "cee",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "differentConceptId"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    }
+  ]
+}

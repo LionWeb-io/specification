@@ -1,0 +1,103 @@
+{
+  "serializationFormatVersion": "2023.1",
+  "languages": [
+    {
+      "key": "myLanguage",
+      "version": "2"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "bbb",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "myConceptId"
+      },
+      "properties": [
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "stringPropertyId"
+          },
+          "value": "my string value"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "integerPropertyId"
+          },
+          "value": "123"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "booleanPropertyId"
+          },
+          "value": "true"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "jsonPropertyId"
+          },
+          "value": "{ \"name\": \"Bob\" }"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "unsetPropertyId"
+          },
+          "value": null
+        }
+      ],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    },
+    {
+      "id": "21",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "time_to_open"
+      },
+      "properties": [
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "day"
+          },
+          "value": "tttt"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "starthour"
+          },
+          "value": "9"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "endhour"
+          },
+          "value": "5"
+        }
+      ],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    }
+  ]
+}

@@ -3,6 +3,7 @@ include::../shared/issue-footnotes.adoc[]
 :m3: ../metametamodel/metametamodel
 :refarch: ../reference-architecture/reference-architecture
 :serialization: ../serialization/serialization
+:v2023-1: ../2023.1/
 
 = LionWeb Roadmap, Releases, and History
 :toc:
@@ -16,7 +17,7 @@ As a volunteer-run Open Source effort, we cannot commit to a timeline.
 We're actively looking for corporate sponsors, with some prospects in sight.
 
 [[in-progress]]
-=== In progress for _after_ release 2023.1
+=== In progress for _after_ version 2023.1
 
 [[bulk-protocol]]
 ==== Specifying bulk protocol
@@ -152,20 +153,25 @@ NOTE: This functionality concerns model-to-text / model-to-binary generators.
 Model-to-model generators would be implemented as <<{refarch}.adoc#processor, Processors>> that run on-demand.
 
 [[releases]]
-== Releases
+[[versions]]
+== Versions
 
 [[release-2023.1]]
+[[version-2023.1]]
 === 2023.1
-Stable <<{serialization}.adoc, serialization format>> (including JSON schema) and <<{m3}.adoc, meta-metamodel>> describing <<{m3}.adoc#Language, Languages>>, <<{m3}.adoc#Concept, Concepts>>, <<{m3}.adoc#Interface, Interfaces>>, <<{m3}.adoc#Annotation, Annotations>>, <<{m3}.adoc#Enumeration, Enumerations>>, <<{m3}.adoc#PrimitiveType, PrimitiveTypes>>, <<{m3}.adoc#Property, Properties>>, <<{m3}.adoc#Containment, Containments>>, and <<{m3}.adoc#Reference, References>>.
-The standard library contains classifiers <<{m3}.adoc#Node, Node>> and <<{m3}.adoc#INamed, INamed>>, and primitive types <<{m3}.adoc#Boolean, Boolean>>, <<{m3}.adoc#String, String>>, <<{m3}.adoc#Integer, Integer>>, and <<{m3}.adoc#JSON, JSON>>.
+Stable serialization format (including JSON schema) and meta-metamodel describing Languages, Concepts, Interfaces, Annotations, Enumerations, PrimitiveTypes, Properties, Containments, and References.
+The standard library contains classifiers Node and INamed, and primitive types Boolean, String, Integer, and JSON.
+
+<<{v2023-1}/index.adoc, Overview>>
 
 [[history]]
 == History
 
 [[history-2023]]
 === 2023
-==== Maybe November
-* Initial release `2023.1`
+==== November
+* Initial release <<{v2023-1}/index.adoc, 2023.1>>
+* Presentation at LangDevCon 2023
 
 ==== May
 * First public presentation at MPS Community Meetup 2023
