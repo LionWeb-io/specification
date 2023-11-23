@@ -180,3 +180,4 @@
 :fn-org204: footnote:org204[https://github.com/LionWeb-io/specification/issues/204[Do we need a paging functionality in bulk API? #204]]
 :fn-org205: footnote:org205[https://github.com/LionWeb-io/specification/issues/205[Should simple bulk API contain an operation to get languages? #205]]
 :fn-org206: footnote:org206[https://github.com/LionWeb-io/specification/issues/206[rename `nodes.children` -> `nodes.containments`? #206]]
+:fn-org211: footnote:org211[https://github.com/LionWeb-io/specification/issues/211[We always transmit complete nodes in bulk API #211]]

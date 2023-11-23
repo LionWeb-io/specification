@@ -23,10 +23,11 @@ Simple bulk API does not need to know the language.{fn-org203}
 
 We assume mapping API is separate from bulk API (variant D){fn-org94}.
 
+We never sent partial nodes.{fn-org211}
+
 #TODO: Do we need a paging parameter?{fn-org204}#
 
-#TODO: Clarify we never sent partial nodes#
-
+[[apis]]
 == APIs
 
 [[partitions, partitions]]
@@ -37,15 +38,15 @@ Calling this API MUST NOT change repository contents.
 
 NOTE: We might add filter capabilities in the future.
 
-.Parameters
+==== Parameters
 None.
 
-.Result
+==== Result
 <<{serialization}.adoc#SerializationChunk, SerializationChunk>> containing all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
 The partitions are sent as complete nodes.{fn-org202}
 Does NOT include <<{m3}.adoc#Language, Languages>> or partition children.
 
-.Example request
+==== Example request
 [source, httprequest]
 ----
 GET /bulk/partitions
@@ -65,7 +66,9 @@ Calling this API MUST NOT change repository contents.
 
 NOTE: We might add advanced filtering capabilities in the future, or introduce an additional querying API.
 
-.Parameters
+If the repository supports <<trash>>, it MUST retrieve nodes from _trash_ if the client asks for them.
+
+==== Parameters
 [[retrieve.nodes]]
 `nodes`:: List of node ids we want to retrieve from the repository.
 
@@ -84,11 +87,11 @@ If present, MUST be an integer >= 0, with
 NOTE: There's no _magic value_ of `depthLimit` to express _infinite_ depth.
 We need to omit the parameter if we don't want to limit the depth.
 
-.Result
+==== Result
 <<{serialization}.adoc#SerializationChunk, SerializationChunk>> containing all nodes according to `nodes` and `depthLimit` parameters.
 Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLanguages>>, only their <<{serialization}.adoc#MetaPointer, MetaPointers>>.
 
-.Example request
+==== Example request
 [source, httprequest]
 ----
 GET /bulk/retrieve?mode=direct
@@ -113,10 +116,13 @@ Creates new nodes, or updates existing nodes in the repository.
 
 We always process one node in its entirety, i.e. we cannot update parts of the node with this API.
 
-A node id referenced as child, reference, or annotation _can_ be mentioned in the same request, but _can_ be omitted if a node with that id already exists in the repository.
+A node id referenced as parent, containment, reference, or annotation _can_ be mentioned in the same request, but _can_ be omitted if a node with that id already exists in the repository.
 This way, we can move subtrees and add arbitrary references without sending unchanged nodes.
 
-.Parameters
+We consider a node to be _updated_ if a node with the same id already exists in the repository.
+Otherwise, we consider that node to be _new_.
+
+==== Parameters
 [[store.nodes]]
 `nodes`:: <<{serialization}.adoc#SerializationChunk, SerializationChunk>> containing all nodes to store to the repository.
 
@@ -133,90 +139,48 @@ The call accepts already existing node ids only referenced as child, reference, 
 `update`::: Only accept existing nodes.
 The call fails without any changes to the repository if any node id from `nodes` does not exist in the repository.
 
-.Semantics
+==== Semantics
+After completing this call, all sent nodes MUST have exactly the sent contents (except `parent`, see below #TODO correct?#) in the repository.
+We must send containments/annotations from the parent's view, because we need to know the containment and index of the contained node/annotation within its parent.
 
-Containment needs to be sent from the parent's view, because containments are part of a list (with index).
+If we move a contained/annotation node `C` from its previous parent `A` to its new parent `B`, we MUST send both `A` and `B`.
+This guarantees no implicit changes to other parts of the model.
+If `A` is missing in the input nodes, the whole call fails without any changes to the repository.
 
-#TODO: Add delete command, Q: Do we update references to that node?#
+The whole call fails, without any changes to the repository, if it would lead to a malformed model (i.e. cycles in containment hierarchy, same node contained in different parents, parent and corresponding containment/annotation don't match #TODO: Add reference to model validation#).
+#TODO correct (aka transactional semantics)?#
 
-We describe the store semantics by comparing one _sent_ node with one _repo_ node potentially already existing in the repository.{fn-org75}
-Both nodes have the same id, thus we consider them identical.{fn-org31}
+The repository SHOULD NOT validate the "meta-semantics" of the sent nodes, e.g. whether a Concept instance without parent is a partition, a feature instance can be part of its node instance, or a node mentioned as annotation is an Annotation instance.
+Rationale: We want to support storing invalid models, so the user does not lose data.
+Also, we assume no knowledge of the metamodel.
 
-#TODO: Do we assume transactional semantics?#
+#TODO do we support changes to classifier? What about changes in metapointer.version? Migration use cases?#
 
-We describe the semantics of `replace` mode.
-The other modes behave the same, except that they first compare the _sent_ nodes to the _repo_ nodes and might abort the call without any change to the repository.
+#TODO: Do we create new partitions implicitly (by sending a node without parent) or have special call?#
 
-* If the _sent_ `A` does not yet exist (i.e. no corresponding _repo_ `A`), we create it as sent.
-** If any other _sent_ `B` mentions `A` as child/annotation, we create `A` as child/annotation of `B`. +
-#TODO do we validate that `A` is an annotation instance in case it's mentioned as annotation?#
-** If `A` is not mentioned as child/annotation, we create it as new partition. +
-#TODO do we validate that `A` is an partition instance?#
-* If only _repo_ exist, we don't do anything (typically, there are a lot more nodes in the repository than the call).
-* If both _sent_ and _repo_ exist, we "overwrite" _repo_.
-That means:
 
-Concept::
-** If both _sent_ and _repo_ have the same concept MetaPointer, we don't change the repository.
-** Otherwise, this call fails.{fn-org69} #TODO correct? What about changes in metapointer.version? Migration use cases?#
+[[orphan]]
+.Orphans
+An _orphan_ node is a node present in the repository that is not mentioned in any other node as containment or annotation, and is not a partition.
+All new orphans SHOULD be moved to a special [[trash, trash]]_trash_ partition in the repository.
+Changing nodes within _trash_ fails the whole call without changes to the repository, except if we _recover_ the node.
+_Recovering_ means to re-add the orphan node as containment/annotation to a regular node.
 
-Properties::
-** If the property exists in both _sent_ and _repo_
-*** If they have the same value, we don't change the repository.
-*** If they have a different value, we change the property to the _sent_ value.
-** If the property only exists in _sent_, we add the property.
-** If the property only exists in _repo_ we delete the property.  #TODO: _add_ property or _set_ property to null?#
+If a repository supports _trash_, the repository MAY delete nodes in _trash_ according to its own _garbage collection_ rules (e.g. after some time, or on memory pressure).
+If a repository does not support _trash_, it immediately deletes orphans.
 
-Children::
-** If the child exists #TODO rephrase to distinguish node existence and serialization contents# in both _sent_ and _repo_
-*** If the child is in the same containment
-**** If the child is in the same position, we don't change the repository.
-**** If the child is in a different position, we move the child to the _sent_ position.
-*** If the child is in different containments, we move the child to the _sent_ containment and position.
-** If the child only exists in _sent_
-*** If the child node exists (either because it was sent in this call, or is already part of the repository), we add the child.
-This means we move the child into this node.
-*** Otherwise, this call fails #TODO correct?#
-** If the child only exists in _repo_
-*** If the child has been added as child/annotation somewhere else in this call, we move the child (as described above).
-*** Otherwise, we delete the child *node* from the repository.
-
-References::
-** If the reference target exists in both _sent_ and _repo_
-*** If the target is in the same reference
-**** If the target is in the same position, we don't change the repository.
-**** If the target is in a different position, we move the target to the _sent_ position.
-*** {empty}
-+
-NOTE: We don't need to consider if the target is in different references specially -- the target can be referenced from two references within the same parent.
-** If the reference target only exists in _sent_, we add the target.
-** If the reference target only exists in _repo_, we remove the target.
-
-Annotations::
-** If the annotation exists in both _sent_ and _repo_
-*** If the annotation is in the same position, we don't change the repository.
-*** If the annotation is in a different position, we move the annotation to the _sent_ position.
-** If the annotation only exists in _sent_
-*** If the annotation node exists (either because it was sent in this call, or is already part of the repository), we add the annotation.
-*** Otherwise, this call fails #TODO correct?#
-** If the annotation only exists in _repo_
-*** If the annotation has been added as child/annotation somewhere else in this call, we move the annotation (as described above).
-*** Otherwise, we delete the annotation *node* from the repository.
-
-Parent::
-We have to ignore the `parent` field in the _sent_ because otherwise we always had to send the whole ancestor axis, even if unchanged. +
-#TODO double-check#
+The repository MUST NOT update/change references to orphan nodes.
+Rationale: We in general do support unresolved or unresolvable references, and changes to the model should always be explicit. #TODO correct?#
 
 .How to handle unknown ids?
 
 * If requested by this client via <<ids>>: Create new node
 * If not requested by this client{fn-org94}{fn-org70} #TODO decide#
 
-
-.Result
+==== Result
 #TODO#
 
-.Example request
+==== Example request
 [source, httprequest]
 ----
 POST /bulk/store?mode=replace
@@ -231,7 +195,43 @@ TODO request body
 // ----
 
 
+[[delete, delete]]
+=== delete: Delete nodes from repository
+Deletes nodes from the repository, including <<trash>>.
 
+Deleted nodes don't exist anymore in the repository from the client's point of view.
+They might still exist in other contexts (e.g. another branch), or physically within the repository for internal reasons (e.g. storage optimization, concurrent editing support).
+After this call succeeds, the deleted nodes MUST NOT appear in any responses according to this API.
+
+Contained/annotation nodes of deleted nodes that are not explicitly mentioned in the call become <<orphan, orphans>> and get treated accordingly (i.e. moved to _trash_, if available).
+#TODO do we need a `recursive` parameter?#
+
+After this call succeeds, a repository MAY consider the deleted node's id to be _unused_, and thus allow to re-use it.
+A repository also MAY disallow re-using previously deleted node ids.
+
+The whole call fails, without any changes to the repository, if any of the provided node ids does not exist in the repository #TODO correct? What about concurrent deletes?#, or any of the provided node ids is a <<{m3}.adoc#predefined-builtins-keys, built-in id>>.
+
+==== Parameters
+[[delete.nodes]]
+`nodes`:: List of node ids we want to delete from the repository.
+
+==== Result
+#TODO#
+
+==== Example request
+[source, httprequest]
+----
+DELETE /bulk/delete?nodes=["first-node-id","13123123","c2Vjb25kIG5vZGUgaWQ"]
+----
+
+[NOTE]
+====
+link:https://www.rfc-editor.org/rfc/rfc9110.html#name-delete[RFC 9110: HTTP Semantics] states about the request body of a DELETE method:
+
+> An origin server SHOULD NOT rely on private agreements to receive content, since participants in HTTP communication are often unaware of intermediaries along the request chain.
+
+Thus, this example sends the node ids via URL query.
+====
 
 [[ids, ids]]
 === ids: Get available ids
@@ -248,21 +248,23 @@ The ids MUST exclude the <<{m3}.adoc#predefined-builtins-keys, built-in ids>>.
 Calling this API MUST NOT change repository contents themselves (besides the internal knowledge of reserved ids).
 
 We don't assume leases, i.e. ids handed out to one client are "owned" by that client forever.
+Rationale: Otherwise, the repository must track sessions, and run housekeeping on leases.
+This would exclude simple repository implementations.
 
 We assume infinite id space.
 
 #TODO: Take care of DOS attack to deplete id space.#
 
-.Parameters
+==== Parameters
 [[ids.count]]
 `count`:: Number of ids requested.
 The repository MUST return between one (inclusive) and `count` (inclusive) ids.
 It MAY return less than `count` ids.
 
-.Result
+==== Result
 List of ids guaranteed to be free.
 
-.Example request
+==== Example request
 [source, httprequest]
 ----
 GET /bulk/ids?count=10
