@@ -250,7 +250,7 @@ link:https://www.rfc-editor.org/rfc/rfc9110.html#name-delete[RFC 9110: HTTP Sema
 
 Thus, this example sends the node ids via URL query.
 
-[horizonmtal]
+[horizontal]
 Jos:: Weird to put them in the URL, instead of the body.
 ====
 
