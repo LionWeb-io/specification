@@ -3,7 +3,7 @@ include::../shared/issue-footnotes.adoc[]
 :m3: ../metametamodel/metametamodel
 = Bulk Repository Access API
 :toc: preamble
-:toclevels: 3
+:toclevels: 2
 
 The bulk API is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
 It is intended for CRUD operations on (larger) sets of nodes.
