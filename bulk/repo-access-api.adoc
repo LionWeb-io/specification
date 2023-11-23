@@ -68,6 +68,13 @@ NOTE: We might add advanced filtering capabilities in the future, or introduce a
 
 If the repository supports <<trash>>, it MUST retrieve nodes from _trash_ if the client asks for them.
 
+[horizontal]
+Jos:: Trash? Didn't see this before.  Doesn't thip open up manu additional questions
+- What happens if I create a node with an id of a trahsed node?
+Jos:: I don't like the idea that trashed nodes can just be found as any other node.
+I would expect an explicit recovery call of some kind. 
+Jos:: This might be something to postpone, it makes everything more complex 
+
 ==== Parameters
 [[retrieve.nodes]]
 `nodes`:: List of node ids we want to retrieve from the repository.
@@ -119,6 +126,9 @@ We always process one node in its entirety, i.e. we cannot update parts of the n
 A node id referenced as parent, containment, reference, or annotation _can_ be mentioned in the same request, but _can_ be omitted if a node with that id already exists in the repository.
 This way, we can move subtrees and add arbitrary references without sending unchanged nodes.
 
+[horizontal]
+Jos:: A node id referenced as parent, containment, reference, or annotation can always be omitted, even if no such node exist. Isn't it?
+
 We consider a node to be _updated_ if a node with the same id already exists in the repository.
 Otherwise, we consider that node to be _new_.
 
@@ -153,6 +163,14 @@ The whole call fails, without any changes to the repository, if it would lead to
 The repository SHOULD NOT validate the "meta-semantics" of the sent nodes, e.g. whether a Concept instance without parent is a partition, a feature instance can be part of its node instance, or a node mentioned as annotation is an Annotation instance.
 Rationale: We want to support storing invalid models, so the user does not lose data.
 Also, we assume no knowledge of the metamodel.
+
+[horizontal]
+Jos:: The repository should work without metamodel knmowledge, but some kind of correctness will be needed,
+otherwise many clients won't work.
+We should probably cross-reference with the validation document to see which rules are to be maintained by the repository.
+Jos:: If the metamodel is know n, the repository can check many extra things.
+That _could_ be beneficiary for all clients. 
+Maybe we should have optional validations on the server?
 
 #TODO do we support changes to classifier? What about changes in metapointer.version? Migration use cases?#
 
@@ -231,6 +249,9 @@ link:https://www.rfc-editor.org/rfc/rfc9110.html#name-delete[RFC 9110: HTTP Sema
 > An origin server SHOULD NOT rely on private agreements to receive content, since participants in HTTP communication are often unaware of intermediaries along the request chain.
 
 Thus, this example sends the node ids via URL query.
+
+[horizonmtal]
+Jos:: Weird to put them in the URL, instead of the body.
 ====
 
 [[ids, ids]]
