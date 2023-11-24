@@ -56,7 +56,7 @@ and xref:{m3}.adoc#JSON[JSON].
 
 * TypeScript
   {emquad}https://github.com/LionWeb-io/lionweb-typescript[repo]
-  {emquad}npm
+  {emquad}https://www.npmjs.com/org/lionweb[NPM org with 4 packages]
 
 * Freon
   {emquad}https://github.com/LionWeb-io/lioncore-freon[repo]
