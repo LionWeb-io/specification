@@ -1,6 +1,8 @@
 include::../shared/issue-footnotes.adoc[]
 :serialization: ../serialization/serialization
 :m3: ../metametamodel/metametamodel
+:trash: trash-api
+
 = Bulk Repository Access API
 :toc: preamble
 :toclevels: 2
@@ -67,15 +69,6 @@ Retrieves subtrees nested in the listed node ids.{fn-org201}
 Calling this API MUST NOT change repository contents.
 
 NOTE: We might add advanced filtering capabilities in the future, or introduce an additional querying API.
-
-If the repository supports <<trash>>, it MUST retrieve nodes from _trash_ if the client asks for them.
-
-[horizontal]
-Jos:: Trash? Didn't see this before.  Doesn't thip open up manu additional questions
-- What happens if I create a node with an id of a trahsed node?
-Jos:: I don't like the idea that trashed nodes can just be found as any other node.
-I would expect an explicit recovery call of some kind. 
-Jos:: This might be something to postpone, it makes everything more complex 
 
 ==== Parameters
 [[retrieve.nodes]]
@@ -184,13 +177,13 @@ Maybe we should have optional validations on the server?
 [[orphan]]
 .Orphans
 An _orphan_ node is a node present in the repository that is not mentioned in any other node as containment or annotation, and is not a partition.
-All new orphans SHOULD be moved to a special [[trash, trash]]_trash_ partition in the repository.
-#TODO: Move trash to separate spec#
-Changing nodes within _trash_ fails the whole call without changes to the repository, except if we _recover_ the node.
-_Recovering_ means to re-add the orphan node as containment/annotation to a regular node.
+We cannot create orphans explicitly.
+A node becomes an orphan if it already exists in the repository, but the node's id is removed from its parent containment/annotation,
+and the node is not moved to another parent.
 
-If a repository supports _trash_, the repository MAY delete nodes in _trash_ according to its own _garbage collection_ rules (e.g. after some time, or on memory pressure).
-If a repository does not support _trash_, it immediately deletes orphans.
+#TODO: What about references to orphans? Do they resolve?#
+
+A repository MAY immediately <<delete>> orphans, or keep them in a <<{trash}.adoc, trash>>.
 
 The repository MUST NOT update/change references to orphan nodes.
 Rationale: We in general do support unresolved or unresolvable references.
@@ -220,7 +213,7 @@ TODO request body
 
 [[delete, delete]]
 === delete: Delete nodes from repository
-Deletes nodes from the repository, including <<trash>>.
+Deletes nodes from the repository.
 
 Deleted nodes don't exist anymore in the repository from the client's point of view.
 They might still exist in other contexts (e.g. another branch), or physically within the repository for internal reasons (e.g. storage optimization, concurrent editing support).
