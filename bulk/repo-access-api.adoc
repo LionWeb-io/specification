@@ -29,6 +29,22 @@ We never sent partial nodes.{fn-org211}
 
 We send commands (with potentially implicit effects), not state updates.
 
+We assume transactional semantics for each command.
+
+We do support invalid models w.r.t.
+
+* Violations of metamodel constraints
+* Unresolvable references
+
+We enforce conformance to
+
+* Tree structure (i.e. at most one parent for each node)
+* Symmetry between containment/annotation and parent
+* No unresolvable containment/annotation ids
+* No unresolvable parent ids
+
+#TODO Double-check agreement on invalid models / enforced conformance#
+
 #TODO: Do we need a paging parameter?{fn-org204}#
 
 [[apis]]
@@ -121,9 +137,6 @@ We always process one node in its entirety, i.e. we cannot update parts of the n
 A node id referenced as parent, containment, reference, or annotation _can_ be mentioned in the same request, but _can_ be omitted if a node with that id already exists in the repository.
 This way, we can move subtrees and add arbitrary references without sending unchanged nodes.
 
-[horizontal]
-Jos:: A node id referenced as parent, containment, reference, or annotation can always be omitted, even if no such node exist. Isn't it?
-
 We consider a node to be _updated_ if a node with the same id already exists in the repository.
 Otherwise, we consider that node to be _new_.
 
@@ -146,18 +159,18 @@ The call accepts already existing node ids only referenced as child, reference, 
 [[store.mode.update]]
 `update`::: Only accept existing nodes.
 The call fails without any changes to the repository if any node id from `nodes` does not exist in the repository.
+#TODO: Do we want this mode?#
 
 ==== Semantics
 After completing this call, all sent nodes MUST have exactly the sent contents (except `parent`, see below #TODO correct?#) in the repository.
 We must send containments/annotations from the parent's view, because we need to know the containment and index of the contained node/annotation within its parent.
 
-If we move a contained/annotation node `C` from its previous parent `A` to its new parent `B`, we MUST `B`, and MAY omit `A`.
+If we move a contained/annotation node `C` from its previous parent `A` to its new parent `B`, we MUST send `B`, and MAY omit `A`.
 This means we can have implicit changes in `A`.
 
 The whole call fails, without any changes to the repository, if it would lead to a malformed model (i.e. cycles in containment hierarchy, same node contained in different parents, parent and corresponding containment/annotation don't match #TODO: Add reference to model validation#).
-#TODO correct (aka transactional semantics)?#
 
-The repository SHOULD NOT validate the "meta-semantics" of the sent nodes, e.g. whether a Concept instance without parent is a partition, a feature instance can be part of its node instance, or a node mentioned as annotation is an Annotation instance.
+The repository SHOULD NOT #TODO: or MUST NOT?# validate the "meta-semantics" of the sent nodes, e.g. whether a Concept instance without parent is a partition, a feature instance can be part of its node instance, or a node mentioned as annotation is an Annotation instance.
 Rationale: We want to support storing invalid models, so the user does not lose data.
 Also, we assume no knowledge of the metamodel.
 
@@ -166,7 +179,7 @@ Jos:: The repository should work without metamodel knmowledge, but some kind of 
 otherwise many clients won't work.
 We should probably cross-reference with the validation document to see which rules are to be maintained by the repository.
 Jos:: If the metamodel is know n, the repository can check many extra things.
-That _could_ be beneficiary for all clients. 
+That _could_ be beneficiary for all clients.
 Maybe we should have optional validations on the server?
 
 #TODO do we support changes to classifier? What about changes in metapointer.version? Migration use cases?#
@@ -298,6 +311,8 @@ GET /bulk/ids?count=10
 
 
 == Mapping CRUD operations
+#TODO: Outdated, update#
+
 NOTE: We assume <<store.mode.replace>> mode.
 
 read:: <<retrieve, retrieve call>> with requested node ids.
