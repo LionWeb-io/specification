@@ -174,14 +174,6 @@ The repository SHOULD NOT #TODO: or MUST NOT?# validate the "meta-semantics" of 
 Rationale: We want to support storing invalid models, so the user does not lose data.
 Also, we assume no knowledge of the metamodel.
 
-[horizontal]
-Jos:: The repository should work without metamodel knmowledge, but some kind of correctness will be needed,
-otherwise many clients won't work.
-We should probably cross-reference with the validation document to see which rules are to be maintained by the repository.
-Jos:: If the metamodel is know n, the repository can check many extra things.
-That _could_ be beneficiary for all clients.
-Maybe we should have optional validations on the server?
-
 #TODO do we support changes to classifier? What about changes in metapointer.version? Migration use cases?#
 
 #TODO: Do we create new partitions implicitly (by sending a node without parent) or have special call?#
@@ -262,8 +254,6 @@ link:https://www.rfc-editor.org/rfc/rfc9110.html#name-delete[RFC 9110: HTTP Sema
 
 Thus, this example sends the node ids via URL query.
 
-[horizontal]
-Jos:: Weird to put them in the URL, instead of the body.
 ====
 
 [[ids, ids]]
@@ -330,6 +320,3 @@ delete::
 move:: Assume we want to move node `N` from its current parent `S` to its new parent `T`.
 +
 <<store, store call>> that sends `T` with all its features, including `N` in the children.
-
-[horizontal]
-Jos:: According to the explanation before `S` should also be sent.
