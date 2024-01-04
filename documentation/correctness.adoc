@@ -27,7 +27,7 @@ This approach provides a degree of resilience: issues arising in one level don't
 LionWeb provides a JSON serialization format for models: the serialization chunk.
 LionWeb intentionally doesn't prescribe anything about the _programmatic representation_ of models -- i.e.: the runtime or in-memory representation that's the result of deserializing a serialization chunk of a model -- leaving implementors of language-oriented tooling free to choose the representation that's right for them.
 Because of that, this specification is phrased _completely_ in terms of the JSON serialization.
-The first three levels of this specification pertain purely to the JSON that's supposed to be the serialization chunk of a model, and are language(s)-aspecific.
+The first three levels of this specification pertain purely to the JSON that's supposed to be the serialization chunk of a model, and are language(s)-agnostic -- essentially, this is about whether the JSON is _well-formed_ as a serialization chunk in JSON format.
 The next levels _could_ be phrased in terms of a programmatic representation, but the equivalent formulation purely in terms of the serialization format works just as well.
 
 This specification admits some flexibility on the first three, JSON-centric levels.
@@ -43,7 +43,7 @@ The list is roughly in order from low-level to language(s)-specific.
 [horizontal]
 
 Low-level syntactic::
-Pertains to the character stream that's supposed to be JSON text that's (supposed to be) the serialization chunk of a model.
+Pertains to the text that's (supposed to be) the JSON serialization chunk of a model.
 
 Structural syntactic::
 Pertains to the syntactic structure of the parsed JSON text.
@@ -58,13 +58,22 @@ This means that the serialization chunk conforms to the language(s) it declares 
 An example is that a node must declare values for exactly the features of the classifier it declares.
 
 Referential::
-This pertains to whether references resolve.
+This pertains to whether references resolve within the chunk.
 An unresolvable reference doesn't prevent being able to work with the model, but it often prohibits the next level –– Constraints -- from producing meaningful results.
 
 Constraints::
 This pertains to a language(s)-specific notion of correctness.
 An incorrectness would typically either lead to a direct failure in the model's semantics -- i.e.: its execution through interpretation, or generating code and running that --, or to the result of the semantics not making sense in the (context of the) domain.
 This distinction effectively divides this level in two sublevels, but it's up to the language(s) designers to expose those.
+In our experience, a significant part of constraints is "`type-informed`" which means that _type computation/derivation_ is probably an intrinsic part of the constraints aspect of any language.
+
+[NOTE]
+====
+LionWeb uses explicit, ID-based references, which means that scoping is not needed to resolve references.
+Nevertheless, scoping probably still plays some role in any language.
+Consider the following constraint in an ERD-style language: "`in a reference to a field of a referenced entity, the field referenced must be a field of the entity referenced`".
+Even though this is a constraint, it can be interpreted as a scoping rule as well, and the language's UI should take it into account when providing content assist to the language's users.
+====
 
 
 == Overview of the severity
