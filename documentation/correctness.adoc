@@ -14,8 +14,11 @@ We'll talk about _correctness_ from now, and consider _validity_ and _consistenc
 
 It makes sense to phrase the answer as a collection of _issues_, instead of giving a hard "`yes/no`" answer.
 An issue is a specific point in the model where a specific kind of incorrectness arises.
-Many (kinds of) issues can be meaningfully recovered from, and recovery can often be obvious to the point it can be automatic.
-The unresolved reference can be left in as-is, and treated as an unknown (but not a _missing_) value with special meaning (i.e., domain-specific semantics).
+Many (kinds of) issues can be meaningfully (fully or partially) recovered from, and recovery can often be obvious to the point it can be automatic.
+The unresolved reference can be left in as-is, and treated as an unknown (but not a _missing_) value.
+It's then up to the consumers of models to give a special meaning -- i.e., domain-specific semantics -- to that particular value.
+In some cases, that might not be possible or desirable to do, e.g.: most interpreters and code generators can only work with a completely correct model.
+
 The illegal comma should be reported but can subsequently be safely ignored.
 In cases where recovery is not automatic, an issue should be very clear to the user what they can do to resolve it.
 A model must be editable/mutable -- and even usable to some -- even if it has issues.
@@ -32,13 +35,16 @@ The next levels _could_ be phrased in terms of a programmatic representation, bu
 
 This specification admits some flexibility on the first three, JSON-centric levels.
 That is because the behavior and adaptability of JSON parsers differ from implementation to implementation.
-We simply can't (and don't want to demand) that a LionWeb implementation always produces issues, even if they're recoverable or ignorable anyway.
+E.g., some parsers might simply ignore/skip over trailing commas, or have the last of key-value pairs with duplicate keys "`win`".
+We simply can't (and don't want to demand) that a LionWeb implementation always produces the exact same issues, especially if they can be fully recovered from (in an automatic way).
 
 
 == Overview of the levels
 
 We first give an overview of the various levels, and what each pertains to, at first without specifying the corresponding kinds of issues that may arise in that level.
-The list is roughly in order from low-level to language(s)-specific.
+The list is roughly in order from low-level and language-agnostic, to language(s)-specific.
+
+// TODO  come up with user-readable names for these categories
 
 [horizontal]
 
@@ -47,11 +53,12 @@ Pertains to the text that's (supposed to be) the JSON serialization chunk of a m
 
 Structural syntactic::
 Pertains to the syntactic structure of the parsed JSON text.
-It's essentially equivalent to applying a generic JSON Schema.
+It's essentially equivalent to conforming to a generic, language-agnostic JSON Schema -- or some other formalism to describe the syntactic structure of the JSON -- for the serialization format.
 
 Hierarchical::
-Pertains to non-local, inter-node constraints on the parsed JSON text.
-An example is that a node that declared a parent node must be contained as a child of that parent node.
+Pertains to relational constraints within the parsed JSON text.
+An example is that each node ID occurs uniquely.
+Another example is that a node that declares a certain parent node must be contained as a child of that parent node -- provided that parent node is present in the serialization chunk; if it's not, then we can't check that constraint.
 
 Meta-structural::
 This means that the serialization chunk conforms to the language(s) it declares to be an instance of.
@@ -62,35 +69,82 @@ This pertains to whether references resolve within the chunk.
 An unresolvable reference doesn't prevent being able to work with the model, but it often prohibits the next level –– Constraints -- from producing meaningful results.
 
 Constraints::
-This pertains to a language(s)-specific notion of correctness.
-An incorrectness would typically either lead to a direct failure in the model's semantics -- i.e.: its execution through interpretation, or generating code and running that --, or to the result of the semantics not making sense in the (context of the) domain.
-This distinction effectively divides this level in two sublevels, but it's up to the language(s) designers to expose those.
-In our experience, a significant part of constraints is "`type-informed`" which means that _type computation/derivation_ is probably an intrinsic part of the constraints aspect of any language.
+This pertains to a semantic, language(s)-specific notion of correctness.
+An incorrectness would typically lead to a direct failure in the model's semantics -- i.e.: its execution through interpretation, or generating code and running that --, or to the result of the semantics not making sense in the (context of the) domain, or both.
+It's up to the language(s) designers to make that distinction (whenever it exists) clear to the language's users.
+
+We give an example of a language-specific constraint.
+Consider a language with core concepts _tables_, _columns_ within those, and SQL-like _queries_.
+These queries _reference_ columns within tables, e.g. in the form: `<table>.<column>`.
+A constraint for any reference would be: "`in a reference to a column of a referenced table, the column referenced must be a column of the referenced table`".
+
+In our experience (and independent of/orthogonal to the two sublevels), a significant part of constraints is "`type-informed`" which means that _type computation/derivation_ is probably an intrinsic part of the constraints aspect of any language.
 
 [NOTE]
 ====
 LionWeb uses explicit, ID-based references, which means that scoping is not needed to resolve references.
 Nevertheless, scoping probably still plays some role in any language.
-Consider the following constraint in an ERD-style language: "`in a reference to a field of a referenced entity, the field referenced must be a field of the entity referenced`".
-Even though this is a constraint, it can be interpreted as a scoping rule as well, and the language's UI should take it into account when providing content assist to the language's users.
+The constraint stated above can be interpreted as a scoping rule, and the language's UI should take it into account when providing content assist to the language's users.
 ====
 
 
-== Overview of the severity
+== Details to be reported in an issue
 
-Each issue has a _severity_ that is an indication of the recoverability of the issue.
+A reported issue should contain the following pieces of information:
+
+* An identification of the _kind_ of issue.
+(Optionally, this corresponds to an automatic fix.)
+* A _location_: where the issue occurred -- see below.
+* A user-readable message explaining what the issue is, and how it should be fixed.
+Ideally, this message is computed from other information in the issue.
+* The _severity_ of the issue that is an indication of the recoverability of the issue -- see below.
+
+=== Location
+
+An issue is useless if it doesn't tell exactly what “thing” in the model triggered it -- the issue's location.
+A number of basic ways of identifying a location exist:
+
+[horizontal]
+
+Text-based::
+A specific location in a text could be given in any of the following forms:
++
+* A pair of integers (line, column), with the text starting at (1, 1).
+* A character index (considering the text as a character stream), starting at 1.
+* A _range_ of text given as a (pair consisting of a) character location and an integer length.
++
+The first two forms are _character locations_ which are interchangeable, although the first form is inherently more user-friendly.
+A range provide more information to work with, except for when the length is 1 or so large a number to be meaningful, e.g. effectively meaning "`the rest of the text`".
++
+For issues arising on the low-level syntactic level, these are the only available ways to identify a location.
+Unfortunately, not all JSON parsers are able to report problems in this way.
+
+JSON-based::
+JsonPathfootnote:[https://goessner.net/articles/JsonPath/] is a method to point to specific elements in JSON text in a precise way that's independent of textual location.
+This way is useful from the structural syntactic level onwards.
+
+Node-based::
+Beyond the hierarchical level, it becomes possible to address specific nodes by their ID.
+In addition, one can point to a specific feature (by key) and to a specific value of a multi-valued feature by index.
+All in all: (<node-ID>[, <feature-key>[, <value-index>]]).
+
+Location-forms can be thought to "`cascade`": it's convenient to augment a node-based location with a JSON-based location, and likewise a JSON-based location with a text-based one.
+
+
+=== Severities
+
 They are:
 
 [horizontal]
 
-Ignorable::
+Fully recoverable::
 
-Fixable::
-
-Stubbable::
+Partially recoverable::
 
 Fatal::
 
+
+// TODO  in active voice: see https://github.com/LionWeb-io/specification/pull/88#issuecomment-1759004676
 
 == Low-level syntactic
 
