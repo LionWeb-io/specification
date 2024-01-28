@@ -5,7 +5,7 @@ include::../shared/issue-footnotes.adoc[]
 :toc: preamble
 :toclevels: 3
 
-The bulk Language API is used retrieve languages in batches at the moment of invocation.{fn-org25}{fn-org205}
+The bulk Language API is used retrieve languages in batches at the moment of invocation.{fn-org25}{fn-org205}{fn-org215}
 It is intended for #CRUD?# operations on languages.
 it is *not* intended as a delta-oriented API that takes "modification commands" as arguments.
 

@@ -7,19 +7,12 @@ include::../shared/issue-footnotes.adoc[]
 :toc: preamble
 :toclevels: 3
 
-<<{bulk}.adoc#orphan, Orphans>> are nodes that fall out of the original model tree.
-Instead of just forgetting about them, a repository can optionally move them into a special place called _trash_.
+<<{bulk}.adoc#orphan, Orphans>> are nodes that fall out of the original model tree.{fn-org219}
+Instead of just forgetting about them, a repository can optionally move them into a special place called _trash_.{fn-org217}
 Orphans can be _recovered_ from there by re-inserting them into the original model tree.
 
 == Trash lifetime
 The repository MAY delete nodes in _trash_ according to its own _garbage collection_ rules (e.g. after some time, or on memory pressure).
-
-[horizontal]
-Jos:: Trash? Didn't see this before.  Doesn't thip open up manu additional questions
-- What happens if I create a node with an id of a trahsed node?
-Jos:: I don't like the idea that trashed nodes can just be found as any other node.
-I would expect an explicit recovery call of some kind.
-Jos:: This might be something to postpone, it makes everything more complex
 
 == Adjustments to Bulk Repository Access API
 
