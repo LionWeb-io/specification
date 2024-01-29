@@ -4,6 +4,10 @@
     {
       "key": "LionCore-M3",
       "version": "2023.1"
+    },
+    {
+      "key": "LionCore-builtins",
+      "version": "2023.1"
     }
   ],
   "nodes": [
@@ -29,7 +33,7 @@
             "version": "2023.1",
             "key": "Language-version"
           },
-          "value": "1"
+          "value": "2023.1"
         },
         {
           "property": {
