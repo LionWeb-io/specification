@@ -1,0 +1,355 @@
+include::../shared/issue-footnotes.adoc[]
+:serialization: ../serialization/serialization
+:m3: ../metametamodel/metametamodel
+:bulk: ../bulk/repo-access-api
+:chunk: <<{serialization}.adoc#SerializationChunk, SerializationChunk>>
+
+= Derived Models
+:toc: preamble
+:toclevels: 2
+
+Derived models are calculated from other (original or derived) models without direct human interaction.
+They are usually some form of analysis result, such as one related to a type system.
+Nodes in derived models are typically associated with an original node -- e.g., the type computed for an AST node.
+The repository manages this association.
+Derived models may be persisted or be recalculated on the fly.
+
+== Terminology
+original node::
+A node CRUDed by users (mediated by tools).
+
+derived node::
+A node implementing `IDerived` that can be calculated from one or more _base_ nodes.
++
+NOTE: A derived node is still a node with all its capabilities.
+Thus, a derived node MUST be (indirectly) contained by a partition.
+
+base node::
+A node that has _derived_ nodes.
+The base node can be an _original_ or _derived_ node.
+
+ava::
+A <<{m3}.adoc#Language, Language>> that defines the requested contents of a _derived_ model.
+The _derived nodes_ are instances of ava.
++
+Example: We request ava `com.example.validation`.
+This language defines interface `Warning`.
+Another language `org.compiler.validation` _dependsOn_ `com.example.validation`,
+and defines classifiers `ParserWarning implements IDerived, Warning` and `LinkerWarning implements IDerived, Warning`.
++
+[plantuml, avaExample, svg]
+----
+package "com.example.validation" as ex {
+  interface Warning
+}
+
+package "org.compiler.validation" as comp {
+  class ParserWarning implements .IDerived, ex.Warning
+  class LinkerWarning implements .IDerived, ex.Warning
+}
+
+comp .> ex: dependsOn
+----
++
+The derived model contains instances of `ParserWarning` and `LinkerWarning`.
++
+NOTE: The name "ava" is a sufficiently meaningless placeholder until we think of a good name.
+
+derivation::
+The _derived_ nodes referencing a _base_ node.
+Can be specified by the _derived_ node's _ava_.
+
+original model::
+A model that cannot be (re-)computed from other models.
++
+It contains mainly _original_ nodes, but MAY contain _derived_ nodes.
+Example: A processor uses the repository to store its derivation result.
+
+derived model::
+A model that can be calculated from _base_ models.
+Its partition, and possibly many other nodes, are _derived_ nodes.
++
+However, a derived model MAY contain nodes that do not implement `IDerived`.
+Example: A derived richtext description contains `Word` concepts.
+`Word` is reused in many contexts, and does not implement `IDerived`.
+
+base model::
+A model that has _derived_ models.
+A base model can be an _original_ or _derived_ model.
+
+== New builtin interface `IDerived`
+[plantuml, iderived, svg]
+----
+interface "builtins::Node" as Node
+
+interface IDerived
+
+IDerived "0..*" -> "1..*"  Node: base
+----
+
+Each derived node references one or more base nodes.
+Any (base) node can have none or more derived nodes.
+
+== Client use cases:
+* "Which validation issues have been found on this partition?"
+
+* "What are the types of all nodes in this partition?"
+
+* "What's the type of this node I reached via reference, i.e. I don't know its partition?"
+
+* "Update me any time the validation of this node changes"
+
+* "Give me this partition including validation and typing info"
+
+* "Give me this partition FAST, I don't care about validation and typing info"
+
+== Client Bulk API
+=== retrieveDerivation
+Retrieves derivations of subtrees of listed node ids, according to listed languages.
+
+==== Parameters
+[[retrieveDerivation.nodeIds]]
+`nodeIds`:: List of node ids we want to retrieve derivations about from the repository.
+
+[[retrieveDerivation.languages]]
+`languages`:: List of _avas_ to specify the kind of derivations.
+Optional parameter, defaults to _all derivations_.
+If present, MUST be a list of (language key, language version) pairs.
+
+[[retrieveDerivation.depthLimit]]
+`depthLimit`:: Limit the depth of retrieved subtrees.
+Optional parameter, defaults to _infinite_.
+If present, MUST be an integer >= 0, with
++
+--
+* 0 meaning "return only the nodes with ids listed in `nodeIds` parameter",
+* 1 meaning "return the nodes with id listed in the `nodeIds` parameter and their direct children/annotations",
+* 2 meaning "return the nodes with id listed in the `nodeIds` parameter, their direct children/annotations, and the direct children/annotations of these",
+* etc.
+--
++
+NOTE: There's no _magic value_ of `depthLimit` to express _infinite_ depth.
+We need to omit the parameter if we don't want to limit the depth.
+
+==== Result
+{chunk} containing all derived nodes according to `nodeIds`, `languages`, and `depthLimit` parameters.
+
+First, we find all _base_ nodes according to `nodeIds` and `depthLimit` parameter (see  <<{bulk}.adoc#retrieve, Bulk retrieve>>).
+Then, we find all _derivations_ according to `languages`.
+The result contains all derivations and all their descendants.
+
+Does NOT include the base nodes mentioned in `nodeIds`, or their descendants.
+Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLanguages>>, only their <<{serialization}.adoc#MetaPointer, MetaPointers>>.
+
+
+== Possible derivation backends
+
+[[permanent-repo, permanently stored in repository]]
+Permanently stored in repository::
+_Example: Information about import source._
+We don't want to use annotations, as it's a lot of data, and we rarely need it.
+So we don't want to burden the original model with it.
+We create this derived model once, store it in the repository, and only change it on re-import.
+Thus, derived node ids are stable.
++
+NOTE: This implements option G in #13{fn-org13}.
+
+[[permanent-external, permanently stored externally]]
+Permanently stored externally (with identity)::
+_Example: Extended personnel data._
+We relate original model nodes to persons in active directory.
+All external data has its own identity (a GUID).
+We derive node ids from external identity.
+
+[[temp-repo, temporarily stored in repository]]
+Temporarily stored in repository::
+_Example: Recalculation-expensive validation results._
+We run potentially expensive validators on model change, and store their result in the repository.
+As soon as we re-execute a validator, we delete all previous results of that validator from the repository.
+Thus, derived node ids of the same validation result are stable, but once we re-calculate it, the node id changes
+(even if it's semantically the same validation result).
+
+[[internal, internally stored]]
+Internally stored::
+_Example: Complex type calculation engine with in-memory representation of its results._
+We update in-memory type information on model change.
+We build the derived model from in-memory representation.
+We store derived node ids also in memory, so they are stable for the lifetime of the in-memory representation.
+
+[[live, live-calculated]]
+Live-calculated::
+_Example: Simple programming language where the type is always explicitly mentioned._
+We never infer any type, just look up a few references.
+Thus, we always calculate the type on-the-fly, and never persist it.
+Derived node ids change on every request.
+
+== Backend implementation of `retrieveDerivation`
+A processor can `register` or `unregister` itself for one or more _ava_.
+Only <<permanent-external>>, <<internal>>, and <<live>> backends would register.
+
+On a call to `retrieveDerivation`, we forward the request to the registered processors.
+We also check the repository for partitions that implement `IDerived` and are instances of a classifier of one of the _ava_ languages.
+
+=== Example
+Assume a _base_ model with nodes `a`,`b`,`bb`,`c`.
+`a` is a partition containing `b` and `c`.
+`b` contains `bb`.
+
+[plantuml, retrieveDerivationExample, svg]
+----
+hide empty members
+
+object a
+object b
+object bb
+object c
+
+a *-- b
+a *-- c
+b *-- bb
+----
+
+.Languages
+
+* `ValidationLang`, defines
+** `IViolation`
+* `M2Validation` _dependsOn_ `ValidationLang`, defines
+** `PropertyViolation` implements `IDerived`, `IViolation`
+** `MultiplicityViolation` implements `IDerived`, `IViolation`
+* `DomainValidation` _dependsOn_ `ValidationLang`, defines
+** `DomainValidationPartition` implements `IDerived`
+** `InvalidNameViolation` implements `IDerived`, `IViolation`
+* `TypeLang`, defines
+** `StringType` implements `IDerived`
+** `IntType` implements `IDerived`
+** `EnumType` implements `IDerived`
+** `UnkonwnType` implements `IDerived`
+
+[plantuml, retrieveDerivationLanguages, svg]
+----
+hide empty members
+
+'interface IDerived
+
+package ValidationLang {
+  interface IViolation
+}
+
+package M2Validation {
+  class PropertyViolation implements ValidationLang.IViolation
+    ', .IDerived
+  PropertyViolation --> .M3.Property: property
+  class MultiplicityViolation implements ValidationLang.IViolation
+    ', .IDerived
+  MultiplicityViolation --> .M3.Feature: feature
+}
+'M2Validation .> ValidationLang: dependsOn
+
+package DomainValidation {
+  class DomainValidationPartition<<partition>>
+    'implements .IDerived
+  class InvalidNameViolation implements ValidationLang.IViolation
+    ', .IDerived
+  {
+    message: string
+  }
+  DomainValidationPartition *-- InvalidNameViolation
+}
+'DomainValidation .> ValidationLang: dependsOn
+
+package TypeLang {
+  class StringType
+  class IntType
+  class EnumType
+  class UnknownType
+}
+
+package M3 {
+  interface Feature
+  class Property implements Feature
+}
+----
+
+.Available backends
+* <<temp-repo>> Domain validator providing `ValidationLang` _ava_
+* <<internal>> Typesystem calculator providing `TypeLang` _ava_
+* <<live>> M2 validator providing `ValidationLang` _ava_
+
+.Description
+1. [registration] M2 validator and Typesystem calculator processors register themselves with their _ava_.
+2. [prebuild] Domain validator processor creates its temporary _derived_ partition `x`, containing one node with id `xx`, and stores it to repository.
+Domain validator retrieved these free node ids from repository.
+3. Typesystem calculator calculates the types of all original nodes.
+It requests free node ids `ff`, `fg`, `fh`, `fi` for the resulting derived nodes and stores them in its internal representation.
+4. [model update] Typesystem calculator is notified that node `c` changed.
+It recalculates the type, but doesn't succeed, resulting in an _unknown type_.
+Typesystem calculator requests a free node id for the resulting derived node `UnknownType` and stores the node id in its internal representation.
+5. [request] A client asks to retrieve a derivation for nodes `a`, `b`, `c` with infinite depth for _avas_ `ValidationLang` and `TypeLang`.
+6. Backend asks Typesystem validator to provide `TypeLang` derivations.
+7. Typesystem validator returns nodes `ff`, `fg`, `fh`, `gg` according to its internal representation.
+Note that node `fi` is replaced by `gg` (from model update).
+8. Backend asks M2 validator to provide `ValidationLang` derivations.
+9. M2 validator replies with two new nodes `eef` and `csa`.
+M2 validator got the node ids for the new nodes from repository.
+10. Backend asks Repository for all fitting partitions, and retrieves each partition's contents.
+11. Repository returns `x` and `xx`.
+12. Backend concatenates all results and returns them to client.
+
+[plantuml, retrieveDerivationImpl, svg]
+----
+actor client
+participant "retrieveDerivation\nbackend" as backend
+participant "Domain\nvalidator" as domval
+participant "Typesystem\ncalculator" as typer
+participant "M2 validator" as langval
+participant repository
+
+== registration ==
+autonumber 1
+langval ->> backend: register(ValidationLang)
+autonumber stop
+typer ->> backend: register(TypeLang)
+
+== prebuild ==
+autonumber resume
+domval<<-] ++
+autonumber stop
+  domval -> repository ++: ids(count=1)
+  return [x]
+  domval ->> repository: store([\n  DomainValidationPartition:x()\n  InvalidNameViolation:xx(base[b], message="no space name")\n])
+deactivate domval
+
+autonumber resume
+typer<<-] ++
+autonumber stop
+  typer -> typer ++: typeAll()
+    typer -> repository ++: ids(count=4)
+    return [ff, fg, fh, fi]
+  deactivate typer
+deactivate typer
+
+== model update ==
+autonumber resume
+typer<<-] ++: modelChange(c)
+autonumber stop
+  typer -> typer ++: type(c)
+    typer -> repository ++: ids(count=1)
+    return [gg]
+  deactivate typer
+deactivate typer
+
+== request ==
+autonumber resume
+client -> backend ++: retrieveDerivation(\n  baseNodeIds=[a,b,c]\n  languages=[ValidationLang, TypeLang]\n)
+  backend ->> typer ++: provideDerivation(baseNodeIds=[a,b,c])
+  return [\n  StringType:ff(base=[a])\n  IntType:fg(base=[b])\n  EnumType:fh(base=[bb,myEnum])\n  UnknownType:gg(base=[c])\n]
+  backend ->> langval ++: provideDerivation(baseNodeIds=[a,b,c])
+autonumber stop
+    langval -> repository ++: ids(count=2)
+    return [eef, csa]
+autonumber resume
+  return [\n  PropertyValueViolation:eef(base=[a], property=x)\n  MultiplicityViolation:csa(base=[bb], feature=age)\n]
+  backend ->> repository ++: listPartitions().where(\n  [ValidationLang, TypeLang].contains(\n    it.classifer.allSpecializedLanguages()\n  )\n)\n.retrieve()
+  return [\n  DomainValidationPartition:x()\n  InvalidNameViolation:xx(base[b], message="no space name")\n]
+return [\n  StringType:ff)\n  IntType:fg\n  EnumType:fh\n  UnknownType:gg\n  PropertyValueViolation:eef\n  MultiplicityViolation:csa\n  DomainValidationPartition:x\n  InvalidNameViolation:xx\n]
+----
