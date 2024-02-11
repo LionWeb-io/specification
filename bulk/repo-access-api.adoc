@@ -53,7 +53,9 @@ For now, we do not support paging, as paging tree nodes is non-trivial.{fn-org20
 
 == Deleted nodes
 We don't have an explicit delete API.{fn-org221}
+
 We don't support [[orphan, orphans]]_orphans_ for now.
+They are immediately deleted.{fn-org219}
 
 Deleted nodes don't exist anymore in the repository from the client's point of view.
 They might still exist in other contexts (e.g. another branch), or physically within the repository for internal reasons (e.g. storage optimization, concurrent editing support).
@@ -61,6 +63,9 @@ A deleted node MUST NOT appear in any responses according to this API.{fn-org220
 
 A repository MAY consider the deleted node's id to be _unused_, and thus allow to re-use it.
 A repository also MAY disallow re-using previously deleted node ids.
+
+== Error cases for all SerializationChunks
+=== Node with same id sent more than once
 
 
 [[apis]]
@@ -83,6 +88,9 @@ None.
 The partitions are sent as complete nodes.{fn-org202}
 Does NOT include <<{m3}.adoc#Language, Languages>> or partition children.
 
+==== Error cases
+None.
+
 [[createPartitions, createPartitions]]
 === createPartitions: Create new partitions
 Creates new partitions in the repository.{fn-org216}
@@ -101,6 +109,11 @@ Each partition node id MUST NOT exist in the repository, and the sending client 
 ==== Result
 #TODO#
 
+==== Error cases
+===== Partition node id already exists
+===== Partition node id not reserved for this client
+===== Partition node lists contained or annotated nodes
+
 [[deletePartitions, deletePartitions]]
 === deletePartitions: Delete partitions and all their contents
 Deletes all mentioned partitions, including all (transitive) annotations and children.
@@ -116,6 +129,9 @@ All (transitive) annotations and children become <<orphan, orphans>>.
 ==== Result
 #TODO#
 
+==== Error cases
+===== Node with that id is not a partition
+===== Node with that id does not exist
 
 [[retrieve, retrieve]]
 === retrieve: Get nodes from repository
@@ -147,6 +163,9 @@ We need to omit the parameter if we don't want to limit the depth.
 ==== Result
 {chunk} containing all nodes according to `nodeIds` and `depthLimit` parameters.
 Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLanguages>>, only their <<{serialization}.adoc#MetaPointer, MetaPointers>>.
+
+==== Error cases
+===== Node with requested id does not exist
 
 ==== Example request
 [source, httprequest]
@@ -222,6 +241,13 @@ Also, we assume no knowledge of the metamodel.
 // include::partitions.json[]
 // ----
 
+==== Error cases
+===== Node id mentioned as annotation/child in more than one parent
+===== Move would create loop in tree
+===== Parent / child / annotation node id unknown
+===== Parent doesn't match child/annotation
+===== New node id not reserved for this client
+
 
 [[ids, ids]]
 === ids: Get available ids
@@ -254,6 +280,9 @@ It MAY return less than `count` ids.
 ==== Result
 List of ids guaranteed to be free.
 
+==== Error cases
+None.
+
 ==== Example request
 [source, httprequest]
 ----
@@ -277,7 +306,7 @@ create:: <<createPartitions>> for partitions, <<store, store call>> that sends a
 
 update:: <<store, store call>> that sends a node (both partitions and other nodes) with an _existing id_, including all its features (both updated and unchanged).
 
-delete:: <<deletePartitions>> for partitions (including all descendants), <<delete>> for other nodes
+delete:: <<deletePartitions>> for partitions (including all descendants), for others <<store>> of the parent node without mentioning the deleted node.
 
 move:: Assume we want to move node `N` from its current parent `S` to its new parent `T`.
 +
