@@ -132,6 +132,7 @@ All (transitive) annotations and children become <<orphan, orphans>>.
 ==== Error cases
 ===== Node with that id is not a partition
 ===== Node with that id does not exist
+===== Invalid node id
 
 [[retrieve, retrieve]]
 === retrieve: Get nodes from repository
@@ -166,6 +167,8 @@ Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLang
 
 ==== Error cases
 ===== Node with requested id does not exist
+===== Invalid depthLimit
+===== Invalid node id
 
 ==== Example request
 [source, httprequest]
