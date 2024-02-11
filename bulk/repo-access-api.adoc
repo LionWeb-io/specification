@@ -49,7 +49,19 @@ We enforce conformance to{fn-org223}
 * No unresolvable containment/annotation ids
 * No unresolvable parent ids
 
-For now, we do not support paging, as paging tree nodes is non-trivial{fn-org204}
+For now, we do not support paging, as paging tree nodes is non-trivial.{fn-org204}
+
+== Deleted nodes
+We don't have an explicit delete API.{fn-org221}
+We don't support [[orphan, orphans]]_orphans_ for now.
+
+Deleted nodes don't exist anymore in the repository from the client's point of view.
+They might still exist in other contexts (e.g. another branch), or physically within the repository for internal reasons (e.g. storage optimization, concurrent editing support).
+A deleted node MUST NOT appear in any responses according to this API.{fn-org220}
+
+A repository MAY consider the deleted node's id to be _unused_, and thus allow to re-use it.
+A repository also MAY disallow re-using previously deleted node ids.
+
 
 [[apis]]
 == APIs
@@ -78,8 +90,7 @@ Creates new partitions in the repository.{fn-org216}
 Each sent node is its own partition.
 Thus, we cannot send the contents (i.e. (indirect) annotations/containments) of a partition; We can send them in a later <<store>> call.
 We also MUST NOT mention any annotation/containment node ids in the partition nodes, as they cannot be part of the same request, and we don't allow moving nodes in this operation.
-
-We MAY send properties and references #TODO correct?#{fn-org225}
+We MAY send properties and references{fn-org225}
 
 Each partition node id MUST NOT exist in the repository, and the sending client MUST use node ids allocated to it via <<ids>>.
 
@@ -189,21 +200,6 @@ Also, we assume no knowledge of the metamodel.
 
 #TODO do we support changes to classifier? What about changes in metapointer.version? Migration use cases?#{fn-org69}
 
-
-[[orphan]]
-.Orphans
-An _orphan_ node is a node present in the repository that is not mentioned in any other node as containment or annotation, and is not a partition.{fn-org219}
-We cannot create orphans explicitly.
-A node becomes an orphan if it already exists in the repository, but the node's id is removed from its parent containment/annotation,
-and the node is not moved to another parent.
-
-#TODO: What about references to orphans? Do they resolve?#
-
-A repository MAY immediately <<delete>> orphans, or keep them in a <<{trash}.adoc, trash>>.
-
-The repository MUST NOT update/change references to orphan nodes.
-Rationale: We in general do support unresolved or unresolvable references.
-
 .How to handle unknown ids?
 
 * If requested by this client via <<ids>>: Create new node
@@ -226,46 +222,6 @@ Rationale: We in general do support unresolved or unresolvable references.
 // include::partitions.json[]
 // ----
 
-
-[[delete, delete]]
-=== delete: Delete nodes from repository
-Deletes nodes from the repository.{fn-org221}
-
-Deleted nodes don't exist anymore in the repository from the client's point of view.
-They might still exist in other contexts (e.g. another branch), or physically within the repository for internal reasons (e.g. storage optimization, concurrent editing support).
-After this call succeeds, the deleted nodes MUST NOT appear in any responses according to this API.{fn-org220}
-
-If we delete a node, we implicitly remove it from its parent's containment/annotation.
-
-(Transitively) contained/annotation nodes of deleted nodes that are not explicitly mentioned in the call are deleted.
-
-After this call succeeds, a repository MAY consider the deleted node's id to be _unused_, and thus allow to re-use it.
-A repository also MAY disallow re-using previously deleted node ids.
-
-The whole call fails, without any changes to the repository, if any of the provided node ids does not exist in the repository, or any of the provided node ids is a <<{m3}.adoc#predefined-builtins-keys, built-in id>>.
-
-==== Parameters
-[[delete.nodeIds]]
-`nodeIds`:: List of node ids we want to delete from the repository.
-
-==== Result
-#TODO#
-
-==== Example request
-[source, httprequest]
-----
-DELETE /bulk/delete?nodes=["first-node-id","13123123","c2Vjb25kIG5vZGUgaWQ"]
-----
-
-[NOTE]
-====
-link:https://www.rfc-editor.org/rfc/rfc9110.html#name-delete[RFC 9110: HTTP Semantics] states about the request body of a DELETE method:
-
-> An origin server SHOULD NOT rely on private agreements to receive content, since participants in HTTP communication are often unaware of intermediaries along the request chain.
-
-Thus, this example sends the node ids via URL query.
-
-====
 
 [[ids, ids]]
 === ids: Get available ids
