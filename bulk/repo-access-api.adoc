@@ -15,30 +15,30 @@ it is *not* intended as a delta-oriented API that takes "modification commands" 
 == Use Cases
 We describe the use cases from a client's perspective.
 
-* "I'm starting up, which partitions do you know about?", i.e. list possible contents.
-* "Let's have a new slate, add a new partition", i.e. partition creation.
-* "This part is not needed any more, remove the partition", i.e. partition deletion.
-* "Here is a node forest, store it as I hand it to you", i.e. actual bulk data storage.
-** Sub-case with same behavior: "I'm a very simple client who knows nothing about deltas, so whatever I send you is the truth", i.e. click-save-button.
-* "I'm starting up, get me the current partition contents", i.e. initial load.
-* "I want to create a guaranteed new node, which id to use?", i.e. retrieval of unused ids.
+* "I'm starting up, which partitions do you know about?", i.e. <<listPartitions, list possible contents>>.
+* "Let's have a new slate, add a new partition", i.e. <<createPartitions, partition creation>>.
+* "This part is not needed any more, remove the partition", i.e. <<deletePartitions, partition deletion>>.
+* "Give me the whole subtree under this node", i.e. actual <<retrieve, bulk data retrieval>>
+* "Here is a node forest, store it as I hand it to you", i.e. actual <<store, bulk data storage>>.
+** Sub-case with same behavior: "I'm a very simple client who knows nothing about deltas, so whatever I send you is the truth", i.e. <<store, click-save-button>>.
+* "I'm starting up, get me the current partition contents", i.e. <<retrieve, initial load>>.
+* "I want to create a guaranteed new node, which id to use?", i.e. retrieval of <<ids, unused ids>>.
 
-== Working Hypothesis
-Simple bulk API does not need to know the language.{fn-org203}
+[#validity]
+== Validity assumptions
+We don't need to know anything about languages for this API.{fn-org203}
+
+We never sent partial nodes or features.{fn-org211}
+Thus, we can only update or receive a complete node with all its features.
+We cannot update only some of the features, or part of a feature (e.g. start of a string property value).
+
+We assume transactional semantics for each modifying command.{fn-org229}
+A command either succeeds completely, or fails completely and does not change the repository's content.
 
 We do support invalid models w.r.t.{fn-org226}
 
-* Violations of metamodel constraints
-* Unresolvable references
-
-
-We assume mapping API is separate from bulk API (variant D){fn-org94}.
-
-We never sent partial nodes.{fn-org211}
-
-We send commands (with potentially implicit effects), not state updates.
-
-We assume transactional semantics for each command.{fn-org229}
+* Violations of metamodel constraints, e.g. whether a Concept instance without parent is a partition, a feature instance can be part of its node instance, or a node mentioned as annotation is an Annotation instance.
+* Unresolvable references, i.e. a <<{serialization}.adoc#reference, reference target node id>> unknown to the repository.
 
 We enforce conformance to{fn-org223}
 
@@ -46,11 +46,21 @@ We enforce conformance to{fn-org223}
 * Symmetry between containment/annotation and parent
 * No unresolvable containment/annotation ids
 * No unresolvable parent ids
+* A child node id MUST appear exactly once in all of its parent's containments
+* An annotation node id MUST appear exactly once in all of its parent's annotations
+* Every node MUST (directly or indirectly) be contained in a partition, except partitions themselves
+* Partitions MUST NOT have a parent
+
+#TODO: Add reference to model validation#
+
+== Out of scope
+We assume mapping API is separate from bulk API{fn-org94}.
 
 For now, we do not support paging, as paging tree nodes is non-trivial.{fn-org204}
 
+
 == Deleted nodes
-We don't have an explicit delete API.{fn-org221}
+We don't have an explicit delete command.{fn-org221}
 
 We don't support [[orphan, orphans]]_orphans_ for now.
 They are immediately deleted.{fn-org219}
@@ -90,6 +100,17 @@ A _messageCode_ might imply presence of specific keys in `data`.
 Refer to <<bulk-json-schema>> for details.
 
 == Message codes for all SerializationChunks
+=== Invalid node id
+.Success
+false
+
+.MessageCode
+``
+
+.Data
+[horizontal]
+`invalidNodeId`:: Id of non-partition node.
+
 === Node with same id sent more than once
 .Success
 false
@@ -106,11 +127,12 @@ false
 [[apis]]
 == Commands
 
+[[listPartitions, listPartitions]]
 [[partitions, listPartitions]]
 === listPartitions: List available partitions
 Lists all non-language partitions accessible in the repository.
 
-Calling this API MUST NOT change repository contents.
+Calling this command MUST NOT change repository contents.
 
 NOTE: We might add filter capabilities in the future.
 
@@ -121,7 +143,7 @@ None.
 
 Contains a {chunk} with all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
 The partitions are sent as complete nodes.{fn-org202}
-Does NOT include <<{m3}.adoc#Language, Languages>> or partition children.
+Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
 
 ==== Message codes
 None.
@@ -133,13 +155,13 @@ Creates new partitions in the repository.{fn-org216}
 Each sent node is its own partition.
 Thus, we cannot send the contents (i.e. (indirect) annotations/containments) of a partition; We can send them in a later <<store>> call.
 We also MUST NOT mention any annotation/containment node ids in the partition nodes, as they cannot be part of the same request, and we don't allow moving nodes in this operation.
-We MAY send properties and references{fn-org225}
+We MAY send properties and references.{fn-org225}
 
 Each partition node id MUST NOT exist in the repository, and the sending client MUST use node ids allocated to it via <<ids>>.
 
 ==== Parameters
 [[createPartitions.nodes]]
-`nodes`:: {chunk} containing  all nodes we want to add as new partitions.
+`nodes`:: {chunk} containing all nodes we want to add as new partitions.
 
 ==== Response
 Does not contain a `chunk`.
@@ -204,7 +226,7 @@ None
 === deletePartitions: Delete partitions and all their contents
 Deletes all mentioned partitions, including all (transitive) annotations and children.
 
-All node ids mentions MUST be of partition nodes.
+All mentioned node ids MUST be ids of partition nodes.
 
 All (transitive) annotations and children become <<orphan, orphans>>.
 
@@ -238,29 +260,19 @@ false
 .Data
 None
 
-===== Invalid node id
-.Success
-false
-
-.MessageCode
-``
-
-.Data
-[horizontal]
-`invalidNodeId`:: Id of non-partition node.
-
 
 [[retrieve, retrieve]]
 === retrieve: Get nodes from repository
 Retrieves subtrees nested in the listed node ids.{fn-org201}
 
-Calling this API MUST NOT change repository contents.
+Calling this command MUST NOT change repository contents.
 
 NOTE: We might add advanced filtering capabilities in the future, or introduce an additional querying API.
 
 ==== Parameters
 [[retrieve.nodeIds]]
 `nodeIds`:: List of node ids we want to retrieve from the repository.
+Can be partition node ids and/or nested node ids.
 
 [[retrieve.depthLimit]]
 `depthLimit`:: Limit the depth of retrieved subtrees.
@@ -325,32 +337,12 @@ false
 [horizontal]
 `depthLimit`:: The invalid `depthLimit` parameter.
 
-===== Invalid node id
-
-// ==== Example request
-// [source, httprequest]
-// ----
-// GET /bulk/retrieve?mode=direct
-//
-// [
-//   "first-node-id",
-//   "13123123",
-//   "c2Vjb25kIG5vZGUgaWQ"
-// ]
-// ----
-
-// .Example response
-// [source, json]
-// ----
-// include::partitions.json[]
-// ----
-
 
 [[store, store]]
 === store: Put nodes into repository
 Creates new nodes, or updates existing nodes in the repository.
 
-We always process one node in its entirety, i.e. we cannot update parts of the node with this API.{fn-org211}
+We always process one node in its entirety, i.e. we cannot update parts of the node with this command.{fn-org211}
 
 A node id referenced as parent, containment, reference, or annotation _can_ be mentioned in the same request, but _can_ be omitted if a node with that id already exists in the repository.
 This way, we can move subtrees and add arbitrary references without sending unchanged nodes.
@@ -371,9 +363,8 @@ We must send containments/annotations from the parent's view, because we need to
 If we move a contained/annotation node `C` from its previous parent `A` to its new parent `B`, we MUST send `B`, and MAY omit `A`.{fn-org227}
 This means we can have implicit changes in `A`.
 
-The whole call fails, without any changes to the repository, if it would lead to a malformed model (i.e. cycles in containment hierarchy, same node contained in different parents, parent and corresponding containment/annotation don't match #TODO: Add reference to model validation#).{fn-org223}
-
-The repository MUST NOT validate the "meta-semantics" of the sent nodes, e.g. whether a Concept instance without parent is a partition, a feature instance can be part of its node instance, or a node mentioned as annotation is an Annotation instance.{fn-org226}
+The whole call fails, without any changes to the repository, if it would lead to a <<validity, malformed model>>.{fn-org223}
+The repository MUST NOT validate the metamodel constraints of the sent nodes.{fn-org226}
 
 The repository SHOULD support changing <<{serialization}.adoc#meta-pointer, meta-pointers>>, e.g.  a node's `classifier.language`, a property's `property.version` or an enumeration literal's `key`.{fn-org69} #TODO Correct? Update issue#
 
@@ -384,20 +375,6 @@ The repository SHOULD support changing <<{serialization}.adoc#meta-pointer, meta
 
 ==== Response
 Does not contain a chunk.
-
-// ==== Example request
-// [source, httprequest]
-// ----
-// POST /bulk/store?mode=replace
-//
-// TODO request body
-// ----
-
-// .Example response
-// [source, json]
-// ----
-// include::partitions.json[]
-// ----
 
 ==== Message codes
 ===== Chunk missing
@@ -489,7 +466,7 @@ The repository
 
 The ids MUST exclude the <<{m3}.adoc#predefined-builtins-keys, built-in ids>>.
 
-Calling this API MUST NOT change repository contents themselves (besides the internal knowledge of reserved ids).
+Calling this command MUST NOT change repository contents themselves (besides the internal knowledge of reserved ids).
 
 We don't assume leases, i.e. ids handed out to one client are "owned" by that client forever.
 Rationale: Otherwise, the repository must track sessions, and run housekeeping on leases.
@@ -509,22 +486,10 @@ List of ids guaranteed to be free.
 ==== Message codes
 None.
 
-==== Example request
-[source, httprequest]
-----
-GET /bulk/ids?count=10
-----
-
-// .Example response
-// [source, json]
-// ----
-// include::partitions.json[]
-// ----
-
 
 == Mapping CRUD operations
 
-list:: <<partitions>> for partitions, <<retrieve>> for descendants.
+list:: <<listPartitions>> for partitions, <<retrieve>> for descendants.
 
 read:: <<retrieve, retrieve call>> with requested node ids (both partitions and other nodes).
 
@@ -541,7 +506,7 @@ move:: Assume we want to move node `N` from its current parent `S` to its new pa
 NOTE: We cannot move partitions, as we cannot nest them.{fn-org29}
 
 [[bulk-json-schema]]
-== JSON Schema for Bulk API responses
+== JSON Schema for responses
 [source,json]
 ----
 include::bulkapi.schema.json[]
