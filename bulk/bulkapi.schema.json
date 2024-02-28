@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lionweb.io/bulkapi.schema.json",
+  "title": "LionWeb Bulk API",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "messages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "messageCode": {
+            "$ref": "#/$defs/id"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          }
+        },
+        "required": [
+          "messageCode",
+          "message",
+          "data"
+        ],
+        "additionalProperties": false,
+        "minProperties": 3,
+        "maxProperties": 3
+      },
+      "uniqueItems": false
+    },
+    "chunk": {
+      "$ref": "#/$defs/serializationChunk"
+    }
+  },
+  "required": [
+    "success",
+    "messages"
+  ],
+  "additionalProperties": false,
+  "minProperties": 2,
+  "maxProperties": 3,
+  "$defs": {
+    "id": {
+      "$ref": "./../serialization/serialization.schema.json#$defs/id"
+    },
+    "serializationChunk": {
+      "$ref": "./../serialization/serialization.schema.json"
+    }
+  }
+}

@@ -199,3 +199,6 @@
 :fn-org228: footnote:org228[https://github.com/LionWeb-io/specification/issues/228[In bulk API store(), a node's `parent` field may be `null` in some circumstances #228]]
 :fn-org229: footnote:org229[https://github.com/LionWeb-io/specification/issues/229[Bulk API assumes transactional semantics for changing operations #229]]
 :fn-org230: footnote:org230[https://github.com/LionWeb-io/specification/issues/230[Which modes to support in bulk API store? #230]]
+:fn-org233: footnote:org233[https://github.com/LionWeb-io/specification/issues/233[Add Char to Builtins type #233]]
+:fn-org234: footnote:org234[https://github.com/LionWeb-io/specification/issues/234[How to get the partition of a deeply nested node (efficiently)? #234]]
+:fn-org236: footnote:org236[https://github.com/LionWeb-io/specification/issues/236[How to report additional info in bulk API? #236]]
