@@ -5,22 +5,29 @@
   "type": "object",
   "properties": {
     "success": {
+      "description": "Whether the request has been processed successfully.",
       "type": "boolean"
     },
     "messages": {
+      "description": "Additional messages besides the actual response.",
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
           "messageCode": {
+            "description": "Identifies the message type.",
             "$ref": "#/$defs/id"
           },
           "message": {
+            "description": "Human-readable message.",
             "type": "string"
           },
           "data": {
+            "description": "Additional data, depending on the message type.",
             "type": "object",
-            "additionalProperties": { "type": "string" }
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         },
         "required": [
@@ -35,7 +42,15 @@
       "uniqueItems": false
     },
     "chunk": {
+      "description": "Model content response, if applicable to the command.",
       "$ref": "#/$defs/serializationChunk"
+    },
+    "nodeIds": {
+      "description": "List of node ids, if applicable to the command.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/id"
+      }
     }
   },
   "required": [
