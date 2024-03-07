@@ -171,27 +171,26 @@ A _kind_ might imply presence of specific keys in `data`.
 
 
 == Message kinds for all commands
-=== Invalid node id
-.Success
-false
 
-.MessageKind
-``
+[cols="3h,3,1,7a"]
+|===
+|Kind |Description |Success |Implied data
 
-.Data
+|`` #TODO#
+|Invalid node id
+|false
+|
 [horizontal]
 `invalidNodeId`:: Id of non-partition node.
 
-=== Node with same id sent more than once
-.Success
-false
-
-.MessageKind
-``
-
-.Data
+|`` #TODO#
+|Node with same id sent more than once
+|false
+|
 [horizontal]
 ``:: .
+
+|===
 
 
 [[commands]]
@@ -238,60 +237,43 @@ Each partition node id MUST NOT exist in the repository, and the sending client 
 Does not contain a `chunk`.
 
 ==== Message kinds
-===== Partition node states parent id
-.Success
-false
+[cols="3h,3,1,7a"]
+|===
+|Kind |Description |Success |Implied data
 
-.MessageKind
-`PartitionHasParent`
-
-.Data
+|`PartitionHasParent`
+|Partition node states parent id
+|false
+|
 [horizontal]
 `nodeId`:: node id of requested partition that has a parent.
 
-
-===== Partition node id already exists
-.Success
-false
-
-.MessageKind
-`PartitionAlreadyExists`
-
-.Data
+|`PartitionAlreadyExists`
+|Partition node id already exists
+|false
+|
 [horizontal]
 `nodeId`:: Id of already existing node.
 
-===== Partition node id not reserved for this client
-.Success
-false
+|`` #TODO#
+|Partition node id not reserved for this client
+|false
+| None
 
-.MessageKind
-``
-
-.Data
-None
-
-===== Partition node lists contained or annotated nodes
-.Success
-false
-
-.MessageKind
-`PartitionHasChildren`
-`PartitionHasAnnotations`
-
-.Data
+|`PartitionHasChildren`
+`PartitionHasAnnotations` #TODO#
+|Partition node lists contained or annotated nodes
+|false
+|
 [horizontal]
 `nodeId`:: node id of requested partition that has children or annotations.
 
-===== Empty Request
-.Success
-true
+|`EmptyChunk`
+|Empty Request
+|true
+|None
 
-.MessageKind
-`EmptyChunk`
-
-.Data
-None
+|===
 
 [[deletePartitions, deletePartitions]]
 === deletePartitions: Delete partitions and all their contents
@@ -309,27 +291,25 @@ All (transitive) annotations and children become <<orphan, orphans>>.
 Does not contain a chunk.
 
 ==== Message kinds
-===== Node with that id is not a partition
-.Success
-false
 
-.MessageKind
-`NodeIsNotPartition`
+[cols="3h,3,1,7a"]
+|===
+|Kind |Description |Success |Implied data
 
-.Data
+|`NodeIsNotPartition`
+|Node with that id is not a partition
+|false
+|
 [horizontal]
 `nodeId`:: Id of non-partition node.
 `parentNodeId`:: Id of the parent node.
 
-===== Node with that id does not exist
-.Success
-true
+|`` #TODO#
+|Node with that id does not exist
+|true
+|None
 
-.MessageKind
-``
-
-.Data
-None
+|===
 
 
 [[retrieve, retrieve]]
@@ -365,48 +345,37 @@ We need to omit the parameter if we don't want to limit the depth.
 Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLanguages>>, only their <<{serialization}.adoc#MetaPointer, MetaPointers>>.
 
 ==== Message kinds
-===== Node with requested id does not exist
-.Success
-true
+[cols="3h,3,1,7a"]
+|===
+|Kind |Description |Success |Implied data
 
-.MessageKind
-`IdNotFound`
-
-.Data
+|`IdNotFound`
+|Node with requested id does not exist
+|true
+|
 [horizontal]
 `nodeId`:: Id of non-existent node
 
-===== Empty id list
-.Success
-true
+|`EmptyIdList`
+|Empty id list
+|true
+|None
 
-.MessageKind
-`EmptyIdList`
-
-.Data
-None
-
-===== Invalid ids parameter
-.Success
-false
-
-.MessageKind
-`IdsIncorrect`
-
-.Data
+|`IdsIncorrect`
+|Invalid ids parameter
+|false
+|
 [horizontal]
 `nodeIds`:: The invalid `nodeIds` parameter
 
-===== Invalid depthLimit parameter
-.Success
-false
-
-.MessageKind
-`DepthLimitIncorrect`
-
-.Data
+|`DepthLimitIncorrect`
+|Invalid depthLimit parameter
+|false
+|
 [horizontal]
 `depthLimit`:: The invalid `depthLimit` parameter.
+
+|===
 
 
 [[store, store]]
@@ -444,66 +413,44 @@ The repository MUST support changing <<{serialization}.adoc#meta-pointer, meta-p
 Does not contain a chunk.
 
 ==== Message kinds
-===== Chunk missing
-.Success
-false
+[cols="3h,3,1,7a"]
+|===
+|Kind |Description |Success |Implied data
 
-.MessageKind
-`NullChunk`
+|`NullChunk`
+|Chunk missing
+|false
+|None
 
-.Data
-None
+|`` #TODO#
+|Node id mentioned as annotation/child in more than one parent
+|false
+|#TODO#
 
-===== Node id mentioned as annotation/child in more than one parent
-.Success
-false
+|`` #TODO#
+|Move would create loop in tree
+|false
+|#TODO#
 
-.MessageKind
-``
-
-.Data
-None
-
-===== Move would create loop in tree
-.Success
-false
-
-.MessageKind
-``
-
-.Data
-None
-
-===== Parent / child / annotation node id unknown
-.Success
-false
-
-.MessageKind
-`ParentMissing`
-
-.Data
+|`ParentMissing`
+|Parent / child / annotation node id unknown
+|false
+|
 [horizontal]
 `nodeId`:: Id of node that doesn't have a parent.
 
-===== Parent doesn't match child/annotation
-.Success
-false
+|`` #TODO#
+|Parent doesn't match child/annotation
+|false
+|#TODO#
 
-.MessageKind
-``
+|`` #TODO#
+|New node id not reserved for this client
+|false
+|#TODO#
 
-.Data
-None
+|===
 
-===== New node id not reserved for this client
-.Success
-false
-
-.MessageKind
-``
-
-.Data
-None
 
 [[ids, ids]]
 === ids: Get available ids
