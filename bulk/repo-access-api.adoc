@@ -75,11 +75,90 @@ A deleted node MUST NOT appear in any responses according to this API.{fn-org220
 A repository MAY consider the deleted node's id to be _unused_, and thus allow to re-use it.
 A repository also MAY disallow re-using previously deleted node ids.
 
+== Unknown node ids
+An _unknown node id_ is a node id that's not the node id of any node present in the repository.
+An unknown node id can be present as a reference target (as we support unresolvable references).
+
+How to handle unknown node ids in <<createPartitions>> and <<store>> commands?
+
+Scenarios:
+
+[cols="4,1,2,1,1,2"]
+|===
+|Description: Node id ... |Valid format |Format fits repo |Present in repo | Reserved |Repo action
+
+|already present in repository
+|✔️
+|✔️ (repo accepted it)
+|✔️
+|✔️
+|error (<<createPartitions>>) / update node (<<store>>)
+
+|<<ids, requested>> by this client
+|✔️
+|✔️ (repo handed it out)
+|❌
+|✔️
+|create node
+
+|<<ids, requested>> by other client
+|✔️
+|✔️ (repo handed it out)
+|❌
+|✔️
+|error
+
+|used previously by deleted node, repo disallows re-use
+|✔️
+|✔️ (repo handed it out)
+|❌
+|✔️
+|error
+
+|used previously by deleted node, repo supports re-use
+|✔️
+|✔️ (repo handed it out)
+|❌
+|❌
+|create node
+
+|invented by client, matches repo format +
+Example: `123` for Modelix
+|✔️
+|✔️
+|❌
+|❌
+|#TODO#
+
+|invented by client, violates repo format +
+Example: `ab123` for Modelix
+|✔️
+|❌️
+|❌
+|❌
+|#TODO#
+
+|invented by client, invalid  +
+Example: `he!!o`
+|❌️️
+|❌️
+|❌
+|❌
+|error
+
+|===
+
+node id
+
+* If requested by this client via <<ids>>: Create new node
+* If not requested by this client{fn-org94}{fn-org70} #TODO decide#
+
+
 == Responses
 The repository signals _success_ or _failure_ with each response.
 We call this part of the reponse [[Response.success]]`success` flag.
 
-The repository MAY reply each command with a zero or more additional [[Response.messages]]`messages` besides its main response.{fn-org236}
+Besides the main response, the repository can reply each command with zero or more additional [[Response.messages]]`messages`.{fn-org236}
 Each message MUST have the following properties:
 
 * [[message.kind]]`kind` is an <<{serialization}.adoc#id, id>>-compatible string identifying the message type.
@@ -360,10 +439,6 @@ The repository MUST NOT validate the metamodel constraints of the sent nodes.{fn
 
 The repository MUST support changing <<{serialization}.adoc#meta-pointer, meta-pointers>>, e.g.  a node's `classifier.language`, a property's `property.version` or an enumeration literal's `key`.{fn-org69}
 
-.How to handle unknown ids?
-
-* If requested by this client via <<ids>>: Create new node
-* If not requested by this client{fn-org94}{fn-org70} #TODO decide#
 
 ==== Response
 Does not contain a chunk.
