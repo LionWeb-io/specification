@@ -202,3 +202,4 @@
 :fn-org233: footnote:org233[https://github.com/LionWeb-io/specification/issues/233[Add Char to Builtins type #233]]
 :fn-org234: footnote:org234[https://github.com/LionWeb-io/specification/issues/234[How to get the partition of a deeply nested node (efficiently)? #234]]
 :fn-org236: footnote:org236[https://github.com/LionWeb-io/specification/issues/236[How to report additional info in bulk API? #236]]
+:fn-org237: footnote:org237[https://github.com/LionWeb-io/specification/issues/237[Denial-of-service protection is out of scope (at least for now) #237]]

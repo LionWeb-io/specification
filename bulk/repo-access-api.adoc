@@ -51,13 +51,16 @@ We enforce conformance to{fn-org223}
 * Every node MUST (directly or indirectly) be contained in a partition, except partitions themselves
 * Partitions MUST NOT have a parent
 
-#TODO: Add reference to model validation#
+#TODO: Add reference to model correctness doc#
 
 == Out of scope
 We assume mapping API is separate from bulk API{fn-org94}.
 
 For now, we do not support paging, as paging tree nodes is non-trivial.{fn-org204}
 
+For now, we don't include any specific protections agains denial-of-service attacks.{fn-org237}
+
+We don't describe the binding to any specific protocol (e.g. HTTP) as part of this specification; We only describe the semantics.{fn-org148}
 
 == Deleted nodes
 We don't have an explicit delete command.{fn-org221}
@@ -72,41 +75,28 @@ A deleted node MUST NOT appear in any responses according to this API.{fn-org220
 A repository MAY consider the deleted node's id to be _unused_, and thus allow to re-use it.
 A repository also MAY disallow re-using previously deleted node ids.
 
-== Response Format
-The repository replies each command with a JSON object.{fn-org236}
-It contains two required properties `success` and `messages`.
-Depending on the command, it might contain a `chunk` or `nodeIds` property.
+== Responses
+The repository signals _success_ or _failure_ with each response.
+We call this part of the reponse [[Response.success]]`success` flag.
 
-.Example (with empty chunk)
-[source,json]
-----
-include::exampleBulkResponse.json[]
-----
-
-`success` is a boolean flag to state whether the command executed successfully.
-
-`chunk` contains a {chunk}, if the command responses with nodes (i.e. <<listPartitions>>, <<retrieve>>).
-
-`nodeIds` contains an array of <<{serialization}.adoc#id, node ids>>, if the command responses with node ids (i.e. <<ids>>).
-
-`messages` contains an array of additional messages the repository can include with its response.
+The repository MAY reply each command with a zero or more additional [[Response.messages]]`messages` besides its main response.{fn-org236}
 Each message MUST have the following properties:
 
-* `messageCode` is an <<{serialization}.adoc#id, id>>-compatible string identifying the message type.
- ##TODO: Do we limit the messageCode to pre-defined list or can a repo add its own?##
-* `message` is a human-readable string describing the message.
-* `data` is a flat object with arbitrary keys and values.
+* [[message.kind]]`kind` is an <<{serialization}.adoc#id, id>>-compatible string identifying the message type.
+Some message kinds are pre-defined in this specification.
+A repository MAY reply with other, additional message kinds.
+* [[message.message]]`message` is a human-readable string describing the message.
+* [[message.data]]`data` is a flat map with arbitrary keys and values.
 All values MUST be strings, the keys MUST be <<{serialization}.adoc#id, id>>-compatible.
-A _messageCode_ might imply presence of specific keys in `data`.
+A _kind_ might imply presence of specific keys in `data`.
 
-Refer to <<bulk-json-schema>> for details.
 
-== Message codes for all SerializationChunks
+== Message kinds for all commands
 === Invalid node id
 .Success
 false
 
-.MessageCode
+.MessageKind
 ``
 
 .Data
@@ -117,7 +107,7 @@ false
 .Success
 false
 
-.MessageCode
+.MessageKind
 ``
 
 .Data
@@ -147,7 +137,7 @@ Contains a {chunk} with all accessible <<{m3}.adoc#partition, Partitions>> in th
 The partitions are sent as complete nodes.{fn-org202}
 Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
 
-==== Message codes
+==== Message kinds
 None.
 
 [[createPartitions, createPartitions]]
@@ -168,12 +158,12 @@ Each partition node id MUST NOT exist in the repository, and the sending client 
 ==== Response
 Does not contain a `chunk`.
 
-==== Message codes
+==== Message kinds
 ===== Partition node states parent id
 .Success
 false
 
-.MessageCode
+.MessageKind
 `PartitionHasParent`
 
 .Data
@@ -185,7 +175,7 @@ false
 .Success
 false
 
-.MessageCode
+.MessageKind
 `PartitionAlreadyExists`
 
 .Data
@@ -196,7 +186,7 @@ false
 .Success
 false
 
-.MessageCode
+.MessageKind
 ``
 
 .Data
@@ -206,7 +196,7 @@ None
 .Success
 false
 
-.MessageCode
+.MessageKind
 `PartitionHasChildren`
 `PartitionHasAnnotations`
 
@@ -218,7 +208,7 @@ false
 .Success
 true
 
-.MessageCode
+.MessageKind
 `EmptyChunk`
 
 .Data
@@ -239,12 +229,12 @@ All (transitive) annotations and children become <<orphan, orphans>>.
 ==== Response
 Does not contain a chunk.
 
-==== Message codes
+==== Message kinds
 ===== Node with that id is not a partition
 .Success
 false
 
-.MessageCode
+.MessageKind
 `NodeIsNotPartition`
 
 .Data
@@ -254,9 +244,9 @@ false
 
 ===== Node with that id does not exist
 .Success
-#TODO#
+true
 
-.MessageCode
+.MessageKind
 ``
 
 .Data
@@ -295,12 +285,12 @@ We need to omit the parameter if we don't want to limit the depth.
 {chunk} containing all nodes according to `nodeIds` and `depthLimit` parameters.
 Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLanguages>>, only their <<{serialization}.adoc#MetaPointer, MetaPointers>>.
 
-==== Message codes
+==== Message kinds
 ===== Node with requested id does not exist
 .Success
 true
 
-.MessageCode
+.MessageKind
 `IdNotFound`
 
 .Data
@@ -311,7 +301,7 @@ true
 .Success
 true
 
-.MessageCode
+.MessageKind
 `EmptyIdList`
 
 .Data
@@ -321,7 +311,7 @@ None
 .Success
 false
 
-.MessageCode
+.MessageKind
 `IdsIncorrect`
 
 .Data
@@ -332,7 +322,7 @@ false
 .Success
 false
 
-.MessageCode
+.MessageKind
 `DepthLimitIncorrect`
 
 .Data
@@ -368,7 +358,7 @@ This means we can have implicit changes in `A`.
 The whole call fails, without any changes to the repository, if it would lead to a <<validity, malformed model>>.{fn-org223}
 The repository MUST NOT validate the metamodel constraints of the sent nodes.{fn-org226}
 
-The repository SHOULD support changing <<{serialization}.adoc#meta-pointer, meta-pointers>>, e.g.  a node's `classifier.language`, a property's `property.version` or an enumeration literal's `key`.{fn-org69} #TODO Correct? Update issue#
+The repository MUST support changing <<{serialization}.adoc#meta-pointer, meta-pointers>>, e.g.  a node's `classifier.language`, a property's `property.version` or an enumeration literal's `key`.{fn-org69}
 
 .How to handle unknown ids?
 
@@ -378,12 +368,12 @@ The repository SHOULD support changing <<{serialization}.adoc#meta-pointer, meta
 ==== Response
 Does not contain a chunk.
 
-==== Message codes
+==== Message kinds
 ===== Chunk missing
 .Success
 false
 
-.MessageCode
+.MessageKind
 `NullChunk`
 
 .Data
@@ -393,7 +383,7 @@ None
 .Success
 false
 
-.MessageCode
+.MessageKind
 ``
 
 .Data
@@ -403,7 +393,7 @@ None
 .Success
 false
 
-.MessageCode
+.MessageKind
 ``
 
 .Data
@@ -413,7 +403,7 @@ None
 .Success
 false
 
-.MessageCode
+.MessageKind
 `ParentMissing`
 
 .Data
@@ -424,7 +414,7 @@ false
 .Success
 false
 
-.MessageCode
+.MessageKind
 ``
 
 .Data
@@ -434,27 +424,11 @@ None
 .Success
 false
 
-.MessageCode
+.MessageKind
 ``
 
 .Data
 None
-
-===== Meta-pointer change not supported
-.Success
-false
-
-.MessageCode
-``
-
-.Data
-[horizontal]
-`old-language`:: `language` of existing meta-pointer
-`new-language`:: `language` of attempted changed meta-pointer
-`old-version`:: `version` of existing meta-pointer
-`new-version`:: `version` of attempted changed meta-pointer
-`old-key`:: `key` of existing meta-pointer
-`new-key`:: `key` of attempted changed meta-pointer
 
 [[ids, ids]]
 === ids: Get available ids
@@ -485,7 +459,7 @@ It MAY return less than `count` ids.
 ==== Response
 List of ids guaranteed to be free.
 
-==== Message codes
+==== Message kinds
 None.
 
 
@@ -506,10 +480,3 @@ move:: Assume we want to move node `N` from its current parent `S` to its new pa
 <<store, store call>> that sends `T` with all its features, including `N` in the children.
 +
 NOTE: We cannot move partitions, as we cannot nest them.{fn-org29}
-
-[[bulk-json-schema]]
-== JSON Schema for responses
-[source,json]
-----
-include::bulkapi.schema.json[]
-----
