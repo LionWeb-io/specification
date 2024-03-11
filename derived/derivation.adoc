@@ -90,6 +90,11 @@ IDerived "0..*" -> "1..*"  Node: base
 Each derived node references one or more base nodes.
 Any (base) node can have none or more derived nodes.
 
+[horizontal,labelwidth=12]
+QUESTION:: Should a derived node also be able to refer to features inside a node? Or do we leave that for specific classes implementing `IDerived`? 
+QUESTION:: The assumption is that derived nodes can have children that are not derived nodes.
+Of course children could also be derived nodes.
+
 == Client use cases:
 * "Which validation issues have been found on this partition?"
 
@@ -134,6 +139,9 @@ We need to omit the parameter if we don't want to limit the depth.
 ==== Result
 {chunk} containing all derived nodes according to `nodeIds`, `languages`, and `depthLimit` parameters.
 
+[horizontal,labelwidth=12]
+QUESTION:: The `depth:Limit` describes the depth of the retrieved nodes (derived nodes may be full trees), the next line suggests that `depthLimit` applies to the node id's sent. Needs clarification.
+
 First, we find all _base_ nodes according to `nodeIds` and `depthLimit` parameter (see  <<{bulk}.adoc#retrieve, Bulk retrieve>>).
 Then, we find all _derivations_ according to `languages`.
 The result contains all derivations and all their descendants.
@@ -143,6 +151,8 @@ Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLang
 
 
 == Possible derivation backends
+[horizontal,labelwidth=12]
+QUESTION:: The repository that is referred to is this always the repository where the opriginal model is stored, or could oit be a different (i.e. derivation processor specific)  repository?
 
 [[permanent-repo, permanently stored in repository]]
 Permanently stored in repository::
@@ -269,6 +279,9 @@ package M3 {
   class Property implements Feature
 }
 ----
+
+[horizontal,labelwidth=12]
+QUESTION:: Should the `PropertyValidation`  also point to the Property instance in the M2 model being validated, and not just to the node that contains the property?
 
 .Available backends
 * <<temp-repo>> Domain validator providing `ValidationLang` _ava_
