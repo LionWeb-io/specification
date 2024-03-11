@@ -1,0 +1,91 @@
+= Implementation Notes for Bulk Repository Access API
+
+Describes how a repository might implement <<repo-acces-api.adoc#apis, Bulk Repository Access API>>.
+
+[[store, store]]
+== store: Put nodes into repository
+
+We describe the store semantics by comparing one _sent_ node with one _repo_ node potentially already existing in the repository.{fn-org75}
+Both nodes have the same id, thus we consider them identical.{fn-org31}
+
+#TODO: Do we assume transactional semantics?#
+
+We describe the semantics of `replace` mode.
+The other modes behave the same, except that they first compare the _sent_ nodes to the _repo_ nodes and might abort the call without any change to the repository.
+
+====
+**Jos** _All of the below is **very** much dependent on the way the repository is implemented.
+
+**Jos** _It seems to assume that there are separate fields for every metapointer, property, property value, etc etc. 
+I am currently working with a repo (implementing the bulp API) that uses a different storage scheme (use partly JSON, partly relational tables)  where the text below make no sense at all._
+
+**Jos** _The notion that **we don't change the repository** is very much undefined.
+As far as I am concerned the server can overwrite identical values and effectively is still unchanged._
+====
+
+* If the _sent_ `A` does not yet exist (i.e. no corresponding _repo_ `A`), we create it as sent.
+** If any other _sent_ `B` mentions `A` as child/annotation, we create `A` as child/annotation of `B`. +
+#TODO do we validate that `A` is an annotation instance in case it's mentioned as annotation?#
+** If `A` is not mentioned as child/annotation, we create it as new partition. +
+#TODO do we validate that `A` is an partition instance?#
+* If only _repo_ exist, we don't do anything (typically, there are a lot more nodes in the repository than the call).
+* If both _sent_ and _repo_ exist, we "overwrite" _repo_.
+That means:
+
+Concept::
+** If both _sent_ and _repo_ have the same concept MetaPointer, we don't change the repository.
+** Otherwise, this call fails.{fn-org69} #TODO correct? What about changes in metapointer.version? Migration use cases?#
+
+Properties::
+** If the property exists in both _sent_ and _repo_
+*** If they have the same value, we don't change the repository.
+*** If they have a different value, we change the property to the _sent_ value.
+** If the property only exists in _sent_, we add the property.
+** If the property only exists in _repo_ we delete the property.  #TODO: _add_ property or _set_ property to null?#
+
+Children::
+** If the child exists #TODO rephrase to distinguish node existence and serialization contents# in both _sent_ and _repo_
+*** If the child is in the same containment
+**** If the child is in the same position, we don't change the repository.
+**** If the child is in a different position, we move the child to the _sent_ position.
+*** If the child is in different containments, we move the child to the _sent_ containment and position.
+** If the child only exists in _sent_
+*** If the child node exists (either because it was sent in this call, or is already part of the repository), we add the child.
+This means we move the child into this node.
+*** Otherwise, this call fails #TODO correct?#
+** If the child only exists in _repo_
+*** If the child has been added as child/annotation somewhere else in this call, we move the child (as described above).
+*** Otherwise, we delete the child *node* from the repository.
+
+References::
+** If the reference target exists in both _sent_ and _repo_
+*** If the target is in the same reference
+**** If the target is in the same position, we don't change the repository.
+**** If the target is in a different position, we move the target to the _sent_ position.
+*** {empty}
++
+NOTE: We don't need to consider if the target is in different references specially -- the target can be referenced from two references within the same parent.
+** If the reference target only exists in _sent_, we add the target.
+** If the reference target only exists in _repo_, we remove the target.
+
+Annotations::
+** If the annotation exists in both _sent_ and _repo_
+*** If the annotation is in the same position, we don't change the repository.
+*** If the annotation is in a different position, we move the annotation to the _sent_ position.
+** If the annotation only exists in _sent_
+*** If the annotation node exists (either because it was sent in this call, or is already part of the repository), we add the annotation.
+*** Otherwise, this call fails #TODO correct?#
+** If the annotation only exists in _repo_
+*** If the annotation has been added as child/annotation somewhere else in this call, we move the annotation (as described above).
+*** Otherwise, we delete the annotation *node* from the repository.
+
+Parent::
+We have to ignore the `parent` field in the _sent_ because otherwise we always had to send the whole ancestor axis, even if unchanged. +
+#TODO double-check#
+
+.How to handle unknown ids?
+
+* If requested by this client via <<ids>>: Create new node
+* If not requested by this client{fn-org94}{fn-org70} #TODO decide#
+
+
