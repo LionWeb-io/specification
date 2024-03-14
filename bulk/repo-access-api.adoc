@@ -1,155 +1,525 @@
-= Repo Access API
+include::../shared/issue-footnotes.adoc[]
+:serialization: ../serialization/serialization
+:m3: ../metametamodel/metametamodel
+:trash: trash-api
+:arch: ../reference-architecture/reference-architecture
+:chunk: <<{serialization}.adoc#SerializationChunk, SerializationChunk>>
 
-The repository API is used to store and retrieve models, where "model" is a somehow bounded subset of the repo contents.
-It is intended for bulk access (read, modify a couple of times on the client then store again).
+= Bulk Repository Access API
+:toc: preamble
+:toclevels: 2
+
+The bulk API is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
+It is intended for CRUD operations on (larger) sets of nodes.
 it is *not* intended as a delta-oriented API that takes "modification commands" as arguments.
 
+== Conventions used in this document
+* ALL-CAPS key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in https://datatracker.ietf.org/doc/html/bcp14[BCP14] (https://datatracker.ietf.org/doc/html/rfc2119[RFC2119], https://datatracker.ietf.org/doc/html/rfc8174[RFC8174]) when, and only when, they appear in all capitals, as shown here.
+* Footnotes refer to more discussions and rationale, but are non-normative.
+
+[[use-cases]]
 == Use Cases
+We describe the use cases from a client's perspective.
 
-Moved to link:../documentation/use-cases.adoc[]
+* "I'm starting up, which partitions do you know about?", i.e. <<listPartitions, list possible contents>>.
+* "Let's have a new slate, add a new partition", i.e. <<createPartitions, partition creation>>.
+* "This part is not needed any more, remove the partition", i.e. <<deletePartitions, partition deletion>>.
+* "Give me the whole subtree under this node", i.e. actual <<retrieve, bulk data retrieval>>
+* "Here is a node forest, store it as I hand it to you", i.e. actual <<store, bulk data storage>>.
+** Sub-case with same behavior: "I'm a very simple client who knows nothing about deltas, so whatever I send you is the truth", i.e. <<store, click-save-button>>.
+* "I'm starting up, get me the current partition contents", i.e. <<retrieve, initial load>>.
+* "I want to create a guaranteed new node, which id to use?", i.e. retrieval of <<ids, unused ids>>.
 
-== APIs
+[[validity]]
+== Validity assumptions
+We don't need to know anything about languages for this API.{fn-org203}
 
-retrieve part of model::
-* in: (list of) node ID
-* in: mode \{node, subtree, closure}
-* out: (list of) subgraph(s)
+We never sent partial nodes or features.{fn-org211}
+Thus, we can only update or receive a complete node with all its features.
+We cannot update only some of the features, or part of a feature (e.g. start of a string property value).
 
-store part of model::
-* in: (list of) subgraph(s)
+We assume transactional semantics for each modifying command.{fn-org229}
+A command either succeeds completely, or fails completely and does not change the repository's content.
 
-give me a range of IDs I can use::
-* tbd
+We do support invalid models w.r.t.{fn-org226}
 
-Next: versioning, node referencing/URL
+* Violations of metamodel constraints, e.g. whether a Concept instance without parent is a partition, a feature instance can be part of its node instance, or a node mentioned as annotation is an Annotation instance.
+* Unresolvable references, i.e. a <<{serialization}.adoc#reference, reference target node id>> unknown to the repository.
 
-Note: how do we represent nodes and lists of subgraphs. (Sascha Map serialization)
+We enforce conformance to{fn-org223}
 
-== REST API
-A model is just represented as a list of nodes.
-Each node has an ID and can be referenced using that ID.
+* Tree structure (i.e. at most one parent for each node)
+* Symmetry between containment/annotation and parent
+* No unresolvable containment/annotation ids
+* No unresolvable parent ids
+* A child node id MUST appear exactly once in all of its parent's containments
+* An annotation node id MUST appear exactly once in all of its parent's annotations
+* Every node MUST (directly or indirectly) be contained in a partition, except partitions themselves
+* Partitions MUST NOT have a parent
 
-A model implementation on the client side just has to maintain a Map<NodeId, NodeData>.
-When it receives data from the server it’s as simple as putting it into the map and overriding the existing node data.
-There is no difference between loading an initial version or applying an incremental update.
+#TODO: Add reference to model correctness doc#
 
-The server is responsible for doing the difficult algorithmic part.
-This minimizes the code required on the client side, making it easy to provide implementations for different platforms.
+[[out-of-scope]]
+== Out of scope
+We assume mapping API is separate from bulk API{fn-org94}.
 
-[source, httprequest]
-----
-GET /lion/\{repositoryID}/
+For now, we do not support paging, as paging tree nodes is non-trivial.{fn-org204}
 
-GET /lion/\{repositoryID}/\{versionHash}/
+For now, we don't include any specific protections agains denial-of-service attacks.{fn-org237}
 
-GET /lion/\{repositoryID}/\{branchName}/
-----
+We don't describe the binding to any specific protocol (e.g. HTTP) as part of this specification; We only describe the semantics.{fn-org148}
 
-Response:
+[[deleted-nodes]]
+== Deleted nodes
+We don't have an explicit delete command.{fn-org221}
 
-[source, json]
-----
-{
-  "versionHash": "af945d129c476",
-  "nodes": [
-    {
-      "id": 1,
-      "properties": {
-        "some": "something",
-        "values": "42",
-        "here": "161.21"
-      },
-      "references": { "entities": [735001, 769001] },
-      "children": {}
-    },
-    {
-      "id": 735001,
-      "properties": {
-        "name": "Entity1"
-      },
-      "references": {},
-      "children": { "properties": [735002, 735003, 735004] }
-    }
-  ]
-}
-----
+We don't support [[orphan, orphans]]_orphans_ for now.
+They are immediately deleted.{fn-org219}
 
-If the server doesn’t support branches or versioning then it only implements the first endpoint.
-The client can fall back to the first endpoint, if the others return 404.
+Deleted nodes don't exist anymore in the repository from the client's point of view.
+They might still exist in other contexts (e.g. another branch), or physically within the repository for internal reasons (e.g. storage optimization, concurrent editing support).
+A deleted node MUST NOT appear in any responses according to this API.{fn-org220}
 
-[source, httprequest]
-----
-GET /lion/\{repositoryID}/delta/\{baseVersionHash}/
+A repository MAY consider the deleted node's id to be _unused_, and thus allow to re-use it.
+A repository also MAY disallow re-using previously deleted node ids.
 
-GET /lion/\{repositoryID}/\{versionHash}/delta/\{baseVersionHash}/
+[[client-ids]]
+== Client ids
+Each <<{arch}.adoc#client, client>> MUST  provide a unique _client id_ when connecting to the repository.{fn-org241}
+The client id is an <<{serialization}.adoc#id, id>>-compatible string.
+A client MAY connect more than once to the same repository at the same time with the same client id.
+It is out of scope of LionWeb to guarantee the uniqueness of the client id.
+The repository does not apply any uniqueness checks.
 
-GET /lion/\{repositoryID}/\{branchName}/delta/\{baseVersionHash}/
-----
+[[unknown-node-ids]]
+== Unknown node ids
+An _unknown node id_ is a node id that's not the node id of any node present in the repository.
+An unknown node id can be present as a reference target (as we support unresolvable references).
 
-Response:
+How to handle unknown node ids in <<createPartitions>> and <<store>> commands?{fn-org94}{fn-org70}
 
-[source, json]
-----
-{
-  "versionHash": "af945d129c476",
-  "baseVersionHash": "39a15fd49c867",
-  "nodes": [
-    // only nodes that changed between the two versions
-  ]
-}
-----
+Scenarios:
 
-Also optional.
-If the server only supports bulk model read/write operations then it returns 404 and the client will fall back to the bulk endpoints.
+[cols="4,1,2,1,1,2"]
+|===
+|Description: Node id ... |Valid format |Format fits repo |Present in repo | Reserved |Repo action
 
-[source, httprequest]
-----
-POST /lion/\{repositoryID}/\{branchName}/\{baseVersionHash}/update
+|already present in repository
+|✔️
+|✔️ (repo accepted it)
+|✔️
+|✔️
+|error (<<createPartitions>>) / update node (<<store>>)
 
-POST /lion/\{repositoryID}/\{branchName}/update
-----
+|<<ids, requested>> by this client
+|✔️
+|✔️ (repo handed it out)
+|❌
+|✔️
+|create node
 
-Request body:
+|<<ids, requested>> by other client
+|✔️
+|✔️ (repo handed it out)
+|❌
+|✔️
+|error
 
-[source, json]
-----
-[
-  // list of modified nodes
-  {
-    "id": 735001,
-    "properties": { "name": "EntityA" }
-    // unmodified content of the node can be omitted
-  }
-]
-----
+|used previously by deleted node, repo disallows re-use
+|✔️
+|✔️ (repo handed it out)
+|❌
+|✔️
+|error
 
-Response:
+|used previously by deleted node, repo supports re-use
+|✔️
+|✔️ (repo handed it out)
+|❌
+|❌
+|create node
 
-[source, json]
-----
-{
-  "versionHash": "af945d129c476",
-  "baseVersionHash": "39a15fd49c867",
-  "nodes": []
-}
-----
+|invented by this client, requested by other client
+|✔️
+|✔️ (repo handed it out)
+|❌
+|✔️
+|error
 
-The response is similar to the `…/delta/…` endpoint.
-If there were concurrent changes and conflicts were resolved by the server then it may contain a list of the nodes that need to be updated on the client, otherwise the list of nodes is empty.
+|invented by client, matches repo format +
+Example: `123` for repo with internal long ids
+|✔️
+|✔️
+|❌
+|❌
+|create node
 
-Servers that don’t support versioning can provide only the second endpoint without a `baseVersion`.
-The response then doesn’t contain any version hashes.
+|invented by client, violates repo format +
+Example: `ab123` for repo with internal long ids
+|✔️
+|❌️
+|❌
+|❌
+|create node
 
-Reading the concrete rest API, this reminds me that there are (at least) five aspects about which we have to discuss:
+|invented by client, invalid  +
+Example: `he!!o`
+|❌️️
+|❌️
+|❌
+|❌
+|error
 
-. What is the vocabulary (set of operations) that we want to support?
-** what is the granularity/size of the "unit of stuff" we read and write?
-** how flexibly can we express the query to determine that size?
-** can we layer a query API on top of a simpler API?
+|===
 
-. How do we represent the models (fragments) across the wire? JSON, YAML, etc.?
+[[responses]]
+== Responses
+The repository signals _success_ or _failure_ with each response.
+We call this part of the reponse [[Response.success]]`success` flag.
 
-. How do we represent the actual operations? Which transport protocol do we use?
+Besides the main response, the repository can reply each command with zero or more additional [[Response.messages]]`messages`.{fn-org236}
+Each message MUST have the following properties:
 
-I think 1) is independent of 3).
-Which is why I would like to discuss this initially without discussing the REST details.
+* [[message.kind]]`kind` is an <<{serialization}.adoc#id, id>>-compatible string identifying the message type.
+Some message kinds are pre-defined in this specification.
+A repository MAY reply with other, additional message kinds.
+* [[message.message]]`message` is a human-readable string describing the message.
+* [[message.data]]`data` is a flat map with arbitrary keys and values.
+All values MUST be strings, the keys MUST be <<{serialization}.adoc#id, id>>-compatible.
+A _kind_ might imply presence of specific keys in `data`.
+
+[[message-kinds-global]]
+== Message kinds for all commands
+
+[cols="3h,3,1,7a"]
+|===
+|Kind |Description |Success |Implied data
+
+|`` #TODO#
+|Invalid node id
+|false
+|
+[horizontal]
+`invalidNodeId`:: Id of non-partition node.
+
+|`` #TODO#
+|Node with same id sent more than once
+|false
+|#TODO#
+
+|`` #TODO#
+|Invalid tree due to concurrent update{fn-org238}
+|false
+|#TODO#
+
+|===
+
+
+[[commands]]
+[[apis]]
+== Commands
+
+[[listPartitions, listPartitions]]
+[[partitions, listPartitions]]
+=== listPartitions: List available partitions
+Lists all non-language partitions accessible in the repository.
+
+Calling this command MUST NOT change repository contents.
+
+NOTE: We might add filter capabilities in the future.
+
+==== Parameters
+None.
+
+==== Response
+Contains a {chunk} with all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
+The partitions are sent as complete nodes.{fn-org202}
+Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
+
+==== Message kinds
+None.
+
+[[createPartitions, createPartitions]]
+=== createPartitions: Create new partitions
+Creates new partitions in the repository.{fn-org216}
+
+Each sent node is its own partition.
+Thus, we cannot send the contents (i.e. (indirect) annotations/containments) of a partition; We can send them in a later <<store>> call.
+We also MUST NOT mention any annotation/containment node ids in the partition nodes, as they cannot be part of the same request, and we don't allow moving nodes in this operation.
+We MAY send properties and references.{fn-org225}
+
+Nodes MUST use <<unknown-node-ids>>.
+
+==== Parameters
+[[createPartitions.nodes]]
+`nodes`:: {chunk} containing all nodes we want to add as new partitions.
+
+==== Response
+Does not contain a `chunk`.
+
+==== Message kinds
+[cols="3h,3,1,7a"]
+|===
+|Kind |Description |Success |Implied data
+
+|`PartitionHasParent`
+|Partition node states parent id
+|false
+|
+[horizontal]
+`nodeId`:: node id of requested partition that has a parent.
+
+|`PartitionAlreadyExists`
+|Partition node id already exists
+|false
+|
+[horizontal]
+`nodeId`:: Id of already existing node.
+
+|`` #TODO#
+|Partition node id not reserved for this client
+|false
+| #TODO#
+
+|`PartitionHasChildren`
+`PartitionHasAnnotations` #TODO#
+|Partition node lists contained or annotated nodes
+|false
+|
+[horizontal]
+`nodeId`:: node id of requested partition that has children or annotations.
+
+|`EmptyChunk`
+|Empty Request
+|true
+|None
+
+|===
+
+[[deletePartitions, deletePartitions]]
+=== deletePartitions: Delete partitions and all their contents
+Deletes all mentioned partitions, including all (transitive) annotations and children.
+
+All mentioned node ids MUST be ids of partition nodes.
+
+All (transitive) annotations and children become <<orphan, orphans>>.
+
+==== Parameters:
+[[deletePartitions.nodeIds]]
+`nodeIds`:: List of node ids to delete.
+
+==== Response
+Does not contain a chunk.
+
+==== Message kinds
+
+[cols="3h,3,1,7a"]
+|===
+|Kind |Description |Success |Implied data
+
+|`NodeIsNotPartition`
+|Node with that id is not a partition
+|false
+|
+[horizontal]
+`nodeId`:: Id of non-partition node.
+`parentNodeId`:: Id of the parent node.
+
+|`` #TODO#
+|Node with that id does not exist
+|true
+|#TODO#
+
+|===
+
+
+[[retrieve, retrieve]]
+=== retrieve: Get nodes from repository
+Retrieves subtrees nested in the listed node ids.{fn-org201}
+
+Calling this command MUST NOT change repository contents.
+
+NOTE: We might add advanced filtering capabilities in the future, or introduce an additional querying API.
+
+==== Parameters
+[[retrieve.nodeIds]]
+`nodeIds`:: List of node ids we want to retrieve from the repository.
+Can be partition node ids and/or nested node ids.
+
+[[retrieve.depthLimit]]
+`depthLimit`:: Limit the depth of retrieved subtrees.
+Optional parameter, defaults to _infinite_.
+If present, MUST be an integer >= 0, with
++
+--
+* 0 meaning "return only the nodes with ids listed in `nodeIds` parameter",
+* 1 meaning "return the nodes with id listed in the `nodeIds` parameter and their direct children/annotations",
+* 2 meaning "return the nodes with id listed in the `nodeIds` parameter, their direct children/annotations, and the direct children/annotations of these",
+* etc.
+--
++
+NOTE: There's no _magic value_ of `depthLimit` to express _infinite_ depth.
+We need to omit the parameter if we don't want to limit the depth.
+
+==== Response
+{chunk} containing all nodes according to `nodeIds` and `depthLimit` parameters.
+Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLanguages>>, only their <<{serialization}.adoc#MetaPointer, MetaPointers>>.
+
+==== Message kinds
+[cols="3h,3,1,7a"]
+|===
+|Kind |Description |Success |Implied data
+
+|`IdNotFound`
+|Node with requested id does not exist
+|true
+|
+[horizontal]
+`nodeId`:: Id of non-existent node
+
+|`EmptyIdList`
+|Empty id list
+|true
+|None
+
+|`IdsIncorrect`
+|Invalid ids parameter
+|false
+|
+[horizontal]
+`nodeIds`:: The invalid `nodeIds` parameter
+
+|`DepthLimitIncorrect`
+|Invalid depthLimit parameter
+|false
+|
+[horizontal]
+`depthLimit`:: The invalid `depthLimit` parameter.
+
+|===
+
+
+[[store, store]]
+=== store: Put nodes into repository
+Creates new nodes, or updates existing nodes in the repository.
+
+We always process one node in its entirety, i.e. we cannot update parts of the node with this command.{fn-org211}
+
+A node id referenced as parent, containment, reference, or annotation _can_ be mentioned in the same request, but _can_ be omitted if a node with that id already exists in the repository.
+This way, we can move subtrees and add arbitrary references without sending unchanged nodes.
+
+We consider that node to be _new_ if it has an <<unknown-node-ids, unknown node id>>.
+Otherwise, we consider the node to be _updated_ (i.e. if a node with the same id already exists in the repository).
+
+We do not support different modes.{fn-org230}
+
+==== Parameters
+[[store.nodes]]
+`nodes`:: {chunk} containing all nodes to store to the repository.
+
+==== Semantics
+After completing this call, all sent nodes MUST have exactly the sent contents in the repository.
+We must send containments/annotations from the parent's view, because we need to know the containment and index of the contained node/annotation within its parent.
+
+If we move a contained/annotation node `C` from its previous parent `A` to its new parent `B`, we MUST send `B`, and MAY omit `A`.{fn-org227}
+This means we can have implicit changes in `A`.
+
+The whole call fails, without any changes to the repository, if it would lead to a <<validity, malformed model>>.{fn-org223}
+The repository MUST NOT validate the metamodel constraints of the sent nodes.{fn-org226}
+
+The repository MUST support changing <<{serialization}.adoc#meta-pointer, meta-pointers>>, e.g.  a node's `classifier.language`, a property's `property.version` or an enumeration literal's `key`.{fn-org69}
+
+
+==== Response
+Does not contain a chunk.
+
+==== Message kinds
+[cols="3h,3,1,7a"]
+|===
+|Kind |Description |Success |Implied data
+
+|`NullChunk`
+|Chunk missing
+|false
+|None
+
+|`` #TODO#
+|Node id mentioned as annotation/child in more than one parent
+|false
+|#TODO#
+
+|`` #TODO#
+|Move would create loop in tree
+|false
+|#TODO#
+
+|`ParentMissing`
+|Parent / child / annotation node id unknown
+|false
+|
+[horizontal]
+`nodeId`:: Id of node that doesn't have a parent.
+
+|`` #TODO#
+|Parent doesn't match child/annotation
+|false
+|#TODO#
+
+|`` #TODO#
+|New node id not reserved for this client
+|false
+|#TODO#
+
+|===
+
+
+[[ids, ids]]
+=== ids: Get available ids
+Provides unused <<{m3}.adoc#identifiers, valid ids>>.
+
+The repository
+
+* MUST NOT hand out the same unused ids to any other client.
+* MAY hand out the same unused ids to the same client more than once.
+* MUST NOT contain any node with any of the provided ids.
+
+The ids MUST exclude the <<{m3}.adoc#predefined-builtins-keys, built-in ids>>.
+
+Calling this command MUST NOT change repository contents themselves (besides the internal knowledge of reserved ids).
+
+We don't assume leases, i.e. ids handed out to one client are "owned" by that client forever.
+Rationale: Otherwise, the repository must track sessions, and run housekeeping on leases.
+This would exclude simple repository implementations.
+
+We assume infinite id space.
+
+==== Parameters
+[[ids.count]]
+`count`:: Number of ids requested.
+The repository MUST return between one (inclusive) and `count` (inclusive) ids.
+It MAY return less than `count` ids.
+
+==== Response
+List of ids guaranteed to be free.
+
+==== Message kinds
+None.
+
+[[crud-mapping]]
+== Mapping CRUD operations
+
+list:: <<listPartitions>> for partitions, <<retrieve>> for descendants.
+
+read:: <<retrieve, retrieve call>> with requested node ids (both partitions and other nodes).
+
+create:: <<createPartitions>> for partitions, <<store, store call>> that sends a node with a <<ids, _new id_>>, including all its features.
+
+update:: <<store, store call>> that sends a node (both partitions and other nodes) with an _existing id_, including all its features (both updated and unchanged).
+
+delete:: <<deletePartitions>> for partitions (including all descendants), for others <<store>> of the parent node without mentioning the deleted node.
+
+move:: Assume we want to move node `N` from its current parent `S` to its new parent `T`.
++
+<<store, store call>> that sends `T` with all its features, including `N` in the children.
++
+NOTE: We cannot move partitions, as we cannot nest them.{fn-org29}

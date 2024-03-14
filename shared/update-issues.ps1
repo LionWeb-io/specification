@@ -6,4 +6,4 @@ Foreach-Object {
 	$title = $members[2]
 	":fn-org${id}: footnote:org${id}[https://github.com/LionWeb-io/specification/issues/${id}[${title} #${id}]]"
 } |
-out-file -encoding utf8 issue-footnotes.adoc
+out-file -encoding utf8 issue-footnotes-imported.adoc

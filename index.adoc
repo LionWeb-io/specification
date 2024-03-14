@@ -8,6 +8,7 @@
 * xref:documentation/use-cases.adoc[Use Cases]
 * xref:metametamodel/metametamodel.adoc[Meta-Metamodel (M3)]
 * xref:serialization/serialization.adoc[Serialization Format]
+* xref:bulk/repo-access-api.adoc[Bulk Repository Access API]
 
 == Versions
 

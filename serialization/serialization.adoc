@@ -208,7 +208,7 @@ NOTE: The referred *node* can be contained in the processed document, but also c
 Each *annotation* MUST be a _string_.
 It adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained annotation *node*.
 
-NOTE: Each *annotation* element is the inverse relation of a *parent*.
+NOTE: Each *annotation* element is the inverse relation of a *parent*.{fn-org150}
 
 NOTE: The annotation *node* can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
 
