@@ -98,7 +98,7 @@ In many cases this might not be what the client needs.
 - How can a client see the difference? 
 - How can we ensure a client does not start editing / changing derived models?
 
-*=> Do we need to formalize Models (see definition above) in the repository?*
+*=> Do we need to formalize the notion of Models (see definition above) in the repository?*
 
 == Repository Confusion
 Assuming that processors use the existing bulk or delta API to store/retrieve nodes.
@@ -109,7 +109,6 @@ Assuming that processors use the existing bulk or delta API to store/retrieve no
   * For calculated nodes this is even harder as there is no information in the language
     to deduce whether a node is calculated.
 - If the previous point is solved, how does the repository know to which processor they belong?
-- The repsotiory should be able to work without knowing the language(s),
 
 == Processors
 There is a number of questions that needs to be answered about processors:
