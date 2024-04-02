@@ -1,0 +1,134 @@
+:serialization: ../serialization/serialization
+:m3: ../metametamodel/metametamodel
+:bulk: ../bulk/repo-access-api
+:chunk: <<{serialization}.adoc#SerializationChunk, SerializationChunk>>
+
+= Processors and Derived Models
+:toc: preamble
+:toclevels: 2
+
+== Terminology
+
+repository::
+A _repository_ is the "world".
+- A repository is the scope in which id's are unique.
+- A repository is the scope in which referred nodes can be resolved.
+- A repository is a collection of partitions.
+
+original node::
+A node CRUDed by users (mediated by tools).
+
+derived node::
+A node implementing `IDerived` that is attached (by reference) to one base node and
+that can be calculated from its base node and (optionally) other nodes.
+
+calculated node:: A node that is (automatically) calculated from other nodes.
+A derived node is a calculated node, but not vice versa.
+
+model::
+A _model_ is a subset of a repository.
+- A model is a collection of partitions (from the same repository).
+
+original model::
+An _original model_ is a model where all nodes are original nodes.
+- An original model cannot be (re-)computed from other models.
+
+derived model::
+A _derived model_ is a model that can be calculated from _base_ models.
+- A derived model has no original nodes.
+- In a derived model all nodes are created (automatically) by a processor. 
+  It contains derived nodes and calculated nodes.
+
++
+However, a derived model MAY contain nodes that do not implement `IDerived`.
+Example: A derived richtext description contains `Word` concepts.
+`Word` is reused in many contexts, and does not implement `IDerived`.
+In this case `Word` is a calculated node, but *not* a derived node.
+
+NOTE: A repository always contains exactly one original model and any number of derived models.
+
+NOTE: As defined here, nodes that are calculated by a processor can never be children or annotations of an original node.
+
+base model::
+A model that has _derived_ models.
+A base model can be an _original_ or a _derived_ model.
+
+processor::
+A _processor_ is a component that provides/calculates derived nodes for nodes in a base model.
+- A processor is always directly associated with exactly one _base model_.
+- A processor creates (derived and calculated) nodes in exactly one _derived model_.
+- A processor may use nodes (derived, calculated or original) from any model to calculate it's derived model.
+
+NOTE: Note that multiple processors may use the same language in their derived models.
+E.g. a _model validation_ processor and a _type errors_ processor and a _deadlock detection_ processor may all use the same _Findings_ language.
+Because of this derived models cannot be identified by their used languages.
+
+== Getting a derived node
+Assume a client has base nodes _BaseA_, _BaseB_ and _BaseC_.
+To ask for a derived node the client needs:
+
+- The node id of BaseN.
+- The identification of the processor/derived model.
+
+Given processors _Red_, _Yellow_ and _Blue_ (don't be afraid of them :-) the client can ask:
+
+    Get derived node Blue for BaseA.id
+
+or
+
+    Get derived node Orange for BaseA.id and BaseB.id
+
+Note that _Processor Blue_ and _Derived Model Blue_ are conceptually the same
+from the point of view of the client.
+
+NOTE: In this approach the language(s) used by a derived model play no role at all.
+The response chunk containing the derived nodes (and their children etc.) will contain `usedLanguages`.
+
+The picture below shows an actual instantiation of the above described structure.
+
+.Repository with models and processors
+image::processors.png[width=100%]
+
+
+== Client Confusion
+In general, there are (possibly) derived models in a repository, therefore requesting all
+partitions will result in getting both original partitions and all derived partitions.
+In many cases this might not be what the client needs.
+
+- How can a client see the difference? 
+- How can we ensure a client does not start editing / changing derived models?
+
+*=> Do we need to formalize Models (see definition above) in the repository?*
+
+== Repository Confusion
+Assuming that processors use the existing bulk or delta API to store/retrieve nodes.
+
+- How does the repository know which nodes/partitions are derived or calculated?
+  * The repository should be able to work without knowing the language(s),
+    therefore the repository cannot consult a language definition to know which nodes are derived.
+  * For calculated nodes this is even harder as there is no information in the language
+    to deduce whether a node is calculated.
+- If the previous point is solved, how does the repository know to which processor they belong?
+- The repsotiory should be able to work without knowing the language(s),
+
+== Processors
+There is a number of questions that needs to be answered about processors:
+
+- A processor is related to exactly one base model, this relationship needs to be defined somewhere.
+  * As there is one original model in a repository, connecting a processor to an original base model is
+    identical to connecting / registering a processor to a repository.
+  * The relationship to the derived model of the processor is less easy as
+    there might be many derived models in a repository. 
+- A processor typically expects nodes from one or more specific languages. 
+  * E.g a type processor needs to understand the nodes for which it is calculating the types, while a scoping processor needs to understand the scoping rules of the specific language(s).
+  * 
+- Processors are attached to a repository, because they need access to their base model and
+  the repository is the only place where this can be found.
+- Who and when will a processor be started?
+  * We do not want the client to explicitly start (and/or stop) processors.
+    A client should simply ask for a derived node for a certain processor/derived model.
+    The processor may already be running, or it will be started.
+    Except for maybe the performance, this should be invisible to the client.
+- Can a processor create multiple derived nodes for one base node?
+  * E.g. a type processor may not only calculate types, but also type errors for a node.
+    Do we want to allow this?
