@@ -13,6 +13,9 @@ Same as in https://github.com/LionWeb-io/specification/issues/248#issuecomment-2
 * `derivationBackend` has a special API to ask processors for a _complete_ derivation.
 (Note that this only contains the derived nodes from this processor -- `derivationBackend` aggregates the results of all processors that contribute to the same derivation).
 
+NOTE: Red activity lines for repository are updates. +
+Yellow boxes are the incoming, unprocessed changes.
+
 [plantuml,scenario,svg]
 ----
 !pragma teoz true
@@ -33,6 +36,7 @@ repo ->> scope: <font color=darkcyan>change1</font>
 activate scope
 autonumber 1
 scope -> scope: queue
+note over scope: <b>inbox:</b>\n<font color=darkcyan>change1</font>
 [-[hidden]>scope
 deactivate scope
 
@@ -42,6 +46,7 @@ deactivate repo
 activate dom
 autonumber 1
 dom -> dom: queue
+note over dom: <b>inbox:</b>\n<font color=darkcyan>change1</font>
 [-[hidden]>dom
 deactivate dom
 
@@ -50,8 +55,10 @@ repo <<-]: <font color=coral>change2</font>
 activate repo #red
 autonumber 1
 repo ->> scope: <font color=coral>change2</font>
+note over scope: <b>inbox:</b>\n<font color=darkcyan>change1</font>\n<font color=coral>change2</font>
 autonumber 1
 repo ->> dom: <font color=coral>change2</font>
+note over dom: <b>inbox:</b>\n<font color=darkcyan>change1</font>\n<font color=coral>change2</font>
 deactivate repo
 
 autonumber 1
@@ -59,8 +66,10 @@ repo <<-]: <font color=deeppink>change3</font>
 activate repo #red
 autonumber 1
 repo ->> scope: <font color=deeppink>change3</font>
+note over scope: <b>inbox:</b>\n<font color=darkcyan>change1</font>\n<font color=coral>change2</font>\n<font color=deeppink>change3</font>
 autonumber 1
 repo ->> dom: <font color=deeppink>change3</font>
+note over dom: <b>inbox:</b>\n<font color=darkcyan>change1</font>\n<font color=coral>change2</font>\n<font color=deeppink>change3</font>
 deactivate repo
 
 == global state: aa ==
@@ -87,6 +96,7 @@ activate db
 
   autonumber 4
   scope -> scope: process <font color=darkcyan>change1</font>
+  note over scope: <b>inbox:</b>\n<font color=coral>change2</font>\n<font color=deeppink>change3</font>
   autonumber 10
   &  val -> repo++: get original model
   return
@@ -94,10 +104,12 @@ activate db
 
   autonumber 5
   scope -> scope: process <font color=coral>change2</font>
+  note over scope: <b>inbox:</b>\n<font color=deeppink>change3</font>
 
 
   autonumber 14
   & dom -> dom: process <font color=darkcyan>change1</font>\nno change
+  note over dom: <b>inbox:</b>\n<font color=coral>change2</font>\n<font color=deeppink>change3</font>
   autonumber 15
   dom -> dom ++: process <font color=coral>change2</font>
   autonumber stop
@@ -107,6 +119,7 @@ activate db
 == global state: ab ==
 
   return
+  note over dom: <b>inbox:</b>\n<font color=deeppink>change3</font>
 
   autonumber 12
   val -> val: calculate
@@ -120,23 +133,29 @@ activate db
   activate repo #red
   autonumber 7
   repo ->> scope: <font color=goldenrod>newChange</font>
+  note over scope: <b>inbox:</b>\n<font color=deeppink>change3</font>\n<b>delayed inbox:</b>\n<font color=goldenrod>newChange</font>
   autonumber 16
   repo ->> dom: <font color=goldenrod>newChange</font>
+  note over dom: <b>inbox:</b>\n<font color=deeppink>change3</font>\n<b>delayed inbox:</b>\n<font color=goldenrod>newChange</font>
   deactivate repo
 
 == global state: bb ==
 
   autonumber 7
   scope -> scope: process <font color=deeppink>change3</font>
+  note over scope: <b>inbox:</b>\n<i>empty</i>\n<b>delayed inbox:</b>\n<font color=goldenrod>newChange</font>
   autonumber 8
   scope -->> db: validations
   deactivate scope
+  note over scope: <b>inbox:</b>\n<font color=goldenrod>newChange</font>
 
   autonumber 17
   dom -> dom: process <font color=deeppink>change3</font>\nno change
+  note over dom: <b>inbox:</b>\n<i>empty</i>\n<b>delayed inbox:</b>\n<font color=goldenrod>newChange</font>
   autonumber 18
   dom -->> db: validations
   deactivate dom
+  note over dom: <b>inbox:</b>\n<font color=goldenrod>newChange</font>
 
 autonumber 20
 gen <-- db
