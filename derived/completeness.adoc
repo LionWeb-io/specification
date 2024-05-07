@@ -1,0 +1,156 @@
+= Completeness Scenario
+
+"complete" means "a processor has finished all its work _up to the point in time at which we asked it_"
+
+Same as in https://github.com/LionWeb-io/specification/issues/248#issuecomment-2079730360[#248]
+
+== Assumptions
+
+* processors use the same APIs as other clients to retrieve their base models (and any other nodes they might need).
+
+* There is a central authority `derivationBackend` within a repository that handles requests for derivations.
+
+* `derivationBackend` has a special API to ask processors for a _complete_ derivation.
+(Note that this only contains the derived nodes from this processor -- `derivationBackend` aggregates the results of all processors that contribute to the same derivation).
+
+[plantuml,scenario,svg]
+----
+!pragma teoz true
+
+actor generator as gen
+participant derivationBackend as db
+participant ScopeProcessor as scope<<delta>>
+participant ValidationProcessor as val<<bulk>>
+participant DomainValidator as dom<<delta>>
+database repository as repo
+
+autonumber 1
+
+repo <<-]: <font color=darkcyan>change1</font>
+activate repo #red
+autonumber 1
+repo ->> scope: <font color=darkcyan>change1</font>
+activate scope
+autonumber 1
+scope -> scope: queue
+[-[hidden]>scope
+deactivate scope
+
+autonumber 1
+repo ->> dom: <font color=darkcyan>change1</font>
+deactivate repo
+activate dom
+autonumber 1
+dom -> dom: queue
+[-[hidden]>dom
+deactivate dom
+
+autonumber 1
+repo <<-]: <font color=coral>change2</font>
+activate repo #red
+autonumber 1
+repo ->> scope: <font color=coral>change2</font>
+autonumber 1
+repo ->> dom: <font color=coral>change2</font>
+deactivate repo
+
+autonumber 1
+repo <<-]: <font color=deeppink>change3</font>
+activate repo #red
+autonumber 1
+repo ->> scope: <font color=deeppink>change3</font>
+autonumber 1
+repo ->> dom: <font color=deeppink>change3</font>
+deactivate repo
+
+== global state: aa ==
+
+autonumber 2
+
+gen -> db: get validation\nderivation
+activate db
+  autonumber 3
+  db ->> scope
+  activate scope
+
+  autonumber 3
+  db ->> val
+  activate val
+
+  autonumber 3
+  db ->> dom
+  activate dom
+
+  autonumber 13
+  & dom -> repo ++: get persisted derived model
+  return
+
+  autonumber 4
+  scope -> scope: process <font color=darkcyan>change1</font>
+  autonumber 10
+  &  val -> repo++: get original model
+  return
+
+
+  autonumber 5
+  scope -> scope: process <font color=coral>change2</font>
+
+
+  autonumber 14
+  & dom -> dom: process <font color=darkcyan>change1</font>\nno change
+  autonumber 15
+  dom -> dom ++: process <font color=coral>change2</font>
+  autonumber stop
+    dom -> repo ++ #red: update persisted derived model
+    return
+
+== global state: ab ==
+
+  return
+
+  autonumber 12
+  val -> val: calculate
+  autonumber 12
+  val -->> db: validations
+  deactivate val
+
+
+  autonumber 6
+  repo <<-]: <font color=goldenrod>newChange</font>
+  activate repo #red
+  autonumber 7
+  repo ->> scope: <font color=goldenrod>newChange</font>
+  autonumber 16
+  repo ->> dom: <font color=goldenrod>newChange</font>
+  deactivate repo
+
+== global state: bb ==
+
+  autonumber 7
+  scope -> scope: process <font color=deeppink>change3</font>
+  autonumber 8
+  scope -->> db: validations
+  deactivate scope
+
+  autonumber 17
+  dom -> dom: process <font color=deeppink>change3</font>\nno change
+  autonumber 18
+  dom -->> db: validations
+  deactivate dom
+
+autonumber 20
+gen <-- db
+deactivate db
+
+activate scope
+autonumber 9
+scope -> scope: process <font color=goldenrod>newChange</font>
+[-[hidden]>scope
+deactivate scope
+
+activate dom
+autonumber 19
+dom -> dom: process <font color=goldenrod>newChange</font>\nno change
+[-[hidden]>dom
+deactivate dom
+----
