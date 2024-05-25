@@ -337,7 +337,7 @@ It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Langu
 The correspondence between a PrimitiveType an implementation class on a specific platforms can be specified through annotations, but it is not specified on the PrimitiveType itself.
 
 .Constraints
-TBD
+#TODO: TBD#
 
 [[Enumeration]]
 ==== Enumeration
@@ -363,7 +363,7 @@ An Enumeration is a <<DataType>> (as it can be used as <<Property.type, type>> o
 It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name) and a <<IKeyed>> (as it has a key).
 
 .Constraints
-TBD
+#TODO: TBD#
 
 [[EnumerationLiteral]]
 ==== EnumerationLiteral
@@ -409,7 +409,7 @@ A Containment is a <<Link>> (as it describes a relation between two Classifiers)
 It is indirectly a <<Feature>> (as it describes the characteristics of a <<Classifier>>), an <<INamed>> (as it has a name) and a <<IKeyed>> (as it has a key).
 
 .Constraints
-TBD
+#TODO: TBD#
 
 [[Reference]]
 ==== Reference
@@ -435,7 +435,7 @@ A Reference is a <<Link>> (as it describes a relation between two Classifiers).
 It is indirectly a <<Feature>> (as it describes the characteristics of a <<Classifier>>), an <<INamed>> (as it has a name) and a <<IKeyed>> (as it has a key).
 
 .Constraints
-TBD
+#TODO: TBD#
 
 [[Property]]
 ==== Property
@@ -460,7 +460,7 @@ A Property is a <<Feature>> (as it describes the characteristics of a <<Classifi
 It is indirectly a <<IKeyed>> (as it has a key) and an <<INamed>> (as it has a name).
 
 .Constraints
-TBD
+#TODO: TBD#
 
 === Abstract concepts
 
@@ -526,7 +526,7 @@ A Classifier is a <<LanguageEntity>> (as it is a top level element in a <<Langua
 It is indirectly a <<IKeyed>> (as it has a key) and an <<INamed>> (as it has a name).
 
 .Constraints
-TBD
+#TODO: TBD#
 
 [[DataType]]
 ==== DataType
@@ -552,7 +552,7 @@ A DataType can be one of:
 * <<Enumeration>>
 
 .Constraints
-TBD
+#TODO: TBD#
 
 [[Feature]]
 ==== Feature
@@ -647,7 +647,7 @@ A Link can be either a <<Containment>>, or a <<Reference>>.
 We do NOT support link specialization.{fn-org8}
 
 .Constraints
-TBD
+#TODO: TBD#
 
 === Interfaces
 
@@ -813,7 +813,7 @@ LionCore represents multiplicity as the two booleans <<Feature.optional, `option
 |===
 
 .Constraints
-TBD
+#TODO: TBD#
 
 [[partition]]
 ==== Partitions
