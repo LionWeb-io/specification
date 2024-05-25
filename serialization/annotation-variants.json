@@ -1,5 +1,5 @@
 {
-  "serializationFormatVersion": "2023.1",
+  "serializationFormatVersion": "2024.1",
   "languages": [
     {
       "key": "myLanguage",
@@ -11,7 +11,7 @@
     },
     {
       "key": "LionWeb-M3",
-      "version": "2023.1"
+      "version": "2024.1"
     }
   ],
   "nodes": [
@@ -153,7 +153,7 @@
       "id": "bbb",
       "classifier": {
         "language": "LionWeb-M3",
-        "version": "2023.1",
+        "version": "2024.1",
         "key": "Concept"
       },
       "properties": [],
@@ -161,7 +161,7 @@
         {
           "containment": {
             "language": "LionWeb-M3",
-            "version": "2023.1",
+            "version": "2024.1",
             "key": "Classifier-features"
           },
           "children": [
@@ -179,7 +179,7 @@
       "id": "bbb-prop",
       "classifier": {
         "language": "LionWeb-M3",
-        "version": "2023.1",
+        "version": "2024.1",
         "key": "Property"
       },
       "properties": [],
