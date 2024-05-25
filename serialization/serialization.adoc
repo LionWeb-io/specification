@@ -9,7 +9,7 @@ include::../shared/issue-footnotes.adoc[]
 :toc: preamble
 :toclevels: 3
 
-This document describes the serialization format for LionWeb chunks.
+This document describes the serialization format for LionWeb *version 2024.1* chunks.
 
 == Conventions used in this document
 * _italic_ words refer to concepts defined by JSON.
