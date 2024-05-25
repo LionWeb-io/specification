@@ -556,7 +556,7 @@ TBD
 
 [[Feature]]
 ==== Feature
-A Feature represents a characteristic or some form of data associated with a particular concept.
+A Feature represents a characteristic or some form of data associated with a particular <<Classifier>>.
 
 .Example
 For example, an _Invoice_ can have an associated _date_, a _number_, a connection with a _customer_, and it can contain _InvoiceLines_.
@@ -619,7 +619,7 @@ If a host language cannot handle this situation, the generator towards that lang
 
 [[Link]]
 ==== Link
-Represent a connection to an <<Classifier>>.
+Represent a connection to a <<Classifier>>.
 
 .Example
 An _Invoice_ can be connected to its _InvoiceLines_ and to a _Customer_.
