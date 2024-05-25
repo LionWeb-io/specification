@@ -55,7 +55,6 @@
             "LionCore-builtins-String",
             "LionCore-builtins-Boolean",
             "LionCore-builtins-Integer",
-            "LionCore-builtins-JSON",
             "LionCore-builtins-Node",
             "LionCore-builtins-INamed"
           ]
@@ -157,36 +156,6 @@
             "key": "IKeyed-key"
           },
           "value": "LionCore-builtins-Integer"
-        }
-      ],
-      "containments": [],
-      "references": [],
-      "annotations": [],
-      "parent": "LionCore-builtins"
-    },
-    {
-      "id": "LionCore-builtins-JSON",
-      "classifier": {
-        "language": "LionCore-M3",
-        "version": "2023.1",
-        "key": "PrimitiveType"
-      },
-      "properties": [
-        {
-          "property": {
-            "language": "LionCore-builtins",
-            "version": "2023.1",
-            "key": "LionCore-builtins-INamed-name"
-          },
-          "value": "JSON"
-        },
-        {
-          "property": {
-            "language": "LionCore-M3",
-            "version": "2023.1",
-            "key": "IKeyed-key"
-          },
-          "value": "LionCore-builtins-JSON"
         }
       ],
       "containments": [],
