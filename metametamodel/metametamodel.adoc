@@ -378,7 +378,7 @@ An EnumerationLiteral is similar to Ecore’s `EEnumLiteral` and to MPS’ `Enum
 .Characteristics
 An EnumerationLiteral has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
 
-An Enumeration is a <<IKeyed>> (as it has a key) and indirectly an <<INamed>> (as it has a name).
+An EnumerationLiteral is a <<IKeyed>> (as it has a key) and indirectly an <<INamed>> (as it has a name).
 
 .Constraints
 Each EnumerationLiteral must have a unique `name` within the Enumeration.
