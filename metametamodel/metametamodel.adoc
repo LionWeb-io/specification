@@ -753,7 +753,6 @@ This means the id MUST be identical to the key for each node in this language.
 |<<String>> |PrimitiveType |LionCore-builtins-String
 |<<Boolean>> |PrimitiveType |LionCore-builtins-Boolean
 |<<Integer>> |PrimitiveType |LionCore-builtins-Integer
-|<<JSON>> |PrimitiveType |LionCore-builtins-JSON
 |<<Node>> |Concept |LionCore-builtins-Node
 |<<INamed>> |Interface |LionCore-builtins-INamed
 |<<INamed.name, INamed.name>> |Property |LionCore-builtins-INamed-name
@@ -787,7 +786,6 @@ Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense t
 * [[Boolean, Boolean]] `Boolean` with exactly two values: `true` and `false` (<<{serialization}.adoc#boolean, Details>>)
 * [[String, String]] `String`, an arbitrary-length series of Unicode characters (<<{serialization}.adoc#string, Details>>)
 * [[Integer, Integer]] `Integer`, an arbitrary-length positive or negative integer number (<<{serialization}.adoc#integer, Details>>)
-* [[JSON, JSON]] `JSON`, any valid JSON document (<<{serialization}.adoc#json, Details>>)
 
 
 === Supporting terminology
