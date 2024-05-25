@@ -403,7 +403,7 @@ We could simulate it by a custom `EDatatype` in ECore.
 .Characteristics
 [[StructuredDatatype.fields, StructuredDatatype.fields]]
 A StructuredDatatype contains <<Field, Fields>> in its `fields` containment.
-It also represents the <<namespaces, namespace>> for the Fields.
+It also represents the <<namespaces, namespace>> for the fields.
 
 A StructuredDatatype has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
 
@@ -411,12 +411,12 @@ A StructuredDatatype is a <<DataType>> (as it can be used as <<Property.type, ty
 It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name) and a <<IKeyed>> (as it has a key).
 
 .Constraints
-Instances of StructuredDatatype SHOULD be immutable.
+M1 Instances of a StructuredDatatype SHOULD be immutable.
 
-An instance of StructuredDataype MUST have non-null values for all its fields with a `type` of <<PrimitiveType>> or <<Enumeration>>.
-fields with a `type` of StructuredDatatype MAY be `null`.
+An M1 instance of StructuredDatatype MUST have non-null values for all its fields with `type` of <<PrimitiveType>> or <<Enumeration>>.
+fields with `type` of StructuredDatatype can be `null`.
 
-A StructuredDatatype MAY (directly or indirectly) contain a field with itself as `type`.
+A StructuredDatatype can (directly or indirectly) contain a field with itself as `type`.
 
 
 [[Field]]
@@ -427,7 +427,7 @@ Represents one part of a <<StructuredDatatype>>.{fn-org265}
 
 .Example
 In the StructuredDatatype "Complex number", we would have two fields "real part" and "imaginary part".
-A StructuredDatatype had the fields "red", "green", and "blue".
+A StructuredDatatype "Color" had the fields "red", "green", and "blue".
 
 .EMF & MPS equivalent
 No direct similarities.
@@ -438,10 +438,10 @@ A Field has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
 [[Field.type, Field.type]]
 A Field refers its `type`, which is a <<DataType>>.
 
-A Field is a <<IKeyed>> (as it has a key) and indirectly an <<INamed>> (as it has a name).
+A Field is an <<IKeyed>> (as it has a key) and indirectly an <<INamed>> (as it has a name).
 
 .Constraints
-Each Field must have a unique `name` within the containing StructuredDatatype.
+Each Field MUST have a unique `name` within its containing StructuredDatatype.
 
 Each Field belongs to one and only one StructuredDatatype.
 
