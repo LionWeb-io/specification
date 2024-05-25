@@ -5,6 +5,7 @@ include::../shared/issue-footnotes.adoc[]
 :arch: ../reference-architecture/reference-architecture
 :chunk: <<{serialization}.adoc#SerializationChunk, SerializationChunk>>
 
+[[bulk]]
 = Bulk Repository Access API
 :toc: preamble
 :toclevels: 2

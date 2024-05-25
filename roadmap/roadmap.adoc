@@ -3,7 +3,9 @@ include::../shared/issue-footnotes.adoc[]
 :m3: ../metametamodel/metametamodel
 :refarch: ../reference-architecture/reference-architecture
 :serialization: ../serialization/serialization
+:bulk: ../bulk/repo-access-api
 :v2023-1: ../2023.1/
+:v2024-1: ../2024.1/
 
 = LionWeb Roadmap, Releases, and History
 :toc:
@@ -155,6 +157,13 @@ Model-to-model generators would be implemented as <<{refarch}.adoc#processor, Pr
 [[releases]]
 [[versions]]
 == Versions
+
+[[release-2024.1]]
+[[version-2024.1]]
+=== 2024.1
+* Specified <<{bulk}.adoc#bulk, Bulk Repository Access API>>
+* Removed built-in `JSON` primitive datatype
+* Added <<{m3}.adoc#StructuredDatatype, StructuredDatatype>>
 
 [[release-2023.1]]
 [[version-2023.1]]
