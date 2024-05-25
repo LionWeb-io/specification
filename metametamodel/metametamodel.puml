@@ -28,6 +28,8 @@ abstract class Feature #LightBlue implements IKeyed {
   optional: Boolean
 }
 
+class Field #LightPink implements IKeyed
+
 abstract class Classifier #LightGreen extends LanguageEntity
 
 abstract class Link #LightBlue extends Feature {
@@ -50,6 +52,8 @@ class Property #LightBlue extends Feature
 
 class Reference #LightBlue extends Link
 
+class StructuredDatatype #LightPink extends DataType
+
 ' relations:
 
 Annotation "*" --> "0..1" Classifier: annotates
@@ -65,12 +69,18 @@ EnumerationLiteral "*" -* "1" Enumeration : literals
 
 Feature "*" -* "1" Classifier: features
 
+Field "*" -> "1" DataType: type
+
 Link "*" --> "1" Classifier: type
 
 Language "*" --> "*" Language: dependsOn
 LanguageEntity "*" -* "1" Language: entities
 
 Property "*" -> "1" DataType: type
+
+Field "*" -* "1" StructuredDatatype: fields
+
+Language -[hidden]- EnumerationLiteral
 
 legend
   <#LightGray,#LightGray>| <#LightBlue>Feature |
