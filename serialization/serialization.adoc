@@ -286,20 +286,196 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 * `" 5"`
 * `"-6 "`
 
-[[json]]
-==== JSON
-<<{m3}.adoc#JSON, LionCore JSON>> MUST be encoded as JSON _string_.
-All double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
-The value MUST adhere to JSON spec (RFC 8259).
+[[structuredDatatype]]
+==== Structured Datatype
+<<{m3}.adoc#StructuredDatatype, LionCore StructuredDatatype>> MUST be encoded as JSON _string_.
+The string contains a JSON _object_ according to spec (RFC 8259) with proper escaping: all double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
 
-.Valid example
-`"{ \"key\": \"my value\",\n\"myArray\": [1, -2, true] }"`
+The contents of the string are formed as follows:
+A <<{m3}.adoc#StructuredDatatype, LionCore StructuredDatatype>> is encoded as JSON _object_.
+Each <<{m3}.adoc#Field, Field>> forms one _member_, with the field's <<{m3}.adoc#IKeyed.key, key>> as JSON _key_ and the field's value as JSON _value_.
+For fields of type <<string>>, <<boolean>>, <<integer>>, and <<literal>>, the _value_ is encoded as JSON _string_ in the same way as for a property.
+For fields of type <<structuredDatatype>>, the value is encoded as JSON _object_ if the field is set, otherwise as JSON _null_.
 
-.Invalid example
-`{ "key": "my value", "myArray": [1, -2, true] }`
+.Structured datatypes used in the examples
+--
+
+NOTE: The format used in this example is non-normative.
+
+[source]
+----
+structured datatype Amount             [id 10, key amount]
+  value: Integer                       [id 11, key amount-val]
+  currency: String                     [id 12, key amount-cur]
+  digital: Boolean                     [id 13, key digital]
+
+structured datatype Decimal            [id 20, key decimal]
+  int: Integer                         [id 21, key decimal-int]
+  frac: Integer                        [id 22, key decimal-frac]
+
+structured datatype ComplexNumber      [id 30, key compex]
+  real: Decimal                        [id 31, key complex-real]
+  imaginary: Decimal                   [id 32, key complex-imaginary]
+
+structured datatype FullyQualifiedName [id 50, key fqn]
+  name: String                         [id 40, key nm]
+  nested: FullyQualifiedName           [id 55, key nested]
+----
+--
+
+.Valid examples
+* Amount _42 EUR non-digital_: `"{\n  \"amount-val\":  \"42\",\n  \"amount-cur\": \"EUR\",\n  \"digital\": \"false\"\n}"`
++
+unescaped content:
++
+[source, json]
+----
+{
+  "amount-val":  "42",
+  "amount-cur": "EUR",
+  "digital": "false"
+}
+----
+
+* Decimal _42.0_: `"{\"decimal-int\": \"42\", \"decimal-frac\": \"0\"}"`
++
+unescaped content:
++
+[source, json]
+----
+{"decimal-int": "42", "decimal-frac": "0"}
+----
+
+* ComplexNumber _23.17 + 42.0i_: `"{\n\"complex-real\": { \"decimal-int\": \"23\", \"decimal-frac\": \"17\"},\n\"complex-imaginary\": { \"decimal-int\": \"42\", \"decimal-frac\": \"0\"}\n}"`
++
+unescaped content:
++
+[source, json]
+----
+{
+"complex-real": { "decimal-int": "23", "decimal-frac": "17"},
+"complex-imaginary": { "decimal-int": "42", "decimal-frac": "0"}
+}
+----
+
+* FullyQualifiedName _com.example.subdomain_: `"{\n  \"nm\": \"com\",\n  \"nested\": {\n    \"nm\": \"example\",\n    \"nested\": {\n      \"nm\": \"subdomain\",\n      \"nested\": null\n    }\n  }\n}"`
++
+unescaped content:
++
+[source, json]
+----
+{
+  "nm": "com",
+  "nested": {
+    "nm": "example",
+    "nested": {
+      "nm": "subdomain",
+      "nested": null
+    }
+  }
+}
+----
+
+.Invalid examples
+* Amount with non-string field values: `"{\n  \"amount-val\":  42,\n  \"amount-cur\": \"EUR\",\n  \"digital\": false\n}"`
++
+unescaped content:
++
+[source, json]
+----
+{
+  "amount-val":  42,
+  "amount-cur": "EUR",
+  "digital": false
+}
+----
+
+* Decimal with missing field: `"{\"decimal-int\": \"42\"}"`
++
+unescaped content:
++
+[source, json]
+----
+{"decimal-int": "42"}
+----
+
+* Decimal with `null` value for field with primitive type: `"{\"decimal-int\": \"42\", \"decimal-frac\": null}"`
++
+unescaped content:
++
+[source, json]
+----
+{"decimal-int": "42", "decimal-frac": null}
+----
+
+* Decimal with missing outer braces: `"\"decimal-int\": \"42\", \"decimal-frac\": \"0\""`
++
+unescaped content:
++
+[source, json]
+----
+"decimal-int": "42", "decimal-frac": "0"
+----
+
+* Decimal with field name as JSON _keys_: `"{\"int\": \"42\", \"frac\": \"0\"}"`
++
+unescaped content:
++
+[source, json]
+----
+{"int": "42", "frac": "0"}
+----
+
+* Decimal with invalid field value: `"{\"decimal-int\": \"42\", \"decimal-frac\": \"nothing\"}"`
++
+unescaped content:
++
+[source, json]
+----
+{"decimal-int": "42", "decimal-frac": "nothing"}
+----
+
+* Decimal with unknown field: `"{\"decimal-int\": \"42\", \"decimal-frac\": \"0\", \"decimal-comment\": \"life question?\"}"`
++
+unescaped content:
++
+[source, json]
+----
+{"decimal-int": "42", "decimal-frac": "0", "decimal-comment": "life question?"}
+----
+
+* ComplexNumber with recursively nested structured datatype: `"{\n\"complex-real\": \"{ \\\"decimal-int\\\": \\\"23\\\", \\\"decimal-frac\\\": \\\"17\\\"}\",\n\"complex-imaginary\": { \"decimal-int\": \"42\", \"decimal-frac\": \"0\"}\n}"`
++
+unescaped content:
++
+[source, json]
+----
+{
+"complex-real": "{ \"decimal-int\": \"23\", \"decimal-frac\": \"17\"}",
+"complex-imaginary": { "decimal-int": "42", "decimal-frac": "0"}
+}
+----
+
+* FullyQualifiedName with _null_ as string value for unset nested structured datatype: `"{\n  \"nm\": \"com\",\n  \"nested\": {\n    \"nm\": \"example\",\n    \"nested\": {\n      \"nm\": \"subdomain\",\n      \"nested\": \"null\"\n    }\n  }\n}"`
++
+unescaped content:
++
+[source, json]
+----
+{
+  "nm": "com",
+  "nested": {
+    "nm": "example",
+    "nested": {
+      "nm": "subdomain",
+      "nested": "null"
+    }
+  }
+}
+----
 
 [[literal]]
-==== Enumeration literals
+==== Enumeration literal
 <<{m3}.adoc#EnumerationLiteral, LionCore Enumeration literals>> MUST be encoded as JSON _string_ _value_ according to <<{m3}.adoc#keys, Key spec>>.
 MUST refer to the <<{m3}.adoc#IKeyed.key, key>> of an <<{m3}.adoc#EnumerationLiteral, EnumerationLiteral>> of the <<{m3}.adoc#Enumeration, Enumeration>> defined as <<{m3}.adoc#Property.type, type>> of this *Property*.{fn-org128}
 
