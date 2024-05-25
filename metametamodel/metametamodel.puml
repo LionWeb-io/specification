@@ -78,7 +78,7 @@ LanguageEntity "*" -* "1" Language: entities
 
 Property "*" -> "1" DataType: type
 
-Field "*" -* "1" StructuredDatatype: fields
+Field "1..*" -* "1" StructuredDatatype: fields
 
 Language -[hidden]- EnumerationLiteral
 
