@@ -304,9 +304,13 @@ NOTE: The format used in this example is non-normative.
 
 [source]
 ----
+enumeration Currency                   [id aa, key currency]
+  literal EUR                          [id a0, key cur-eur]
+  literal GBP                          [id a1, key cur-gbp]
+
 structured datatype Amount             [id 10, key amount]
   value: Integer                       [id 11, key amount-val]
-  currency: String                     [id 12, key amount-cur]
+  currency: Currency                   [id 12, key amount-cur]
   digital: Boolean                     [id 13, key digital]
 
 structured datatype Decimal            [id 20, key decimal]
@@ -324,7 +328,7 @@ structured datatype FullyQualifiedName [id 50, key fqn]
 --
 
 .Valid examples
-* Amount _42 EUR non-digital_: `"{\n  \"amount-val\":  \"42\",\n  \"amount-cur\": \"EUR\",\n  \"digital\": \"false\"\n}"`
+* Amount _42 EUR non-digital_: `"{\n  \"amount-val\":  \"42\",\n  \"amount-cur\": \"cur-eur\",\n  \"digital\": \"false\"\n}"`
 +
 unescaped content:
 +
@@ -332,7 +336,7 @@ unescaped content:
 ----
 {
   "amount-val":  "42",
-  "amount-cur": "EUR",
+  "amount-cur": "cur-eur",
   "digital": "false"
 }
 ----
@@ -377,7 +381,7 @@ unescaped content:
 ----
 
 .Invalid examples
-* Amount with non-string field values: `"{\n  \"amount-val\":  42,\n  \"amount-cur\": \"EUR\",\n  \"digital\": false\n}"`
+* Amount with non-string field values: `"{\n  \"amount-val\":  42,\n  \"amount-cur\": \"cur-eur\",\n  \"digital\": false\n}"`
 +
 unescaped content:
 +
@@ -385,7 +389,7 @@ unescaped content:
 ----
 {
   "amount-val":  42,
-  "amount-cur": "EUR",
+  "amount-cur": "cur-eur",
   "digital": false
 }
 ----
