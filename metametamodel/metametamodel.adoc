@@ -387,9 +387,11 @@ Each EnumerationLiteral belongs to one and only one Enumeration.
 
 [[StructuredDatatype]]
 ==== StructuredDatatype
-Represents a collection of named instances of <<PrimitiveType, Primitive Types>>.
+Represents a collection of named instances of <<DataType, Data Types>>.
 They are meant to support a small composite of values that semantically form a unit.
-StructuredDatatypes have no identity, are always copied by value, and SHOULD be immutable.{fn-org265}
+Instances of StructuredDatatypes have no identity, are always copied by value, and SHOULD be immutable.{fn-org265}
+Two instances of a StructuredDatatype that hold the same values for all fields of that StructuredDatatype are interchangeable.
+(Instances of <<Classifier, Classifiers>> have an identity, through <<Node.id, `id`>>.)
 
 #TODO: use proper name for concept#
 
@@ -552,6 +554,7 @@ A LanguageEntity can be one of:
 * <<Interface>>
 * <<Enumeration>>
 * <<PrimitiveType>>
+* <<StructuredDatatype>>
 
 .Constraints
 Each LanguageEntity must have a unique `name` within the Language.
@@ -611,6 +614,7 @@ A DataType can be one of:
 
 * <<PrimitiveType>>
 * <<Enumeration>>
+* <<StructuredDatatype>>
 
 .Constraints
 #TODO: TBD#
