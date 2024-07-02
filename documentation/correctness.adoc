@@ -1,49 +1,78 @@
 = Serialization chunk correctness
 
-Whether a model is _correct_ –- or _valid_, or _consistent_ –- is an important question.
+Whether a model is _correct_ —or _valid_, or _consistent_— is an important question.
 Correctness ultimately determines whether a model is useful in the context it exists in.
 Answering that question only with a simple "`yes`" or "`no`" is too simplistic: a model can be incorrect in different ways and on different levels.
 
-Not being able to resolve a reference is a different kind of failure than violating a semantic constraint.
-Having an illegal extra comma in an array somewhere in the JSON serialization of a model -- e.g. `[ 0, 1, 2**,** ]` -- should not prevent that serialization chunk from being deserializable.
+E.g., not being able to resolve a reference is a different kind of failure than violating a semantic constraint.
+Having an illegal trailing comma in an array somewhere in the JSON serialization of a model —e.g., `[ 0, 1, 2**,** ]`— should not prevent that serialization chunk from being processable — i.e.: interchangeable, deserializable, etc.
 
-In this document, we're trying to provide a useful answer to a more narrow question: When is a _serialization chunk_ considered to be correct?
+With this document, we provide a useful answer to a more narrow question: **When is a _serialization chunk_ correct to what extent?**
 This limits the discourse to the purview of the LionWeb specification without spilling over into areas that the specification doesn't target.
+
+We focus purely on serialization chunks, and do not consider models as result of deserializing serialization chunks.
+We have the following reasons for that:
+
+* A model is faithfully representable as a set of serialization chunks.
+    In other words: a deserialization should not add information (and, symmetrically, a serialization should not loose information).
+* Deserialization is quite context-specific, and is typically tied to the particular platform/language used — i.e., JVM with Java, Kotlin, Java-/TypeScript, etc.
+    This means that the concrete API of the deserialization can vary quite a bit.
+* The LionWeb serialization JSON format is the cornerstone of the LionWeb specification.
+
+Note that it's entirely up to a _consumer_ of a serialization chunk to validate its correctness, and to decide what to do with any incorrectness detected.
+A consumer of a serialization chunk is a piece of software accepting a serialization chunk for processing, modification, persistence, etc.
+
+The rest of this document is split up in the following sections:
+
+[horizontal]
+Issues:: How incorrectness is reported to a consumer of a serialization chunk.
+Correctness levels:: How the various kinds of issues are organized.
 
 [IMPORTANT]
 ====
 We'll talk about _correctness_ from now, and consider _validity_ and _consistency_ to be equivalent concepts.
 ====
 
-It makes sense to phrase the answer as a collection of _issues_, instead of giving a hard "`yes/no`" answer.
-An issue is a specific point in a serialization chunk where a specific kind of incorrectness arises.
-Many (kinds of) issues can be meaningfully (fully or partially) recovered from, and recovery can often be obvious to the point it can be automatic.
-The unresolved reference can be left in as-is, and treated as an unknown (but not a _missing_) value.
-It's then up to the consumers of serialization chunks to give a special meaning -- i.e., domain-specific semantics -- to that particular value.
-In some cases, that might not be possible or desirable to do, e.g.: most interpreters and code generators can only work with a completely correct, and complete model.
-That means they might have to combine / "`stitch together`" multiple serialization chunks to produce a complete model.
 
-The illegal comma should be reported but can subsequently be safely ignored.
-In cases where recovery is not automatic, an issue should be very clear to the user what they can do to resolve it.
-A serialization chunk must be editable/mutable (by a suitable client) even if it has issues.
+== Issues
+
+It makes sense to phrase the answer as a collection of _issues_, instead of giving a hard "`yes/no`" answer.
+An **issue** is (to be defined as) a specific point in a serialization chunk where a specific kind of incorrectness arises.
+
+Many (kinds of) issues allow a meaningful (full or partial) _recovery_ — i.e.: they can be recovered from.
+Recovery is often obvious enough that it can be performed programmatically — i.e.: automatically.
+E.g., an illegal trailing comma in a JSON array should be reported but can subsequently be safely ignored.
+
+An unresolved reference can be left in as-is, and treated as an unknown (but not a _absent_) value.
+It's then up to the consumer of a serialization chunk to give a special meaning — i.e., domain-specific semantics — to that particular value.
+In some cases, that might not be possible or desirable to do, e.g.: most interpreters and code generators can only work with a completely correct, and complete model.
+That means they might have to combine —or "`stitch together`"— multiple serialization chunks to produce a complete model.
+
+It's entirely up to the consumer of the serialization chunk to validate its correctness, and to decide what to do with any resulting issues.
+Especially issues that don't permit programmatic recovery, should be reported very clearly to the domain/subject matter expert, in a way that explains what they can do to repair/prevent is.
+A serialization chunk must be editable/mutable (by a suitable client, after deserialization) even if it has issues.
+
+A consumer of a serialization chunk could implement recovery for kinds of issues that permit programmatic recovery as procedures that modify the serialization chunk.
+
+
+== Correctness levels
 
 LionWeb provides a precise notion for serialization chunk correctness in the form of a multi-leveled specification.
-For each level, it specifies what kinds of incorrectness can arise, how these should be reported as issues, and whether and how these can be meaningfully _recovered_ from.
+For each level, it specifies what kinds of incorrectness can arise, how these should be reported as issues, and whether and how these can be meaningfully recovered from.
 This approach provides a degree of resilience: issues arising in one level don't necessarily prohibit determining whether a serialization chunk exhibits incorrectness on another level, provided an issue can be meaningfully _recovered_ from.
 
-The first three levels of this specification pertain purely to the JSON that's supposed to be a serialization chunk, and are language(s)-agnostic -- essentially, this is about whether the JSON is _well-formed_ as a serialization chunk in JSON format.
-Only the fourth level -- meta-structural -- introduces language-awareness, but still takes place entirely within the serialization chunk.
+The first three levels of this specification pertain purely to the JSON that's supposed to be a serialization chunk, and are language(s)-agnostic — essentially, this is about whether the JSON is _well-formed_ as a serialization chunk in JSON format.
+Only the fourth level —meta-structural— introduces language-awareness, but still takes place entirely within the serialization chunk.
 The final, fifth level is completely language-specific.
 
 This specification admits some flexibility on the first three, JSON-centric levels.
 That is because the behavior and adaptability of JSON parsers differ from implementation to implementation.
 E.g., some parsers might simply ignore/skip over trailing commas, or have the last of key-value pairs with duplicate keys "`win`".
-We simply can't (and don't want to demand) that a LionWeb implementation always produces the exact same issues, especially if they can be fully recovered from (in an automatic way).
+We simply can't (and don't want to demand) that a LionWeb implementation always produces the exact same issues, especially if they can be fully recovered from (in a programmatic way).
 
-Chunks can by definition be incomplete.
-It's not important whether references resolve within the serialization chunk.
-An unresolvable reference doesn't affect interoperability/interchangeability.
-For this reason, we don't identify unresolvable references as an incorrectness / a source of issues.
+Serialization chunks are by definition allowed to be incomplete.
+It's not important whether references resolve _within_ the serialization chunk: an unresolvable reference doesn't affect interoperability/interchangeability.
+For this reason, we don't necessarily identify unresolvable references as an incorrectness.
 
 
 == Overview of the levels
@@ -59,12 +88,12 @@ Pertains to the text that's (supposed to be) the JSON serialization chunk.
 
 Structural::
 Pertains to the syntactic structure of the parsed JSON text.
-It's essentially equivalent to conforming to a generic, language-agnostic JSON Schema -- or some other formalism to describe the syntactic structure of the JSON -- for the serialization format.
+It's essentially equivalent to conforming to a generic, language-agnostic JSON Schema —or some other formalism to describe the syntactic structure of the JSON— for the serialization format.
 
 Hierarchical::
 Pertains to relational constraints within the parsed JSON text.
 An example is that each node ID occurs uniquely.
-Another example is that a node that declares a certain parent node must be contained as a child of that parent node -- provided that parent node is present in the serialization chunk; if it's not, then we can't check that constraint.
+Another example is that a node that declares a certain parent node must be contained as a child of that parent node — provided that parent node is present in the serialization chunk; if it's not, then we can't check that constraint.
 
 Meta-structural::
 This means that the serialization chunk conforms to the language(s) it declares to be an instance of.
@@ -72,7 +101,7 @@ An example is that a node must declare values for exactly the features of the cl
 
 Constraints::
 This pertains to a semantic, language(s)-specific notion of correctness.
-We choose to pragmatically treat the constraints level as a special correctness level, as constraint violations don't affect interoperability/interchangeability -- see <<_constraints, below>>.
+We choose to pragmatically treat the constraints level as a special correctness level, as constraint violations don't affect interoperability/interchangeability — see <<_constraints, below>>.
 
 
 == Details to be reported in an issue
@@ -80,11 +109,10 @@ We choose to pragmatically treat the constraints level as a special correctness 
 A reported issue should contain the following pieces of information:
 
 * An identification of the _kind_ of issue.
-(Optionally, this corresponds to an automatic fix.)
-* A _location_: where the issue occurred -- see <<_location,below>>.
-* A user-readable message explaining what the issue is, and how it should be fixed.
+* A _location_: where the issue occurred — see <<_location,below>>.
+* A user-readable message explaining what the issue is, and how it should be remedied.
 Ideally, this message is computed from other information in the issue.
-* The _severity_ of the issue that is an indication of the recoverability of the issue -- see <<_severities,below>>.
+* The _severity_ of the issue that is an indication of the recoverability of the issue — see <<_severities,below>>.
 
 === Location
 
@@ -101,7 +129,7 @@ A specific location in a text could be given in any of the following forms:
 * A _range_ of text given as a (pair consisting of a) character location and an integer length.
 +
 The first two forms are _character locations_ which are interchangeable, although the first form is inherently more user-friendly.
-A range provide more information to work with, except for when the length is 1 or so large a number to be meaningful, e.g. effectively meaning "`the rest of the text`".
+A range provide more information to work with, except for when the length is 1 or so large a number to be meaningful — e.g., effectively meaning "`the rest of the text`".
 +
 For issues arising on the JSON level, these are the only available ways to identify a location.
 Unfortunately, not all JSON parsers are able to report problems in this way.
@@ -145,12 +173,12 @@ Fatal::
 
 == Constraints
 
-A violation of a constraint would typically lead to a direct failure in the model's semantics -- i.e.: its execution through interpretation, or generating code and running that --, or to the result of the semantics not making sense in the (context of the) domain, or both.
+A violation of a constraint would typically lead to a direct failure in the model's semantics — i.e.: its execution through interpretation, or generating code and running that —, or to the result of the semantics not making sense in the (context of the) domain, or both.
 It's up to the language(s) designers to make that distinction (whenever it exists) clear to the language's users.
 
 We give an example of a language-specific constraint.
 Consider a language with core concepts _tables_, _columns_ within those, and SQL-like _queries_.
-These queries _reference_ columns within tables, e.g. in the form: `<table>.<column>`.
+These queries _reference_ columns within tables, e.g., in the form: `<table>.<column>`.
 A constraint for any reference would be: "`in a reference to a column of a referenced table, the column referenced must be a column of the referenced table`".
 
 Another example would be names appear uniquely within bounded contexts.
@@ -160,7 +188,7 @@ In our experience (and independent of/orthogonal to the two sublevels), a signif
 This level is probably most conveniently phrased in terms of a programmatic representation, but for every programmatic representation there's an equivalent formulation purely in terms of the serialization format.
 This works just as well, and maybe even better, because semantics can be more generically "`patched`" w.r.t. non-resolving references.
 However, the constraints are not necessarily specified in a form that's interpretable in terms of a serialization chunk, and agnostic to any particular programmatic representation.
-(LionWeb intentionally doesn't prescribe anything about the _programmatic representation_ of models -- i.e.: the runtime or in-memory representation that's the result of deserializing a serialization chunk of a model -- leaving implementors of language-oriented tooling free to choose the representation that's right for them.)
+(LionWeb intentionally doesn't prescribe anything about the _programmatic representation_ of models — i.e.: the runtime or in-memory representation that's the result of deserializing a serialization chunk of a model — leaving implementors of language-oriented tooling free to choose the representation that's right for them.)
 That might be enough of an obstacle to compute constraint violations only on the programmatic level, and disregarding it completely on the level of serialization chunks.
 
 [NOTE]
