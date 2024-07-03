@@ -1,0 +1,35 @@
+= Serialization chunk correctness
+
+Whether a model is _correct_ —or _valid_, or _consistent_— is an important question.
+Correctness ultimately determines whether a model is useful in the context it exists in.
+Answering that question only with a simple "`yes`" or "`no`" is too simplistic: a model can be incorrect in different ways and on different levels.
+
+E.g., not being able to resolve a reference is a different kind of failure than violating a semantic constraint.
+Having an illegal trailing comma in an array somewhere in the JSON serialization of a model —e.g., `[ 0, 1, 2**,** ]`— should not prevent that serialization chunk from being processable — i.e.: interchangeable, deserializable, etc.
+
+With this document, we provide a useful answer to a more narrow question: **When is a _serialization chunk_ correct to what extent?**
+This limits the discourse to the purview of the LionWeb specification without spilling over into areas that the specification doesn't target.
+
+We focus purely on serialization chunks, and do not consider models as result of deserializing serialization chunks.
+We have the following reasons for that:
+
+* A model is faithfully representable as a set of serialization chunks.
+    In other words: a deserialization should not add information (and, symmetrically, a serialization should not loose information).
+* Deserialization is quite context-specific, and is typically tied to the particular platform/language used — i.e., JVM with Java, Kotlin, Java-/TypeScript, etc.
+    This means that the concrete API of the deserialization can vary quite a bit.
+* The LionWeb serialization JSON format is the cornerstone of the LionWeb specification.
+
+Note that it's entirely up to a _consumer_ of a serialization chunk to validate its correctness, and to decide what to do with any incorrectness detected.
+A consumer of a serialization chunk is a piece of software accepting a serialization chunk for processing, modification, persistence, etc.
+
+The rest of this document is split up in the following sections:
+
+[horizontal]
+<<issues.adoc#, Issues>>:: How incorrectness is (to be) reported to a consumer of a serialization chunk.
+<<levels.adoc#, Correctness levels>>:: How the various kinds of issues are organized.
+
+[IMPORTANT]
+====
+We'll talk about _correctness_ from now, and consider _validity_ and _consistency_ to be equivalent concepts.
+====
+

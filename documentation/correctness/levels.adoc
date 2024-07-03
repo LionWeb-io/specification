@@ -1,0 +1,87 @@
+= Correctness levels
+
+LionWeb provides a precise notion for serialization chunk correctness in the form of a multi-leveled specification.
+For each level, it specifies what kinds of incorrectness can arise, how these should be reported as issues, and whether and how these can be meaningfully recovered from.
+This approach provides a degree of resilience: issues arising in one level don't necessarily prohibit determining whether a serialization chunk exhibits incorrectness on another level, provided an issue can be meaningfully _recovered_ from.
+
+The first three levels of this specification pertain purely to the JSON that's supposed to be a serialization chunk, and are language(s)-agnostic — essentially, this is about whether the JSON is _well-formed_ as a serialization chunk in JSON format.
+Only the fourth level —meta-structural— introduces language-awareness, but still takes place entirely within the serialization chunk.
+The final, fifth level is completely language-specific.
+
+This specification admits some flexibility on the first three, JSON-centric levels.
+That is because the behavior and adaptability of JSON parsers differ from implementation to implementation.
+E.g., some parsers might simply ignore/skip over trailing commas, or have the last of key-value pairs with duplicate keys "`win`".
+We simply can't (and don't want to demand) that a LionWeb implementation always produces the exact same issues, especially if they can be fully recovered from (in a programmatic way).
+
+Serialization chunks are by definition allowed to be incomplete.
+It's not important whether references resolve _within_ the serialization chunk: an unresolvable reference doesn't affect interoperability/interchangeability.
+For this reason, we don't necessarily identify unresolvable references as an incorrectness.
+
+We give an overview of the various levels, and what each pertains to.
+At first, we do this without specifying the corresponding kinds of issues that may arise in that level.
+The list is roughly in order from low-level and language-agnostic, to language(s)-specific.
+
+[horizontal]
+
+JSON::
+Pertains to the text that's (supposed to be) the JSON serialization chunk.
+
+Structural::
+Pertains to the syntactic structure of the parsed JSON text.
+It's essentially equivalent to conforming to a generic, language-agnostic JSON Schema —or some other formalism to describe the syntactic structure of the JSON— for the serialization format.
+
+Hierarchical::
+Pertains to relational constraints within the parsed JSON text.
+An example is that each node ID occurs uniquely.
+Another example is that a node that declares a certain parent node must be contained as a child of that parent node — provided that parent node is present in the serialization chunk; if it's not, then we can't check that constraint.
+
+Meta-structural::
+This means that the serialization chunk conforms to the language(s) it declares to be an instance of.
+An example is that a node must declare values for exactly the features of the classifier it declares.
+
+Constraints::
+This pertains to a semantic, language(s)-specific notion of correctness.
+We choose to pragmatically treat the constraints level as a special correctness level, as constraint violations don't affect interoperability/interchangeability — see <<_constraints, below>>.
+
+
+
+
+// TODO  in active voice: see https://github.com/LionWeb-io/specification/pull/88#issuecomment-1759004676
+
+== Low-level syntactic
+
+== Structural syntactic
+
+== Hierarchical
+
+== Meta-structural
+
+== Referential
+
+== Constraints
+
+A violation of a constraint would typically lead to a direct failure in the model's semantics — i.e.: its execution through interpretation, or generating code and running that —, or to the result of the semantics not making sense in the (context of the) domain, or both.
+It's up to the language(s) designers to make that distinction (whenever it exists) clear to the language's users.
+
+We give an example of a language-specific constraint.
+Consider a language with core concepts _tables_, _columns_ within those, and SQL-like _queries_.
+These queries _reference_ columns within tables, e.g., in the form: `<table>.<column>`.
+A constraint for any reference would be: "`in a reference to a column of a referenced table, the column referenced must be a column of the referenced table`".
+
+Another example would be names appear uniquely within bounded contexts.
+
+In our experience (and independent of/orthogonal to the two sublevels), a significant part of constraints is "`type-informed`" which means that _type computation/derivation_ is probably an intrinsic part of the constraints aspect of any language.
+
+This level is probably most conveniently phrased in terms of a programmatic representation, but for every programmatic representation there's an equivalent formulation purely in terms of the serialization format.
+This works just as well, and maybe even better, because semantics can be more generically "`patched`" w.r.t. non-resolving references.
+However, the constraints are not necessarily specified in a form that's interpretable in terms of a serialization chunk, and agnostic to any particular programmatic representation.
+(LionWeb intentionally doesn't prescribe anything about the _programmatic representation_ of models — i.e.: the runtime or in-memory representation that's the result of deserializing a serialization chunk of a model — leaving implementors of language-oriented tooling free to choose the representation that's right for them.)
+That might be enough of an obstacle to compute constraint violations only on the programmatic level, and disregarding it completely on the level of serialization chunks.
+
+[NOTE]
+====
+LionWeb uses explicit, ID-based references, which means that scoping is not needed to resolve references.
+Nevertheless, scoping probably still plays some role in any language.
+The constraint stated above can be interpreted as a scoping rule, and the language's UI should take it into account when providing content assist to the language's users.
+====
+
