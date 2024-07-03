@@ -317,7 +317,7 @@ structured datatype Decimal            [id 20, key decimal]
   int: Integer                         [id 21, key decimal-int]
   frac: Integer                        [id 22, key decimal-frac]
 
-structured datatype ComplexNumber      [id 30, key compex]
+structured datatype ComplexNumber      [id 30, key complex]
   real: Decimal                        [id 31, key complex-real]
   imaginary: Decimal                   [id 32, key complex-imaginary]
 
