@@ -9,12 +9,12 @@ We'll talk about _correctness_ from now, and consider _validity_ and _consistenc
 
 Correctness ultimately determines whether a model is useful in the context it exists and is used in.
 Answering that question only with a simple "`yes`" or "`no`" is too simplistic: a model can be incorrect in different ways, and on different levels.
-Having an illegal trailing comma in an array somewhere in the JSON serialization of a model —e.g., `[ 0, 1, 2**,** ]`— should not prevent that serialization chunk from being consumable — i.e.: processable, interchangeable, deserializable, etc.
+Having an illegal trailing comma in an array somewhere in the JSON serialization of a model —e.g., `[ 0, 1, 2**,** ]`— should not prevent that serialization chunk from being consumablefootnote:[I.e.: processable, interchangeable, deserializable, etc.].
 Not being able to resolve a reference is a different kind of failure than violating a semantic constraint.
 
 With this document, we aim to provide a useful answer to a narrower question: **When is a _serialization chunk_ correct, and to what extent?**
 We focus purely on serialization chunks, and do not consider programmatic representations of models, e.g. as a result of deserializing serialization chunks.
-(LionWeb intentionally doesn't prescribe anything about the _programmatic representation_ of models — i.e.: the runtime or in-memory representation that's the result of deserializing a serialization chunk of a model — leaving implementors of language-oriented tooling free to choose the representation that's right for them.)
+(LionWeb intentionally doesn't prescribe anything about the _programmatic representation_ of modelsfootnote:[I.e.: the runtime or in-memory representation that's the result of deserializing a serialization chunk of a model], leaving implementors of language-oriented tooling free to choose the representation that's right for them.)
 This limits the scope to the LionWeb specification without spilling over into areas that the specification doesn't target (or doesn't target _yet_).
 
 We have the following reasons for that:
@@ -23,24 +23,24 @@ We have the following reasons for that:
 In other words: a post-deserialization, programmatic representation should not add (non-derivable), nor loose information.
 Symmetrically: serialization should not loose or add information either.
 
-* Programmatic representation of a model (post-deserialization) is quite context-specific, and is typically tied to the particular platform/language used — i.e., JVM with Java, Kotlin, Java-/TypeScript, etc.
+* Programmatic representation of a model (post-deserialization) is quite context-specific, and is typically tied to the particular platform/language usedfootnote:[I.e.: JVM with Java, Kotlin, Java-/TypeScript, etc.].
 This means that the concrete API of the programmatic representation can vary quite a bit, making it more difficult to answer the question in a uniform way.
 
 * The LionWeb serialization JSON format is the cornerstone of the LionWeb specification.
 
-Note that it's entirely up to _consumers_ to assert/validate the correctness of a serialization chunk, and to decide what to do with any incorrectness detected.
-A **consumer** of serialization chunks is a software component accepting serialization chunks for processing (transformation, modification), persistence, etc.
+Note that it's entirely up to _clients_ to assert/validate the correctness of a serialization chunk, and to decide what to do with any incorrectness detected.
+(A **client** is a software component accepting serialization chunks consuming serialization chunks for processing—transformation, modification—, persistence, etc.)
 
 The rest of this document is split up in the following sections:
 
 [horizontal]
-<<issues.adoc#, Issues>>:: How incorrectness is (to be) reported by consumers of serialization chunks.
-<<levels.adoc#, Correctness levels>>:: How the various kinds of issues are organized.
+<<findings.adoc#, Findings>>:: How clients (should) report incorrectness, in the form of _findings_.
+<<levels.adoc#, Correctness levels>>:: How the various kinds of findings are organized.
 
 [NOTE]
 ====
 This document is _not_ a specification.
-Consumers of serialization chunks can choose to recognize certain kinds of incorrectness, while not recognizing others.
-Consumers can also choose whether to implement recovery (see the sections) for any kind of incorrect.
+Clients can choose to recognize certain kinds of incorrectness, while not recognizing others.
+Clients can also choose whether to implement recovery (see the sections) for any kind of incorrect.
 ====
 
