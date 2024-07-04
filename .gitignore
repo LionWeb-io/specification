@@ -1,3 +1,8 @@
-# temp files
+# temporary files:
 ~$*
 .asciidoctor/
+
+# draw.io backup and temporary files:
+*.drawio.bkp
+*.drawio.dtmp
+
