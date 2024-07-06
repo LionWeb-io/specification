@@ -52,7 +52,7 @@ class Property #LightBlue extends Feature
 
 class Reference #LightBlue extends Link
 
-class StructuredDatatype #LightPink extends DataType
+class StructuredDataType #LightPink extends DataType
 
 ' relations:
 
@@ -78,7 +78,7 @@ LanguageEntity "*" -* "1" Language: entities
 
 Property "*" -> "1" DataType: type
 
-Field "1..*" -* "1" StructuredDatatype: fields
+Field "1..*" -* "1" StructuredDataType: fields
 
 Language -[hidden]- EnumerationLiteral
 

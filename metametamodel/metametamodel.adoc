@@ -53,7 +53,7 @@ We will list elements by their type: classes, abstract classes and interfaces.
 
 === Concepts
 
-The concepts are <<Language>>, <<Concept>>, <<Annotation>>, <<Interface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<StructuredDatatype>>, <<Field>>, <<Containment>>, <<Reference>>, and <<Property>>.
+The concepts are <<Language>>, <<Concept>>, <<Annotation>>, <<Interface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<StructuredDataType>>, <<Field>>, <<Containment>>, <<Reference>>, and <<Property>>.
 
 [[Language]]
 ==== Language
@@ -385,51 +385,51 @@ Each EnumerationLiteral must have a unique `name` within the Enumeration.
 
 Each EnumerationLiteral belongs to one and only one Enumeration.
 
-[[StructuredDatatype]]
-==== StructuredDatatype
+[[StructuredDataType]]
+==== StructuredDataType
 Represents a collection of named instances of <<DataType, Data Types>>.
 They are meant to support a small composite of values that semantically form a unit.
-Instances of StructuredDatatypes have no identity, are always copied by value, and SHOULD be immutable.{fn-org265}
-Two instances of a StructuredDatatype that hold the same values for all fields of that StructuredDatatype are interchangeable.
+Instances of StructuredDataTypes have no identity, are always copied by value, and SHOULD be immutable.{fn-org265}
+Two instances of a StructuredDataType that hold the same values for all fields of that StructuredDataType are interchangeable.
 (Instances of <<Classifier, Classifiers>> have an identity, through <<Node.id, `id`>>.)
 
 #TODO: use proper name for concept#
 
 .Example
-We could represent a "Complex number { real part, imaginary part }" or "Color { red, green, blue }" as StructuredDatatype.
+We could represent a "Complex number { real part, imaginary part }" or "Color { red, green, blue }" as StructuredDataType.
 
 .EMF & MPS equivalent
 No direct similarities.
 We could simulate it by a custom `EDatatype` in ECore.
 
 .Characteristics
-[[StructuredDatatype.fields, StructuredDatatype.fields]]
-A StructuredDatatype contains <<Field, Fields>> in its `fields` containment.
+[[StructuredDataType.fields, StructuredDataType.fields]]
+A StructuredDataType contains <<Field, Fields>> in its `fields` containment.
 It also represents the <<namespaces, namespace>> for the fields.
 
-A StructuredDatatype has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
+A StructuredDataType has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
 
-A StructuredDatatype is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>).
+A StructuredDataType is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>).
 It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name) and a <<IKeyed>> (as it has a key).
 
 .Constraints
-M1 Instances of a StructuredDatatype SHOULD be immutable.
+M1 Instances of a StructuredDataType SHOULD be immutable.
 
-An M1 instance of StructuredDatatype MUST have non-null values for all its fields with `type` of <<PrimitiveType>> or <<Enumeration>>.
-fields with `type` of StructuredDatatype can be `null`.
+An M1 instance of StructuredDataType MUST have non-null values for all its fields with `type` of <<PrimitiveType>> or <<Enumeration>>.
+fields with `type` of StructuredDataType can be `null`.
 
-A StructuredDatatype can (directly or indirectly) contain a field with itself as `type`.
+A StructuredDataType can (directly or indirectly) contain a field with itself as `type`.
 
 
 [[Field]]
 ==== Field
-Represents one part of a <<StructuredDatatype>>.{fn-org265}
+Represents one part of a <<StructuredDataType>>.{fn-org265}
 
 #TODO: use proper name for concept#
 
 .Example
-In the StructuredDatatype "Complex number", we would have two fields "real part" and "imaginary part".
-A StructuredDatatype "Color" had the fields "red", "green", and "blue".
+In the StructuredDataType "Complex number", we would have two fields "real part" and "imaginary part".
+A StructuredDataType "Color" had the fields "red", "green", and "blue".
 
 .EMF & MPS equivalent
 No direct similarities.
@@ -443,9 +443,9 @@ A Field refers its `type`, which is a <<DataType>>.
 A Field is an <<IKeyed>> (as it has a key) and indirectly an <<INamed>> (as it has a name).
 
 .Constraints
-Each Field MUST have a unique `name` within its containing StructuredDatatype.
+Each Field MUST have a unique `name` within its containing StructuredDataType.
 
-Each Field belongs to one and only one StructuredDatatype.
+Each Field belongs to one and only one StructuredDataType.
 
 
 [[Containment]]
@@ -554,7 +554,7 @@ A LanguageEntity can be one of:
 * <<Interface>>
 * <<Enumeration>>
 * <<PrimitiveType>>
-* <<StructuredDatatype>>
+* <<StructuredDataType>>
 
 .Constraints
 Each LanguageEntity must have a unique `name` within the Language.
@@ -614,7 +614,7 @@ A DataType can be one of:
 
 * <<PrimitiveType>>
 * <<Enumeration>>
-* <<StructuredDatatype>>
+* <<StructuredDataType>>
 
 .Constraints
 #TODO: TBD#
@@ -803,8 +803,8 @@ The language itself has key `LionCore-M3`{fn-org91} and is named `LionCore_M3`{f
 |<<Property>> |Concept |Property
 |<<Property.type>> |Reference |Property-type
 |<<Reference>> |Concept |Reference
-|<<StructuredDatatype>> |Concept |StructuredDatatype
-|<<StructuredDatatype.fields>> |Containment |StructuredDatatype-fields
+|<<StructuredDataType>> |Concept |StructuredDataType
+|<<StructuredDataType.fields>> |Containment |StructuredDataType-fields
 |===
 
 [[predefined-builtins-keys]]
