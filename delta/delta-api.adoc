@@ -1,0 +1,476 @@
+include::../shared/issue-footnotes.adoc[]
+:serialization: ../serialization/serialization
+:m3: ../metametamodel/metametamodel
+:bulk: ../bulk/repo-access-api
+:arch: ../reference-architecture/reference-architecture
+:chunk: <<{serialization}.adoc#SerializationChunk, SerializationChunk>>
+
+[[delta]]
+= Delta Repository Access API
+:toc: preamble
+:toclevels: 2
+
+The delta API *version 2024.1* is used to store and retrieve changes to nodes.
+It is intended for fine-grained changes to single values.
+it is *not* intended as a bulk API that updates large chunks of the model at once.
+
+== Conventions used in this document
+* ALL-CAPS key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in https://datatracker.ietf.org/doc/html/bcp14[BCP14] (https://datatracker.ietf.org/doc/html/rfc2119[RFC2119], https://datatracker.ietf.org/doc/html/rfc8174[RFC8174]) when, and only when, they appear in all capitals, as shown here.
+* Footnotes refer to more discussions and rationale, but are non-normative.
+
+[[events]]
+== Events
+
+=== Open questions{fn-org280}:
+#TODO#
+
+* If we move a node from being an annotation to being a child, the value of `oldContainment` would be `null`
+
+* Do we need <<moveReference>>?
+
+* <<addReference>> / <<removeReference>> operate on complete references, thus either `target` or `resolveInfo` can be `null`
+
+* `xxxReferenceResolveInfo` / `xxxReferenceTarget` operate only on existing references, they cannot add new ones or remove existing ones completely
+
+* For new nodes, do we only send their id + classifier, or a complete node?
+
+* If we send <<removeChild>>, do we also need to send that for all descendants?
+Maybe the client can send only one, and the repo changes this into a <<composite>> that includes one <<removeChild>> for each descendant?
+
+* Which of the events can potentially create invalid (recursively contained) trees?
+
+* Which kind of errors do we accept?
+How does this interact with concurrent edits?
+Example: Does <<removeChild>> fail if the `removedChild` does not exist?
+
+* Do we include the optional parameters?
+It might be easier to react on an event if included, but they are not strictly necessary
+(as they can be calculated from the required parameters, given the receiver knows the model).
+Related: in removal cases (e.g. <<removeChild>>), do we want to send only the removed id or the whole node?
+
+=== Parameter types
+
+[[nodeType]]Node:: Either the whole node as json, or its id + classifier (tbd)
+[[targetNodeType]]TargetNode:: Target's node as id
+[[metaPointerType]]MetaPointer:: MetaPointer-tuple to describe an M2 element (classifier, feature, etc.)
+[[propertyValueType]]PropertyValue:: Property value encoded as string
+[[resolveInfoType]]ResolveInfo:: ResolveInfo of a reference as string
+[[indexType]]Index:: Position inside a multiple link or annotations as integer >= 0
+[[eventType]]Event:: Any event
+
+=== Events
+
+#TODO# Assumptions:
+
+* This protocol does not need to know any langugage, i.e. it does not validate if the node structure adhere to its language(s).
+
+* We cannot have unknown children or parents, but we can have "dead" references (i.e. refer to non-existent nodes).
+
+
+[cols="a,a,a,a"]
+|===
+|Name |Required params |Optional params | Errors
+
+4+|
+[[events-partitions]]
+==== Partitions
+
+|[[addPartition]]addPartition
+|
+* newPartition: <<nodeType>>
+|
+|
+* `newPartition` id already exists
+
+
+|[[removePartition]]removePartition
+|
+* removedPartition: <<nodeType>> or <<targetNodeType>>
+|
+|
+* `removedPartition` does not exist
+
+4+|
+[[events-nodes]]
+==== Nodes
+
+|[[changeConcept]]changeConcept
+|
+* node: <<targetNodeType>>
+* newConcept: <<metaPointerType>>
+|
+* oldConcept: <<metaPointerType>>
+|
+* `node` does not exist
+
+4+|
+[[events-properties]]
+==== Properties
+
+
+|[[addProperty]]addProperty
+|
+* node: <<targetNodeType>>
+* property: <<metaPointerType>>
+* newValue: <<propertyValueType>>
+|
+|
+* `node` does not exist
+
+|[[removeProperty]]removeProperty
+|
+* node: <<targetNodeType>>
+* property: <<metaPointerType>>
+|
+* oldValue: <<propertyValueType>>
+|
+* `node` does not exist
+* `property` is not set in `node`
+
+|[[changeProperty]]changeProperty
+|
+* node: <<targetNodeType>>
+* property: <<metaPointerType>>
+* newValue: <<propertyValueType>>
+|
+* oldValue: <<propertyValueType>>
+|
+* `node` does not exist
+* `property` is not set in `node`
+
+
+4+|
+[[events-children]]
+==== Children
+
+|[[addChild]]addChild
+|
+* parent: <<targetNodeType>>
+* newChild: <<nodeType>>
+* containment: <<metaPointerType>>
+* index: <<indexType>>
+|
+|
+* `parent` does not exist
+* `newChild` id already exists
+* `index` is beyond the number of `containment` entries in `parent`
+
+
+|[[removeChild]]removeChild
+|
+* removedChild: <<nodeType>> or <<targetNodeType>>
+|
+* parent: <<targetNodeType>>
+* containment: <<metaPointerType>>
+* index: <<indexType>>
+|
+* `removedChild` does not exist
+* `parent` does not exist
+* `removedChild` is not a child of `parent` in `containment`
+* `index` is beyond (the number of `containment` entries in `parent`) - 1
+
+|[[replaceChild]]replaceChild
+|
+* newChild: <<nodeType>>
+* replacedChild: <<nodeType>> or <<targetNodeType>>
+|
+* parent: <<targetNodeType>>
+* containment: <<metaPointerType>>
+* index: <<indexType>>
+|
+* `newChild` id already exists
+* `replacedChild` does not exist
+* `parent` does not exist
+* `replacedChild` is not a child of `parent` in `containment`
+* `index` is beyond (the number of `containment` entries in `parent`) - 1
+
+|[[moveChildFromOtherContainment]]moveChildFromOtherContainment
+|
+* newParent: <<targetNodeType>>
+* newContainment: <<metaPointerType>>
+* newIndex: <<indexType>>
+* movedChild: <<targetNodeType>>
+|
+* oldParent: <<targetNodeType>>
+* oldContainment: <<metaPointerType>>
+* oldIndex: <<indexType>>
+|
+* `newParent` does not exist
+* `newIndex` is beyond the number of `newContainment` entries in `newParent`
+* `movedChild` does not exist
+* `oldParent` does not exist
+* `movedChild` is not a child of `oldParent` in `oldContainment`
+* `oldIndex` is beyond (the number of `oldContainment` entries in `oldParent`) - 1
+
+|[[moveChildFromOtherContainmentInSameParent]]moveChildFromOtherContainmentInSameParent
+|
+* newContainment: <<metaPointerType>>
+* newIndex: <<indexType>>
+* movedChild: <<targetNodeType>>
+|
+* parent: <<targetNodeType>>
+* oldContainment: <<metaPointerType>>
+* oldIndex: <<indexType>>
+|
+* `newIndex` is beyond the number of `newContainment` entries in `parent`
+* `movedChild` does not exist
+* `parent` does not exist
+* `movedChild` is not a child of `parent` in `oldContainment`
+* `oldIndex` is beyond (the number of `oldContainment` entries in `parent`) - 1
+
+|[[moveChildInSameContainment]]moveChildInSameContainment
+|
+* newIndex: <<indexType>>
+* movedChild: <<targetNodeType>>
+|
+* parent: <<targetNodeType>>
+* containment: <<metaPointerType>>
+* oldIndex: <<indexType>>
+|
+* `newIndex` is beyond (the number of `newContainment` entries in `parent`) - 1
+* `movedChild` does not exist
+* `parent` does not exist
+* `movedChild` is not a child of `parent` in `containment`
+* `oldIndex` is beyond (the number of `newContainment` entries in `parent`) - 1
+* `newIndex` is same as `oldIndex`
+
+
+4+|
+[[events-annotations]]
+==== Annotations
+
+|[[addAnnotation]]addAnnotation
+|
+* parent: <<targetNodeType>>
+* newAnnotation: <<nodeType>>
+* index: <<indexType>>
+|
+|
+* `parent` does not exist
+* `newAnnotation` id already exists
+* `index` is beyond the number of annotations of `parent`
+
+
+|[[removeAnnotation]]removeAnnotation
+|
+* removedAnnotation: <<nodeType>> or <<targetNodeType>>
+|
+* parent: <<targetNodeType>>
+* index: <<indexType>>
+|
+* `removedAnnotation` does not exist
+* `parent` does not exist
+* `removedAnnotation` is not an annotation of `parent`
+* `index` is beyond (the number of annotations of `parent`) - 1
+
+|[[replaceAnnotation]]replaceAnnotation
+|
+* newAnnotation: <<nodeType>>
+* replacedAnnotation: <<nodeType>> or <<targetNodeType>>
+|
+* parent: <<targetNodeType>>
+* index: <<indexType>>
+|
+* `newAnnotation` id already exists
+* `replacedAnnotation` does not exist
+* `parent` does not exist
+* `replacedAnnotation` is not an annotation of `parent`
+* `index` is beyond (the number of annotations of `parent`) - 1
+
+|[[moveAnnotationFromOtherParent]]moveAnnotationFromOtherParent
+|
+* newParent: <<targetNodeType>>
+* newIndex: <<indexType>>
+* movedAnnotation: <<targetNodeType>>
+|
+* oldParent: <<targetNodeType>>
+* oldIndex: <<indexType>>
+|
+* `newParent` does not exist
+* `index` is beyond the number of annotations of `newParent`
+* `movedAnnotation` does not exist
+* `oldParent` does not exist
+* `movedAnnotation` is not an annotation of `oldParent`
+* `oldIndex` is beyond (the number of annotations of `oldParent`) - 1
+
+
+|[[moveAnnotationInSameParent]]moveAnnotationInSameParent
+|
+* newIndex: <<indexType>>
+* movedAnnotation: <<targetNodeType>>
+|
+* parent: <<targetNodeType>>
+* oldIndex: <<targetNodeType>>
+|
+* `newIndex` is beyond (the number of annotations of `parent`) - 1
+* `movedAnnotation` does not exist
+* `parent` does not exist
+* `movedAnnotation` is not an annotation of `parent`
+* `oldIndex` is beyond (the number of annotations of `parent`) - 1
+
+4+|
+[[events-references]]
+==== References
+We refer to references by the tuple of _[parent, reference, index]_.
+Rationale: Both reference `target` and `resolveInfo` can be `null`, so they aren't suitable for identifying the reference.
+However, `target` and `resolveInfo` MUST NOT both be `null`.
+
+|[[addReference]]addReference
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newTarget: <<targetNodeType>>?
+* newResolveInfo: <<resolveInfoType>>?
+|
+|
+* `parent` does not exist
+* `index` is beyond the number of `reference` entries of `parent`
+* `newTarget` is `null` and `newResolveInfo` is `null`
+
+|[[removeReference]]removeReference
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+|
+* removedTarget: <<targetNodeType>>
+* removedResolveInfo: <<resolveInfoType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `removedTarget` is `null` and `removedResolveInfo` is `null`
+
+|[[changeReference]]changeReference
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newTarget: <<targetNodeType>>?
+* newResolveInfo: <<targetNodeType>>?
+|
+* replacedTarget: <<targetNodeType>>
+* replacedResolveInfo: <<resolveInfoType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newTarget` is `null` and `newResolveInfo` is `null`
+* `replacedTarget` is `null` and `replacedResolveInfo` is `null`
+
+|[[moveReference]]moveReference
+
+#TODO#: Needed?
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* oldIndex: <<indexType>>
+* newIndex: <<indexType>>
+|
+* target: <<targetNodeType>>
+* resolveInfo: <<resolveInfoType>>
+|
+* `parent` does not exist
+* `newIndex` is beyond (the number of `reference` entries of `parent`) - 1
+* `oldIndex` is beyond (the number of `reference` entries of `parent`) - 1
+* `target` is `null` and `resolveInfo` is `null`
+
+|[[addReferenceResolveInfo]]addReferenceResolveInfo
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newResolveInfo: <<resolveInfoType>>
+|
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newResolveInfo` is `null`
+
+|[[removeReferenceResolveInfo]]removeReferenceResolveInfo
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+|
+* target: <<targetNodeType>>
+* removedResolveInfo: <<resolveInfoType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `removedResolveInfo` is `null`
+* `target` is `null`
+
+|[[changeReferenceResolveInfo]]changeReferenceResolveInfo
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newResolveInfo: <<resolveInfoType>>
+|
+* target: <<targetNodeType>>?
+* replacedResolveInfo: <<resolveInfoType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newResolveInfo` is `null`
+* `removedResolveInfo` is `null`
+
+|[[addReferenceTarget]]addReferenceTarget
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newTarget: <<targetNodeType>>
+|
+* resolveInfo: <<resolveInfoType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newTarget` is `null`
+* `resolveInfo` is `null`
+
+|[[removeReferenceTarget]]removeReferenceTarget
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+|
+* resolveInfo: <<resolveInfoType>>
+* removedTarget: <<targetNodeType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `resolveInfo` is `null`
+* `removedTarget` is `null`
+
+|[[changeReferenceTarget]]changeReferenceTarget
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newTarget: <<targetNodeType>>
+|
+* resolveInfo: <<resolveInfoType>>
+* replacedTarget: <<targetNodeType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newTarget` is `null`
+* `replacedTarget` is `null`
+
+4+|
+[[events-composite]]
+==== Composite
+
+|[[composite]]composite
+|
+* parts: <<eventType>>[]
+|
+|
+* accumulation of all errors of `parts`
+
+|[[giveUpDeltasJustReload]]giveUpDeltasJustReload
+|
+|
+|
+|===
