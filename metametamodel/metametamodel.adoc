@@ -6,7 +6,7 @@ include::../shared/issue-footnotes.adoc[]
 :sectnums:
 
 
-In this document we describe the Meta-Metamodel to be used by LionWeb.
+In this document we describe the Meta-Metamodel to be used by LionWeb *version 2024.1*.
 The Meta-Metamodel is called LionCore.
 
 [[introduction]]
@@ -53,7 +53,7 @@ We will list elements by their type: classes, abstract classes and interfaces.
 
 === Concepts
 
-The concepts are <<Language>>, <<Concept>>, <<Annotation>>, <<Interface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<Containment>>, <<Reference>>, and <<Property>>.
+The concepts are <<Language>>, <<Concept>>, <<Annotation>>, <<Interface>>, <<PrimitiveType>>, <<Enumeration>>, <<EnumerationLiteral>>, <<StructuredDataType>>, <<Field>>, <<Containment>>, <<Reference>>, and <<Property>>.
 
 [[Language]]
 ==== Language
@@ -334,10 +334,10 @@ A PrimitiveType has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
 A PrimitiveType is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>).
 It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name) and a <<IKeyed>> (as it has a key).
 
-The correspondence between a PrimitiveType an implementation class on a specific platforms can be specified through annotations, but it is not specified on the PrimitiveType itself.
+The correspondence between a PrimitiveType and an implementation class on a specific platforms can be specified through annotations, but it is not specified on the PrimitiveType itself.
 
 .Constraints
-TBD
+We consider a PrimitiveType as opaque value type without structure or identity.
 
 [[Enumeration]]
 ==== Enumeration
@@ -358,12 +358,11 @@ An Enumeration has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
 An Enumeration contains <<EnumerationLiteral, EnumerationLiterals>> in its `literals` containment.
 It also represents the <<namespaces, namespace>> for the EnumerationLiterals.
 
-
 An Enumeration is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>).
 It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name) and a <<IKeyed>> (as it has a key).
 
 .Constraints
-TBD
+Implementations should use native representations for Enumerations, e.g. a `enum` in a Java implementation.
 
 [[EnumerationLiteral]]
 ==== EnumerationLiteral
@@ -378,12 +377,71 @@ An EnumerationLiteral is similar to Ecore’s `EEnumLiteral` and to MPS’ `Enum
 .Characteristics
 An EnumerationLiteral has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
 
-An Enumeration is a <<IKeyed>> (as it has a key) and indirectly an <<INamed>> (as it has a name).
+An EnumerationLiteral is a <<IKeyed>> (as it has a key) and indirectly an <<INamed>> (as it has a name).
 
 .Constraints
 Each EnumerationLiteral must have a unique `name` within the Enumeration.
 
 Each EnumerationLiteral belongs to one and only one Enumeration.
+
+[[StructuredDataType]]
+==== StructuredDataType
+Represents a collection of named instances of <<DataType, Data Types>>.
+They are meant to support a small composite of values that semantically form a unit.
+Instances of StructuredDataTypes have no identity, are always copied by value, and SHOULD be immutable.{fn-org265}
+Two instances of a StructuredDataType that hold the same values for all fields of that StructuredDataType are interchangeable.
+(Instances of <<Classifier, Classifiers>> have an identity, through <<Node.id, `id`>>.)
+
+.Example
+We could represent a "Complex number { real part, imaginary part }" or "Color { red, green, blue }" as StructuredDataType.
+
+.EMF & MPS equivalent
+No direct similarities.
+We could simulate it by a custom `EDatatype` in ECore.
+
+.Characteristics
+[[StructuredDataType.fields, StructuredDataType.fields]]
+A StructuredDataType contains <<Field, Fields>> in its `fields` containment.
+It also represents the <<namespaces, namespace>> for the fields.
+
+A StructuredDataType has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
+
+A StructuredDataType is a <<DataType>> (as it can be used as <<Property.type, type>> of a <<Property>>).
+It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Language>>), an <<INamed>> (as it has a name) and a <<IKeyed>> (as it has a key).
+
+.Constraints
+M1 Instances of a StructuredDataType SHOULD be immutable.
+
+An M1 instance of StructuredDataType MUST have non-null values for all its fields with `type` of <<PrimitiveType>> or <<Enumeration>>.
+fields with `type` of StructuredDataType can be `null`.
+
+A StructuredDataType can (directly or indirectly) contain a field with itself as `type`.
+
+
+[[Field]]
+==== Field
+Represents one part of a <<StructuredDataType>>.{fn-org265}
+
+.Example
+In the StructuredDataType "Complex number", we would have two fields "real part" and "imaginary part".
+A StructuredDataType "Color" had the fields "red", "green", and "blue".
+
+.EMF & MPS equivalent
+No direct similarities.
+
+.Characteristics
+A Field has a <<INamed.name, `name`>> and an <<IKeyed.key, `key`>>.
+
+[[Field.type, Field.type]]
+A Field refers its `type`, which is a <<DataType>>.
+
+A Field is an <<IKeyed>> (as it has a key) and indirectly an <<INamed>> (as it has a name).
+
+.Constraints
+Each Field MUST have a unique `name` within its containing StructuredDataType.
+
+Each Field belongs to one and only one StructuredDataType.
+
 
 [[Containment]]
 ==== Containment
@@ -409,7 +467,18 @@ A Containment is a <<Link>> (as it describes a relation between two Classifiers)
 It is indirectly a <<Feature>> (as it describes the characteristics of a <<Classifier>>), an <<INamed>> (as it has a name) and a <<IKeyed>> (as it has a key).
 
 .Constraints
-TBD
+Each node, except <<partition>>, must be contained once in exactly one Containment.
+
+The implicit inverse relation of a Containment is called [[parent, parent]]_parent_.
+Example: An IfStatement _contains_ its condition.
+Then, the condition's _parent_ is the IfStatement.
+
+Instances in containments MUST NOT form a direct or indirect circle:
+If node _a_ contains node _b_, node _b_ MUST NOT contain _a_ (direct containment circle).
+If the same node _b_ contains node _c_, _c_ MUST NOT contain _a_ (indirect containment circle).
+However, Concept _A_ can have a Containment of type _A_.
+Concept _A_ with Containment of type _B_, with Concept _B_ having a Containment of type _A_, is also valid.
+
 
 [[Reference]]
 ==== Reference
@@ -435,7 +504,10 @@ A Reference is a <<Link>> (as it describes a relation between two Classifiers).
 It is indirectly a <<Feature>> (as it describes the characteristics of a <<Classifier>>), an <<INamed>> (as it has a name) and a <<IKeyed>> (as it has a key).
 
 .Constraints
-TBD
+A multiple Reference MAY refer to the same target more than once.
+Example: We have nodes _p1_ and _p2_ of Concept Procedure.
+Concept StackTrace has a multiple reference "frames" of type Procedure.
+An instance of StackTrace can have frames refer to _[p1, p2, p1]_.
 
 [[Property]]
 ==== Property
@@ -460,7 +532,7 @@ A Property is a <<Feature>> (as it describes the characteristics of a <<Classifi
 It is indirectly a <<IKeyed>> (as it has a key) and an <<INamed>> (as it has a name).
 
 .Constraints
-TBD
+Properties are always single-valued.{fn-org289}.
 
 === Abstract concepts
 
@@ -491,6 +563,7 @@ A LanguageEntity can be one of:
 * <<Interface>>
 * <<Enumeration>>
 * <<PrimitiveType>>
+* <<StructuredDataType>>
 
 .Constraints
 Each LanguageEntity must have a unique `name` within the Language.
@@ -525,9 +598,6 @@ A Classifier can be one of:
 A Classifier is a <<LanguageEntity>> (as it is a top level element in a <<Language>>).
 It is indirectly a <<IKeyed>> (as it has a key) and an <<INamed>> (as it has a name).
 
-.Constraints
-TBD
-
 [[DataType]]
 ==== DataType
 A type of value which has no relevant identity in the context of a model.
@@ -550,13 +620,15 @@ A DataType can be one of:
 
 * <<PrimitiveType>>
 * <<Enumeration>>
+* <<StructuredDataType>>
 
 .Constraints
-TBD
+We consider a DataType as value type without identity.
+Implementations can choose to copy, compare, or process DataType values by value.
 
 [[Feature]]
 ==== Feature
-A Feature represents a characteristic or some form of data associated with a particular concept.
+A Feature represents a characteristic or some form of data associated with a particular <<Classifier>>.
 
 .Example
 For example, an _Invoice_ can have an associated _date_, a _number_, a connection with a _customer_, and it can contain _InvoiceLines_.
@@ -619,7 +691,7 @@ If a host language cannot handle this situation, the generator towards that lang
 
 [[Link]]
 ==== Link
-Represent a connection to an <<Classifier>>.
+Represent a connection to a <<Classifier>>.
 
 .Example
 An _Invoice_ can be connected to its _InvoiceLines_ and to a _Customer_.
@@ -644,10 +716,9 @@ It is indirectly a <<IKeyed>> (as it has a key) and an <<INamed>> (as it has a n
 
 A Link can be either a <<Containment>>, or a <<Reference>>.
 
+.Constraints
 We do NOT support link specialization.{fn-org8}
 
-.Constraints
-TBD
 
 === Interfaces
 
@@ -707,12 +778,12 @@ The language itself has key `LionCore-M3`{fn-org91} and is named `LionCore_M3`{f
 |<<Annotation.annotates>> |Reference |Annotation-annotates
 |<<Annotation.extends>> |Reference |Annotation-extends
 |<<Annotation.implements>> |Reference |Annotation-implements
+|<<Classifier>> |Concept |Classifier
+|<<Classifier.features>> |Containment |Classifier-features
 |<<Concept>> |Concept |Concept
 |<<Concept.abstract>> |Property |Concept-abstract
 |<<Concept.extends>> |Reference |Concept-extends
 |<<Concept.implements>> |Reference |Concept-implements
-|<<Interface>> |Concept |Interface
-|<<Interface.extends>> |Reference |Interface-extends
 |<<Containment>> |Concept |Containment
 |<<DataType>> |Concept |DataType
 |<<Enumeration>> |Concept |Enumeration
@@ -720,22 +791,26 @@ The language itself has key `LionCore-M3`{fn-org91} and is named `LionCore_M3`{f
 |<<EnumerationLiteral>> |Concept |EnumerationLiteral
 |<<Feature>> |Concept |Feature
 |<<Feature.optional>> |Property |Feature-optional
-|<<Classifier>> |Concept |Classifier
-|<<Classifier.features>> |Containment |Classifier-features
-|<<Link>> |Concept |Link
-|<<Link.multiple>> |Property |Link-multiple
-|<<Link.type>> |Reference |Link-type
+|<<Field>> |Concept |Field
+|<<Field.type>> |Reference |Field-type
+|<<IKeyed>> |Interface |IKeyed
+|<<IKeyed.key>> |Property |IKeyed-key
+|<<Interface>> |Concept |Interface
+|<<Interface.extends>> |Reference |Interface-extends
 |<<Language>> |Concept |Language
 |<<Language.dependsOn>> |Reference |Language-dependsOn
 |<<Language.entities>> |Containment |Language-entities
 |<<Language.version>> |Property |Language-version
 |<<LanguageEntity>> |Concept |LanguageEntity
-|<<IKeyed>> |Interface |IKeyed
-|<<IKeyed.key>> |Property |IKeyed-key
+|<<Link>> |Concept |Link
+|<<Link.multiple>> |Property |Link-multiple
+|<<Link.type>> |Reference |Link-type
 |<<PrimitiveType>> |Concept |PrimitiveType
 |<<Property>> |Concept |Property
 |<<Property.type>> |Reference |Property-type
 |<<Reference>> |Concept |Reference
+|<<StructuredDataType>> |Concept |StructuredDataType
+|<<StructuredDataType.fields>> |Containment |StructuredDataType-fields
 |===
 
 [[predefined-builtins-keys]]
@@ -750,13 +825,12 @@ This means the id MUST be identical to the key for each node in this language.
 |===
 |Instance |Concept |Id and key
 
-|<<String>> |PrimitiveType |LionCore-builtins-String
 |<<Boolean>> |PrimitiveType |LionCore-builtins-Boolean
-|<<Integer>> |PrimitiveType |LionCore-builtins-Integer
-|<<JSON>> |PrimitiveType |LionCore-builtins-JSON
-|<<Node>> |Concept |LionCore-builtins-Node
 |<<INamed>> |Interface |LionCore-builtins-INamed
 |<<INamed.name, INamed.name>> |Property |LionCore-builtins-INamed-name
+|<<Integer>> |PrimitiveType |LionCore-builtins-Integer
+|<<Node>> |Concept |LionCore-builtins-Node
+|<<String>> |PrimitiveType |LionCore-builtins-String
 |===
 
 
@@ -787,12 +861,11 @@ Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense t
 * [[Boolean, Boolean]] `Boolean` with exactly two values: `true` and `false` (<<{serialization}.adoc#boolean, Details>>)
 * [[String, String]] `String`, an arbitrary-length series of Unicode characters (<<{serialization}.adoc#string, Details>>)
 * [[Integer, Integer]] `Integer`, an arbitrary-length positive or negative integer number (<<{serialization}.adoc#integer, Details>>)
-* [[JSON, JSON]] `JSON`, any valid JSON document (<<{serialization}.adoc#json, Details>>)
 
 
 === Supporting terminology
 ==== Multiplicity
-Multiplicity describes how many targets a link must and can have.
+Multiplicity describes how many targets a <<Link>> must and can have.
 
 .Example
 Common multiplicities are `1` (meaning there MUST be exactly one target), `0..1` (meaning there CAN be exactly one target), `0..\*` (meaning there CAN be zero or more targets), and `1..*` (meaning there MUST be at least one target, but there CAN be more than one targets).
@@ -814,8 +887,6 @@ LionCore represents multiplicity as the two booleans <<Feature.optional, `option
 |`1..*` |false |true
 |===
 
-.Constraints
-TBD
 
 [[partition]]
 ==== Partitions
@@ -903,7 +974,7 @@ It is important to offer this functionality also in consideration that some impl
 === Generics
 
 Generics are not directly supported by this proposal.
-We can solve some needs through specialization of features in derived classes.
+We could solve some needs through specialization of features in derived classes.
 We could alternatively also imagine using specific annotations for supporting this.
 
 In general Generics complicate the solution and MPS can live without them.
