@@ -34,7 +34,7 @@ it is *not* intended as a bulk API that updates large chunks of the model at onc
 
 * For new nodes, do we only send their id + classifier, or a complete node?
 
-* If we send <<removeChild>>, do we also need to send that for all descendants?
+* If we send <<removeChild>>, do we also need to send that for all descendants?{fn-org286}
 Maybe the client can send only one, and the repo changes this into a <<composite>> that includes one <<removeChild>> for each descendant?
 
 * Which of the events can potentially create invalid (recursively contained) trees?
@@ -43,7 +43,7 @@ Maybe the client can send only one, and the repo changes this into a <<composite
 How does this interact with concurrent edits?
 Example: Does <<removeChild>> fail if the `removedChild` does not exist?
 
-* Do we include the optional parameters?
+* Do we include the optional parameters?{fn-org287}
 It might be easier to react on an event if included, but they are not strictly necessary
 (as they can be calculated from the required parameters, given the receiver knows the model).
 Related: in removal cases (e.g. <<removeChild>>), do we want to send only the removed id or the whole node?
