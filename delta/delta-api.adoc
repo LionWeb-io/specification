@@ -26,8 +26,6 @@ it is *not* intended as a bulk API that updates large chunks of the model at onc
 
 * If we move a node from being an annotation to being a child, the value of `oldContainment` would be `null`
 
-* Do we need <<moveReference>>?
-
 * <<addReference>> / <<removeReference>> operate on complete references, thus either `target` or `resolveInfo` can be `null`
 
 * `xxxReferenceResolveInfo` / `xxxReferenceTarget` operate only on existing references, they cannot add new ones or remove existing ones completely
@@ -227,11 +225,11 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * containment: <<metaPointerType>>
 * oldIndex: <<indexType>>
 |
-* `newIndex` is beyond (the number of `newContainment` entries in `parent`) - 1
+* `newIndex` is beyond (the number of `containment` entries in `parent`) - 1
 * `movedChild` does not exist
 * `parent` does not exist
 * `movedChild` is not a child of `parent` in `containment`
-* `oldIndex` is beyond (the number of `newContainment` entries in `parent`) - 1
+* `oldIndex` is beyond (the number of `containment` entries in `parent`) - 1
 * `newIndex` is same as `oldIndex`
 
 
@@ -357,9 +355,43 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * `newTarget` is `null` and `newResolveInfo` is `null`
 * `replacedTarget` is `null` and `replacedResolveInfo` is `null`
 
-|[[moveReference]]moveReference
+|[[moveEntryFromOtherReference]]moveEntryFromOtherReference
 
-#TODO#: Needed?
+|
+* newParent: <<targetNodeType>>
+* newReference: <<metaPointerType>>
+* newIndex: <<indexType>>
+* oldParent: <<targetNodeType>>
+* oldReference: <<metaPointerType>>
+* oldIndex: <<indexType>>
+|
+* target: <<targetNodeType>>
+* resolveInfo: <<resolveInfoType>>
+|
+* `newParent` does not exist
+* `newIndex` is beyond (the number of `newReference` entries of `newParent`)
+* `oldIndex` is beyond (the number of `oldReference` entries of `oldParent`) - 1
+* `target` is `null` and `resolveInfo` is `null`
+
+|[[moveEntryFromOtherReferenceInSameParent]]moveEntryFromOtherReferenceInSameParent
+
+|
+* parent: <<targetNodeType>>
+* newReference: <<metaPointerType>>
+* newIndex: <<indexType>>
+* oldReference: <<metaPointerType>>
+* oldIndex: <<indexType>>
+|
+* target: <<targetNodeType>>
+* resolveInfo: <<resolveInfoType>>
+|
+* `parent` does not exist
+* `newIndex` is beyond (the number of `newReference` entries of `parent`)
+* `oldIndex` is beyond (the number of `oldReference` entries of `parent`) - 1
+* `target` is `null` and `resolveInfo` is `null`
+
+|[[moveEntryInSameReference]]moveEntryInSameReference
+
 |
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
