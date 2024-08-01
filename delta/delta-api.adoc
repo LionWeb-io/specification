@@ -46,6 +46,8 @@ It might be easier to react on an event if included, but they are not strictly n
 (as they can be calculated from the required parameters, given the receiver knows the model).
 Related: in removal cases (e.g. <<removeChild>>), do we want to send only the removed id or the whole node?
 
+* Do we need "swapNodes" event?
+
 === Parameter types
 
 [[nodeType]]Node:: Either the whole node as json, or its id + classifier (tbd)
@@ -501,8 +503,54 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 |
 * accumulation of all errors of `parts`
 
+4+|
+[[events-subscription]]
+==== Subscription
+
+|[[subscribeEverything]]subscribeEverything
+|
+* subscribe: `boolean`
+|
+|
+
+|[[subscribePartitions]]subscribePartitions
+|
+* creation: `boolean`
+* deletion: `boolean`
+|
+|
+* already subscribed to everything
+
+|[[subscribeToNode]]subscribeNode
+|
+* node: <<targetNodeType>>
+|
+* depth: `integer`
+|
+* already subscribed to everything
+
+|[[unsubscribeNode]]unsubscribeNode
+|
+* node: <<targetNodeType>>
+|
+* depth: `integer`
+|
+* not subscribed to `node`
+
+4+|
+[[events-misc]]
+==== Miscellaneous
+
 |[[giveUpDeltasJustReload]]giveUpDeltasJustReload
 |
 |
 |
+
+|[[getAvailableIds]]getAvailableIds
+|
+* count: `integer`
+|
+|
+
+
 |===
