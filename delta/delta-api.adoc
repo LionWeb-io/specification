@@ -67,18 +67,18 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * We cannot have unknown children or parents, but we can have "dead" references (i.e. refer to non-existent nodes).
 
 
-[cols="a,a,a,a"]
+[cols="a,a,a"]
 |===
-|Name |Required params |Optional params | Errors
+|Name |Parameters | Errors
 
-4+|
+3+|
 [[events-partitions]]
 ==== Partitions
 
 |[[addPartition]]addPartition
 |
 * newPartition: <<nodeType>>
-|
+
 |
 * `newPartition` id already exists
 
@@ -87,10 +87,9 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 |
 * removedPartition: <<nodeType>> or <<targetNodeType>>
 |
-|
 * `removedPartition` does not exist
 
-4+|
+3+|
 [[events-nodes]]
 ==== Nodes
 
@@ -98,12 +97,11 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 |
 * node: <<targetNodeType>>
 * newConcept: <<metaPointerType>>
-|
 * oldConcept: <<metaPointerType>>
 |
 * `node` does not exist
 
-4+|
+3+|
 [[events-properties]]
 ==== Properties
 
@@ -114,14 +112,12 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * property: <<metaPointerType>>
 * newValue: <<propertyValueType>>
 |
-|
 * `node` does not exist
 
 |[[removeProperty]]removeProperty
 |
 * node: <<targetNodeType>>
 * property: <<metaPointerType>>
-|
 * oldValue: <<propertyValueType>>
 |
 * `node` does not exist
@@ -132,14 +128,13 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * node: <<targetNodeType>>
 * property: <<metaPointerType>>
 * newValue: <<propertyValueType>>
-|
 * oldValue: <<propertyValueType>>
 |
 * `node` does not exist
 * `property` is not set in `node`
 
 
-4+|
+3+|
 [[events-children]]
 ==== Children
 
@@ -150,7 +145,6 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * containment: <<metaPointerType>>
 * index: <<indexType>>
 |
-|
 * `parent` does not exist
 * `newChild` id already exists
 * `index` is beyond the number of `containment` entries in `parent`
@@ -159,7 +153,6 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 |[[removeChild]]removeChild
 |
 * removedChild: <<nodeType>> or <<targetNodeType>>
-|
 * parent: <<targetNodeType>>
 * containment: <<metaPointerType>>
 * index: <<indexType>>
@@ -173,7 +166,6 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 |
 * newChild: <<nodeType>>
 * replacedChild: <<nodeType>> or <<targetNodeType>>
-|
 * parent: <<targetNodeType>>
 * containment: <<metaPointerType>>
 * index: <<indexType>>
@@ -190,7 +182,6 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
-|
 * oldParent: <<targetNodeType>>
 * oldContainment: <<metaPointerType>>
 * oldIndex: <<indexType>>
@@ -207,7 +198,6 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
-|
 * parent: <<targetNodeType>>
 * oldContainment: <<metaPointerType>>
 * oldIndex: <<indexType>>
@@ -222,7 +212,6 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 |
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
-|
 * parent: <<targetNodeType>>
 * containment: <<metaPointerType>>
 * oldIndex: <<indexType>>
@@ -235,7 +224,7 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * `newIndex` is same as `oldIndex`
 
 
-4+|
+3+|
 [[events-annotations]]
 ==== Annotations
 
@@ -245,7 +234,6 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * newAnnotation: <<nodeType>>
 * index: <<indexType>>
 |
-|
 * `parent` does not exist
 * `newAnnotation` id already exists
 * `index` is beyond the number of annotations of `parent`
@@ -254,7 +242,6 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 |[[removeAnnotation]]removeAnnotation
 |
 * removedAnnotation: <<nodeType>> or <<targetNodeType>>
-|
 * parent: <<targetNodeType>>
 * index: <<indexType>>
 |
@@ -267,7 +254,6 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 |
 * newAnnotation: <<nodeType>>
 * replacedAnnotation: <<nodeType>> or <<targetNodeType>>
-|
 * parent: <<targetNodeType>>
 * index: <<indexType>>
 |
@@ -282,7 +268,6 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * newParent: <<targetNodeType>>
 * newIndex: <<indexType>>
 * movedAnnotation: <<targetNodeType>>
-|
 * oldParent: <<targetNodeType>>
 * oldIndex: <<indexType>>
 |
@@ -298,7 +283,6 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 |
 * newIndex: <<indexType>>
 * movedAnnotation: <<targetNodeType>>
-|
 * parent: <<targetNodeType>>
 * oldIndex: <<targetNodeType>>
 |
@@ -308,7 +292,7 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * `movedAnnotation` is not an annotation of `parent`
 * `oldIndex` is beyond (the number of annotations of `parent`) - 1
 
-4+|
+3+|
 [[events-references]]
 ==== References
 We refer to references by the tuple of _[parent, reference, index]_.
@@ -323,7 +307,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * newTarget: <<targetNodeType>>?
 * newResolveInfo: <<resolveInfoType>>?
 |
-|
 * `parent` does not exist
 * `index` is beyond the number of `reference` entries of `parent`
 * `newTarget` is `null` and `newResolveInfo` is `null`
@@ -333,7 +316,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
-|
 * removedTarget: <<targetNodeType>>
 * removedResolveInfo: <<resolveInfoType>>
 |
@@ -348,7 +330,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * index: <<indexType>>
 * newTarget: <<targetNodeType>>?
 * newResolveInfo: <<targetNodeType>>?
-|
 * replacedTarget: <<targetNodeType>>
 * replacedResolveInfo: <<resolveInfoType>>
 |
@@ -366,7 +347,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * oldParent: <<targetNodeType>>
 * oldReference: <<metaPointerType>>
 * oldIndex: <<indexType>>
-|
 * target: <<targetNodeType>>
 * resolveInfo: <<resolveInfoType>>
 |
@@ -383,7 +363,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * newIndex: <<indexType>>
 * oldReference: <<metaPointerType>>
 * oldIndex: <<indexType>>
-|
 * target: <<targetNodeType>>
 * resolveInfo: <<resolveInfoType>>
 |
@@ -399,7 +378,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * reference: <<metaPointerType>>
 * oldIndex: <<indexType>>
 * newIndex: <<indexType>>
-|
 * target: <<targetNodeType>>
 * resolveInfo: <<resolveInfoType>>
 |
@@ -415,7 +393,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * index: <<indexType>>
 * newResolveInfo: <<resolveInfoType>>
 |
-|
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `newResolveInfo` is `null`
@@ -425,7 +402,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
-|
 * target: <<targetNodeType>>
 * removedResolveInfo: <<resolveInfoType>>
 |
@@ -440,7 +416,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * newResolveInfo: <<resolveInfoType>>
-|
 * target: <<targetNodeType>>?
 * replacedResolveInfo: <<resolveInfoType>>
 |
@@ -455,7 +430,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * newTarget: <<targetNodeType>>
-|
 * resolveInfo: <<resolveInfoType>>
 |
 * `parent` does not exist
@@ -468,7 +442,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
-|
 * resolveInfo: <<resolveInfoType>>
 * removedTarget: <<targetNodeType>>
 |
@@ -483,7 +456,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * newTarget: <<targetNodeType>>
-|
 * resolveInfo: <<resolveInfoType>>
 * replacedTarget: <<targetNodeType>>
 |
@@ -492,7 +464,7 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * `newTarget` is `null`
 * `replacedTarget` is `null`
 
-4+|
+3+|
 [[events-composite]]
 ==== Composite
 
@@ -500,10 +472,9 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 |
 * parts: <<eventType>>[]
 |
-|
 * accumulation of all errors of `parts`
 
-4+|
+3+|
 [[events-subscription]]
 ==== Subscription
 
@@ -511,20 +482,17 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 |
 * subscribe: `boolean`
 |
-|
 
 |[[subscribePartitions]]subscribePartitions
 |
 * creation: `boolean`
 * deletion: `boolean`
 |
-|
 * already subscribed to everything
 
 |[[subscribeToNode]]subscribeNode
 |
 * node: <<targetNodeType>>
-|
 * depth: `integer`
 |
 * already subscribed to everything
@@ -532,24 +500,21 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 |[[unsubscribeNode]]unsubscribeNode
 |
 * node: <<targetNodeType>>
-|
 * depth: `integer`
 |
 * not subscribed to `node`
 
-4+|
+3+|
 [[events-misc]]
 ==== Miscellaneous
 
 |[[giveUpDeltasJustReload]]giveUpDeltasJustReload
 |
 |
-|
 
 |[[getAvailableIds]]getAvailableIds
 |
 * count: `integer`
-|
 |
 
 
