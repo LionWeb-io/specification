@@ -139,11 +139,11 @@ car *-- steering: steering
 
 annotation pos as "22:DiagramPosition"
 
-car *- pos: <<annotation>>
+car *- pos: <<annotations>>
 
 annotation review as "33:ReviewComment"
 
-steering *- review: <<annotation>>
+steering *- review: <<annotations>>
 
 engine -[hidden]> steering
 ----
@@ -337,7 +337,7 @@ For example, a `Project` might refer to its `mainResponsible: Employee`, or to a
 The node containing the reference is called _source_, the referred node _target_ of the reference.
 A node can be referenced by none, one, or many other nodes.
 It can be referenced by itself.
-A node can reference another node more than once.
+A node can reference another node (or itself) more than once.
 
 [plantuml, project, svg]
 ----
@@ -597,14 +597,14 @@ So we can come up with an annotation `WindowAnnotation` that `annotates: House`,
 All these nodes still adhere to the intents of ``House``'s designer, but also transport the additional information about windows we need for our use case.
 
 Even more importantly, we can put orthogonal concerns into annotation instances.
-For the domain of `House`, we don't want to concern ourselves with the details how a parser constructed that node.
+For the domain of `House`, we don't want to bother with the details how a parser constructed that node.
 But it would be useful to show users where this node originated from in case of errors.
 Not a problem with an annotation `ParserSource` that `annotates: Node` (i.e. any node).
 Similarly, we could come up with an annotation `ReviewComment` to be used during code reviews.
 The reviewer can attach instances to any node, without interfering with the original intent of these nodes.
 
 Review comments demonstrate one drawback of annotations: we're violating the generally valued idea of _separating concerns_, as we mix domain concerns and process concerns in the same model.
-The alternative would be to keep both concerns in separate concerns, and have the review comments reference the node they apply to.
+The alternative would be to keep both concerns in separate models, and have the review comments reference the node they apply to.
 Experience shows this approach is very hard to maintain:
 What happens if we deleted a house, and there's still a review comment referring to it?
 The review model might not be loaded during the deletion, so it now contains a "zombie" review comment.
@@ -612,8 +612,8 @@ We might need to introduce "garbage collection" strategies to find such zombies 
 For more context-sensitive annotations, moving the annotated node might introduce similar problems.
 
 Annotations should not be used as replacement for proper concept design.
-If our language concerned the domain of houses, review comments are completely independent of that domain, should not be part of it, and are perfect candidates for annotations.
-However, if our language concerned modeling discussions, then reviews and comments are integral part of that domain, and should be represented by proper containments and (abstract) concepts in our language.
+If our language dealt with the domain of houses, review comments are completely independent of that domain, should not be part of it, and are perfect candidates for annotations.
+However, if our language was modeling discussions, then reviews and comments are integral part of that domain, and should be represented by proper containments and (abstract) concepts in our language.
 In this case, using annotations only because they seem conveniently applicable at lots of places is a strong modeling smell.
 
 == Languages
