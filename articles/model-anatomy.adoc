@@ -10,7 +10,7 @@ include::../shared/issue-footnotes.adoc[]
 
 This article walks us through a LionWeb model:
 What it is, what's inside, how the inside looks, what the contents mean, and why they are that way.
-It is meant as introduction to some of the details of LionWeb.
+It is meant as an introduction to some of the details of LionWeb.
 We don't assume any prior knowledge of LionWeb; some experience with general modeling ideas is helpful.
 
 == Introduction
@@ -23,6 +23,13 @@ This question is infamous in the modeling community -- but we have to answer it 
 We deliberately don't use that term in our specifications, as it's so overloaded and ambiguous.
 For our purposes, we can always replace "model" with "a bunch of nodes".
 Then the question transforms to: What is a node?
+
+[[notation]]
+== Notation used in this article and diagrams
+We use integer numbers as node ids, and short names for keys of language elements.
+We label boxes in diagrams that represent M1-level nodes with the node id and its classifier, as in `10:Person`.
+Boxes in diagrams for M2-level language elements are labelled only with the classifier, i.e. `Person`.
+Boxes that represent concepts or concept instances use `C` icon, and `@` icon for annotation (instance) boxes.
 
 [[nodes]]
 == Nodes
@@ -59,7 +66,7 @@ However, examples and tests are for human consumption -- real nodes (in their ra
 [[meta-pointer]]
 === Meta-pointer
 Before we get to the next part of a node, classifier, we need to discuss _meta-pointers_.
-Any time we refer from an instance model (M1) to its meta-model (M2 a.k.a. _Language_), we use meta-pointers.
+Any time we refer from an instance model (M1) to its metamodel (M2 a.k.a. _Language_), we use meta-pointers.
 They are a triple of {_language key_, _language version_, _element key_}, for example `{language=MyLanguage, version=23-alpha, key=MyConcept}`.
 Both language key and element key use the same character set as <<node-id, node ids>>, whereas language version can be any non-empty string.
 
@@ -104,7 +111,7 @@ The opposite of a node's parent are a node's _children_.
 In the example above, node `10` has children `5` and `11`; node `5` does not have any children.
 
 A node's classifier defines which kind of children a node can have -- the node's <<containment, containments>>.
-In our example, node `5` might be contained in `engine`, and node `11` in `steering`.
+In our example, node `5` might be contained in `engine`, and node `11` in `steering` -- both defined in classifier `Car`.
 
 [plantuml, carContainments, svg]
 ----
@@ -150,7 +157,7 @@ engine -[hidden]> steering
 
 In summary, a node's parent must always be symmetric -- either to the parent's children, or the parent's annotation instances.
 
-If we deleted the parent node, we implicitly delete all its children and annotation instances, each of their children and annotation instances, and so on.
+If we deleted the parent node, we implicitly deleted all its children and annotation instances, each of their children and annotation instances, and so on.
 In other words, a child or annotation instance shares the lifetime of its parent.
 
 This also explains why we consider the annotated node the parent of an annotation instance:
@@ -195,7 +202,7 @@ String properties can have any string value, including empty.
 Integer properties support positive and negative decimal integers of any length.
 Boolean properties can only have the values `true` or `false`.
 A language might define its own additional _primitive types_.
-In any case, we store all of them as string on low-level serialization format (i.e. JSON).
+In any case, we store all of them as string in low-level serialization format (i.e. JSON).
 
 ==== Enumerations
 A property can also be of an _enumeration_ type.
@@ -240,7 +247,7 @@ json "TextRange [key=tr]" as tr {
 ----
 
 We store the value of a structured data type as string, the same as all other primitive types.
-The content of that string is an escaped JSON structure.
+The content of that string is a serialized and escaped JSON object.
 As example, the value of above's `TextPosition` would be `"{\"lin\": \"42\", \"col\": \"-30\"}"`.
 Refer to <<{serialization}.adoc#structured-datatype, serialization specs>> for details.
 
@@ -288,10 +295,11 @@ Rectangle *-- Coordinate: lowerRight
 A node's classifier describes the valid containments.
 This description includes the containment’s _name_, _key_, whether it is _optional_, whether we allow _multiple_ nodes in the containment, and its _type_.
 Name, key and optional mean the same for containments and <<properties, properties>>.
-A singular containment allows only one contained node, e.g. a `Rectangle` can contain only one `topLeft` coordinate.
+A singular containment (i.e. `multiple = false`) allows only one contained node, e.g. a `Rectangle` can contain only one `topLeft` coordinate.
 In contrast, a `House` can contain multiple ``Room``s.
 For multiple containments, we keep track which child is contained at which position.
 As every contained node can have only one parent, we cannot have duplicates in multiple containments.
+Thus, multiple containments behave like an _ordered set_.
 
 [plantuml, house, svg]
 ----
@@ -334,11 +342,12 @@ A containment is invalid if the contained node's id cannot be resolved.
 
 A node can point to other nodes it has some relation to.
 For example, a `Project` might refer to its `mainResponsible: Employee`, or to all its `externalParties: BusinessPartner`.
-The node containing the reference is called _source_, the referred node _target_ of the reference.
+The node containing the reference is called _source_, the referred node is called _target_ of the reference.
 A node can be referenced by none, one, or many other nodes.
 It can be referenced by itself.
 A node can reference another node (or itself) more than once.
 
+[[space-project]]
 [plantuml, project, svg]
 ----
 hide empty members
@@ -392,9 +401,9 @@ However, it's up to the application to select and set the appropriate resolveInf
 
 This serves two purposes:
 
-* In the space project example above, assume some app that displays the list of external parties for the project as `ESA: 23, JAXA: 42`.
+* In the <<space-project, space project example above>>, assume some app that displays the list of external parties for the project as `ESA: 23, JAXA: 42`.
 Now someone thinks there's no project left with ESA, and deletes node 87 (the ESA one).
-If the `externalParties [0]` reference only knew the target node id, the best possible display would be `!unknown target 87!, JAXA: 42` -- not very helpful to the user.
+If the `externalParties` reference only knew the target node id, the best possible display would be `!unknown target 87!, JAXA: 42` -- not very helpful to the user.
 With resolveInfo, we can display `!unknown target ESA!, JAXA: 42`.
 Now the user has a much better chance of tracking down the error.
 
@@ -409,6 +418,7 @@ Target node id, resolveInfo, or both must be set for each reference -- otherwise
 Assume a node `T` that happens to be the target of a reference `myRef` from node `A`.
 When we delete `T`, the reference stays untouched: `A` still contains a reference `myRef` with target node id `T` (and maybe some resolveInfo), but the target cannot be resolved.
 LionWeb allows references with unresolvable target.
+It's up to the consumer of the model to do something about that target, though.
 
 [plantuml, deadRef, svg]
 ----
@@ -443,11 +453,13 @@ package "after deleting T" {
 
 A contained node shares the lifetime of its parent -- if the parent is deleted, the contained node gets deleted, too.
 The contained node makes no sense without its parent.
+Even if we kept the contained node, where would it go?
+We'd need to invent some special place for it.
 In contrast, the target of a reference is perfectly valid without the source.
-They can be deleted independently.
+They can be deleted independently, and don't need to be deleted when sources pointing to them are deleted.
 
-Containments form a model into tree shape.
-With references, we turn that tree into a graph, as a node can be target of several references.
+Containments establish a tree shape for the model.
+With references, we regard the model as a graph, as a node can be target of several references.
 
 [plantuml, graph, svg]
 ----
@@ -585,7 +597,7 @@ Both a contained node `C` and an annotated node `A` share the lifecycle of their
 So what's the difference?
 
 A containment must be described in the parent's node classifier.
-If the parent is of classifier `House` with containments `rooms`, and `doors`, we cannot add a containment `windows` to the parent node.
+If the parent is of classifier `House` with containments `rooms`, and `doors`, we (as users of that classifier) cannot add a containment `windows` to the parent node.
 The designer of classifier `House` made the choice that for their domain, a house should only care about rooms and doors, but not windows.
 The designer might not have anticipated our use case of their domain.
 But every user of that classifier relies on this structure of a house, so we must not mess with it.
@@ -614,7 +626,11 @@ For more context-sensitive annotations, moving the annotated node might introduc
 Annotations should not be used as replacement for proper concept design.
 If our language dealt with the domain of houses, review comments are completely independent of that domain, should not be part of it, and are perfect candidates for annotations.
 However, if our language was modeling discussions, then reviews and comments are integral part of that domain, and should be represented by proper containments and (abstract) concepts in our language.
-In this case, using annotations only because they seem conveniently applicable at lots of places is a strong modeling smell.
+In this case, using annotations only because they seem conveniently applicable at lots of places is a strong modeling smell. +
+But we've just added the very domain-specific `windows` as annotations to a `House` -- doesn't that smell the same?
+Yes.
+Ideally, we would work with ``House``'s designer to add windows, or create a specialized concept `WindowedHouse extends House`.
+We might resort to windows as annotations as a trade-off if we interchanged house models with external parties.
 
 == Languages
 
