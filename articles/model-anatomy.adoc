@@ -91,6 +91,7 @@ The parent of node `A` is the node `B` that contains `A`.
 For example, node `10` of classifier `Car` might contain node `5` of classifier `PetrolEngine`, and node `11` of classifier `SteeringWheel`.
 Thus, the parent of `5` is `10`, and the parent of `11` is also `10`.
 
+.Parent example
 [plantuml, carParent, svg]
 ----
 hide empty members
@@ -113,6 +114,7 @@ In the example above, node `10` has children `5` and `11`; node `5` does not hav
 A node's classifier defines which kind of children a node can have -- the node's <<containment, containments>>.
 In our example, node `5` might be contained in `engine`, and node `11` in `steering` -- both defined in classifier `Car`.
 
+.Containment example
 [plantuml, carContainments, svg]
 ----
 hide empty members
@@ -131,7 +133,7 @@ Let's add a node `22` of annotation `DiagramPosition` to our `10:Car`, and node 
 Thus, the parent of `22` is `10`, and the parent of `33` is `11`.
 We also call this the _annotated node_: node `10` has annotation `22`, and node `22` has annotated node `10`.
 
-
+.Annotation instances example
 [plantuml, carAnnotations, svg]
 ----
 hide empty members
@@ -154,8 +156,7 @@ steering *- review: <<annotations>>
 
 engine -[hidden]> steering
 ----
-
-In summary, a node's parent must always be symmetric -- either to the parent's children, or the parent's annotation instances.
+In summary, a node's parent must always have a counterpart -- either in the parent's children, or in the parent's annotation instances.
 
 If we deleted the parent node, we implicitly deleted all its children and annotation instances, each of their children and annotation instances, and so on.
 In other words, a child or annotation instance shares the lifetime of its parent.
@@ -169,6 +170,7 @@ If the annotated node is gone, the annotation instance makes no sense anymore --
 We use properties to store simple values inside a node.
 A node of classifier `Person` might have properties `name: String`, `age: Integer` and `alive: Boolean`.
 
+.Person properties example
 [plantuml, personProperties, svg]
 ----
 hide empty members
@@ -181,7 +183,7 @@ class person as "3:Person" {
 
 A node's classifier describes which properties can appear in the node.
 This description includes the property's _name_, _key_, whether it is _optional_, and its _type_.
-The name is for humans to understand the property; we use the key to uniquely identify it technically.
+The name is for humans to understand the property; we use the key to uniquely identify the property technically.
 With the optional flag we specify whether a node without this property is considered valid or not:
 In our system, a `person` without known `name` might be a problem, but we could still process them without knowing their `age`.
 
@@ -202,7 +204,7 @@ String properties can have any string value, including empty.
 Integer properties support positive and negative decimal integers of any length.
 Boolean properties can only have the values `true` or `false`.
 A language might define its own additional _primitive types_.
-In any case, we store all of them as string in low-level serialization format (i.e. JSON).
+In any case, we store all of them as string in the low-level serialization format (i.e. JSON).
 
 ==== Enumerations
 A property can also be of an _enumeration_ type.
@@ -213,6 +215,7 @@ A language must explicitly declare an enumeration to use it as the type of a pro
 Enumeration properties must have one of the enumeration literal values.
 On low-level serialization, we store the value as the enumeration literal's key.
 
+.Enumeration example
 [plantuml, personEnum, svg]
 ----
 hide empty members
@@ -231,6 +234,7 @@ LionWeb supports another kind of simple type: _structured data type_ (added in L
 They are a collection of other primitive types, called _fields_.
 Both the structured data type and each field has a _name_ and _key_ with the usual meaning.
 
+.Structured data type example
 [plantuml, sdtColor, svg]
 ----
 json "TextPosition [key=tp]" as tp {
@@ -258,6 +262,7 @@ A node `A` can contain other nodes `B` and `C`.
 Then `B` has the <<parent, parent>> `A`; `A` has _children_ `B` and `C`.
 If `C` contains `D`, then `D` has the _ancestors_ `C` and `A`; `A` has the _descendants_ `B`, `C`, and `D`.
 
+.Parent, children, ancestors, and descendants example
 [plantuml, axis, svg]
 ----
 hide empty members
@@ -280,6 +285,7 @@ A node can never contain itself, neither directly nor indirectly.
 We use containments if the contained node only makes sense together with its parent -- a `Coordinate` is not very useful if we don't know which shape it belongs to.
 We also identify different containments -- for a `Rectangle`, we want to know whether a contained `Coordinate` is `topLeft` or `lowerRight`.
 
+.Several containments example
 [plantuml, rectangle, svg]
 ----
 hide empty members
@@ -294,13 +300,15 @@ Rectangle *-- Coordinate: lowerRight
 
 A node's classifier describes the valid containments.
 This description includes the containment’s _name_, _key_, whether it is _optional_, whether we allow _multiple_ nodes in the containment, and its _type_.
-Name, key and optional mean the same for containments and <<properties, properties>>.
+Name, key and optional flag mean the same for containments as for <<properties, properties>>.
+Contrary to properties, a containment can be singular or multiple.
 A singular containment (i.e. `multiple = false`) allows only one contained node, e.g. a `Rectangle` can contain only one `topLeft` coordinate.
 In contrast, a `House` can contain multiple ``Room``s.
 For multiple containments, we keep track which child is contained at which position.
 As every contained node can have only one parent, we cannot have duplicates in multiple containments.
 Thus, multiple containments behave like an _ordered set_.
 
+.Single (`address`) and multiple (`rooms`) containments example
 [plantuml, house, svg]
 ----
 hide empty members
@@ -347,7 +355,8 @@ A node can be referenced by none, one, or many other nodes.
 It can be referenced by itself.
 A node can reference another node (or itself) more than once.
 
-[[space-project]]
+.Interstellar projects example
+[[interstellar-project]]
 [plantuml, project, svg]
 ----
 hide empty members
@@ -401,7 +410,7 @@ However, it's up to the application to select and set the appropriate resolveInf
 
 This serves two purposes:
 
-* In the <<space-project, space project example above>>, assume some app that displays the list of external parties for the project as `ESA: 23, JAXA: 42`.
+* In the <<interstellar-project, interstellar project example above>>, assume some app that displays the list of external parties for the project as `ESA: 23, JAXA: 42`.
 Now someone thinks there's no project left with ESA, and deletes node 87 (the ESA one).
 If the `externalParties` reference only knew the target node id, the best possible display would be `!unknown target 87!, JAXA: 42` -- not very helpful to the user.
 With resolveInfo, we can display `!unknown target ESA!, JAXA: 42`.
@@ -420,6 +429,7 @@ When we delete `T`, the reference stays untouched: `A` still contains a referenc
 LionWeb allows references with unresolvable target.
 It's up to the consumer of the model to do something about that target, though.
 
+.Unresolved references example
 [plantuml, deadRef, svg]
 ----
 hide empty members
@@ -461,6 +471,7 @@ They can be deleted independently, and don't need to be deleted when sources poi
 Containments establish a tree shape for the model.
 With references, we regard the model as a graph, as a node can be target of several references.
 
+.Node graph example
 [plantuml, graph, svg]
 ----
 hide empty members
@@ -507,6 +518,7 @@ We can use annotation instances as reference target.
 Assuming node `X` mentions node `Y` in ``X``'s annotation instances, we say `X` is _annotated by_ `Y`, and `Y` has _annotated node_ `Y`.
 ``Y``'s annotated node is always also ``Y``'s parent node.
 
+.Relations and terms between a node and its annotation instance
 [plantuml, annotationInstance, svg]
 ----
 hide empty members
@@ -535,6 +547,8 @@ With node `34`, we have an annotation instance of `SourcePosition`.
 Node `1:Function` can be _annotated by_ node `34:SourcePosition`, because `SourcePosition` states it _annotates_ `Function`.
 In contrast, node `3:Argument` cannot be _annotated by_ node `35:SourcePosition`, because `Argument` is not compatible with `Function` (the kind of classifier ``SourcePosition`` _annotates_).
 
+.Valid (`34`) and invalid (`35`) annotation instances example
+[[invalid-annotation]]
 [plantuml,annotation,svg]
 ----
 hide empty members
@@ -593,7 +607,7 @@ Annotations can _annotate_ other annotations; however, this approach introduces 
 #TODO:# Do we allow unresolvable annotations?
 
 === Differences between containment and annotation instance
-Both a contained node `C` and an annotated node `A` share the lifecycle of their parent node `P`.
+Both a contained node `C` and an annotation instance `A` share the lifecycle of their parent node `P`.
 So what's the difference?
 
 A containment must be described in the parent's node classifier.
@@ -609,28 +623,32 @@ So we can come up with an annotation `WindowAnnotation` that `annotates: House`,
 All these nodes still adhere to the intents of ``House``'s designer, but also transport the additional information about windows we need for our use case.
 
 Even more importantly, we can put orthogonal concerns into annotation instances.
-For the domain of `House`, we don't want to bother with the details how a parser constructed that node.
+For the domain of our <<invalid-annotation, functions with arguments>>, we don't want to bother with the details how a parser constructed that node.
 But it would be useful to show users where this node originated from in case of errors.
-Not a problem with an annotation `ParserSource` that `annotates: Node` (i.e. any node).
-Similarly, we could come up with an annotation `ReviewComment` to be used during code reviews.
+Not a problem with an annotation `SourcePosition`.
+Similarly, we could come up with an annotation `ReviewComment` that `annotates: Node` (i.e. any node), to be used during code reviews.
 The reviewer can attach instances to any node, without interfering with the original intent of these nodes.
 
 Review comments demonstrate one drawback of annotations: we're violating the generally valued idea of _separating concerns_, as we mix domain concerns and process concerns in the same model.
 The alternative would be to keep both concerns in separate models, and have the review comments reference the node they apply to.
 Experience shows this approach is very hard to maintain:
-What happens if we deleted a house, and there's still a review comment referring to it?
+What happens if we deleted a function, and there's still a review comment referring to it?
 The review model might not be loaded during the deletion, so it now contains a "zombie" review comment.
 We might need to introduce "garbage collection" strategies to find such zombies and deal with them.
-For more context-sensitive annotations, moving the annotated node might introduce similar problems.
+For more context-sensitive annotations, moving the annotated node might introduce similar problems:
+The annotation instance might not make sense in the context of the annotated node's new position.
+As example, imagine an annotation `Profiling { cpuPercentage: Integer; annotates = Statement }`.
+This annotation is not only meaningless, but actually wrong if the statement were moved somewhere else.
 
 Annotations should not be used as replacement for proper concept design.
 If our language dealt with the domain of houses, review comments are completely independent of that domain, should not be part of it, and are perfect candidates for annotations.
 However, if our language was modeling discussions, then reviews and comments are integral part of that domain, and should be represented by proper containments and (abstract) concepts in our language.
-In this case, using annotations only because they seem conveniently applicable at lots of places is a strong modeling smell. +
-But we've just added the very domain-specific `windows` as annotations to a `House` -- doesn't that smell the same?
-Yes.
-Ideally, we would work with ``House``'s designer to add windows, or create a specialized concept `WindowedHouse extends House`.
-We might resort to windows as annotations as a trade-off if we interchanged house models with external parties.
+In this case, using annotations only because they seem conveniently applicable at lots of places is a strong modeling smell.
+
+== Built-in Library
+
+plantuml::../metametamodel/builtins.puml[format=svg]
+
 
 == Languages
 
