@@ -430,6 +430,7 @@ The node containing the reference is called _source_, the referred node is calle
 A node can be referenced by none, one, or many other nodes.
 It can be referenced by itself.
 A node can reference another node (or itself) more than once.
+Thus, multiple references behave like a _list_.
 
 .Interstellar projects example
 [[interstellar-project]]
@@ -496,7 +497,7 @@ Now the user has a much better chance of tracking down the error.
 
 * We need to know the target node id in order to store it in a reference.
 But in parser-based systems, after parsing we know only some kind of identifier of a reference target.
-We might want to store this unresolved _abstract syntax tree_ (AST).
+We might want to store this unresolved _abstract syntax tree_ (AST) as a LionWeb model.
 A later linking step hopefully finds the actual target and fills in the proper target node id.
 
 Target node id, resolveInfo, or both must be set for each reference -- otherwise the reference is pointless.
@@ -590,6 +591,28 @@ Also, the annotation instance must be mentioned in its parent's annotation insta
 Both these criteria are indirect; thus, when only looking at a node (without examining its classifier or parent), we cannot distinguish annotation instances from other nodes.
 That's by design: _everything_ is a node, remember?
 
+.Annotations examples
+[plantuml, annotationsExample, svg]
+----
+hide empty members
+
+class "12:Requirement" as req {
+  description:String = \n  "Associate an issue to every PR"
+}
+
+annotation "13:ParsedFromLine" as parsed {
+  lineNumber: Integer = 37
+}
+
+annotation "14:ReviewComment" as review {
+  author: String = "eve"
+  comment: String = \n  "Even if just fixing typos?!"
+}
+
+parsed <-* req: <<annotations>>[0]
+req *-> review: <<annotations>>[1]
+----
+
 An annotation instance can have any kind and amount of properties, containments, references, and other annotation instances.
 We can use annotation instances as reference target.
 
@@ -611,6 +634,10 @@ X *-> Y: > <<annotations>>
 ----
 
 Annotation instances share the lifecycle of their annotated node; when we delete the annotated node, the annotation instance gets also deleted.
+
+We keep track of the order of annotation instances.
+As every annotation instance can have only one parent, we cannot have duplicates in annotations.
+Thus, annotation instances behave like an _ordered set_.
 
 ==== Applicable classifiers
 The classifier of an annotation instance must be an annotation.
