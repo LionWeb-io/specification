@@ -32,7 +32,7 @@ A node is the fundamental building block in LionWeb.
 It consists of a unique identifier (**id**), a **classifier** to define the nature / type / class of the node, the node's **parent** node and lists of **properties**, **containments**, **references**, and **annotation instances**, respectively.
 We group a node's properties, containments, and references as the **features** of that node.
 
-Properties are simple values like `name: String`, `age: Integer` or `alive: Boolean`.
+<<properties>> are simple values like `name: String`, `age: Integer` or `alive: Boolean`.
 
 .Properties examples
 [plantuml, nodePropertiesExample, svg]
@@ -46,7 +46,7 @@ class 1:Person {
 }
 ----
 
-Containments are other nodes that this node is composed of; examples would be `mainEntrance: Door[1]` or `corners: Coordinate[0..*]`.
+<<containments>> are other nodes that this node is composed of; examples would be `mainEntrance: Door[1]` or `corners: Coordinate[0..*]`.
 
 .Containments examples
 [plantuml, nodeContainmentsExample, svg]
@@ -70,7 +70,7 @@ shape *--> "0..*" coord0: corners[0]
 shape *--> "0..*" coord1: corners[1]
 ----
 
-References are other nodes that this node relates to; examples would be `surface: Material[1]` or `stakeholders: Employee[1..*]`.
+<<references>> are other nodes that this node relates to; examples would be `surface: Material[1]` or `stakeholders: Employee[1..*]`.
 
 .References examples
 [plantuml, nodeReferencesExample, svg]
@@ -90,7 +90,7 @@ project ..> "1..*" alice: stakeholders[0]
 project ..> "1..*" bob: stakeholders[1]
 ----
 
-Annotation instances are other nodes that represent orthogonal concerns of this node; examples include `ParsedFromLine` or `ReviewComment`.
+<<annotations, Annotation instances>> are other nodes that represent orthogonal concerns of this node; examples include `ParsedFromLine` or `ReviewComment`.
 
 .Annotations examples
 [plantuml, nodeAnnotationsExample, svg]
@@ -281,6 +281,7 @@ Boolean properties can only have the values `true` or `false`.
 A language might define its own additional _primitive types_.
 In any case, we store all of them as string in the low-level serialization format (i.e. JSON).
 
+[#enumerations]
 ==== Enumerations
 A property can also be of an _enumeration_ type.
 Enumerations have a _name_, _key_, and a list of _enumeration literals_.
@@ -304,6 +305,7 @@ enum status as "CivilStatus [key=cs]"
 }
 ----
 
+[#structured-data-types]
 ==== Structured data types
 LionWeb supports another kind of simple type: _structured data type_ (added in LionWeb version 2024.1).
 They are a collection of other primitive types, called _fields_.
@@ -418,6 +420,16 @@ b *--> c3: rooms [2]
 
 A containment's type refers to a classifier, and describes which nodes can be part of that containment.
 Only nodes that have a compatible classifier can be part of that containment.
+
+[NOTE]
+====
+All of interfaces, concepts, and annotations are classifiers.
+Thus, a containment can specify its type to be `IMoveable` interface, `AbstractShape` (abstract) concept,
+`Rectangle` (concrete) concept, or `Todo` annotation.
+
+The latter is an edge case, but has its usages: We might want to annotate other nodes with todos specific to that node, but also have a list of general todos somewhere, unrelated to a specific node.
+Moreover, we definitely want to allow both interface and concept as containment type; keeping annotation out of that would clutter LionWeb's meta-metamodel.
+====
 
 On serialization level, we store the contained node's id for a containment.
 A containment is invalid if the contained node's id cannot be resolved.
@@ -635,12 +647,13 @@ X -[#transparent]> Y: > annotated by <U+00a0><U+00a0><U+00a0>
 X *-> Y: > <<annotations>>
 ----
 
-Annotation instances share the lifecycle of their annotated node; when we delete the annotated node, the annotation instance gets also deleted.
+Annotation instances share the lifetime of their annotated node; when we delete the annotated node, the annotation instance gets also deleted.
 
 We keep track of the order of annotation instances.
 As every annotation instance can have only one parent, we cannot have duplicates in annotations.
 Thus, annotation instances behave like an _ordered set_.
 
+[#annotation-applicable-classifiers]
 ==== Applicable classifiers
 The classifier of an annotation instance must be an annotation.
 Annotations are similar to concepts, and both are classifiers.
@@ -708,7 +721,7 @@ Annotations can _annotate_ other annotations; however, this approach introduces 
 #TODO:# Do we allow unresolvable annotations?
 
 === Differences between containment and annotation instance
-Both a contained node `C` and an annotation instance `A` share the lifecycle of their parent node `P`.
+Both a contained node `C` and an annotation instance `A` share the lifetime of their parent node `P`.
 So what's the difference?
 
 A containment must be described in the parent's node classifier.
@@ -754,13 +767,90 @@ This library contains our pre-defined <<primitive-types, primitive types>>, `Nod
 Named things are so common in models that it warrants a special interface.
 Implementations can offer default behavior for nodes of `INamed` type, e.g. use the name in tree displays, for issue reporting, or as default for <<resolveInfo, resolveInfo>> in reference targets.
 
+.Built-in library
 plantuml::model-anatomy/builtins.puml[format=svg]
 
 
 == Languages
+Programming languages like java natively know things like classes, records, and enums.
+We can use them to describe the structures we care about in our program, e.g. `class Person`.
+Then, we work with instances of these structures, e.g. `new Person("Joe")`.
 
+LionWeb has the same three conceptual layers:
+LionWeb natively knows e.g. concepts, data types, and enumerations; we call this "meta-metamodel" or _M3_.
+With them, we can describe e.g. `concept Person`; this would be part of a "Language" or _M2_.
+Then, we work with instances, aka nodes, e.g. `node<23:Person> { name: String = "Joe" }` as part of _M1_.
+
+This section describes our meta-metamodel.
+We've already explained some aspects in the <<nodes, nodes>> section; we won't duplicate that here.
+
+Our meta-metamodel closely resembles other meta-metamodels like EMF Ecore, MPS structure aspect, Java, C#, TypeScript, etc.
+This is a very deliberate choice: We want to be as compatible as possible.
+Also, several decades of usage shows they _just work_ -- we don't want to reinvent the wheel, or be different _because_.
+
+.LionWeb meta-metamodel. Green boxes relate to _classifiers_; blue boxes to _features_, and red boxes to _data types_.
 plantuml::model-anatomy/metametamodel.puml[format=svg]
 
+A _language_ groups related _classifiers_ and _data types_ (summarized as _language entities_).
+For example, we might design a language to describe houses, or cars.
+We've already covered a language's _version_ in the <<meta-pointer>> section.
+It also explains _keys_, used to uniquely identify everything inside a language.
+
+[#classifiers]
+=== Classifiers
+Classifiers define the nature / type / class of a node.
+LionWeb knows three kinds of _classifiers_: _concepts_, _annotations_, and _interfaces_.
+Every classifier can define an arbitrary number of <<features, features>>.
+
+All classifiers support _inheritance_, meaning that a classifier "inherits" all features defined by its direct or indirect _generalizations_.
+A generalization, (a.k.a. supertype, superclass, extended class, implemented interface) is the opposite of _specialization_ (a.k.a. subtype, subclass, interface implementations).
+A classifier `A` is _compatible_ to a classifier `B` if `A` is a (direct or indirect) specialization of `B` or, looking at the same fact from the other direction: `B` is a (direct or indirect) generalization of `A`.
+Every classifier implicitly or explicitly specializes `Node` from LionWeb's <<builtins, built-in library>>.
+
+Concepts are equivalent to classes in object-orientation.
+They can _extend_ one other concept, and _implement_ any number of interfaces.
+An _abstract_ concept can never be instantiated, i.e. there cannot be a node with that classifier.
+An abstract concept can extend a _concrete_ (i.e. `abstract=false`) concept, and vice versa.
+Concepts marked as _partition_ can only appear as root nodes in a model (i.e. not have a parent).
+
+Annotations are similar to concepts: They can _extend_ one other annotation and _implement_ interfaces.
+They are always concrete, and cannot be used as partition.
+Additionally, annotations describe which classifiers they are <<annotation-applicable-classifiers, applicable to>>.
+
+Interfaces can _extend_ any number of other interfaces.
+They are always abstract, thus can never be instantiated.
+
+.Single vs. multiple inheritance
+[NOTE]
+====
+Concepts and annotations support _single inheritance_, interfaces _multiple inheritance_.
+This is in line with most modern programming languages.
+However, programming languages do this to avoid the https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem[diamond inheritance problem].
+We don't have this problem in LionWeb, as we don't have behavior.
+
+This begs the question: What's the difference between an abstract concept and an interface?
+The answer: Not much.
+So we could just abandon interfaces completely, allow multiple inheritance for concepts, and be done, right?
+Yes, that would work.
+
+https://github.com/LionWeb-io/specification/issues/104[Issue 104] lists all the gory details of our discussion on this topic.
+The gist: We couldn't find strong arguments in either direction.
+It mostly comes down to compatibility with other systems, which in turn boils down to _who does the work_:
+if we allowed multiple inheritance, converters to similar systems like EMF or C{plus}{plus} would be simple, but converters to single inheritance systems like MPS, Java or C# would need to spend lots of effort on mapping.
+The same applies with disallowing multiple inheritance: MPS, Java or C# converters are simple, but EMF or C{plus}{plus} become trickier.
+We took the latter direction more or less arbitrarily so we can move on.
+====
+
+[#features]
+=== Features
+Features are the possible contents of a <<classifiers, classifier>>.
+LionWeb supports three kinds of _features_: <<properties, properties>> are simple values, <<containments, containments>> describe other nodes with shared lifetime, and <<references, references>> point to other nodes.
+We summarize the latter two as _links_.
+The linked sections describe the details of all features.
+
+=== Data types
+Data types describe the possible values of a <<properties, property>>.
+LionWeb supports three kinds of _data types_: <<primitive-types, primitive types>> with no further specified structure, <<enumerations, enumerations>> with a finite, pre-defined, non-extensible list of possible values, and <<structured-data-types, structured data types>> as combination of other data types.
 
 [appendix]
 [[notation]]
