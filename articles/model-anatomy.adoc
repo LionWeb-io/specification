@@ -253,7 +253,7 @@ json "TextRange [key=tr]" as tr {
 We store the value of a structured data type as string, the same as all other primitive types.
 The content of that string is a serialized and escaped JSON object.
 As example, the value of above's `TextPosition` would be `"{\"lin\": \"42\", \"col\": \"-30\"}"`.
-Refer to <<{serialization}.adoc#structured-datatype, serialization specs>> for details.
+Refer to <<{serialization}.adoc#structuredDatatype, serialization specs>> for details.
 
 [[containments]]
 === Containments
@@ -647,12 +647,12 @@ In this case, using annotations only because they seem conveniently applicable a
 
 == Built-in Library
 
-plantuml::../metametamodel/builtins.puml[format=svg]
+plantuml::model-anatomy/builtins.puml[format=svg]
 
 
 == Languages
 
-plantuml::../metametamodel/metametamodel.puml[format=svg]
+plantuml::model-anatomy/metametamodel.puml[format=svg]
 
 
 [appendix]
