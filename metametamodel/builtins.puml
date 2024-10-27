@@ -11,12 +11,10 @@ interface INamed <<Interface>> #LightGreen {
 class String <<(P, darkgray) PrimitiveType>> #LightPink
 class Integer <<(P, darkgray) PrimitiveType>> #LightPink
 class Boolean <<(P, darkgray) PrimitiveType>> #LightPink
-class JSON <<(P, darkgray) PrimitiveType>> #LightPink
 
 Node -[hidden]- String
 
 String -[hidden] Integer
 Integer -[hidden] Boolean
-Boolean -[hidden] JSON
 
 @enduml
