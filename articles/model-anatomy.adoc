@@ -236,6 +236,24 @@ In other words, a child or annotation instance shares the lifetime of its parent
 This also explains why we consider the annotated node the parent of an annotation instance:
 If the annotated node is gone, the annotation instance makes no sense anymore -- they share the annotated node's lifetime.
 
+.Parent vs. Supertype
+[NOTE]
+====
+We might confuse the _parent of a node_ with the _generalization of a <<classifiers, classifier>>_ (a.k.a. supertype, superclass, extended class, implemented interface).
+They are completely independent of each other.
+
+_Parent_ always refers to a node, i.e. instance / M1 level: node `A` is the parent of node `B`.
+
+_Generalization_ always refers to a classifier, i.e. language / M2 level: concept `List` is the generalization of concept `LinkedList`.
+
+* We might have node `1:List` that contains node `2:List`: `1` is parent of `2`, but both are ``List``s.
+* We might have node `3:LinkedList` that contains node `4:List`: `3` is parent of `4`, although ``4``'s classifier is a generalization of ``3``'s classifier.
+* We might have node `5:List` and another, unrelated, node `6:LinkedList`. `5` and `6` have no parent-relationship, but ``5``'s classifier is a generalization of ``6``'s classifier.
+* We might have node `7:List` that contains node `8:Person`: `7` is parent of `8`, but ``7``'s classifier is completely unrelated to ``8``'s classifier.
+
+
+====
+
 [[properties]]
 === Properties
 
