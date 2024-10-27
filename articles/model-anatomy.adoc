@@ -272,8 +272,9 @@ This leads to all kinds of problems we'd like to avoid.
 
 The following subsections describe the kinds of data types supported by LionWeb.
 
+[#primitive-types]
 ==== Primitive types
-LionWeb ships with built-in types for `String`, `Integer`, and `Boolean`, as they are needed in almost all systems.
+LionWeb ships with <<builtins, built-in types>> for `String`, `Integer`, and `Boolean`, as they are needed in almost all systems.
 String properties can have any string value, including empty.
 Integer properties support positive and negative decimal integers of any length.
 Boolean properties can only have the values `true` or `false`.
@@ -480,11 +481,12 @@ This can help, for example, to describe steps: `steps: Task[1..*] = {generate, s
 LionWeb does not support bidirectional references.
 They are very hard to maintain, and also hard to process (i.e. if we want to traverse the whole model).
 
+[#resolveInfo]
 ==== ResolveInfo
 For references, we store the target node's id, and additionally a `resolveInfo`.
 ResolveInfo is a string that somehow describes the target node.
 Typical candidate would be the target's node `name` (if the target node has such a property).
-To support this typical default behavior, LionWeb has a built-in interface `INamed` with one property `name: String` that might be implemented by any classifier.
+To support this typical default behavior, LionWeb has a <<builtins, built-in interface>> `INamed` with one property `name: String` that might be implemented by any classifier.
 However, it's up to the application to select and set the appropriate resolveInfo.
 
 This serves two purposes:
@@ -700,7 +702,7 @@ package M1 <<Rectangle>> {
 M2 -[hidden]- M1
 ----
 
-An annotation that is applicable to all concepts says it annotates `Node` from LionWeb's built-in library.
+An annotation that is applicable to all concepts says it annotates `Node` from LionWeb's <<builtins, built-in library>>.
 Annotations can _annotate_ other annotations; however, this approach introduces complexities and should be used with great caution.
 
 #TODO:# Do we allow unresolvable annotations?
@@ -744,7 +746,13 @@ If our language dealt with the domain of houses, review comments are completely 
 However, if our language was modeling discussions, then reviews and comments are integral part of that domain, and should be represented by proper containments and (abstract) concepts in our language.
 In this case, using annotations only because they seem conveniently applicable at lots of places is a strong modeling smell.
 
+[#builtins]
 == Built-in Library
+Every LionWeb implementation must ship with a built-in library.
+This library contains our pre-defined <<primitive-types, primitive types>>, `Node` as the superconcept of all concepts, and interface `INamed`.
+
+Named things are so common in models that it warrants a special interface.
+Implementations can offer default behavior for nodes of `INamed` type, e.g. use the name in tree displays, for issue reporting, or as default for <<resolveInfo, resolveInfo>> in reference targets.
 
 plantuml::model-anatomy/builtins.puml[format=svg]
 
