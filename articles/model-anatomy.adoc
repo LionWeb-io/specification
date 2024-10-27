@@ -255,7 +255,9 @@ class person as "3:Person" {
 
 A node's classifier describes which properties can appear in the node.
 This description includes the property's _name_, _key_, whether it is _optional_, and its _type_.
-The name is for humans to understand the property; we use the key to uniquely identify the property technically.
+On low-level serialization, we use a <<meta-pointer>> to refer to the description for each property value.
+
+The property's name is for humans to understand the property; we use the key to uniquely identify the property technically.
 With the optional flag we specify whether a node without this property is considered valid or not:
 In our system, a `person` without known `name` might be a problem, but we could still process them without knowing their `age`.
 
@@ -372,6 +374,8 @@ Rectangle *--> Coordinate: lowerRight
 
 A node's classifier describes the valid containments.
 This description includes the containment’s _name_, _key_, whether it is _optional_, whether we allow _multiple_ nodes in the containment, and its _type_.
+On low-level serialization, we use a <<meta-pointer>> to refer to the description for each containment.
+
 Name, key and optional flag mean the same for containments as for <<properties, properties>>.
 Contrary to properties, a containment can be singular or multiple.
 A singular containment (i.e. `multiple = false`) allows only one contained node, e.g. a `Rectangle` can contain only one `topLeft` coordinate.
@@ -465,7 +469,9 @@ coop <. pr2: mainResponsible
 
 A node's classifier describes the valid references.
 This description includes the references’ _name_, _key_, whether it is _optional_, whether we allow _multiple_ targets in the reference, and its _type_.
-All of them mean the same as for <<containments, containments>>, respectively.
+On low-level serialization, we use a <<meta-pointer>> to refer to the description for each reference.
+
+The description means the same as for <<containments, containments>>, respectively.
 For multiple references, we keep track which target is listed at which position.
 The same target can appear several times in a multiple reference.
 This can help, for example, to describe steps: `steps: Task[1..*] = {generate, saveAll, compile, saveAll}` refers to Task `saveAll` twice.
