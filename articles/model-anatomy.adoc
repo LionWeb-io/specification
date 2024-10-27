@@ -13,11 +13,11 @@ This article walks us through a LionWeb model:
 What it is, what's inside, how the inside looks, what the contents mean, and why they are that way.
 It is meant as an introduction to some of the details of LionWeb.
 Our target audience are developers that want to work with LionWeb.
-We don't assume any prior knowledge of LionWeb; some experience with general modeling ideas is helpful.
+We don't assume any prior knowledge of LionWeb; some experience with object-oriented languages, and general modeling ideas, is helpful.
 
 == Introduction
 The fundamental world view in LionWeb is "everything is a model".
-This means we express everything we talk about in this context in the form of models.
+This means we express everything we talk about in the form of models.
 
 But what is a model?
 STOP -- don't run away!
@@ -121,14 +121,14 @@ Let's look into each of these in more detail.
 The id of a node is a string of arbitrary length, consisting of characters `A`-`Z`, `a`-`z`, `0`-`9`, dash `-` and underscore `_`.
 It cannot be empty, and it must be unique for all nodes in the model.
 
-The valid character set coincides to the output of _base64url_-encoding.
-This comes very handy if we had to derive the node id from some other source, like a binary hash, or fully qualified name.
+The valid character set coincides with the output of _base64url_-encoding.
+This comes very handy if we had to derive the node id from some other source, like a binary hash, or a fully qualified name.
 
 We chose this character set, as it should be compatible with any run-time environment, and avoid any encoding issues.
 We don't limit the id's length, so any kind of other source can be represented -- fully qualified names tend to get very long, for example.
 
 We assume nodes with equal id string to be identical.
-Assuming an implementation in an object-oriented language like Java, something went wrong if we had e.g. two different Java objects of class `Node`, but with equal `nodeId` field.
+Assuming an implementation in an object-oriented language like Java, something went wrong if we had two different Java objects of class `Node`, but with equal `nodeId` field.
 
 Node ids should NOT carry any meaning:
 Only because a node id happens to contain the string `frontLeftWheel`, we should NOT assume its classifier might be `Wheel`, or its containment might be `frontLeft`.
@@ -138,7 +138,7 @@ However, examples and tests are for human consumption -- real nodes (in their ra
 [[meta-pointer, meta-pointer]]
 === Meta-pointer
 Before we get to the next part of a node, classifier, we need to discuss _meta-pointers_.
-Any time we refer from an instance model (M1) to its metamodel (M2 a.k.a. _Language_), we use meta-pointers.
+Any time we refer from an instance model (M1) to its metamodel (M2 a.k.a. <<Languages, language>>), we use meta-pointers.
 They are a triple of {_language key_, _language version_, _element key_}, for example `{language=MyLanguage, version=23-alpha, key=MyConcept}`.
 Both language key and element key use the same character set as <<node-id, node ids>>, whereas language version can be any non-empty string.
 
@@ -150,8 +150,8 @@ We just assume that equal strings refer to the identical version.
 
 === Node classifier
 A node's classifier is a <<meta-pointer>> that defines the node's nature, or type or class -- "what kind of thing is this node?"
-A classifier of a node is equivalent to the class of a Java object.
-The classifier can either be a _concrete concept_ or an _annotation_. It cannot be an _abstract concept_ or _interface_, as we cannot instantiate them.
+A classifier of a node is equivalent to the class of a Java, C#, or TypeScript object.
+The <<classifiers, classifier>> can either be a _concrete concept_ or an _annotation_. It cannot be an _abstract concept_ or _interface_, as we cannot instantiate them.
 
 A node must adhere to its classifier.
 This means the node can only have features as described in the node's classifier.
@@ -456,7 +456,7 @@ A containment is invalid if the contained node's id cannot be resolved.
 === References
 
 A node can point to other nodes it has some relation to.
-For example, a `Project` might refer to its `mainResponsible: Employee`, or to all its `externalParties: BusinessPartner`.
+For example, a `Project` might refer to its `mainResponsible: Employee`, or to all its `externalParties: BusinessPartner[0..*]`.
 The node containing the reference is called _source_, the referred node is called _target_ of the reference.
 A node can be referenced by none, one, or many other nodes.
 It can be referenced by itself.
@@ -487,8 +487,8 @@ class jaxa as "40:BusinessPartner" {
   budget: Integer = 42
 }
 
-pr ..> esa: externalParties [0]
-pr ..> jaxa: externalParties [1]
+pr ..> "0..*" esa: externalParties [0]
+pr ..> "0..*" jaxa: externalParties [1]
 
 pr .> coop: mainResponsible
 
@@ -515,7 +515,7 @@ They are very hard to maintain, and also hard to process (i.e. if we want to tra
 ==== ResolveInfo
 For references, we store the target node's id, and additionally a `resolveInfo`.
 ResolveInfo is a string that somehow describes the target node.
-Typical candidate would be the target's node `name` (if the target node has such a property).
+Typical candidate would be the target's node `name` (if the target node had such a property).
 To support this typical default behavior, LionWeb has a <<builtins, built-in interface>> `INamed` with one property `name: String` that might be implemented by any classifier.
 However, it's up to the application to select and set the appropriate resolveInfo.
 
@@ -736,8 +736,6 @@ M2 -[hidden]- M1
 An annotation that is applicable to all concepts says it annotates `Node` from LionWeb's <<builtins, built-in library>>.
 Annotations can _annotate_ other annotations; however, this approach introduces complexities and should be used with great caution.
 
-#TODO:# Do we allow unresolvable annotations?
-
 === Differences between containment and annotation instance
 Both a contained node `C` and an annotation instance `A` share the lifetime of their parent node `P`.
 So what's the difference?
@@ -780,7 +778,7 @@ In this case, using annotations only because they seem conveniently applicable a
 [#builtins]
 == Built-in Library
 Every LionWeb implementation must ship with a built-in library.
-This library contains our pre-defined <<primitive-types, primitive types>>, `Node` as the superconcept of all concepts, and interface `INamed`.
+This library contains our pre-defined <<primitive-types, primitive types>>, `Node` as the generalization of all concepts, and interface `INamed`.
 
 Named things are so common in models that it warrants a special interface.
 Implementations can offer default behavior for nodes of `INamed` type, e.g. use the name in tree displays, for issue reporting, or as default for <<resolveInfo, resolveInfo>> in reference targets.
@@ -790,7 +788,7 @@ plantuml::model-anatomy/builtins.puml[format=svg]
 
 
 == Languages
-Programming languages like java natively know things like classes, records, and enums.
+Programming languages like Java or C# natively know things like classes, records, and enums.
 We can use them to describe the structures we care about in our program, e.g. `class Person`.
 Then, we work with instances of these structures, e.g. `new Person("Joe")`.
 
@@ -821,7 +819,7 @@ LionWeb knows three kinds of _classifiers_: _concepts_, _annotations_, and _inte
 Every classifier can define an arbitrary number of <<features, features>>.
 
 All classifiers support _inheritance_, meaning that a classifier "inherits" all features defined by its direct or indirect _generalizations_.
-A generalization, (a.k.a. supertype, superclass, extended class, implemented interface) is the opposite of _specialization_ (a.k.a. subtype, subclass, interface implementations).
+A generalization, (a.k.a. supertype, superclass, extended class, implemented interface) is the opposite of _specialization_ (a.k.a. subtype, subclass, interface implementations, "is a").
 A classifier `A` is _compatible_ to a classifier `B` if `A` is a (direct or indirect) specialization of `B` or, looking at the same fact from the other direction: `B` is a (direct or indirect) generalization of `A`.
 Every classifier implicitly or explicitly specializes `Node` from LionWeb's <<builtins, built-in library>>.
 
@@ -864,7 +862,6 @@ We took the latter direction more or less arbitrarily so we can move on.
 Features are the possible contents of a <<classifiers, classifier>>.
 LionWeb supports three kinds of _features_: <<properties, properties>> are simple values, <<containments, containments>> describe other nodes with shared lifetime, and <<references, references>> point to other nodes.
 We summarize the latter two as _links_.
-The linked sections describe the details of all features.
 
 === Data types
 Data types describe the possible values of a <<properties, property>>.
