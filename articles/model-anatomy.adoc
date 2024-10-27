@@ -398,7 +398,7 @@ For multiple references, we keep track which target is listed at which position.
 The same target can appear several times in a multiple reference.
 This can help, for example, to describe steps: `steps: Task[1..*] = {generate, saveAll, compile, saveAll}` refers to Task `saveAll` twice.
 
-LionWeb does not support bi-directional references.
+LionWeb does not support bidirectional references.
 They are very hard to maintain, and also hard to process (i.e. if we want to traverse the whole model).
 
 ==== ResolveInfo
@@ -593,12 +593,6 @@ package M1 <<Rectangle>> {
 }
 
 M2 -[hidden]- M1
-
-'Function <.. f1: <<classifier>>
-'Argument <.. a1: <<classifier>>
-'SourcePosition <.. an1: <<classifier>>
-'SourcePosition <. an2: <<classifier>>
-
 ----
 
 An annotation that is applicable to all concepts says it annotates `Node` from LionWeb's built-in library.
