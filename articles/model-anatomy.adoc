@@ -7,6 +7,7 @@ include::../shared/issue-footnotes.adoc[]
 :toc: preamble
 :toclevels: 3
 :sectnums:
+:!figure-caption:
 
 This article walks us through a LionWeb model:
 What it is, what's inside, how the inside looks, what the contents mean, and why they are that way.
@@ -172,8 +173,8 @@ class engine as "5:PetrolEngine"
 
 class steering as "11:SteeringWheel"
 
-car *-- engine
-car *-- steering
+car *--> engine
+car *--> steering
 ----
 
 Every node MUST have exactly one parent -- except for root nodes.
@@ -195,8 +196,8 @@ class engine as "5:PetrolEngine"
 
 class steering as "11:SteeringWheel"
 
-car *-- engine: engine
-car *-- steering: steering
+car *--> engine: engine
+car *--> steering: steering
 ----
 
 Additionally, a node can have <<annotation, annotation instances>>.
@@ -214,16 +215,16 @@ class engine as "5:PetrolEngine"
 
 class steering as "11:SteeringWheel"
 
-car *-- engine: engine
-car *-- steering: steering
+car *--> engine: engine
+car *--> steering: steering
 
 annotation pos as "22:DiagramPosition"
 
-car *- pos: <<annotations>>
+car *-> pos: <<annotations>>
 
 annotation review as "33:ReviewComment"
 
-steering *- review: <<annotations>>
+steering *-> review: <<annotations>>
 
 engine -[hidden]> steering
 ----
@@ -344,9 +345,9 @@ class B
 class C
 class D
 
-A *-- B
-A *-- C
-C *-- D
+A *--> B
+A *--> C
+C *--> D
 ----
 
 Every node (except root nodes) must have exactly one parent, thus no node can be contained more than once.
@@ -365,8 +366,8 @@ class Rectangle
 
 class Coordinate
 
-Rectangle *-- Coordinate: topLeft
-Rectangle *-- Coordinate: lowerRight
+Rectangle *--> Coordinate: topLeft
+Rectangle *--> Coordinate: lowerRight
 ----
 
 A node's classifier describes the valid containments.
@@ -402,11 +403,11 @@ class c3 as "122:Bedroom" {
   title: String = "Guest room"
 }
 
-b *- a: address
+b *-> a: address
 
-b *-- c1: rooms [0]
-b *-- c2: rooms [1]
-b *-- c3: rooms [2]
+b *--> c1: rooms [0]
+b *--> c2: rooms [1]
+b *--> c3: rooms [2]
 
 ----
 
@@ -560,9 +561,9 @@ together {
 
 class D
 
-A *-- B
-A *-- C
-B *-- D
+A *--> B
+A *--> C
+B *--> D
 
 A <.. D
 E <. D
@@ -600,7 +601,7 @@ annotation Y
 X -[#transparent]> Y: < parent
 X -[#transparent]> Y: < annotated node
 X -[#transparent]> Y: > annotated by <U+00a0><U+00a0><U+00a0>
-X *- Y: > <<annotations>>
+X *-> Y: > <<annotations>>
 ----
 
 Annotation instances share the lifecycle of their annotated node; when we delete the annotated node, the annotation instance gets also deleted.
@@ -631,7 +632,7 @@ package M2 <<Rectangle>> {
 
   class Argument <<Classifier>> {
   }
-  Function *- "0..*" Argument: parameters
+  Function *-> "0..*" Argument: parameters
 
   annotation SourcePosition <<Annotation>> {
     line: Integer
@@ -648,19 +649,19 @@ package M1 <<Rectangle>> {
   class a1 as "3:Argument" <<Node>> {
     name = "action"
   }
-  f1 *- a1: parameters
+  f1 *-> a1: parameters
 
   annotation an1 as "34:SourcePosition" <<Node>> {
     line = 2
     column = 13
   }
-  an1 -* f1: <<annotations>>
+  an1 <-* f1: <<annotations>>
 
   annotation an2 as "35:SourcePosition" <<Node>>  #line:red {
     line = 2
     column = 18
   }
-  a1 *- an2: <<annotations>>
+  a1 *-> an2: <<annotations>>
 }
 
 M2 -[hidden]- M1
