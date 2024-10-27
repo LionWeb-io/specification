@@ -11,6 +11,7 @@ include::../shared/issue-footnotes.adoc[]
 This article walks us through a LionWeb model:
 What it is, what's inside, how the inside looks, what the contents mean, and why they are that way.
 It is meant as an introduction to some of the details of LionWeb.
+Our target audience are developers that want to work with LionWeb.
 We don't assume any prior knowledge of LionWeb; some experience with general modeling ideas is helpful.
 
 == Introduction
@@ -24,13 +25,6 @@ We deliberately don't use that term in our specifications, as it's so overloaded
 For our purposes, we can always replace "model" with "a bunch of nodes".
 Then the question transforms to: What is a node?
 
-[[notation]]
-== Notation used in this article and diagrams
-We use integer numbers as node ids, and short names for keys of language elements.
-We label boxes in diagrams that represent M1-level nodes with the node id and its classifier, as in `10:Person`.
-Boxes in diagrams for M2-level language elements are labelled only with the classifier, i.e. `Person`.
-Boxes that represent concepts or concept instances use `C` icon, and `@` icon for annotation (instance) boxes.
-
 [[nodes]]
 == Nodes
 A node is the fundamental building block in LionWeb.
@@ -38,9 +32,86 @@ It consists of a unique identifier (**id**), a **classifier** to define the natu
 We group a node's properties, containments, and references as the **features** of that node.
 
 Properties are simple values like `name: String`, `age: Integer` or `alive: Boolean`.
-Containments are other nodes that this node is composed of; examples would be `mainEntrance: Door[1]` or `corners: Coordinate[0..\*]`.
+
+.Properties examples
+[plantuml, nodePropertiesExample, svg]
+----
+hide empty members
+
+class 1:Person {
+  name: String = "John"
+  age: Integer = 23
+  alive: Boolean = true
+}
+----
+
+Containments are other nodes that this node is composed of; examples would be `mainEntrance: Door[1]` or `corners: Coordinate[0..*]`.
+
+.Containments examples
+[plantuml, nodeContainmentsExample, svg]
+----
+hide empty members
+
+class "2:House" as house
+class "3:SteelDoor" as door
+house *--> "1" door: mainEntrance
+
+class "4:Shape" as shape
+class "5:Coordinate" as coord0 {
+  x: Integer = 0
+  y: Integer = 0
+}
+class "6:Coordinate" as coord1 {
+  x: Integer = -10
+  y: Integer = 10
+}
+shape *--> "0..*" coord0: corners[0]
+shape *--> "0..*" coord1: corners[1]
+----
+
 References are other nodes that this node relates to; examples would be `surface: Material[1]` or `stakeholders: Employee[1..*]`.
+
+.References examples
+[plantuml, nodeReferencesExample, svg]
+----
+hide empty members
+
+class "7:Table" as table
+class "8:Wood" as wood
+
+table ..> "1" wood: surface
+
+class "9:Project" as project
+class "10:Alice" as alice
+class "11:Bob" as bob
+
+project ..> "1..*" alice: stakeholders[0]
+project ..> "1..*" bob: stakeholders[1]
+----
+
 Annotation instances are other nodes that represent orthogonal concerns of this node; examples include `ParsedFromLine` or `ReviewComment`.
+
+.Annotations examples
+[plantuml, nodeAnnotationsExample, svg]
+----
+hide empty members
+
+class "12:Requirement" as req {
+  description:String = \n  "Associate an issue to every PR"
+}
+
+annotation "13:ParsedFromLine" as parsed {
+  lineNumber: Integer = 37
+}
+
+annotation "14:ReviewComment" as review {
+  author: String = "eve"
+  comment: String = \n  "Even if just fixing typos?!"
+}
+
+parsed <-* req: <<annotations>>[0]
+req *-> review: <<annotations>>[1]
+----
 
 Let's look into each of these in more detail.
 
@@ -56,14 +127,14 @@ We chose this character set, as it should be compatible with any run-time enviro
 We don't limit the id's length, so any kind of other source can be represented -- fully qualified names tend to get very long, for example.
 
 We assume nodes with equal id string to be identical.
-Something went wrong if we had e.g. two different Java objects of class `Node`, but with equal `nodeId` field.
+Assuming an implementation in an object-oriented language like Java, something went wrong if we had e.g. two different Java objects of class `Node`, but with equal `nodeId` field.
 
 Node ids should NOT carry any meaning:
 Only because a node id happens to contain the string `frontLeftWheel`, we should NOT assume its classifier might be `Wheel`, or its containment might be `frontLeft`.
 These "descriptive" node ids are quite useful to read examples or in tests, as they provide more context.
 However, examples and tests are for human consumption -- real nodes (in their raw form) are not.
 
-[[meta-pointer]]
+[[meta-pointer, meta-pointer]]
 === Meta-pointer
 Before we get to the next part of a node, classifier, we need to discuss _meta-pointers_.
 Any time we refer from an instance model (M1) to its metamodel (M2 a.k.a. _Language_), we use meta-pointers.
@@ -468,8 +539,8 @@ We'd need to invent some special place for it.
 In contrast, the target of a reference is perfectly valid without the source.
 They can be deleted independently, and don't need to be deleted when sources pointing to them are deleted.
 
-Containments establish a tree shape for the model.
-With references, we regard the model as a graph, as a node can be target of several references.
+Containments establish a _tree shape_ for the model.
+With references, we regard the model as a _graph_, as a node can be target of several references.
 
 .Node graph example
 [plantuml, graph, svg]
@@ -648,6 +719,14 @@ plantuml::model-anatomy/builtins.puml[format=svg]
 
 plantuml::model-anatomy/metametamodel.puml[format=svg]
 
+
+[appendix]
+[[notation]]
+== Notation used in this article and diagrams
+We use integer numbers as node ids, and short names for keys of language elements.
+We label boxes in diagrams that represent M1-level nodes with the node id and its classifier, as in `10:Person`.
+Boxes in diagrams for M2-level language elements are labelled only with the classifier, i.e. `Person`.
+Boxes that represent concepts or concept instances use `C` icon, and `@` icon for annotation (instance) boxes.
 
 [appendix]
 [[language-key]]
