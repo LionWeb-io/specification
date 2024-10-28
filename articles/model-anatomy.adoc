@@ -128,7 +128,6 @@ We chose this character set, as it should be compatible with any run-time enviro
 We don't limit the id's length, so any kind of other source can be represented -- fully qualified names tend to get very long, for example.
 
 We assume nodes with equal id string to be identical.
-Assuming an implementation in an object-oriented language like Java, something went wrong if we had two different Java objects of class `Node`, but with equal `nodeId` field.
 
 Node ids should NOT carry any meaning:
 Only because a node id happens to contain the string `frontLeftWheel`, we should NOT assume its classifier might be `Wheel`, or its containment might be `frontLeft`.
@@ -153,7 +152,7 @@ A node's classifier is a <<meta-pointer>> that defines the node's nature, or typ
 A classifier of a node is equivalent to the class of a Java, C#, or TypeScript object.
 The <<classifiers, classifier>> can either be a _concrete concept_ or an _annotation_. It cannot be an _abstract concept_ or _interface_, as we cannot instantiate them.
 
-A node must adhere to its classifier.
+A node must conform to its classifier.
 This means the node can only have features as described in the node's classifier.
 footnote:[At least by default; we might deviate from that constraint under special circumstances, like migrations.]
 
@@ -736,7 +735,7 @@ M2 -[hidden]- M1
 An annotation that is applicable to all concepts says it annotates `Node` from LionWeb's <<builtins, built-in library>>.
 Annotations can _annotate_ other annotations; however, this approach introduces complexities and should be used with great caution.
 
-=== Differences between containment and annotation instance
+=== Differences between containment and annotation instances
 Both a contained node `C` and an annotation instance `A` share the lifetime of their parent node `P`.
 So what's the difference?
 
