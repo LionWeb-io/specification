@@ -18,165 +18,228 @@ it is *not* intended as a bulk API that updates large chunks of the model at onc
 * ALL-CAPS key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in https://datatracker.ietf.org/doc/html/bcp14[BCP14] (https://datatracker.ietf.org/doc/html/rfc2119[RFC2119], https://datatracker.ietf.org/doc/html/rfc8174[RFC8174]) when, and only when, they appear in all capitals, as shown here.
 * Footnotes refer to more discussions and rationale, but are non-normative.
 
-[[events]]
-== Events
-
-=== Open questions{fn-org280}:
+== Open questions{fn-org280}:
 #TODO#
 
-* If we move a node from being an annotation to being a child, the value of `oldContainment` would be `null`
-
-* <<addReference>> / <<removeReference>> operate on complete references, thus either `target` or `resolveInfo` can be `null`
-
-* `xxxReferenceResolveInfo` / `xxxReferenceTarget` operate only on existing references, they cannot add new ones or remove existing ones completely
-
 * For new nodes, do we only send their id + classifier, or a complete node?
-
-* If we send <<removeChild>>, do we also need to send that for all descendants?{fn-org286}
-Maybe the client can send only one, and the repo changes this into a <<composite>> that includes one <<removeChild>> for each descendant?
 
 * Which of the events can potentially create invalid (recursively contained) trees?
 
 * Which kind of errors do we accept?
 How does this interact with concurrent edits?
-Example: Does <<removeChild>> fail if the `removedChild` does not exist?
+Example: Does <<cmd-deleteChild>> fail if the `removedChild` does not exist?
 
-* Do we include the optional parameters?{fn-org287}
-It might be easier to react on an event if included, but they are not strictly necessary
-(as they can be calculated from the required parameters, given the receiver knows the model).
-Related: in removal cases (e.g. <<removeChild>>), do we want to send only the removed id or the whole node?
+* in removal cases (e.g. <<cmd-deleteChild>>), do we want to send only the removed id or the whole node?
 
 * Do we need "swapNodes" event?
 
-=== Parameter types
+* Wording for commands/events: Shall we use "deleteXxx" everywhere? Or "removeXxx"? Or "deleteXxx" for deleting nodes, and "removeXxx" for removing properties / references?
 
-[[nodeType]]Node:: Either the whole node as json, or its id + classifier (tbd)
+* Do we send updates on all newly subscribed nodes after <<evnt-subscription, subscription events?>>{fn-org275}
+
+* Decide on errors marked with #?# (invalid optional parameter values){fn-org312}
+
+* How to report a command has completely been discarded, without any resulting event?
+
+== Parameter types
+
+[[nodeType]]Node:: Either the whole node as json, or its id + classifier #TODO#
 [[targetNodeType]]TargetNode:: Target's node as id
 [[metaPointerType]]MetaPointer:: MetaPointer-tuple to describe an M2 element (classifier, feature, etc.)
 [[propertyValueType]]PropertyValue:: Property value encoded as string
 [[resolveInfoType]]ResolveInfo:: ResolveInfo of a reference as string
 [[indexType]]Index:: Position inside a multiple link or annotations as integer >= 0
+[[commandType]]Command:: Any command
+[[commandIdType]]CommandId:: Id of a command.{fn-org305}
+Same format as node ids; must be unique per client and connection.
 [[eventType]]Event:: Any event
+[[commandSourceType]]CommandSource:: _[clientId, commandId]_ tuple{fn-org306} this event is based on.
+This allows a client to know when its command has been processed (either successful or not).
+[[freeIdType]]FreeId:: Free node ids
 
-=== Events
+=== How to calculate a CommandSource
 
-#TODO# Assumptions:
+`commandSource = base64urlEncode(sha256(concat(clientId, commandId)))`{fn-org306}
 
-* This protocol does not need to know any langugage, i.e. it does not validate if the node structure adhere to its language(s).
+1. Concatenate the `clientId` and `commandId`
+2. Calculate sha256 hash of that concatenated string
+3. Encode the hash with base64url scheme.
 
-* We cannot have unknown children or parents, but we can have "dead" references (i.e. refer to non-existent nodes).
+Rationale: The originating client for this command does know both the client id and command id.
+The same applies for the repository, but NOT other clients.
+So the originating client and the repository can calculate the `commandSource`, but not any other client.
+Thus, the command -- event correlation is possible for the originating client without revealing any origin information to other clients.
 
+=== How to address references
+We refer to references by the tuple of _[parent, reference, index]_.
+Rationale: Both reference `target` and `resolveInfo` can be `null`, so they aren't suitable for identifying the reference.
+However, `target` and `resolveInfo` MUST NOT both be `null`.
+
+
+== Commands
 
 [cols="a,a,a"]
 |===
 |Name |Parameters | Errors
 
 3+|
-[[events-partitions]]
+[[cmd-partitions]]
 ==== Partitions
+|[[cmd-addPartition, add partition command]]*add partition*
 
-|[[addPartition]]addPartition
+Add `newPartition` node as new partition.
+
+See also <<evnt-partitionAdded>>.
 |
 * newPartition: <<nodeType>>
-
+* commandId: <<commandIdType>>
 |
 * `newPartition` id already exists
 
+|[[cmd-deletePartition, delete partition command]]*delete partition*
 
-|[[removePartition]]removePartition
+Delete partition `deletedPartition`.
+
+See also <<evnt-partitionDeleted>>.
 |
-* removedPartition: <<nodeType>> or <<targetNodeType>>
+* deletedPartition: <<nodeType>> or <<targetNodeType>> #TODO#
+* commandId: <<commandIdType>>
 |
-* `removedPartition` does not exist
+* `deletedPartition` does not exist
 
 3+|
-[[events-nodes]]
+[[cmd-nodes]]
 ==== Nodes
 
-|[[changeConcept]]changeConcept
+|[[cmd-changeConcept, change concept command]]*change concept*
+
+Change concept of `node` from `oldConcept` to `newConcept`.
+
+See also <<evnt-conceptChanged>>.
 |
 * node: <<targetNodeType>>
 * newConcept: <<metaPointerType>>
 * oldConcept: <<metaPointerType>>
+* commandId: <<commandIdType>>
 |
 * `node` does not exist
+* ##?## `node` currently does not have concept `oldConcept`
 
 3+|
-[[events-properties]]
+[[cmd-properties]]
 ==== Properties
 
+|[[cmd-addProperty, add property command]]*add property*
 
-|[[addProperty]]addProperty
+Add `newValue` as value of property `property` to `node`.
+
+See also <<evnt-propertyAdded>>.
 |
 * node: <<targetNodeType>>
 * property: <<metaPointerType>>
 * newValue: <<propertyValueType>>
+* commandId: <<commandIdType>>
 |
 * `node` does not exist
+* ##?## `property` already set in `node`
 
-|[[removeProperty]]removeProperty
+|[[cmd-deleteProperty, delete property command]]*delete property*
+
+Delete existing `property` with `oldValue` from `node`.
+
+See also <<evnt-propertyDeleted>>.
 |
 * node: <<targetNodeType>>
 * property: <<metaPointerType>>
 * oldValue: <<propertyValueType>>
+* commandId: <<commandIdType>>
 |
 * `node` does not exist
-* `property` is not set in `node`
+* ##?## `property` is not set in `node`
+* ##?## `property` currently does not have `oldValue`
 
-|[[changeProperty]]changeProperty
+|[[cmd-changeProperty, change property command]]*change property*
+
+Change existing `property` of `node` from `oldValue` to `newValue`.
+
+See also <<evnt-propertyChanged>>.
 |
 * node: <<targetNodeType>>
 * property: <<metaPointerType>>
 * newValue: <<propertyValueType>>
 * oldValue: <<propertyValueType>>
+* commandId: <<commandIdType>>
 |
 * `node` does not exist
-* `property` is not set in `node`
+* ##?## `property` is not set in `node`
+* ##?## `property` currently does not have `oldValue`
 
 
 3+|
-[[events-children]]
+[[cmd-children]]
 ==== Children
 
-|[[addChild]]addChild
+|[[cmd-addChild, add child command]]*add child*
+
+Add new node `newChild` to `parent` in `containment` at `index`.
+
+See also <<evnt-childAdded>>.
 |
 * parent: <<targetNodeType>>
 * newChild: <<nodeType>>
 * containment: <<metaPointerType>>
 * index: <<indexType>>
+* commandId: <<commandIdType>>
 |
 * `parent` does not exist
 * `newChild` id already exists
 * `index` is beyond the number of `containment` entries in `parent`
 
+|[[cmd-deleteChild, delete child command]]*delete child*
 
-|[[removeChild]]removeChild
+Delete existing node `deletedChild` from ``parent``'s `containment` at `index`.
+
+See also <<evnt-childDeleted>>.
 |
-* removedChild: <<nodeType>> or <<targetNodeType>>
+* deletedChild: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
 * containment: <<metaPointerType>>
 * index: <<indexType>>
+* commandId: <<commandIdType>>
 |
-* `removedChild` does not exist
+* `deletedChild` does not exist
 * `parent` does not exist
-* `removedChild` is not a child of `parent` in `containment`
-* `index` is beyond (the number of `containment` entries in `parent`) - 1
+* `deletedChild` is not a child of `parent` in `containment`
+* ##?## `index` is beyond (the number of `containment` entries in `parent`) - 1
+* ##?## `deletedChild` is not the node at ``parent``'s `containment` at `index`.
 
-|[[replaceChild]]replaceChild
+|[[cmd-replaceChild, replace child command]]*replace child*
+
+Replace existing node `replacedChild` inside ``parent``'s `containment` at `index` with new node `newChild`.
+Delete `replacedChild`.
+
+See also <<evnt-childReplaced>>.
 |
 * newChild: <<nodeType>>
-* replacedChild: <<nodeType>> or <<targetNodeType>>
+* replacedChild: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
 * containment: <<metaPointerType>>
 * index: <<indexType>>
+* commandId: <<commandIdType>>
 |
 * `newChild` id already exists
 * `replacedChild` does not exist
 * `parent` does not exist
 * `replacedChild` is not a child of `parent` in `containment`
-* `index` is beyond (the number of `containment` entries in `parent`) - 1
+* ##?## `index` is beyond (the number of `containment` entries in `parent`) - 1
+* ##?## `replacedChild` is not the node at ``parent``'s `containment` at `index`.
 
-|[[moveChildFromOtherContainment]]moveChildFromOtherContainment
+|[[cmd-moveChildFromOtherContainment, move child from other containment command]]*move child from other containment*
+
+Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
+inside ``newParent``'s `newContainment` at `newIndex`.
+
+See also <<evnt-childMovedFromOtherContainment>>.
 |
 * newParent: <<targetNodeType>>
 * newContainment: <<metaPointerType>>
@@ -185,15 +248,22 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * oldParent: <<targetNodeType>>
 * oldContainment: <<metaPointerType>>
 * oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
 |
 * `newParent` does not exist
 * `newIndex` is beyond the number of `newContainment` entries in `newParent`
 * `movedChild` does not exist
-* `oldParent` does not exist
-* `movedChild` is not a child of `oldParent` in `oldContainment`
-* `oldIndex` is beyond (the number of `oldContainment` entries in `oldParent`) - 1
+* ##?## `oldParent` does not exist
+* ##?## `movedChild` is not a child of `oldParent` in `oldContainment`
+* ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `oldParent`) - 1
+* ##?## `movedChild` is not the node at ``oldParent``'s `oldContainment` at `oldIndex`.
 
-|[[moveChildFromOtherContainmentInSameParent]]moveChildFromOtherContainmentInSameParent
+|[[cmd-moveChildFromOtherContainmentInSameParent, move child from other containment in same parent command]]*move child from other containment in same parent*
+
+Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
+inside ``parent``'s `newContainment` at `newIndex`.
+
+See also <<evnt-childMovedFromOtherContainmentInSameParent>>.
 |
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
@@ -201,75 +271,150 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * parent: <<targetNodeType>>
 * oldContainment: <<metaPointerType>>
 * oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
 |
 * `newIndex` is beyond the number of `newContainment` entries in `parent`
 * `movedChild` does not exist
 * `parent` does not exist
 * `movedChild` is not a child of `parent` in `oldContainment`
-* `oldIndex` is beyond (the number of `oldContainment` entries in `parent`) - 1
+* ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `parent`) - 1
+* ##?## `movedChild` is not the node at ``parent``'s `oldContainment` at `oldIndex`.
 
-|[[moveChildInSameContainment]]moveChildInSameContainment
+|[[cmd-moveChildInSameContainment, move child in same containment command]]*move child in same containment*
+
+Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
+inside ``parent``'s `containment` at `newIndex`.
+
+See also <<evnt-childMovedInSameContainment>>.
 |
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
 * parent: <<targetNodeType>>
 * containment: <<metaPointerType>>
 * oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
 |
 * `newIndex` is beyond (the number of `containment` entries in `parent`) - 1
 * `movedChild` does not exist
 * `parent` does not exist
-* `movedChild` is not a child of `parent` in `containment`
-* `oldIndex` is beyond (the number of `containment` entries in `parent`) - 1
+* ##?## `movedChild` is not a child of `parent` in `containment`
+* ##?## `oldIndex` is beyond (the number of `containment` entries in `parent`) - 1
 * `newIndex` is same as `oldIndex`
+* ##?## `movedChild` is not the node at ``parent``'s `containment` at `oldIndex`.
 
+|[[cmd-moveChildFromAnnotations, move child from annotations command]]*move child from annotations*
+
+Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
+inside ``newParent``'s `newContainment` at `newIndex`.
+
+See also <<evnt-childMovedFromAnnotations>>.
+|
+* newParent: <<targetNodeType>>
+* newContainment: <<metaPointerType>>
+* newIndex: <<indexType>>
+* movedAnnotation: <<targetNodeType>>
+* oldParent: <<targetNodeType>>
+* oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
+|
+* `newParent` does not exist
+* `newIndex` is beyond the number of `newContainment` entries in `newParent`
+* `movedAnnotation` does not exist
+* ##?## `oldParent` does not exist
+* ##?## `movedAnnotation` is not an annotation of `oldParent`
+* ##?## `oldIndex` is beyond (the number of annotation entries in `oldParent`) - 1
+* ##?## `movedAnnotation` is not the node at ``oldParent``'s annotations at `oldIndex`.
+
+|[[cmd-moveChildFromAnnotationsInSameParent, move child from annotations in same parent command]]*move child from annotations in same parent*
+
+Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
+inside ``parent``'s `newContainment` at `newIndex`.
+
+See also <<evnt-childMovedFromAnnotationsInSameParent>>.
+|
+* newContainment: <<metaPointerType>>
+* newIndex: <<indexType>>
+* movedAnnotation: <<targetNodeType>>
+* parent: <<targetNodeType>>
+* oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
+|
+* `newIndex` is beyond the number of `newContainment` entries in `parent`
+* `movedAnnotation` does not exist
+* `parent` does not exist
+* ##?## `movedAnnotation` is not an annotation of `parent`
+* ##?## `oldIndex` is beyond (the number of annotation entries in `parent`) - 1
+* ##?## `movedAnnotation` is not the node at ``parent``'s annotations at `oldIndex`.
 
 3+|
-[[events-annotations]]
+[[cmd-annotations]]
 ==== Annotations
 
-|[[addAnnotation]]addAnnotation
+|[[cmd-addAnnotation, add annotation command]]*add annotation*
+
+Add new node `newAnnotation` to ``parent``'s annotations at `index`.
+
+See also <<evnt-annotationAdded>>.
 |
 * parent: <<targetNodeType>>
 * newAnnotation: <<nodeType>>
 * index: <<indexType>>
+* commandId: <<commandIdType>>
 |
 * `parent` does not exist
 * `newAnnotation` id already exists
 * `index` is beyond the number of annotations of `parent`
 
+|[[cmd-deleteAnnotation, delete annotation command]]*delete annotation*
 
-|[[removeAnnotation]]removeAnnotation
+Delete existing node `deletedAnnotation` from ``parent``'s annotations at `index`.
+
+See also <<evnt-annotationDeleted>>.
 |
-* removedAnnotation: <<nodeType>> or <<targetNodeType>>
+* deletedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
 * index: <<indexType>>
+* commandId: <<commandIdType>>
 |
-* `removedAnnotation` does not exist
+* `deletedAnnotation` does not exist
 * `parent` does not exist
-* `removedAnnotation` is not an annotation of `parent`
+* `deletedAnnotation` is not an annotation of `parent`
 * `index` is beyond (the number of annotations of `parent`) - 1
+* ##?## `deletedAnnotation` is not the node at ``parent``'s annotations at `index`.
 
-|[[replaceAnnotation]]replaceAnnotation
+|[[cmd-replaceAnnotation, replace annotation command]]*replace annotation*
+
+Replace existing node `replacedAnnotation` inside ``parent``'s annotations at `index` with new node `newAnnotation`.
+Delete `replacedAnnotation`.
+
+See also <<evnt-annotationReplaced>>.
 |
 * newAnnotation: <<nodeType>>
-* replacedAnnotation: <<nodeType>> or <<targetNodeType>>
+* replacedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
 * index: <<indexType>>
+* commandId: <<commandIdType>>
 |
 * `newAnnotation` id already exists
 * `replacedAnnotation` does not exist
 * `parent` does not exist
 * `replacedAnnotation` is not an annotation of `parent`
 * `index` is beyond (the number of annotations of `parent`) - 1
+* ##?## `replacedAnnotation` is not the node at ``parent``'s annotations at `index`.
 
-|[[moveAnnotationFromOtherParent]]moveAnnotationFromOtherParent
+|[[cmd-moveAnnotationFromOtherParent, move annotation from other parent command]]*move annotation from other parent*
+
+Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
+inside ``newParent``'s annotations at `newIndex`.
+
+See also <<evnt-annotationMovedFromOtherParent>>.
 |
 * newParent: <<targetNodeType>>
 * newIndex: <<indexType>>
 * movedAnnotation: <<targetNodeType>>
 * oldParent: <<targetNodeType>>
 * oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
 |
 * `newParent` does not exist
 * `index` is beyond the number of annotations of `newParent`
@@ -277,53 +422,819 @@ Related: in removal cases (e.g. <<removeChild>>), do we want to send only the re
 * `oldParent` does not exist
 * `movedAnnotation` is not an annotation of `oldParent`
 * `oldIndex` is beyond (the number of annotations of `oldParent`) - 1
+* ##?## `movedAnnotation` is not the node at ``oldParent``'s annotations at `oldIndex`.
 
+|[[cmd-moveAnnotationInSameParent, move annotation in same parent command]]*move annotation in same parent*
 
-|[[moveAnnotationInSameParent]]moveAnnotationInSameParent
+Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
+inside ``parent``'s annotations at `newIndex`.
+
+See also <<evnt-annotationMovedInSameParent>>.
 |
 * newIndex: <<indexType>>
 * movedAnnotation: <<targetNodeType>>
 * parent: <<targetNodeType>>
 * oldIndex: <<targetNodeType>>
+* commandId: <<commandIdType>>
 |
 * `newIndex` is beyond (the number of annotations of `parent`) - 1
 * `movedAnnotation` does not exist
 * `parent` does not exist
 * `movedAnnotation` is not an annotation of `parent`
 * `oldIndex` is beyond (the number of annotations of `parent`) - 1
+* ##?## `movedAnnotation` is not the node at ``parent``'s annotations at `oldIndex`.
+
+|[[cmd-moveAnnotationFromContainment, move annotation from containment command]]*move annotation from containment*
+
+Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
+inside ``newParent``'s annotations at `newIndex`.
+
+See also <<evnt-annotationMovedFromContainment>>.
+|
+* newParent: <<targetNodeType>>
+* newIndex: <<indexType>>
+* movedChild: <<targetNodeType>>
+* oldParent: <<targetNodeType>>
+* oldContainment: <<metaPointerType>>
+* oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
+|
+* `newParent` does not exist
+* `newIndex` is beyond the number of annotation entries in `newParent`
+* `movedChild` does not exist
+* ##?## `oldParent` does not exist
+* ##?## `movedChild` is not a child of `oldParent` in `oldContainment`
+* ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `oldParent`) - 1
+* ##?## `movedChild` is not the node at ``oldParent``'s `oldContainment` at `oldIndex`.
+
+|[[cmd-moveAnnotationFromContainmentInSameParent, move annotation from containment in same parent command]]*move annotation from containment in same parent*
+
+Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
+inside ``parent``'s annotations at `newIndex`.
+
+See also <<evnt-annotationMovedFromContainmentInSameParent>>.
+|
+* newContainment: <<metaPointerType>>
+* newIndex: <<indexType>>
+* movedChild: <<targetNodeType>>
+* parent: <<targetNodeType>>
+* oldContainment: <<metaPointerType>>
+* oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
+|
+* `newIndex` is beyond the number of annotation entries in `parent`
+* `movedChild` does not exist
+* `parent` does not exist
+* ##?## `movedChild` is not a child of `parent` in `oldContainment`
+* ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `parent`) - 1
+* ##?## `movedChild` is not the node at ``parent``'s `oldContainment` at `oldIndex`.
 
 3+|
-[[events-references]]
+[[cmd-references]]
 ==== References
-We refer to references by the tuple of _[parent, reference, index]_.
-Rationale: Both reference `target` and `resolveInfo` can be `null`, so they aren't suitable for identifying the reference.
-However, `target` and `resolveInfo` MUST NOT both be `null`.
 
-|[[addReference]]addReference
+|[[cmd-addReference, add reference command]]*add reference*
+
+Add `newTarget` / `newResolveInfo` to ``parent``'s `reference` at `index`.
+
+See also <<evnt-referenceAdded>>.
 |
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * newTarget: <<targetNodeType>>?
 * newResolveInfo: <<resolveInfoType>>?
+* commandId: <<commandIdType>>
 |
 * `parent` does not exist
 * `index` is beyond the number of `reference` entries of `parent`
 * `newTarget` is `null` and `newResolveInfo` is `null`
 
-|[[removeReference]]removeReference
+|[[cmd-deleteReference, delete reference command]]*delete reference*
+
+Delete existing `deletedTarget`/`deletedResolveInfo` from ``parent``'s `reference` at `index`.
+
+See also <<evnt-referenceDeleted>>.
 |
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
-* removedTarget: <<targetNodeType>>
-* removedResolveInfo: <<resolveInfoType>>
+* deletedTarget: <<targetNodeType>>?
+* deletedResolveInfo: <<resolveInfoType>>?
+* commandId: <<commandIdType>>
 |
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `removedTarget` is `null` and `removedResolveInfo` is `null`
+* `deletedTarget` is `null` and `deletedResolveInfo` is `null`
+* ##?## `deletedTarget` is not the target at ``parent``'s `reference` at `index`.
+* ##?## `deletedResolveInfo` is not the resolveInfo at ``parent``'s `reference` at `index`.
 
-|[[changeReference]]changeReference
+|[[cmd-changeReference, change reference command]]*change reference*
+
+Replace existing `replacedTarget`/`replacedResolveInfo`  inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
+
+See also <<evnt-referenceChanged>>.
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newTarget: <<targetNodeType>>?
+* newResolveInfo: <<targetNodeType>>?
+* replacedTarget: <<targetNodeType>>?
+* replacedResolveInfo: <<resolveInfoType>>?
+* commandId: <<commandIdType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newTarget` is `null` and `newResolveInfo` is `null`
+* `replacedTarget` is `null` and `replacedResolveInfo` is `null`
+* ##?## `replacedTarget` is not the target at ``parent``'s `reference` at `index`.
+* ##?## `replacedResolveInfo` is not the resolveInfo at ``parent``'s `reference` at `index`.
+
+|[[cmd-moveEntryFromOtherReference, move entry from other reference command]]*move entry from other reference*
+
+Move existing `target`/`resolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
+to ``newParent``'s `newReference` at `newIndex`.
+
+See also <<evnt-entryMovedFromOtherReference>>.
+|
+* newParent: <<targetNodeType>>
+* newReference: <<metaPointerType>>
+* newIndex: <<indexType>>
+* oldParent: <<targetNodeType>>
+* oldReference: <<metaPointerType>>
+* oldIndex: <<indexType>>
+* target: <<targetNodeType>>?
+* resolveInfo: <<resolveInfoType>>?
+* commandId: <<commandIdType>>
+|
+* `newParent` does not exist
+* `newIndex` is beyond (the number of `newReference` entries of `newParent`)
+* `oldIndex` is beyond (the number of `oldReference` entries of `oldParent`) - 1
+* `target` is `null` and `resolveInfo` is `null`
+* ##?## `target` is not the target at ``oldParent``'s `oldReference` at `oldIndex`.
+* ##?## `resolveInfo` is not the resolveInfo at ``oldParent``'s `oldReference` at `oldIndex`.
+
+|[[cmd-moveEntryFromOtherReferenceInSameParent, move entry from other reference in same parent command]]*move entry from other reference in same parent*
+
+Move existing `target`/`resolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
+to ``parent``'s `newReference` at `newIndex`.
+
+See also <<evnt-entryMovedFromOtherReferenceInSameParent>>.
+|
+* parent: <<targetNodeType>>
+* newReference: <<metaPointerType>>
+* newIndex: <<indexType>>
+* oldReference: <<metaPointerType>>
+* oldIndex: <<indexType>>
+* target: <<targetNodeType>>?
+* resolveInfo: <<resolveInfoType>>?
+* commandId: <<commandIdType>>
+|
+* `parent` does not exist
+* `newIndex` is beyond (the number of `newReference` entries of `parent`)
+* `oldIndex` is beyond (the number of `oldReference` entries of `parent`) - 1
+* `target` is `null` and `resolveInfo` is `null`
+* ##?## `target` is not the target at ``parent``'s `oldReference` at `oldIndex`.
+* ##?## `resolveInfo` is not the resolveInfo at ``parent``'s `oldReference` at `oldIndex`.
+
+|[[cmd-moveEntryInSameReference, move entry in same reference command]]*move entry in same reference*
+
+Move existing `target`/`resolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
+inside ``parent``'s `reference` at `newIndex`.
+
+See also <<evnt-entryMovedInSameReference>>.
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* oldIndex: <<indexType>>
+* newIndex: <<indexType>>
+* target: <<targetNodeType>>?
+* resolveInfo: <<resolveInfoType>>?
+* commandId: <<commandIdType>>
+|
+* `parent` does not exist
+* `newIndex` is beyond (the number of `reference` entries of `parent`) - 1
+* `oldIndex` is beyond (the number of `reference` entries of `parent`) - 1
+* `target` is `null` and `resolveInfo` is `null`
+* ##?## `target` is not the target at ``parent``'s `reference` at `oldIndex`.
+* ##?## `resolveInfo` is not the resolveInfo at ``parent``'s `reference` at `oldIndex`.
+
+|[[cmd-addReferenceResolveInfo, add reference ResolveInfo command]]*add reference ResolveInfo*
+
+Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
+
+****
+`target` MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
+****
+
+See also <<evnt-ReferenceResolveInfoAdded>>.
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newResolveInfo: <<resolveInfoType>>
+* target: <<targetNodeType>>
+* commandId: <<commandIdType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newResolveInfo` is `null`
+* ##?## resolveInfo already set in ``parent``'s `reference` at `index`.
+
+|[[cmd-deleteReferenceResolveInfo, delete reference ResolveInfo command]]*delete reference ResolveInfo*
+
+Delete existing `deletedResolveInfo` as ResolveInfo from existing entry inside ``parent``'s `reference` at `index` with `target`.
+
+****
+`target` MUST NOT be `null` as we're about to remove ResolveInfo, and at least one of target and ResolveInfo MUST always be non-`null`.
+****
+
+See also <<evnt-referenceResolveInfoDeleted>>.
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* target: <<targetNodeType>>
+* deletedResolveInfo: <<resolveInfoType>>
+* commandId: <<commandIdType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `deletedResolveInfo` is `null`
+* `target` is `null`
+* ##?## resolveInfo is not set in ``parent``'s `reference` at `index`.
+* ##?## resolveInfo currently is not `deletedResolveInfo` in ``parent``'s `reference` at `index`.
+
+|[[cmd-changeReferenceResolveInfo, change reference ResolveInfo command]]*change reference ResolveInfo*
+
+Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` from `oldResolveInfo` to `newResolveInfo`.
+
+****
+`target` MAY be `null` as we can only change ResolveInfo if both `oldResolveInfo` and `newResolveInfo` is non-`null`.
+****
+
+See also <<evnt-referenceResolveInfoChanged>>.
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newResolveInfo: <<resolveInfoType>>
+* target: <<targetNodeType>>?
+* oldResolveInfo: <<resolveInfoType>>
+* commandId: <<commandIdType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newResolveInfo` is `null`
+* `oldResolveInfo` is `null`
+* ##?## resolveInfo is not set in ``parent``'s `reference` at `index`
+* ##?## resolveInfo currently is not `oldResolveInfo` in ``parent``'s `reference` at `index`
+
+|[[cmd-addReferenceTarget, add reference target command]]*add reference target*
+
+Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+
+****
+`resolveInfo` MUST NOT be `null` as we can only add target if target is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
+****
+
+See also <<evnt-referenceTargetAdded>>.
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newTarget: <<targetNodeType>>
+* resolveInfo: <<resolveInfoType>>
+* commandId: <<commandIdType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newTarget` is `null`
+* ##?## target already set in ``parent``'s `reference` at `index`.
+
+|[[cmd-deleteReferenceTarget, delete reference target command]]*delete reference target*
+
+Delete existing `deletedTarget` as target from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+
+****
+`resolveInfo` MUST NOT be `null` as we're about to remove target, and at least one of target and ResolveInfo MUST always be non-`null`.
+****
+
+See also <<evnt-referenceTargetDeleted>>.
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* resolveInfo: <<resolveInfoType>>
+* deletedTarget: <<targetNodeType>>
+* commandId: <<commandIdType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `deletedTarget` is `null`
+* ##?## target is not set in ``parent``'s `reference` at `index`.
+* ##?## target currently is not `deletedTarget` in ``parent``'s `reference` at `index`.
+
+|[[cmd-changeReferenceTarget, change reference target command]]*change reference target*
+
+Change target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` from `oldTarget` to `newTarget`.
+
+****
+`resolveInfo` MAY be `null` as we can only change target if both `oldTarget` and `newTarget` is non-`null`.
+****
+
+See also <<evnt-referenceTargetChanged>>.
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newTarget: <<targetNodeType>>
+* resolveInfo: <<resolveInfoType>>?
+* oldTarget: <<targetNodeType>>
+* commandId: <<commandIdType>>
+|
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newTarget` is `null`
+* `oldTarget` is `null`
+* ##?## target is not set in ``parent``'s `reference` at `index`
+* ##?## target currently is not `oldTarget` in ``parent``'s `reference` at `index`
+
+3+|
+[[cmd-composite-section]]
+==== Composite
+
+|[[cmd-composite, composite command]]*composite*
+
+Groups several commands into a logical group.
+The parts are ordered.
+
+Command groups don't guarantee anything; the repository MAY take the group as a hint to resolve conflicts in a different manner.
+
+See also <<evnt-composite>>.
+|
+* parts: <<commandType>>[]
+* commandId: <<commandIdType>>
+|
+* accumulation of all errors of `parts`
+
+3+|
+[[cmd-subscription]]
+==== Subscription
+
+|[[cmd-subscribeEverything, subscribe to everything command]]*subscribe to everything*
+
+If `subscribe` is true, this client wants to receive events on any changes to the repository.
+Otherwise, this client does not want to receive such updates (anymore).
+
+See also <<evnt-everythingSubscribed>>.
+|
+* subscribe: `boolean`
+* commandId: <<commandIdType>>
+|
+
+|[[cmd-subscribePartitions, subscribe to partition changes command]]*subscribe to partition changes*
+
+This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions.
+
+See also <<evnt-partitionsSubscribed>>.
+|
+* creation: `boolean`
+* deletion: `boolean`
+* commandId: <<commandIdType>>
+|
+* already subscribed to everything
+
+|[[cmd-subscribePartition, subscribe to partition command]]*subscribe to partition*
+
+This client wants to receive events on any changes to `partition` or any of its descendants.
+
+See also <<evnt-partitionSubscribed>>.
+|
+* partition: <<targetNodeType>>
+* commandId: <<commandIdType>>
+|
+* already subscribed to everything
+
+|[[cmd-unsubscribePartition, unsubscribe from partition command]]*unsubscribe from partition*
+
+This client does not want to receive events on any changes to `partition` or any of its descendants anymore.
+
+See also <<evnt-partitionUnsubscribed>>.
+|
+* partition: <<targetNodeType>>
+* commandId: <<commandIdType>>
+|
+* not subscribed to `partition`
+
+3+|
+[[cmd-misc]]
+==== Miscellaneous
+
+|[[cmd-getAvailableIds, get available ids command]]*get available ids*
+
+Request `count` number of unused <<{m3}.adoc#identifiers, valid ids>>.
+
+See also <<evnt-availableIds>>.
+|
+* count: `integer`
+* commandId: <<commandIdType>>
+|
+
+|===
+
+== Events
+
+[cols="a,a"]
+|===
+|Name |Parameters
+
+2+|
+[[evnt-partitions]]
+==== Partitions
+
+|[[evnt-partitionAdded, partition added event]]*partition added*
+
+Partition `newPartition` has been added to the repository.
+
+See also <<cmd-addPartition>>.
+|
+* newPartition: <<nodeType>>
+* originCommands: <<commandSourceType>>[]
+
+
+|[[evnt-partitionDeleted, partition deleted event]]*partition deleted*
+
+Partition `deletedPartition`, and all its descendants, have been deleted from the repository.
+
+See also <<cmd-deletePartition>>.
+|
+* deletedPartition: <<nodeType>> or <<targetNodeType>> #TODO#
+* originCommands: <<commandSourceType>>[]
+
+2+|
+[[evnt-nodes]]
+==== Nodes
+
+|[[evnt-conceptChanged, concept changed event]]*concept changed*
+
+Concept of `node` has been changed from `oldConcept` to `newConcept`.
+
+See also <<cmd-changeConcept>>.
+|
+* node: <<targetNodeType>>
+* newConcept: <<metaPointerType>>
+* oldConcept: <<metaPointerType>>
+* originCommands: <<commandSourceType>>[]
+
+2+|
+[[evnt-properties]]
+==== Properties
+
+|[[evnt-propertyAdded, property added event]]*property added*
+
+`property` of `node` has been set to `newValue`.
+
+See also <<cmd-addProperty>>.
+|
+* node: <<targetNodeType>>
+* property: <<metaPointerType>>
+* newValue: <<propertyValueType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-propertyDeleted, property deleted event]]*property deleted*
+
+Existing `property` of `node` with `oldValue` has been deleted.
+
+See also <<cmd-deleteProperty>>.
+|
+* node: <<targetNodeType>>
+* property: <<metaPointerType>>
+* oldValue: <<propertyValueType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-propertyChanged, property changed event]]*property changed*
+
+Existing `property` of `node` has been changed from `oldValue` to `newValue`.
+
+See also <<cmd-changeProperty>>.
+|
+* node: <<targetNodeType>>
+* property: <<metaPointerType>>
+* newValue: <<propertyValueType>>
+* oldValue: <<propertyValueType>>
+* originCommands: <<commandSourceType>>[]
+
+
+2+|
+[[evnt-children]]
+==== Children
+
+|[[evnt-childAdded, child added event]]*child added*
+
+New node `newChild` has been added to ``parent``'s  `containment` at `index`.
+All other children inside ``parent``'s `containment` with index >= `index` have been moved to next higher index.
+
+See also <<cmd-addChild>>.
+|
+* parent: <<targetNodeType>>
+* newChild: <<nodeType>>
+* containment: <<metaPointerType>>
+* index: <<indexType>>
+* originCommands: <<commandSourceType>>[]
+
+
+|[[evnt-childDeleted, child deleted event]]*child deleted*
+
+Existing node `deletedChild`, and all its descendants, have been deleted from ``parent``'s `containment` at `index`.
+All other children inside ``parent``'s `containment` with index > `index` have been moved to next lower index.
+
+See also <<cmd-deleteChild>>.
+|
+* deletedChild: <<nodeType>> or <<targetNodeType>> #TODO#
+* parent: <<targetNodeType>>
+* containment: <<metaPointerType>>
+* index: <<indexType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-childReplaced, child replaced event]]*child replaced*
+
+Existing node `replacedChild` inside ``parent``'s `containment` at `index` has been replaced with new node `newChild`.
+`replacedChild`, and all its descendants, have been deleted.
+
+See also <<cmd-replaceChild>>.
+|
+* newChild: <<nodeType>>
+* replacedChild: <<nodeType>> or <<targetNodeType>> #TODO#
+* parent: <<targetNodeType>>
+* containment: <<metaPointerType>>
+* index: <<indexType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-childMovedFromOtherContainment, child moved from other containment event]]*child moved from other containment*
+
+Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has been moved
+inside ``newParent``'s `newContainment` at `newIndex`.
+
+All other children inside ``oldParent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+All other children inside ``newParent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
+
+See also <<cmd-moveChildFromOtherContainment>>.
+|
+* newParent: <<targetNodeType>>
+* newContainment: <<metaPointerType>>
+* newIndex: <<indexType>>
+* movedChild: <<targetNodeType>>
+* oldParent: <<targetNodeType>>
+* oldContainment: <<metaPointerType>>
+* oldIndex: <<indexType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-childMovedFromOtherContainmentInSameParent, child moved from other containment in same parent event]]*child moved from other containment in same parent*
+
+Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has been moved
+inside ``parent``'s `newContainment` at `newIndex`.
+
+All other children inside ``parent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+All other children inside ``parent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
+
+See also <<cmd-moveChildFromOtherContainmentInSameParent>>.
+|
+* newContainment: <<metaPointerType>>
+* newIndex: <<indexType>>
+* movedChild: <<targetNodeType>>
+* parent: <<targetNodeType>>
+* oldContainment: <<metaPointerType>>
+* oldIndex: <<indexType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-childMovedInSameContainment, child moved in same containment event]]*child moved in same containment*
+
+Existing node `movedChild` (previously inside ``parent``'s `containment` at `oldIndex`) has been moved
+inside ``parent``'s `containment` at `newIndex`.
+
+If `oldIndex` < `newIndex`: All other children inside ``parent``'s `containment` with previous index > `oldIndex` and previous index <= `newIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* F[6]`
+
+If `oldIndex` > `newIndex`: All other children inside ``parent``'s `containment` with previous index >= `newIndex` and previous index < `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6]`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+See also <<cmd-moveChildInSameContainment>>.
+|
+* newIndex: <<indexType>>
+* movedChild: <<targetNodeType>>
+* parent: <<targetNodeType>>
+* containment: <<metaPointerType>>
+* oldIndex: <<indexType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-childMovedFromAnnotations, child moved from annotations command]]*child moved from annotations*
+
+Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has been moved
+inside ``newParent``'s `newContainment` at `newIndex`.
+
+All other annotations inside ``oldParent``'s `annotations` with index > `oldIndex` have been moved to next lower index.
+
+All other children inside ``newParent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
+
+See also <<cmd-moveChildFromAnnotations>>.
+|
+* newParent: <<targetNodeType>>
+* newContainment: <<metaPointerType>>
+* newIndex: <<indexType>>
+* movedAnnotation: <<targetNodeType>>
+* oldParent: <<targetNodeType>>
+* oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
+
+|[[evnt-childMovedFromAnnotationsInSameParent, child moved from annotations in same parent command]]*child moved  from annotations in same parent*
+
+Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has been moved
+inside ``parent``'s `newContainment` at `newIndex`.
+
+All other annotations inside ``parent``'s `annotations` with index > `oldIndex` have been moved to next lower index.
+
+All other children inside ``parent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
+
+See also <<cmd-moveChildFromAnnotationsInSameParent>>.
+|
+* newContainment: <<metaPointerType>>
+* newIndex: <<indexType>>
+* movedAnnotation: <<targetNodeType>>
+* parent: <<targetNodeType>>
+* oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
+
+2+|
+[[evnt-annotations]]
+==== Annotations
+
+|[[evnt-annotationAdded, annotationAdded event]]*annotation added*
+
+New node `newAnnotation` has been added to ``parent``'s annotations at `index`.
+All other annotations inside ``parent``'s annotations with index >= `index` have been moved to next higher index.
+
+See also <<cmd-addAnnotation>>.
+|
+* parent: <<targetNodeType>>
+* newAnnotation: <<nodeType>>
+* index: <<indexType>>
+* originCommands: <<commandSourceType>>[]
+
+
+|[[evnt-annotationDeleted, annotation deleted event]]*annotation deleted*
+
+Existing node `deletedAnnotation`, and all its descendants, have been deleted from ``parent``'s annotations at `index`.
+All other annotations inside ``parent``'s annotations with index > `index` have been moved to next lower index.
+
+See also <<cmd-deleteAnnotation>>.
+|
+* deletedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
+* parent: <<targetNodeType>>
+* index: <<indexType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-annotationReplaced, annotation replaced event]]*annotation replaced*
+
+Existing node `replacedAnnotation` inside ``parent``'s annotations at `index` has been replaced with new node `newAnnotation`.
+`replacedAnnotation`, and all its descendants, have been deleted.
+
+See also <<cmd-replaceAnnotation>>.
+|
+* newAnnotation: <<nodeType>>
+* replacedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
+* parent: <<targetNodeType>>
+* index: <<indexType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-annotationMovedFromOtherParent, annotation moved from other parent event]]*annotation moved from other parent*
+
+Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has been moved
+inside ``newParent``'s annotations at `newIndex`.
+
+All other annotations inside ``oldParent``'s annotations with index > `oldIndex` have been moved to next lower index.
+
+All other annotations inside ``newParent``'s annotations with index >= `newIndex` have been moved to next higher index.
+
+See also <<cmd-moveAnnotationFromOtherParent>>.
+|
+* newParent: <<targetNodeType>>
+* newIndex: <<indexType>>
+* movedAnnotation: <<targetNodeType>>
+* oldParent: <<targetNodeType>>
+* oldIndex: <<indexType>>
+* originCommands: <<commandSourceType>>[]
+
+
+|[[evnt-annotationMovedInSameParent, annotation moved in same parent event]]*annotation moved in same parent*
+
+Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has been moved
+inside ``parent``'s annotations at `newIndex`.
+
+If `oldIndex` < `newIndex`: All other annotations inside ``parent``'s annotations with previous index > `oldIndex` and previous index <= `newIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* F[6]`
+
+If `oldIndex` > `newIndex`: All other annotations inside ``parent``'s annotations with previous index >= `newIndex` and previous index < `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6]`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+See also <<cmd-moveAnnotationInSameParent>>.
+|
+* newIndex: <<indexType>>
+* movedAnnotation: <<targetNodeType>>
+* parent: <<targetNodeType>>
+* oldIndex: <<targetNodeType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-annotationMovedFromContainment, annotation moved from containment command]]*annotation moved from containment*
+
+Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has been moved
+inside ``newParent``'s annotations at `newIndex`.
+
+All other children inside ``oldParent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+All other annotations inside ``newParent``'s annotations with index >= `newIndex` have been moved to next higher index.
+
+See also <<cmd-moveAnnotationFromContainment>>.
+|
+* newParent: <<targetNodeType>>
+* newIndex: <<indexType>>
+* movedChild: <<targetNodeType>>
+* oldParent: <<targetNodeType>>
+* oldContainment: <<metaPointerType>>
+* oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
+
+|[[evnt-annotationMovedFromContainmentInSameParent, annotation moved from containment in same parent command]]*annotation moved from containment in same parent*
+
+Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has been moved
+inside ``parent``'s annotations at `newIndex`.
+
+All other children inside ``parent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+All other annotations inside ``parent``'s annotations with index >= `newIndex` have been moved to next higher index.
+
+See also <<cmd-moveAnnotationFromContainmentInSameParent>>.
+|
+* newContainment: <<metaPointerType>>
+* newIndex: <<indexType>>
+* movedChild: <<targetNodeType>>
+* parent: <<targetNodeType>>
+* oldContainment: <<metaPointerType>>
+* oldIndex: <<indexType>>
+* commandId: <<commandIdType>>
+
+2+|
+[[evnt-references]]
+==== References
+
+|[[evnt-referenceAdded, reference added event]]*reference added*
+
+Reference with `newTarget`/`newResolveInfo` has been added to ``parent``'s `reference` at `index`.
+All other entries inside ``parent``'s `reference` with index >= `index` have been moved to next higher index.
+
+See also <<cmd-addReference>>.
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* newTarget: <<targetNodeType>>?
+* newResolveInfo: <<resolveInfoType>>?
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-referenceDeleted, reference deleted event]]*reference deleted*
+
+Existing reference with `deletedTarget`/`deletedResolveInfo` has been deleted from ``parent``'s `reference` at `index`.
+All other entries inside ``parent``'s `reference` with index > `index` have been moved to next lower index.
+
+See also <<cmd-deleteReference>>.
+|
+* parent: <<targetNodeType>>
+* reference: <<metaPointerType>>
+* index: <<indexType>>
+* deletedTarget: <<targetNodeType>>
+* deletedResolveInfo: <<resolveInfoType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-referenceChanged, reference changed event]]*reference changed*
+
+Existing reference with `replacedTarget`/`replacedResolveInfo` inside ``parent``'s annotations at `index` has been replaced with `newTarget`/`newResolveInfo`.
+
+See also <<cmd-changeReference>>.
 |
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
@@ -332,14 +1243,18 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * newResolveInfo: <<targetNodeType>>?
 * replacedTarget: <<targetNodeType>>
 * replacedResolveInfo: <<resolveInfoType>>
-|
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `newTarget` is `null` and `newResolveInfo` is `null`
-* `replacedTarget` is `null` and `replacedResolveInfo` is `null`
+* originCommands: <<commandSourceType>>[]
 
-|[[moveEntryFromOtherReference]]moveEntryFromOtherReference
+|[[evnt-entryMovedFromOtherReference, entry moved from other reference event]]*entry moved from other reference*
 
+Existing reference `target`/`resolveInfo` (previously inside ``oldParent``'s `oldReference` at `oldIndex`) has been moved
+to ``newParent``'s `newReference` at `newIndex`.
+
+All other entries inside ``oldParent``'s `oldReference` with index > `oldIndex` have been moved to next lower index.
+
+All other entries inside ``newParent``'s `newReference` with index >= `newIndex` have been moved to next higher index.
+
+See also <<cmd-moveEntryFromOtherReference>>.
 |
 * newParent: <<targetNodeType>>
 * newReference: <<metaPointerType>>
@@ -349,14 +1264,18 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * oldIndex: <<indexType>>
 * target: <<targetNodeType>>
 * resolveInfo: <<resolveInfoType>>
-|
-* `newParent` does not exist
-* `newIndex` is beyond (the number of `newReference` entries of `newParent`)
-* `oldIndex` is beyond (the number of `oldReference` entries of `oldParent`) - 1
-* `target` is `null` and `resolveInfo` is `null`
+* originCommands: <<commandSourceType>>[]
 
-|[[moveEntryFromOtherReferenceInSameParent]]moveEntryFromOtherReferenceInSameParent
+|[[evnt-entryMovedFromOtherReferenceInSameParent, entry moved from other reference in same parent event]]*entry moved from other reference in same parent*
 
+Existing reference `target`/`resolveInfo` (previously inside ``parent``'s `oldReference` at `oldIndex`) has been moved
+to ``parent``'s `newReference` at `newIndex`.
+
+All other entries inside ``parent``'s `oldReference` with index > `oldIndex` have been moved to next lower index.
+
+All other entries inside ``parent``'s `newReference` with index >= `newIndex` have been moved to next higher index.
+
+See also <<cmd-moveEntryFromOtherReferenceInSameParent>>.
 |
 * parent: <<targetNodeType>>
 * newReference: <<metaPointerType>>
@@ -365,14 +1284,26 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * oldIndex: <<indexType>>
 * target: <<targetNodeType>>
 * resolveInfo: <<resolveInfoType>>
-|
-* `parent` does not exist
-* `newIndex` is beyond (the number of `newReference` entries of `parent`)
-* `oldIndex` is beyond (the number of `oldReference` entries of `parent`) - 1
-* `target` is `null` and `resolveInfo` is `null`
+* originCommands: <<commandSourceType>>[]
 
-|[[moveEntryInSameReference]]moveEntryInSameReference
+|[[evnt-entryMovedInSameReference, entry moved in same reference event]]*entry moved in same reference*
 
+Existing reference `target`/`resolveInfo` (previously inside ``parent``'s `reference` at `oldIndex`) has been moved
+to ``parent``'s `reference` at `newIndex`.
+
+If `oldIndex` < `newIndex`: All other entries inside ``parent``'s `reference` with previous index > `oldIndex` and previous index <= `newIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* F[6]`
+
+If `oldIndex` > `newIndex`: All other entries inside ``parent``'s `reference` with previous index >= `newIndex` and previous index < `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6]`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+See also <<cmd-moveEntryInSameReference>>.
 |
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
@@ -380,37 +1311,39 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * newIndex: <<indexType>>
 * target: <<targetNodeType>>
 * resolveInfo: <<resolveInfoType>>
-|
-* `parent` does not exist
-* `newIndex` is beyond (the number of `reference` entries of `parent`) - 1
-* `oldIndex` is beyond (the number of `reference` entries of `parent`) - 1
-* `target` is `null` and `resolveInfo` is `null`
+* originCommands: <<commandSourceType>>[]
 
-|[[addReferenceResolveInfo]]addReferenceResolveInfo
+|[[evnt-ReferenceResolveInfoAdded, reference ResolveInfo added event]]*reference ResolveInfo added*
+
+`newResolveInfo` has been added as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
+
+See also <<cmd-addReferenceResolveInfo>>.
 |
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * newResolveInfo: <<resolveInfoType>>
-|
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `newResolveInfo` is `null`
+* target: <<targetNodeType>>
+* originCommands: <<commandSourceType>>[]
 
-|[[removeReferenceResolveInfo]]removeReferenceResolveInfo
+|[[evnt-referenceResolveInfoDeleted, reference ResolveInfo deleted event]]*reference ResolveInfo deleted*
+
+ResolveInfo `deletedResolveInfo` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `target`.
+
+See also <<cmd-deleteReferenceResolveInfo>>.
 |
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * target: <<targetNodeType>>
-* removedResolveInfo: <<resolveInfoType>>
-|
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `removedResolveInfo` is `null`
-* `target` is `null`
+* deletedResolveInfo: <<resolveInfoType>>
+* originCommands: <<commandSourceType>>[]
 
-|[[changeReferenceResolveInfo]]changeReferenceResolveInfo
+|[[evnt-referenceResolveInfoChanged, reference ResolveInfo changed event]]*reference ResolveInfo changed*
+
+ResolveInfo of existing entry inside ``parent``'s `reference` at `index` with `target` has been changed from `oldResolveInfo` to `newResolveInfo`.
+
+See also <<cmd-changeReferenceResolveInfo>>.
 |
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
@@ -418,104 +1351,124 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 * newResolveInfo: <<resolveInfoType>>
 * target: <<targetNodeType>>?
 * replacedResolveInfo: <<resolveInfoType>>
-|
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `newResolveInfo` is `null`
-* `removedResolveInfo` is `null`
+* originCommands: <<commandSourceType>>[]
 
-|[[addReferenceTarget]]addReferenceTarget
+|[[evnt-referenceTargetAdded, reference target added event]]*reference target added*
+
+`newTarget` has been added as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+
+See also <<cmd-addReferenceTarget>>.
 |
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * newTarget: <<targetNodeType>>
 * resolveInfo: <<resolveInfoType>>
-|
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `newTarget` is `null`
-* `resolveInfo` is `null`
+* originCommands: <<commandSourceType>>[]
 
-|[[removeReferenceTarget]]removeReferenceTarget
+|[[evnt-referenceTargetDeleted, reference target deleted event]]*reference target deleted*
+
+Target `deletedTarget` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+
+See also <<cmd-deleteReferenceTarget>>.
 |
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * resolveInfo: <<resolveInfoType>>
-* removedTarget: <<targetNodeType>>
-|
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `resolveInfo` is `null`
-* `removedTarget` is `null`
+* deletedTarget: <<targetNodeType>>
+* originCommands: <<commandSourceType>>[]
 
-|[[changeReferenceTarget]]changeReferenceTarget
+|[[evnt-referenceTargetChanged, reference target changed event]]*reference target changed*
+
+Target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` has been changed from `oldTarget` to `newTarget`.
+
+See also <<cmd-changeReferenceTarget>>.
 |
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * newTarget: <<targetNodeType>>
-* resolveInfo: <<resolveInfoType>>
+* resolveInfo: <<resolveInfoType>>?
 * replacedTarget: <<targetNodeType>>
-|
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `newTarget` is `null`
-* `replacedTarget` is `null`
+* originCommands: <<commandSourceType>>[]
 
-3+|
-[[events-composite]]
+2+|
+[[evnt-composite-section]]
 ==== Composite
 
-|[[composite]]composite
+|[[evnt-composite, composite event]]*composite*
+
+The events in `parts` have happened in the given order.
+
+All `originCommands` have been handled (maybe by discarding them).
+
+See also <<cmd-composite>>.
 |
 * parts: <<eventType>>[]
-|
-* accumulation of all errors of `parts`
+* originCommands: <<commandSourceType>>[]
 
-3+|
-[[events-subscription]]
+2+|
+[[evnt-subscription]]
 ==== Subscription
 
-|[[subscribeEverything]]subscribeEverything
+|[[evnt-everythingSubscribed, everything subscribed event]]*everything subscribed*
+
+This client is now subscribed (if `subscribe` is true) to, or unsubscribed (if `subscribe` is false) from, events on any changes to the repository.
+
+See also <<cmd-subscribeEverything>>.
 |
 * subscribe: `boolean`
-|
+* originCommands: <<commandSourceType>>[]
 
-|[[subscribePartitions]]subscribePartitions
+|[[evnt-partitionsSubscribed, partitions subscribed event]]*partitions subscribed*
+
+This client is now subscribed (if `creation` is true) to, or unsubscribed (if `creation` is false) from, <<evnt-partitionAdded>>s.
+
+This client is now subscribed (if `deletion` is true) to, or unsubscribed (if `deletion` is false) from, <<evnt-partitionDeleted>>s.
+
+See also <<cmd-subscribePartitions>>.
 |
 * creation: `boolean`
 * deletion: `boolean`
-|
-* already subscribed to everything
+* originCommands: <<commandSourceType>>[]
 
-|[[subscribeToNode]]subscribeNode
-|
-* node: <<targetNodeType>>
-* depth: `integer`
-|
-* already subscribed to everything
+|[[evnt-partitionSubscribed, partition subscribed event]]*partition subscribed*
 
-|[[unsubscribeNode]]unsubscribeNode
-|
-* node: <<targetNodeType>>
-* depth: `integer`
-|
-* not subscribed to `node`
+This client is now subscribed to any events on `partition` or any of its descendants.
 
-3+|
-[[events-misc]]
+See also <<cmd-subscribePartition>>.
+|
+* partition: <<targetNodeType>>
+* originCommands: <<commandSourceType>>[]
+
+|[[evnt-partitionUnsubscribed, partition unsubscribed event]]*partition unsubscribed*
+
+This client is now unsubscribed from any events on `partition` or any of its descendants.
+
+See also <<cmd-unsubscribePartition>>.
+|
+* partition: <<targetNodeType>>
+* originCommands: <<commandSourceType>>[]
+
+2+|
+[[evnt-misc]]
 ==== Miscellaneous
 
-|[[giveUpDeltasJustReload]]giveUpDeltasJustReload
-|
-|
+|[[evnt-giveUpDeltasJustReload, give up deltas just reload event]]*give up deltas just reload*
 
-|[[getAvailableIds]]getAvailableIds
+There have been too many events.
+This client should close and reopen its connection.
 |
-* count: `integer`
-|
+* originCommands: <<commandSourceType>>[]
 
+
+|[[evnt-availableIds, available ids event]]*available ids*
+All `ids` are guaranteed to be available, and are reserved for this client.
+
+See also <<cmd-getAvailableIds>>.
+|
+* ids: <<freeIdType>>[]
+* originCommands: <<commandSourceType>>[]
 
 |===
