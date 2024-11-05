@@ -5,3 +5,6 @@
 * `logo-path-white.svg` is the same as `logo-path.svg`, but with white foreground.
 * `logo-title.svg` is an extension of `logo.svg` also containing text "LIONWEB" at the bottom in font "Bahnschrift Bold Condensed".
 * `logo-title-path.svg` is a stripped down version of `logo-title.svg` symmetric to `logo-path.svg`.
+
+The file with extension .afpub is an Affinity Publisher file.
+This is the source for the poster.
