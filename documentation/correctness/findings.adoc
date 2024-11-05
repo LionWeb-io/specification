@@ -1,0 +1,96 @@
+= Findings
+
+It makes sense to phrase the answer as a collection of _findings_, instead of giving a hard "`yes/no`" answer.
+A **finding** is a specific point in a serialization chunk where a specific kind of incorrectness arises.
+
+Many (kinds of) findings allow a meaningful (full or partial) _recovery_ — meaning: they can be recovered from.
+Recovery is often obvious enough that it can be performed programmatically — meaning: automatically.
+As an example: an illegal trailing comma in a JSON array should be reported but can be recovered from, simply by ignoring/skipping over it.
+
+An unresolved reference can be left in as-is, and treated as an unknown (but not a _absent_) value.
+It's then up to consumers of serialization chunks to give a special meaning — i.e., domain-specific semantics — to that particular value.
+In some cases, that might not be possible or desirable to do, e.g.: most interpreters and code generators can only work with a completely correct, and complete model.
+That means they might have to combine —or "`stitch together`"— multiple serialization chunks to produce a complete model.
+
+It's entirely up to consumers of serialization chunks to validate its correctness, and to decide what to do with any resulting findings.
+Especially findings that don't permit programmatic recovery, should be reported very clearly to the domain/subject matter expert, in a way that explains what they can do to repair/prevent is.
+A serialization chunk must be editable/mutable (by a suitable client, after deserialization) even if it has findings.
+
+Consumer of serialization chunks could implement recovery for kinds of findings that permit programmatic recovery as procedures that modify the serialization chunk.
+
+
+== Details to be reported in a finding
+
+A reported finding should contain at least the following pieces of information:
+
+* An identification of the _kind_ of the finding.
++
+The kind of the finding should also determine its _severity_.
+This **severity** is an indication of the recoverability of the finding — see <<_severities,below>>.
+We think it's reasonable to assume that every instance of a particular kind of finding has the same severity.
+
+* A _location_: where the finding occurred — see <<_location,below>>.
+
+* A user-readable message explaining what the finding is, and how it should be remedied.
+Ideally, this message can be computed from other information in the finding, specifically its kind and location.
+
+A reported finding could contain more information, depending on its kind.
+
+
+=== Location
+
+A finding is useless if it doesn't tell exactly what its location is.
+A number of basic ways of identifying a location exist:
+
+[horizontal]
+
+Text-based::
+A specific location in a text could be given in any of the following forms:
++
+* A pair of integers (line, column), with the text starting at (1, 1).
+* A character index (considering the text as a character stream), starting at 1.
+* A _range_ of text given as a (pair consisting of a) character location and an integer length.
++
+The first two forms are _character locations_ which are interchangeable, although the first form is inherently more user-friendly.
+A range provide more information to work with, except for when the length is 1 or so large a number to be meaningful — e.g., effectively meaning "`the rest of the text`".
++
+For findings arising on the <<levels.adoc#, JSON level>>, these are the only available ways to identify a location.
+Unfortunately, not all JSON parsers are able to report problems in this way.
+
+JSON-based::
+JsonPathfootnote:[https://goessner.net/articles/JsonPath/] is a method to point to specific elements in JSON text in a precise way that's independent of textual location.
+This way is useful from the <<levels.adoc#, structural level>> onwards.
+
+(Sub-)Node-based::
+Beyond the <<levels.adoc#, hierarchical level>>, it becomes possible to address specific nodes by their ID.
+In addition, one can point to a specific feature (by key) and to a specific value of a multi-valued feature by index.
+All in all: (<node-ID>[, <feature-key>[, <value-index>]]).
+
+Location-forms can be thought to "`cascade`": it's convenient to augment a node-based location with a JSON-based location, and likewise a JSON-based location with a text-based one.
+
+
+=== Severities
+
+They are:
+
+[horizontal]
+
+Fatal::
+    It's not possible to recover from the finding.
+    E.g., a byte stream that's supposed to be a JSON file is empty, or not even remotely recognizable as a LionWeb-compliant serialization chunk.
+
+Stubbable::
+    It's possible to recover from the finding by providing a stub.
+    E.g., an unresolved reference could be deserialized in the form of a "`stubbing`" proxy node for the target of that reference.
+    This proxy node at least preserves the referred-to ID, and potentially `resolveInfo`, or a suitable (abstract) concept.
+    Such a proxy node can later on be replaced by the actual node that is the reference's target, e.g. when an additional serialization chunk containing that target gets deserialized (in the same context).
+
+Requires intervention::
+    Intervention —presumably a manual one by a human, but some kind of ML/AI could also be employed— is required to recover from this finding.
+    This is in particular the case for missing information, e.g.: required features lacking a value setting in a node.
+
+Auto-recoverable::
+    This is "`the best`" severity, as it's recovery is programmatic/automatic.
+    The typical example is the trailing comma in a JSON array—(we might think of that as "`ignorable`".)
+    Another class of examples is formed by incorrectness that's solved by performing a _migration_.
+
