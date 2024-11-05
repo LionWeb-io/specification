@@ -13,3 +13,7 @@
 == Versions
 
 * xref:2023.1/index.adoc[2023.1]
+
+== Articles
+
+* xref:articles/model-anatomy.adoc[Anatomy of a LionWeb Model]

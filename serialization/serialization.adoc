@@ -288,11 +288,11 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 
 [[structuredDatatype]]
 ==== Structured Datatype
-<<{m3}.adoc#StructuredDatatype, LionCore StructuredDatatype>> MUST be encoded as JSON _string_.
+<<{m3}.adoc#StructuredDataType, LionCore StructuredDataType>> MUST be encoded as JSON _string_.
 The string contains a JSON _object_ according to spec (RFC 8259) with proper escaping: all double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
 
 The contents of the string are formed as follows:
-A <<{m3}.adoc#StructuredDatatype, LionCore StructuredDatatype>> is encoded as JSON _object_.
+A <<{m3}.adoc#StructuredDataType, LionCore StructuredDataType>> is encoded as JSON _object_.
 Each <<{m3}.adoc#Field, Field>> forms one _member_, with the field's <<{m3}.adoc#IKeyed.key, key>> as JSON _key_ and the field's value as JSON _value_.
 For fields of type <<string>>, <<boolean>>, <<integer>>, and <<literal>>, the _value_ is encoded as JSON _string_ in the same way as for a property.
 For fields of type <<structuredDatatype>>, the value is encoded as JSON _object_ if the field is set, otherwise as JSON _null_.
@@ -608,7 +608,7 @@ This section lists all versions as they appear in <<SerializationChunk.serializa
 === 2024.1
 Technical name: `2024.1`
 
-* Repurposed `JSON` primitive datatype serialization for <<{m3}.adoc#StructuredDatatype, StructuredDatatype>>
+* Repurposed `JSON` primitive datatype serialization for <<{m3}.adoc#StructuredDataType, StructuredDataType>>
 
 Refer to <<{roadmap}.adoc#release-2024.1, roadmap>> for details.
 

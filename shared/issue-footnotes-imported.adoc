@@ -232,3 +232,4 @@
 :fn-org285: footnote:org285[https://github.com/LionWeb-io/specification/issues/285[Deleting a node does not touch existing references to that node #285]]
 :fn-org286: footnote:org286[https://github.com/LionWeb-io/specification/issues/286[If we remove a node via delta protocol, do we also need to send events for all descendants? #286]]
 :fn-org287: footnote:org287[https://github.com/LionWeb-io/specification/issues/287[Do we include the optional parameters in delta events? #287]]
+:fn-org289: footnote:org289[https://github.com/LionWeb-io/specification/issues/289[We do not allow multiple property values #289]]

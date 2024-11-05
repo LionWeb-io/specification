@@ -69,7 +69,7 @@
             "-id-PrimitiveType",
             "-id-Property",
             "-id-Reference",
-            "-id-StructuredDatatype"
+            "-id-StructuredDataType"
           ]
         }
       ],
@@ -2494,7 +2494,7 @@
       "parent": "-id-LionCore-M3"
     },
     {
-      "id": "-id-StructuredDatatype",
+      "id": "-id-StructuredDataType",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2523,7 +2523,7 @@
             "version": "2024.1",
             "key": "LionCore-builtins-INamed-name"
           },
-          "value": "StructuredDatatype"
+          "value": "StructuredDataType"
         },
         {
           "property": {
@@ -2531,7 +2531,7 @@
             "version": "2024.1",
             "key": "IKeyed-key"
           },
-          "value": "StructuredDatatype"
+          "value": "StructuredDataType"
         }
       ],
       "containments": [
@@ -2542,7 +2542,7 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-StructuredDatatype-fields"
+            "-id-StructuredDataType-fields"
           ]
         }
       ],
@@ -2573,7 +2573,7 @@
       "parent": "-id-LionCore-M3"
     },
     {
-      "id": "-id-StructuredDatatype-fields",
+      "id": "-id-StructuredDataType-fields",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2610,7 +2610,7 @@
             "version": "2024.1",
             "key": "IKeyed-key"
           },
-          "value": "StructuredDatatype-fields"
+          "value": "StructuredDataType-fields"
         }
       ],
       "containments": [],
@@ -2630,7 +2630,7 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-StructuredDatatype"
+      "parent": "-id-StructuredDataType"
     }
   ]
 }

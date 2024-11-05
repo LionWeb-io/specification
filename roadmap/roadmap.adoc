@@ -163,7 +163,7 @@ Model-to-model generators would be implemented as <<{refarch}.adoc#processor, Pr
 === 2024.1
 * Specified <<{bulk}.adoc#bulk, Bulk Repository Access API>>
 * Removed built-in `JSON` primitive datatype
-* Added <<{m3}.adoc#StructuredDatatype, StructuredDatatype>>
+* Added <<{m3}.adoc#StructuredDataType, StructuredDataType>>
 
 [[release-2023.1]]
 [[version-2023.1]]
