@@ -8,7 +8,7 @@ include::../shared/issue-footnotes.adoc[]
 [[delta]]
 = Delta Repository Access API
 :toc: preamble
-:toclevels: 2
+:toclevels: 3
 
 The delta API *version 2024.1* is used to store and retrieve changes to nodes.
 It is intended for fine-grained changes to single values.
@@ -35,13 +35,12 @@ Example: Does <<cmd-deleteChild>> fail if the `removedChild` does not exist?
 
 * Wording for commands/events: Shall we use "deleteXxx" everywhere? Or "removeXxx"? Or "deleteXxx" for deleting nodes, and "removeXxx" for removing properties / references?
 
-* Do we send updates on all newly subscribed nodes after <<evnt-subscription, subscription events?>>{fn-org275}
-
 * Decide on errors marked with #?# (invalid optional parameter values){fn-org312}
 
 * How to report a command has completely been discarded, without any resulting event?
 
-== Parameter types
+== Messages
+=== Parameter types
 
 [[nodeType]]Node:: Either the whole node as json, or its id + classifier #TODO#
 [[targetNodeType]]TargetNode:: Target's node as id
@@ -52,12 +51,15 @@ Example: Does <<cmd-deleteChild>> fail if the `removedChild` does not exist?
 [[commandType]]Command:: Any command
 [[commandIdType]]CommandId:: Id of a command.{fn-org305}
 Same format as node ids; must be unique per client and connection.
+[[queryIdType]]QueryId:: Id of a query.
+Same format as node ids; must be unique per client and connection.
+[[chunkType]]SerializationChunk:: <<{serialization}.adoc, Chunk of nodes>>
 [[eventType]]Event:: Any event
 [[commandSourceType]]CommandSource:: _[clientId, commandId]_ tuple{fn-org306} this event is based on.
 This allows a client to know when its command has been processed (either successful or not).
 [[freeIdType]]FreeId:: Free node ids
 
-=== How to calculate a CommandSource
+==== How to calculate a CommandSource
 
 `commandSource = base64urlEncode(sha256(concat(clientId, commandId)))`{fn-org306}
 
@@ -70,13 +72,13 @@ The same applies for the repository, but NOT other clients.
 So the originating client and the repository can calculate the `commandSource`, but not any other client.
 Thus, the command -- event correlation is possible for the originating client without revealing any origin information to other clients.
 
-=== How to address references
+==== How to address references
 We refer to references by the tuple of _[parent, reference, index]_.
 Rationale: Both reference `target` and `resolveInfo` can be `null`, so they aren't suitable for identifying the reference.
 However, `target` and `resolveInfo` MUST NOT both be `null`.
 
 
-== Commands
+=== Commands
 
 [cols="a,a,a"]
 |===
@@ -779,56 +781,57 @@ See also <<evnt-composite>>.
 |
 * accumulation of all errors of `parts`
 
-3+|
+|===
+
+=== Queries
+
+[cols="a,a,a,a"]
+|===
+|Name |Request Parameters |Response Parameters |Errors
+
+4+|
 [[cmd-subscription]]
 ==== Subscription
 
-|[[cmd-subscribeEverything, subscribe to everything command]]*subscribe to everything*
-
-If `subscribe` is true, this client wants to receive events on any changes to the repository.
-Otherwise, this client does not want to receive such updates (anymore).
-
-See also <<evnt-everythingSubscribed>>.
-|
-* subscribe: `boolean`
-* commandId: <<commandIdType>>
-|
-
-|[[cmd-subscribePartitions, subscribe to partition changes command]]*subscribe to partition changes*
+|[[qry-subscribePartitions, subscribe to partition changes query]]*subscribe to partition changes*
 
 This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions.
 
-See also <<evnt-partitionsSubscribed>>.
 |
 * creation: `boolean`
 * deletion: `boolean`
-* commandId: <<commandIdType>>
+* partitions: `boolean`
+* queryId: <<queryIdType>>
 |
-* already subscribed to everything
+* queryId: <<queryIdType>>
+|
 
-|[[cmd-subscribePartition, subscribe to partition command]]*subscribe to partition*
+|[[qry-subscribePartition, subscribe to partition command]]*subscribe to partition*
 
 This client wants to receive events on any changes to `partition` or any of its descendants.
 
-See also <<evnt-partitionSubscribed>>.
 |
 * partition: <<targetNodeType>>
-* commandId: <<commandIdType>>
+* queryId: <<queryIdType>>
 |
-* already subscribed to everything
+* contents: <<chunkType>>
+* queryId: <<queryIdType>>
+|
+* already subscribed to `partition`
 
 |[[cmd-unsubscribePartition, unsubscribe from partition command]]*unsubscribe from partition*
 
 This client does not want to receive events on any changes to `partition` or any of its descendants anymore.
 
-See also <<evnt-partitionUnsubscribed>>.
 |
 * partition: <<targetNodeType>>
-* commandId: <<commandIdType>>
+* queryId: <<queryIdType>>
+|
+* queryId: <<queryIdType>>
 |
 * not subscribed to `partition`
 
-3+|
+4+|
 [[cmd-misc]]
 ==== Miscellaneous
 
@@ -836,15 +839,19 @@ See also <<evnt-partitionUnsubscribed>>.
 
 Request `count` number of unused <<{m3}.adoc#identifiers, valid ids>>.
 
-See also <<evnt-availableIds>>.
+`ids` might contain less or equal number of ids than `count`.
 |
 * count: `integer`
-* commandId: <<commandIdType>>
+* queryId: <<queryIdType>>
+|
+* ids: <<freeIdType>>[]
+* queryId: <<queryIdType>>
 |
 
 |===
 
-== Events
+
+=== Events
 
 [cols="a,a"]
 |===
@@ -1406,69 +1413,6 @@ All `originCommands` have been handled (maybe by discarding them).
 See also <<cmd-composite>>.
 |
 * parts: <<eventType>>[]
-* originCommands: <<commandSourceType>>[]
-
-2+|
-[[evnt-subscription]]
-==== Subscription
-
-|[[evnt-everythingSubscribed, everything subscribed event]]*everything subscribed*
-
-This client is now subscribed (if `subscribe` is true) to, or unsubscribed (if `subscribe` is false) from, events on any changes to the repository.
-
-See also <<cmd-subscribeEverything>>.
-|
-* subscribe: `boolean`
-* originCommands: <<commandSourceType>>[]
-
-|[[evnt-partitionsSubscribed, partitions subscribed event]]*partitions subscribed*
-
-This client is now subscribed (if `creation` is true) to, or unsubscribed (if `creation` is false) from, <<evnt-partitionAdded>>s.
-
-This client is now subscribed (if `deletion` is true) to, or unsubscribed (if `deletion` is false) from, <<evnt-partitionDeleted>>s.
-
-See also <<cmd-subscribePartitions>>.
-|
-* creation: `boolean`
-* deletion: `boolean`
-* originCommands: <<commandSourceType>>[]
-
-|[[evnt-partitionSubscribed, partition subscribed event]]*partition subscribed*
-
-This client is now subscribed to any events on `partition` or any of its descendants.
-
-See also <<cmd-subscribePartition>>.
-|
-* partition: <<targetNodeType>>
-* originCommands: <<commandSourceType>>[]
-
-|[[evnt-partitionUnsubscribed, partition unsubscribed event]]*partition unsubscribed*
-
-This client is now unsubscribed from any events on `partition` or any of its descendants.
-
-See also <<cmd-unsubscribePartition>>.
-|
-* partition: <<targetNodeType>>
-* originCommands: <<commandSourceType>>[]
-
-2+|
-[[evnt-misc]]
-==== Miscellaneous
-
-|[[evnt-giveUpDeltasJustReload, give up deltas just reload event]]*give up deltas just reload*
-
-There have been too many events.
-This client should close and reopen its connection.
-|
-* originCommands: <<commandSourceType>>[]
-
-
-|[[evnt-availableIds, available ids event]]*available ids*
-All `ids` are guaranteed to be available, and are reserved for this client.
-
-See also <<cmd-getAvailableIds>>.
-|
-* ids: <<freeIdType>>[]
 * originCommands: <<commandSourceType>>[]
 
 |===
