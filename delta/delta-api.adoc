@@ -8,7 +8,7 @@ include::../shared/issue-footnotes.adoc[]
 [[delta]]
 = Delta Repository Access API
 :toc: preamble
-:toclevels: 3
+:toclevels: 4
 
 The delta API *version 2024.1* is used to store and retrieve changes to nodes.
 It is intended for fine-grained changes to single values.
@@ -590,155 +590,196 @@ Received -> Processed: <i>repository</i> emits event,\n<i>client</i> receives ev
 Processed --> [*]: <i>client</i>\ndiscards
 ----
 
-[cols="a,a,a"]
-|===
-|Name |Parameters | Errors
-
-3+|
 [[cmd-partitions]]
 ==== Partitions
-|[[cmd-addPartition, add partition command]]*add partition*
 
+[[cmd-addPartition]]
+===== Add partition
 Add `newPartition` node as new partition.
 
-See also <<evnt-partitionAdded>>.
-|
+.Parameters
 * newPartition: <<nodeType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newPartition` id already exists
 
-|[[cmd-deletePartition, delete partition command]]*delete partition*
+.Technical name
+`addPartition`
 
+.Related event
+<<evnt-partitionAdded>>
+
+[[cmd-deletePartition]]
+===== Delete partition
 Delete partition `deletedPartition`.
 
-See also <<evnt-partitionDeleted>>.
-|
+.Parameters
 * deletedPartition: <<nodeType>> or <<targetNodeType>> #TODO#
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `deletedPartition` does not exist
 
-3+|
+.Technical name
+`deletePartition`
+
+.Related event
+<<evnt-partitionDeleted>>
+
 [[cmd-nodes]]
 ==== Nodes
 
-|[[cmd-changeConcept, change concept command]]*change concept*
-
+[[cmd-changeConcept]]
+===== Change concept
 Change concept of `node` from `oldConcept` to `newConcept`.
 
-See also <<evnt-conceptChanged>>.
-|
+.Parameters
 * node: <<targetNodeType>>
 * newConcept: <<metaPointerType>>
 * oldConcept: <<metaPointerType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `node` does not exist
 * ##?## `node` currently does not have concept `oldConcept`
 
-3+|
+.Technical name
+`changeConcept`
+
+.Related event
+<<evnt-conceptChanged>>
+
 [[cmd-properties]]
 ==== Properties
 
-|[[cmd-addProperty, add property command]]*add property*
-
+[[cmd-addProperty]]
+===== Add property
 Add `newValue` as value of property `property` to `node`.
 
-See also <<evnt-propertyAdded>>.
-|
+.Parameters
 * node: <<targetNodeType>>
 * property: <<metaPointerType>>
 * newValue: <<propertyValueType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `node` does not exist
 * ##?## `property` already set in `node`
 
-|[[cmd-deleteProperty, delete property command]]*delete property*
+.Technical name
+`addProperty`
 
+.Related event
+<<evnt-propertyAdded>>
+
+[[cmd-deleteProperty]]
+===== Delete property
 Delete existing `property` with `oldValue` from `node`.
 
-See also <<evnt-propertyDeleted>>.
-|
+.Parameters
 * node: <<targetNodeType>>
 * property: <<metaPointerType>>
 * oldValue: <<propertyValueType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `node` does not exist
 * ##?## `property` is not set in `node`
 * ##?## `property` currently does not have `oldValue`
 
-|[[cmd-changeProperty, change property command]]*change property*
+.Technical name
+`deleteProperty`
 
+.Related event
+<<evnt-propertyDeleted>>
+
+[[cmd-changeProperty]]
+===== Change property
 Change existing `property` of `node` from `oldValue` to `newValue`.
 
-See also <<evnt-propertyChanged>>.
-|
+.Parameters
 * node: <<targetNodeType>>
 * property: <<metaPointerType>>
 * newValue: <<propertyValueType>>
 * oldValue: <<propertyValueType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `node` does not exist
 * ##?## `property` is not set in `node`
 * ##?## `property` currently does not have `oldValue`
 
 
-3+|
+.Technical name
+`changeProperty`
+
+.Related event
+<<evnt-propertyChanged>>
+
 [[cmd-children]]
 ==== Children
 
-|[[cmd-addChild, add child command]]*add child*
-
+[[cmd-addChild]]
+===== Add child
 Add new node `newChild` to `parent` in `containment` at `index`.
 
-See also <<evnt-childAdded>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * newChild: <<nodeType>>
 * containment: <<metaPointerType>>
 * index: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Events
 * `parent` does not exist
 * `newChild` id already exists
 * `index` is beyond the number of `containment` entries in `parent`
 
-|[[cmd-deleteChild, delete child command]]*delete child*
+.Technical name
+`addChild`
 
+.Related event
+<<evnt-childAdded>>
+
+[[cmd-deleteChild]]
+===== Delete child
 Delete existing node `deletedChild` from ``parent``'s `containment` at `index`.
 
-See also <<evnt-childDeleted>>.
-|
+.Parameters
 * deletedChild: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
 * containment: <<metaPointerType>>
 * index: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `deletedChild` does not exist
 * `parent` does not exist
 * `deletedChild` is not a child of `parent` in `containment`
 * ##?## `index` is beyond (the number of `containment` entries in `parent`) - 1
 * ##?## `deletedChild` is not the node at ``parent``'s `containment` at `index`.
 
-|[[cmd-replaceChild, replace child command]]*replace child*
+.Technical name
+`deleteChild`
 
+.Related event
+<<evnt-childDeleted>>
+
+[[cmd-replaceChild]]
+===== Replace child
 Replace existing node `replacedChild` inside ``parent``'s `containment` at `index` with new node `newChild`.
 Delete `replacedChild`.
 
-See also <<evnt-childReplaced>>.
-|
+.Parameters
 * newChild: <<nodeType>>
 * replacedChild: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
 * containment: <<metaPointerType>>
 * index: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newChild` id already exists
 * `replacedChild` does not exist
 * `parent` does not exist
@@ -746,13 +787,18 @@ See also <<evnt-childReplaced>>.
 * ##?## `index` is beyond (the number of `containment` entries in `parent`) - 1
 * ##?## `replacedChild` is not the node at ``parent``'s `containment` at `index`.
 
-|[[cmd-moveChildFromOtherContainment, move child from other containment command]]*move child from other containment*
+.Technical name
+`replaceChild`
 
+.Related event
+<<evnt-childReplaced>>
+
+[[cmd-moveChildFromOtherContainment]]
+===== Move child from other containment
 Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
 inside ``newParent``'s `newContainment` at `newIndex`.
 
-See also <<evnt-childMovedFromOtherContainment>>.
-|
+.Parameters
 * newParent: <<targetNodeType>>
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
@@ -761,7 +807,8 @@ See also <<evnt-childMovedFromOtherContainment>>.
 * oldContainment: <<metaPointerType>>
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newParent` does not exist
 * `newIndex` is beyond the number of `newContainment` entries in `newParent`
 * `movedChild` does not exist
@@ -770,13 +817,18 @@ See also <<evnt-childMovedFromOtherContainment>>.
 * ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `oldParent`) - 1
 * ##?## `movedChild` is not the node at ``oldParent``'s `oldContainment` at `oldIndex`.
 
-|[[cmd-moveChildFromOtherContainmentInSameParent, move child from other containment in same parent command]]*move child from other containment in same parent*
+.Technical name
+`moveChildFromOtherContainment`
 
+.Related event
+<<evnt-childMovedFromOtherContainment>>
+
+[[cmd-moveChildFromOtherContainmentInSameParent]]
+===== Move child from other containment in same parent
 Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
 inside ``parent``'s `newContainment` at `newIndex`.
 
-See also <<evnt-childMovedFromOtherContainmentInSameParent>>.
-|
+.Parameters
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
@@ -784,7 +836,8 @@ See also <<evnt-childMovedFromOtherContainmentInSameParent>>.
 * oldContainment: <<metaPointerType>>
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newIndex` is beyond the number of `newContainment` entries in `parent`
 * `movedChild` does not exist
 * `parent` does not exist
@@ -792,20 +845,26 @@ See also <<evnt-childMovedFromOtherContainmentInSameParent>>.
 * ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `parent`) - 1
 * ##?## `movedChild` is not the node at ``parent``'s `oldContainment` at `oldIndex`.
 
-|[[cmd-moveChildInSameContainment, move child in same containment command]]*move child in same containment*
+.Technical name
+`moveChildFromOtherContainmentInSameParent`
 
+.Related event
+<<evnt-childMovedFromOtherContainmentInSameParent>>
+
+[[cmd-moveChildInSameContainment]]
+===== Move child in same containment
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
 inside ``parent``'s `containment` at `newIndex`.
 
-See also <<evnt-childMovedInSameContainment>>.
-|
+.Parameters
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
 * parent: <<targetNodeType>>
 * containment: <<metaPointerType>>
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newIndex` is beyond (the number of `containment` entries in `parent`) - 1
 * `movedChild` does not exist
 * `parent` does not exist
@@ -814,13 +873,18 @@ See also <<evnt-childMovedInSameContainment>>.
 * `newIndex` is same as `oldIndex`
 * ##?## `movedChild` is not the node at ``parent``'s `containment` at `oldIndex`.
 
-|[[cmd-moveChildFromAnnotations, move child from annotations command]]*move child from annotations*
+.Technical name
+`moveChildInSameContainment`
 
+.Related event
+<<evnt-childMovedInSameContainment>>
+
+[[cmd-moveChildFromAnnotations]]
+===== Move child from annotations
 Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
 inside ``newParent``'s `newContainment` at `newIndex`.
 
-See also <<evnt-childMovedFromAnnotations>>.
-|
+.Parameters
 * newParent: <<targetNodeType>>
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
@@ -828,7 +892,8 @@ See also <<evnt-childMovedFromAnnotations>>.
 * oldParent: <<targetNodeType>>
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newParent` does not exist
 * `newIndex` is beyond the number of `newContainment` entries in `newParent`
 * `movedAnnotation` does not exist
@@ -837,20 +902,26 @@ See also <<evnt-childMovedFromAnnotations>>.
 * ##?## `oldIndex` is beyond (the number of annotation entries in `oldParent`) - 1
 * ##?## `movedAnnotation` is not the node at ``oldParent``'s annotations at `oldIndex`.
 
-|[[cmd-moveChildFromAnnotationsInSameParent, move child from annotations in same parent command]]*move child from annotations in same parent*
+.Technical name
+`moveChildFromAnnotations`
 
+.Related event
+<<evnt-childMovedFromAnnotations>>
+
+[[cmd-moveChildFromAnnotationsInSameParent]]
+===== Move child from annotations in same parent
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
 inside ``parent``'s `newContainment` at `newIndex`.
 
-See also <<evnt-childMovedFromAnnotationsInSameParent>>.
-|
+.Parameters
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
 * movedAnnotation: <<targetNodeType>>
 * parent: <<targetNodeType>>
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newIndex` is beyond the number of `newContainment` entries in `parent`
 * `movedAnnotation` does not exist
 * `parent` does not exist
@@ -858,55 +929,72 @@ See also <<evnt-childMovedFromAnnotationsInSameParent>>.
 * ##?## `oldIndex` is beyond (the number of annotation entries in `parent`) - 1
 * ##?## `movedAnnotation` is not the node at ``parent``'s annotations at `oldIndex`.
 
-3+|
+.Technical name
+`moveChildFromAnnotationsInSameParent`
+
+.Related event
+<<evnt-childMovedFromAnnotationsInSameParent>>
+
 [[cmd-annotations]]
 ==== Annotations
 
-|[[cmd-addAnnotation, add annotation command]]*add annotation*
-
+[[cmd-addAnnotation]]
+===== Add annotation
 Add new node `newAnnotation` to ``parent``'s annotations at `index`.
 
-See also <<evnt-annotationAdded>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * newAnnotation: <<nodeType>>
 * index: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `newAnnotation` id already exists
 * `index` is beyond the number of annotations of `parent`
 
-|[[cmd-deleteAnnotation, delete annotation command]]*delete annotation*
+.Technical name
+`addAnnotation`
 
+.Related event
+<<evnt-annotationAdded>>
+
+[[cmd-deleteAnnotation]]
+===== Delete annotation
 Delete existing node `deletedAnnotation` from ``parent``'s annotations at `index`.
 
-See also <<evnt-annotationDeleted>>.
-|
+.Parameters
 * deletedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
 * index: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `deletedAnnotation` does not exist
 * `parent` does not exist
 * `deletedAnnotation` is not an annotation of `parent`
 * `index` is beyond (the number of annotations of `parent`) - 1
 * ##?## `deletedAnnotation` is not the node at ``parent``'s annotations at `index`.
 
-|[[cmd-replaceAnnotation, replace annotation command]]*replace annotation*
+.Technical name
+`deleteAnnotation`
 
+.Related event
+<<evnt-annotationDeleted>>
+
+[[cmd-replaceAnnotation]]
+===== Replace annotation
 Replace existing node `replacedAnnotation` inside ``parent``'s annotations at `index` with new node `newAnnotation`.
 Delete `replacedAnnotation`.
 
-See also <<evnt-annotationReplaced>>.
-|
+.Parameters
 * newAnnotation: <<nodeType>>
 * replacedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
 * index: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newAnnotation` id already exists
 * `replacedAnnotation` does not exist
 * `parent` does not exist
@@ -914,20 +1002,26 @@ See also <<evnt-annotationReplaced>>.
 * `index` is beyond (the number of annotations of `parent`) - 1
 * ##?## `replacedAnnotation` is not the node at ``parent``'s annotations at `index`.
 
-|[[cmd-moveAnnotationFromOtherParent, move annotation from other parent command]]*move annotation from other parent*
+.Technical name
+`replaceAnnotation`
 
+.Related event
+<<evnt-annotationReplaced>>
+
+[[cmd-moveAnnotationFromOtherParent]]
+===== Move annotation from other parent
 Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
 inside ``newParent``'s annotations at `newIndex`.
 
-See also <<evnt-annotationMovedFromOtherParent>>.
-|
+.Parameters
 * newParent: <<targetNodeType>>
 * newIndex: <<indexType>>
 * movedAnnotation: <<targetNodeType>>
 * oldParent: <<targetNodeType>>
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newParent` does not exist
 * `index` is beyond the number of annotations of `newParent`
 * `movedAnnotation` does not exist
@@ -936,19 +1030,26 @@ See also <<evnt-annotationMovedFromOtherParent>>.
 * `oldIndex` is beyond (the number of annotations of `oldParent`) - 1
 * ##?## `movedAnnotation` is not the node at ``oldParent``'s annotations at `oldIndex`.
 
-|[[cmd-moveAnnotationInSameParent, move annotation in same parent command]]*move annotation in same parent*
+.Technical name
+`moveAnnotationFromOtherParent`
 
+.Related event
+<<evnt-annotationMovedFromOtherParent>>
+
+
+[[cmd-moveAnnotationInSameParent]]
+===== Move annotation in same parent
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
 inside ``parent``'s annotations at `newIndex`.
 
-See also <<evnt-annotationMovedInSameParent>>.
-|
+.Parameters
 * newIndex: <<indexType>>
 * movedAnnotation: <<targetNodeType>>
 * parent: <<targetNodeType>>
 * oldIndex: <<targetNodeType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newIndex` is beyond (the number of annotations of `parent`) - 1
 * `movedAnnotation` does not exist
 * `parent` does not exist
@@ -956,13 +1057,18 @@ See also <<evnt-annotationMovedInSameParent>>.
 * `oldIndex` is beyond (the number of annotations of `parent`) - 1
 * ##?## `movedAnnotation` is not the node at ``parent``'s annotations at `oldIndex`.
 
-|[[cmd-moveAnnotationFromContainment, move annotation from containment command]]*move annotation from containment*
+.Technical name
+`moveAnnotationInSameParent`
 
+.Related event
+<<evnt-annotationMovedInSameParent>>
+
+[[cmd-moveAnnotationFromContainment]]
+===== Move annotation from containment
 Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
 inside ``newParent``'s annotations at `newIndex`.
 
-See also <<evnt-annotationMovedFromContainment>>.
-|
+.Parameters
 * newParent: <<targetNodeType>>
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
@@ -970,7 +1076,8 @@ See also <<evnt-annotationMovedFromContainment>>.
 * oldContainment: <<metaPointerType>>
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newParent` does not exist
 * `newIndex` is beyond the number of annotation entries in `newParent`
 * `movedChild` does not exist
@@ -979,13 +1086,18 @@ See also <<evnt-annotationMovedFromContainment>>.
 * ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `oldParent`) - 1
 * ##?## `movedChild` is not the node at ``oldParent``'s `oldContainment` at `oldIndex`.
 
-|[[cmd-moveAnnotationFromContainmentInSameParent, move annotation from containment in same parent command]]*move annotation from containment in same parent*
+.Technical name
+`moveAnnotationFromContainment`
 
+.Related event
+<<evnt-annotationMovedFromContainment>>
+
+[[cmd-moveAnnotationFromContainmentInSameParent]]
+===== Move annotation from containment in same parent
 Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
 inside ``parent``'s annotations at `newIndex`.
 
-See also <<evnt-annotationMovedFromContainmentInSameParent>>.
-|
+.Parameters
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
@@ -993,7 +1105,8 @@ See also <<evnt-annotationMovedFromContainmentInSameParent>>.
 * oldContainment: <<metaPointerType>>
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newIndex` is beyond the number of annotation entries in `parent`
 * `movedChild` does not exist
 * `parent` does not exist
@@ -1001,52 +1114,68 @@ See also <<evnt-annotationMovedFromContainmentInSameParent>>.
 * ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `parent`) - 1
 * ##?## `movedChild` is not the node at ``parent``'s `oldContainment` at `oldIndex`.
 
-3+|
+.Technical name
+`moveAnnotationFromContainmentInSameParent`
+
+.Related event
+<<evnt-annotationMovedFromContainmentInSameParent>>
+
 [[cmd-references]]
 ==== References
 
-|[[cmd-addReference, add reference command]]*add reference*
-
+[[cmd-addReference]]
+===== Add reference
 Add `newTarget` / `newResolveInfo` to ``parent``'s `reference` at `index`.
 
-See also <<evnt-referenceAdded>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * newTarget: <<targetNodeType>>?
 * newResolveInfo: <<resolveInfoType>>?
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `index` is beyond the number of `reference` entries of `parent`
 * `newTarget` is `null` and `newResolveInfo` is `null`
 
-|[[cmd-deleteReference, delete reference command]]*delete reference*
+.Technical name
+`addReference`
 
+.Related event
+<<evnt-referenceAdded>>
+
+[[cmd-deleteReference]]
+===== Delete reference
 Delete existing `deletedTarget`/`deletedResolveInfo` from ``parent``'s `reference` at `index`.
 
-See also <<evnt-referenceDeleted>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * deletedTarget: <<targetNodeType>>?
 * deletedResolveInfo: <<resolveInfoType>>?
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `deletedTarget` is `null` and `deletedResolveInfo` is `null`
 * ##?## `deletedTarget` is not the target at ``parent``'s `reference` at `index`.
 * ##?## `deletedResolveInfo` is not the resolveInfo at ``parent``'s `reference` at `index`.
 
-|[[cmd-changeReference, change reference command]]*change reference*
+.Technical name
+`deleteReference`
 
+.Related event
+<<evnt-referenceDeleted>>
+
+[[cmd-changeReference]]
+===== Change reference
 Replace existing `replacedTarget`/`replacedResolveInfo`  inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
 
-See also <<evnt-referenceChanged>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1055,7 +1184,8 @@ See also <<evnt-referenceChanged>>.
 * replacedTarget: <<targetNodeType>>?
 * replacedResolveInfo: <<resolveInfoType>>?
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `newTarget` is `null` and `newResolveInfo` is `null`
@@ -1063,13 +1193,18 @@ See also <<evnt-referenceChanged>>.
 * ##?## `replacedTarget` is not the target at ``parent``'s `reference` at `index`.
 * ##?## `replacedResolveInfo` is not the resolveInfo at ``parent``'s `reference` at `index`.
 
-|[[cmd-moveEntryFromOtherReference, move entry from other reference command]]*move entry from other reference*
+.Technical name
+`changeReference`
 
+.Related event
+<<evnt-referenceChanged>>
+
+[[cmd-moveEntryFromOtherReference]]
+===== Move entry from other reference
 Move existing `target`/`resolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
 to ``newParent``'s `newReference` at `newIndex`.
 
-See also <<evnt-entryMovedFromOtherReference>>.
-|
+.Parameters
 * newParent: <<targetNodeType>>
 * newReference: <<metaPointerType>>
 * newIndex: <<indexType>>
@@ -1079,7 +1214,8 @@ See also <<evnt-entryMovedFromOtherReference>>.
 * target: <<targetNodeType>>?
 * resolveInfo: <<resolveInfoType>>?
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `newParent` does not exist
 * `newIndex` is beyond (the number of `newReference` entries of `newParent`)
 * `oldIndex` is beyond (the number of `oldReference` entries of `oldParent`) - 1
@@ -1087,13 +1223,18 @@ See also <<evnt-entryMovedFromOtherReference>>.
 * ##?## `target` is not the target at ``oldParent``'s `oldReference` at `oldIndex`.
 * ##?## `resolveInfo` is not the resolveInfo at ``oldParent``'s `oldReference` at `oldIndex`.
 
-|[[cmd-moveEntryFromOtherReferenceInSameParent, move entry from other reference in same parent command]]*move entry from other reference in same parent*
+.Technical name
+`moveEntryFromOtherReference`
 
+.Related event
+<<evnt-entryMovedFromOtherReference>>
+
+[[cmd-moveEntryFromOtherReferenceInSameParent]]
+===== Move entry from other reference in same parent
 Move existing `target`/`resolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
 to ``parent``'s `newReference` at `newIndex`.
 
-See also <<evnt-entryMovedFromOtherReferenceInSameParent>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * newReference: <<metaPointerType>>
 * newIndex: <<indexType>>
@@ -1102,7 +1243,8 @@ See also <<evnt-entryMovedFromOtherReferenceInSameParent>>.
 * target: <<targetNodeType>>?
 * resolveInfo: <<resolveInfoType>>?
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `newIndex` is beyond (the number of `newReference` entries of `parent`)
 * `oldIndex` is beyond (the number of `oldReference` entries of `parent`) - 1
@@ -1110,13 +1252,18 @@ See also <<evnt-entryMovedFromOtherReferenceInSameParent>>.
 * ##?## `target` is not the target at ``parent``'s `oldReference` at `oldIndex`.
 * ##?## `resolveInfo` is not the resolveInfo at ``parent``'s `oldReference` at `oldIndex`.
 
-|[[cmd-moveEntryInSameReference, move entry in same reference command]]*move entry in same reference*
+.Technical name
+`moveEntryFromOtherReferenceInSameParent`
 
+.Related event
+<<evnt-entryMovedFromOtherReferenceInSameParent>>
+
+[[cmd-moveEntryInSameReference]]
+===== Move entry in same reference
 Move existing `target`/`resolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
 inside ``parent``'s `reference` at `newIndex`.
 
-See also <<evnt-entryMovedInSameReference>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * oldIndex: <<indexType>>
@@ -1124,7 +1271,8 @@ See also <<evnt-entryMovedInSameReference>>.
 * target: <<targetNodeType>>?
 * resolveInfo: <<resolveInfoType>>?
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `newIndex` is beyond (the number of `reference` entries of `parent`) - 1
 * `oldIndex` is beyond (the number of `reference` entries of `parent`) - 1
@@ -1132,45 +1280,57 @@ See also <<evnt-entryMovedInSameReference>>.
 * ##?## `target` is not the target at ``parent``'s `reference` at `oldIndex`.
 * ##?## `resolveInfo` is not the resolveInfo at ``parent``'s `reference` at `oldIndex`.
 
-|[[cmd-addReferenceResolveInfo, add reference ResolveInfo command]]*add reference ResolveInfo*
+.Technical name
+`moveEntryInSameReference`
 
+.Related event
+<<evnt-entryMovedInSameReference>>
+
+[[cmd-addReferenceResolveInfo]]
+===== Add reference ResolveInfo
 Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
 
 ****
 `target` MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
-See also <<evnt-ReferenceResolveInfoAdded>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * newResolveInfo: <<resolveInfoType>>
 * target: <<targetNodeType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `newResolveInfo` is `null`
 * ##?## resolveInfo already set in ``parent``'s `reference` at `index`.
 
-|[[cmd-deleteReferenceResolveInfo, delete reference ResolveInfo command]]*delete reference ResolveInfo*
+.Technical name
+`addReferenceResolveInfo`
 
+.Related event
+<<evnt-referenceResolveInfoAdded>>
+
+[[cmd-deleteReferenceResolveInfo]]
+===== Delete reference ResolveInfo
 Delete existing `deletedResolveInfo` as ResolveInfo from existing entry inside ``parent``'s `reference` at `index` with `target`.
 
 ****
 `target` MUST NOT be `null` as we're about to remove ResolveInfo, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
-See also <<evnt-referenceResolveInfoDeleted>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * target: <<targetNodeType>>
 * deletedResolveInfo: <<resolveInfoType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `deletedResolveInfo` is `null`
@@ -1178,16 +1338,21 @@ See also <<evnt-referenceResolveInfoDeleted>>.
 * ##?## resolveInfo is not set in ``parent``'s `reference` at `index`.
 * ##?## resolveInfo currently is not `deletedResolveInfo` in ``parent``'s `reference` at `index`.
 
-|[[cmd-changeReferenceResolveInfo, change reference ResolveInfo command]]*change reference ResolveInfo*
+.Technical name
+`deleteReferenceResolveInfo`
 
+.Related event
+<<evnt-referenceResolveInfoDeleted>>
+
+[[cmd-changeReferenceResolveInfo]]
+===== Change reference ResolveInfo
 Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` from `oldResolveInfo` to `newResolveInfo`.
 
 ****
 `target` MAY be `null` as we can only change ResolveInfo if both `oldResolveInfo` and `newResolveInfo` is non-`null`.
 ****
 
-See also <<evnt-referenceResolveInfoChanged>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1195,7 +1360,8 @@ See also <<evnt-referenceResolveInfoChanged>>.
 * target: <<targetNodeType>>?
 * oldResolveInfo: <<resolveInfoType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `newResolveInfo` is `null`
@@ -1203,61 +1369,78 @@ See also <<evnt-referenceResolveInfoChanged>>.
 * ##?## resolveInfo is not set in ``parent``'s `reference` at `index`
 * ##?## resolveInfo currently is not `oldResolveInfo` in ``parent``'s `reference` at `index`
 
-|[[cmd-addReferenceTarget, add reference target command]]*add reference target*
+.Technical name
+`changeReferenceResolveInfo`
 
+.Related event
+<<evnt-referenceResolveInfoChanged>>
+
+[[cmd-addReferenceTarget]]
+===== Add reference target
 Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
 
 ****
 `resolveInfo` MUST NOT be `null` as we can only add target if target is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
-See also <<evnt-referenceTargetAdded>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * newTarget: <<targetNodeType>>
 * resolveInfo: <<resolveInfoType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `newTarget` is `null`
 * ##?## target already set in ``parent``'s `reference` at `index`.
 
-|[[cmd-deleteReferenceTarget, delete reference target command]]*delete reference target*
+.Technical name
+`addReferenceTarget`
 
+.Related event
+<<evnt-referenceTargetAdded>>
+
+[[cmd-deleteReferenceTarget]]
+===== Delete reference target
 Delete existing `deletedTarget` as target from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
 
 ****
 `resolveInfo` MUST NOT be `null` as we're about to remove target, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
-See also <<evnt-referenceTargetDeleted>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
 * resolveInfo: <<resolveInfoType>>
 * deletedTarget: <<targetNodeType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `deletedTarget` is `null`
 * ##?## target is not set in ``parent``'s `reference` at `index`.
 * ##?## target currently is not `deletedTarget` in ``parent``'s `reference` at `index`.
 
-|[[cmd-changeReferenceTarget, change reference target command]]*change reference target*
+.Technical name
+`deleteReferenceTarget`
 
+.Related event
+<<evnt-referenceTargetDeleted>>
+
+[[cmd-changeReferenceTarget]]
+===== Change reference target
 Change target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` from `oldTarget` to `newTarget`.
 
 ****
 `resolveInfo` MAY be `null` as we can only change target if both `oldTarget` and `newTarget` is non-`null`.
 ****
 
-See also <<evnt-referenceTargetChanged>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1265,7 +1448,8 @@ See also <<evnt-referenceTargetChanged>>.
 * resolveInfo: <<resolveInfoType>>?
 * oldTarget: <<targetNodeType>>
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `newTarget` is `null`
@@ -1273,219 +1457,271 @@ See also <<evnt-referenceTargetChanged>>.
 * ##?## target is not set in ``parent``'s `reference` at `index`
 * ##?## target currently is not `oldTarget` in ``parent``'s `reference` at `index`
 
-3+|
+.Technical name
+`changeReferenceTarget`
+
+.Related event
+<<evnt-referenceTargetChanged>>
+
 [[cmd-composite-section]]
 ==== Composite
 
-|[[cmd-composite, composite command]]*composite*
-
+[[cmd-composite]]
+===== composite
 Groups several commands into a logical group.
 The parts are ordered.
 
 Command groups don't guarantee anything; the repository MAY take the group as a hint to resolve conflicts in a different manner.
 
-See also <<evnt-composite>>.
-|
+.Parameters
 * parts: <<commandType>>[]
 * commandId: <<commandIdType>>
-|
+
+.Errors
 * accumulation of all errors of `parts`
 
-|===
+.Technical name
+`composite`
+
+.Related event
+<<evnt-composite>>
 
 === Queries
 
-[cols="a,a,a,a"]
-|===
-|Name |Request Parameters |Response Parameters |Errors
-
-4+|
 [[cmd-subscription]]
 ==== Subscription
 
-|[[qry-subscribePartitions, subscribe to partition changes query]]*subscribe to partition changes*
-
+[[qry-subscribePartitions]]
+===== Subscribe to partition changes
 This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions.
 
-|
+.Request parameters
 * creation: `boolean`
 * deletion: `boolean`
 * partitions: `boolean`
 * queryId: <<queryIdType>>
-|
+
+.Response parameters
 * queryId: <<queryIdType>>
-|
 
-|[[qry-subscribePartition, subscribe to partition command]]*subscribe to partition*
+.Errors
+_none_
 
+.Technical name
+`subscribePartitions`
+
+[[qry-subscribePartition]]
+===== Subscribe to partition
 This client wants to receive events on any changes to `partition` or any of its descendants.
 
-|
+.Request parameters
 * partition: <<targetNodeType>>
 * queryId: <<queryIdType>>
-|
+
+.Response parameters
 * contents: <<chunkType>>
 * queryId: <<queryIdType>>
-|
+
+.Errors
 * already subscribed to `partition`
 
-|[[cmd-unsubscribePartition, unsubscribe from partition command]]*unsubscribe from partition*
+.Technical name
+`subscribePartition`
 
+[[cmd-unsubscribePartition]]
+===== Unsubscribe from partition
 This client does not want to receive events on any changes to `partition` or any of its descendants anymore.
 
-|
+.Request parameters
 * partition: <<targetNodeType>>
 * queryId: <<queryIdType>>
-|
+
+.Response parameters
 * queryId: <<queryIdType>>
-|
+
+.Errors
 * not subscribed to `partition`
 
-4+|
+.Technical name
+`unsubscribePartition`
+
 [[cmd-misc]]
 ==== Miscellaneous
 
-|[[cmd-getAvailableIds, get available ids command]]*get available ids*
-
+[[cmd-getAvailableIds]]
+===== Get available ids
 Request `count` number of unused <<{m3}.adoc#identifiers, valid ids>>.
 
 `ids` might contain less or equal number of ids than `count`.
-|
+
+.Request parameters
 * count: `integer`
 * queryId: <<queryIdType>>
-|
+
+.Response parameters
 * ids: <<freeIdType>>[]
 * queryId: <<queryIdType>>
-|
 
-|===
+.Errors
+_none_
+
+.Technical name
+`getAvailableIds`
 
 
 === Events
 
-[cols="a,a"]
-|===
-|Name |Parameters
-
-2+|
 [[evnt-partitions]]
 ==== Partitions
 
-|[[evnt-partitionAdded, partition added event]]*partition added*
-
+[[evnt-partitionAdded]]
+===== Partition added
 Partition `newPartition` has been added to the repository.
 
 This client is now subscribed to any changes to `newPartition` or any of its descendants.
 
-See also <<cmd-addPartition>>.
-|
+.Parameters
 * newPartition: <<nodeType>>
 * originCommands: <<commandSourceType>>[]
 
+.Technical name
+`partitionAdded`
 
-|[[evnt-partitionDeleted, partition deleted event]]*partition deleted*
+.Related command
+<<cmd-addPartition>>
 
+[[evnt-partitionDeleted]]
+===== Partition deleted
 Partition `deletedPartition`, and all its descendants, have been deleted from the repository.
 
 This client is now unsubscribed from any changes to `deletedPartition` or any of its descendants.
 
-See also <<cmd-deletePartition>>.
-|
+.Parameters
 * deletedPartition: <<nodeType>> or <<targetNodeType>> #TODO#
 * originCommands: <<commandSourceType>>[]
 
-2+|
+.Technical name
+`partitionDeleted`
+
+.Related command
+<<cmd-deletePartition>>
+
 [[evnt-nodes]]
 ==== Nodes
 
-|[[evnt-conceptChanged, concept changed event]]*concept changed*
-
+[[evnt-conceptChanged]]
+===== Concept changed
 Concept of `node` has been changed from `oldConcept` to `newConcept`.
 
-See also <<cmd-changeConcept>>.
-|
+.Parameters
 * node: <<targetNodeType>>
 * newConcept: <<metaPointerType>>
 * oldConcept: <<metaPointerType>>
 * originCommands: <<commandSourceType>>[]
 
-2+|
+.Technical name
+`conceptChanged`
+
+.Related command
+<<cmd-changeConcept>>
+
 [[evnt-properties]]
 ==== Properties
 
-|[[evnt-propertyAdded, property added event]]*property added*
-
+[[evnt-propertyAdded]]
+===== Property added
 `property` of `node` has been set to `newValue`.
 
-See also <<cmd-addProperty>>.
-|
+.Parameters
 * node: <<targetNodeType>>
 * property: <<metaPointerType>>
 * newValue: <<propertyValueType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-propertyDeleted, property deleted event]]*property deleted*
+.Technical name
+`propertyAdded`
 
+.Related command
+<<cmd-addProperty>>
+
+[[evnt-propertyDeleted]]
+===== Property deleted
 Existing `property` of `node` with `oldValue` has been deleted.
 
-See also <<cmd-deleteProperty>>.
-|
+.Parameters
 * node: <<targetNodeType>>
 * property: <<metaPointerType>>
 * oldValue: <<propertyValueType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-propertyChanged, property changed event]]*property changed*
+.Technical name
+`propertyDeleted`
 
+.Related command
+<<cmd-deleteProperty>>
+
+[[evnt-propertyChanged]]
+===== Property changed
 Existing `property` of `node` has been changed from `oldValue` to `newValue`.
 
-See also <<cmd-changeProperty>>.
-|
+.Parameters
 * node: <<targetNodeType>>
 * property: <<metaPointerType>>
 * newValue: <<propertyValueType>>
 * oldValue: <<propertyValueType>>
 * originCommands: <<commandSourceType>>[]
 
+.Technical name
+`propertyChanged`
 
-2+|
+.Related command
+<<cmd-changeProperty>>
+
 [[evnt-children]]
 ==== Children
 
-|[[evnt-childAdded, child added event]]*child added*
-
+[[evnt-childAdded]]
+===== Child added
 New node `newChild` has been added to ``parent``'s  `containment` at `index`.
 All other children inside ``parent``'s `containment` with index >= `index` have been moved to next higher index.
 
-See also <<cmd-addChild>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * newChild: <<nodeType>>
 * containment: <<metaPointerType>>
 * index: <<indexType>>
 * originCommands: <<commandSourceType>>[]
 
+.Technical name
+`childAdded`
 
-|[[evnt-childDeleted, child deleted event]]*child deleted*
+.Related command
+<<cmd-addChild>>
 
+[[evnt-childDeleted]]
+===== Child deleted
 Existing node `deletedChild`, and all its descendants, have been deleted from ``parent``'s `containment` at `index`.
 All other children inside ``parent``'s `containment` with index > `index` have been moved to next lower index.
 
-See also <<cmd-deleteChild>>.
-|
+.Parameters
 * deletedChild: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
 * containment: <<metaPointerType>>
 * index: <<indexType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-childReplaced, child replaced event]]*child replaced*
+.Technical name
+`childDeleted`
 
+.Related command
+<<cmd-deleteChild>>
+
+[[evnt-childReplaced]]
+===== Child replaced
 Existing node `replacedChild` inside ``parent``'s `containment` at `index` has been replaced with new node `newChild`.
 `replacedChild`, and all its descendants, have been deleted.
 
-See also <<cmd-replaceChild>>.
-|
+.Parameters
 * newChild: <<nodeType>>
 * replacedChild: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
@@ -1493,8 +1729,14 @@ See also <<cmd-replaceChild>>.
 * index: <<indexType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-childMovedFromOtherContainment, child moved from other containment event]]*child moved from other containment*
+.Technical name
+`childReplaced`
 
+.Related command
+<<cmd-replaceChild>>
+
+[[evnt-childMovedFromOtherContainment]]
+===== Child moved from other containment
 Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has been moved
 inside ``newParent``'s `newContainment` at `newIndex`.
 
@@ -1502,8 +1744,7 @@ All other children inside ``oldParent``'s `oldContainment` with index > `oldInde
 
 All other children inside ``newParent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
 
-See also <<cmd-moveChildFromOtherContainment>>.
-|
+.Parameters
 * newParent: <<targetNodeType>>
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
@@ -1513,8 +1754,14 @@ See also <<cmd-moveChildFromOtherContainment>>.
 * oldIndex: <<indexType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-childMovedFromOtherContainmentInSameParent, child moved from other containment in same parent event]]*child moved from other containment in same parent*
+.Technical name
+`childMovedFromOtherContainment`
 
+.Related command
+<<cmd-moveChildFromOtherContainment>>
+
+[[evnt-childMovedFromOtherContainmentInSameParent]]
+===== Child moved from other containment in same parent
 Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has been moved
 inside ``parent``'s `newContainment` at `newIndex`.
 
@@ -1522,8 +1769,7 @@ All other children inside ``parent``'s `oldContainment` with index > `oldIndex` 
 
 All other children inside ``parent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
 
-See also <<cmd-moveChildFromOtherContainmentInSameParent>>.
-|
+.Parameters
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
@@ -1532,8 +1778,14 @@ See also <<cmd-moveChildFromOtherContainmentInSameParent>>.
 * oldIndex: <<indexType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-childMovedInSameContainment, child moved in same containment event]]*child moved in same containment*
+.Technical name
+`childMovedFromOtherContainmentInSameParent`
 
+.Related command
+<<cmd-moveChildFromOtherContainmentInSameParent>>
+
+[[evnt-childMovedInSameContainment]]
+===== Child moved in same containment
 Existing node `movedChild` (previously inside ``parent``'s `containment` at `oldIndex`) has been moved
 inside ``parent``'s `containment` at `newIndex`.
 
@@ -1549,8 +1801,7 @@ Example: +
 
 `oldIndex` MUST NOT be equal to `newIndex`.
 
-See also <<cmd-moveChildInSameContainment>>.
-|
+.Parameters
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
 * parent: <<targetNodeType>>
@@ -1558,8 +1809,14 @@ See also <<cmd-moveChildInSameContainment>>.
 * oldIndex: <<indexType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-childMovedFromAnnotations, child moved from annotations command]]*child moved from annotations*
+.Technical name
+`childMovedInSameContainment`
 
+.Related command
+<<cmd-moveChildInSameContainment>>
+
+[[evnt-childMovedFromAnnotations]]
+===== Child moved from annotations
 Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has been moved
 inside ``newParent``'s `newContainment` at `newIndex`.
 
@@ -1567,8 +1824,7 @@ All other annotations inside ``oldParent``'s `annotations` with index > `oldInde
 
 All other children inside ``newParent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
 
-See also <<cmd-moveChildFromAnnotations>>.
-|
+.Parameters
 * newParent: <<targetNodeType>>
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
@@ -1577,8 +1833,14 @@ See also <<cmd-moveChildFromAnnotations>>.
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
 
-|[[evnt-childMovedFromAnnotationsInSameParent, child moved from annotations in same parent command]]*child moved  from annotations in same parent*
+.Technical name
+`childMovedFromAnnotations`
 
+.Related command
+<<cmd-moveChildFromAnnotations>>
+
+[[evnt-childMovedFromAnnotationsInSameParent]]
+===== Child moved from annotations in same parent
 Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has been moved
 inside ``parent``'s `newContainment` at `newIndex`.
 
@@ -1586,8 +1848,7 @@ All other annotations inside ``parent``'s `annotations` with index > `oldIndex` 
 
 All other children inside ``parent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
 
-See also <<cmd-moveChildFromAnnotationsInSameParent>>.
-|
+.Parameters
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
 * movedAnnotation: <<targetNodeType>>
@@ -1595,50 +1856,69 @@ See also <<cmd-moveChildFromAnnotationsInSameParent>>.
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
 
-2+|
+.Technical name
+`childMovedFromAnnotationsInSameParent`
+
+.Related command
+<<cmd-moveChildFromAnnotationsInSameParent>>
+
 [[evnt-annotations]]
 ==== Annotations
 
-|[[evnt-annotationAdded, annotationAdded event]]*annotation added*
-
+[[evnt-annotationAdded]]
+===== Annotation added
 New node `newAnnotation` has been added to ``parent``'s annotations at `index`.
 All other annotations inside ``parent``'s annotations with index >= `index` have been moved to next higher index.
 
-See also <<cmd-addAnnotation>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * newAnnotation: <<nodeType>>
 * index: <<indexType>>
 * originCommands: <<commandSourceType>>[]
 
+.Technical name
+`annotationAdded`
 
-|[[evnt-annotationDeleted, annotation deleted event]]*annotation deleted*
+.Related command
+<<cmd-addAnnotation>>
 
+[[evnt-annotationDeleted]]
+===== Annotation deleted
 Existing node `deletedAnnotation`, and all its descendants, have been deleted from ``parent``'s annotations at `index`.
 All other annotations inside ``parent``'s annotations with index > `index` have been moved to next lower index.
 
-See also <<cmd-deleteAnnotation>>.
-|
+.Parameters
 * deletedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
 * index: <<indexType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-annotationReplaced, annotation replaced event]]*annotation replaced*
+.Technical name
+`annotationDeleted`
 
+.Related command
+<<cmd-deleteAnnotation>>
+
+[[evnt-annotationReplaced]]
+===== Annotation replaced
 Existing node `replacedAnnotation` inside ``parent``'s annotations at `index` has been replaced with new node `newAnnotation`.
 `replacedAnnotation`, and all its descendants, have been deleted.
 
-See also <<cmd-replaceAnnotation>>.
-|
+.Parameters
 * newAnnotation: <<nodeType>>
 * replacedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
 * parent: <<targetNodeType>>
 * index: <<indexType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-annotationMovedFromOtherParent, annotation moved from other parent event]]*annotation moved from other parent*
+.Technical name
+`annotationReplaced`
 
+.Related command
+<<cmd-replaceAnnotation>>
+
+[[evnt-annotationMovedFromOtherParent]]
+===== Annotation moved from other parent
 Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has been moved
 inside ``newParent``'s annotations at `newIndex`.
 
@@ -1646,8 +1926,7 @@ All other annotations inside ``oldParent``'s annotations with index > `oldIndex`
 
 All other annotations inside ``newParent``'s annotations with index >= `newIndex` have been moved to next higher index.
 
-See also <<cmd-moveAnnotationFromOtherParent>>.
-|
+.Parameters
 * newParent: <<targetNodeType>>
 * newIndex: <<indexType>>
 * movedAnnotation: <<targetNodeType>>
@@ -1655,9 +1934,14 @@ See also <<cmd-moveAnnotationFromOtherParent>>.
 * oldIndex: <<indexType>>
 * originCommands: <<commandSourceType>>[]
 
+.Technical name
+`annotationMovedFromOtherParent`
 
-|[[evnt-annotationMovedInSameParent, annotation moved in same parent event]]*annotation moved in same parent*
+.Related command
+<<cmd-moveAnnotationFromOtherParent>>
 
+[[evnt-annotationMovedInSameParent]]
+===== Annotation moved in same parent
 Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has been moved
 inside ``parent``'s annotations at `newIndex`.
 
@@ -1673,16 +1957,21 @@ Example: +
 
 `oldIndex` MUST NOT be equal to `newIndex`.
 
-See also <<cmd-moveAnnotationInSameParent>>.
-|
+.Parameters
 * newIndex: <<indexType>>
 * movedAnnotation: <<targetNodeType>>
 * parent: <<targetNodeType>>
 * oldIndex: <<targetNodeType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-annotationMovedFromContainment, annotation moved from containment command]]*annotation moved from containment*
+.Technical name
+`annotationMovedInSameParent`
 
+.Related command
+<<cmd-moveAnnotationInSameParent>>
+
+[[evnt-annotationMovedFromContainment]]
+===== Annotation moved from containment
 Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has been moved
 inside ``newParent``'s annotations at `newIndex`.
 
@@ -1690,8 +1979,7 @@ All other children inside ``oldParent``'s `oldContainment` with index > `oldInde
 
 All other annotations inside ``newParent``'s annotations with index >= `newIndex` have been moved to next higher index.
 
-See also <<cmd-moveAnnotationFromContainment>>.
-|
+.Parameters
 * newParent: <<targetNodeType>>
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
@@ -1700,8 +1988,14 @@ See also <<cmd-moveAnnotationFromContainment>>.
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
 
-|[[evnt-annotationMovedFromContainmentInSameParent, annotation moved from containment in same parent command]]*annotation moved from containment in same parent*
+.Technical name
+`annotationMovedFromContainment`
 
+.Related command
+<<cmd-moveAnnotationFromContainment>>
+
+[[evnt-annotationMovedFromContainmentInSameParent]]
+===== Annotation moved from containment in same parent
 Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has been moved
 inside ``parent``'s annotations at `newIndex`.
 
@@ -1709,8 +2003,7 @@ All other children inside ``parent``'s `oldContainment` with index > `oldIndex` 
 
 All other annotations inside ``parent``'s annotations with index >= `newIndex` have been moved to next higher index.
 
-See also <<cmd-moveAnnotationFromContainmentInSameParent>>.
-|
+.Parameters
 * newContainment: <<metaPointerType>>
 * newIndex: <<indexType>>
 * movedChild: <<targetNodeType>>
@@ -1719,17 +2012,21 @@ See also <<cmd-moveAnnotationFromContainmentInSameParent>>.
 * oldIndex: <<indexType>>
 * commandId: <<commandIdType>>
 
-2+|
+.Technical name
+`annotationMovedFromContainmentInSameParent`
+
+.Related command
+<<cmd-moveAnnotationFromContainmentInSameParent>>
+
 [[evnt-references]]
 ==== References
 
-|[[evnt-referenceAdded, reference added event]]*reference added*
-
+[[evnt-referenceAdded]]
+===== Reference added
 Reference with `newTarget`/`newResolveInfo` has been added to ``parent``'s `reference` at `index`.
 All other entries inside ``parent``'s `reference` with index >= `index` have been moved to next higher index.
 
-See also <<cmd-addReference>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1737,13 +2034,18 @@ See also <<cmd-addReference>>.
 * newResolveInfo: <<resolveInfoType>>?
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-referenceDeleted, reference deleted event]]*reference deleted*
+.Technical name
+`referenceAdded`
 
+.Related command
+<<cmd-addReference>>
+
+[[evnt-referenceDeleted]]
+===== Reference deleted
 Existing reference with `deletedTarget`/`deletedResolveInfo` has been deleted from ``parent``'s `reference` at `index`.
 All other entries inside ``parent``'s `reference` with index > `index` have been moved to next lower index.
 
-See also <<cmd-deleteReference>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1751,12 +2053,17 @@ See also <<cmd-deleteReference>>.
 * deletedResolveInfo: <<resolveInfoType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-referenceChanged, reference changed event]]*reference changed*
+.Technical name
+`referenceDeleted`
 
+.Related command
+<<cmd-deleteReference>>
+
+[[evnt-referenceChanged]]
+===== Reference changed
 Existing reference with `replacedTarget`/`replacedResolveInfo` inside ``parent``'s annotations at `index` has been replaced with `newTarget`/`newResolveInfo`.
 
-See also <<cmd-changeReference>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1766,8 +2073,14 @@ See also <<cmd-changeReference>>.
 * replacedResolveInfo: <<resolveInfoType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-entryMovedFromOtherReference, entry moved from other reference event]]*entry moved from other reference*
+.Technical name
+`referenceChanged`
 
+.Related command
+<<cmd-changeReference>>
+
+[[evnt-entryMovedFromOtherReference]]
+===== Entry moved from other reference
 Existing reference `target`/`resolveInfo` (previously inside ``oldParent``'s `oldReference` at `oldIndex`) has been moved
 to ``newParent``'s `newReference` at `newIndex`.
 
@@ -1775,8 +2088,7 @@ All other entries inside ``oldParent``'s `oldReference` with index > `oldIndex` 
 
 All other entries inside ``newParent``'s `newReference` with index >= `newIndex` have been moved to next higher index.
 
-See also <<cmd-moveEntryFromOtherReference>>.
-|
+.Parameters
 * newParent: <<targetNodeType>>
 * newReference: <<metaPointerType>>
 * newIndex: <<indexType>>
@@ -1787,8 +2099,14 @@ See also <<cmd-moveEntryFromOtherReference>>.
 * resolveInfo: <<resolveInfoType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-entryMovedFromOtherReferenceInSameParent, entry moved from other reference in same parent event]]*entry moved from other reference in same parent*
+.Technical name
+`entryMovedFromOtherReference`
 
+.Related command
+<<cmd-moveEntryFromOtherReference>>
+
+[[evnt-entryMovedFromOtherReferenceInSameParent]]
+===== Entry moved from other reference in same parent
 Existing reference `target`/`resolveInfo` (previously inside ``parent``'s `oldReference` at `oldIndex`) has been moved
 to ``parent``'s `newReference` at `newIndex`.
 
@@ -1796,8 +2114,7 @@ All other entries inside ``parent``'s `oldReference` with index > `oldIndex` hav
 
 All other entries inside ``parent``'s `newReference` with index >= `newIndex` have been moved to next higher index.
 
-See also <<cmd-moveEntryFromOtherReferenceInSameParent>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * newReference: <<metaPointerType>>
 * newIndex: <<indexType>>
@@ -1807,8 +2124,14 @@ See also <<cmd-moveEntryFromOtherReferenceInSameParent>>.
 * resolveInfo: <<resolveInfoType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-entryMovedInSameReference, entry moved in same reference event]]*entry moved in same reference*
+.Technical name
+`entryMovedFromOtherReferenceInSameParent`
 
+.Related command
+<<cmd-moveEntryFromOtherReferenceInSameParent>>
+
+[[evnt-entryMovedInSameReference]]
+===== Entry moved in same reference
 Existing reference `target`/`resolveInfo` (previously inside ``parent``'s `reference` at `oldIndex`) has been moved
 to ``parent``'s `reference` at `newIndex`.
 
@@ -1824,8 +2147,7 @@ Example: +
 
 `oldIndex` MUST NOT be equal to `newIndex`.
 
-See also <<cmd-moveEntryInSameReference>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * oldIndex: <<indexType>>
@@ -1834,12 +2156,17 @@ See also <<cmd-moveEntryInSameReference>>.
 * resolveInfo: <<resolveInfoType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-ReferenceResolveInfoAdded, reference ResolveInfo added event]]*reference ResolveInfo added*
+.Technical name
+`entryMovedInSameReference`
 
+.Related command
+<<cmd-moveEntryInSameReference>>
+
+[[evnt-referenceResolveInfoAdded]]
+===== Reference ResolveInfo added
 `newResolveInfo` has been added as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
 
-See also <<cmd-addReferenceResolveInfo>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1847,12 +2174,17 @@ See also <<cmd-addReferenceResolveInfo>>.
 * target: <<targetNodeType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-referenceResolveInfoDeleted, reference ResolveInfo deleted event]]*reference ResolveInfo deleted*
+.Technical name
+`referenceResolveInfoAdded`
 
+.Related command
+<<cmd-addReferenceResolveInfo>>
+
+[[evnt-referenceResolveInfoDeleted]]
+===== Reference ResolveInfo deleted
 ResolveInfo `deletedResolveInfo` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `target`.
 
-See also <<cmd-deleteReferenceResolveInfo>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1860,12 +2192,17 @@ See also <<cmd-deleteReferenceResolveInfo>>.
 * deletedResolveInfo: <<resolveInfoType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-referenceResolveInfoChanged, reference ResolveInfo changed event]]*reference ResolveInfo changed*
+.Technical name
+`referenceResolveInfoDeleted`
 
+.Related command
+<<cmd-deleteReferenceResolveInfo>>
+
+[[evnt-referenceResolveInfoChanged]]
+===== Reference ResolveInfo changed
 ResolveInfo of existing entry inside ``parent``'s `reference` at `index` with `target` has been changed from `oldResolveInfo` to `newResolveInfo`.
 
-See also <<cmd-changeReferenceResolveInfo>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1874,12 +2211,17 @@ See also <<cmd-changeReferenceResolveInfo>>.
 * replacedResolveInfo: <<resolveInfoType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-referenceTargetAdded, reference target added event]]*reference target added*
+.Technical name
+`referenceResolveInfoChanged`
 
+.Related command
+<<cmd-changeReferenceResolveInfo>>
+
+[[evnt-referenceTargetAdded]]
+===== Reference target added
 `newTarget` has been added as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
 
-See also <<cmd-addReferenceTarget>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1887,12 +2229,17 @@ See also <<cmd-addReferenceTarget>>.
 * resolveInfo: <<resolveInfoType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-referenceTargetDeleted, reference target deleted event]]*reference target deleted*
+.Technical name
+`referenceTargetAdded`
 
+.Related command
+<<cmd-addReferenceTarget>>
+
+[[evnt-referenceTargetDeleted]]
+===== Reference target deleted
 Target `deletedTarget` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
 
-See also <<cmd-deleteReferenceTarget>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1900,12 +2247,17 @@ See also <<cmd-deleteReferenceTarget>>.
 * deletedTarget: <<targetNodeType>>
 * originCommands: <<commandSourceType>>[]
 
-|[[evnt-referenceTargetChanged, reference target changed event]]*reference target changed*
+.Technical name
+`referenceTargetDeleted`
 
+.Related command
+<<cmd-deleteReferenceTarget>>
+
+[[evnt-referenceTargetChanged]]
+===== Reference target changed
 Target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` has been changed from `oldTarget` to `newTarget`.
 
-See also <<cmd-changeReferenceTarget>>.
-|
+.Parameters
 * parent: <<targetNodeType>>
 * reference: <<metaPointerType>>
 * index: <<indexType>>
@@ -1914,19 +2266,27 @@ See also <<cmd-changeReferenceTarget>>.
 * replacedTarget: <<targetNodeType>>
 * originCommands: <<commandSourceType>>[]
 
-2+|
+.Technical name
+`referenceTargetChanged`
+
+.Related command
+<<cmd-changeReferenceTarget>>
+
 [[evnt-composite-section]]
 ==== Composite
 
-|[[evnt-composite, composite event]]*composite*
-
+[[evnt-composite]]
+===== Composite
 The events in `parts` have happened in the given order.
 
 All `originCommands` have been handled (maybe by discarding them).
 
-See also <<cmd-composite>>.
-|
+.Parameters
 * parts: <<eventType>>[]
 * originCommands: <<commandSourceType>>[]
 
-|===
+.Technical name
+`composite`
+
+.Related command
+<<cmd-composite>>
