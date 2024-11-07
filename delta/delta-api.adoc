@@ -587,11 +587,10 @@ endlegend
 ----
 
 
-[cols="a,a,a"]
+==== Partitions
+[cols="30a,35a,35a"]
 |===
 |Command / Event / Description |Before |After
-
-3+|==== Partitions
 
 |
 <<cmd-addPartition>>
@@ -642,7 +641,12 @@ firstLevelChild *--> secondLevelChild
 |
 _nothing_
 
-3+|==== Nodes
+|===
+
+==== Nodes
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
 
 |
 <<cmd-changeConcept>>
@@ -667,7 +671,13 @@ hide circles
 class "node:<color #blue>newConcept</color>"
 ----
 
-3+|==== Properties
+|===
+
+==== Properties
+
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
 
 |
 <<cmd-addProperty>>
@@ -746,7 +756,13 @@ class "node" {
 }
 ----
 
-3+|==== Children
+|===
+
+==== Children
+
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
 
 |
 <<cmd-addChild>>
