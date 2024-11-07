@@ -1,5 +1,4 @@
 === Virgin repository, first time client connects
-
 [plantuml,virginRepo,svg]
 ----
 hide footbox

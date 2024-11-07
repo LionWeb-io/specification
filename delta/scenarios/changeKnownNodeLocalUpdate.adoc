@@ -1,5 +1,4 @@
 === Client changes known node with local update
-
 [plantuml,changeKnownNodeLocalUpdate,svg]
 ----
 hide footbox
