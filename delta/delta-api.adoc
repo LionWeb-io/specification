@@ -1598,6 +1598,541 @@ movedChild *--> descendant
 
 |===
 
+==== References
+
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-addReference>>
+
+<<evnt-referenceAdded>>
+
+Add `newTarget` / `newResolveInfo` to ``parent``'s `reference` at `index`.
+|
+[plantuml,addReference-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class newTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[hidden].> newTarget #Blue: reference\n[index]
+parent ..> nextEntry: reference\n[index]
+----
+|
+[plantuml,addReference-after,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class newTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[thickness=2].> newTarget #Blue: reference\n[index]\n<color #blue>{new</color>\n<color #blue>ResolveInfo}</color>
+parent ..> nextEntry: reference\n[index + 1]
+----
+
+|
+<<cmd-deleteReference>>
+
+<<evnt-referenceDeleted>>
+
+Delete existing `deletedTarget`/`deletedResolveInfo` from ``parent``'s `reference` at `index`.
+|
+[plantuml,deleteReference-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class "deleted\nTarget" as deletedTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[thickness=2].> deletedTarget #red: reference\n[index]\n<color #red>{deleted</color>\n<color #red>ResolveInfo}</color>
+parent ..> nextEntry: reference\n[index + 1]
+----
+|
+[plantuml, deleteReference-after, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class "deleted\nTarget" as deletedTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[hidden].> deletedTarget #red: reference\n[index]\n{deleted\nResolveInfo}
+parent ..> nextEntry: reference\n[index + 1]
+----
+
+|
+<<cmd-changeReference>>
+
+<<evnt-referenceChanged>>
+
+Replace existing `replacedTarget`/`replacedResolveInfo`  inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
+|
+[plantuml,changeReference-before,svg]
+----
+hide empty members
+hide circles
+left to right direction
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class "replaced\nTarget" as replacedTarget
+class "new\nTarget" as newTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[thickness=2].> replacedTarget #red: reference\n[index]\n<color #red>{replaced</color>\n<color #red>ResolveInfo}</color>
+parent .[hidden].> newTarget: reference\n[index]\n{new\nResolveInfo}
+parent ..> nextEntry: reference\n[index + 1]
+
+previousEntry -[hidden]> replacedTarget
+----
+|
+[plantuml, changeReference-after, svg]
+----
+hide empty members
+hide circles
+left to right direction
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class "replaced\nTarget" as replacedTarget
+class "new\nTarget" as newTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[hidden].> replacedTarget #red: reference\n[index]\n<color #red>{replaced</color>\n<color #red>ResolveInfo}</color>
+parent .[thickness=2].> newTarget #blue: reference\n[index]\n<color #blue>{new</color>\n<color #blue>ResolveInfo}</color>
+parent ..> nextEntry: reference\n[index + 1]
+
+previousEntry -[hidden]> replacedTarget
+----
+
+|
+<<cmd-moveEntryFromOtherReference>>
+
+<<evnt-entryMovedFromOtherReference>>
+
+Move existing `target`/`resolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
+to ``newParent``'s `newReference` at `newIndex`.
+|
+[plantuml,moveEntryFromOtherReference-before,svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nEntry" as oldPreviousEntry
+class "old\nNext\nEntry" as oldNextEntry
+
+oldParent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
+oldParent .[thickness=2].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
+oldParent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
+
+class "moved\nChild" as target #Orange
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+oldPreviousEntry -[hidden]-> newPreviousEntry
+oldNextEntry -[hidden]-> newNextEntry
+
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+class newParent
+
+newPreviousEntry <.. newParent: new\nReference\n[newIndex - 1]
+target <.[hidden]. newParent #blue: new\nReference\n[newIndex]\n<color #blue>{resolveInfo}</color>
+newNextEntry <.. newParent: new\nReference\n[newIndex]
+
+oldPreviousEntry -[hidden]> target
+target -[hidden]> newNextEntry
+----
+|
+[plantuml, moveEntryFromOtherReference-after, svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "old\nNext\nSibling" as oldNextSibling
+
+oldParent ..> oldPreviousSibling: old\nReference\n[oldIndex - 1]
+oldParent .[hidden].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
+oldParent ..> oldNextSibling: old\nReference\n[oldIndex]
+
+class "moved\nChild" as target #Orange
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+oldPreviousSibling -[hidden]-> newPreviousSibling
+oldNextSibling -[hidden]-> newNextSibling
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+class newParent
+
+newPreviousSibling <.. newParent: new\nReference\n[newIndex - 1]
+target <.[thickness=2]. newParent #blue: new\nReference\n[newIndex]\n<color #blue>{resolveInfo}</color>
+newNextSibling <.. newParent: new\nReference\n[newIndex + 1]
+
+oldPreviousSibling -[hidden]> target
+target -[hidden]> newNextSibling
+----
+
+|
+<<cmd-moveEntryFromOtherReferenceInSameParent>>
+
+<<evnt-entryMovedFromOtherReferenceInSameParent>>
+
+Move existing `target`/`resolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
+to ``parent``'s `newReference` at `newIndex`.
+|
+[plantuml,moveEntryFromOtherReferenceInSameParent-before,svg]
+----
+hide empty members
+hide circles
+
+class "old\nPrevious\nEntry" as oldPreviousEntry
+class target #Orange
+class "old\nNext\nEntry" as oldNextEntry
+
+class parent
+
+parent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
+
+parent .[thickness=2].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
+parent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
+
+oldPreviousEntry -[hidden]> oldNextEntry
+oldPreviousEntry -[hidden]right-> target
+
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+newPreviousEntry -[hidden]> newNextEntry
+oldPreviousEntry -[hidden]-> newPreviousEntry
+oldNextEntry -[hidden]> newNextEntry
+
+parent ..> newPreviousEntry: new\nReference\n[newIndex - 1]
+parent ..> newNextEntry: new\nReference\n[newIndex]
+----
+|
+[plantuml, moveEntryFromOtherReferenceInSameParent-after, svg]
+----
+hide empty members
+hide circles
+
+class "old\nPrevious\nEntry" as oldPreviousEntry
+class target #Orange
+class "old\nNext\nEntry" as oldNextEntry
+
+class parent
+
+parent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
+parent .[thickness=2].> target #blue: new\nReference\n[newIndex]\n<color #blue>{resolveInfo}</color>
+parent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
+
+oldPreviousEntry -[hidden]> oldNextEntry
+oldPreviousEntry -[hidden]-> target
+
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+newPreviousEntry -[hidden]> newNextEntry
+oldPreviousEntry -[hidden]-> newPreviousEntry
+oldNextEntry -[hidden]> newNextEntry
+
+parent ..> newPreviousEntry: new\nReference\n[newIndex - 1]
+parent ..> newNextEntry: new\nReference\n[newIndex]
+----
+
+|
+<<cmd-moveEntryInSameReference>>
+
+<<evnt-entryMovedInSameReference>>
+
+Move existing `target`/`resolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
+inside ``parent``'s `reference` at `newIndex`.
+|
+[plantuml,moveEntryInSameReference-before,svg]
+----
+hide empty members
+hide circles
+left to right direction
+
+class parent
+
+class "sibling\nEntryA" as siblingA
+class target #Orange
+class "sibling\nEntryB" as siblingB
+class "sibling\nEntryC" as siblingC
+
+parent ..> siblingA: reference\n[oldIndex - 1]
+parent ..> target: reference\n[<color #red>oldIndex</color>]\n<color #red>{resolveInfo}</color>
+parent ..> siblingB: reference\n[oldIndex + 1]
+parent ..> siblingC: reference\n[oldIndex + 2]
+
+siblingA -[hidden]> target
+----
+|
+[plantuml, moveEntryInSameReference-after, svg]
+----
+hide empty members
+hide circles
+left to right direction
+
+class parent
+
+class "sibling\nEntryA" as siblingA
+class target #Orange
+class "sibling\nEntryB" as siblingB
+class "sibling\nEntryC" as siblingC
+
+parent *--> siblingA: reference\n[oldIndex - 1]
+parent *--> siblingB: reference\n[oldIndex]
+parent *--> target: reference\n[<color #Blue>newIndex</color>]\n<color #blue>{resolveInfo}</color>
+parent *--> siblingC: reference\n[newIndex + 1]
+
+siblingA -[hidden]> siblingB
+siblingB -[hidden]> target
+----
+
+|
+<<cmd-addReferenceResolveInfo>>
+
+<<evnt-referenceResolveInfoAdded>>
+
+Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
+|
+[plantuml,addReferenceResolveInfo-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class target
+
+parent ..> target: reference\n[index]\n<color #red>{null}</color>
+----
+|
+[plantuml,addReferenceResolveInfo-after,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class target
+
+parent ..> target: reference\n[index]\n<color #blue>{newResolveInfo}</color>
+----
+
+|
+<<cmd-deleteReferenceResolveInfo>>
+
+<<evnt-referenceResolveInfoDeleted>>
+
+Delete existing `deletedResolveInfo` as ResolveInfo from existing entry inside ``parent``'s `reference` at `index` with `target`.
+|
+[plantuml,deleteReferenceResolveInfo-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class target
+
+parent ..> target: reference\n[index]\n<color #red>{deletedResolveInfo}</color>
+----
+|
+[plantuml, deleteReferenceResolveInfo-after, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class target
+
+parent ..> target: reference\n[index]\n<color #blue>{null}</color>
+----
+
+|
+<<cmd-changeReferenceResolveInfo>>
+
+<<evnt-referenceResolveInfoChanged>>
+
+Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` from `oldResolveInfo` to `newResolveInfo`.
+|
+[plantuml,changeReferenceResolveInfo-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class target
+
+parent ..> target: reference\n[index]\n<color #red>{oldResolveInfo}</color>
+----
+|
+[plantuml, changeReferenceResolveInfo-after, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class target
+
+parent ..> target: reference\n[index]\n<color #blue>{newResolveInfo}</color>
+----
+
+|
+<<cmd-addReferenceTarget>>
+
+<<evnt-referenceTargetAdded>>
+
+Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+|
+[plantuml,addReferenceTarget-before,svg]
+----
+hide empty members
+hide circles
+
+skinparam class<<h>> {
+  borderColor Transparent
+  backgroundColor Transparent
+  stereotypeFontColor Transparent
+}
+
+class parent
+
+class " " as target<<h>>
+class newTarget
+
+parent ..> target: reference\n[index]\n{resolveInfo}
+target -[hidden]-> newTarget
+----
+|
+[plantuml,addReferenceTarget-after,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class newTarget
+
+parent .[thickness=2].> newTarget #blue: reference\n[index]\n{resolveInfo}
+----
+
+|
+<<cmd-deleteReferenceTarget>>
+
+<<evnt-referenceTargetDeleted>>
+
+Delete existing `deletedTarget` as target from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+|
+[plantuml,deleteReferenceTarget-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class deletedTarget
+
+parent .[thickness=2].> deletedTarget #red: reference\n[index]\n{resolveInfo}
+----
+|
+[plantuml,deleteReferenceTarget-after,svg]
+----
+hide empty members
+hide circles
+
+skinparam class<<h>> {
+  borderColor Transparent
+  backgroundColor Transparent
+  stereotypeFontColor Transparent
+}
+
+class parent
+
+class " " as target<<h>>
+class deletedTarget
+
+parent ..> target: reference\n[index]\n{resolveInfo}
+target -[hidden]-> deletedTarget
+----
+
+|
+<<cmd-changeReferenceTarget>>
+
+<<evnt-referenceTargetChanged>>
+
+Change target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` from `oldTarget` to `newTarget`.
+|
+[plantuml,changeReferenceTarget-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class oldTarget
+class newTarget
+
+parent .[thickness=2].> oldTarget #red: reference\n[index]\n{resolveInfo}
+parent .[hidden].> newTarget
+----
+|
+[plantuml,changeReferenceTarget-after,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class oldTarget
+class newTarget
+
+parent .[hidden].> oldTarget
+parent .[thickness=2].> newTarget #blue: reference\n[index]\n{resolveInfo}
+----
+
+|===
+
 === Commands
 
 ==== Lifecycle
