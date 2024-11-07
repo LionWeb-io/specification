@@ -1,0 +1,32 @@
+|
+[plantuml, addAnnotation-before, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> nextSibling: <<annotations>>\n[index]
+----
+|
+[plantuml,addAnnotation-after,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "newAnnotation:\nRemark" as newAnnotation #LightSkyBlue {
+  text:String="ok"
+}
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> newAnnotation #Blue: <<annotations>>\n[index]
+parent *--> nextSibling: <<annotations>>\n[index + 1]
+----

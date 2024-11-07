@@ -1,0 +1,61 @@
+|
+[plantuml,moveChildFromAnnotations-before,svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "moved\nAnnotation" as movedAnnotation #Orange
+class "old\nNext\nSibling" as oldNextSibling
+
+class descendant #Orange
+
+oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
+oldParent *--> movedAnnotation #red: <<annotations>>\n[oldIndex]
+oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex + 1]
+
+movedAnnotation *--> descendant
+
+descendant -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+newParent *--> newNextSibling: new\nContainment\n[newIndex]
+----
+|
+[plantuml,moveChildFromAnnotations-after,svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "old\nNext\nSibling" as oldNextSibling
+
+oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
+oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex]
+
+oldPreviousSibling -[hidden]- newParent
+oldNextSibling -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "moved\nAnnotation" as movedAnnotation #Orange
+class "new\nNext\nSibling" as newNextSibling
+
+class descendant #Orange
+
+newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+newParent *--> movedAnnotation #Blue: new\nContainment\n[newIndex]
+newParent *--> newNextSibling: new\nContainment\n[newIndex + 1]
+
+movedAnnotation *--> descendant
+----

@@ -598,20 +598,7 @@ endlegend
 <<evnt-partitionAdded>>
 
 Add `newPartition` node as new partition.
-|
-_nothing_
-|
-[plantuml, addPartition, svg]
-----
-hide empty members
-hide circles
-
-class newPartition:Person <<Partition>> #LightSkyBlue {
-  name: String = "John"
-  age: Integer = 23
-  alive: Boolean = true
-}
-----
+include::commandEventOverview/addPartition.adoc[]
 
 |
 <<cmd-deletePartition>>
@@ -619,28 +606,7 @@ class newPartition:Person <<Partition>> #LightSkyBlue {
 <<evnt-partitionDeleted>>
 
 Delete partition `deletedPartition`.
-|
-[plantuml, deletePartition, svg]
-----
-hide empty members
-hide circles
-
-class "deletedPartition:Person" as deletedPartition <<Partition>> #red {
-  name: String = "John"
-  age: Integer = 23
-  alive: Boolean = true
-}
-
-class "leftEye:Eye" as firstLevelChild #red
-
-class "upperEyelid:Eyelid" as secondLevelChild #red
-
-deletedPartition *--> firstLevelChild
-firstLevelChild *--> secondLevelChild
-----
-|
-_nothing_
-
+include::commandEventOverview/deletePartition.adoc[]
 |===
 
 ==== Nodes
@@ -654,23 +620,7 @@ _nothing_
 <<evnt-conceptChanged>>
 
 Change concept of `node` from `oldConcept` to `newConcept`.
-|
-[plantuml, changeConcept-before, svg]
-----
-hide empty members
-hide circles
-
-class "node:<color #red>oldConcept</color>"
-----
-|
-[plantuml, changeConcept-after, svg]
-----
-hide empty members
-hide circles
-
-class "node:<color #blue>newConcept</color>"
-----
-
+include::commandEventOverview/changeConcept.adoc[]
 |===
 
 ==== Properties
@@ -685,24 +635,7 @@ class "node:<color #blue>newConcept</color>"
 <<evnt-propertyAdded>>
 
 Add `newValue` as value of property `property` to `node`.
-|
-[plantuml, addProperty-before, svg]
-----
-hide empty members
-hide circles
-
-class "node"
-----
-|
-[plantuml, addProperty-after, svg]
-----
-hide empty members
-hide circles
-
-class "node" {
-  <color: #blue>property = newValue</color>
-}
-----
+include::commandEventOverview/addProperty.adoc[]
 
 |
 <<cmd-deleteProperty>>
@@ -710,24 +643,7 @@ class "node" {
 <<evnt-propertyDeleted>>
 
 Delete existing `property` with `oldValue` from `node`.
-|
-[plantuml, deleteProperty-before, svg]
-----
-hide empty members
-hide circles
-
-class "node" {
-  <color #red>property = oldValue</color>
-}
-----
-|
-[plantuml, deleteProperty-after, svg]
-----
-hide empty members
-hide circles
-
-class "node"
-----
+include::commandEventOverview/deleteProperty.adoc[]
 
 |
 <<cmd-changeProperty>>
@@ -735,27 +651,7 @@ class "node"
 <<evnt-propertyChanged>>
 
 Change existing `property` of `node` from `oldValue` to `newValue`.
-|
-[plantuml, changeProperty-before, svg]
-----
-hide empty members
-hide circles
-
-class "node" {
-  property = <color #red>oldValue</color>
-}
-----
-|
-[plantuml, changeProperty-after, svg]
-----
-hide empty members
-hide circles
-
-class "node" {
-  property = <color #blue>newValue</color>
-}
-----
-
+include::commandEventOverview/changeProperty.adoc[]
 |===
 
 ==== Children
@@ -770,38 +666,7 @@ class "node" {
 <<evnt-childAdded>>
 
 Add new node `newChild` to `parent` in `containment` at `index`.
-|
-[plantuml, addChild-before, svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "next\nSibling" as nextSibling
-
-parent *--> previousSibling: containment\n[index - 1]
-parent *--> nextSibling: containment\n[index]
-----
-|
-[plantuml, addChild-after, svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "newChild:Car" as newChild #LightSkyBlue {
-  length:Integer=19
-}
-class "next\nSibling" as nextSibling
-
-parent *--> previousSibling: containment\n[index - 1]
-parent *--> newChild #Blue: containment\n[index]
-parent *--> nextSibling: containment\n[index + 1]
-----
+include::commandEventOverview/addChild.adoc[]
 
 |
 <<cmd-deleteChild>>
@@ -809,40 +674,7 @@ parent *--> nextSibling: containment\n[index + 1]
 <<evnt-childDeleted>>
 
 Delete existing node `deletedChild` from ``parent``'s `containment` at `index`.
-|
-[plantuml, deleteChild-before, svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "deleted\nChild" as deletedChild #red
-class "next\nSibling" as nextSibling
-
-class descendant #red
-
-parent *--> previousSibling: containment\n[index - 1]
-parent *--> deletedChild #red: containment\n[index]
-parent *--> nextSibling: containment\n[index + 1]
-
-deletedChild *--> descendant #red
-----
-|
-[plantuml, deleteChild-after, svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "next\nSibling" as nextSibling
-
-parent *--> previousSibling: containment\n[index - 1]
-parent *--> nextSibling: containment\n[index]
-----
+include::commandEventOverview/deleteChild.adoc[]
 
 |
 <<cmd-replaceChild>>
@@ -851,44 +683,7 @@ parent *--> nextSibling: containment\n[index]
 
 Replace existing node `replacedChild` inside ``parent``'s `containment` at `index` with new node `newChild`.
 Delete `replacedChild`.
-|
-[plantuml,replaceChild-before,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "replaced\nChild" as replacedChild #red
-class "next\nSibling" as nextSibling
-
-class descendant #red
-
-parent *--> previousSibling: containment\n[index - 1]
-parent *--> replacedChild #red: containment\n[index]
-parent *--> nextSibling: containment\n[index + 1]
-
-replacedChild *--> descendant #red
-----
-|
-[plantuml, replaceChild-after, svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "newChild:Car" as newChild #LightSkyBlue {
-  length:Integer=19
-}
-class "next\nSibling" as nextSibling
-
-parent *--> previousSibling: containment\n[index - 1]
-parent *--> newChild #Blue: containment\n[index]
-parent *--> nextSibling: containment\n[index + 1]
-----
+include::commandEventOverview/replaceChild.adoc[]
 
 |
 <<cmd-moveChildFromOtherContainment>>
@@ -897,126 +692,16 @@ parent *--> nextSibling: containment\n[index + 1]
 
 Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
 inside ``newParent``'s `newContainment` at `newIndex`.
+include::commandEventOverview/moveChildFromOtherContainment.adoc[]
 |
-[plantuml,moveChildFromOtherContainment-before,svg]
-----
-hide empty members
-hide circles
 
-class oldParent
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "moved\nChild" as movedChild #Orange
-class "old\nNext\nSibling" as oldNextSibling
-
-class descendant #Orange
-
-oldParent *--> oldPreviousSibling: old\nContainment\n[oldIndex - 1]
-oldParent *--> movedChild #red: old\nContainment\n[oldIndex]
-oldParent *--> oldNextSibling: old\nContainment\n[oldIndex + 1]
-
-movedChild *--> descendant
-
-descendant -[hidden]- newParent
-
-class newParent
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "new\nNext\nSibling" as newNextSibling
-
-newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-newParent *--> newNextSibling: new\nContainment\n[newIndex]
-----
-|
-[plantuml, moveChildFromOtherContainment-after, svg]
-----
-hide empty members
-hide circles
-
-class oldParent
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "old\nNext\nSibling" as oldNextSibling
-
-oldParent *--> oldPreviousSibling: old\nContainment\n[oldIndex - 1]
-oldParent *--> oldNextSibling: old\nContainment\n[oldIndex]
-
-oldPreviousSibling -[hidden]- newParent
-oldNextSibling -[hidden]- newParent
-
-class newParent
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "moved\nChild" as movedChild #Orange
-class "new\nNext\nSibling" as newNextSibling
-
-class descendant #Orange
-
-newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-newParent *--> movedChild #Blue: new\nContainment\n[newIndex]
-newParent *--> newNextSibling: new\nContainment\n[newIndex + 1]
-
-movedChild *--> descendant
-----
-
-|
 <<cmd-moveChildFromOtherContainmentInSameParent>>
 
 <<evnt-childMovedFromOtherContainmentInSameParent>>
 
 Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
 inside ``parent``'s `newContainment` at `newIndex`.
-|
-[plantuml,moveChildFromOtherContainmentInSameParent-before,svg]
-----
-hide empty members
-hide circles
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class descendant #Orange
-class "moved\nChild" as movedChild #Orange
-class "old\nNext\nSibling" as oldNextSibling
-
-class parent
-
-descendant <--* movedChild
-
-oldPreviousSibling <--* parent: old\nContainment\n[oldIndex - 1]
-movedChild <--* parent #red: old\nContainment\n[oldIndex]
-oldNextSibling <--* parent: old\nContainment\n[oldIndex + 1]
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "new\nNext\nSibling" as newNextSibling
-
-parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-parent *--> newNextSibling: new\nContainment\n[newIndex]
-----
-|
-[plantuml, moveChildFromOtherContainmentInSameParent-after, svg]
-----
-hide empty members
-hide circles
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "old\nNext\nSibling" as oldNextSibling
-
-class parent
-
-oldPreviousSibling <--* parent: old\nContainment\n[oldIndex - 1]
-oldNextSibling <--* parent: old\nContainment\n[oldIndex]
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "moved\nChild" as movedChild #Orange
-class "new\nNext\nSibling" as newNextSibling
-
-class descendant #Orange
-
-parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-parent *--> movedChild #Blue: new\nContainment\n[newIndex]
-parent *--> newNextSibling: new\nContainment\n[newIndex + 1]
-
-movedChild *--> descendant
-----
+include::commandEventOverview/moveChildFromOtherContainmentInSameParent.adoc[]
 
 |
 <<cmd-moveChildInSameContainment>>
@@ -1025,57 +710,7 @@ movedChild *--> descendant
 
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
 inside ``parent``'s `containment` at `newIndex`.
-|
-[plantuml,moveChildInSameContainment-before,svg]
-----
-hide empty members
-hide circles
-left to right direction
-
-class parent
-
-class siblingA
-class movedChild #Orange
-class siblingB
-class siblingC
-
-class descendant #Orange
-
-parent *--> siblingA: containment\n[oldIndex - 1]
-parent *--> movedChild: containment\n[<color #red>oldIndex</color>]
-parent *--> siblingB: containment\n[oldIndex + 1]
-parent *--> siblingC: containment\n[oldIndex + 2]
-
-movedChild *-> descendant
-
-siblingA -[hidden]> movedChild
-----
-|
-[plantuml, moveChildInSameContainment-after, svg]
-----
-hide empty members
-hide circles
-left to right direction
-
-class parent
-
-class siblingA
-class movedChild #Orange
-class siblingB
-class siblingC
-
-class descendant #Orange
-
-parent *--> siblingA: containment\n[oldIndex - 1]
-parent *--> siblingB: containment\n[oldIndex]
-parent *--> movedChild: containment\n[<color #Blue>newIndex</color>]
-parent *--> siblingC: containment\n[newIndex + 1]
-
-movedChild *-> descendant
-
-siblingA -[hidden]> siblingB
-siblingB -[hidden]> movedChild
-----
+include::commandEventOverview/moveChildInSameContainment.adoc[]
 
 |
 <<cmd-moveChildFromAnnotations>>
@@ -1084,67 +719,7 @@ siblingB -[hidden]> movedChild
 
 Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
 inside ``newParent``'s `newContainment` at `newIndex`.
-|
-[plantuml,moveChildFromAnnotations-before,svg]
-----
-hide empty members
-hide circles
-
-class oldParent
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "moved\nAnnotation" as movedAnnotation #Orange
-class "old\nNext\nSibling" as oldNextSibling
-
-class descendant #Orange
-
-oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
-oldParent *--> movedAnnotation #red: <<annotations>>\n[oldIndex]
-oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex + 1]
-
-movedAnnotation *--> descendant
-
-descendant -[hidden]- newParent
-
-class newParent
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "new\nNext\nSibling" as newNextSibling
-
-newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-newParent *--> newNextSibling: new\nContainment\n[newIndex]
-----
-|
-[plantuml,moveChildFromAnnotations-after,svg]
-----
-hide empty members
-hide circles
-
-class oldParent
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "old\nNext\nSibling" as oldNextSibling
-
-oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
-oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex]
-
-oldPreviousSibling -[hidden]- newParent
-oldNextSibling -[hidden]- newParent
-
-class newParent
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "moved\nAnnotation" as movedAnnotation #Orange
-class "new\nNext\nSibling" as newNextSibling
-
-class descendant #Orange
-
-newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-newParent *--> movedAnnotation #Blue: new\nContainment\n[newIndex]
-newParent *--> newNextSibling: new\nContainment\n[newIndex + 1]
-
-movedAnnotation *--> descendant
-----
+include::commandEventOverview/moveChildFromAnnotations.adoc[]
 
 |
 <<cmd-moveChildFromAnnotationsInSameParent>>
@@ -1153,58 +728,7 @@ movedAnnotation *--> descendant
 
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
 inside ``parent``'s `newContainment` at `newIndex`.
-|
-[plantuml,moveChildFromAnnotationsInSameParent-before,svg]
-----
-hide empty members
-hide circles
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class descendant #Orange
-class "moved\nAnnotation" as movedAnnotation #Orange
-class "old\nNext\nSibling" as oldNextSibling
-
-class parent
-
-descendant <--* movedAnnotation
-
-oldPreviousSibling <--* parent: <<annotations>>\n[oldIndex - 1]
-movedAnnotation <--* parent #red: <<annotations>>\n[oldIndex]
-oldNextSibling <--* parent: <<annotations>>\n[oldIndex + 1]
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "new\nNext\nSibling" as newNextSibling
-
-parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-parent *--> newNextSibling: new\nContainment\n[newIndex]
-----
-|
-[plantuml,moveChildFromAnnotationsInSameParent-after,svg]
-----
-hide empty members
-hide circles
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "old\nNext\nSibling" as oldNextSibling
-
-class parent
-
-oldPreviousSibling <--* parent: <<annotations>>\n[oldIndex - 1]
-oldNextSibling <--* parent: <<annotations>>\n[oldIndex]
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "moved\nAnnotation" as movedAnnotation #Orange
-class "new\nNext\nSibling" as newNextSibling
-
-class descendant #Orange
-
-parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-parent *--> movedAnnotation #Blue: new\nContainment\n[newIndex]
-parent *--> newNextSibling: new\nContainment\n[newIndex + 1]
-
-movedAnnotation *--> descendant
-----
-
+include::commandEventOverview/moveChildFromAnnotationsInSameParent.adoc[]
 
 |===
 
@@ -1220,38 +744,7 @@ movedAnnotation *--> descendant
 <<evnt-annotationAdded>>
 
 Add new node `newAnnotation` to ``parent``'s annotations at `index`.
-|
-[plantuml, addAnnotation-before, svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "next\nSibling" as nextSibling
-
-parent *--> previousSibling: <<annotations>>\n[index - 1]
-parent *--> nextSibling: <<annotations>>\n[index]
-----
-|
-[plantuml,addAnnotation-after,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "newAnnotation:\nRemark" as newAnnotation #LightSkyBlue {
-  text:String="ok"
-}
-class "next\nSibling" as nextSibling
-
-parent *--> previousSibling: <<annotations>>\n[index - 1]
-parent *--> newAnnotation #Blue: <<annotations>>\n[index]
-parent *--> nextSibling: <<annotations>>\n[index + 1]
-----
+include::commandEventOverview/addAnnotation.adoc[]
 
 |
 <<cmd-deleteAnnotation>>
@@ -1259,40 +752,7 @@ parent *--> nextSibling: <<annotations>>\n[index + 1]
 <<evnt-annotationDeleted>>
 
 Delete existing node `deletedAnnotation` from ``parent``'s annotations at `index`.
-|
-[plantuml,deleteAnnotation-before,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "deleted\nAnnotation" as deletedAnnotation #red
-class "next\nSibling" as nextSibling
-
-class descendant #red
-
-parent *--> previousSibling: <<annotations>>\n[index - 1]
-parent *--> deletedAnnotation #red: <<annotations>>\n[index]
-parent *--> nextSibling: <<annotations>>\n[index + 1]
-
-deletedAnnotation *--> descendant #red
-----
-|
-[plantuml, deleteAnnotation-after, svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "next\nSibling" as nextSibling
-
-parent *--> previousSibling: <<annotations>>\n[index - 1]
-parent *--> nextSibling: <<annotations>>\n[index]
-----
+include::commandEventOverview/deleteAnnotation.adoc[]
 
 |
 <<cmd-replaceAnnotation>>
@@ -1301,44 +761,7 @@ parent *--> nextSibling: <<annotations>>\n[index]
 
 Replace existing node `replacedAnnotation` inside ``parent``'s annotations at `index` with new node `newAnnotation`.
 Delete `replacedAnnotation`.
-|
-[plantuml,replaceAnnotation-before,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "replaced\nAnnotation" as replacedAnnotation #red
-class "next\nSibling" as nextSibling
-
-class descendant #red
-
-parent *--> previousSibling: <<annotations>>\n[index - 1]
-parent *--> replacedAnnotation #red: <<annotations>>\n[index]
-parent *--> nextSibling: <<annotations>>\n[index + 1]
-
-replacedAnnotation *--> descendant #red
-----
-|
-[plantuml,replaceAnnotation-after,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nSibling" as previousSibling
-class "newAnnotation:\nRemark" as newAnnotation #LightSkyBlue {
-  text:String="ok"
-}
-class "next\nSibling" as nextSibling
-
-parent *--> previousSibling: <<annotations>>\n[index - 1]
-parent *--> newAnnotation #Blue: <<annotations>>\n[index]
-parent *--> nextSibling: <<annotations>>\n[index + 1]
-----
+include::commandEventOverview/replaceAnnotation.adoc[]
 
 |
 <<cmd-moveAnnotationFromOtherParent>>
@@ -1347,67 +770,7 @@ parent *--> nextSibling: <<annotations>>\n[index + 1]
 
 Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
 inside ``newParent``'s annotations at `newIndex`.
-|
-[plantuml,moveAnnotationFromOtherParent-before,svg]
-----
-hide empty members
-hide circles
-
-class oldParent
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "moved\nAnnotation" as movedAnnotation #Orange
-class "old\nNext\nSibling" as oldNextSibling
-
-class descendant #Orange
-
-oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
-oldParent *--> movedAnnotation #red: <<annotations>>\n[oldIndex]
-oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex + 1]
-
-movedAnnotation *--> descendant
-
-descendant -[hidden]- newParent
-
-class newParent
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "new\nNext\nSibling" as newNextSibling
-
-newParent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
-newParent *--> newNextSibling: <<annotations>>\n[newIndex]
-----
-|
-[plantuml,moveAnnotationFromOtherParent-after,svg]
-----
-hide empty members
-hide circles
-
-class oldParent
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "old\nNext\nSibling" as oldNextSibling
-
-oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
-oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex]
-
-oldPreviousSibling -[hidden]- newParent
-oldNextSibling -[hidden]- newParent
-
-class newParent
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "moved\nAnnotation" as movedAnnotation #Orange
-class "new\nNext\nSibling" as newNextSibling
-
-class descendant #Orange
-
-newParent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
-newParent *--> movedAnnotation #Blue: <<annotations>>\n[newIndex]
-newParent *--> newNextSibling: <<annotations>>\n[newIndex + 1]
-
-movedAnnotation *--> descendant
-----
+include::commandEventOverview/moveAnnotationFromOtherParent.adoc[]
 
 |
 <<cmd-moveAnnotationInSameParent>>
@@ -1416,57 +779,7 @@ movedAnnotation *--> descendant
 
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
 inside ``parent``'s annotations at `newIndex`.
-|
-[plantuml,moveAnnotationInSameParent-before,svg]
-----
-hide empty members
-hide circles
-left to right direction
-
-class parent
-
-class siblingA
-class "moved\nAnnotation" as movedAnnotation #Orange
-class siblingB
-class siblingC
-
-class descendant #Orange
-
-parent *--> siblingA: <<annotations>>\n[oldIndex - 1]
-parent *--> movedAnnotation: <<annotations>>\n[<color #red>oldIndex</color>]
-parent *--> siblingB: <<annotations>>\n[oldIndex + 1]
-parent *--> siblingC: <<annotations>>\n[oldIndex + 2]
-
-movedAnnotation *-> descendant
-
-siblingA -[hidden]> movedAnnotation
-----
-|
-[plantuml,moveAnnotationInSameParent-after,svg]
-----
-hide empty members
-hide circles
-left to right direction
-
-class parent
-
-class siblingA
-class "moved\nAnnotation" as movedAnnotation #Orange
-class siblingB
-class siblingC
-
-class descendant #Orange
-
-parent *--> siblingA: <<annotations>>\n[oldIndex - 1]
-parent *--> siblingB: <<annotations>>\n[oldIndex]
-parent *--> movedAnnotation: <<annotations>>\n[<color #Blue>newIndex</color>]
-parent *--> siblingC: <<annotations>>\n[newIndex + 1]
-
-movedAnnotation *-> descendant
-
-siblingA -[hidden]> siblingB
-siblingB -[hidden]> movedAnnotation
-----
+include::commandEventOverview/moveAnnotationInSameParent.adoc[]
 
 |
 <<cmd-moveAnnotationFromContainment>>
@@ -1475,67 +788,7 @@ siblingB -[hidden]> movedAnnotation
 
 Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
 inside ``newParent``'s annotations at `newIndex`.
-|
-[plantuml,moveAnnotationFromContainment-before,svg]
-----
-hide empty members
-hide circles
-
-class oldParent
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "moved\nChild" as movedChild #Orange
-class "old\nNext\nSibling" as oldNextSibling
-
-class descendant #Orange
-
-oldParent *--> oldPreviousSibling: old\nContainment\n[oldIndex - 1]
-oldParent *--> movedChild #red: old\nContainment\n[oldIndex]
-oldParent *--> oldNextSibling: old\nContainment\n[oldIndex + 1]
-
-movedChild *--> descendant
-
-descendant -[hidden]- newParent
-
-class newParent
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "new\nNext\nSibling" as newNextSibling
-
-newParent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
-newParent *--> newNextSibling: <<annotations>>\n[newIndex]
-----
-|
-[plantuml, moveAnnotationFromContainment-after, svg]
-----
-hide empty members
-hide circles
-
-class oldParent
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "old\nNext\nSibling" as oldNextSibling
-
-oldParent *--> oldPreviousSibling: old\nContainment\n[oldIndex - 1]
-oldParent *--> oldNextSibling: old\nContainment\n[oldIndex]
-
-oldPreviousSibling -[hidden]- newParent
-oldNextSibling -[hidden]- newParent
-
-class newParent
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "moved\nChild" as movedChild #Orange
-class "new\nNext\nSibling" as newNextSibling
-
-class descendant #Orange
-
-newParent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
-newParent *--> movedChild #Blue: <<annotations>>\n[newIndex]
-newParent *--> newNextSibling: <<annotations>>\n[newIndex + 1]
-
-movedChild *--> descendant
-----
+include::commandEventOverview/moveAnnotationFromContainment.adoc[]
 
 |
 <<cmd-moveAnnotationFromContainmentInSameParent>>
@@ -1544,57 +797,7 @@ movedChild *--> descendant
 
 Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
 inside ``parent``'s annotations at `newIndex`.
-|
-[plantuml,moveAnnotationFromContainmentInSameParent-before,svg]
-----
-hide empty members
-hide circles
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class descendant #Orange
-class "moved\nChild" as movedChild #Orange
-class "old\nNext\nSibling" as oldNextSibling
-
-class parent
-
-descendant <--* movedChild
-
-oldPreviousSibling <--* parent: old\nContainment\n[oldIndex - 1]
-movedChild <--* parent #red: old\nContainment\n[oldIndex]
-oldNextSibling <--* parent: old\nContainment\n[oldIndex + 1]
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "new\nNext\nSibling" as newNextSibling
-
-parent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
-parent *--> newNextSibling: <<annotations>>\n[newIndex]
-----
-|
-[plantuml, moveAnnotationFromContainmentInSameParent-after, svg]
-----
-hide empty members
-hide circles
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "old\nNext\nSibling" as oldNextSibling
-
-class parent
-
-oldPreviousSibling <--* parent: old\nContainment\n[oldIndex - 1]
-oldNextSibling <--* parent: old\nContainment\n[oldIndex]
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "moved\nChild" as movedChild #Orange
-class "new\nNext\nSibling" as newNextSibling
-
-class descendant #Orange
-
-parent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
-parent *--> movedChild #Blue: <<annotations>>\n[newIndex]
-parent *--> newNextSibling: <<annotations>>\n[newIndex + 1]
-
-movedChild *--> descendant
-----
+include::commandEventOverview/moveAnnotationFromContainmentInSameParent.adoc[]
 
 |===
 
@@ -1610,38 +813,7 @@ movedChild *--> descendant
 <<evnt-referenceAdded>>
 
 Add `newTarget` / `newResolveInfo` to ``parent``'s `reference` at `index`.
-|
-[plantuml,addReference-before,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nEntry" as previousEntry
-class newTarget
-class "next\nEntry" as nextEntry
-
-parent ..> previousEntry: reference\n[index - 1]
-parent .[hidden].> newTarget #Blue: reference\n[index]
-parent ..> nextEntry: reference\n[index]
-----
-|
-[plantuml,addReference-after,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nEntry" as previousEntry
-class newTarget
-class "next\nEntry" as nextEntry
-
-parent ..> previousEntry: reference\n[index - 1]
-parent .[thickness=2].> newTarget #Blue: reference\n[index]\n<color #blue>{new</color>\n<color #blue>ResolveInfo}</color>
-parent ..> nextEntry: reference\n[index + 1]
-----
+include::commandEventOverview/addReference.adoc[]
 
 |
 <<cmd-deleteReference>>
@@ -1649,38 +821,7 @@ parent ..> nextEntry: reference\n[index + 1]
 <<evnt-referenceDeleted>>
 
 Delete existing `deletedTarget`/`deletedResolveInfo` from ``parent``'s `reference` at `index`.
-|
-[plantuml,deleteReference-before,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nEntry" as previousEntry
-class "deleted\nTarget" as deletedTarget
-class "next\nEntry" as nextEntry
-
-parent ..> previousEntry: reference\n[index - 1]
-parent .[thickness=2].> deletedTarget #red: reference\n[index]\n<color #red>{deleted</color>\n<color #red>ResolveInfo}</color>
-parent ..> nextEntry: reference\n[index + 1]
-----
-|
-[plantuml, deleteReference-after, svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class "previous\nEntry" as previousEntry
-class "deleted\nTarget" as deletedTarget
-class "next\nEntry" as nextEntry
-
-parent ..> previousEntry: reference\n[index - 1]
-parent .[hidden].> deletedTarget #red: reference\n[index]\n{deleted\nResolveInfo}
-parent ..> nextEntry: reference\n[index + 1]
-----
+include::commandEventOverview/deleteReference.adoc[]
 
 |
 <<cmd-changeReference>>
@@ -1688,48 +829,7 @@ parent ..> nextEntry: reference\n[index + 1]
 <<evnt-referenceChanged>>
 
 Replace existing `replacedTarget`/`replacedResolveInfo`  inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
-|
-[plantuml,changeReference-before,svg]
-----
-hide empty members
-hide circles
-left to right direction
-
-class parent
-
-class "previous\nEntry" as previousEntry
-class "replaced\nTarget" as replacedTarget
-class "new\nTarget" as newTarget
-class "next\nEntry" as nextEntry
-
-parent ..> previousEntry: reference\n[index - 1]
-parent .[thickness=2].> replacedTarget #red: reference\n[index]\n<color #red>{replaced</color>\n<color #red>ResolveInfo}</color>
-parent .[hidden].> newTarget: reference\n[index]\n{new\nResolveInfo}
-parent ..> nextEntry: reference\n[index + 1]
-
-previousEntry -[hidden]> replacedTarget
-----
-|
-[plantuml, changeReference-after, svg]
-----
-hide empty members
-hide circles
-left to right direction
-
-class parent
-
-class "previous\nEntry" as previousEntry
-class "replaced\nTarget" as replacedTarget
-class "new\nTarget" as newTarget
-class "next\nEntry" as nextEntry
-
-parent ..> previousEntry: reference\n[index - 1]
-parent .[hidden].> replacedTarget #red: reference\n[index]\n<color #red>{replaced</color>\n<color #red>ResolveInfo}</color>
-parent .[thickness=2].> newTarget #blue: reference\n[index]\n<color #blue>{new</color>\n<color #blue>ResolveInfo}</color>
-parent ..> nextEntry: reference\n[index + 1]
-
-previousEntry -[hidden]> replacedTarget
-----
+include::commandEventOverview/changeReference.adoc[]
 
 |
 <<cmd-moveEntryFromOtherReference>>
@@ -1738,74 +838,7 @@ previousEntry -[hidden]> replacedTarget
 
 Move existing `target`/`resolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
 to ``newParent``'s `newReference` at `newIndex`.
-|
-[plantuml,moveEntryFromOtherReference-before,svg]
-----
-hide empty members
-hide circles
-
-class oldParent
-
-class "old\nPrevious\nEntry" as oldPreviousEntry
-class "old\nNext\nEntry" as oldNextEntry
-
-oldParent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
-oldParent .[thickness=2].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
-oldParent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
-
-class "moved\nChild" as target #Orange
-class "new\nPrevious\nEntry" as newPreviousEntry
-class "new\nNext\nEntry" as newNextEntry
-
-oldPreviousEntry -[hidden]-> newPreviousEntry
-oldNextEntry -[hidden]-> newNextEntry
-
-class "new\nPrevious\nEntry" as newPreviousEntry
-class "new\nNext\nEntry" as newNextEntry
-
-class newParent
-
-newPreviousEntry <.. newParent: new\nReference\n[newIndex - 1]
-target <.[hidden]. newParent #blue: new\nReference\n[newIndex]\n<color #blue>{resolveInfo}</color>
-newNextEntry <.. newParent: new\nReference\n[newIndex]
-
-oldPreviousEntry -[hidden]> target
-target -[hidden]> newNextEntry
-----
-|
-[plantuml, moveEntryFromOtherReference-after, svg]
-----
-hide empty members
-hide circles
-
-class oldParent
-
-class "old\nPrevious\nSibling" as oldPreviousSibling
-class "old\nNext\nSibling" as oldNextSibling
-
-oldParent ..> oldPreviousSibling: old\nReference\n[oldIndex - 1]
-oldParent .[hidden].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
-oldParent ..> oldNextSibling: old\nReference\n[oldIndex]
-
-class "moved\nChild" as target #Orange
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "new\nNext\nSibling" as newNextSibling
-
-oldPreviousSibling -[hidden]-> newPreviousSibling
-oldNextSibling -[hidden]-> newNextSibling
-
-class "new\nPrevious\nSibling" as newPreviousSibling
-class "new\nNext\nSibling" as newNextSibling
-
-class newParent
-
-newPreviousSibling <.. newParent: new\nReference\n[newIndex - 1]
-target <.[thickness=2]. newParent #blue: new\nReference\n[newIndex]\n<color #blue>{resolveInfo}</color>
-newNextSibling <.. newParent: new\nReference\n[newIndex + 1]
-
-oldPreviousSibling -[hidden]> target
-target -[hidden]> newNextSibling
-----
+include::commandEventOverview/moveEntryFromOtherReference.adoc[]
 
 |
 <<cmd-moveEntryFromOtherReferenceInSameParent>>
@@ -1814,65 +847,7 @@ target -[hidden]> newNextSibling
 
 Move existing `target`/`resolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
 to ``parent``'s `newReference` at `newIndex`.
-|
-[plantuml,moveEntryFromOtherReferenceInSameParent-before,svg]
-----
-hide empty members
-hide circles
-
-class "old\nPrevious\nEntry" as oldPreviousEntry
-class target #Orange
-class "old\nNext\nEntry" as oldNextEntry
-
-class parent
-
-parent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
-
-parent .[thickness=2].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
-parent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
-
-oldPreviousEntry -[hidden]> oldNextEntry
-oldPreviousEntry -[hidden]right-> target
-
-class "new\nPrevious\nEntry" as newPreviousEntry
-class "new\nNext\nEntry" as newNextEntry
-
-newPreviousEntry -[hidden]> newNextEntry
-oldPreviousEntry -[hidden]-> newPreviousEntry
-oldNextEntry -[hidden]> newNextEntry
-
-parent ..> newPreviousEntry: new\nReference\n[newIndex - 1]
-parent ..> newNextEntry: new\nReference\n[newIndex]
-----
-|
-[plantuml, moveEntryFromOtherReferenceInSameParent-after, svg]
-----
-hide empty members
-hide circles
-
-class "old\nPrevious\nEntry" as oldPreviousEntry
-class target #Orange
-class "old\nNext\nEntry" as oldNextEntry
-
-class parent
-
-parent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
-parent .[thickness=2].> target #blue: new\nReference\n[newIndex]\n<color #blue>{resolveInfo}</color>
-parent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
-
-oldPreviousEntry -[hidden]> oldNextEntry
-oldPreviousEntry -[hidden]-> target
-
-class "new\nPrevious\nEntry" as newPreviousEntry
-class "new\nNext\nEntry" as newNextEntry
-
-newPreviousEntry -[hidden]> newNextEntry
-oldPreviousEntry -[hidden]-> newPreviousEntry
-oldNextEntry -[hidden]> newNextEntry
-
-parent ..> newPreviousEntry: new\nReference\n[newIndex - 1]
-parent ..> newNextEntry: new\nReference\n[newIndex]
-----
+include::commandEventOverview/moveEntryFromOtherReferenceInSameParent.adoc[]
 
 |
 <<cmd-moveEntryInSameReference>>
@@ -1881,49 +856,7 @@ parent ..> newNextEntry: new\nReference\n[newIndex]
 
 Move existing `target`/`resolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
 inside ``parent``'s `reference` at `newIndex`.
-|
-[plantuml,moveEntryInSameReference-before,svg]
-----
-hide empty members
-hide circles
-left to right direction
-
-class parent
-
-class "sibling\nEntryA" as siblingA
-class target #Orange
-class "sibling\nEntryB" as siblingB
-class "sibling\nEntryC" as siblingC
-
-parent ..> siblingA: reference\n[oldIndex - 1]
-parent ..> target: reference\n[<color #red>oldIndex</color>]\n<color #red>{resolveInfo}</color>
-parent ..> siblingB: reference\n[oldIndex + 1]
-parent ..> siblingC: reference\n[oldIndex + 2]
-
-siblingA -[hidden]> target
-----
-|
-[plantuml, moveEntryInSameReference-after, svg]
-----
-hide empty members
-hide circles
-left to right direction
-
-class parent
-
-class "sibling\nEntryA" as siblingA
-class target #Orange
-class "sibling\nEntryB" as siblingB
-class "sibling\nEntryC" as siblingC
-
-parent *--> siblingA: reference\n[oldIndex - 1]
-parent *--> siblingB: reference\n[oldIndex]
-parent *--> target: reference\n[<color #Blue>newIndex</color>]\n<color #blue>{resolveInfo}</color>
-parent *--> siblingC: reference\n[newIndex + 1]
-
-siblingA -[hidden]> siblingB
-siblingB -[hidden]> target
-----
+include::commandEventOverview/moveEntryInSameReference.adoc[]
 
 |
 <<cmd-addReferenceResolveInfo>>
@@ -1931,30 +864,7 @@ siblingB -[hidden]> target
 <<evnt-referenceResolveInfoAdded>>
 
 Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
-|
-[plantuml,addReferenceResolveInfo-before,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class target
-
-parent ..> target: reference\n[index]\n<color #red>{null}</color>
-----
-|
-[plantuml,addReferenceResolveInfo-after,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class target
-
-parent ..> target: reference\n[index]\n<color #blue>{newResolveInfo}</color>
-----
+include::commandEventOverview/addReferenceResolveInfo.adoc[]
 
 |
 <<cmd-deleteReferenceResolveInfo>>
@@ -1962,30 +872,7 @@ parent ..> target: reference\n[index]\n<color #blue>{newResolveInfo}</color>
 <<evnt-referenceResolveInfoDeleted>>
 
 Delete existing `deletedResolveInfo` as ResolveInfo from existing entry inside ``parent``'s `reference` at `index` with `target`.
-|
-[plantuml,deleteReferenceResolveInfo-before,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class target
-
-parent ..> target: reference\n[index]\n<color #red>{deletedResolveInfo}</color>
-----
-|
-[plantuml, deleteReferenceResolveInfo-after, svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class target
-
-parent ..> target: reference\n[index]\n<color #blue>{null}</color>
-----
+include::commandEventOverview/deleteReferenceResolveInfo.adoc[]
 
 |
 <<cmd-changeReferenceResolveInfo>>
@@ -1993,30 +880,7 @@ parent ..> target: reference\n[index]\n<color #blue>{null}</color>
 <<evnt-referenceResolveInfoChanged>>
 
 Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` from `oldResolveInfo` to `newResolveInfo`.
-|
-[plantuml,changeReferenceResolveInfo-before,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class target
-
-parent ..> target: reference\n[index]\n<color #red>{oldResolveInfo}</color>
-----
-|
-[plantuml, changeReferenceResolveInfo-after, svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class target
-
-parent ..> target: reference\n[index]\n<color #blue>{newResolveInfo}</color>
-----
+include::commandEventOverview/changeReferenceResolveInfo.adoc[]
 
 |
 <<cmd-addReferenceTarget>>
@@ -2024,38 +888,7 @@ parent ..> target: reference\n[index]\n<color #blue>{newResolveInfo}</color>
 <<evnt-referenceTargetAdded>>
 
 Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
-|
-[plantuml,addReferenceTarget-before,svg]
-----
-hide empty members
-hide circles
-
-skinparam class<<h>> {
-  borderColor Transparent
-  backgroundColor Transparent
-  stereotypeFontColor Transparent
-}
-
-class parent
-
-class " " as target<<h>>
-class newTarget
-
-parent ..> target: reference\n[index]\n{resolveInfo}
-target -[hidden]-> newTarget
-----
-|
-[plantuml,addReferenceTarget-after,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class newTarget
-
-parent .[thickness=2].> newTarget #blue: reference\n[index]\n{resolveInfo}
-----
+include::commandEventOverview/addReferenceTarget.adoc[]
 
 |
 <<cmd-deleteReferenceTarget>>
@@ -2063,38 +896,7 @@ parent .[thickness=2].> newTarget #blue: reference\n[index]\n{resolveInfo}
 <<evnt-referenceTargetDeleted>>
 
 Delete existing `deletedTarget` as target from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
-|
-[plantuml,deleteReferenceTarget-before,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class deletedTarget
-
-parent .[thickness=2].> deletedTarget #red: reference\n[index]\n{resolveInfo}
-----
-|
-[plantuml,deleteReferenceTarget-after,svg]
-----
-hide empty members
-hide circles
-
-skinparam class<<h>> {
-  borderColor Transparent
-  backgroundColor Transparent
-  stereotypeFontColor Transparent
-}
-
-class parent
-
-class " " as target<<h>>
-class deletedTarget
-
-parent ..> target: reference\n[index]\n{resolveInfo}
-target -[hidden]-> deletedTarget
-----
+include::commandEventOverview/deleteReferenceTarget.adoc[]
 
 |
 <<cmd-changeReferenceTarget>>
@@ -2102,34 +904,7 @@ target -[hidden]-> deletedTarget
 <<evnt-referenceTargetChanged>>
 
 Change target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` from `oldTarget` to `newTarget`.
-|
-[plantuml,changeReferenceTarget-before,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class oldTarget
-class newTarget
-
-parent .[thickness=2].> oldTarget #red: reference\n[index]\n{resolveInfo}
-parent .[hidden].> newTarget
-----
-|
-[plantuml,changeReferenceTarget-after,svg]
-----
-hide empty members
-hide circles
-
-class parent
-
-class oldTarget
-class newTarget
-
-parent .[hidden].> oldTarget
-parent .[thickness=2].> newTarget #blue: reference\n[index]\n{resolveInfo}
-----
+include::commandEventOverview/changeReferenceTarget.adoc[]
 
 |===
 
@@ -3062,7 +1837,7 @@ commandId:: <<commandIdType>>
 ==== Composite
 
 [[cmd-composite]]
-===== composite
+===== Composite
 Groups several commands into a logical group.
 The parts are ordered.
 

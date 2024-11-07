@@ -1,0 +1,43 @@
+|
+[plantuml,moveEntryInSameReference-before,svg]
+----
+hide empty members
+hide circles
+left to right direction
+
+class parent
+
+class "sibling\nEntryA" as siblingA
+class target #Orange
+class "sibling\nEntryB" as siblingB
+class "sibling\nEntryC" as siblingC
+
+parent ..> siblingA: reference\n[oldIndex - 1]
+parent ..> target: reference\n[<color #red>oldIndex</color>]\n<color #red>{resolveInfo}</color>
+parent ..> siblingB: reference\n[oldIndex + 1]
+parent ..> siblingC: reference\n[oldIndex + 2]
+
+siblingA -[hidden]> target
+----
+|
+[plantuml, moveEntryInSameReference-after, svg]
+----
+hide empty members
+hide circles
+left to right direction
+
+class parent
+
+class "sibling\nEntryA" as siblingA
+class target #Orange
+class "sibling\nEntryB" as siblingB
+class "sibling\nEntryC" as siblingC
+
+parent *--> siblingA: reference\n[oldIndex - 1]
+parent *--> siblingB: reference\n[oldIndex]
+parent *--> target: reference\n[<color #Blue>newIndex</color>]\n<color #blue>{resolveInfo}</color>
+parent *--> siblingC: reference\n[newIndex + 1]
+
+siblingA -[hidden]> siblingB
+siblingB -[hidden]> target
+----

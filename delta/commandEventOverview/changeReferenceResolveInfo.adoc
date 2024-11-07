@@ -1,0 +1,24 @@
+|
+[plantuml,changeReferenceResolveInfo-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class target
+
+parent ..> target: reference\n[index]\n<color #red>{oldResolveInfo}</color>
+----
+|
+[plantuml, changeReferenceResolveInfo-after, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class target
+
+parent ..> target: reference\n[index]\n<color #blue>{newResolveInfo}</color>
+----

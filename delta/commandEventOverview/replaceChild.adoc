@@ -1,0 +1,38 @@
+|
+[plantuml,replaceChild-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "replaced\nChild" as replacedChild #red
+class "next\nSibling" as nextSibling
+
+class descendant #red
+
+parent *--> previousSibling: containment\n[index - 1]
+parent *--> replacedChild #red: containment\n[index]
+parent *--> nextSibling: containment\n[index + 1]
+
+replacedChild *--> descendant #red
+----
+|
+[plantuml, replaceChild-after, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "newChild:Car" as newChild #LightSkyBlue {
+  length:Integer=19
+}
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: containment\n[index - 1]
+parent *--> newChild #Blue: containment\n[index]
+parent *--> nextSibling: containment\n[index + 1]
+----

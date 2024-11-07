@@ -1,0 +1,20 @@
+|
+[plantuml, changeProperty-before, svg]
+----
+hide empty members
+hide circles
+
+class "node" {
+  property = <color #red>oldValue</color>
+}
+----
+|
+[plantuml, changeProperty-after, svg]
+----
+hide empty members
+hide circles
+
+class "node" {
+  property = <color #blue>newValue</color>
+}
+----

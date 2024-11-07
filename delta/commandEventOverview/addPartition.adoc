@@ -1,0 +1,14 @@
+|
+_nothing_
+|
+[plantuml, addPartition, svg]
+----
+hide empty members
+hide circles
+
+class newPartition:Person <<Partition>> #LightSkyBlue {
+  name: String = "John"
+  age: Integer = 23
+  alive: Boolean = true
+}
+----

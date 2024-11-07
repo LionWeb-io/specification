@@ -1,0 +1,19 @@
+|
+[plantuml, addProperty-before, svg]
+----
+hide empty members
+hide circles
+
+class "node"
+----
+|
+[plantuml, addProperty-after, svg]
+----
+hide empty members
+hide circles
+
+class "node" {
+  <color: #blue>property = newValue</color>
+}
+----
+

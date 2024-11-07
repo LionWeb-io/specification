@@ -1,0 +1,68 @@
+|
+[plantuml,moveEntryFromOtherReference-before,svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nEntry" as oldPreviousEntry
+class "old\nNext\nEntry" as oldNextEntry
+
+oldParent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
+oldParent .[thickness=2].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
+oldParent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
+
+class "moved\nChild" as target #Orange
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+oldPreviousEntry -[hidden]-> newPreviousEntry
+oldNextEntry -[hidden]-> newNextEntry
+
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+class newParent
+
+newPreviousEntry <.. newParent: new\nReference\n[newIndex - 1]
+target <.[hidden]. newParent #blue: new\nReference\n[newIndex]\n<color #blue>{resolveInfo}</color>
+newNextEntry <.. newParent: new\nReference\n[newIndex]
+
+oldPreviousEntry -[hidden]> target
+target -[hidden]> newNextEntry
+----
+|
+[plantuml, moveEntryFromOtherReference-after, svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "old\nNext\nSibling" as oldNextSibling
+
+oldParent ..> oldPreviousSibling: old\nReference\n[oldIndex - 1]
+oldParent .[hidden].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
+oldParent ..> oldNextSibling: old\nReference\n[oldIndex]
+
+class "moved\nChild" as target #Orange
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+oldPreviousSibling -[hidden]-> newPreviousSibling
+oldNextSibling -[hidden]-> newNextSibling
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+class newParent
+
+newPreviousSibling <.. newParent: new\nReference\n[newIndex - 1]
+target <.[thickness=2]. newParent #blue: new\nReference\n[newIndex]\n<color #blue>{resolveInfo}</color>
+newNextSibling <.. newParent: new\nReference\n[newIndex + 1]
+
+oldPreviousSibling -[hidden]> target
+target -[hidden]> newNextSibling
+----

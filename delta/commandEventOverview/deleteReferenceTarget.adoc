@@ -1,0 +1,32 @@
+|
+[plantuml,deleteReferenceTarget-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class deletedTarget
+
+parent .[thickness=2].> deletedTarget #red: reference\n[index]\n{resolveInfo}
+----
+|
+[plantuml,deleteReferenceTarget-after,svg]
+----
+hide empty members
+hide circles
+
+skinparam class<<h>> {
+  borderColor Transparent
+  backgroundColor Transparent
+  stereotypeFontColor Transparent
+}
+
+class parent
+
+class " " as target<<h>>
+class deletedTarget
+
+parent ..> target: reference\n[index]\n{resolveInfo}
+target -[hidden]-> deletedTarget
+----

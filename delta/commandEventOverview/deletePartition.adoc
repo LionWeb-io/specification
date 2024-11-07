@@ -1,0 +1,21 @@
+|
+[plantuml, deletePartition, svg]
+----
+hide empty members
+hide circles
+
+class "deletedPartition:Person" as deletedPartition <<Partition>> #red {
+  name: String = "John"
+  age: Integer = 23
+  alive: Boolean = true
+}
+
+class "leftEye:Eye" as firstLevelChild #red
+
+class "upperEyelid:Eyelid" as secondLevelChild #red
+
+deletedPartition *--> firstLevelChild
+firstLevelChild *--> secondLevelChild
+----
+|
+_nothing_
