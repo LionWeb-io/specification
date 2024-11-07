@@ -1,0 +1,65 @@
+=== Virgin repository, first time client connects
+
+[plantuml,virginRepo,svg]
+----
+hide footbox
+autonumber
+
+box "Client A"
+  participant Editor as editor
+'  participant Queries as cQry
+  participant Events as clientEvent
+  participant Commands as clientCmd
+  participant Session as clientSession
+end box
+
+box "Repository"
+  participant Session as repoSession
+  participant Commands as repoCmd
+'  participant Queries  as rQry
+  participant Events as repoEvent
+  participant Core as core
+end box
+
+== Client A unconnected ==
+
+clientSession -> repoSession ++: connect("client-a")
+return ok
+
+[->> clientCmd ++
+clientCmd -> repoCmd ++: addPartition(nodeA, "cmd-1")
+repoCmd ->> core
+activate core
+clientCmd <-- repoCmd: received("cmd-1")
+deactivate clientCmd
+deactivate repoCmd
+
+core -> core: update()
+
+core -> repoEvent
+deactivate core
+
+activate repoEvent
+clientEvent <<- repoEvent: partitionAdded(nodeA,\n  ["ZWUzN2Q0YTcwZjM4YzhjYzU3NmQ5YThk\n    NjczNTU0ODBmMDI4YTE0MjE4ZDU2MTRh\n    NGRjNTA3NmE1MTk3Y2U3ZiAgLQo\n  "])
+deactivate repoEvent
+
+activate clientEvent
+clientEvent -> editor
+deactivate clientEvent
+
+activate editor
+editor -> editor: draw(nodeA)
+----
+
+1. Client connects to repository with its client id `client-a`.
+2. Repository confirms connection.
+3. Client initiates new partition.
+4. Client sends `addPartition` command with `nodeA` payload (details omitted) and command id `cmd-1`.
+5. Repository registers command for processing.
+6. Repository acknowledges reception of command with id `cmd-1`.
+7. Repository updates internal representation.
+8. Repository creates event for update.
+9. Repository emits event `partitionAdded` with `nodeA` payload.
+It includes one <<commandSourceType>> with value `base64url(sha256("client-acmd-1"))`
+10. Client receives event and forwards information to editor.
+11. Client draws `nodeA`.
