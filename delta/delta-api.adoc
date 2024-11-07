@@ -2159,9 +2159,10 @@ Processed --> [*]: <i>client</i>\ndiscards
 ===== Add partition
 Add `newPartition` node as new partition.
 
+[horizontal]
 .Parameters
-* newPartition: <<nodeType>>
-* commandId: <<commandIdType>>
+newPartition:: <<nodeType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newPartition` id already exists
@@ -2176,9 +2177,10 @@ Add `newPartition` node as new partition.
 ===== Delete partition
 Delete partition `deletedPartition`.
 
+[horizontal]
 .Parameters
-* deletedPartition: <<nodeType>> or <<targetNodeType>> #TODO#
-* commandId: <<commandIdType>>
+deletedPartition:: <<nodeType>> or <<targetNodeType>> #TODO#
+commandId:: <<commandIdType>>
 
 .Errors
 * `deletedPartition` does not exist
@@ -2196,11 +2198,12 @@ Delete partition `deletedPartition`.
 ===== Change concept
 Change concept of `node` from `oldConcept` to `newConcept`.
 
+[horizontal]
 .Parameters
-* node: <<targetNodeType>>
-* newConcept: <<metaPointerType>>
-* oldConcept: <<metaPointerType>>
-* commandId: <<commandIdType>>
+node:: <<targetNodeType>>
+newConcept:: <<metaPointerType>>
+oldConcept:: <<metaPointerType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `node` does not exist
@@ -2219,11 +2222,12 @@ Change concept of `node` from `oldConcept` to `newConcept`.
 ===== Add property
 Add `newValue` as value of property `property` to `node`.
 
+[horizontal]
 .Parameters
-* node: <<targetNodeType>>
-* property: <<metaPointerType>>
-* newValue: <<propertyValueType>>
-* commandId: <<commandIdType>>
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+newValue:: <<propertyValueType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `node` does not exist
@@ -2239,11 +2243,12 @@ Add `newValue` as value of property `property` to `node`.
 ===== Delete property
 Delete existing `property` with `oldValue` from `node`.
 
+[horizontal]
 .Parameters
-* node: <<targetNodeType>>
-* property: <<metaPointerType>>
-* oldValue: <<propertyValueType>>
-* commandId: <<commandIdType>>
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+oldValue:: <<propertyValueType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `node` does not exist
@@ -2260,12 +2265,13 @@ Delete existing `property` with `oldValue` from `node`.
 ===== Change property
 Change existing `property` of `node` from `oldValue` to `newValue`.
 
+[horizontal]
 .Parameters
-* node: <<targetNodeType>>
-* property: <<metaPointerType>>
-* newValue: <<propertyValueType>>
-* oldValue: <<propertyValueType>>
-* commandId: <<commandIdType>>
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+newValue:: <<propertyValueType>>
+oldValue:: <<propertyValueType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `node` does not exist
@@ -2286,12 +2292,13 @@ Change existing `property` of `node` from `oldValue` to `newValue`.
 ===== Add child
 Add new node `newChild` to `parent` in `containment` at `index`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* newChild: <<nodeType>>
-* containment: <<metaPointerType>>
-* index: <<indexType>>
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+newChild:: <<nodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Events
 * `parent` does not exist
@@ -2308,12 +2315,13 @@ Add new node `newChild` to `parent` in `containment` at `index`.
 ===== Delete child
 Delete existing node `deletedChild` from ``parent``'s `containment` at `index`.
 
+[horizontal]
 .Parameters
-* deletedChild: <<nodeType>> or <<targetNodeType>> #TODO#
-* parent: <<targetNodeType>>
-* containment: <<metaPointerType>>
-* index: <<indexType>>
-* commandId: <<commandIdType>>
+deletedChild:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `deletedChild` does not exist
@@ -2333,13 +2341,14 @@ Delete existing node `deletedChild` from ``parent``'s `containment` at `index`.
 Replace existing node `replacedChild` inside ``parent``'s `containment` at `index` with new node `newChild`.
 Delete `replacedChild`.
 
+[horizontal]
 .Parameters
-* newChild: <<nodeType>>
-* replacedChild: <<nodeType>> or <<targetNodeType>> #TODO#
-* parent: <<targetNodeType>>
-* containment: <<metaPointerType>>
-* index: <<indexType>>
-* commandId: <<commandIdType>>
+newChild:: <<nodeType>>
+replacedChild:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newChild` id already exists
@@ -2360,15 +2369,16 @@ Delete `replacedChild`.
 Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
 inside ``newParent``'s `newContainment` at `newIndex`.
 
+[horizontal]
 .Parameters
-* newParent: <<targetNodeType>>
-* newContainment: <<metaPointerType>>
-* newIndex: <<indexType>>
-* movedChild: <<targetNodeType>>
-* oldParent: <<targetNodeType>>
-* oldContainment: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newParent:: <<targetNodeType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newParent` does not exist
@@ -2390,14 +2400,15 @@ inside ``newParent``'s `newContainment` at `newIndex`.
 Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
 inside ``parent``'s `newContainment` at `newIndex`.
 
+[horizontal]
 .Parameters
-* newContainment: <<metaPointerType>>
-* newIndex: <<indexType>>
-* movedChild: <<targetNodeType>>
-* parent: <<targetNodeType>>
-* oldContainment: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newIndex` is beyond the number of `newContainment` entries in `parent`
@@ -2418,13 +2429,14 @@ inside ``parent``'s `newContainment` at `newIndex`.
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
 inside ``parent``'s `containment` at `newIndex`.
 
+[horizontal]
 .Parameters
-* newIndex: <<indexType>>
-* movedChild: <<targetNodeType>>
-* parent: <<targetNodeType>>
-* containment: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newIndex` is beyond (the number of `containment` entries in `parent`) - 1
@@ -2446,14 +2458,15 @@ inside ``parent``'s `containment` at `newIndex`.
 Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
 inside ``newParent``'s `newContainment` at `newIndex`.
 
+[horizontal]
 .Parameters
-* newParent: <<targetNodeType>>
-* newContainment: <<metaPointerType>>
-* newIndex: <<indexType>>
-* movedAnnotation: <<targetNodeType>>
-* oldParent: <<targetNodeType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newParent:: <<targetNodeType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newParent` does not exist
@@ -2475,13 +2488,14 @@ inside ``newParent``'s `newContainment` at `newIndex`.
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
 inside ``parent``'s `newContainment` at `newIndex`.
 
+[horizontal]
 .Parameters
-* newContainment: <<metaPointerType>>
-* newIndex: <<indexType>>
-* movedAnnotation: <<targetNodeType>>
-* parent: <<targetNodeType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newIndex` is beyond the number of `newContainment` entries in `parent`
@@ -2504,11 +2518,12 @@ inside ``parent``'s `newContainment` at `newIndex`.
 ===== Add annotation
 Add new node `newAnnotation` to ``parent``'s annotations at `index`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* newAnnotation: <<nodeType>>
-* index: <<indexType>>
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+newAnnotation:: <<nodeType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -2525,11 +2540,12 @@ Add new node `newAnnotation` to ``parent``'s annotations at `index`.
 ===== Delete annotation
 Delete existing node `deletedAnnotation` from ``parent``'s annotations at `index`.
 
+[horizontal]
 .Parameters
-* deletedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
-* parent: <<targetNodeType>>
-* index: <<indexType>>
-* commandId: <<commandIdType>>
+deletedAnnotation:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `deletedAnnotation` does not exist
@@ -2549,12 +2565,13 @@ Delete existing node `deletedAnnotation` from ``parent``'s annotations at `index
 Replace existing node `replacedAnnotation` inside ``parent``'s annotations at `index` with new node `newAnnotation`.
 Delete `replacedAnnotation`.
 
+[horizontal]
 .Parameters
-* newAnnotation: <<nodeType>>
-* replacedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
-* parent: <<targetNodeType>>
-* index: <<indexType>>
-* commandId: <<commandIdType>>
+newAnnotation:: <<nodeType>>
+replacedAnnotation:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newAnnotation` id already exists
@@ -2575,13 +2592,14 @@ Delete `replacedAnnotation`.
 Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
 inside ``newParent``'s annotations at `newIndex`.
 
+[horizontal]
 .Parameters
-* newParent: <<targetNodeType>>
-* newIndex: <<indexType>>
-* movedAnnotation: <<targetNodeType>>
-* oldParent: <<targetNodeType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newParent:: <<targetNodeType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newParent` does not exist
@@ -2604,12 +2622,13 @@ inside ``newParent``'s annotations at `newIndex`.
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
 inside ``parent``'s annotations at `newIndex`.
 
+[horizontal]
 .Parameters
-* newIndex: <<indexType>>
-* movedAnnotation: <<targetNodeType>>
-* parent: <<targetNodeType>>
-* oldIndex: <<targetNodeType>>
-* commandId: <<commandIdType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldIndex:: <<targetNodeType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newIndex` is beyond (the number of annotations of `parent`) - 1
@@ -2630,14 +2649,15 @@ inside ``parent``'s annotations at `newIndex`.
 Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
 inside ``newParent``'s annotations at `newIndex`.
 
+[horizontal]
 .Parameters
-* newParent: <<targetNodeType>>
-* newIndex: <<indexType>>
-* movedChild: <<targetNodeType>>
-* oldParent: <<targetNodeType>>
-* oldContainment: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newParent:: <<targetNodeType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newParent` does not exist
@@ -2659,14 +2679,15 @@ inside ``newParent``'s annotations at `newIndex`.
 Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
 inside ``parent``'s annotations at `newIndex`.
 
+[horizontal]
 .Parameters
-* newContainment: <<metaPointerType>>
-* newIndex: <<indexType>>
-* movedChild: <<targetNodeType>>
-* parent: <<targetNodeType>>
-* oldContainment: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `newIndex` is beyond the number of annotation entries in `parent`
@@ -2689,13 +2710,14 @@ inside ``parent``'s annotations at `newIndex`.
 ===== Add reference
 Add `newTarget` / `newResolveInfo` to ``parent``'s `reference` at `index`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newTarget: <<targetNodeType>>?
-* newResolveInfo: <<resolveInfoType>>?
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>?
+newResolveInfo:: <<resolveInfoType>>?
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -2712,13 +2734,14 @@ Add `newTarget` / `newResolveInfo` to ``parent``'s `reference` at `index`.
 ===== Delete reference
 Delete existing `deletedTarget`/`deletedResolveInfo` from ``parent``'s `reference` at `index`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* deletedTarget: <<targetNodeType>>?
-* deletedResolveInfo: <<resolveInfoType>>?
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+deletedTarget:: <<targetNodeType>>?
+deletedResolveInfo:: <<resolveInfoType>>?
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -2737,15 +2760,16 @@ Delete existing `deletedTarget`/`deletedResolveInfo` from ``parent``'s `referenc
 ===== Change reference
 Replace existing `replacedTarget`/`replacedResolveInfo`  inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newTarget: <<targetNodeType>>?
-* newResolveInfo: <<targetNodeType>>?
-* replacedTarget: <<targetNodeType>>?
-* replacedResolveInfo: <<resolveInfoType>>?
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>?
+newResolveInfo:: <<targetNodeType>>?
+replacedTarget:: <<targetNodeType>>?
+replacedResolveInfo:: <<resolveInfoType>>?
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -2766,16 +2790,17 @@ Replace existing `replacedTarget`/`replacedResolveInfo`  inside ``parent``'s `re
 Move existing `target`/`resolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
 to ``newParent``'s `newReference` at `newIndex`.
 
+[horizontal]
 .Parameters
-* newParent: <<targetNodeType>>
-* newReference: <<metaPointerType>>
-* newIndex: <<indexType>>
-* oldParent: <<targetNodeType>>
-* oldReference: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* target: <<targetNodeType>>?
-* resolveInfo: <<resolveInfoType>>?
-* commandId: <<commandIdType>>
+newParent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldParent:: <<targetNodeType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+target:: <<targetNodeType>>?
+resolveInfo:: <<resolveInfoType>>?
+commandId:: <<commandIdType>>
 
 .Errors
 * `newParent` does not exist
@@ -2796,15 +2821,16 @@ to ``newParent``'s `newReference` at `newIndex`.
 Move existing `target`/`resolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
 to ``parent``'s `newReference` at `newIndex`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* newReference: <<metaPointerType>>
-* newIndex: <<indexType>>
-* oldReference: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* target: <<targetNodeType>>?
-* resolveInfo: <<resolveInfoType>>?
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+target:: <<targetNodeType>>?
+resolveInfo:: <<resolveInfoType>>?
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -2825,14 +2851,15 @@ to ``parent``'s `newReference` at `newIndex`.
 Move existing `target`/`resolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
 inside ``parent``'s `reference` at `newIndex`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* newIndex: <<indexType>>
-* target: <<targetNodeType>>?
-* resolveInfo: <<resolveInfoType>>?
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+newIndex:: <<indexType>>
+target:: <<targetNodeType>>?
+resolveInfo:: <<resolveInfoType>>?
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -2856,13 +2883,14 @@ Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `refer
 `target` MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newResolveInfo: <<resolveInfoType>>
-* target: <<targetNodeType>>
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newResolveInfo:: <<resolveInfoType>>
+target:: <<targetNodeType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -2884,13 +2912,14 @@ Delete existing `deletedResolveInfo` as ResolveInfo from existing entry inside `
 `target` MUST NOT be `null` as we're about to remove ResolveInfo, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* target: <<targetNodeType>>
-* deletedResolveInfo: <<resolveInfoType>>
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+target:: <<targetNodeType>>
+deletedResolveInfo:: <<resolveInfoType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -2914,14 +2943,15 @@ Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` 
 `target` MAY be `null` as we can only change ResolveInfo if both `oldResolveInfo` and `newResolveInfo` is non-`null`.
 ****
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newResolveInfo: <<resolveInfoType>>
-* target: <<targetNodeType>>?
-* oldResolveInfo: <<resolveInfoType>>
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newResolveInfo:: <<resolveInfoType>>
+target:: <<targetNodeType>>?
+oldResolveInfo:: <<resolveInfoType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -2945,13 +2975,14 @@ Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `
 `resolveInfo` MUST NOT be `null` as we can only add target if target is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newTarget: <<targetNodeType>>
-* resolveInfo: <<resolveInfoType>>
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -2973,13 +3004,14 @@ Delete existing `deletedTarget` as target from existing entry inside ``parent``'
 `resolveInfo` MUST NOT be `null` as we're about to remove target, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* resolveInfo: <<resolveInfoType>>
-* deletedTarget: <<targetNodeType>>
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+resolveInfo:: <<resolveInfoType>>
+deletedTarget:: <<targetNodeType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -3002,14 +3034,15 @@ Change target of existing entry inside ``parent``'s `reference` at `index` with 
 `resolveInfo` MAY be `null` as we can only change target if both `oldTarget` and `newTarget` is non-`null`.
 ****
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newTarget: <<targetNodeType>>
-* resolveInfo: <<resolveInfoType>>?
-* oldTarget: <<targetNodeType>>
-* commandId: <<commandIdType>>
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>?
+oldTarget:: <<targetNodeType>>
+commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
@@ -3035,9 +3068,10 @@ The parts are ordered.
 
 Command groups don't guarantee anything; the repository MAY take the group as a hint to resolve conflicts in a different manner.
 
+[horizontal]
 .Parameters
-* parts: <<commandType>>[]
-* commandId: <<commandIdType>>
+parts:: <<commandType>>[]
+commandId:: <<commandIdType>>
 
 .Errors
 * accumulation of all errors of `parts`
@@ -3057,14 +3091,16 @@ Command groups don't guarantee anything; the repository MAY take the group as a 
 ===== Subscribe to partition changes
 This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions.
 
+[horizontal]
 .Request parameters
-* creation: `boolean`
-* deletion: `boolean`
-* partitions: `boolean`
-* queryId: <<queryIdType>>
+creation:: `boolean`
+deletion:: `boolean`
+partitions:: `boolean`
+queryId:: <<queryIdType>>
 
+[horizontal]
 .Response parameters
-* queryId: <<queryIdType>>
+queryId:: <<queryIdType>>
 
 .Errors
 _none_
@@ -3076,13 +3112,15 @@ _none_
 ===== Subscribe to partition
 This client wants to receive events on any changes to `partition` or any of its descendants.
 
+[horizontal]
 .Request parameters
-* partition: <<targetNodeType>>
-* queryId: <<queryIdType>>
+partition:: <<targetNodeType>>
+queryId:: <<queryIdType>>
 
+[horizontal]
 .Response parameters
-* contents: <<chunkType>>
-* queryId: <<queryIdType>>
+contents:: <<chunkType>>
+queryId:: <<queryIdType>>
 
 .Errors
 * already subscribed to `partition`
@@ -3094,12 +3132,14 @@ This client wants to receive events on any changes to `partition` or any of its 
 ===== Unsubscribe from partition
 This client does not want to receive events on any changes to `partition` or any of its descendants anymore.
 
+[horizontal]
 .Request parameters
-* partition: <<targetNodeType>>
-* queryId: <<queryIdType>>
+partition:: <<targetNodeType>>
+queryId:: <<queryIdType>>
 
+[horizontal]
 .Response parameters
-* queryId: <<queryIdType>>
+queryId:: <<queryIdType>>
 
 .Errors
 * not subscribed to `partition`
@@ -3116,13 +3156,15 @@ Request `count` number of unused <<{m3}.adoc#identifiers, valid ids>>.
 
 `ids` might contain less or equal number of ids than `count`.
 
+[horizontal]
 .Request parameters
-* count: `integer`
-* queryId: <<queryIdType>>
+count:: `integer`
+queryId:: <<queryIdType>>
 
+[horizontal]
 .Response parameters
-* ids: <<freeIdType>>[]
-* queryId: <<queryIdType>>
+ids:: <<freeIdType>>[]
+queryId:: <<queryIdType>>
 
 .Errors
 _none_
@@ -3142,9 +3184,10 @@ Partition `newPartition` has been added to the repository.
 
 This client is now subscribed to any changes to `newPartition` or any of its descendants.
 
+[horizontal]
 .Parameters
-* newPartition: <<nodeType>>
-* originCommands: <<commandSourceType>>[]
+newPartition:: <<nodeType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `partitionAdded`
@@ -3158,9 +3201,10 @@ Partition `deletedPartition`, and all its descendants, have been deleted from th
 
 This client is now unsubscribed from any changes to `deletedPartition` or any of its descendants.
 
+[horizontal]
 .Parameters
-* deletedPartition: <<nodeType>> or <<targetNodeType>> #TODO#
-* originCommands: <<commandSourceType>>[]
+deletedPartition:: <<nodeType>> or <<targetNodeType>> #TODO#
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `partitionDeleted`
@@ -3175,11 +3219,12 @@ This client is now unsubscribed from any changes to `deletedPartition` or any of
 ===== Concept changed
 Concept of `node` has been changed from `oldConcept` to `newConcept`.
 
+[horizontal]
 .Parameters
-* node: <<targetNodeType>>
-* newConcept: <<metaPointerType>>
-* oldConcept: <<metaPointerType>>
-* originCommands: <<commandSourceType>>[]
+node:: <<targetNodeType>>
+newConcept:: <<metaPointerType>>
+oldConcept:: <<metaPointerType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `conceptChanged`
@@ -3194,11 +3239,12 @@ Concept of `node` has been changed from `oldConcept` to `newConcept`.
 ===== Property added
 `property` of `node` has been set to `newValue`.
 
+[horizontal]
 .Parameters
-* node: <<targetNodeType>>
-* property: <<metaPointerType>>
-* newValue: <<propertyValueType>>
-* originCommands: <<commandSourceType>>[]
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+newValue:: <<propertyValueType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `propertyAdded`
@@ -3210,11 +3256,12 @@ Concept of `node` has been changed from `oldConcept` to `newConcept`.
 ===== Property deleted
 Existing `property` of `node` with `oldValue` has been deleted.
 
+[horizontal]
 .Parameters
-* node: <<targetNodeType>>
-* property: <<metaPointerType>>
-* oldValue: <<propertyValueType>>
-* originCommands: <<commandSourceType>>[]
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+oldValue:: <<propertyValueType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `propertyDeleted`
@@ -3226,12 +3273,13 @@ Existing `property` of `node` with `oldValue` has been deleted.
 ===== Property changed
 Existing `property` of `node` has been changed from `oldValue` to `newValue`.
 
+[horizontal]
 .Parameters
-* node: <<targetNodeType>>
-* property: <<metaPointerType>>
-* newValue: <<propertyValueType>>
-* oldValue: <<propertyValueType>>
-* originCommands: <<commandSourceType>>[]
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+newValue:: <<propertyValueType>>
+oldValue:: <<propertyValueType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `propertyChanged`
@@ -3247,12 +3295,13 @@ Existing `property` of `node` has been changed from `oldValue` to `newValue`.
 New node `newChild` has been added to ``parent``'s  `containment` at `index`.
 All other children inside ``parent``'s `containment` with index >= `index` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* newChild: <<nodeType>>
-* containment: <<metaPointerType>>
-* index: <<indexType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+newChild:: <<nodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `childAdded`
@@ -3265,12 +3314,13 @@ All other children inside ``parent``'s `containment` with index >= `index` have 
 Existing node `deletedChild`, and all its descendants, have been deleted from ``parent``'s `containment` at `index`.
 All other children inside ``parent``'s `containment` with index > `index` have been moved to next lower index.
 
+[horizontal]
 .Parameters
-* deletedChild: <<nodeType>> or <<targetNodeType>> #TODO#
-* parent: <<targetNodeType>>
-* containment: <<metaPointerType>>
-* index: <<indexType>>
-* originCommands: <<commandSourceType>>[]
+deletedChild:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `childDeleted`
@@ -3283,13 +3333,14 @@ All other children inside ``parent``'s `containment` with index > `index` have b
 Existing node `replacedChild` inside ``parent``'s `containment` at `index` has been replaced with new node `newChild`.
 `replacedChild`, and all its descendants, have been deleted.
 
+[horizontal]
 .Parameters
-* newChild: <<nodeType>>
-* replacedChild: <<nodeType>> or <<targetNodeType>> #TODO#
-* parent: <<targetNodeType>>
-* containment: <<metaPointerType>>
-* index: <<indexType>>
-* originCommands: <<commandSourceType>>[]
+newChild:: <<nodeType>>
+replacedChild:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `childReplaced`
@@ -3306,15 +3357,16 @@ All other children inside ``oldParent``'s `oldContainment` with index > `oldInde
 
 All other children inside ``newParent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* newParent: <<targetNodeType>>
-* newContainment: <<metaPointerType>>
-* newIndex: <<indexType>>
-* movedChild: <<targetNodeType>>
-* oldParent: <<targetNodeType>>
-* oldContainment: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* originCommands: <<commandSourceType>>[]
+newParent:: <<targetNodeType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `childMovedFromOtherContainment`
@@ -3331,14 +3383,15 @@ All other children inside ``parent``'s `oldContainment` with index > `oldIndex` 
 
 All other children inside ``parent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* newContainment: <<metaPointerType>>
-* newIndex: <<indexType>>
-* movedChild: <<targetNodeType>>
-* parent: <<targetNodeType>>
-* oldContainment: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* originCommands: <<commandSourceType>>[]
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `childMovedFromOtherContainmentInSameParent`
@@ -3363,13 +3416,14 @@ Example: +
 
 `oldIndex` MUST NOT be equal to `newIndex`.
 
+[horizontal]
 .Parameters
-* newIndex: <<indexType>>
-* movedChild: <<targetNodeType>>
-* parent: <<targetNodeType>>
-* containment: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* originCommands: <<commandSourceType>>[]
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `childMovedInSameContainment`
@@ -3386,14 +3440,15 @@ All other annotations inside ``oldParent``'s `annotations` with index > `oldInde
 
 All other children inside ``newParent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* newParent: <<targetNodeType>>
-* newContainment: <<metaPointerType>>
-* newIndex: <<indexType>>
-* movedAnnotation: <<targetNodeType>>
-* oldParent: <<targetNodeType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newParent:: <<targetNodeType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Technical name
 `childMovedFromAnnotations`
@@ -3410,13 +3465,14 @@ All other annotations inside ``parent``'s `annotations` with index > `oldIndex` 
 
 All other children inside ``parent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* newContainment: <<metaPointerType>>
-* newIndex: <<indexType>>
-* movedAnnotation: <<targetNodeType>>
-* parent: <<targetNodeType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Technical name
 `childMovedFromAnnotationsInSameParent`
@@ -3432,11 +3488,12 @@ All other children inside ``parent``'s `newContainment` with index >= `newIndex`
 New node `newAnnotation` has been added to ``parent``'s annotations at `index`.
 All other annotations inside ``parent``'s annotations with index >= `index` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* newAnnotation: <<nodeType>>
-* index: <<indexType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+newAnnotation:: <<nodeType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `annotationAdded`
@@ -3449,11 +3506,12 @@ All other annotations inside ``parent``'s annotations with index >= `index` have
 Existing node `deletedAnnotation`, and all its descendants, have been deleted from ``parent``'s annotations at `index`.
 All other annotations inside ``parent``'s annotations with index > `index` have been moved to next lower index.
 
+[horizontal]
 .Parameters
-* deletedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
-* parent: <<targetNodeType>>
-* index: <<indexType>>
-* originCommands: <<commandSourceType>>[]
+deletedAnnotation:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `annotationDeleted`
@@ -3466,12 +3524,13 @@ All other annotations inside ``parent``'s annotations with index > `index` have 
 Existing node `replacedAnnotation` inside ``parent``'s annotations at `index` has been replaced with new node `newAnnotation`.
 `replacedAnnotation`, and all its descendants, have been deleted.
 
+[horizontal]
 .Parameters
-* newAnnotation: <<nodeType>>
-* replacedAnnotation: <<nodeType>> or <<targetNodeType>> #TODO#
-* parent: <<targetNodeType>>
-* index: <<indexType>>
-* originCommands: <<commandSourceType>>[]
+newAnnotation:: <<nodeType>>
+replacedAnnotation:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `annotationReplaced`
@@ -3488,13 +3547,14 @@ All other annotations inside ``oldParent``'s annotations with index > `oldIndex`
 
 All other annotations inside ``newParent``'s annotations with index >= `newIndex` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* newParent: <<targetNodeType>>
-* newIndex: <<indexType>>
-* movedAnnotation: <<targetNodeType>>
-* oldParent: <<targetNodeType>>
-* oldIndex: <<indexType>>
-* originCommands: <<commandSourceType>>[]
+newParent:: <<targetNodeType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `annotationMovedFromOtherParent`
@@ -3519,12 +3579,13 @@ Example: +
 
 `oldIndex` MUST NOT be equal to `newIndex`.
 
+[horizontal]
 .Parameters
-* newIndex: <<indexType>>
-* movedAnnotation: <<targetNodeType>>
-* parent: <<targetNodeType>>
-* oldIndex: <<targetNodeType>>
-* originCommands: <<commandSourceType>>[]
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldIndex:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `annotationMovedInSameParent`
@@ -3541,14 +3602,15 @@ All other children inside ``oldParent``'s `oldContainment` with index > `oldInde
 
 All other annotations inside ``newParent``'s annotations with index >= `newIndex` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* newParent: <<targetNodeType>>
-* newIndex: <<indexType>>
-* movedChild: <<targetNodeType>>
-* oldParent: <<targetNodeType>>
-* oldContainment: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newParent:: <<targetNodeType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Technical name
 `annotationMovedFromContainment`
@@ -3565,14 +3627,15 @@ All other children inside ``parent``'s `oldContainment` with index > `oldIndex` 
 
 All other annotations inside ``parent``'s annotations with index >= `newIndex` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* newContainment: <<metaPointerType>>
-* newIndex: <<indexType>>
-* movedChild: <<targetNodeType>>
-* parent: <<targetNodeType>>
-* oldContainment: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* commandId: <<commandIdType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
 
 .Technical name
 `annotationMovedFromContainmentInSameParent`
@@ -3588,13 +3651,14 @@ All other annotations inside ``parent``'s annotations with index >= `newIndex` h
 Reference with `newTarget`/`newResolveInfo` has been added to ``parent``'s `reference` at `index`.
 All other entries inside ``parent``'s `reference` with index >= `index` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newTarget: <<targetNodeType>>?
-* newResolveInfo: <<resolveInfoType>>?
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>?
+newResolveInfo:: <<resolveInfoType>>?
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `referenceAdded`
@@ -3607,13 +3671,14 @@ All other entries inside ``parent``'s `reference` with index >= `index` have bee
 Existing reference with `deletedTarget`/`deletedResolveInfo` has been deleted from ``parent``'s `reference` at `index`.
 All other entries inside ``parent``'s `reference` with index > `index` have been moved to next lower index.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* deletedTarget: <<targetNodeType>>
-* deletedResolveInfo: <<resolveInfoType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+deletedTarget:: <<targetNodeType>>
+deletedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `referenceDeleted`
@@ -3625,15 +3690,16 @@ All other entries inside ``parent``'s `reference` with index > `index` have been
 ===== Reference changed
 Existing reference with `replacedTarget`/`replacedResolveInfo` inside ``parent``'s annotations at `index` has been replaced with `newTarget`/`newResolveInfo`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newTarget: <<targetNodeType>>?
-* newResolveInfo: <<targetNodeType>>?
-* replacedTarget: <<targetNodeType>>
-* replacedResolveInfo: <<resolveInfoType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>?
+newResolveInfo:: <<targetNodeType>>?
+replacedTarget:: <<targetNodeType>>
+replacedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `referenceChanged`
@@ -3650,16 +3716,17 @@ All other entries inside ``oldParent``'s `oldReference` with index > `oldIndex` 
 
 All other entries inside ``newParent``'s `newReference` with index >= `newIndex` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* newParent: <<targetNodeType>>
-* newReference: <<metaPointerType>>
-* newIndex: <<indexType>>
-* oldParent: <<targetNodeType>>
-* oldReference: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* target: <<targetNodeType>>
-* resolveInfo: <<resolveInfoType>>
-* originCommands: <<commandSourceType>>[]
+newParent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldParent:: <<targetNodeType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+target:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `entryMovedFromOtherReference`
@@ -3676,15 +3743,16 @@ All other entries inside ``parent``'s `oldReference` with index > `oldIndex` hav
 
 All other entries inside ``parent``'s `newReference` with index >= `newIndex` have been moved to next higher index.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* newReference: <<metaPointerType>>
-* newIndex: <<indexType>>
-* oldReference: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* target: <<targetNodeType>>
-* resolveInfo: <<resolveInfoType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+target:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `entryMovedFromOtherReferenceInSameParent`
@@ -3709,14 +3777,15 @@ Example: +
 
 `oldIndex` MUST NOT be equal to `newIndex`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* oldIndex: <<indexType>>
-* newIndex: <<indexType>>
-* target: <<targetNodeType>>
-* resolveInfo: <<resolveInfoType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+newIndex:: <<indexType>>
+target:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `entryMovedInSameReference`
@@ -3728,13 +3797,14 @@ Example: +
 ===== Reference ResolveInfo added
 `newResolveInfo` has been added as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newResolveInfo: <<resolveInfoType>>
-* target: <<targetNodeType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newResolveInfo:: <<resolveInfoType>>
+target:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `referenceResolveInfoAdded`
@@ -3746,13 +3816,14 @@ Example: +
 ===== Reference ResolveInfo deleted
 ResolveInfo `deletedResolveInfo` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `target`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* target: <<targetNodeType>>
-* deletedResolveInfo: <<resolveInfoType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+target:: <<targetNodeType>>
+deletedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `referenceResolveInfoDeleted`
@@ -3764,14 +3835,15 @@ ResolveInfo `deletedResolveInfo` has been deleted from existing entry inside ``p
 ===== Reference ResolveInfo changed
 ResolveInfo of existing entry inside ``parent``'s `reference` at `index` with `target` has been changed from `oldResolveInfo` to `newResolveInfo`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newResolveInfo: <<resolveInfoType>>
-* target: <<targetNodeType>>?
-* replacedResolveInfo: <<resolveInfoType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newResolveInfo:: <<resolveInfoType>>
+target:: <<targetNodeType>>?
+replacedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `referenceResolveInfoChanged`
@@ -3783,13 +3855,14 @@ ResolveInfo of existing entry inside ``parent``'s `reference` at `index` with `t
 ===== Reference target added
 `newTarget` has been added as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newTarget: <<targetNodeType>>
-* resolveInfo: <<resolveInfoType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `referenceTargetAdded`
@@ -3801,13 +3874,14 @@ ResolveInfo of existing entry inside ``parent``'s `reference` at `index` with `t
 ===== Reference target deleted
 Target `deletedTarget` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* resolveInfo: <<resolveInfoType>>
-* deletedTarget: <<targetNodeType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+resolveInfo:: <<resolveInfoType>>
+deletedTarget:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `referenceTargetDeleted`
@@ -3819,14 +3893,15 @@ Target `deletedTarget` has been deleted from existing entry inside ``parent``'s 
 ===== Reference target changed
 Target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` has been changed from `oldTarget` to `newTarget`.
 
+[horizontal]
 .Parameters
-* parent: <<targetNodeType>>
-* reference: <<metaPointerType>>
-* index: <<indexType>>
-* newTarget: <<targetNodeType>>
-* resolveInfo: <<resolveInfoType>>?
-* replacedTarget: <<targetNodeType>>
-* originCommands: <<commandSourceType>>[]
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>?
+replacedTarget:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `referenceTargetChanged`
@@ -3843,9 +3918,10 @@ The events in `parts` have happened in the given order.
 
 All `originCommands` have been handled (maybe by discarding them).
 
+[horizontal]
 .Parameters
-* parts: <<eventType>>[]
-* originCommands: <<commandSourceType>>[]
+parts:: <<eventType>>[]
+originCommands:: <<commandSourceType>>[]
 
 .Technical name
 `composite`
