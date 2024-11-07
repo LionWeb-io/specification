@@ -9,6 +9,8 @@ include::../shared/issue-footnotes.adoc[]
 = Delta Repository Access API
 :toc: preamble
 :toclevels: 4
+:sectnumlevels: 4
+:sectnums:
 :!figure-caption:
 
 The delta API *version 2024.1* is used to store and retrieve changes to nodes.
