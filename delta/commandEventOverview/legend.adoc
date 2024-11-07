@@ -1,3 +1,4 @@
+.Diagram legend
 [plantuml,legend,svg]
 ----
 hide empty members
