@@ -783,7 +783,7 @@ class "newChild:Car" as newChild #LightSkyBlue {
 class "next\nSibling" as nextSibling
 
 parent *--> previousSibling: containment\n[index - 1]
-parent *--> newChild: containment\n[index]
+parent *--> newChild #Blue: containment\n[index]
 parent *--> nextSibling: containment\n[index + 1]
 ----
 
@@ -808,10 +808,10 @@ class "next\nSibling" as nextSibling
 class descendant #red
 
 parent *--> previousSibling: containment\n[index - 1]
-parent *--> deletedChild: containment\n[index]
+parent *--> deletedChild #red: containment\n[index]
 parent *--> nextSibling: containment\n[index + 1]
 
-deletedChild *--> descendant
+deletedChild *--> descendant #red
 ----
 |
 [plantuml, deleteChild-after, svg]
@@ -850,10 +850,10 @@ class "next\nSibling" as nextSibling
 class descendant #red
 
 parent *--> previousSibling: containment\n[index - 1]
-parent *--> replacedChild: containment\n[index]
+parent *--> replacedChild #red: containment\n[index]
 parent *--> nextSibling: containment\n[index + 1]
 
-replacedChild *--> descendant
+replacedChild *--> descendant #red
 ----
 |
 [plantuml, replaceChild-after, svg]
@@ -870,7 +870,7 @@ class "newChild:Car" as newChild #LightSkyBlue {
 class "next\nSibling" as nextSibling
 
 parent *--> previousSibling: containment\n[index - 1]
-parent *--> newChild: containment\n[index]
+parent *--> newChild #Blue: containment\n[index]
 parent *--> nextSibling: containment\n[index + 1]
 ----
 
@@ -896,7 +896,7 @@ class "old\nNext\nSibling" as oldNextSibling
 class descendant #Orange
 
 oldParent *--> oldPreviousSibling: old\nContainment\n[oldIndex - 1]
-oldParent *--> movedChild: old\nContainment\n[oldIndex]
+oldParent *--> movedChild #red: old\nContainment\n[oldIndex]
 oldParent *--> oldNextSibling: old\nContainment\n[oldIndex + 1]
 
 movedChild *--> descendant
@@ -937,7 +937,7 @@ class "new\nNext\nSibling" as newNextSibling
 class descendant #Orange
 
 newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-newParent *--> movedChild: new\nContainment\n[newIndex]
+newParent *--> movedChild #Blue: new\nContainment\n[newIndex]
 newParent *--> newNextSibling: new\nContainment\n[newIndex + 1]
 
 movedChild *--> descendant
@@ -966,7 +966,7 @@ class parent
 descendant <--* movedChild
 
 oldPreviousSibling <--* parent: old\nContainment\n[oldIndex - 1]
-movedChild <--* parent: old\nContainment\n[oldIndex]
+movedChild <--* parent #red: old\nContainment\n[oldIndex]
 oldNextSibling <--* parent: old\nContainment\n[oldIndex + 1]
 
 class "new\nPrevious\nSibling" as newPreviousSibling
@@ -996,7 +996,7 @@ class "new\nNext\nSibling" as newNextSibling
 class descendant #Orange
 
 parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-parent *--> movedChild: new\nContainment\n[newIndex]
+parent *--> movedChild #Blue: new\nContainment\n[newIndex]
 parent *--> newNextSibling: new\nContainment\n[newIndex + 1]
 
 movedChild *--> descendant
@@ -1026,7 +1026,7 @@ class siblingC
 class descendant #Orange
 
 parent *--> siblingA: containment\n[oldIndex - 1]
-parent *--> movedChild: containment\n[oldIndex]
+parent *--> movedChild: containment\n[<color #red>oldIndex</color>]
 parent *--> siblingB: containment\n[oldIndex + 1]
 parent *--> siblingC: containment\n[oldIndex + 2]
 
@@ -1052,7 +1052,7 @@ class descendant #Orange
 
 parent *--> siblingA: containment\n[oldIndex - 1]
 parent *--> siblingB: containment\n[oldIndex]
-parent *--> movedChild: containment\n[newIndex]
+parent *--> movedChild: containment\n[<color #Blue>newIndex</color>]
 parent *--> siblingC: containment\n[newIndex + 1]
 
 movedChild *-> descendant
@@ -1083,7 +1083,7 @@ class "old\nNext\nSibling" as oldNextSibling
 class descendant #Orange
 
 oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
-oldParent *--> movedAnnotation: <<annotations>>\n[oldIndex]
+oldParent *--> movedAnnotation #red: <<annotations>>\n[oldIndex]
 oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex + 1]
 
 movedAnnotation *--> descendant
@@ -1124,7 +1124,7 @@ class "new\nNext\nSibling" as newNextSibling
 class descendant #Orange
 
 newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-newParent *--> movedAnnotation: new\nContainment\n[newIndex]
+newParent *--> movedAnnotation #Blue: new\nContainment\n[newIndex]
 newParent *--> newNextSibling: new\nContainment\n[newIndex + 1]
 
 movedAnnotation *--> descendant
@@ -1153,7 +1153,7 @@ class parent
 descendant <--* movedAnnotation
 
 oldPreviousSibling <--* parent: <<annotations>>\n[oldIndex - 1]
-movedAnnotation <--* parent: <<annotations>>\n[oldIndex]
+movedAnnotation <--* parent #red: <<annotations>>\n[oldIndex]
 oldNextSibling <--* parent: <<annotations>>\n[oldIndex + 1]
 
 class "new\nPrevious\nSibling" as newPreviousSibling
@@ -1183,7 +1183,7 @@ class "new\nNext\nSibling" as newNextSibling
 class descendant #Orange
 
 parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-parent *--> movedAnnotation: new\nContainment\n[newIndex]
+parent *--> movedAnnotation #Blue: new\nContainment\n[newIndex]
 parent *--> newNextSibling: new\nContainment\n[newIndex + 1]
 
 movedAnnotation *--> descendant
