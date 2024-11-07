@@ -1,8 +1,7 @@
 |
 [plantuml,changeReference-before,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 left to right direction
 
 class parent
@@ -22,8 +21,7 @@ previousEntry -[hidden]> replacedTarget
 |
 [plantuml, changeReference-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 left to right direction
 
 class parent

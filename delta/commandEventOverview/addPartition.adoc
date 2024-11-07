@@ -3,8 +3,7 @@ _nothing_
 |
 [plantuml, addPartition, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class newPartition:Person <<Partition>> #LightSkyBlue {
   name: String = "John"

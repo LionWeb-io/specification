@@ -1,8 +1,7 @@
 |
 [plantuml,replaceAnnotation-before,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 
@@ -21,8 +20,7 @@ replacedAnnotation *--> descendant #red
 |
 [plantuml,replaceAnnotation-after,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 

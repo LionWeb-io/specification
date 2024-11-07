@@ -1,14 +1,7 @@
 |
 [plantuml,addReferenceTarget-before,svg]
 ----
-hide empty members
-hide circles
-
-skinparam class<<h>> {
-  borderColor Transparent
-  backgroundColor Transparent
-  stereotypeFontColor Transparent
-}
+!include commandEventOverviewStyle.puml
 
 class parent
 
@@ -21,8 +14,7 @@ target -[hidden]-> newTarget
 |
 [plantuml,addReferenceTarget-after,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 

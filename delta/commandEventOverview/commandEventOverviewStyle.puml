@@ -1,0 +1,10 @@
+@startuml
+hide empty members
+hide circles
+
+skinparam class<<h>> {
+  borderColor Transparent
+  backgroundColor Transparent
+  stereotypeFontColor Transparent
+}
+@enduml

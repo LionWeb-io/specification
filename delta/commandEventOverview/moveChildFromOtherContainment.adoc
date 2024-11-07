@@ -1,8 +1,7 @@
 |
 [plantuml,moveChildFromOtherContainment-before,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class oldParent
 
@@ -23,23 +22,26 @@ descendant -[hidden]- newParent
 class newParent
 
 class "new\nPrevious\nSibling" as newPreviousSibling
+class " " as dummy <<h>>
 class "new\nNext\nSibling" as newNextSibling
 
 newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+newParent *-[hidden]-> dummy #Blue: new\nContainment\n[newIndex]
 newParent *--> newNextSibling: new\nContainment\n[newIndex]
 ----
 |
 [plantuml, moveChildFromOtherContainment-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class oldParent
 
 class "old\nPrevious\nSibling" as oldPreviousSibling
+class " " as dummy <<h>>
 class "old\nNext\nSibling" as oldNextSibling
 
 oldParent *--> oldPreviousSibling: old\nContainment\n[oldIndex - 1]
+oldParent *-[hidden]-> dummy #red: old\nContainment\n[oldIndex]
 oldParent *--> oldNextSibling: old\nContainment\n[oldIndex]
 
 oldPreviousSibling -[hidden]- newParent

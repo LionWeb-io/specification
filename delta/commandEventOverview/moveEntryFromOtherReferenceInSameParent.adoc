@@ -1,8 +1,7 @@
 |
 [plantuml,moveEntryFromOtherReferenceInSameParent-before,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class "old\nPrevious\nEntry" as oldPreviousEntry
 class target #Orange
@@ -31,8 +30,7 @@ parent ..> newNextEntry: new\nReference\n[newIndex]
 |
 [plantuml, moveEntryFromOtherReferenceInSameParent-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class "old\nPrevious\nEntry" as oldPreviousEntry
 class target #Orange

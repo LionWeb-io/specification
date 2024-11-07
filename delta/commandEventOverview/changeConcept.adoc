@@ -1,16 +1,14 @@
 |
 [plantuml, changeConcept-before, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class "node:<color #red>oldConcept</color>"
 ----
 |
 [plantuml, changeConcept-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class "node:<color #blue>newConcept</color>"
 ----

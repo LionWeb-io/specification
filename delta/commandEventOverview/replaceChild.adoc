@@ -1,8 +1,7 @@
 |
 [plantuml,replaceChild-before,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 
@@ -21,8 +20,7 @@ replacedChild *--> descendant #red
 |
 [plantuml, replaceChild-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 
