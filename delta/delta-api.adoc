@@ -40,7 +40,7 @@ Example: Does <<cmd-deleteChild>> fail if the `removedChild` does not exist?
 
 * Decide on errors marked with #?# (invalid optional parameter values){fn-org312}
 
-* How to report a command has completely been discarded, without any resulting event?
+* How to report a command has completely been discarded, without any resulting event?{fn-org314}
 
 == Scenarios
 include::scenarios/virginRepo.adoc[]
