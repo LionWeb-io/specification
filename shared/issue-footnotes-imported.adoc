@@ -255,3 +255,4 @@
 :fn-org311: footnote:org311[https://github.com/LionWeb-io/specification/issues/311[Do we allow unresolved annotation instances? #311]]
 :fn-org312: footnote:org312[https://github.com/LionWeb-io/specification/issues/312[How to handle commands with invalid optional parameter value? #312]]
 :fn-org313: footnote:org313[https://github.com/LionWeb-io/specification/issues/313[What's the command id of a bulk api store request? #313]]
+:fn-org314: footnote:org314[https://github.com/LionWeb-io/specification/issues/314[How to report a command has completely been discarded, without any resulting event? #314]]
