@@ -97,20 +97,7 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 
 === Command -- event pairs overview
 
-[plantuml, legend, svg]
-----
-skinparam legendBackgroundColor #transparent
-skinparam legendBorderColor #transparent
-skinparam legendEntrySeparator #transparent
-
-legend right
-    <b>Legend</b>
-    |<#LightSkyBlue>   | added|
-    |<#red>| deleted |
-    |<#Orange>| moved|
-endlegend
-----
-
+include::commandEventOverview/legend.adoc[]
 
 ==== Partitions
 [cols="30a,35a,35a"]
