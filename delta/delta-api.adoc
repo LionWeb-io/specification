@@ -570,6 +570,628 @@ Rationale: Both reference `target` and `resolveInfo` can be `null`, so they aren
 However, `target` and `resolveInfo` MUST NOT both be `null`.
 
 
+=== Command -- event pairs overview
+
+[plantuml, legend, svg]
+----
+skinparam legendBackgroundColor #transparent
+skinparam legendBorderColor #transparent
+skinparam legendEntrySeparator #transparent
+
+legend right
+    <b>Legend</b>
+    |<#LightSkyBlue>   | added|
+    |<#red>| deleted |
+    |<#Orange>| moved|
+endlegend
+----
+
+
+[cols="a,a,a"]
+|===
+|Command / Event / Description |Before |After
+
+3+|==== Partitions
+
+|
+<<cmd-addPartition>>
+
+<<evnt-partitionAdded>>
+
+Add `newPartition` node as new partition.
+|
+_nothing_
+|
+[plantuml, addPartition, svg]
+----
+hide empty members
+hide circles
+
+class newPartition:Person <<Partition>> #LightSkyBlue {
+  name: String = "John"
+  age: Integer = 23
+  alive: Boolean = true
+}
+----
+
+|
+<<cmd-deletePartition>>
+
+<<evnt-partitionDeleted>>
+
+Delete partition `deletedPartition`.
+|
+[plantuml, deletePartition, svg]
+----
+hide empty members
+hide circles
+
+class "deletedPartition:Person" as deletedPartition <<Partition>> #red {
+  name: String = "John"
+  age: Integer = 23
+  alive: Boolean = true
+}
+
+class "leftEye:Eye" as firstLevelChild #red
+
+class "upperEyelid:Eyelid" as secondLevelChild #red
+
+deletedPartition *--> firstLevelChild
+firstLevelChild *--> secondLevelChild
+----
+|
+_nothing_
+
+3+|==== Nodes
+
+|
+<<cmd-changeConcept>>
+
+<<evnt-conceptChanged>>
+
+Change concept of `node` from `oldConcept` to `newConcept`.
+|
+[plantuml, changeConcept-before, svg]
+----
+hide empty members
+hide circles
+
+class "node:<color #red>oldConcept</color>"
+----
+|
+[plantuml, changeConcept-after, svg]
+----
+hide empty members
+hide circles
+
+class "node:<color #blue>newConcept</color>"
+----
+
+3+|==== Properties
+
+|
+<<cmd-addProperty>>
+
+<<evnt-propertyAdded>>
+
+Add `newValue` as value of property `property` to `node`.
+|
+[plantuml, addProperty-before, svg]
+----
+hide empty members
+hide circles
+
+class "node"
+----
+|
+[plantuml, addProperty-after, svg]
+----
+hide empty members
+hide circles
+
+class "node" {
+  <color: #blue>property = newValue</color>
+}
+----
+
+|
+<<cmd-deleteProperty>>
+
+<<evnt-propertyDeleted>>
+
+Delete existing `property` with `oldValue` from `node`.
+|
+[plantuml, deleteProperty-before, svg]
+----
+hide empty members
+hide circles
+
+class "node" {
+  <color #red>property = oldValue</color>
+}
+----
+|
+[plantuml, deleteProperty-after, svg]
+----
+hide empty members
+hide circles
+
+class "node"
+----
+
+|
+<<cmd-changeProperty>>
+
+<<evnt-propertyChanged>>
+
+Change existing `property` of `node` from `oldValue` to `newValue`.
+|
+[plantuml, changeProperty-before, svg]
+----
+hide empty members
+hide circles
+
+class "node" {
+  property = <color #red>oldValue</color>
+}
+----
+|
+[plantuml, changeProperty-after, svg]
+----
+hide empty members
+hide circles
+
+class "node" {
+  property = <color #blue>newValue</color>
+}
+----
+
+3+|==== Children
+
+|
+<<cmd-addChild>>
+
+<<evnt-childAdded>>
+
+Add new node `newChild` to `parent` in `containment` at `index`.
+|
+[plantuml, addChild-before, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: containment\n[index - 1]
+parent *--> nextSibling: containment\n[index]
+----
+|
+[plantuml, addChild-after, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "newChild:Car" as newChild #LightSkyBlue {
+  length:Integer=19
+}
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: containment\n[index - 1]
+parent *--> newChild: containment\n[index]
+parent *--> nextSibling: containment\n[index + 1]
+----
+
+|
+<<cmd-deleteChild>>
+
+<<evnt-childDeleted>>
+
+Delete existing node `deletedChild` from ``parent``'s `containment` at `index`.
+|
+[plantuml, deleteChild-before, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "deleted\nChild" as deletedChild #red
+class "next\nSibling" as nextSibling
+
+class descendant #red
+
+parent *--> previousSibling: containment\n[index - 1]
+parent *--> deletedChild: containment\n[index]
+parent *--> nextSibling: containment\n[index + 1]
+
+deletedChild *--> descendant
+----
+|
+[plantuml, deleteChild-after, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: containment\n[index - 1]
+parent *--> nextSibling: containment\n[index]
+----
+
+|
+<<cmd-replaceChild>>
+
+<<evnt-childReplaced>>
+
+Replace existing node `replacedChild` inside ``parent``'s `containment` at `index` with new node `newChild`.
+Delete `replacedChild`.
+|
+[plantuml,replaceChild-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "replaced\nChild" as replacedChild #red
+class "next\nSibling" as nextSibling
+
+class descendant #red
+
+parent *--> previousSibling: containment\n[index - 1]
+parent *--> replacedChild: containment\n[index]
+parent *--> nextSibling: containment\n[index + 1]
+
+replacedChild *--> descendant
+----
+|
+[plantuml, replaceChild-after, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "newChild:Car" as newChild #LightSkyBlue {
+  length:Integer=19
+}
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: containment\n[index - 1]
+parent *--> newChild: containment\n[index]
+parent *--> nextSibling: containment\n[index + 1]
+----
+
+|
+<<cmd-moveChildFromOtherContainment>>
+
+<<evnt-childMovedFromOtherContainment>>
+
+Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
+inside ``newParent``'s `newContainment` at `newIndex`.
+|
+[plantuml,moveChildFromOtherContainment-before,svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "moved\nChild" as movedChild #Orange
+class "old\nNext\nSibling" as oldNextSibling
+
+class descendant #Orange
+
+oldParent *--> oldPreviousSibling: old\nContainment\n[oldIndex - 1]
+oldParent *--> movedChild: old\nContainment\n[oldIndex]
+oldParent *--> oldNextSibling: old\nContainment\n[oldIndex + 1]
+
+movedChild *--> descendant
+
+descendant -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+newParent *--> newNextSibling: new\nContainment\n[newIndex]
+----
+|
+[plantuml, moveChildFromOtherContainment-after, svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "old\nNext\nSibling" as oldNextSibling
+
+oldParent *--> oldPreviousSibling: old\nContainment\n[oldIndex - 1]
+oldParent *--> oldNextSibling: old\nContainment\n[oldIndex]
+
+oldPreviousSibling -[hidden]- newParent
+oldNextSibling -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "moved\nChild" as movedChild #Orange
+class "new\nNext\nSibling" as newNextSibling
+
+class descendant #Orange
+
+newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+newParent *--> movedChild: new\nContainment\n[newIndex]
+newParent *--> newNextSibling: new\nContainment\n[newIndex + 1]
+
+movedChild *--> descendant
+----
+
+|
+<<cmd-moveChildFromOtherContainmentInSameParent>>
+
+<<evnt-childMovedFromOtherContainmentInSameParent>>
+
+Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
+inside ``parent``'s `newContainment` at `newIndex`.
+|
+[plantuml,moveChildFromOtherContainmentInSameParent-before,svg]
+----
+hide empty members
+hide circles
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class descendant #Orange
+class "moved\nChild" as movedChild #Orange
+class "old\nNext\nSibling" as oldNextSibling
+
+class parent
+
+descendant <--* movedChild
+
+oldPreviousSibling <--* parent: old\nContainment\n[oldIndex - 1]
+movedChild <--* parent: old\nContainment\n[oldIndex]
+oldNextSibling <--* parent: old\nContainment\n[oldIndex + 1]
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+parent *--> newNextSibling: new\nContainment\n[newIndex]
+----
+|
+[plantuml, moveChildFromOtherContainmentInSameParent-after, svg]
+----
+hide empty members
+hide circles
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "old\nNext\nSibling" as oldNextSibling
+
+class parent
+
+oldPreviousSibling <--* parent: old\nContainment\n[oldIndex - 1]
+oldNextSibling <--* parent: old\nContainment\n[oldIndex]
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "moved\nChild" as movedChild #Orange
+class "new\nNext\nSibling" as newNextSibling
+
+class descendant #Orange
+
+parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+parent *--> movedChild: new\nContainment\n[newIndex]
+parent *--> newNextSibling: new\nContainment\n[newIndex + 1]
+
+movedChild *--> descendant
+----
+
+|
+<<cmd-moveChildInSameContainment>>
+
+<<evnt-childMovedInSameContainment>>
+
+Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
+inside ``parent``'s `containment` at `newIndex`.
+|
+[plantuml,moveChildInSameContainment-before,svg]
+----
+hide empty members
+hide circles
+left to right direction
+
+class parent
+
+class siblingA
+class movedChild #Orange
+class siblingB
+class siblingC
+
+class descendant #Orange
+
+parent *--> siblingA: oldContainment\n[oldIndex - 1]
+parent *--> movedChild: oldContainment\n[oldIndex]
+parent *--> siblingB: oldContainment\n[oldIndex + 1]
+parent *--> siblingC: oldContainment\n[oldIndex + 2]
+
+movedChild *-> descendant
+
+siblingA -[hidden]> movedChild
+----
+|
+[plantuml, moveChildInSameContainment-after, svg]
+----
+hide empty members
+hide circles
+left to right direction
+
+class parent
+
+class siblingA
+class movedChild #Orange
+class siblingB
+class siblingC
+
+class descendant #Orange
+
+parent *--> siblingA: oldContainment\n[oldIndex - 1]
+parent *--> siblingB: oldContainment\n[oldIndex]
+parent *--> movedChild: oldContainment\n[newIndex]
+parent *--> siblingC: oldContainment\n[newIndex + 1]
+
+movedChild *-> descendant
+
+siblingA -[hidden]> siblingB
+siblingB -[hidden]> movedChild
+----
+
+|
+<<cmd-moveChildFromAnnotations>>
+
+<<evnt-childMovedFromAnnotations>>
+
+Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
+inside ``newParent``'s `newContainment` at `newIndex`.
+|
+[plantuml,moveChildFromAnnotations-before,svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "moved\nAnnotation" as movedAnnotation #Orange
+class "old\nNext\nSibling" as oldNextSibling
+
+class descendant #Orange
+
+oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
+oldParent *--> movedAnnotation: <<annotations>>\n[oldIndex]
+oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex + 1]
+
+movedAnnotation *--> descendant
+
+descendant -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+newParent *--> newNextSibling: new\nContainment\n[newIndex]
+----
+|
+[plantuml,moveChildFromAnnotations-after,svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "old\nNext\nSibling" as oldNextSibling
+
+oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
+oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex]
+
+oldPreviousSibling -[hidden]- newParent
+oldNextSibling -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "moved\nAnnotation" as movedAnnotation #Orange
+class "new\nNext\nSibling" as newNextSibling
+
+class descendant #Orange
+
+newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+newParent *--> movedAnnotation: new\nContainment\n[newIndex]
+newParent *--> newNextSibling: new\nContainment\n[newIndex + 1]
+
+movedAnnotation *--> descendant
+----
+
+|
+<<cmd-moveChildFromAnnotationsInSameParent>>
+
+<<evnt-childMovedFromAnnotationsInSameParent>>
+
+Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
+inside ``parent``'s `newContainment` at `newIndex`.
+|
+[plantuml,moveChildFromAnnotationsInSameParent-before,svg]
+----
+hide empty members
+hide circles
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class descendant #Orange
+class "moved\nAnnotation" as movedAnnotation #Orange
+class "old\nNext\nSibling" as oldNextSibling
+
+class parent
+
+descendant <--* movedAnnotation
+
+oldPreviousSibling <--* parent: <<annotations>>\n[oldIndex - 1]
+movedAnnotation <--* parent: <<annotations>>\n[oldIndex]
+oldNextSibling <--* parent: <<annotations>>\n[oldIndex + 1]
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+parent *--> newNextSibling: new\nContainment\n[newIndex]
+----
+|
+[plantuml,moveChildFromAnnotationsInSameParent-after,svg]
+----
+hide empty members
+hide circles
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "old\nNext\nSibling" as oldNextSibling
+
+class parent
+
+oldPreviousSibling <--* parent: <<annotations>>\n[oldIndex - 1]
+oldNextSibling <--* parent: <<annotations>>\n[oldIndex]
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "moved\nAnnotation" as movedAnnotation #Orange
+class "new\nNext\nSibling" as newNextSibling
+
+class descendant #Orange
+
+parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+parent *--> movedAnnotation: new\nContainment\n[newIndex]
+parent *--> newNextSibling: new\nContainment\n[newIndex + 1]
+
+movedAnnotation *--> descendant
+----
+
+
+|===
+
 === Commands
 
 ==== Lifecycle
@@ -577,7 +1199,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 [plantuml, commandsLifecycle, svg]
 ----
 hide empty description
-
 
 [*] -> Created: <i>client</i>\ncreates
 Created -> Sent: <i>client</i>\nsends
