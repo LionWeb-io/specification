@@ -1208,6 +1208,396 @@ movedAnnotation *--> descendant
 
 |===
 
+==== Annotations
+
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-addAnnotation>>
+
+<<evnt-annotationAdded>>
+
+Add new node `newAnnotation` to ``parent``'s annotations at `index`.
+|
+[plantuml, addAnnotation-before, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> nextSibling: <<annotations>>\n[index]
+----
+|
+[plantuml,addAnnotation-after,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "newAnnotation:\nRemark" as newAnnotation #LightSkyBlue {
+  text:String="ok"
+}
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> newAnnotation #Blue: <<annotations>>\n[index]
+parent *--> nextSibling: <<annotations>>\n[index + 1]
+----
+
+|
+<<cmd-deleteAnnotation>>
+
+<<evnt-annotationDeleted>>
+
+Delete existing node `deletedAnnotation` from ``parent``'s annotations at `index`.
+|
+[plantuml,deleteAnnotation-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "deleted\nAnnotation" as deletedAnnotation #red
+class "next\nSibling" as nextSibling
+
+class descendant #red
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> deletedAnnotation #red: <<annotations>>\n[index]
+parent *--> nextSibling: <<annotations>>\n[index + 1]
+
+deletedAnnotation *--> descendant #red
+----
+|
+[plantuml, deleteAnnotation-after, svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> nextSibling: <<annotations>>\n[index]
+----
+
+|
+<<cmd-replaceAnnotation>>
+
+<<evnt-annotationReplaced>>
+
+Replace existing node `replacedAnnotation` inside ``parent``'s annotations at `index` with new node `newAnnotation`.
+Delete `replacedAnnotation`.
+|
+[plantuml,replaceAnnotation-before,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "replaced\nAnnotation" as replacedAnnotation #red
+class "next\nSibling" as nextSibling
+
+class descendant #red
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> replacedAnnotation #red: <<annotations>>\n[index]
+parent *--> nextSibling: <<annotations>>\n[index + 1]
+
+replacedAnnotation *--> descendant #red
+----
+|
+[plantuml,replaceAnnotation-after,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "newAnnotation:\nRemark" as newAnnotation #LightSkyBlue {
+  text:String="ok"
+}
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> newAnnotation #Blue: <<annotations>>\n[index]
+parent *--> nextSibling: <<annotations>>\n[index + 1]
+----
+
+|
+<<cmd-moveAnnotationFromOtherParent>>
+
+<<evnt-annotationMovedFromOtherParent>>
+
+Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
+inside ``newParent``'s annotations at `newIndex`.
+|
+[plantuml,moveAnnotationFromOtherParent-before,svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "moved\nAnnotation" as movedAnnotation #Orange
+class "old\nNext\nSibling" as oldNextSibling
+
+class descendant #Orange
+
+oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
+oldParent *--> movedAnnotation #red: <<annotations>>\n[oldIndex]
+oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex + 1]
+
+movedAnnotation *--> descendant
+
+descendant -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+newParent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
+newParent *--> newNextSibling: <<annotations>>\n[newIndex]
+----
+|
+[plantuml,moveAnnotationFromOtherParent-after,svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "old\nNext\nSibling" as oldNextSibling
+
+oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
+oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex]
+
+oldPreviousSibling -[hidden]- newParent
+oldNextSibling -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "moved\nAnnotation" as movedAnnotation #Orange
+class "new\nNext\nSibling" as newNextSibling
+
+class descendant #Orange
+
+newParent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
+newParent *--> movedAnnotation #Blue: <<annotations>>\n[newIndex]
+newParent *--> newNextSibling: <<annotations>>\n[newIndex + 1]
+
+movedAnnotation *--> descendant
+----
+
+|
+<<cmd-moveAnnotationInSameParent>>
+
+<<evnt-annotationMovedInSameParent>>
+
+Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
+inside ``parent``'s annotations at `newIndex`.
+|
+[plantuml,moveAnnotationInSameParent-before,svg]
+----
+hide empty members
+hide circles
+left to right direction
+
+class parent
+
+class siblingA
+class "moved\nAnnotation" as movedAnnotation #Orange
+class siblingB
+class siblingC
+
+class descendant #Orange
+
+parent *--> siblingA: <<annotations>>\n[oldIndex - 1]
+parent *--> movedAnnotation: <<annotations>>\n[<color #red>oldIndex</color>]
+parent *--> siblingB: <<annotations>>\n[oldIndex + 1]
+parent *--> siblingC: <<annotations>>\n[oldIndex + 2]
+
+movedAnnotation *-> descendant
+
+siblingA -[hidden]> movedAnnotation
+----
+|
+[plantuml,moveAnnotationInSameParent-after,svg]
+----
+hide empty members
+hide circles
+left to right direction
+
+class parent
+
+class siblingA
+class "moved\nAnnotation" as movedAnnotation #Orange
+class siblingB
+class siblingC
+
+class descendant #Orange
+
+parent *--> siblingA: <<annotations>>\n[oldIndex - 1]
+parent *--> siblingB: <<annotations>>\n[oldIndex]
+parent *--> movedAnnotation: <<annotations>>\n[<color #Blue>newIndex</color>]
+parent *--> siblingC: <<annotations>>\n[newIndex + 1]
+
+movedAnnotation *-> descendant
+
+siblingA -[hidden]> siblingB
+siblingB -[hidden]> movedAnnotation
+----
+
+|
+<<cmd-moveAnnotationFromContainment>>
+
+<<evnt-annotationMovedFromContainment>>
+
+Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
+inside ``newParent``'s annotations at `newIndex`.
+|
+[plantuml,moveAnnotationFromContainment-before,svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "moved\nChild" as movedChild #Orange
+class "old\nNext\nSibling" as oldNextSibling
+
+class descendant #Orange
+
+oldParent *--> oldPreviousSibling: old\nContainment\n[oldIndex - 1]
+oldParent *--> movedChild #red: old\nContainment\n[oldIndex]
+oldParent *--> oldNextSibling: old\nContainment\n[oldIndex + 1]
+
+movedChild *--> descendant
+
+descendant -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+newParent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
+newParent *--> newNextSibling: <<annotations>>\n[newIndex]
+----
+|
+[plantuml, moveAnnotationFromContainment-after, svg]
+----
+hide empty members
+hide circles
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "old\nNext\nSibling" as oldNextSibling
+
+oldParent *--> oldPreviousSibling: old\nContainment\n[oldIndex - 1]
+oldParent *--> oldNextSibling: old\nContainment\n[oldIndex]
+
+oldPreviousSibling -[hidden]- newParent
+oldNextSibling -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "moved\nChild" as movedChild #Orange
+class "new\nNext\nSibling" as newNextSibling
+
+class descendant #Orange
+
+newParent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
+newParent *--> movedChild #Blue: <<annotations>>\n[newIndex]
+newParent *--> newNextSibling: <<annotations>>\n[newIndex + 1]
+
+movedChild *--> descendant
+----
+
+|
+<<cmd-moveAnnotationFromContainmentInSameParent>>
+
+<<evnt-annotationMovedFromContainmentInSameParent>>
+
+Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
+inside ``parent``'s annotations at `newIndex`.
+|
+[plantuml,moveAnnotationFromContainmentInSameParent-before,svg]
+----
+hide empty members
+hide circles
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class descendant #Orange
+class "moved\nChild" as movedChild #Orange
+class "old\nNext\nSibling" as oldNextSibling
+
+class parent
+
+descendant <--* movedChild
+
+oldPreviousSibling <--* parent: old\nContainment\n[oldIndex - 1]
+movedChild <--* parent #red: old\nContainment\n[oldIndex]
+oldNextSibling <--* parent: old\nContainment\n[oldIndex + 1]
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "new\nNext\nSibling" as newNextSibling
+
+parent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
+parent *--> newNextSibling: <<annotations>>\n[newIndex]
+----
+|
+[plantuml, moveAnnotationFromContainmentInSameParent-after, svg]
+----
+hide empty members
+hide circles
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "old\nNext\nSibling" as oldNextSibling
+
+class parent
+
+oldPreviousSibling <--* parent: old\nContainment\n[oldIndex - 1]
+oldNextSibling <--* parent: old\nContainment\n[oldIndex]
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "moved\nChild" as movedChild #Orange
+class "new\nNext\nSibling" as newNextSibling
+
+class descendant #Orange
+
+parent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
+parent *--> movedChild #Blue: <<annotations>>\n[newIndex]
+parent *--> newNextSibling: <<annotations>>\n[newIndex + 1]
+
+movedChild *--> descendant
+----
+
+|===
+
 === Commands
 
 ==== Lifecycle
