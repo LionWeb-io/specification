@@ -1,0 +1,59 @@
+|
+[plantuml,moveEntryFromOtherReferenceInSameParent-before,svg]
+----
+hide empty members
+hide circles
+
+class "old\nPrevious\nEntry" as oldPreviousEntry
+class target #Orange
+class "old\nNext\nEntry" as oldNextEntry
+
+class parent
+
+parent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
+
+parent .[thickness=2].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
+parent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
+
+oldPreviousEntry -[hidden]> oldNextEntry
+oldPreviousEntry -[hidden]right-> target
+
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+newPreviousEntry -[hidden]> newNextEntry
+oldPreviousEntry -[hidden]-> newPreviousEntry
+oldNextEntry -[hidden]> newNextEntry
+
+parent ..> newPreviousEntry: new\nReference\n[newIndex - 1]
+parent ..> newNextEntry: new\nReference\n[newIndex]
+----
+|
+[plantuml, moveEntryFromOtherReferenceInSameParent-after, svg]
+----
+hide empty members
+hide circles
+
+class "old\nPrevious\nEntry" as oldPreviousEntry
+class target #Orange
+class "old\nNext\nEntry" as oldNextEntry
+
+class parent
+
+parent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
+parent .[thickness=2].> target #blue: new\nReference\n[newIndex]\n<color #blue>{resolveInfo}</color>
+parent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
+
+oldPreviousEntry -[hidden]> oldNextEntry
+oldPreviousEntry -[hidden]-> target
+
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+newPreviousEntry -[hidden]> newNextEntry
+oldPreviousEntry -[hidden]-> newPreviousEntry
+oldNextEntry -[hidden]> newNextEntry
+
+parent ..> newPreviousEntry: new\nReference\n[newIndex - 1]
+parent ..> newNextEntry: new\nReference\n[newIndex]
+----

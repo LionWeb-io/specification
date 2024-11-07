@@ -1,0 +1,32 @@
+|
+[plantuml,addReferenceTarget-before,svg]
+----
+hide empty members
+hide circles
+
+skinparam class<<h>> {
+  borderColor Transparent
+  backgroundColor Transparent
+  stereotypeFontColor Transparent
+}
+
+class parent
+
+class " " as target<<h>>
+class newTarget
+
+parent ..> target: reference\n[index]\n{resolveInfo}
+target -[hidden]-> newTarget
+----
+|
+[plantuml,addReferenceTarget-after,svg]
+----
+hide empty members
+hide circles
+
+class parent
+
+class newTarget
+
+parent .[thickness=2].> newTarget #blue: reference\n[index]\n{resolveInfo}
+----

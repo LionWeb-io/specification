@@ -1,0 +1,16 @@
+|
+[plantuml, changeConcept-before, svg]
+----
+hide empty members
+hide circles
+
+class "node:<color #red>oldConcept</color>"
+----
+|
+[plantuml, changeConcept-after, svg]
+----
+hide empty members
+hide circles
+
+class "node:<color #blue>newConcept</color>"
+----
