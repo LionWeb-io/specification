@@ -1,0 +1,36 @@
+=== Client tries to change unknown node with failed command
+
+[plantuml,changeUnknownNodeFailedCommand,svg]
+----
+hide footbox
+autonumber
+
+box "Client A"
+  participant Editor as editor
+  participant Commands as clientCmd
+end box
+
+box "Repository"
+  participant Commands as repoCmd
+  participant Core as core
+end box
+
+== Client A connected with client id "client-a"\nsubscribed to "partition-id"\nassumes invalid nodeA (part of "partition-id") ==
+
+[->> editor ++
+editor -> clientCmd ++
+clientCmd -> repoCmd ++: addProperty("nodeA", age, "23", "cmd-1")
+repoCmd -> core ++: checkNodeId("nodeA")
+return false
+return failed("cmd-1", "unknown node id nodeA")
+return
+editor -> editor: DisplayError()
+----
+1. User enters new property value on node `nodeA` that's known to the editor.
+2. Client editor forwards user action into command.
+3. Client sends `addProperty` command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
+4. Repository checks whether it knows a node with id `nodeA`.
+5. Repository doesn't know that node.
+6. Repository refuses command.
+7. Client informs editor of failed command.
+8. Client informs user.
