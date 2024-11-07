@@ -1,5 +1,4 @@
 === Client tries to change unknown node with failed event
-
 [plantuml,changeUnknownNodeFailedEvent,svg]
 ----
 hide footbox

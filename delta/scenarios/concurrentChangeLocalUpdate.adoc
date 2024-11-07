@@ -1,5 +1,4 @@
 === Concurrent changes to known node with local update
-
 [plantuml,concurrentChangeLocalUpdate,svg]
 ----
 hide footbox

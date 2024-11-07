@@ -1,5 +1,4 @@
 === Client reconnects to known partition
-
 [plantuml,reconnectKnownPartition,svg]
 ----
 hide footbox

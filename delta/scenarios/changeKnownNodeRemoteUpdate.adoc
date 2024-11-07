@@ -1,5 +1,4 @@
 === Client changes known node with remote update
-
 [plantuml,changeKnownNodeRemoteUpdate,svg]
 ----
 hide footbox

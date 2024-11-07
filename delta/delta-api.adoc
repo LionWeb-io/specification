@@ -59,7 +59,6 @@ include::scenarios/concurrentChangeRemoteUpdate.adoc[]
 
 == Messages
 === Parameter types
-
 [[nodeType]]Node:: Either the whole node as json, or its id + classifier #TODO#
 [[targetNodeType]]TargetNode:: Target's node as id
 [[metaPointerType]]MetaPointer:: MetaPointer-tuple to describe an M2 element (classifier, feature, etc.)
@@ -78,7 +77,6 @@ This allows a client to know when its command has been processed (either success
 [[freeIdType]]FreeId:: Free node ids
 
 ==== How to calculate a CommandSource
-
 `commandSource = base64urlEncode(sha256(concat(clientId, commandId)))`{fn-org306}
 
 1. Concatenate the `clientId` and `commandId`
@@ -97,7 +95,6 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 
 
 === Command -- event pairs overview
-
 include::commandEventOverview/legend.adoc[]
 
 ==== Partitions
@@ -137,7 +134,6 @@ include::commandEventOverview/changeConcept.adoc[]
 |===
 
 ==== Properties
-
 [cols="30a,35a,35a"]
 |===
 |Command / Event / Description |Before |After
@@ -168,7 +164,6 @@ include::commandEventOverview/changeProperty.adoc[]
 |===
 
 ==== Children
-
 [cols="30a,35a,35a"]
 |===
 |Command / Event / Description |Before |After
@@ -242,11 +237,9 @@ include::commandEventOverview/moveChildFromAnnotations.adoc[]
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
 inside ``parent``'s `newContainment` at `newIndex`.
 include::commandEventOverview/moveChildFromAnnotationsInSameParent.adoc[]
-
 |===
 
 ==== Annotations
-
 [cols="30a,35a,35a"]
 |===
 |Command / Event / Description |Before |After
@@ -311,11 +304,9 @@ include::commandEventOverview/moveAnnotationFromContainment.adoc[]
 Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
 inside ``parent``'s annotations at `newIndex`.
 include::commandEventOverview/moveAnnotationFromContainmentInSameParent.adoc[]
-
 |===
 
 ==== References
-
 [cols="30a,35a,35a"]
 |===
 |Command / Event / Description |Before |After
@@ -424,7 +415,6 @@ include::commandEventOverview/changeReferenceTarget.adoc[]
 === Commands
 
 ==== Lifecycle
-
 [plantuml, commandsLifecycle, svg]
 ----
 hide empty description
