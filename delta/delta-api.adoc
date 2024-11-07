@@ -1025,10 +1025,10 @@ class siblingC
 
 class descendant #Orange
 
-parent *--> siblingA: oldContainment\n[oldIndex - 1]
-parent *--> movedChild: oldContainment\n[oldIndex]
-parent *--> siblingB: oldContainment\n[oldIndex + 1]
-parent *--> siblingC: oldContainment\n[oldIndex + 2]
+parent *--> siblingA: containment\n[oldIndex - 1]
+parent *--> movedChild: containment\n[oldIndex]
+parent *--> siblingB: containment\n[oldIndex + 1]
+parent *--> siblingC: containment\n[oldIndex + 2]
 
 movedChild *-> descendant
 
@@ -1050,10 +1050,10 @@ class siblingC
 
 class descendant #Orange
 
-parent *--> siblingA: oldContainment\n[oldIndex - 1]
-parent *--> siblingB: oldContainment\n[oldIndex]
-parent *--> movedChild: oldContainment\n[newIndex]
-parent *--> siblingC: oldContainment\n[newIndex + 1]
+parent *--> siblingA: containment\n[oldIndex - 1]
+parent *--> siblingB: containment\n[oldIndex]
+parent *--> movedChild: containment\n[newIndex]
+parent *--> siblingC: containment\n[newIndex + 1]
 
 movedChild *-> descendant
 
