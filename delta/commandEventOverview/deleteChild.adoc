@@ -1,8 +1,7 @@
 |
 [plantuml, deleteChild-before, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 
@@ -21,14 +20,15 @@ deletedChild *--> descendant #red
 |
 [plantuml, deleteChild-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 
 class "previous\nSibling" as previousSibling
+class " " as deletedChild <<h>>
 class "next\nSibling" as nextSibling
 
 parent *--> previousSibling: containment\n[index - 1]
+parent *-[hidden]-> deletedChild #red: containment\n[index]
 parent *--> nextSibling: containment\n[index]
 ----

@@ -1,21 +1,16 @@
 |
 [plantuml, deletePartition, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
-class "deletedPartition:Person" as deletedPartition <<Partition>> #red {
-  name: String = "John"
-  age: Integer = 23
-  alive: Boolean = true
-}
+class deletedPartition <<Partition>> #red
 
-class "leftEye:Eye" as firstLevelChild #red
+class firstLevelChild #red
 
-class "upperEyelid:Eyelid" as secondLevelChild #red
+class secondLevelChild #red
 
-deletedPartition *--> firstLevelChild
-firstLevelChild *--> secondLevelChild
+deletedPartition *--> firstLevelChild #red
+firstLevelChild *--> secondLevelChild #red
 ----
 |
 _nothing_

@@ -1,8 +1,7 @@
 |
 [plantuml, deleteProperty-before, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class "node" {
   <color #red>property = oldValue</color>
@@ -11,8 +10,7 @@ class "node" {
 |
 [plantuml, deleteProperty-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class "node"
 ----

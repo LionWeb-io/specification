@@ -1,8 +1,7 @@
 |
 [plantuml,deleteReferenceResolveInfo-before,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 
@@ -13,8 +12,7 @@ parent ..> target: reference\n[index]\n<color #red>{deletedResolveInfo}</color>
 |
 [plantuml, deleteReferenceResolveInfo-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 

@@ -1,8 +1,7 @@
 |
 [plantuml,deleteAnnotation-before,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 
@@ -21,14 +20,15 @@ deletedAnnotation *--> descendant #red
 |
 [plantuml, deleteAnnotation-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 
 class "previous\nSibling" as previousSibling
+class " " as dummy <<h>>
 class "next\nSibling" as nextSibling
 
 parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *-[hidden]-> dummy #red: <<annotations>>\n[index]
 parent *--> nextSibling: <<annotations>>\n[index]
 ----

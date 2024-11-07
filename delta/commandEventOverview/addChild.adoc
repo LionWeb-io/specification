@@ -1,22 +1,22 @@
 |
 [plantuml, addChild-before, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 
 class "previous\nSibling" as previousSibling
+class " " as newChild<<h>>
 class "next\nSibling" as nextSibling
 
 parent *--> previousSibling: containment\n[index - 1]
+parent *-[hidden]-> newChild #Blue: containment\n[index]
 parent *--> nextSibling: containment\n[index]
 ----
 |
 [plantuml, addChild-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 

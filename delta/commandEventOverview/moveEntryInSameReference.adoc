@@ -1,8 +1,7 @@
 |
 [plantuml,moveEntryInSameReference-before,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 left to right direction
 
 class parent
@@ -22,8 +21,7 @@ siblingA -[hidden]> target
 |
 [plantuml, moveEntryInSameReference-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 left to right direction
 
 class parent

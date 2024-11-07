@@ -1,8 +1,7 @@
 |
 [plantuml,deleteReference-before,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 
@@ -17,8 +16,7 @@ parent ..> nextEntry: reference\n[index + 1]
 |
 [plantuml, deleteReference-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 

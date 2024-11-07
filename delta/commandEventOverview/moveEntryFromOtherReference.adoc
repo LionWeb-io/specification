@@ -1,8 +1,7 @@
 |
 [plantuml,moveEntryFromOtherReference-before,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class oldParent
 
@@ -35,8 +34,7 @@ target -[hidden]> newNextEntry
 |
 [plantuml, moveEntryFromOtherReference-after, svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class oldParent
 

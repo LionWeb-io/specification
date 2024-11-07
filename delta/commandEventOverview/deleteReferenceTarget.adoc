@@ -1,8 +1,7 @@
 |
 [plantuml,deleteReferenceTarget-before,svg]
 ----
-hide empty members
-hide circles
+!include commandEventOverviewStyle.puml
 
 class parent
 
@@ -13,14 +12,7 @@ parent .[thickness=2].> deletedTarget #red: reference\n[index]\n{resolveInfo}
 |
 [plantuml,deleteReferenceTarget-after,svg]
 ----
-hide empty members
-hide circles
-
-skinparam class<<h>> {
-  borderColor Transparent
-  backgroundColor Transparent
-  stereotypeFontColor Transparent
-}
+!include commandEventOverviewStyle.puml
 
 class parent
 
