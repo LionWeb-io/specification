@@ -180,6 +180,98 @@ Rationale: Both reference `target` and `resolveInfo` can be `null`, so they aren
 However, `target` and `resolveInfo` MUST NOT both be `null`.
 
 
+[[queries]]
+=== Queries
+
+[[cmd-subscription]]
+==== Subscription
+
+[[qry-subscribePartitions]]
+===== Subscribe to partition changes
+This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions.
+
+[horizontal]
+.Request parameters
+creation:: `boolean`
+deletion:: `boolean`
+partitions:: `boolean`
+queryId:: <<queryIdType>>
+
+[horizontal]
+.Response parameters
+queryId:: <<queryIdType>>
+
+.Errors
+_none_
+
+.Technical name
+`subscribePartitions`
+
+[[qry-subscribePartition]]
+===== Subscribe to partition
+This client wants to receive events on any changes to `partition` or any of its descendants.
+
+[horizontal]
+.Request parameters
+partition:: <<targetNodeType>>
+queryId:: <<queryIdType>>
+
+[horizontal]
+.Response parameters
+contents:: <<chunkType>>
+queryId:: <<queryIdType>>
+
+.Errors
+* already subscribed to `partition`
+
+.Technical name
+`subscribePartition`
+
+[[cmd-unsubscribePartition]]
+===== Unsubscribe from partition
+This client does not want to receive events on any changes to `partition` or any of its descendants anymore.
+
+[horizontal]
+.Request parameters
+partition:: <<targetNodeType>>
+queryId:: <<queryIdType>>
+
+[horizontal]
+.Response parameters
+queryId:: <<queryIdType>>
+
+.Errors
+* not subscribed to `partition`
+
+.Technical name
+`unsubscribePartition`
+
+[[cmd-misc]]
+==== Miscellaneous
+
+[[cmd-getAvailableIds]]
+===== Get available ids
+Request `count` number of unused <<{m3}.adoc#identifiers, valid ids>>.
+
+`ids` might contain less or equal number of ids than `count`.
+
+[horizontal]
+.Request parameters
+count:: `integer`
+queryId:: <<queryIdType>>
+
+[horizontal]
+.Response parameters
+ids:: <<freeIdType>>[]
+queryId:: <<queryIdType>>
+
+.Errors
+_none_
+
+.Technical name
+`getAvailableIds`
+
+
 === Command -- event pairs overview
 include::commandEventOverview/legend.adoc[]
 
@@ -497,6 +589,7 @@ Change target of existing entry inside ``parent``'s `reference` at `index` with 
 include::commandEventOverview/changeReferenceTarget.adoc[]
 
 |===
+
 
 [[commands]]
 === Commands
@@ -1446,97 +1539,6 @@ commandId:: <<commandIdType>>
 
 .Related event
 <<evnt-composite>>
-
-[[queries]]
-=== Queries
-
-[[cmd-subscription]]
-==== Subscription
-
-[[qry-subscribePartitions]]
-===== Subscribe to partition changes
-This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions.
-
-[horizontal]
-.Request parameters
-creation:: `boolean`
-deletion:: `boolean`
-partitions:: `boolean`
-queryId:: <<queryIdType>>
-
-[horizontal]
-.Response parameters
-queryId:: <<queryIdType>>
-
-.Errors
-_none_
-
-.Technical name
-`subscribePartitions`
-
-[[qry-subscribePartition]]
-===== Subscribe to partition
-This client wants to receive events on any changes to `partition` or any of its descendants.
-
-[horizontal]
-.Request parameters
-partition:: <<targetNodeType>>
-queryId:: <<queryIdType>>
-
-[horizontal]
-.Response parameters
-contents:: <<chunkType>>
-queryId:: <<queryIdType>>
-
-.Errors
-* already subscribed to `partition`
-
-.Technical name
-`subscribePartition`
-
-[[cmd-unsubscribePartition]]
-===== Unsubscribe from partition
-This client does not want to receive events on any changes to `partition` or any of its descendants anymore.
-
-[horizontal]
-.Request parameters
-partition:: <<targetNodeType>>
-queryId:: <<queryIdType>>
-
-[horizontal]
-.Response parameters
-queryId:: <<queryIdType>>
-
-.Errors
-* not subscribed to `partition`
-
-.Technical name
-`unsubscribePartition`
-
-[[cmd-misc]]
-==== Miscellaneous
-
-[[cmd-getAvailableIds]]
-===== Get available ids
-Request `count` number of unused <<{m3}.adoc#identifiers, valid ids>>.
-
-`ids` might contain less or equal number of ids than `count`.
-
-[horizontal]
-.Request parameters
-count:: `integer`
-queryId:: <<queryIdType>>
-
-[horizontal]
-.Response parameters
-ids:: <<freeIdType>>[]
-queryId:: <<queryIdType>>
-
-.Errors
-_none_
-
-.Technical name
-`getAvailableIds`
 
 [[events]]
 === Events
