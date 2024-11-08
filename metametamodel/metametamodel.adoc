@@ -864,6 +864,7 @@ Some <<PrimitiveType, primitive types>> will be widely used, so it makes sense t
 
 
 === Supporting terminology
+[[multiplicity]]
 ==== Multiplicity
 Multiplicity describes how many targets a <<Link>> must and can have.
 
