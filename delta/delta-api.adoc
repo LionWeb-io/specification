@@ -93,6 +93,7 @@ in practice, we might transmit some or all of them through a shared channel.
 This protocol is agnostic of its underlying technical implementation.
 We can use any (e.g. stateless, stateful) protocol, as long as it fulfills request/response characteristics for client-initiated query, command, and session messages, and repository-initiated broadcast characteristics for event messages.
 
+[[session, session]]
 === Session characteristics
 One client may have more than one open session.
 The client has the responsibility to guarantee uniqueness of query / command / session message ids.
@@ -148,22 +149,38 @@ include::scenarios/concurrentChangeRemoteUpdate.adoc[]
 
 == Messages
 === Parameter types
-[[nodeType]]Node:: Either the whole node as json, or its id + classifier #TODO#
-[[targetNodeType]]TargetNode:: Target's node as id
-[[metaPointerType]]MetaPointer:: MetaPointer-tuple to describe an M2 element (classifier, feature, etc.)
-[[propertyValueType]]PropertyValue:: Property value encoded as string
-[[resolveInfoType]]ResolveInfo:: ResolveInfo of a reference as string
-[[indexType]]Index:: Position inside a multiple link or annotations as integer >= 0
-[[commandType]]Command:: Any command
+[[nodeType]]Node:: Whole node encoded as <<{serialization}.adoc#node, node>>.
+
+[[targetNodeType]]TargetNode:: Target's node as <<{m3}.adoc#identifiers, id>>.
+
+[[metaPointerType]]MetaPointer:: MetaPointer-tuple to describe an M2 element (classifier, feature, etc.).
+Encoded as <<{serialization}.adoc#meta-pointer, meta-pointer>>.
+
+[[propertyValueType]]PropertyValue:: Property value encoded as <<{serialization}.adoc#property-values, property value>>.
+
+[[resolveInfoType]]ResolveInfo:: ResolveInfo of a reference as string.
+Can be `null`.
+
+[[indexType]]Index:: Position inside a multiple link or annotations as integer >= 0.
+Cannot be `null`.
+Use value `0` for <<{m3}.adoc#multiplicity, single links>>.
+
+[[commandType]]Command:: Any <<commands, command>>.
+
 [[commandIdType]]CommandId:: Id of a command.{fn-org305}
-Same format as node ids; must be unique per client and connection.
+Same format as <<{m3}.adoc#identifiers, node ids>>; must be unique per <<session>>.
+
 [[queryIdType]]QueryId:: Id of a query.
-Same format as node ids; must be unique per client and connection.
-[[chunkType]]SerializationChunk:: <<{serialization}.adoc, Chunk of nodes>>
-[[eventType]]Event:: Any event
+Same format as <<{m3}.adoc#identifiers, node ids>>; must be unique per <<session>>.
+
+[[chunkType]]SerializationChunk:: <<{serialization}.adoc, Chunk of nodes>>.
+
+[[eventType]]Event:: Any <<events, event>>.
+
 [[commandSourceType]]CommandSource:: _[clientId, commandId]_ tuple{fn-org306} this event is based on.
 This allows a client to know when its command has been processed (either successful or not).
-[[freeIdType]]FreeId:: Free node ids
+
+[[freeIdType]]FreeId:: Free <<{m3}.adoc#identifiers, node id>>.
 
 ==== How to calculate a CommandSource
 `commandSource = base64urlEncode(sha256(concat(clientId, commandId)))`{fn-org306}
