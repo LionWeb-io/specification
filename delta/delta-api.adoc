@@ -71,7 +71,10 @@ Repository A applies all commands in order, thus deletes node `X` and ignores th
 It emits one `childDeleted` event, correlated to both commands. +
 Repository B keeps an internal "trash can" of all deleted nodes.
 It deletes node `X` on the first command, but resurrects node `X` on the second command and changes the property as requested.
-It first emits a `childDeleted` event (correlated to the first command), but later `childAdded` and `propertyChanged` events (both correlated to the second command).
+It first emits a `childDeleted` event (correlated to the first command), but later `childAdded` and `propertyChanged` events (both correlated to the second command). +
+Repository C batches command processing.
+It looks at both messages together, and decides it's more important to keep the new property value around.
+It emits one `propertyChanged` event, correlated with both commands.
 
 A client stays up-to-date with the repository's contents if it applies all events in order.
 A client can either decide to apply its own change immediately and filter out events based on that command, or wait for the correlated event to arrive and apply the change only then.
