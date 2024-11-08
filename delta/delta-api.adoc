@@ -149,6 +149,7 @@ include::scenarios/concurrentChangeRemoteUpdate.adoc[]
 
 == Messages
 === Parameter types
+[horizontal]
 [[nodeType]]Node:: Whole node encoded as <<{serialization}.adoc#node, node>>.
 
 [[targetNodeType]]TargetNode:: Target's node as <<{m3}.adoc#identifiers, id>>.
@@ -208,18 +209,21 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 
 [[qry-subscribePartitions]]
 ===== Subscribe to partition changes
-This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions.
+This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions, and automatically subscribe (`partitions` is true) to newly created partitions.
 
 [horizontal]
 .Request parameters
-creation:: `boolean`
-deletion:: `boolean`
-partitions:: `boolean`
-queryId:: <<queryIdType>>
+creation:: `boolean` Whether this client wants to receive events on newly created partitions (`true`), or not (`false`).
+
+deletion:: `boolean` Whether this client wants to receive events on deleted partitions (`true`), or not (`false`).
+
+partitions:: `boolean` Whether this client wants to automatically subscribe to newly created partitions (`true`), or not (`false`).
+
+queryId:: <<queryIdType>> Id of this query.
 
 [horizontal]
 .Response parameters
-queryId:: <<queryIdType>>
+queryId:: <<queryIdType>>  Id of this query.
 
 .Errors
 _none_
@@ -233,13 +237,15 @@ This client wants to receive events on any changes to `partition` or any of its 
 
 [horizontal]
 .Request parameters
-partition:: <<targetNodeType>>
-queryId:: <<queryIdType>>
+partition:: <<targetNodeType>> Node id of the partition this client wants to receive events of.
+
+queryId:: <<queryIdType>> Id of this query.
 
 [horizontal]
 .Response parameters
-contents:: <<chunkType>>
-queryId:: <<queryIdType>>
+contents:: <<chunkType>> Complete contents of `partition`, i.e. the node with id `partition` and all of its descendants (including annotation instances).
+
+queryId:: <<queryIdType>> Id of this query.
 
 .Errors
 * already subscribed to `partition`
@@ -253,12 +259,12 @@ This client does not want to receive events on any changes to `partition` or any
 
 [horizontal]
 .Request parameters
-partition:: <<targetNodeType>>
-queryId:: <<queryIdType>>
+partition:: <<targetNodeType>> Node id of the partition this client wants to stop receiving events of.
+queryId:: <<queryIdType>> Id of this query.
 
 [horizontal]
 .Response parameters
-queryId:: <<queryIdType>>
+queryId:: <<queryIdType>> Id of this query.
 
 .Errors
 * not subscribed to `partition`
@@ -273,17 +279,22 @@ queryId:: <<queryIdType>>
 ===== Get available ids
 Request `count` number of unused <<{m3}.adoc#identifiers, valid ids>>.
 
-`ids` might contain less or equal number of ids than `count`.
+Same functionality as <<{bulk}.adoc#ids, bulk API ids command>>.
+
+We don't assume leases, i.e. ids handed out to one client are "owned" by that client forever.
+
+The repository MUST return between one (inclusive) and `count` (inclusive) ids.
+It MAY return less than `count` ids.
 
 [horizontal]
 .Request parameters
-count:: `integer`
-queryId:: <<queryIdType>>
+count:: `integer` Number of ids requested.
+queryId:: <<queryIdType>> Id of this query.
 
 [horizontal]
 .Response parameters
-ids:: <<freeIdType>>[]
-queryId:: <<queryIdType>>
+ids:: <<freeIdType>>[] List of ids guaranteed to be free.
+queryId:: <<queryIdType>> Id of this query.
 
 .Errors
 _none_
@@ -640,6 +651,10 @@ Add `newPartition` node as new partition.
 [horizontal]
 .Parameters
 newPartition:: <<nodeType>>
+`newPartition` MUST contain _id_ and _classifier_.
+It MAY contain _properties_.
+It MUST NOT contain _containments_, _references_, _annotations_, or _parent_ (as this is a partition, thus cannot have a parent).
+
 commandId:: <<commandIdType>>
 
 .Errors
