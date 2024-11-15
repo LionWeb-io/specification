@@ -283,8 +283,6 @@ Same functionality as <<{bulk}.adoc#ids, bulk API ids command>>.
 
 We don't assume leases, i.e. ids handed out to one client are "owned" by that client forever.
 
-The repository MUST return between one (inclusive) and `count` (inclusive) ids.
-It MAY return less than `count` ids.
 
 [horizontal]
 .Request parameters
@@ -294,6 +292,9 @@ queryId:: <<queryIdType>> Id of this query.
 [horizontal]
 .Response parameters
 ids:: <<freeIdType>>[] List of ids guaranteed to be free.
+The repository MUST return between one (inclusive) and `count` (inclusive) ids.
+It MAY return less than `count` ids.
+
 queryId:: <<queryIdType>> Id of this query.
 
 .Errors
@@ -334,7 +335,7 @@ include::commandEventOverview/deletePartition.adoc[]
 |Command / Event / Description |Before |After
 
 |
-<<cmd-changeConcept>>
+<<cmd-changeClassifier>>
 
 <<evnt-conceptChanged>>
 
@@ -650,15 +651,15 @@ Add `newPartition` node as new partition.
 
 [horizontal]
 .Parameters
-newPartition:: <<nodeType>>
-`newPartition` MUST contain _id_ and _classifier_.
+newPartition:: <<nodeType>> root node to form a new partition.
+It MUST contain _id_ and _classifier_.
 It MAY contain _properties_.
 It MUST NOT contain _containments_, _references_, _annotations_, or _parent_ (as this is a partition, thus cannot have a parent).
 
-commandId:: <<commandIdType>>
+commandId:: <<commandIdType>> Id of this command.
 
 .Errors
-* `newPartition` id already exists
+* node with `newPartition` id already exists
 
 .Technical name
 `addPartition`
@@ -668,12 +669,12 @@ commandId:: <<commandIdType>>
 
 [[cmd-deletePartition]]
 ===== Delete partition
-Delete partition `deletedPartition`.
+Delete partition `deletedPartition`, and all its descendants (including annotation instances).
 
 [horizontal]
 .Parameters
 deletedPartition:: <<nodeType>> or <<targetNodeType>> #TODO#
-commandId:: <<commandIdType>>
+commandId:: <<commandIdType>> Id of this command.
 
 .Errors
 * `deletedPartition` does not exist
@@ -687,16 +688,16 @@ commandId:: <<commandIdType>>
 [[cmd-nodes]]
 ==== Nodes
 
-[[cmd-changeConcept]]
-===== Change concept
-Change concept of `node` from `oldConcept` to `newConcept`.
+[[cmd-changeClassifier]]
+===== Change classifier
+Change classifier of `node` from `oldClassifier` to `newClassifier`.
 
 [horizontal]
 .Parameters
 node:: <<targetNodeType>>
-newConcept:: <<metaPointerType>>
-oldConcept:: <<metaPointerType>>
-commandId:: <<commandIdType>>
+newClassifier:: <<metaPointerType>>
+oldClassifier:: <<metaPointerType>>
+commandId:: <<commandIdType>> Id of this command.
 
 .Errors
 * `node` does not exist
@@ -1633,7 +1634,7 @@ originCommands:: <<commandSourceType>>[]
 `conceptChanged`
 
 .Related command
-<<cmd-changeConcept>>
+<<cmd-changeClassifier>>
 
 [[evnt-properties]]
 ==== Properties
@@ -2312,8 +2313,8 @@ originCommands:: <<commandSourceType>>[]
 .Related command
 <<cmd-changeReferenceTarget>>
 
-[[evnt-composite-section]]
-==== Composite
+[[evnt-miscellaneous]]
+==== Miscellaneous
 
 [[evnt-composite]]
 ===== Composite
