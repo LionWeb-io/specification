@@ -2332,3 +2332,33 @@ originCommands:: <<commandSourceType>>[]
 
 .Related command
 <<cmd-composite>>
+
+[[evnt-noOp]]
+===== No-op
+Nothing happened as result of one or more command(s).
+
+[horizontal]
+.Parameters
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`noOp`
+
+.Related command
+_none_
+
+[[evnt-error]]
+===== Error
+Repository couldn't handle one or more command(s).
+
+[horizontal]
+.Parameters
+errorCode:: `String`
+message:: `String`
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`error`
+
+.Related command
+_none_
