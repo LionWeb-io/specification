@@ -436,23 +436,6 @@ Move existing node `movedChild` (currently inside ``parent``'s `containment` at 
 inside ``parent``'s `containment` at `newIndex`.
 include::commandEventOverview/moveChildInSameContainment.adoc[]
 
-|
-<<cmd-moveChildFromAnnotations>>
-
-<<evnt-childMovedFromAnnotations>>
-
-Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
-inside ``newParent``'s `newContainment` at `newIndex`.
-include::commandEventOverview/moveChildFromAnnotations.adoc[]
-
-|
-<<cmd-moveChildFromAnnotationsInSameParent>>
-
-<<evnt-childMovedFromAnnotationsInSameParent>>
-
-Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
-inside ``parent``'s `newContainment` at `newIndex`.
-include::commandEventOverview/moveChildFromAnnotationsInSameParent.adoc[]
 |===
 
 ==== Annotations
@@ -503,23 +486,6 @@ Move existing node `movedAnnotation` (currently inside ``parent``'s annotations 
 inside ``parent``'s annotations at `newIndex`.
 include::commandEventOverview/moveAnnotationInSameParent.adoc[]
 
-|
-<<cmd-moveAnnotationFromContainment>>
-
-<<evnt-annotationMovedFromContainment>>
-
-Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
-inside ``newParent``'s annotations at `newIndex`.
-include::commandEventOverview/moveAnnotationFromContainment.adoc[]
-
-|
-<<cmd-moveAnnotationFromContainmentInSameParent>>
-
-<<evnt-annotationMovedFromContainmentInSameParent>>
-
-Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
-inside ``parent``'s annotations at `newIndex`.
-include::commandEventOverview/moveAnnotationFromContainmentInSameParent.adoc[]
 |===
 
 ==== References
@@ -953,64 +919,6 @@ commandId:: <<commandIdType>>
 .Related event
 <<evnt-childMovedInSameContainment>>
 
-[[cmd-moveChildFromAnnotations]]
-===== Move child from annotations
-Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
-inside ``newParent``'s `newContainment` at `newIndex`.
-
-[horizontal]
-.Parameters
-newParent:: <<targetNodeType>>
-newContainment:: <<metaPointerType>>
-newIndex:: <<indexType>>
-movedAnnotation:: <<targetNodeType>>
-oldParent:: <<targetNodeType>>
-oldIndex:: <<indexType>>
-commandId:: <<commandIdType>>
-
-.Errors
-* `newParent` does not exist
-* `newIndex` is beyond the number of `newContainment` entries in `newParent`
-* `movedAnnotation` does not exist
-* ##?## `oldParent` does not exist
-* ##?## `movedAnnotation` is not an annotation of `oldParent`
-* ##?## `oldIndex` is beyond (the number of annotation entries in `oldParent`) - 1
-* ##?## `movedAnnotation` is not the node at ``oldParent``'s annotations at `oldIndex`.
-
-.Technical name
-`moveChildFromAnnotations`
-
-.Related event
-<<evnt-childMovedFromAnnotations>>
-
-[[cmd-moveChildFromAnnotationsInSameParent]]
-===== Move child from annotations in same parent
-Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
-inside ``parent``'s `newContainment` at `newIndex`.
-
-[horizontal]
-.Parameters
-newContainment:: <<metaPointerType>>
-newIndex:: <<indexType>>
-movedAnnotation:: <<targetNodeType>>
-parent:: <<targetNodeType>>
-oldIndex:: <<indexType>>
-commandId:: <<commandIdType>>
-
-.Errors
-* `newIndex` is beyond the number of `newContainment` entries in `parent`
-* `movedAnnotation` does not exist
-* `parent` does not exist
-* ##?## `movedAnnotation` is not an annotation of `parent`
-* ##?## `oldIndex` is beyond (the number of annotation entries in `parent`) - 1
-* ##?## `movedAnnotation` is not the node at ``parent``'s annotations at `oldIndex`.
-
-.Technical name
-`moveChildFromAnnotationsInSameParent`
-
-.Related event
-<<evnt-childMovedFromAnnotationsInSameParent>>
-
 [[cmd-annotations]]
 ==== Annotations
 
@@ -1143,65 +1051,6 @@ commandId:: <<commandIdType>>
 
 .Related event
 <<evnt-annotationMovedInSameParent>>
-
-[[cmd-moveAnnotationFromContainment]]
-===== Move annotation from containment
-Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
-inside ``newParent``'s annotations at `newIndex`.
-
-[horizontal]
-.Parameters
-newParent:: <<targetNodeType>>
-newIndex:: <<indexType>>
-movedChild:: <<targetNodeType>>
-oldParent:: <<targetNodeType>>
-oldContainment:: <<metaPointerType>>
-oldIndex:: <<indexType>>
-commandId:: <<commandIdType>>
-
-.Errors
-* `newParent` does not exist
-* `newIndex` is beyond the number of annotation entries in `newParent`
-* `movedChild` does not exist
-* ##?## `oldParent` does not exist
-* ##?## `movedChild` is not a child of `oldParent` in `oldContainment`
-* ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `oldParent`) - 1
-* ##?## `movedChild` is not the node at ``oldParent``'s `oldContainment` at `oldIndex`.
-
-.Technical name
-`moveAnnotationFromContainment`
-
-.Related event
-<<evnt-annotationMovedFromContainment>>
-
-[[cmd-moveAnnotationFromContainmentInSameParent]]
-===== Move annotation from containment in same parent
-Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
-inside ``parent``'s annotations at `newIndex`.
-
-[horizontal]
-.Parameters
-newContainment:: <<metaPointerType>>
-newIndex:: <<indexType>>
-movedChild:: <<targetNodeType>>
-parent:: <<targetNodeType>>
-oldContainment:: <<metaPointerType>>
-oldIndex:: <<indexType>>
-commandId:: <<commandIdType>>
-
-.Errors
-* `newIndex` is beyond the number of annotation entries in `parent`
-* `movedChild` does not exist
-* `parent` does not exist
-* ##?## `movedChild` is not a child of `parent` in `oldContainment`
-* ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `parent`) - 1
-* ##?## `movedChild` is not the node at ``parent``'s `oldContainment` at `oldIndex`.
-
-.Technical name
-`moveAnnotationFromContainmentInSameParent`
-
-.Related event
-<<evnt-annotationMovedFromContainmentInSameParent>>
 
 [[cmd-references]]
 ==== References
@@ -1841,55 +1690,6 @@ originCommands:: <<commandSourceType>>[]
 .Related command
 <<cmd-moveChildInSameContainment>>
 
-[[evnt-childMovedFromAnnotations]]
-===== Child moved from annotations
-Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has been moved
-inside ``newParent``'s `newContainment` at `newIndex`.
-
-All other annotations inside ``oldParent``'s `annotations` with index > `oldIndex` have been moved to next lower index.
-
-All other children inside ``newParent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
-
-[horizontal]
-.Parameters
-newParent:: <<targetNodeType>>
-newContainment:: <<metaPointerType>>
-newIndex:: <<indexType>>
-movedAnnotation:: <<targetNodeType>>
-oldParent:: <<targetNodeType>>
-oldIndex:: <<indexType>>
-commandId:: <<commandIdType>>
-
-.Technical name
-`childMovedFromAnnotations`
-
-.Related command
-<<cmd-moveChildFromAnnotations>>
-
-[[evnt-childMovedFromAnnotationsInSameParent]]
-===== Child moved from annotations in same parent
-Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has been moved
-inside ``parent``'s `newContainment` at `newIndex`.
-
-All other annotations inside ``parent``'s `annotations` with index > `oldIndex` have been moved to next lower index.
-
-All other children inside ``parent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
-
-[horizontal]
-.Parameters
-newContainment:: <<metaPointerType>>
-newIndex:: <<indexType>>
-movedAnnotation:: <<targetNodeType>>
-parent:: <<targetNodeType>>
-oldIndex:: <<indexType>>
-commandId:: <<commandIdType>>
-
-.Technical name
-`childMovedFromAnnotationsInSameParent`
-
-.Related command
-<<cmd-moveChildFromAnnotationsInSameParent>>
-
 [[evnt-annotations]]
 ==== Annotations
 
@@ -2002,56 +1802,6 @@ originCommands:: <<commandSourceType>>[]
 
 .Related command
 <<cmd-moveAnnotationInSameParent>>
-
-[[evnt-annotationMovedFromContainment]]
-===== Annotation moved from containment
-Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has been moved
-inside ``newParent``'s annotations at `newIndex`.
-
-All other children inside ``oldParent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
-
-All other annotations inside ``newParent``'s annotations with index >= `newIndex` have been moved to next higher index.
-
-[horizontal]
-.Parameters
-newParent:: <<targetNodeType>>
-newIndex:: <<indexType>>
-movedChild:: <<targetNodeType>>
-oldParent:: <<targetNodeType>>
-oldContainment:: <<metaPointerType>>
-oldIndex:: <<indexType>>
-commandId:: <<commandIdType>>
-
-.Technical name
-`annotationMovedFromContainment`
-
-.Related command
-<<cmd-moveAnnotationFromContainment>>
-
-[[evnt-annotationMovedFromContainmentInSameParent]]
-===== Annotation moved from containment in same parent
-Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has been moved
-inside ``parent``'s annotations at `newIndex`.
-
-All other children inside ``parent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
-
-All other annotations inside ``parent``'s annotations with index >= `newIndex` have been moved to next higher index.
-
-[horizontal]
-.Parameters
-newContainment:: <<metaPointerType>>
-newIndex:: <<indexType>>
-movedChild:: <<targetNodeType>>
-parent:: <<targetNodeType>>
-oldContainment:: <<metaPointerType>>
-oldIndex:: <<indexType>>
-commandId:: <<commandIdType>>
-
-.Technical name
-`annotationMovedFromContainmentInSameParent`
-
-.Related command
-<<cmd-moveAnnotationFromContainmentInSameParent>>
 
 [[evnt-references]]
 ==== References
