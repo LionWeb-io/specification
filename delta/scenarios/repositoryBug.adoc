@@ -1,5 +1,5 @@
-=== Client tries to change unknown node with failed event
-[plantuml,changeUnknownNodeFailedEvent,svg]
+=== Repository has bug, needs to tell client it couldn't apply its commands
+[plantuml,repositoryBug,svg]
 ----
 hide footbox
 autonumber
@@ -33,13 +33,14 @@ editor <-- clientCmd
 deactivate clientCmd
 deactivate editor
 
-core -> core: unknownNodeId("nodeA")
+core -> core: update()
+core -> core: handleError()
 
 core -> repoEvent
 deactivate core
 
 activate repoEvent
-clientEvent <<- repoEvent: error("unknownNode", "cannot add property to unknown node"\n  ["ZWUzN2Q0YTcwZjM4YzhjYzU3NmQ5YThk\n    NjczNTU0ODBmMDI4YTE0MjE4ZDU2MTRh\n    NGRjNTA3NmE1MTk3Y2U3ZiAgLQo\n  "])
+clientEvent <<- repoEvent: error("internalError", "internal error occurred."\n  ["ZWUzN2Q0YTcwZjM4YzhjYzU3NmQ5YThk\n    NjczNTU0ODBmMDI4YTE0MjE4ZDU2MTRh\n    NGRjNTA3NmE1MTk3Y2U3ZiAgLQo\n  "])
 deactivate repoEvent
 
 activate clientEvent
@@ -53,8 +54,10 @@ deactivate clientEvent
 5. Repository acknowledges reception of command with id `cmd-1`.
 6. Client registers processed command id `cmd-1`.
 7. Client informs editor of command submission.
-8. Repository realizes it does not know a node with id `nodeA`
-9. Repository creates event for notification.
-10. Repository emits <<evnt-error>> event with `unknownNode` error code and `cannot add property to unknown node` message.
+8. Repository tries to update internal representation.
+Some error occurs (e.g. database unavailable).
+9. Repository handles the error.
+10. Repository creates event for notification.
+11. Repository emits <<evnt-error>> event with `internalError` error code and `internal error occurred` message.
 It includes one <<commandSourceType>> with value `base64url(sha256("client-acmd-1"))`.
-11. Client removes `cmd-1` from open commands list.
+12. Client removes `cmd-1` from open commands list.

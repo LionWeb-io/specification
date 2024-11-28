@@ -27,7 +27,7 @@ editor -> editor: DisplayError()
 ----
 1. User enters new property value on node `nodeA` that's known to the editor.
 2. Client editor forwards user action into command.
-3. Client sends `addProperty` command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
+3. Client sends <<cmd-addProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
 4. Repository checks whether it knows a node with id `nodeA`.
 5. Repository doesn't know that node.
 6. Repository refuses command.

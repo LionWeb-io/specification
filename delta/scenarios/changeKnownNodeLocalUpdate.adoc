@@ -71,21 +71,21 @@ editor -> editor: update()
 1. User enters new property value.
 2. Client updates `nodeA` with new property value.
 3. Client editor forwards user action into command.
-4. Client sends `addProperty` command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
+4. Client sends <<cmd-addProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
 5. Repository registers command for processing.
 6. Repository acknowledges reception of command with id `cmd-1`.
 7. Client registers processed command id `cmd-1`.
 8. Repository updates internal representation.
 9. Repository creates event for update.
-10. Repository emits event `propertyAdded` with `nodeA` node id, `age` property (details omitted) and `23` value.
+10. Repository emits event <<evnt-propertyAdded>> with `nodeA` node id, `age` property (details omitted) and `23` value.
 It includes one <<commandSourceType>> with value `base64url(sha256("client-acmd-1"))`
 11. Client calculates `base64url(sha256(concat(__clientId__, __commandId__))) for each registered processed command id.
 12. Client found a matching registered processed command id.
 Client unregisters processed command id `cmd-1`, and does NOT forward information to editor -- the event originates from this client, thus has already been processed.
-13. Another client sends `addProperty` command with command id `cmd-x` (other parameters omitted).
+13. Another client sends <<cmd-addProperty>> command with command id `cmd-x` (other parameters omitted).
 14. Repository updates internal representation.
 15. Repository creates event for update.
-16. Repository emits event `propertyAdded` with `nodeA` node id, `age` property (details omitted) and `23` value.
+16. Repository emits event <<evnt-propertyAdded>> with `nodeA` node id, `age` property (details omitted) and `23` value.
 It includes one <<commandSourceType>> with value `base64url(sha256("client-acmd-x"))`
 17. Client calculates `base64url(sha256(concat(__clientId__, __commandId__))) for each registered processed command id.
 18. Client did not find any matching registered processed command id.

@@ -145,9 +145,7 @@ include::scenarios/changeUnknownNodeFailedEvent.adoc[]
 
 include::scenarios/changeSameValueRemoteUpdate.adoc[]
 
-=== Repository has bug, needs to tell client it couldn't apply its commands
-
-Good case for async error reporting "Event"
+include::scenarios/repositoryBug.adoc[]
 
 include::scenarios/concurrentChangeLocalUpdate.adoc[]
 
