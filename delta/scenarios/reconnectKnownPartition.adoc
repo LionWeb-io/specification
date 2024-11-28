@@ -28,7 +28,7 @@ activate editor
 editor -> editor: draw(childNodeA, childNodeB)
 ----
 1. Client knows the relevant partition, wants to subscribe.
-2. Client sends `subscribePartition` query with partition node id `partition-id`.
+2. Client sends <<qry-subscribePartition>> query with partition node id `partition-id`.
 3. Repository retrieves all contents of partition with node id `partition-id`.
 4. Repository found contents.
 5. Repository responds to query with id `qry-1` with contents of 3 nodes: `partitionNode`, `childNodeA`, `childNodeB` (details omitted).

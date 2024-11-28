@@ -53,12 +53,12 @@ editor -> editor: draw(nodeA)
 1. Client connects to repository with its client id `client-a`.
 2. Repository confirms connection.
 3. Client initiates new partition.
-4. Client sends `addPartition` command with `nodeA` payload (details omitted) and command id `cmd-1`.
+4. Client sends <<cmd-addPartition>> command with `nodeA` payload (details omitted) and command id `cmd-1`.
 5. Repository registers command for processing.
 6. Repository acknowledges reception of command with id `cmd-1`.
 7. Repository updates internal representation.
 8. Repository creates event for update.
-9. Repository emits event `partitionAdded` with `nodeA` payload.
+9. Repository emits event <<evnt-partitionAdded>> with `nodeA` payload.
 It includes one <<commandSourceType>> with value `base64url(sha256("client-acmd-1"))`
 10. Client receives event and forwards information to editor.
 11. Client draws `nodeA`.

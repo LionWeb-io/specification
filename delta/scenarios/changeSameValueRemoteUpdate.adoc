@@ -20,11 +20,14 @@ end box
 
 [->> editor ++
 editor -> clientCmd ++
-clientCmd -> repoCmd ++: addProperty("nodeA", age, "23", "cmd-1")
+clientCmd -> repoCmd ++: changeProperty("nodeA", age, "23", "23", "cmd-1")
 repoCmd ->> core
 activate core
 clientCmd <-- repoCmd: received("cmd-1")
 deactivate repoCmd
+clientCmd -> clientEvent: registerProcessedCmd("cmd-1")
+activate clientEvent
+deactivate clientEvent
 editor <-- clientCmd
 deactivate clientCmd
 deactivate editor
@@ -35,25 +38,21 @@ core -> repoEvent
 deactivate core
 
 activate repoEvent
-clientEvent <<- repoEvent: propertyAdded("nodeA", age, "23",\n  ["ZWUzN2Q0YTcwZjM4YzhjYzU3NmQ5YThk\n    NjczNTU0ODBmMDI4YTE0MjE4ZDU2MTRh\n    NGRjNTA3NmE1MTk3Y2U3ZiAgLQo\n  "])
+clientEvent <<- repoEvent: noOp(\n  ["ZWUzN2Q0YTcwZjM4YzhjYzU3NmQ5YThk\n    NjczNTU0ODBmMDI4YTE0MjE4ZDU2MTRh\n    NGRjNTA3NmE1MTk3Y2U3ZiAgLQo\n  "])
 deactivate repoEvent
 
 activate clientEvent
-clientEvent -> editor
+clientEvent -> clientEvent: removeProcessedCmd("cmd-1")
 deactivate clientEvent
-
-activate editor
-editor -> editor: update(nodeA.age = 23)
 ----
-1. User enters new property value.
+1. User enters changed property value that's the same value as the old value.
 2. Client editor forwards user action into command.
-3. Client sends `addProperty` command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
+3. Client sends <<cmd-changeProperty>> command with `nodeA` node id, `age` property (details omitted), `23` old value, `23` new value and command id `cmd-1`.
 4. Repository registers command for processing.
 5. Repository acknowledges reception of command with id `cmd-1`.
-6. Client informs editor of command submission.
-7. Repository updates internal representation.
-8. Repository creates event for update.
-9. Repository emits event `propertyAdded` with `nodeA` node id, `age` property (details omitted) and `23` value.
-It includes one <<commandSourceType>> with value `base64url(sha256("client-acmd-1"))`
-10. Client receives event and forwards information to editor.
-11. Client updates `nodeA` with new property value.
+6. Client registers processed command id `cmd-1`.
+7. Client informs editor of command submission.
+8. Repository determines no change to internal representation.
+9. Repository creates event for notification.
+10. Repository emits <<evnt-noOp>> event with <<commandSourceType>> with value `base64url(sha256("client-acmd-1"))`.
+11. Client removes `cmd-1` from open commands list.
