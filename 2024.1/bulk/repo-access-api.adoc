@@ -58,8 +58,6 @@ We enforce conformance to{fn-org223}
 * Every node MUST (directly or indirectly) be contained in a partition, except partitions themselves
 * Partitions MUST NOT have a parent
 
-#TODO: Add reference to model correctness doc#
-
 [[out-of-scope]]
 == Out of scope
 We assume mapping API is separate from bulk API{fn-org94}.
@@ -72,7 +70,9 @@ We don't describe the binding to any specific protocol (e.g. HTTP) as part of th
 
 [[deleted-nodes]]
 == Deleted nodes
-We don't have an explicit delete command.{fn-org221}
+We don't have an explicit delete command for non-root nodes.{fn-org221}
+We delete non-root nodes indirectly by sending their parent without the deleted node mentioned as child.
+We can <<deletePartitions>> via explicit command.
 
 We don't support [[orphan, orphans]]_orphans_ for now.
 They are immediately deleted.{fn-org219}
