@@ -182,6 +182,8 @@ We CANNOT redefine `annotates` in a sub-annotation (i.e. an annotation that `ext
 We MUST attach an instance of an Annotation only to instances of the Concept the Annotation `annotates` (and sub-concepts thereof).
 We can attach be zero, one, or more instances to a single annotated node.{fn-org32}
 
+We MUST NOT use instances of <<Concept, Concepts>> as annotations to any other node.{fn-org320}
+
 .Annotation examples
 --
 .Language
@@ -478,6 +480,8 @@ If the same node _b_ contains node _c_, _c_ MUST NOT contain _a_ (indirect conta
 However, Concept _A_ can have a Containment of type _A_.
 Concept _A_ with Containment of type _B_, with Concept _B_ having a Containment of type _A_, is also valid.
 
+We MUST NOT use <<Annotation, Annotations>> as type of a Containment.
+We MUST put instances of <<Concept, Concepts>> into a containment on M1 level; we MUST NOT use  instances of Annotations.{fn-org320}
 
 [[Reference]]
 ==== Reference
