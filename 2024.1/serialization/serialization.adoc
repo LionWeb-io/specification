@@ -295,7 +295,7 @@ The contents of the string are formed as follows:
 A <<{m3}.adoc#StructuredDataType, LionCore StructuredDataType>> is encoded as JSON _object_.
 Each <<{m3}.adoc#Field, Field>> forms one _member_, with the field's <<{m3}.adoc#IKeyed.key, key>> as JSON _key_ and the field's value as JSON _value_.
 For fields of type <<string>>, <<boolean>>, <<integer>>, and <<literal>>, the _value_ is encoded as JSON _string_ in the same way as for a property.
-For fields of type <<structuredDatatype>>, the value is encoded as JSON _object_ if the field is set, otherwise as JSON _null_.
+For fields of type <<structuredDatatype>>, the value is encoded as JSON _object_.
 
 .Structured datatypes used in the examples
 --
@@ -320,10 +320,6 @@ structured datatype Decimal            [id 20, key decimal]
 structured datatype ComplexNumber      [id 30, key complex]
   real: Decimal                        [id 31, key complex-real]
   imaginary: Decimal                   [id 32, key complex-imaginary]
-
-structured datatype FullyQualifiedName [id 50, key fqn]
-  name: String                         [id 40, key nm]
-  nested: FullyQualifiedName           [id 55, key nested]
 ----
 --
 
@@ -362,24 +358,6 @@ unescaped content:
 }
 ----
 
-* FullyQualifiedName _com.example.subdomain_: `"{\n  \"nm\": \"com\",\n  \"nested\": {\n    \"nm\": \"example\",\n    \"nested\": {\n      \"nm\": \"subdomain\",\n      \"nested\": null\n    }\n  }\n}"`
-+
-unescaped content:
-+
-[source, json]
-----
-{
-  "nm": "com",
-  "nested": {
-    "nm": "example",
-    "nested": {
-      "nm": "subdomain",
-      "nested": null
-    }
-  }
-}
-----
-
 .Invalid examples
 * Amount with non-string field values: `"{\n  \"amount-val\":  42,\n  \"amount-cur\": \"cur-eur\",\n  \"digital\": false\n}"`
 +
@@ -403,7 +381,7 @@ unescaped content:
 {"decimal-int": "42"}
 ----
 
-* Decimal with `null` value for field with primitive type: `"{\"decimal-int\": \"42\", \"decimal-frac\": null}"`
+* Decimal with `null` value: `"{\"decimal-int\": \"42\", \"decimal-frac\": null}"`
 +
 unescaped content:
 +
@@ -457,24 +435,6 @@ unescaped content:
 {
 "complex-real": "{ \"decimal-int\": \"23\", \"decimal-frac\": \"17\"}",
 "complex-imaginary": { "decimal-int": "42", "decimal-frac": "0"}
-}
-----
-
-* FullyQualifiedName with _null_ as string value for unset nested structured datatype: `"{\n  \"nm\": \"com\",\n  \"nested\": {\n    \"nm\": \"example\",\n    \"nested\": {\n      \"nm\": \"subdomain\",\n      \"nested\": \"null\"\n    }\n  }\n}"`
-+
-unescaped content:
-+
-[source, json]
-----
-{
-  "nm": "com",
-  "nested": {
-    "nm": "example",
-    "nested": {
-      "nm": "subdomain",
-      "nested": "null"
-    }
-  }
 }
 ----
 

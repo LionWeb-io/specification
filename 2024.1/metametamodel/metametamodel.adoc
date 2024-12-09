@@ -412,10 +412,9 @@ It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Langu
 .Constraints
 M1 Instances of a StructuredDataType SHOULD be immutable.
 
-An M1 instance of StructuredDataType MUST have non-null values for all its fields with `type` of <<PrimitiveType>> or <<Enumeration>>.
-fields with `type` of StructuredDataType can be `null`.
+An M1 instance of StructuredDataType MUST have non-null values for all its fields.
 
-A StructuredDataType can (directly or indirectly) contain a field with itself as `type`.
+A StructuredDataType MUST NOT (directly or indirectly) contain a field with itself as `type`.
 
 
 [[Field]]
