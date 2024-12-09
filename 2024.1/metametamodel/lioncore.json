@@ -150,8 +150,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Classifier",
-              "reference": "-id-Classifier"
+              "resolveInfo": "LionWeb.LionCore_M3.Classifier",
+              "reference": null
             }
           ]
         },
@@ -218,8 +218,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Classifier",
-              "reference": "-id-Classifier"
+              "resolveInfo": "LionWeb.LionCore_M3.Classifier",
+              "reference": null
             }
           ]
         }
@@ -278,8 +278,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Annotation",
-              "reference": "-id-Annotation"
+              "resolveInfo": "LionWeb.LionCore_M3.Annotation",
+              "reference": null
             }
           ]
         }
@@ -338,8 +338,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Interface",
-              "reference": "-id-Interface"
+              "resolveInfo": "LionWeb.LionCore_M3.Interface",
+              "reference": null
             }
           ]
         }
@@ -412,8 +412,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Classifier",
-              "reference": "-id-Classifier"
+              "resolveInfo": "LionWeb.LionCore_M3.Classifier",
+              "reference": null
             }
           ]
         },
@@ -472,8 +472,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Boolean",
-              "reference": "LionCore-builtins-Boolean"
+              "resolveInfo": "LionWeb.LionCore_builtins.Boolean",
+              "reference": null
             }
           ]
         }
@@ -532,8 +532,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Concept",
-              "reference": "-id-Concept"
+              "resolveInfo": "LionWeb.LionCore_M3.Concept",
+              "reference": null
             }
           ]
         }
@@ -592,8 +592,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Interface",
-              "reference": "-id-Interface"
+              "resolveInfo": "LionWeb.LionCore_M3.Interface",
+              "reference": null
             }
           ]
         }
@@ -644,8 +644,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Boolean",
-              "reference": "LionCore-builtins-Boolean"
+              "resolveInfo": "LionWeb.LionCore_builtins.Boolean",
+              "reference": null
             }
           ]
         }
@@ -715,8 +715,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Classifier",
-              "reference": "-id-Classifier"
+              "resolveInfo": "LionWeb.LionCore_M3.Classifier",
+              "reference": null
             }
           ]
         },
@@ -783,8 +783,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Interface",
-              "reference": "-id-Interface"
+              "resolveInfo": "LionWeb.LionCore_M3.Interface",
+              "reference": null
             }
           ]
         }
@@ -852,8 +852,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Link",
-              "reference": "-id-Link"
+              "resolveInfo": "LionWeb.LionCore_M3.Link",
+              "reference": null
             }
           ]
         },
@@ -929,8 +929,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "LanguageEntity",
-              "reference": "-id-LanguageEntity"
+              "resolveInfo": "LionWeb.LionCore_M3.LanguageEntity",
+              "reference": null
             }
           ]
         },
@@ -1008,8 +1008,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "DataType",
-              "reference": "-id-DataType"
+              "resolveInfo": "LionWeb.LionCore_M3.DataType",
+              "reference": null
             }
           ]
         },
@@ -1076,8 +1076,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "EnumerationLiteral",
-              "reference": "-id-EnumerationLiteral"
+              "resolveInfo": "LionWeb.LionCore_M3.EnumerationLiteral",
+              "reference": null
             }
           ]
         }
@@ -1153,8 +1153,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "IKeyed",
-              "reference": "-id-IKeyed"
+              "resolveInfo": "LionWeb.LionCore_M3.IKeyed",
+              "reference": null
             }
           ]
         }
@@ -1232,8 +1232,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "IKeyed",
-              "reference": "-id-IKeyed"
+              "resolveInfo": "LionWeb.LionCore_M3.IKeyed",
+              "reference": null
             }
           ]
         }
@@ -1284,8 +1284,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Boolean",
-              "reference": "LionCore-builtins-Boolean"
+              "resolveInfo": "LionWeb.LionCore_builtins.Boolean",
+              "reference": null
             }
           ]
         }
@@ -1363,8 +1363,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "IKeyed",
-              "reference": "-id-IKeyed"
+              "resolveInfo": "LionWeb.LionCore_M3.IKeyed",
+              "reference": null
             }
           ]
         }
@@ -1423,8 +1423,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "DataType",
-              "reference": "-id-DataType"
+              "resolveInfo": "LionWeb.LionCore_M3.DataType",
+              "reference": null
             }
           ]
         }
@@ -1494,8 +1494,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "LanguageEntity",
-              "reference": "-id-LanguageEntity"
+              "resolveInfo": "LionWeb.LionCore_M3.LanguageEntity",
+              "reference": null
             }
           ]
         },
@@ -1562,8 +1562,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Feature",
-              "reference": "-id-Feature"
+              "resolveInfo": "LionWeb.LionCore_M3.Feature",
+              "reference": null
             }
           ]
         }
@@ -1634,8 +1634,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Feature",
-              "reference": "-id-Feature"
+              "resolveInfo": "LionWeb.LionCore_M3.Feature",
+              "reference": null
             }
           ]
         },
@@ -1694,8 +1694,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Boolean",
-              "reference": "LionCore-builtins-Boolean"
+              "resolveInfo": "LionWeb.LionCore_builtins.Boolean",
+              "reference": null
             }
           ]
         }
@@ -1754,8 +1754,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Classifier",
-              "reference": "-id-Classifier"
+              "resolveInfo": "LionWeb.LionCore_M3.Classifier",
+              "reference": null
             }
           ]
         }
@@ -1835,8 +1835,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "IKeyed",
-              "reference": "-id-IKeyed"
+              "resolveInfo": "LionWeb.LionCore_M3.IKeyed",
+              "reference": null
             }
           ]
         }
@@ -1895,8 +1895,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Language",
-              "reference": "-id-Language"
+              "resolveInfo": "LionWeb.LionCore_M3.Language",
+              "reference": null
             }
           ]
         }
@@ -1955,8 +1955,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "LanguageEntity",
-              "reference": "-id-LanguageEntity"
+              "resolveInfo": "LionWeb.LionCore_M3.LanguageEntity",
+              "reference": null
             }
           ]
         }
@@ -2007,8 +2007,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "String",
-              "reference": "LionCore-builtins-String"
+              "resolveInfo": "LionWeb.LionCore_builtins.String",
+              "reference": null
             }
           ]
         }
@@ -2084,8 +2084,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "IKeyed",
-              "reference": "-id-IKeyed"
+              "resolveInfo": "LionWeb.LionCore_M3.IKeyed",
+              "reference": null
             }
           ]
         }
@@ -2139,8 +2139,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "INamed",
-              "reference": "LionCore-builtins-INamed"
+              "resolveInfo": "LionWeb.LionCore_builtins.INamed",
+              "reference": null
             }
           ]
         }
@@ -2191,8 +2191,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "String",
-              "reference": "LionCore-builtins-String"
+              "resolveInfo": "LionWeb.LionCore_builtins.String",
+              "reference": null
             }
           ]
         }
@@ -2260,8 +2260,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "DataType",
-              "reference": "-id-DataType"
+              "resolveInfo": "LionWeb.LionCore_M3.DataType",
+              "reference": null
             }
           ]
         },
@@ -2339,8 +2339,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Feature",
-              "reference": "-id-Feature"
+              "resolveInfo": "LionWeb.LionCore_M3.Feature",
+              "reference": null
             }
           ]
         },
@@ -2407,8 +2407,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "DataType",
-              "reference": "-id-DataType"
+              "resolveInfo": "LionWeb.LionCore_M3.DataType",
+              "reference": null
             }
           ]
         }
@@ -2476,8 +2476,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Link",
-              "reference": "-id-Link"
+              "resolveInfo": "LionWeb.LionCore_M3.Link",
+              "reference": null
             }
           ]
         },
@@ -2555,8 +2555,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "DataType",
-              "reference": "-id-DataType"
+              "resolveInfo": "LionWeb.LionCore_M3.DataType",
+              "reference": null
             }
           ]
         },
@@ -2623,8 +2623,8 @@
           },
           "targets": [
             {
-              "resolveInfo": "Field",
-              "reference": "-id-Field"
+              "resolveInfo": "LionWeb.LionCore_M3.Field",
+              "reference": null
             }
           ]
         }
