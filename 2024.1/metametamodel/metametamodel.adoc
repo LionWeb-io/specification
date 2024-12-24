@@ -416,7 +416,7 @@ M1 Instances of a StructuredDataType SHOULD be immutable.
 
 An M1 instance of StructuredDataType MUST have non-null values for all its fields.
 
-A StructuredDataType MUST NOT (directly or indirectly) contain a field with itself as `type`.
+A StructuredDataType MUST NOT (directly or indirectly) contain a field with itself as `type`.{fn-org265}
 
 
 [[Field]]
@@ -822,7 +822,7 @@ The language itself has key `LionCore-M3`{fn-org91} and is named `LionCore_M3`{f
 ==== Keys and resolveInfos of built-in elements
 The language hosting built-in elements has id and key `LionCore-builtins`{fn-org141}, its name is `LionCore_builtins`{fn-org195}.
 
-Every language implicitly depend on this language.{fn-org9-implicit}
+Every language implicitly depends on this language.{fn-org9-implicit}
 Thus, the ids in this language MUST be stable.
 This means the id MUST be identical to the key for each node in this language.
 
