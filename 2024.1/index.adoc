@@ -33,38 +33,3 @@ xref:{m3}.adoc#Integer[Integer]
 * Meta-metamodel{emquad}xref:{m3}.adoc[html]{emquad}link:{m3}.pdf[pdf]
 
 * Bulk Repository Access API{emquad}xref:{bulk}.adoc[html]{emquad}link:{bulk}.pdf[pdf]
-
-== Example implementations
-
-* Java
-  {emquad}https://github.com/LionWeb-io/lionweb-java/releases/tag/0.2.1[repo]
-** Core
-   {emquad}https://mvnrepository.com/artifact/io.lionweb.lionweb-java/lionweb-java-2023.1-core[Maven]
-** EMF
-   {emquad}https://mvnrepository.com/artifact/io.lionweb.lionweb-java/lionweb-java-2023.1-emf[Maven]
-** EMF Builtins (required by EMF)
-   {emquad}https://mvnrepository.com/artifact/io.lionweb.lionweb-java/lionweb-java-2023.1-emf-builtins[Maven]
-
-* MPS
-** MPS 2021.1
-   {emquad}https://github.com/LionWeb-io/lionweb-mps/releases/tag/2021.1-lw2023.1-0.2.1[repo]
-   {emquad}https://mvnrepository.com/artifact/io.lionweb.lionweb-mps/lionweb-mps-2021.1-lw2023.1[Maven]
-** MPS 2021.2
-   {emquad}https://github.com/LionWeb-io/lionweb-mps/releases/tag/2021.2-lw2023.1-0.2.1[repo]
-   {emquad}https://mvnrepository.com/artifact/io.lionweb.lionweb-mps/lionweb-mps-2021.2-lw2023.1[Maven]
-** MPS 2021.3
-   {emquad}https://github.com/LionWeb-io/lionweb-mps/releases/tag/2021.3-lw2023.1-0.2.1[repo]
-   {emquad}https://mvnrepository.com/artifact/io.lionweb.lionweb-mps/lionweb-mps-2021.3-lw2023.1[Maven]
-
-* TypeScript
-  {emquad}https://github.com/LionWeb-io/lionweb-typescript[repo]
-  {emquad}https://www.npmjs.com/org/lionweb[NPM org with 4 packages]
-
-* Freon
-  {emquad}https://github.com/LionWeb-io/lioncore-freon[repo]
-  {emquad}npm
-
-== Example usages
-
-* PROPS Properties Language
-  {emquad}https://github.com/LionWeb-io/property-demo/releases/tag/LangDev2023[repo]

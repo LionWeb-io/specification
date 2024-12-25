@@ -27,7 +27,7 @@ We describe the use cases from a client's perspective.
 * "This part is not needed any more, remove the partition", i.e. <<deletePartitions, partition deletion>>.
 * "Give me the whole subtree under this node", i.e. actual <<retrieve, bulk data retrieval>>
 * "Here is a node forest, store it as I hand it to you", i.e. actual <<store, bulk data storage>>.
-** Sub-case with same behavior: "I'm a very simple client who knows nothing about deltas, so whatever I send you is the truth", i.e. <<store, click-save-button>>.
+** Sub-case with same behavior: "I'm a very simple client who only knows load and save (like a file), so whatever I send you is the truth", i.e. <<store, click-save-button>>.
 * "I'm starting up, get me the current partition contents", i.e. <<retrieve, initial load>>.
 * "I want to create a guaranteed new node, which id to use?", i.e. retrieval of <<ids, unused ids>>.
 
