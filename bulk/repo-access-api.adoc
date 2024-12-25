@@ -27,7 +27,7 @@ We describe the use cases from a client's perspective.
 * "This part is not needed any more, remove the partition", i.e. <<deletePartitions, partition deletion>>.
 * "Give me the whole subtree under this node", i.e. actual <<retrieve, bulk data retrieval>>
 * "Here is a node forest, store it as I hand it to you", i.e. actual <<store, bulk data storage>>.
-** Sub-case with same behavior: "I'm a very simple client who knows nothing about deltas, so whatever I send you is the truth", i.e. <<store, click-save-button>>.
+** Sub-case with same behavior: "I'm a very simple client who only knows load and save (like a file), so whatever I send you is the truth", i.e. <<store, click-save-button>>.
 * "I'm starting up, get me the current partition contents", i.e. <<retrieve, initial load>>.
 * "I want to create a guaranteed new node, which id to use?", i.e. retrieval of <<ids, unused ids>>.
 
@@ -58,8 +58,6 @@ We enforce conformance to{fn-org223}
 * Every node MUST (directly or indirectly) be contained in a partition, except partitions themselves
 * Partitions MUST NOT have a parent
 
-#TODO: Add reference to model correctness doc#
-
 [[out-of-scope]]
 == Out of scope
 We assume mapping API is separate from bulk API{fn-org94}.
@@ -72,7 +70,9 @@ We don't describe the binding to any specific protocol (e.g. HTTP) as part of th
 
 [[deleted-nodes]]
 == Deleted nodes
-We don't have an explicit delete command.{fn-org221}
+We don't have an explicit delete command for non-root nodes.{fn-org221}
+We delete non-root nodes indirectly by sending their parent without the deleted node mentioned as child.
+We can <<deletePartitions>> via explicit command.
 
 We don't support [[orphan, orphans]]_orphans_ for now.
 They are immediately deleted.{fn-org219}

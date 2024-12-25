@@ -109,7 +109,7 @@ The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55
 
 * [[Node.id]] _key_ `id` with _string_ _value_, adhering to <<id>>.
 * [[Node.classifier]] _key_ `classifier`{fn-org37-name}{fn-org184} with _object_ _value_, adhering to <<meta-pointer>>.
-  The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> or <<{m3}.adoc#Annotation, *Annotation*>> this *node* is an instance of.
+The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> or <<{m3}.adoc#Annotation, *Annotation*>> this *node* is an instance of.
 * [[Node.properties]] _key_ `properties` with _array_ _value_, each _element_ adhering to <<property>>.
 The order of _elements_ is undefined.{fn-org156}
 * [[Node.containments]] _key_ `containments`{fn-org55-name-children}{fn-org206} with _array_ _value_, each _element_ adhering to <<containment>>.
@@ -149,7 +149,7 @@ The order of _members_ is undefined.
 The _object_ MUST contain the following _members_:
 
 * [[Property.property]] _key_ `property` with _object_ _value_, adhering to <<meta-pointer>>.
-  The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Property, *Property*>> this *property* is an instance of.
+The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Property, *Property*>> this *property* is an instance of.
 * [[Property.value]] _key_ `value` with _value_ as one of
 ** _string_{fn-org34} containing the value of the property referenced by the `property`.
 Refer to <<property-values>> for the specification of the value format.
@@ -261,7 +261,7 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 * Integers can contain value zero with any prefix, i.e. `0`, `-0`, or `+0`.
 * Integers MUST NOT contain leading or trailing whitespace.
 * LionWeb does NOT limit the range of the integer value.{fn-org149}
-  An implementation MAY refuse a model containing an integer value outside the supported range.
+An implementation MAY refuse a model containing an integer value outside the supported range.
 
 .Examples of valid Integer encodings
 
@@ -295,7 +295,7 @@ The contents of the string are formed as follows:
 A <<{m3}.adoc#StructuredDataType, LionCore StructuredDataType>> is encoded as JSON _object_.
 Each <<{m3}.adoc#Field, Field>> forms one _member_, with the field's <<{m3}.adoc#IKeyed.key, key>> as JSON _key_ and the field's value as JSON _value_.
 For fields of type <<string>>, <<boolean>>, <<integer>>, and <<literal>>, the _value_ is encoded as JSON _string_ in the same way as for a property.
-For fields of type <<structuredDatatype>>, the value is encoded as JSON _object_ if the field is set, otherwise as JSON _null_.
+For fields of type <<structuredDatatype>>, the value is encoded as JSON _object_.
 
 .Structured datatypes used in the examples
 --
@@ -320,10 +320,6 @@ structured datatype Decimal            [id 20, key decimal]
 structured datatype ComplexNumber      [id 30, key complex]
   real: Decimal                        [id 31, key complex-real]
   imaginary: Decimal                   [id 32, key complex-imaginary]
-
-structured datatype FullyQualifiedName [id 50, key fqn]
-  name: String                         [id 40, key nm]
-  nested: FullyQualifiedName           [id 55, key nested]
 ----
 --
 
@@ -362,24 +358,6 @@ unescaped content:
 }
 ----
 
-* FullyQualifiedName _com.example.subdomain_: `"{\n  \"nm\": \"com\",\n  \"nested\": {\n    \"nm\": \"example\",\n    \"nested\": {\n      \"nm\": \"subdomain\",\n      \"nested\": null\n    }\n  }\n}"`
-+
-unescaped content:
-+
-[source, json]
-----
-{
-  "nm": "com",
-  "nested": {
-    "nm": "example",
-    "nested": {
-      "nm": "subdomain",
-      "nested": null
-    }
-  }
-}
-----
-
 .Invalid examples
 * Amount with non-string field values: `"{\n  \"amount-val\":  42,\n  \"amount-cur\": \"cur-eur\",\n  \"digital\": false\n}"`
 +
@@ -403,7 +381,7 @@ unescaped content:
 {"decimal-int": "42"}
 ----
 
-* Decimal with `null` value for field with primitive type: `"{\"decimal-int\": \"42\", \"decimal-frac\": null}"`
+* Decimal with `null` value: `"{\"decimal-int\": \"42\", \"decimal-frac\": null}"`
 +
 unescaped content:
 +
@@ -457,24 +435,6 @@ unescaped content:
 {
 "complex-real": "{ \"decimal-int\": \"23\", \"decimal-frac\": \"17\"}",
 "complex-imaginary": { "decimal-int": "42", "decimal-frac": "0"}
-}
-----
-
-* FullyQualifiedName with _null_ as string value for unset nested structured datatype: `"{\n  \"nm\": \"com\",\n  \"nested\": {\n    \"nm\": \"example\",\n    \"nested\": {\n      \"nm\": \"subdomain\",\n      \"nested\": \"null\"\n    }\n  }\n}"`
-+
-unescaped content:
-+
-[source, json]
-----
-{
-  "nm": "com",
-  "nested": {
-    "nm": "example",
-    "nested": {
-      "nm": "subdomain",
-      "nested": "null"
-    }
-  }
 }
 ----
 

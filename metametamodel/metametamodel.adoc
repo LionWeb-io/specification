@@ -182,6 +182,8 @@ We CANNOT redefine `annotates` in a sub-annotation (i.e. an annotation that `ext
 We MUST attach an instance of an Annotation only to instances of the Concept the Annotation `annotates` (and sub-concepts thereof).
 We can attach be zero, one, or more instances to a single annotated node.{fn-org32}
 
+We MUST NOT use instances of <<Concept, Concepts>> as annotations to any other node.{fn-org320}
+
 .Annotation examples
 --
 .Language
@@ -412,10 +414,9 @@ It is indirectly a <<LanguageEntity>> (as it is a top level element in a <<Langu
 .Constraints
 M1 Instances of a StructuredDataType SHOULD be immutable.
 
-An M1 instance of StructuredDataType MUST have non-null values for all its fields with `type` of <<PrimitiveType>> or <<Enumeration>>.
-fields with `type` of StructuredDataType can be `null`.
+An M1 instance of StructuredDataType MUST have non-null values for all its fields.
 
-A StructuredDataType can (directly or indirectly) contain a field with itself as `type`.
+A StructuredDataType MUST NOT (directly or indirectly) contain a field with itself as `type`.{fn-org265}
 
 
 [[Field]]
@@ -479,6 +480,8 @@ If the same node _b_ contains node _c_, _c_ MUST NOT contain _a_ (indirect conta
 However, Concept _A_ can have a Containment of type _A_.
 Concept _A_ with Containment of type _B_, with Concept _B_ having a Containment of type _A_, is also valid.
 
+We MUST NOT use <<Annotation, Annotations>> as type of a Containment.
+We MUST put instances of <<Concept, Concepts>> into a containment on M1 level; we MUST NOT use  instances of Annotations.{fn-org320}
 
 [[Reference]]
 ==== Reference
@@ -764,73 +767,75 @@ Any language that uses `INamed` on its own can establish their own constraints.
 Refer to <<keys>> for more constraints.
 
 [[predefined-keys]]
-=== Pre-defined keys and ids
+=== Pre-defined keys and resolveInfos
+We can serialize <<Language, languages>> as regular nodes.
+To keep the serialized form of the language compatible with multiple LionWeb versions. we SHOULD serialize references to M3 elements and <<builtins>> _without_ <<{serialization}.adoc#Reference.reference.reference, target reference id>>, and include the <<{serialization}.adoc#Reference.reference.resolveInfo, resolveInfo>> as listed in this section.{fn-org279}
 
 [[predefined-m3-keys]]
-==== Keys of M3 elements
+==== Keys and resolveInfos of M3 elements
 The language itself has key `LionCore-M3`{fn-org91} and is named `LionCore_M3`{fn-org195}.
 
-[cols="d,d,m"]
+[cols="d,d,m,m"]
 |===
-|M3 element |Concept |Key
+|M3 element |Concept |Key |ResolveInfo
 
-|<<Annotation>> |Concept |Annotation
-|<<Annotation.annotates>> |Reference |Annotation-annotates
-|<<Annotation.extends>> |Reference |Annotation-extends
-|<<Annotation.implements>> |Reference |Annotation-implements
-|<<Classifier>> |Concept |Classifier
-|<<Classifier.features>> |Containment |Classifier-features
-|<<Concept>> |Concept |Concept
-|<<Concept.abstract>> |Property |Concept-abstract
-|<<Concept.extends>> |Reference |Concept-extends
-|<<Concept.implements>> |Reference |Concept-implements
-|<<Containment>> |Concept |Containment
-|<<DataType>> |Concept |DataType
-|<<Enumeration>> |Concept |Enumeration
-|<<Enumeration.literals>> |Containment |Enumeration-literals
-|<<EnumerationLiteral>> |Concept |EnumerationLiteral
-|<<Feature>> |Concept |Feature
-|<<Feature.optional>> |Property |Feature-optional
-|<<Field>> |Concept |Field
-|<<Field.type>> |Reference |Field-type
-|<<IKeyed>> |Interface |IKeyed
-|<<IKeyed.key>> |Property |IKeyed-key
-|<<Interface>> |Concept |Interface
-|<<Interface.extends>> |Reference |Interface-extends
-|<<Language>> |Concept |Language
-|<<Language.dependsOn>> |Reference |Language-dependsOn
-|<<Language.entities>> |Containment |Language-entities
-|<<Language.version>> |Property |Language-version
-|<<LanguageEntity>> |Concept |LanguageEntity
-|<<Link>> |Concept |Link
-|<<Link.multiple>> |Property |Link-multiple
-|<<Link.type>> |Reference |Link-type
-|<<PrimitiveType>> |Concept |PrimitiveType
-|<<Property>> |Concept |Property
-|<<Property.type>> |Reference |Property-type
-|<<Reference>> |Concept |Reference
-|<<StructuredDataType>> |Concept |StructuredDataType
-|<<StructuredDataType.fields>> |Containment |StructuredDataType-fields
+|<<Annotation>> |Concept |Annotation |LionWeb.LionCore_M3.Annotation
+|<<Annotation.annotates>> |Reference |Annotation-annotates  |LionWeb.LionCore_M3.Annotation.annotates
+|<<Annotation.extends>> |Reference |Annotation-extends |LionWeb.LionCore_M3.Annotation.extends
+|<<Annotation.implements>> |Reference |Annotation-implements |LionWeb.LionCore_M3.Annotation.implements
+|<<Classifier>> |Concept |Classifier |LionWeb.LionCore_M3.Classifier
+|<<Classifier.features>> |Containment |Classifier-features |LionWeb.LionCore_M3.Classifier.features
+|<<Concept>> |Concept |Concept |LionWeb.LionCore_M3.Concept
+|<<Concept.abstract>> |Property |Concept-abstract |LionWeb.LionCore_M3.Concept.abstract
+|<<Concept.extends>> |Reference |Concept-extends |LionWeb.LionCore_M3.Concept.extends
+|<<Concept.implements>> |Reference |Concept-implements |LionWeb.LionCore_M3.Concept.implements
+|<<Containment>> |Concept |Containment |LionWeb.LionCore_M3.Containment
+|<<DataType>> |Concept |DataType |LionWeb.LionCore_M3.DataType
+|<<Enumeration>> |Concept |Enumeration |LionWeb.LionCore_M3.Enumeration
+|<<Enumeration.literals>> |Containment |Enumeration-literals |LionWeb.LionCore_M3.Enumeration.literals
+|<<EnumerationLiteral>> |Concept |EnumerationLiteral |LionWeb.LionCore_M3.EnumerationLiteral
+|<<Feature>> |Concept |Feature |LionWeb.LionCore_M3.Feature
+|<<Feature.optional>> |Property |Feature-optional |LionWeb.LionCore_M3.Feature.optional
+|<<Field>> |Concept |Field |LionWeb.LionCore_M3.Field
+|<<Field.type>> |Reference |Field-type |LionWeb.LionCore_M3.Field.type
+|<<IKeyed>> |Interface |IKeyed |LionWeb.LionCore_M3.IKeyed
+|<<IKeyed.key>> |Property |IKeyed-key |LionWeb.LionCore_M3.IKeyed.key
+|<<Interface>> |Concept |Interface |LionWeb.LionCore_M3.Interface
+|<<Interface.extends>> |Reference |Interface-extends |LionWeb.LionCore_M3.Interface.extends
+|<<Language>> |Concept |Language |LionWeb.LionCore_M3.Language
+|<<Language.dependsOn>> |Reference |Language-dependsOn |LionWeb.LionCore_M3.Language.dependsOn
+|<<Language.entities>> |Containment |Language-entities |LionWeb.LionCore_M3.Language.entities
+|<<Language.version>> |Property |Language-version |LionWeb.LionCore_M3.Language.version
+|<<LanguageEntity>> |Concept |LanguageEntity |LionWeb.LionCore_M3.LanguageEntity
+|<<Link>> |Concept |Link |LionWeb.LionCore_M3.Link
+|<<Link.multiple>> |Property |Link-multiple |LionWeb.LionCore_M3.Link.multiple
+|<<Link.type>> |Reference |Link-type |LionWeb.LionCore_M3.Link.type
+|<<PrimitiveType>> |Concept |PrimitiveType |LionWeb.LionCore_M3.PrimitiveType
+|<<Property>> |Concept |Property |LionWeb.LionCore_M3.Property
+|<<Property.type>> |Reference |Property-type |LionWeb.LionCore_M3.Property.type
+|<<Reference>> |Concept |Reference |LionWeb.LionCore_M3.Reference
+|<<StructuredDataType>> |Concept |StructuredDataType |LionWeb.LionCore_M3.StructuredDataType
+|<<StructuredDataType.fields>> |Containment |StructuredDataType-fields |LionWeb.LionCore_M3.StructuredDataType.fields
 |===
 
 [[predefined-builtins-keys]]
-==== Ids of built-in elements
+==== Keys and resolveInfos of built-in elements
 The language hosting built-in elements has id and key `LionCore-builtins`{fn-org141}, its name is `LionCore_builtins`{fn-org195}.
 
-Every language implicitly depend on this language.{fn-org9-implicit}
+Every language implicitly depends on this language.{fn-org9-implicit}
 Thus, the ids in this language MUST be stable.
 This means the id MUST be identical to the key for each node in this language.
 
-[cols="d,d,m"]
+[cols="d,d,m,m"]
 |===
-|Instance |Concept |Id and key
+|Instance |Concept |Key |ResolveInfo
 
-|<<Boolean>> |PrimitiveType |LionCore-builtins-Boolean
-|<<INamed>> |Interface |LionCore-builtins-INamed
-|<<INamed.name, INamed.name>> |Property |LionCore-builtins-INamed-name
-|<<Integer>> |PrimitiveType |LionCore-builtins-Integer
-|<<Node>> |Concept |LionCore-builtins-Node
-|<<String>> |PrimitiveType |LionCore-builtins-String
+|<<Boolean>> |PrimitiveType |LionCore-builtins-Boolean |LionWeb.LionCore_builtins.Boolean
+|<<INamed>> |Interface |LionCore-builtins-INamed |LionWeb.LionCore_builtins.INamed
+|<<INamed.name, INamed.name>> |Property |LionCore-builtins-INamed-name |LionWeb.LionCore_builtins.INamed.name
+|<<Integer>> |PrimitiveType |LionCore-builtins-Integer |LionWeb.LionCore_builtins.Integer
+|<<Node>> |Concept |LionCore-builtins-Node |LionWeb.LionCore_builtins.Node
+|<<String>> |PrimitiveType |LionCore-builtins-String |LionWeb.LionCore_builtins.String
 |===
 
 
