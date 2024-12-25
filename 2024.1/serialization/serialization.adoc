@@ -1,4 +1,4 @@
-include::../shared/issue-footnotes.adoc[]
+include::../../shared/issue-footnotes.adoc[]
 
 :m3: ../metametamodel/metametamodel
 :refarch: ../reference-architecture/reference-architecture
@@ -109,7 +109,7 @@ The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55
 
 * [[Node.id]] _key_ `id` with _string_ _value_, adhering to <<id>>.
 * [[Node.classifier]] _key_ `classifier`{fn-org37-name}{fn-org184} with _object_ _value_, adhering to <<meta-pointer>>.
-The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> or <<{m3}.adoc#Annotation, *Annotation*>> this *node* is an instance of.
+  The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> or <<{m3}.adoc#Annotation, *Annotation*>> this *node* is an instance of.
 * [[Node.properties]] _key_ `properties` with _array_ _value_, each _element_ adhering to <<property>>.
 The order of _elements_ is undefined.{fn-org156}
 * [[Node.containments]] _key_ `containments`{fn-org55-name-children}{fn-org206} with _array_ _value_, each _element_ adhering to <<containment>>.
@@ -149,7 +149,7 @@ The order of _members_ is undefined.
 The _object_ MUST contain the following _members_:
 
 * [[Property.property]] _key_ `property` with _object_ _value_, adhering to <<meta-pointer>>.
-The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Property, *Property*>> this *property* is an instance of.
+  The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Property, *Property*>> this *property* is an instance of.
 * [[Property.value]] _key_ `value` with _value_ as one of
 ** _string_{fn-org34} containing the value of the property referenced by the `property`.
 Refer to <<property-values>> for the specification of the value format.
@@ -261,7 +261,7 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 * Integers can contain value zero with any prefix, i.e. `0`, `-0`, or `+0`.
 * Integers MUST NOT contain leading or trailing whitespace.
 * LionWeb does NOT limit the range of the integer value.{fn-org149}
-An implementation MAY refuse a model containing an integer value outside the supported range.
+  An implementation MAY refuse a model containing an integer value outside the supported range.
 
 .Examples of valid Integer encodings
 

@@ -1,4 +1,4 @@
-include::../shared/issue-footnotes.adoc[]
+include::../../shared/issue-footnotes.adoc[]
 :serialization: ../serialization/serialization
 :m3: ../metametamodel/metametamodel
 :trash: trash-api

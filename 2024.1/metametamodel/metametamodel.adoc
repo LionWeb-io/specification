@@ -1,4 +1,4 @@
-include::../shared/issue-footnotes.adoc[]
+include::../../shared/issue-footnotes.adoc[]
 :serialization: ../serialization/serialization
 = Meta-Metamodel (M3)
 :toc: preamble

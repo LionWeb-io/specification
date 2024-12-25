@@ -19,15 +19,20 @@ As a volunteer-run Open Source effort, we cannot commit to a timeline.
 We're actively looking for corporate sponsors, with some prospects in sight.
 
 [[in-progress]]
-=== In progress for _after_ version 2023.1
+=== In progress for _after_ version 2024.1
 
-[[bulk-protocol]]
-==== Specifying bulk protocol
-We've decided{fn-org148} to specify protocols only by their conceptual features.
-The first such protocol will be the https://github.com/LionWeb-io/specification/blob/d8a54813c6bd224ef84e53a26ac7d60a45a866b5/bulk/repo-access-api.adoc[Bulk Repository access API].
-It is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
-It is intended for CRUD operations on (larger) sets of nodes, and enables integration with "simple" editor (i.e. no real-time collaboration).
-Additionally, this API allows to list the available <<{m3}.adoc#partition, Partitions>>, get Languages known to the repository, and request unused <<{m3}.adoc#identifiers, node ids>>.
+[[delta-protocol]]
+==== Delta protocol
+As described in our <<{refarch}.adoc#delta, reference architecture>>, via delta protocol a client receives an initial snapshot similar to the bulk case.
+Afterwards, the client continues to receive changes (aka deltas) from the repo; it also writes back changes continuously.{fn-org28}
+
+[[derived-models]]
+==== Derived models
+As described in our <<{refarch}.adoc#derivedModel, reference architecture>>, derived models are calculated from other (original or derived) models without direct human interaction.
+They are usually some form of analysis result, such as one related to a type system.
+Nodes in derived models are typically associated with an original node – e.g., the type computed for an AST node.
+The repository manages this association.
+Derived models may be persisted or be recalculated on the fly.footnote:[https://github.com/LionWeb-io/specification/issues?q=is%3Aissue+label%3Aderived[issues on derived models]]
 
 [[envisioned]]
 === Envisioned
@@ -36,11 +41,6 @@ So if you'd like to work on some of these features, or even only have an urgent 
 This will influence the feature's priority.
 
 The list below is in no particular order.
-
-[[delta-protocol]]
-==== Delta protocol
-As described in our <<{refarch}.adoc#delta, reference architecture>>, via delta protocol a client receives an initial snapshot similar to the bulk case.
-Afterwards, the client continues to receive changes (aka deltas) from the repo; it also writes back changes continuously.{fn-org28}
 
 [[standard-derived-models]]
 ==== Standard derived models
@@ -161,9 +161,20 @@ Model-to-model generators would be implemented as <<{refarch}.adoc#processor, Pr
 [[release-2024.1]]
 [[version-2024.1]]
 === 2024.1
-* Specified <<{bulk}.adoc#bulk, Bulk Repository Access API>>
-* Removed built-in `JSON` primitive datatype
-* Added <<{m3}.adoc#StructuredDataType, StructuredDataType>>
+* [[bulk-protocol]] Specified <<{bulk}.adoc#bulk, Bulk Repository Access API>>
+It is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
+It is intended for CRUD operations on (larger) sets of nodes, and enables integration with "simple" editor (i.e. no real-time collaboration).
+Additionally, this API allows to list the available <<{m3}.adoc#partition, Partitions>>, get Languages known to the repository, and request unused <<{m3}.adoc#identifiers, node ids>>.
+
+* Removed built-in `JSON` primitive datatype{fn-org277}
+
+* Added <<{m3}.adoc#StructuredDataType, StructuredDataType>>{fn-org265}
+
+* Removed pre-defined node ids and introduced pre-defined resolveInfos{fn-org279}
+
+* Disallow mixing containments and annotations{fn-org320}
+
+<<{v2024-1}/index.adoc, Overview>>
 
 [[release-2023.1]]
 [[version-2023.1]]
