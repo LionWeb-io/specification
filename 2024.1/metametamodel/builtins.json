@@ -12,7 +12,7 @@
   ],
   "nodes": [
     {
-      "id": "LionCore-builtins",
+      "id": "LionCore-builtins-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -52,11 +52,11 @@
             "key": "Language-entities"
           },
           "children": [
-            "LionCore-builtins-String",
-            "LionCore-builtins-Boolean",
-            "LionCore-builtins-Integer",
-            "LionCore-builtins-Node",
-            "LionCore-builtins-INamed"
+            "LionCore-builtins-String-2024-1",
+            "LionCore-builtins-Boolean-2024-1",
+            "LionCore-builtins-Integer-2024-1",
+            "LionCore-builtins-Node-2024-1",
+            "LionCore-builtins-INamed-2024-1"
           ]
         }
       ],
@@ -74,7 +74,7 @@
       "parent": null
     },
     {
-      "id": "LionCore-builtins-String",
+      "id": "LionCore-builtins-String-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -101,10 +101,10 @@
       "containments": [],
       "references": [],
       "annotations": [],
-      "parent": "LionCore-builtins"
+      "parent": "LionCore-builtins-2024-1"
     },
     {
-      "id": "LionCore-builtins-Boolean",
+      "id": "LionCore-builtins-Boolean-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -131,10 +131,10 @@
       "containments": [],
       "references": [],
       "annotations": [],
-      "parent": "LionCore-builtins"
+      "parent": "LionCore-builtins-2024-1"
     },
     {
-      "id": "LionCore-builtins-Integer",
+      "id": "LionCore-builtins-Integer-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -161,10 +161,10 @@
       "containments": [],
       "references": [],
       "annotations": [],
-      "parent": "LionCore-builtins"
+      "parent": "LionCore-builtins-2024-1"
     },
     {
-      "id": "LionCore-builtins-Node",
+      "id": "LionCore-builtins-Node-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -233,10 +233,10 @@
         }
       ],
       "annotations": [],
-      "parent": "LionCore-builtins"
+      "parent": "LionCore-builtins-2024-1"
     },
     {
-      "id": "LionCore-builtins-INamed",
+      "id": "LionCore-builtins-INamed-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -268,7 +268,7 @@
             "key": "Classifier-features"
           },
           "children": [
-            "LionCore-builtins-INamed-name"
+            "LionCore-builtins-INamed-name-2024-1"
           ]
         }
       ],
@@ -283,10 +283,10 @@
         }
       ],
       "annotations": [],
-      "parent": "LionCore-builtins"
+      "parent": "LionCore-builtins-2024-1"
     },
     {
-      "id": "LionCore-builtins-INamed-name",
+      "id": "LionCore-builtins-INamed-name-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -335,7 +335,7 @@
         }
       ],
       "annotations": [],
-      "parent": "LionCore-builtins-INamed"
+      "parent": "LionCore-builtins-INamed-2024-1"
     }
   ]
 }
