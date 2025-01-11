@@ -12,7 +12,7 @@
   ],
   "nodes": [
     {
-      "id": "-id-LionCore-M3",
+      "id": "-id-LionCore-M3-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -52,24 +52,24 @@
             "key": "Language-entities"
           },
           "children": [
-            "-id-Annotation",
-            "-id-Concept",
-            "-id-Interface",
-            "-id-Containment",
-            "-id-DataType",
-            "-id-Enumeration",
-            "-id-EnumerationLiteral",
-            "-id-Feature",
-            "-id-Field",
-            "-id-Classifier",
-            "-id-Link",
-            "-id-Language",
-            "-id-LanguageEntity",
-            "-id-IKeyed",
-            "-id-PrimitiveType",
-            "-id-Property",
-            "-id-Reference",
-            "-id-StructuredDataType"
+            "-id-Annotation-2024-1",
+            "-id-Concept-2024-1",
+            "-id-Interface-2024-1",
+            "-id-Containment-2024-1",
+            "-id-DataType-2024-1",
+            "-id-Enumeration-2024-1",
+            "-id-EnumerationLiteral-2024-1",
+            "-id-Feature-2024-1",
+            "-id-Field-2024-1",
+            "-id-Classifier-2024-1",
+            "-id-Link-2024-1",
+            "-id-Language-2024-1",
+            "-id-LanguageEntity-2024-1",
+            "-id-IKeyed-2024-1",
+            "-id-PrimitiveType-2024-1",
+            "-id-Property-2024-1",
+            "-id-Reference-2024-1",
+            "-id-StructuredDataType-2024-1"
           ]
         }
       ],
@@ -87,7 +87,7 @@
       "parent": null
     },
     {
-      "id": "-id-Annotation",
+      "id": "-id-Annotation-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -135,9 +135,9 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-Annotation-annotates",
-            "-id-Annotation-extends",
-            "-id-Annotation-implements"
+            "-id-Annotation-annotates-2024-1",
+            "-id-Annotation-extends-2024-1",
+            "-id-Annotation-implements-2024-1"
           ]
         }
       ],
@@ -165,10 +165,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Annotation-annotates",
+      "id": "-id-Annotation-annotates-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -225,10 +225,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Annotation"
+      "parent": "-id-Annotation-2024-1"
     },
     {
-      "id": "-id-Annotation-extends",
+      "id": "-id-Annotation-extends-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -285,10 +285,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Annotation"
+      "parent": "-id-Annotation-2024-1"
     },
     {
-      "id": "-id-Annotation-implements",
+      "id": "-id-Annotation-implements-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -345,10 +345,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Annotation"
+      "parent": "-id-Annotation-2024-1"
     },
     {
-      "id": "-id-Concept",
+      "id": "-id-Concept-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -396,10 +396,10 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-Concept-abstract",
-            "-id-Concept-partition",
-            "-id-Concept-extends",
-            "-id-Concept-implements"
+            "-id-Concept-abstract-2024-1",
+            "-id-Concept-partition-2024-1",
+            "-id-Concept-extends-2024-1",
+            "-id-Concept-implements-2024-1"
           ]
         }
       ],
@@ -427,10 +427,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Concept-abstract",
+      "id": "-id-Concept-abstract-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -479,10 +479,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Concept"
+      "parent": "-id-Concept-2024-1"
     },
     {
-      "id": "-id-Concept-extends",
+      "id": "-id-Concept-extends-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -539,10 +539,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Concept"
+      "parent": "-id-Concept-2024-1"
     },
     {
-      "id": "-id-Concept-implements",
+      "id": "-id-Concept-implements-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -599,10 +599,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Concept"
+      "parent": "-id-Concept-2024-1"
     },
     {
-      "id": "-id-Concept-partition",
+      "id": "-id-Concept-partition-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -651,10 +651,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Concept"
+      "parent": "-id-Concept-2024-1"
     },
     {
-      "id": "-id-Interface",
+      "id": "-id-Interface-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -702,7 +702,7 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-Interface-extends"
+            "-id-Interface-extends-2024-1"
           ]
         }
       ],
@@ -730,10 +730,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Interface-extends",
+      "id": "-id-Interface-extends-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -790,10 +790,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Interface"
+      "parent": "-id-Interface-2024-1"
     },
     {
-      "id": "-id-Containment",
+      "id": "-id-Containment-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -867,10 +867,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-DataType",
+      "id": "-id-DataType-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -944,10 +944,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Enumeration",
+      "id": "-id-Enumeration-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -995,7 +995,7 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-Enumeration-literals"
+            "-id-Enumeration-literals-2024-1"
           ]
         }
       ],
@@ -1023,10 +1023,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Enumeration-literals",
+      "id": "-id-Enumeration-literals-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1083,10 +1083,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Enumeration"
+      "parent": "-id-Enumeration-2024-1"
     },
     {
-      "id": "-id-EnumerationLiteral",
+      "id": "-id-EnumerationLiteral-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1160,10 +1160,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Feature",
+      "id": "-id-Feature-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1211,7 +1211,7 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-Feature-optional"
+            "-id-Feature-optional-2024-1"
           ]
         }
       ],
@@ -1239,10 +1239,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Feature-optional",
+      "id": "-id-Feature-optional-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1291,10 +1291,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Feature"
+      "parent": "-id-Feature-2024-1"
     },
     {
-      "id": "-id-Field",
+      "id": "-id-Field-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1342,7 +1342,7 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-Field-type"
+            "-id-Field-type-2024-1"
           ]
         }
       ],
@@ -1370,10 +1370,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Field-type",
+      "id": "-id-Field-type-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1430,10 +1430,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Field"
+      "parent": "-id-Field-2024-1"
     },
     {
-      "id": "-id-Classifier",
+      "id": "-id-Classifier-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1481,7 +1481,7 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-Classifier-features"
+            "-id-Classifier-features-2024-1"
           ]
         }
       ],
@@ -1509,10 +1509,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Classifier-features",
+      "id": "-id-Classifier-feature-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1569,10 +1569,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Classifier"
+      "parent": "-id-Classifier-2024-1"
     },
     {
-      "id": "-id-Link",
+      "id": "-id-Link-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1620,8 +1620,8 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-Link-multiple",
-            "-id-Link-type"
+            "-id-Link-multiple-2024-1",
+            "-id-Link-type-2024-1"
           ]
         }
       ],
@@ -1649,10 +1649,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Link-multiple",
+      "id": "-id-Link-multiple-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1701,10 +1701,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Link"
+      "parent": "-id-Link-2024-1"
     },
     {
-      "id": "-id-Link-type",
+      "id": "-id-Link-type-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1761,10 +1761,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Link"
+      "parent": "-id-Link-2024-1"
     },
     {
-      "id": "-id-Language",
+      "id": "-id-Language-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1812,9 +1812,9 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-Language-version",
-            "-id-Language-dependsOn",
-            "-id-Language-entities"
+            "-id-Language-version-2024-1",
+            "-id-Language-dependsOn-2024-1",
+            "-id-Language-entities-2024-1"
           ]
         }
       ],
@@ -1842,10 +1842,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Language-dependsOn",
+      "id": "-id-Language-dependsO-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1902,10 +1902,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Language"
+      "parent": "-id-Language-2024-1"
     },
     {
-      "id": "-id-Language-entities",
+      "id": "-id-Language-entities-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -1962,10 +1962,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Language"
+      "parent": "-id-Language-2024-1"
     },
     {
-      "id": "-id-Language-version",
+      "id": "-id-Language-version-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2014,10 +2014,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Language"
+      "parent": "-id-Language-2024-1"
     },
     {
-      "id": "-id-LanguageEntity",
+      "id": "-id-LanguageEntity-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2091,10 +2091,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-IKeyed",
+      "id": "-id-IKeyed-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2126,7 +2126,7 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-IKeyed-key"
+            "-id-IKeyed-key-2024-1"
           ]
         }
       ],
@@ -2146,7 +2146,7 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
       "id": "-id-IKeyed-key",
@@ -2198,10 +2198,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-IKeyed"
+      "parent": "-id-IKeyed-2024-1"
     },
     {
-      "id": "-id-PrimitiveType",
+      "id": "-id-PrimitiveType-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2275,10 +2275,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Property",
+      "id": "-id-Property-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2326,7 +2326,7 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-Property-type"
+            "-id-Property-type-2024-1"
           ]
         }
       ],
@@ -2354,10 +2354,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Property-type",
+      "id": "-id-Property-type-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2414,10 +2414,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-Property"
+      "parent": "-id-Property-2024-1"
     },
     {
-      "id": "-id-Reference",
+      "id": "-id-Reference-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2491,10 +2491,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-StructuredDataType",
+      "id": "-id-StructuredDataType-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2542,7 +2542,7 @@
             "key": "Classifier-features"
           },
           "children": [
-            "-id-StructuredDataType-fields"
+            "-id-StructuredDataType-fields-2024-1"
           ]
         }
       ],
@@ -2570,10 +2570,10 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-LionCore-M3"
+      "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-StructuredDataType-fields",
+      "id": "-id-StructuredDataType-fields-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2630,7 +2630,7 @@
         }
       ],
       "annotations": [],
-      "parent": "-id-StructuredDataType"
+      "parent": "-id-StructuredDataType-2024-1"
     }
   ]
 }
