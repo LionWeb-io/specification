@@ -1,5 +1,5 @@
 |
-[plantuml,moveEntryFromOtherReference-before,svg]
+[plantuml,moveAndReplaceEntryFromOtherReference-before,svg]
 ----
 !include commandEventOverviewStyle.puml
 
@@ -8,6 +8,7 @@ class "old\nPrevious\nEntry" as oldPreviousEntry
 class "old\nNext\nEntry" as oldNextEntry
 
 class "moved\nTarget" as target #Orange
+class "replaced\nTarget" as replaced
 
 oldParent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
 oldParent .[thickness=2].> target #red: old\nReference\n[oldIndex]\n<color #red>{movedResolveInfo}</color>
@@ -21,15 +22,16 @@ oldPreviousEntry -[hidden]-> newPreviousEntry
 oldNextEntry -[hidden]-> newNextEntry
 
 newPreviousEntry <.. newParent: new\nReference\n[newIndex - 1]
-target <.[hidden]. newParent #blue: new\nReference\n[newIndex]\n<color #blue>{resolveInfo}</color>
-newNextEntry <.. newParent: new\nReference\n[newIndex]
+replaced <.. newParent #red: new\nReference\n[newIndex]\n<color #red>{replacedResolveInfo}</color>
+newNextEntry <.. newParent: new\nReference\n[newIndex + 1]
 
+target -[hidden]-> replaced
 oldPreviousEntry -[hidden]> target
-target -[hidden]> newNextEntry
+newPreviousEntry -[hidden]> replaced
 ----
 |
 
-[plantuml,moveEntryFromOtherReference-after,svg]
+[plantuml,moveAndReplaceEntryFromOtherReference-after,svg]
 ----
 !include commandEventOverviewStyle.puml
 
@@ -38,9 +40,10 @@ class "old\nPrevious\nEntry" as oldPreviousEntry
 class "old\nNext\nEntry" as oldNextEntry
 
 class "moved\nTarget" as target #Orange
+class "replaced\nTarget" as replaced
 
 oldParent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
-oldParent .[hidden].> target #red: old\nReference\n[oldIndex]\n<color #red>{movedResolveInfo}</color>
+oldParent .[hidden].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
 oldParent ..> oldNextEntry: old\nReference\n[oldIndex]
 
 class newParent
@@ -54,6 +57,7 @@ newPreviousEntry <.. newParent: new\nReference\n[newIndex - 1]
 target <.[thickness=2]. newParent #blue: new\nReference\n[newIndex]\n<color #blue>{movedResolveInfo}</color>
 newNextEntry <.. newParent: new\nReference\n[newIndex + 1]
 
+target -[hidden]-> replaced
 oldPreviousEntry -[hidden]> target
-target -[hidden]> newNextEntry
+newPreviousEntry -[hidden]> replaced
 ----

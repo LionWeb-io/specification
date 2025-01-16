@@ -1,0 +1,64 @@
+|
+[plantuml,moveAndReplaceEntryFromOtherReferenceInSameParent-before,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+class "old\nPrevious\nEntry" as oldPreviousEntry
+class "old\nNext\nEntry" as oldNextEntry
+
+class "moved\nTarget" as target #Orange
+class "replaced\nTarget" as replaced
+
+parent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
+
+parent .[thickness=2].> target #red: old\nReference\n[oldIndex]\n<color #red>{movedResolveInfo}</color>
+parent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
+
+oldPreviousEntry -[hidden]right-> target
+target -[hidden]right> oldNextEntry
+
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+oldNextEntry -[hidden]-> newPreviousEntry
+
+newPreviousEntry -[hidden]> replaced
+replaced -[hidden]> newNextEntry
+
+parent ..> newPreviousEntry: new\nReference\n[newIndex - 1]
+parent .[thickness=2].> replaced #red: new\nReference\n[newIndex]\n<color #red>{replacedResolveInfo}</color>
+parent ..> newNextEntry: new\nReference\n[newIndex + 1]
+----
+|
+[plantuml, moveAndReplaceEntryFromOtherReferenceInSameParent-after, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+class "old\nPrevious\nEntry" as oldPreviousEntry
+class "old\nNext\nEntry" as oldNextEntry
+
+class " " as dummy <<h>>
+class "moved\nTarget" as target #Orange
+class "replaced\nTarget" as replaced
+
+parent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
+parent ..> oldNextEntry: old\nReference\n[oldIndex]
+
+oldPreviousEntry -[hidden]right-> dummy
+dummy -[hidden]right> oldNextEntry
+
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+oldNextEntry -[hidden]-> newPreviousEntry
+
+newPreviousEntry -[hidden]> target
+target -[hidden]> newNextEntry
+target -[hidden]-> replaced
+
+parent ..> newPreviousEntry: new\nReference\n[newIndex - 1]
+parent .[thickness=2].> target #blue: new\nReference\n[newIndex]\n<color #blue>{movedResolveInfo}</color>
+parent ..> newNextEntry: new\nReference\n[newIndex + 1]
+----

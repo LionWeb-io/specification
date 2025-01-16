@@ -1,5 +1,5 @@
 |
-[plantuml,moveEntryInSameReference-before,svg]
+[plantuml,moveAndReplaceEntryInSameReference-before,svg]
 ----
 !include commandEventOverviewStyle.puml
 left to right direction
@@ -7,19 +7,23 @@ left to right direction
 class parent
 
 class "sibling\nEntryA" as siblingA
-class "moved\nTarget" as target #Orange
 class "sibling\nEntryB" as siblingB
 class "sibling\nEntryC" as siblingC
+
+class "moved\nTarget" as target #Orange
+class "replaced\nTarget" as replaced
 
 parent ..> siblingA: reference\n[oldIndex - 1]
 parent ..> target: reference\n[<color #red>oldIndex</color>]\n<color #red>{movedResolveInfo}</color>
 parent ..> siblingB: reference\n[oldIndex + 1]
-parent ..> siblingC: reference\n[oldIndex + 2]
+parent ..> replaced #red: reference\n[newIndex]\n<color #red>{replacedResolveInfo}</color>
+parent ..> siblingC: reference\n[newIndex + 1]
 
 siblingA -[hidden]> target
+siblingB -[hidden]> replaced
 ----
 |
-[plantuml, moveEntryInSameReference-after, svg]
+[plantuml, moveAndReplaceEntryInSameReference-after, svg]
 ----
 !include commandEventOverviewStyle.puml
 left to right direction
@@ -27,9 +31,11 @@ left to right direction
 class parent
 
 class "sibling\nEntryA" as siblingA
-class "moved\nTarget" as target #Orange
 class "sibling\nEntryB" as siblingB
 class "sibling\nEntryC" as siblingC
+
+class "moved\nTarget" as target #Orange
+class "replaced\nTarget" as replaced
 
 parent *--> siblingA: reference\n[oldIndex - 1]
 parent *--> siblingB: reference\n[oldIndex]
@@ -38,4 +44,5 @@ parent *--> siblingC: reference\n[newIndex + 1]
 
 siblingA -[hidden]> siblingB
 siblingB -[hidden]> target
+target -[hidden]-> replaced
 ----

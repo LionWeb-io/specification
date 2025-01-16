@@ -4,14 +4,14 @@
 !include commandEventOverviewStyle.puml
 
 class "old\nPrevious\nEntry" as oldPreviousEntry
-class target #Orange
+class "moved\nTarget" as target #Orange
 class "old\nNext\nEntry" as oldNextEntry
 
 class parent
 
 parent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
 
-parent .[thickness=2].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
+parent .[thickness=2].> target #red: old\nReference\n[oldIndex]\n<color #red>{movedResolveInfo}</color>
 parent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
 
 oldPreviousEntry -[hidden]> oldNextEntry
@@ -33,13 +33,13 @@ parent ..> newNextEntry: new\nReference\n[newIndex]
 !include commandEventOverviewStyle.puml
 
 class "old\nPrevious\nEntry" as oldPreviousEntry
-class target #Orange
+class "moved\nTarget" as target #Orange
 class "old\nNext\nEntry" as oldNextEntry
 
 class parent
 
 parent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
-parent .[thickness=2].> target #blue: new\nReference\n[newIndex]\n<color #blue>{resolveInfo}</color>
+parent .[thickness=2].> target #blue: new\nReference\n[newIndex]\n<color #blue>{movedResolveInfo}</color>
 parent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
 
 oldPreviousEntry -[hidden]> oldNextEntry
