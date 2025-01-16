@@ -2,6 +2,7 @@
 [plantuml,moveAndReplaceEntryFromOtherReferenceInSameParent-before,svg]
 ----
 !include commandEventOverviewStyle.puml
+left to right direction
 
 class parent
 class "old\nPrevious\nEntry" as oldPreviousEntry
@@ -34,6 +35,7 @@ parent ..> newNextEntry: new\nReference\n[newIndex + 1]
 [plantuml, moveAndReplaceEntryFromOtherReferenceInSameParent-after, svg]
 ----
 !include commandEventOverviewStyle.puml
+left to right direction
 
 class parent
 class "old\nPrevious\nEntry" as oldPreviousEntry
