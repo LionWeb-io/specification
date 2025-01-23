@@ -91,9 +91,9 @@ A client can either decide to apply its own change immediately and filter out ev
 |
 <<cmd-addReference>>
 
-<<cmd-addReferenceTarget>>
-
 <<cmd-addReferenceResolveInfo>>
+
+<<cmd-addReferenceTarget>>
 |<<cmd-addProperty>>
 |<<cmd-addPartition>>
 
@@ -103,9 +103,9 @@ A client can either decide to apply its own change immediately and filter out ev
 |
 <<cmd-deleteReference>>
 
-<<cmd-deleteReferenceTarget>>
-
 <<cmd-deleteReferenceResolveInfo>>
+
+<<cmd-deleteReferenceTarget>>
 |<<cmd-deleteProperty>>
 |<<cmd-deletePartition>>
 
@@ -115,9 +115,9 @@ A client can either decide to apply its own change immediately and filter out ev
 |
 <<cmd-changeReference>>
 
-<<cmd-changeReferenceTarget>>
-
 <<cmd-changeReferenceResolveInfo>>
+
+<<cmd-changeReferenceTarget>>
 |<<cmd-changeProperty>>
 |<<cmd-changeClassifier>>
 
