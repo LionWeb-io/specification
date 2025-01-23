@@ -32,10 +32,10 @@ include::deletePartition.adoc[]
 |
 <<cmd-changeClassifier>>
 
-<<evnt-conceptChanged>>
+<<evnt-classifierChanged>>
 
-Change concept of `node` from `oldConcept` to `newConcept`.
-include::changeConcept.adoc[]
+Change classifier of `node` from `oldClassifier` to `newClassifier`.
+include::changeClassifier.adoc[]
 |===
 
 ==== Properties

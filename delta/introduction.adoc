@@ -4,7 +4,7 @@ Delta API assumes a bidirectional communication channel.
 The _client_ initiates the channel with the _repository_ to open a _session_.
 Both parties communicate through the established channel via _messages_.
 
-Delta API supports these message kinds, loosely following CQRS patternfootnote:[https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation]:
+Delta API supports these message kinds, loosely following CQRS patternfootnote:[https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation]{fn-org291}:
 
 * <<queries>> initiated/requested by the client, with synchronous response by the repository.
 A query requests some information from the repository without changing the repository's contents.
@@ -13,19 +13,19 @@ The repository might reply invalid queries with a failure message.
 
 * <<commands>> initiated/requested by the client, with synchronous response by the repository.
 A command requests some change to the repository.
-The repository quickly confirms having _received_ the command, or rejects a _failed_ command.
+The repository quickly confirms having _received_ the command, or rejects a _failed_ command.{fn-org298}
 However, the repository processes the command asynchronously, and eventually broadcasts the effect(s) as _event_.
 
 * <<events>> initiated/broadcast by the repository, without response by the client.
 An event describes some change that has been applied to the repository's contents.
-Events correlate to their originating command(s); this command might have been sent by this client or another client.
+Events correlate to their originating command(s){fn-org306}; this command might have been sent by this client or another client.{fn-org299}
 All clients receive the same events (given the same _subscription scope_, see below).
 
 * Session messages for bookkeeping.
 
 A client describes the interesting part of the repository's contents by specifying its _subscription scope_.
 The client receives only events on nodes within that scope.
-Scope is defined by the node id of a <<{m3}.adoc#partition, partition>>; it includes all changes to the partition and all its descendants (including annotation instances).
+Scope is defined by the node id of a <<{m3}.adoc#partition, partition>>; it includes all changes to the partition and all its descendants (including annotation instances).{fn-org269}
 
 A typical workflow for a client would be:
 
@@ -43,7 +43,7 @@ The response contains a <<{serialization}.adoc#SerializationChunk, serialization
 The repository is always the ultimate arbiter of its contents.
 It can decide to apply each command verbatim, with some tweaks (e.g. because of concurrent changes), or not at all (e.g. because the command would introduce containment loops).
 
-Each repository might introduce its own strategy how to handle commands.
+Each repository might introduce its own strategy how to handle commands.{fn-org291}
 For example, assume client 1 sends a `deleteChild` command to delete node `X`, and then client 2 sends a `setProperty` command on node `X`. +
 Repository A applies all commands in order, thus deletes node `X` and ignores the second command.
 It emits one `childDeleted` event, correlated to both commands. +
@@ -54,10 +54,10 @@ Repository C batches command processing.
 It looks at both messages together, and decides it's more important to keep the new property value around.
 It emits one `propertyChanged` event, correlated with both commands.
 
-A client stays up-to-date with the repository's contents if it applies all events in order.
+A client stays up-to-date with the repository's contents if it applies all events in order.{fn-org297}
 A client can either decide to apply its own change immediately and filter out events based on that command, or wait for the correlated event to arrive and apply the change only then.
 
-=== Command overview
+=== Command overview{fn-org317}
 
 [cols="2,3,3,3,1,1"]
 |===
@@ -71,7 +71,7 @@ A client can either decide to apply its own change immediately and filter out ev
 
 <<cmd-addReferenceResolveInfo>>
 
-<<cmd-addReferenceTarget>>
+<<cmd-addReferenceTarget>>{fn-org329}
 |<<cmd-addProperty>>
 |<<cmd-addPartition>>
 
@@ -120,21 +120,21 @@ A client can either decide to apply its own change immediately and filter out ev
 |
 |
 
-|Move from other node and replace existing
+|Move from other node and replace existing{fn-org321}
 |<<cmd-moveAndReplaceChildFromOtherContainment>>
 |<<cmd-moveAndReplaceAnnotationFromOtherParent>>
 |<<cmd-moveAndReplaceEntryFromOtherReference>>
 |
 |
 
-|Move from other feature in same node and replace existing
+|Move from other feature in same node and replace existing{fn-org321}
 |<<cmd-moveAndReplaceChildFromOtherContainmentInSameParent>>
 |
 |<<cmd-moveAndReplaceEntryFromOtherReferenceInSameParent>>
 |
 |
 
-|Move in same feature in same node and replace existing
+|Move in same feature in same node and replace existing{fn-org321}
 |<<cmd-moveAndReplaceChildInSameContainment>>
 |<<cmd-moveAndReplaceAnnotationInSameParent>>
 |<<cmd-moveAndReplaceEntryInSameReference>>

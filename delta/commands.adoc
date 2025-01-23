@@ -85,7 +85,7 @@ Change classifier of `node` from `oldClassifier` to `newClassifier`.
 |===
 |Before |After
 
-include::commandEventOverview/changeConcept.adoc[]
+include::commandEventOverview/changeClassifier.adoc[]
 |===
 
 [horizontal]
@@ -98,10 +98,10 @@ commandId:: <<commandIdType>> Id of this command.
 * `node` does not exist
 
 .Technical name
-`changeConcept`
+`changeClassifier`
 
 .Related event
-<<evnt-conceptChanged>>
+<<evnt-classifierChanged>>
 
 [[cmd-properties]]
 ==== Properties
@@ -197,6 +197,9 @@ commandId:: <<commandIdType>>
 [[cmd-addChild]]
 ===== Add child
 Add new node `newChild` to `parent` in `containment` at `index`.
+`newChild` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
 
 [cols="a,a"]
 |===
@@ -254,8 +257,11 @@ commandId:: <<commandIdType>>
 
 [[cmd-replaceChild]]
 ===== Replace child
-Replace existing node inside ``parent``'s `containment` at `index` with new node `newChild`.
 Delete current child inside ``parent``'s `containment` at `index`.
+Replace existing node inside ``parent``'s `containment` at `index` with new node `newChild`.
+`newChild` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
 
 [cols="a,a"]
 |===
@@ -474,6 +480,9 @@ commandId:: <<commandIdType>>
 [[cmd-addAnnotation]]
 ===== Add annotation
 Add new node `newAnnotation` to ``parent``'s annotations at `index`.
+`newAnnotation` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
 
 [cols="a,a"]
 |===
@@ -529,8 +538,11 @@ commandId:: <<commandIdType>>
 
 [[cmd-replaceAnnotation]]
 ===== Replace annotation
-Replace existing node inside ``parent``'s annotations at `index` with new node `newAnnotation`.
 Delete current node at ``parent``'s annotations at `index`.
+Replace existing node inside ``parent``'s annotations at `index` with new node `newAnnotation`.
+`newAnnotation` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
 
 [cols="a,a"]
 |===
@@ -1177,7 +1189,7 @@ commandId:: <<commandIdType>>
 
 [[cmd-composite]]
 ===== Composite
-Groups several commands into a logical group.
+Groups several commands into a logical group.{fn-org281}
 The parts are ordered.
 
 Command groups don't guarantee anything; the repository MAY take the group as a hint to resolve conflicts in a different manner.

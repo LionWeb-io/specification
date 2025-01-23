@@ -41,19 +41,19 @@ originCommands:: <<commandSourceType>>[]
 [[evnt-nodes]]
 ==== Nodes
 
-[[evnt-conceptChanged]]
-===== Concept changed
-Concept of `node` has been changed from `oldConcept` to `newConcept`.
+[[evnt-classifierChanged]]
+===== Classifier changed
+Classifier of `node` has been changed from `oldClassifier` to `newClassifier`.
 
 [horizontal]
 .Parameters
 node:: <<targetNodeType>>
-newConcept:: <<metaPointerType>>
-oldConcept:: <<metaPointerType>>
+newClassifier:: <<metaPointerType>>
+oldClassifier:: <<metaPointerType>>
 originCommands:: <<commandSourceType>>[]
 
 .Technical name
-`conceptChanged`
+`classifierChanged`
 
 .Related command
 <<cmd-changeClassifier>>
@@ -119,6 +119,10 @@ originCommands:: <<commandSourceType>>[]
 [[evnt-childAdded]]
 ===== Child added
 New node `newChild` has been added to ``parent``'s  `containment` at `index`.
+`newChild` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
+
 All other children inside ``parent``'s `containment` with index >= `index` have been moved to next higher index.
 
 [horizontal]
@@ -137,7 +141,7 @@ originCommands:: <<commandSourceType>>[]
 
 [[evnt-childDeleted]]
 ===== Child deleted
-Existing node `deletedChild`, and all its descendants, have been deleted from ``parent``'s `containment` at `index`.
+Existing node `deletedChild`, and all its descendants, have been deleted from ``parent``'s `containment` at `index`.{fn-org286}
 All other children inside ``parent``'s `containment` with index > `index` have been moved to next lower index.
 
 [horizontal]
@@ -157,6 +161,11 @@ originCommands:: <<commandSourceType>>[]
 [[evnt-childReplaced]]
 ===== Child replaced
 Existing node `replacedChild` inside ``parent``'s `containment` at `index` has been replaced with new node `newChild`.
+`newChild` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
+
+
 `replacedChild`, and all its descendants, have been deleted.
 
 [horizontal]
@@ -349,6 +358,10 @@ originCommands:: <<commandSourceType>>[]
 [[evnt-annotationAdded]]
 ===== Annotation added
 New node `newAnnotation` has been added to ``parent``'s annotations at `index`.
+`newAnnotation` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
+
 All other annotations inside ``parent``'s annotations with index >= `index` have been moved to next higher index.
 
 [horizontal]
@@ -366,7 +379,7 @@ originCommands:: <<commandSourceType>>[]
 
 [[evnt-annotationDeleted]]
 ===== Annotation deleted
-Existing node `deletedAnnotation`, and all its descendants, have been deleted from ``parent``'s annotations at `index`.
+Existing node `deletedAnnotation`, and all its descendants, have been deleted from ``parent``'s annotations at `index`.{fn-org286}
 All other annotations inside ``parent``'s annotations with index > `index` have been moved to next lower index.
 
 [horizontal]
@@ -385,6 +398,10 @@ originCommands:: <<commandSourceType>>[]
 [[evnt-annotationReplaced]]
 ===== Annotation replaced
 Existing node `replacedAnnotation` inside ``parent``'s annotations at `index` has been replaced with new node `newAnnotation`.
+`newAnnotation` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
+
 `replacedAnnotation`, and all its descendants, have been deleted.
 
 [horizontal]
@@ -873,7 +890,7 @@ originCommands:: <<commandSourceType>>[]
 
 [[evnt-composite]]
 ===== Composite
-The events in `parts` have happened in the given order.
+The events in `parts` have happened in the given order.{fn-org281}
 
 All `originCommands` have been handled (maybe by discarding them).
 

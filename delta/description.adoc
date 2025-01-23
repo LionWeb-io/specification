@@ -1,7 +1,7 @@
 [[description]]
 == Description
 === Client characteristics
-A client MUST identify with the repository with a _client id_.
+A client MUST identify with the repository with a _client id_.{fn-org241}
 The client id MUST be a valid <<{m3}.adoc#node-id, identifier>>.
 It serves as a technical identifier.
 Authentication and authorization are out of scope of this API.
@@ -26,5 +26,5 @@ We assume the underlying protocol handles quality of service concerns (e.g. guar
 Each message has some id unique to the session:
 
 * Queries have a _query id_.
-* Commands have a _command id_.
-* Events have _origin commands_.
+* Commands have a _command id_.{fn-org305}
+* Events have _origin commands_.{fn-org306}

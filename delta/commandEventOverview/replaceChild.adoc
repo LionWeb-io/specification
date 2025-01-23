@@ -30,7 +30,12 @@ class "newChild:Car" as newChild #LightSkyBlue {
 }
 class "next\nSibling" as nextSibling
 
+class descendant #LightSkyBlue
+
 parent *--> previousSibling: containment\n[index - 1]
 parent *--> newChild #Blue: containment\n[index]
 parent *--> nextSibling: containment\n[index + 1]
+
+newChild *--> descendant #Blue
+previousSibling <.. descendant #Blue
 ----

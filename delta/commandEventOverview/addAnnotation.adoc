@@ -26,7 +26,12 @@ class "newAnnotation:\nRemark" as newAnnotation #LightSkyBlue {
 }
 class "next\nSibling" as nextSibling
 
+class descendant #LightSkyBlue
+
 parent *--> previousSibling: <<annotations>>\n[index - 1]
 parent *--> newAnnotation #Blue: <<annotations>>\n[index]
 parent *--> nextSibling: <<annotations>>\n[index + 1]
+
+newAnnotation *--> descendant #Blue
+previousSibling <.. descendant #Blue
 ----

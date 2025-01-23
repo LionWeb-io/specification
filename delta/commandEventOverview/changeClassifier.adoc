@@ -1,0 +1,14 @@
+|
+[plantuml, changeClassifier-before, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class "node:<color #red>oldClassifier</color>"
+----
+|
+[plantuml, changeClassifier-after, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class "node:<color #blue>newClassifier</color>"
+----

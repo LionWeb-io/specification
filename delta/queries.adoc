@@ -6,7 +6,7 @@
 
 [[qry-subscribePartitions]]
 ===== Subscribe to partition changes
-This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions, and automatically subscribe (`partitions` is true) to newly created partitions.
+This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions, and automatically subscribe (`partitions` is true) to newly created partitions.{fn-org267}
 
 [horizontal]
 .Request parameters
@@ -30,7 +30,7 @@ _none_
 
 [[qry-subscribePartition]]
 ===== Subscribe to partition
-This client wants to receive events on any changes to `partition` or any of its descendants.
+This client wants to receive events on any changes to `partition` or any of its descendants.{fn-org270}{fn-org269}
 
 [horizontal]
 .Request parameters
@@ -52,7 +52,7 @@ queryId:: <<queryIdType>> Id of this query.
 
 [[cmd-unsubscribePartition]]
 ===== Unsubscribe from partition
-This client does not want to receive events on any changes to `partition` or any of its descendants anymore.
+This client does not want to receive events on any changes to `partition` or any of its descendants anymore.{fn-org270}
 
 [horizontal]
 .Request parameters
