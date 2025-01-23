@@ -316,8 +316,8 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveChildFromOtherContainmentInSameParent]]
 ===== Move child from other containment in same parent
-Move existing node `movedChild` (currently inside one of ``parent``'s containments other than `newContainment)
-inside ``parent``'s `newContainment` at `newIndex`.
+Move existing node `movedChild` (currently inside one of ``movedChild``'s parent's containments other than `newContainment`)
+inside ``movedChild``'s parent's `newContainment` at `newIndex`.
 
 [cols="a,a"]
 |===
@@ -331,15 +331,13 @@ include::commandEventOverview/moveChildFromOtherContainmentInSameParent.adoc[]
 newContainment:: <<metaPointerType>>
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
-parent:: <<targetNodeType>>
 commandId:: <<commandIdType>>
 
 .Errors
-* `newIndex` is beyond the number of `newContainment` entries in `parent`
+* `newIndex` is beyond the number of `newContainment` entries in ``movedChild``'s parent
 * `movedChild` does not exist
-* `parent` does not exist
-* `movedChild` is not a child of `parent`
-* `movedChild` is a child of `parent` inside `newContainment`
+* `movedChild` does not have a parent
+* `movedChild` is already a child inside `newContainment`
 
 .Technical name
 `moveChildFromOtherContainmentInSameParent`
@@ -349,8 +347,7 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveChildInSameContainment]]
 ===== Move child in same containment
-Move existing node `movedChild` (currently inside ``parent``'s `containment`)
-inside ``parent``'s `containment` at `newIndex`.
+Move existing node `movedChild` within its current containment to `newIndex`.
 
 [cols="a,a"]
 |===
@@ -363,16 +360,13 @@ include::commandEventOverview/moveChildInSameContainment.adoc[]
 .Parameters
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
-parent:: <<targetNodeType>>
-containment:: <<metaPointerType>>
 commandId:: <<commandIdType>>
 
 .Errors
-* `newIndex` is beyond (the number of `containment` entries in `parent`) - 1
+* `newIndex` is beyond (the number of ``movedChild``'s containment entries in ```movedChild``'s parent) - 1
 * `movedChild` does not exist
-* `parent` does not exist
-* `movedChild` is not a child of `parent` in `containment`
-* `movedChild` is already inside `containment` at `newIndex`
+* `movedChild` does not have a parent
+* `movedChild` is already at `newIndex`
 
 .Technical name
 `moveChildInSameContainment`
@@ -414,9 +408,9 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveAndReplaceChildFromOtherContainmentInSameParent]]
 ===== Move child from other containment in same parent and replace existing child
-Move existing node `movedChild` (currently inside one of ``parent``'s containments other than `newContainment)
-inside ``parent``'s `newContainment` at `newIndex`.
-Delete current child inside ``parent``'s `newContainment` at `newIndex`.
+Move existing node `movedChild` (currently inside one of ``movedChild``'s parent's containments other than `newContainment`)
+inside ``movedChild``'s parent's `newContainment` at `newIndex`.
+Delete current child inside ``movedChild``'s parent's `newContainment` at `newIndex`.
 
 [cols="a,a"]
 |===
@@ -430,15 +424,13 @@ include::commandEventOverview/moveAndReplaceChildFromOtherContainmentInSameParen
 newContainment:: <<metaPointerType>>
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
-parent:: <<targetNodeType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `newIndex` is beyond the number of `newContainment` entries in `parent`
 * `movedChild` does not exist
-* `parent` does not exist
-* `movedChild` is not a child of `parent`
-* `movedChild` is a child of `parent` inside `newContainment`
+* `movedChild` does not have a parent
+* `movedChild` is already a child inside `newContainment`
 
 .Technical name
 `moveAndReplaceChildFromOtherContainmentInSameParent`
@@ -448,9 +440,8 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveAndReplaceChildInSameContainment]]
 ===== Move child in same containment and replace existing child
-Move existing node `movedChild` (currently inside ``parent``'s `containment`)
-inside ``parent``'s `containment` at `newIndex`.
-Delete current child inside ``parent``'s `newContainment` at `newIndex`.
+Move existing node `movedChild` within its current containment to `newIndex`.
+Delete current child inside the same containment at `newIndex`.
 
 [cols="a,a"]
 |===
@@ -463,19 +454,16 @@ include::commandEventOverview/moveAndReplaceChildInSameContainment.adoc[]
 .Parameters
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
-parent:: <<targetNodeType>>
-containment:: <<metaPointerType>>
 commandId:: <<commandIdType>>
 
 .Errors
-* `newIndex` is beyond (the number of `containment` entries in `parent`) - 2
+* `newIndex` is beyond (the number of ``movedChild``'s containment entries in ``movedChild``'s parent) - 2
 * `movedChild` does not exist
-* `parent` does not exist
-* `movedChild` is not a child of `parent` in `containment`
-* `movedChild` is already inside `containment` at `newIndex`
+* `movedChild` does not have a parent
+* `movedChild` is already at `newIndex`
 
 .Technical name
-`moveChildInSameContainment`
+`moveAndReplaceChildInSameContainment`
 
 .Related event
 <<evnt-childMovedAndReplacedInSameContainment>>
@@ -602,8 +590,7 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveAnnotationInSameParent]]
 ===== Move annotation in same parent
-Move existing node `movedAnnotation` (currently inside ``parent``'s annotations)
-inside ``parent``'s annotations at `newIndex`.
+Move existing node `movedAnnotation` within the same parent to `newIndex`.
 
 [cols="a,a"]
 |===
@@ -616,14 +603,12 @@ include::commandEventOverview/moveAnnotationInSameParent.adoc[]
 .Parameters
 newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
-parent:: <<targetNodeType>>
 commandId:: <<commandIdType>>
 
 .Errors
-* `newIndex` is beyond (the number of annotations of `parent`) - 1
+* `newIndex` is beyond (the number of annotations of ``movedAnnotation``'s parent) - 1
 * `movedAnnotation` does not exist
-* `parent` does not exist
-* `movedAnnotation` is not an annotation of `parent`
+* `movedAnnotation` does not have a parent
 
 .Technical name
 `moveAnnotationInSameParent`
@@ -665,9 +650,8 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveAndReplaceAnnotationInSameParent]]
 ===== Move annotation in same parent and replace existing annotation
-Move existing node `movedAnnotation` (currently inside ``parent``'s annotations)
-inside ``parent``'s annotations at `newIndex`.
-Delete current node at ``parent``'s annotations at `newIndex`.
+Move existing node `movedAnnotation` within the same parent to `newIndex`.
+Delete current node at ``movedAnnotation``'s parent's annotations at `newIndex`.
 
 [cols="a,a"]
 |===
@@ -680,17 +664,15 @@ include::commandEventOverview/moveAndReplaceAnnotationInSameParent.adoc[]
 .Parameters
 newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
-parent:: <<targetNodeType>>
 commandId:: <<commandIdType>>
 
 .Errors
-* `newIndex` is beyond (the number of annotations of `parent`) - 1
+* `newIndex` is beyond (the number of annotations of ``movedAnnotation``'s parent) - 1
 * `movedAnnotation` does not exist
-* `parent` does not exist
-* `movedAnnotation` is not an annotation of `parent`
+* `movedAnnotation` does not have a parent
 
 .Technical name
-`moveAnnotationInSameParent`
+`moveAndReplaceAnnotationInSameParent`
 
 .Related event
 <<evnt-annotationMovedAndReplacedInSameParent>>
