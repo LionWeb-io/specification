@@ -1,0 +1,951 @@
+[[commands]]
+=== Commands
+
+==== Lifecycle
+[plantuml, commandsLifecycle, svg]
+----
+hide empty description
+
+[*] -> Created: <i>client</i>\ncreates
+Created -> Sent: <i>client</i>\nsends
+
+Sent --> Failed: <i>repository</i>\ninvalid command
+Failed -> [*]: <i>client</i>\ndiscards
+
+Sent -> Received: <i>repository</i>\nreceives
+Received -> Processed: <i>repository</i> emits event,\n<i>client</i> receives event
+Processed --> [*]: <i>client</i>\ndiscards
+----
+
+[[cmd-partitions]]
+==== Partitions
+
+[[cmd-addPartition]]
+===== Add partition
+Add `newPartition` node as new partition.
+
+[horizontal]
+.Parameters
+newPartition:: <<nodeType>> root node to form a new partition.
+It MUST contain _id_ and _classifier_.
+It MAY contain _properties_.
+It MUST NOT contain _containments_, _references_, _annotations_, or _parent_ (as this is a partition, thus cannot have a parent).
+
+commandId:: <<commandIdType>> Id of this command.
+
+.Errors
+* node with `newPartition` id already exists
+
+.Technical name
+`addPartition`
+
+.Related event
+<<evnt-partitionAdded>>
+
+[[cmd-deletePartition]]
+===== Delete partition
+Delete partition `deletedPartition`, and all its descendants (including annotation instances).
+
+[horizontal]
+.Parameters
+deletedPartition:: <<nodeType>> or <<targetNodeType>> #TODO#
+commandId:: <<commandIdType>> Id of this command.
+
+.Errors
+* `deletedPartition` does not exist
+
+.Technical name
+`deletePartition`
+
+.Related event
+<<evnt-partitionDeleted>>
+
+[[cmd-nodes]]
+==== Nodes
+
+[[cmd-changeClassifier]]
+===== Change classifier
+Change classifier of `node` from `oldClassifier` to `newClassifier`.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+newClassifier:: <<metaPointerType>>
+commandId:: <<commandIdType>> Id of this command.
+
+.Errors
+* `node` does not exist
+
+.Technical name
+`changeConcept`
+
+.Related event
+<<evnt-conceptChanged>>
+
+[[cmd-properties]]
+==== Properties
+
+[[cmd-addProperty]]
+===== Add property
+Add `newValue` as value of property `property` to `node`.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+newValue:: <<propertyValueType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `node` does not exist
+* ##?## `property` already set in `node`
+
+.Technical name
+`addProperty`
+
+.Related event
+<<evnt-propertyAdded>>
+
+[[cmd-deleteProperty]]
+===== Delete property
+Delete existing `property` with `oldValue` from `node`.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `node` does not exist
+* ##?## `property` is not set in `node`
+
+.Technical name
+`deleteProperty`
+
+.Related event
+<<evnt-propertyDeleted>>
+
+[[cmd-changeProperty]]
+===== Change property
+Change existing `property` of `node` to `newValue`.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+newValue:: <<propertyValueType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `node` does not exist
+* ##?## `property` is not set in `node`
+
+
+.Technical name
+`changeProperty`
+
+.Related event
+<<evnt-propertyChanged>>
+
+[[cmd-children]]
+==== Children
+
+[[cmd-addChild]]
+===== Add child
+Add new node `newChild` to `parent` in `containment` at `index`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newChild:: <<nodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Events
+* `parent` does not exist
+* `newChild` id already exists
+* `index` is beyond the number of `containment` entries in `parent`
+
+.Technical name
+`addChild`
+
+.Related event
+<<evnt-childAdded>>
+
+[[cmd-deleteChild]]
+===== Delete child
+Delete existing node from ``parent``'s `containment` at `index`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* ##?## `index` is beyond (the number of `containment` entries in `parent`) - 1
+
+.Technical name
+`deleteChild`
+
+.Related event
+<<evnt-childDeleted>>
+
+[[cmd-replaceChild]]
+===== Replace child
+Replace existing node inside ``parent``'s `containment` at `index` with new node `newChild`.
+Delete current child inside ``parent``'s `containment` at `index`.
+
+[horizontal]
+.Parameters
+newChild:: <<nodeType>>
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newChild` id already exists
+* `parent` does not exist
+* ##?## `index` is beyond (the number of `containment` entries in `parent`) - 1
+
+.Technical name
+`replaceChild`
+
+.Related event
+<<evnt-childReplaced>>
+
+[[cmd-moveChildFromOtherContainment]]
+===== Move child from other containment
+Move existing node `movedChild` inside ``newParent``'s `newContainment` at `newIndex`.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newParent` does not exist
+* `newIndex` is beyond the number of `newContainment` entries in `newParent`
+* `movedChild` does not exist
+
+.Technical name
+`moveChildFromOtherContainment`
+
+.Related event
+<<evnt-childMovedFromOtherContainment>>
+
+[[cmd-moveChildFromOtherContainmentInSameParent]]
+===== Move child from other containment in same parent
+Move existing node `movedChild` (currently inside one of ``parent``'s containments other than `newContainment)
+inside ``parent``'s `newContainment` at `newIndex`.
+
+[horizontal]
+.Parameters
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newIndex` is beyond the number of `newContainment` entries in `parent`
+* `movedChild` does not exist
+* `parent` does not exist
+* `movedChild` is not a child of `parent`
+* `movedChild` is a child of `parent` inside `newContainment`
+
+.Technical name
+`moveChildFromOtherContainmentInSameParent`
+
+.Related event
+<<evnt-childMovedFromOtherContainmentInSameParent>>
+
+[[cmd-moveChildInSameContainment]]
+===== Move child in same containment
+Move existing node `movedChild` (currently inside ``parent``'s `containment`)
+inside ``parent``'s `containment` at `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newIndex` is beyond (the number of `containment` entries in `parent`) - 1
+* `movedChild` does not exist
+* `parent` does not exist
+* `movedChild` is not a child of `parent` in `containment`
+* `movedChild` is already inside `containment` at `newIndex`
+
+.Technical name
+`moveChildInSameContainment`
+
+.Related event
+<<evnt-childMovedInSameContainment>>
+
+[[cmd-moveAndReplaceChildFromOtherContainment]]
+===== Move child from other containment and replace existing child
+Move existing node `movedChild` inside ``newParent``'s `newContainment` at `newIndex`.
+Delete current child inside ``newParent``'s `newContainment` at `newIndex`.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newParent` does not exist
+* `newIndex` is beyond the number of `newContainment` entries in `newParent`
+* `movedChild` does not exist
+
+.Technical name
+`moveAndReplaceChildFromOtherContainment`
+
+.Related event
+<<evnt-childMovedAndReplacedFromOtherContainment>>
+
+[[cmd-moveAndReplaceChildFromOtherContainmentInSameParent]]
+===== Move child from other containment in same parent and replace existing child
+Move existing node `movedChild` (currently inside one of ``parent``'s containments other than `newContainment)
+inside ``parent``'s `newContainment` at `newIndex`.
+Delete current child inside ``parent``'s `newContainment` at `newIndex`.
+
+[horizontal]
+.Parameters
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newIndex` is beyond the number of `newContainment` entries in `parent`
+* `movedChild` does not exist
+* `parent` does not exist
+* `movedChild` is not a child of `parent`
+* `movedChild` is a child of `parent` inside `newContainment`
+
+.Technical name
+`moveAndReplaceChildFromOtherContainmentInSameParent`
+
+.Related event
+<<evnt-childMovedAndReplacedFromOtherContainmentInSameParent>>
+
+[[cmd-moveAndReplaceChildInSameContainment]]
+===== Move child in same containment and replace existing child
+Move existing node `movedChild` (currently inside ``parent``'s `containment`)
+inside ``parent``'s `containment` at `newIndex`.
+Delete current child inside ``parent``'s `newContainment` at `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newIndex` is beyond (the number of `containment` entries in `parent`) - 2
+* `movedChild` does not exist
+* `parent` does not exist
+* `movedChild` is not a child of `parent` in `containment`
+* `movedChild` is already inside `containment` at `newIndex`
+
+.Technical name
+`moveChildInSameContainment`
+
+.Related event
+<<evnt-childMovedAndReplacedInSameContainment>>
+
+[[cmd-annotations]]
+==== Annotations
+
+[[cmd-addAnnotation]]
+===== Add annotation
+Add new node `newAnnotation` to ``parent``'s annotations at `index`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newAnnotation:: <<nodeType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `newAnnotation` id already exists
+* `index` is beyond the number of annotations of `parent`
+
+.Technical name
+`addAnnotation`
+
+.Related event
+<<evnt-annotationAdded>>
+
+[[cmd-deleteAnnotation]]
+===== Delete annotation
+Delete existing node from ``parent``'s annotations at `index`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `index` is beyond (the number of annotations of `parent`) - 1
+
+.Technical name
+`deleteAnnotation`
+
+.Related event
+<<evnt-annotationDeleted>>
+
+[[cmd-replaceAnnotation]]
+===== Replace annotation
+Replace existing node inside ``parent``'s annotations at `index` with new node `newAnnotation`.
+Delete current node at ``parent``'s annotations at `index`.
+
+[horizontal]
+.Parameters
+newAnnotation:: <<nodeType>>
+parent:: <<targetNodeType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newAnnotation` id already exists
+* `parent` does not exist
+* `index` is beyond (the number of annotations of `parent`) - 1
+
+.Technical name
+`replaceAnnotation`
+
+.Related event
+<<evnt-annotationReplaced>>
+
+[[cmd-moveAnnotationFromOtherParent]]
+===== Move annotation from other parent
+Move existing node `movedAnnotation` inside ``newParent``'s annotations at `newIndex`.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newParent` does not exist
+* `index` is beyond the number of annotations of `newParent`
+* `movedAnnotation` does not exist
+
+.Technical name
+`moveAnnotationFromOtherParent`
+
+.Related event
+<<evnt-annotationMovedFromOtherParent>>
+
+
+[[cmd-moveAnnotationInSameParent]]
+===== Move annotation in same parent
+Move existing node `movedAnnotation` (currently inside ``parent``'s annotations)
+inside ``parent``'s annotations at `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newIndex` is beyond (the number of annotations of `parent`) - 1
+* `movedAnnotation` does not exist
+* `parent` does not exist
+* `movedAnnotation` is not an annotation of `parent`
+
+.Technical name
+`moveAnnotationInSameParent`
+
+.Related event
+<<evnt-annotationMovedInSameParent>>
+
+[[cmd-moveAndReplaceAnnotationFromOtherParent]]
+===== Move annotation from other parent and replace existing annotation
+Move existing node `movedAnnotation` inside ``newParent``'s annotations at `newIndex`.
+Delete current node at ``newParent``'s annotations at `newIndex`.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newParent` does not exist
+* `index` is beyond the number of annotations of `newParent`
+* `movedAnnotation` does not exist
+
+.Technical name
+`moveAndReplaceAnnotationFromOtherParent`
+
+.Related event
+<<evnt-annotationMovedAndReplacedFromOtherParent>>
+
+
+[[cmd-moveAndReplaceAnnotationInSameParent]]
+===== Move annotation in same parent and replace existing annotation
+Move existing node `movedAnnotation` (currently inside ``parent``'s annotations)
+inside ``parent``'s annotations at `newIndex`.
+Delete current node at ``parent``'s annotations at `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newIndex` is beyond (the number of annotations of `parent`) - 1
+* `movedAnnotation` does not exist
+* `parent` does not exist
+* `movedAnnotation` is not an annotation of `parent`
+
+.Technical name
+`moveAnnotationInSameParent`
+
+.Related event
+<<evnt-annotationMovedAndReplacedInSameParent>>
+
+[[cmd-references]]
+==== References
+
+[[cmd-addReference]]
+===== Add reference
+Add `newTarget` / `newResolveInfo` to ``parent``'s `reference` at `index`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>?
+newResolveInfo:: <<resolveInfoType>>?
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `index` is beyond the number of `reference` entries of `parent`
+* `newTarget` is `null` and `newResolveInfo` is `null`
+
+.Technical name
+`addReference`
+
+.Related event
+<<evnt-referenceAdded>>
+
+[[cmd-deleteReference]]
+===== Delete reference
+Delete existing entry from ``parent``'s `reference` at `index`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+
+.Technical name
+`deleteReference`
+
+.Related event
+<<evnt-referenceDeleted>>
+
+[[cmd-changeReference]]
+===== Change reference
+Replace existing entry inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>?
+newResolveInfo:: <<targetNodeType>>?
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newTarget` is `null` and `newResolveInfo` is `null`
+
+.Technical name
+`changeReference`
+
+.Related event
+<<evnt-referenceChanged>>
+
+[[cmd-moveEntryFromOtherReference]]
+===== Move entry from other reference
+Move existing entry inside ``oldParent``'s `oldReference` at `oldIndex`
+to ``newParent``'s `newReference` at `newIndex`.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldParent:: <<targetNodeType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newParent` does not exist
+* `newIndex` is beyond (the number of `newReference` entries of `newParent`)
+* `oldIndex` is beyond (the number of `oldReference` entries of `oldParent`) - 1
+
+.Technical name
+`moveEntryFromOtherReference`
+
+.Related event
+<<evnt-entryMovedFromOtherReference>>
+
+[[cmd-moveEntryFromOtherReferenceInSameParent]]
+===== Move entry from other reference in same parent
+Move existing entry inside ``parent``'s `oldReference` at `oldIndex`
+to ``parent``'s `newReference` at `newIndex`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `newIndex` is beyond (the number of `newReference` entries of `parent`)
+* `oldIndex` is beyond (the number of `oldReference` entries of `parent`) - 1
+
+.Technical name
+`moveEntryFromOtherReferenceInSameParent`
+
+.Related event
+<<evnt-entryMovedFromOtherReferenceInSameParent>>
+
+[[cmd-moveEntryInSameReference]]
+===== Move entry in same reference
+Move existing entry inside ``parent``'s `reference` at `oldIndex`
+inside ``parent``'s `reference` at `newIndex`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+newIndex:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `newIndex` is beyond (the number of `reference` entries of `parent`) - 1
+* `oldIndex` is beyond (the number of `reference` entries of `parent`) - 1
+
+.Technical name
+`moveEntryInSameReference`
+
+.Related event
+<<evnt-entryMovedInSameReference>>
+
+[[cmd-moveAndReplaceEntryFromOtherReference]]
+===== Move entry from other reference and replace existing entry
+Move existing entry inside ``oldParent``'s `oldReference` at `oldIndex`
+to ``newParent``'s `newReference` at `newIndex`,
+replacing existing entry in ``newParent``'s `newReference` at `newIndex`.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldParent:: <<targetNodeType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `newParent` does not exist
+* `newIndex` is beyond (the number of `newReference` entries of `newParent`) - 1
+* `oldIndex` is beyond (the number of `oldReference` entries of `oldParent`) - 1
+
+.Technical name
+`moveAndReplaceEntryFromOtherReference`
+
+.Related event
+<<evnt-entryMovedAndReplacedFromOtherReference>>
+
+[[cmd-moveAndReplaceEntryFromOtherReferenceInSameParent]]
+===== Move entry from other reference in same parent and replace existing entry
+Move existing entry inside ``parent``'s `oldReference` at `oldIndex`
+to ``parent``'s `newReference` at `newIndex`,
+replacing existing entry in ``parent``'s `newReference` at `newIndex`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `newIndex` is beyond (the number of `newReference` entries of `parent`) - 1
+* `oldIndex` is beyond (the number of `oldReference` entries of `parent`) - 1
+
+.Technical name
+`moveAndReplaceEntryFromOtherReferenceInSameParent`
+
+.Related event
+<<evnt-entryMovedAndReplacedFromOtherReferenceInSameParent>>
+
+[[cmd-moveAndReplaceEntryInSameReference]]
+===== Move entry in same reference and replace existing entry
+Move existing entry inside ``parent``'s `reference` at `oldIndex`
+inside ``parent``'s `reference` at `newIndex`,
+replacing existing entry in ``parent``'s `reference` at `newIndex`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+newIndex:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `newIndex` is beyond (the number of `reference` entries of `parent`) - 2
+* `oldIndex` is beyond (the number of `reference` entries of `parent`) - 1
+
+.Technical name
+`moveAndReplaceEntryInSameReference`
+
+.Related event
+<<evnt-entryMovedAndReplacedInSameReference>>
+
+[[cmd-addReferenceResolveInfo]]
+===== Add reference ResolveInfo
+Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `reference` at `index`.
+
+****
+Current target MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
+****
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newResolveInfo:: <<resolveInfoType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newResolveInfo` is `null`
+* ##?## resolveInfo already set in ``parent``'s `reference` at `index`.
+
+.Technical name
+`addReferenceResolveInfo`
+
+.Related event
+<<evnt-referenceResolveInfoAdded>>
+
+[[cmd-deleteReferenceResolveInfo]]
+===== Delete reference ResolveInfo
+Delete existing ResolveInfo from existing entry inside ``parent``'s `reference` at `index`.
+
+****
+Current target MUST NOT be `null` as we're about to remove ResolveInfo, and at least one of target and ResolveInfo MUST always be non-`null`.
+****
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* target is `null`
+* ##?## resolveInfo is not set in ``parent``'s `reference` at `index`.
+
+.Technical name
+`deleteReferenceResolveInfo`
+
+.Related event
+<<evnt-referenceResolveInfoDeleted>>
+
+[[cmd-changeReferenceResolveInfo]]
+===== Change reference ResolveInfo
+Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` to `newResolveInfo`.
+
+****
+Current target MAY be `null` as we can only change ResolveInfo if both current ResolveInfo and `newResolveInfo` is non-`null`.
+****
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newResolveInfo:: <<resolveInfoType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newResolveInfo` is `null`
+* ##?## resolveInfo is not set in ``parent``'s `reference` at `index`
+
+.Technical name
+`changeReferenceResolveInfo`
+
+.Related event
+<<evnt-referenceResolveInfoChanged>>
+
+[[cmd-addReferenceTarget]]
+===== Add reference target
+Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `index`.
+
+****
+Current ResolveInfo MUST NOT be `null` as we can only add target if target is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
+****
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newTarget` is `null`
+* ##?## target already set in ``parent``'s `reference` at `index`.
+
+.Technical name
+`addReferenceTarget`
+
+.Related event
+<<evnt-referenceTargetAdded>>
+
+[[cmd-deleteReferenceTarget]]
+===== Delete reference target
+Delete existing target from existing entry inside ``parent``'s `reference` at `index`.
+
+****
+Current ResolveInfo MUST NOT be `null` as we're about to remove target, and at least one of target and ResolveInfo MUST always be non-`null`.
+****
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* ##?## target is not set in ``parent``'s `reference` at `index`.
+
+.Technical name
+`deleteReferenceTarget`
+
+.Related event
+<<evnt-referenceTargetDeleted>>
+
+[[cmd-changeReferenceTarget]]
+===== Change reference target
+Change target of existing entry inside ``parent``'s `reference` at `index` to `newTarget`.
+
+****
+Current ResolveInfo MAY be `null` as we can only change target if both current Target and `newTarget` is non-`null`.
+****
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>
+commandId:: <<commandIdType>>
+
+.Errors
+* `parent` does not exist
+* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* `newTarget` is `null`
+* ##?## target is not set in ``parent``'s `reference` at `index`
+
+.Technical name
+`changeReferenceTarget`
+
+.Related event
+<<evnt-referenceTargetChanged>>
+
+[[cmd-composite-section]]
+==== Composite
+
+[[cmd-composite]]
+===== Composite
+Groups several commands into a logical group.
+The parts are ordered.
+
+Command groups don't guarantee anything; the repository MAY take the group as a hint to resolve conflicts in a different manner.
+
+[horizontal]
+.Parameters
+parts:: <<commandType>>[]
+commandId:: <<commandIdType>>
+
+.Errors
+* accumulation of all errors of `parts`
+
+.Technical name
+`composite`
+
+.Related event
+<<evnt-composite>>

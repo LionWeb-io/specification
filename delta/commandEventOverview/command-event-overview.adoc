@@ -1,0 +1,356 @@
+[[command-event-overview]]
+=== Command -- event pairs overview
+include::legend.adoc[]
+
+==== Partitions
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-addPartition>>
+
+<<evnt-partitionAdded>>
+
+Add `newPartition` node as new partition.
+include::addPartition.adoc[]
+
+|
+<<cmd-deletePartition>>
+
+<<evnt-partitionDeleted>>
+
+Delete partition `deletedPartition`.
+include::deletePartition.adoc[]
+|===
+
+==== Nodes
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-changeClassifier>>
+
+<<evnt-conceptChanged>>
+
+Change concept of `node` from `oldConcept` to `newConcept`.
+include::changeConcept.adoc[]
+|===
+
+==== Properties
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-addProperty>>
+
+<<evnt-propertyAdded>>
+
+Add `newValue` as value of property `property` to `node`.
+include::addProperty.adoc[]
+
+|
+<<cmd-deleteProperty>>
+
+<<evnt-propertyDeleted>>
+
+Delete existing `property` with `oldValue` from `node`.
+include::deleteProperty.adoc[]
+
+|
+<<cmd-changeProperty>>
+
+<<evnt-propertyChanged>>
+
+Change existing `property` of `node` from `oldValue` to `newValue`.
+include::changeProperty.adoc[]
+|===
+
+==== Children
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-addChild>>
+
+<<evnt-childAdded>>
+
+Add new node `newChild` to `parent` in `containment` at `index`.
+include::addChild.adoc[]
+
+|
+<<cmd-deleteChild>>
+
+<<evnt-childDeleted>>
+
+Delete existing node `deletedChild` from ``parent``'s `containment` at `index`.
+include::deleteChild.adoc[]
+
+|
+<<cmd-replaceChild>>
+
+<<evnt-childReplaced>>
+
+Replace existing node `replacedChild` inside ``parent``'s `containment` at `index` with new node `newChild`.
+Delete `replacedChild`.
+include::replaceChild.adoc[]
+
+|
+<<cmd-moveChildFromOtherContainment>>
+
+<<evnt-childMovedFromOtherContainment>>
+
+Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
+inside ``newParent``'s `newContainment` at `newIndex`.
+include::moveChildFromOtherContainment.adoc[]
+|
+
+<<cmd-moveChildFromOtherContainmentInSameParent>>
+
+<<evnt-childMovedFromOtherContainmentInSameParent>>
+
+Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
+inside ``parent``'s `newContainment` at `newIndex`.
+include::moveChildFromOtherContainmentInSameParent.adoc[]
+
+|
+<<cmd-moveChildInSameContainment>>
+
+<<evnt-childMovedInSameContainment>>
+
+Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
+inside ``parent``'s `containment` at `newIndex`.
+include::moveChildInSameContainment.adoc[]
+
+|
+<<cmd-moveAndReplaceChildFromOtherContainment>>
+
+<<evnt-childMovedAndReplacedFromOtherContainment>>
+
+Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
+inside ``newParent``'s `newContainment` at `newIndex`, replacing `replacedChild` that was previously inside ``newParent``'s `newContainment` at `newIndex`.
+include::moveAndReplaceChildFromOtherContainment.adoc[]
+|
+
+<<cmd-moveAndReplaceChildFromOtherContainmentInSameParent>>
+
+<<evnt-childMovedAndReplacedFromOtherContainmentInSameParent>>
+
+Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
+inside ``parent``'s `newContainment` at `newIndex`, replacing `replacedChild` that was previously inside ``parent``'s `newContainment` at `newIndex`.
+include::moveAndReplaceChildFromOtherContainmentInSameParent.adoc[]
+
+|
+<<cmd-moveAndReplaceChildInSameContainment>>
+
+<<evnt-childMovedAndReplacedInSameContainment>>
+
+Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
+inside ``parent``'s `containment` at `newIndex`, replacing `replacedChild` that was previously inside ``parent``'s `containment` at `newIndex`.
+include::moveAndReplaceChildInSameContainment.adoc[]
+
+|===
+
+==== Annotations
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-addAnnotation>>
+
+<<evnt-annotationAdded>>
+
+Add new node `newAnnotation` to ``parent``'s annotations at `index`.
+include::addAnnotation.adoc[]
+
+|
+<<cmd-deleteAnnotation>>
+
+<<evnt-annotationDeleted>>
+
+Delete existing node `deletedAnnotation` from ``parent``'s annotations at `index`.
+include::deleteAnnotation.adoc[]
+
+|
+<<cmd-replaceAnnotation>>
+
+<<evnt-annotationReplaced>>
+
+Replace existing node `replacedAnnotation` inside ``parent``'s annotations at `index` with new node `newAnnotation`.
+Delete `replacedAnnotation`.
+include::replaceAnnotation.adoc[]
+
+|
+<<cmd-moveAnnotationFromOtherParent>>
+
+<<evnt-annotationMovedFromOtherParent>>
+
+Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
+inside ``newParent``'s annotations at `newIndex`.
+include::moveAnnotationFromOtherParent.adoc[]
+
+|
+<<cmd-moveAnnotationInSameParent>>
+
+<<evnt-annotationMovedInSameParent>>
+
+Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
+inside ``parent``'s annotations at `newIndex`.
+include::moveAnnotationInSameParent.adoc[]
+
+|
+<<cmd-moveAndReplaceAnnotationFromOtherParent>>
+
+<<evnt-annotationMovedAndReplacedFromOtherParent>>
+
+Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
+inside ``newParent``'s annotations at `newIndex`, replacing `replacedAnnotation` that was previously inside ``newParent``'s annotations at `newIndex`.
+include::moveAndReplaceAnnotationFromOtherParent.adoc[]
+
+|
+<<cmd-moveAndReplaceAnnotationInSameParent>>
+
+<<evnt-annotationMovedAndReplacedInSameParent>>
+
+Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
+inside ``parent``'s annotations at `newIndex`, replacing `replacedAnnotation` that was previously inside ``parent``'s annotations at `newIndex`.
+include::moveAndReplaceAnnotationInSameParent.adoc[]
+
+|===
+
+==== References
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-addReference>>
+
+<<evnt-referenceAdded>>
+
+Add `newTarget` / `newResolveInfo` to ``parent``'s `reference` at `index`.
+include::addReference.adoc[]
+
+|
+<<cmd-deleteReference>>
+
+<<evnt-referenceDeleted>>
+
+Delete existing `deletedTarget`/`deletedResolveInfo` from ``parent``'s `reference` at `index`.
+include::deleteReference.adoc[]
+
+|
+<<cmd-changeReference>>
+
+<<evnt-referenceChanged>>
+
+Replace existing `replacedTarget`/`replacedResolveInfo`  inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
+include::changeReference.adoc[]
+
+|
+<<cmd-moveEntryFromOtherReference>>
+
+<<evnt-entryMovedFromOtherReference>>
+
+Move existing `target`/`resolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
+to ``newParent``'s `newReference` at `newIndex`.
+include::moveEntryFromOtherReference.adoc[]
+
+|
+<<cmd-moveEntryFromOtherReferenceInSameParent>>
+
+<<evnt-entryMovedFromOtherReferenceInSameParent>>
+
+Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
+to ``parent``'s `newReference` at `newIndex`.
+include::moveEntryFromOtherReferenceInSameParent.adoc[]
+
+|
+<<cmd-moveEntryInSameReference>>
+
+<<evnt-entryMovedInSameReference>>
+
+Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
+inside ``parent``'s `reference` at `newIndex`.
+include::moveEntryInSameReference.adoc[]
+
+|
+<<cmd-moveAndReplaceEntryFromOtherReference>>
+
+<<evnt-entryMovedAndReplacedFromOtherReference>>
+
+Move existing `movedTarget`/`movedResolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
+to ``newParent``'s `newReference` at `newIndex`, replacing `replacedTarget`/`replacedResolveInfo` that was previously inside ``newParent``'s `newReference` at `newIndex`.
+include::moveAndReplaceEntryFromOtherReference.adoc[]
+
+|
+<<cmd-moveAndReplaceEntryFromOtherReferenceInSameParent>>
+
+<<evnt-entryMovedAndReplacedFromOtherReferenceInSameParent>>
+
+Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
+to ``parent``'s `newReference` at `newIndex`, replacing `replacedTarget`/`replacedResolveInfo` that was previously inside ``parent``'s `newReference` at `newIndex`.
+include::moveAndReplaceEntryFromOtherReferenceInSameParent.adoc[]
+
+|
+<<cmd-moveAndReplaceEntryInSameReference>>
+
+<<evnt-entryMovedAndReplacedInSameReference>>
+
+Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
+inside ``parent``'s `reference` at `newIndex`, replacing `replacedTarget`/`replacedResolveInfo` that was previously inside ``parent``'s `reference` at `newIndex`.
+include::moveAndReplaceEntryInSameReference.adoc[]
+
+|
+<<cmd-addReferenceResolveInfo>>
+
+<<evnt-referenceResolveInfoAdded>>
+
+Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
+include::addReferenceResolveInfo.adoc[]
+
+|
+<<cmd-deleteReferenceResolveInfo>>
+
+<<evnt-referenceResolveInfoDeleted>>
+
+Delete existing `deletedResolveInfo` as ResolveInfo from existing entry inside ``parent``'s `reference` at `index` with `target`.
+include::deleteReferenceResolveInfo.adoc[]
+
+|
+<<cmd-changeReferenceResolveInfo>>
+
+<<evnt-referenceResolveInfoChanged>>
+
+Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` from `oldResolveInfo` to `newResolveInfo`.
+include::changeReferenceResolveInfo.adoc[]
+
+|
+<<cmd-addReferenceTarget>>
+
+<<evnt-referenceTargetAdded>>
+
+Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+include::addReferenceTarget.adoc[]
+
+|
+<<cmd-deleteReferenceTarget>>
+
+<<evnt-referenceTargetDeleted>>
+
+Delete existing `deletedTarget` as target from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+include::deleteReferenceTarget.adoc[]
+
+|
+<<cmd-changeReferenceTarget>>
+
+<<evnt-referenceTargetChanged>>
+
+Change target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` from `oldTarget` to `newTarget`.
+include::changeReferenceTarget.adoc[]
+
+|===
