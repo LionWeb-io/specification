@@ -738,12 +738,10 @@ Change classifier of `node` from `oldClassifier` to `newClassifier`.
 .Parameters
 node:: <<targetNodeType>>
 newClassifier:: <<metaPointerType>>
-oldClassifier:: <<metaPointerType>>
 commandId:: <<commandIdType>> Id of this command.
 
 .Errors
 * `node` does not exist
-* ##?## `node` currently does not have concept `oldConcept`
 
 .Technical name
 `changeConcept`
@@ -783,13 +781,11 @@ Delete existing `property` with `oldValue` from `node`.
 .Parameters
 node:: <<targetNodeType>>
 property:: <<metaPointerType>>
-oldValue:: <<propertyValueType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `node` does not exist
 * ##?## `property` is not set in `node`
-* ##?## `property` currently does not have `oldValue`
 
 .Technical name
 `deleteProperty`
@@ -799,20 +795,18 @@ commandId:: <<commandIdType>>
 
 [[cmd-changeProperty]]
 ===== Change property
-Change existing `property` of `node` from `oldValue` to `newValue`.
+Change existing `property` of `node` to `newValue`.
 
 [horizontal]
 .Parameters
 node:: <<targetNodeType>>
 property:: <<metaPointerType>>
 newValue:: <<propertyValueType>>
-oldValue:: <<propertyValueType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `node` does not exist
 * ##?## `property` is not set in `node`
-* ##?## `property` currently does not have `oldValue`
 
 
 .Technical name
@@ -849,22 +843,18 @@ commandId:: <<commandIdType>>
 
 [[cmd-deleteChild]]
 ===== Delete child
-Delete existing node `deletedChild` from ``parent``'s `containment` at `index`.
+Delete existing node from ``parent``'s `containment` at `index`.
 
 [horizontal]
 .Parameters
-deletedChild:: <<nodeType>> or <<targetNodeType>> #TODO#
 parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
 
 .Errors
-* `deletedChild` does not exist
 * `parent` does not exist
-* `deletedChild` is not a child of `parent` in `containment`
 * ##?## `index` is beyond (the number of `containment` entries in `parent`) - 1
-* ##?## `deletedChild` is not the node at ``parent``'s `containment` at `index`.
 
 .Technical name
 `deleteChild`
@@ -874,13 +864,12 @@ commandId:: <<commandIdType>>
 
 [[cmd-replaceChild]]
 ===== Replace child
-Replace existing node `replacedChild` inside ``parent``'s `containment` at `index` with new node `newChild`.
-Delete `replacedChild`.
+Replace existing node inside ``parent``'s `containment` at `index` with new node `newChild`.
+Delete current child inside ``parent``'s `containment` at `index`.
 
 [horizontal]
 .Parameters
 newChild:: <<nodeType>>
-replacedChild:: <<nodeType>> or <<targetNodeType>> #TODO#
 parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
@@ -888,11 +877,8 @@ commandId:: <<commandIdType>>
 
 .Errors
 * `newChild` id already exists
-* `replacedChild` does not exist
 * `parent` does not exist
-* `replacedChild` is not a child of `parent` in `containment`
 * ##?## `index` is beyond (the number of `containment` entries in `parent`) - 1
-* ##?## `replacedChild` is not the node at ``parent``'s `containment` at `index`.
 
 .Technical name
 `replaceChild`
@@ -902,8 +888,7 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveChildFromOtherContainment]]
 ===== Move child from other containment
-Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
-inside ``newParent``'s `newContainment` at `newIndex`.
+Move existing node `movedChild` inside ``newParent``'s `newContainment` at `newIndex`.
 
 [horizontal]
 .Parameters
@@ -911,19 +896,12 @@ newParent:: <<targetNodeType>>
 newContainment:: <<metaPointerType>>
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
-oldParent:: <<targetNodeType>>
-oldContainment:: <<metaPointerType>>
-oldIndex:: <<indexType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `newParent` does not exist
 * `newIndex` is beyond the number of `newContainment` entries in `newParent`
 * `movedChild` does not exist
-* ##?## `oldParent` does not exist
-* ##?## `movedChild` is not a child of `oldParent` in `oldContainment`
-* ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `oldParent`) - 1
-* ##?## `movedChild` is not the node at ``oldParent``'s `oldContainment` at `oldIndex`.
 
 .Technical name
 `moveChildFromOtherContainment`
@@ -933,7 +911,7 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveChildFromOtherContainmentInSameParent]]
 ===== Move child from other containment in same parent
-Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
+Move existing node `movedChild` (currently inside one of ``parent``'s containments other than `newContainment)
 inside ``parent``'s `newContainment` at `newIndex`.
 
 [horizontal]
@@ -942,17 +920,14 @@ newContainment:: <<metaPointerType>>
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
 parent:: <<targetNodeType>>
-oldContainment:: <<metaPointerType>>
-oldIndex:: <<indexType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `newIndex` is beyond the number of `newContainment` entries in `parent`
 * `movedChild` does not exist
 * `parent` does not exist
-* `movedChild` is not a child of `parent` in `oldContainment`
-* ##?## `oldIndex` is beyond (the number of `oldContainment` entries in `parent`) - 1
-* ##?## `movedChild` is not the node at ``parent``'s `oldContainment` at `oldIndex`.
+* `movedChild` is not a child of `parent`
+* `movedChild` is a child of `parent` inside `newContainment`
 
 .Technical name
 `moveChildFromOtherContainmentInSameParent`
@@ -962,7 +937,7 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveChildInSameContainment]]
 ===== Move child in same containment
-Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
+Move existing node `movedChild` (currently inside ``parent``'s `containment`)
 inside ``parent``'s `containment` at `newIndex`.
 
 [horizontal]
@@ -971,17 +946,14 @@ newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
 parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
-oldIndex:: <<indexType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `newIndex` is beyond (the number of `containment` entries in `parent`) - 1
 * `movedChild` does not exist
 * `parent` does not exist
-* ##?## `movedChild` is not a child of `parent` in `containment`
-* ##?## `oldIndex` is beyond (the number of `containment` entries in `parent`) - 1
-* `newIndex` is same as `oldIndex`
-* ##?## `movedChild` is not the node at ``parent``'s `containment` at `oldIndex`.
+* `movedChild` is not a child of `parent` in `containment`
+* `movedChild` is already inside `containemtn` at `newIndex`
 
 .Technical name
 `moveChildInSameContainment`
@@ -1016,21 +988,17 @@ commandId:: <<commandIdType>>
 
 [[cmd-deleteAnnotation]]
 ===== Delete annotation
-Delete existing node `deletedAnnotation` from ``parent``'s annotations at `index`.
+Delete existing node from ``parent``'s annotations at `index`.
 
 [horizontal]
 .Parameters
-deletedAnnotation:: <<nodeType>> or <<targetNodeType>> #TODO#
 parent:: <<targetNodeType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
 
 .Errors
-* `deletedAnnotation` does not exist
 * `parent` does not exist
-* `deletedAnnotation` is not an annotation of `parent`
 * `index` is beyond (the number of annotations of `parent`) - 1
-* ##?## `deletedAnnotation` is not the node at ``parent``'s annotations at `index`.
 
 .Technical name
 `deleteAnnotation`
@@ -1040,24 +1008,20 @@ commandId:: <<commandIdType>>
 
 [[cmd-replaceAnnotation]]
 ===== Replace annotation
-Replace existing node `replacedAnnotation` inside ``parent``'s annotations at `index` with new node `newAnnotation`.
-Delete `replacedAnnotation`.
+Replace existing node inside ``parent``'s annotations at `index` with new node `newAnnotation`.
+Delete current node at ``parent``'s annotations at `index`.
 
 [horizontal]
 .Parameters
 newAnnotation:: <<nodeType>>
-replacedAnnotation:: <<nodeType>> or <<targetNodeType>> #TODO#
 parent:: <<targetNodeType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `newAnnotation` id already exists
-* `replacedAnnotation` does not exist
 * `parent` does not exist
-* `replacedAnnotation` is not an annotation of `parent`
 * `index` is beyond (the number of annotations of `parent`) - 1
-* ##?## `replacedAnnotation` is not the node at ``parent``'s annotations at `index`.
 
 .Technical name
 `replaceAnnotation`
@@ -1067,26 +1031,19 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveAnnotationFromOtherParent]]
 ===== Move annotation from other parent
-Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
-inside ``newParent``'s annotations at `newIndex`.
+Move existing node `movedAnnotation` inside ``newParent``'s annotations at `newIndex`.
 
 [horizontal]
 .Parameters
 newParent:: <<targetNodeType>>
 newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
-oldParent:: <<targetNodeType>>
-oldIndex:: <<indexType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `newParent` does not exist
 * `index` is beyond the number of annotations of `newParent`
 * `movedAnnotation` does not exist
-* `oldParent` does not exist
-* `movedAnnotation` is not an annotation of `oldParent`
-* `oldIndex` is beyond (the number of annotations of `oldParent`) - 1
-* ##?## `movedAnnotation` is not the node at ``oldParent``'s annotations at `oldIndex`.
 
 .Technical name
 `moveAnnotationFromOtherParent`
@@ -1097,7 +1054,7 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveAnnotationInSameParent]]
 ===== Move annotation in same parent
-Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
+Move existing node `movedAnnotation` (currently inside ``parent``'s annotations)
 inside ``parent``'s annotations at `newIndex`.
 
 [horizontal]
@@ -1105,7 +1062,6 @@ inside ``parent``'s annotations at `newIndex`.
 newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
 parent:: <<targetNodeType>>
-oldIndex:: <<targetNodeType>>
 commandId:: <<commandIdType>>
 
 .Errors
@@ -1113,8 +1069,6 @@ commandId:: <<commandIdType>>
 * `movedAnnotation` does not exist
 * `parent` does not exist
 * `movedAnnotation` is not an annotation of `parent`
-* `oldIndex` is beyond (the number of annotations of `parent`) - 1
-* ##?## `movedAnnotation` is not the node at ``parent``'s annotations at `oldIndex`.
 
 .Technical name
 `moveAnnotationInSameParent`
@@ -1151,23 +1105,18 @@ commandId:: <<commandIdType>>
 
 [[cmd-deleteReference]]
 ===== Delete reference
-Delete existing `deletedTarget`/`deletedResolveInfo` from ``parent``'s `reference` at `index`.
+Delete existing entry from ``parent``'s `reference` at `index`.
 
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 index:: <<indexType>>
-deletedTarget:: <<targetNodeType>>?
-deletedResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `deletedTarget` is `null` and `deletedResolveInfo` is `null`
-* ##?## `deletedTarget` is not the target at ``parent``'s `reference` at `index`.
-* ##?## `deletedResolveInfo` is not the resolveInfo at ``parent``'s `reference` at `index`.
 
 .Technical name
 `deleteReference`
@@ -1177,7 +1126,7 @@ commandId:: <<commandIdType>>
 
 [[cmd-changeReference]]
 ===== Change reference
-Replace existing `replacedTarget`/`replacedResolveInfo`  inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
+Replace existing entry inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
 
 [horizontal]
 .Parameters
@@ -1186,17 +1135,12 @@ reference:: <<metaPointerType>>
 index:: <<indexType>>
 newTarget:: <<targetNodeType>>?
 newResolveInfo:: <<targetNodeType>>?
-replacedTarget:: <<targetNodeType>>?
-replacedResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `newTarget` is `null` and `newResolveInfo` is `null`
-* `replacedTarget` is `null` and `replacedResolveInfo` is `null`
-* ##?## `replacedTarget` is not the target at ``parent``'s `reference` at `index`.
-* ##?## `replacedResolveInfo` is not the resolveInfo at ``parent``'s `reference` at `index`.
 
 .Technical name
 `changeReference`
@@ -1206,7 +1150,7 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveEntryFromOtherReference]]
 ===== Move entry from other reference
-Move existing `target`/`resolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
+Move existing entry inside ``oldParent``'s `oldReference` at `oldIndex`
 to ``newParent``'s `newReference` at `newIndex`.
 
 [horizontal]
@@ -1217,17 +1161,12 @@ newIndex:: <<indexType>>
 oldParent:: <<targetNodeType>>
 oldReference:: <<metaPointerType>>
 oldIndex:: <<indexType>>
-target:: <<targetNodeType>>?
-resolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
 
 .Errors
 * `newParent` does not exist
 * `newIndex` is beyond (the number of `newReference` entries of `newParent`)
 * `oldIndex` is beyond (the number of `oldReference` entries of `oldParent`) - 1
-* `target` is `null` and `resolveInfo` is `null`
-* ##?## `target` is not the target at ``oldParent``'s `oldReference` at `oldIndex`.
-* ##?## `resolveInfo` is not the resolveInfo at ``oldParent``'s `oldReference` at `oldIndex`.
 
 .Technical name
 `moveEntryFromOtherReference`
@@ -1237,7 +1176,7 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveEntryFromOtherReferenceInSameParent]]
 ===== Move entry from other reference in same parent
-Move existing `target`/`resolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
+Move existing entry inside ``parent``'s `oldReference` at `oldIndex`
 to ``parent``'s `newReference` at `newIndex`.
 
 [horizontal]
@@ -1247,17 +1186,12 @@ newReference:: <<metaPointerType>>
 newIndex:: <<indexType>>
 oldReference:: <<metaPointerType>>
 oldIndex:: <<indexType>>
-target:: <<targetNodeType>>?
-resolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
 * `newIndex` is beyond (the number of `newReference` entries of `parent`)
 * `oldIndex` is beyond (the number of `oldReference` entries of `parent`) - 1
-* `target` is `null` and `resolveInfo` is `null`
-* ##?## `target` is not the target at ``parent``'s `oldReference` at `oldIndex`.
-* ##?## `resolveInfo` is not the resolveInfo at ``parent``'s `oldReference` at `oldIndex`.
 
 .Technical name
 `moveEntryFromOtherReferenceInSameParent`
@@ -1267,7 +1201,7 @@ commandId:: <<commandIdType>>
 
 [[cmd-moveEntryInSameReference]]
 ===== Move entry in same reference
-Move existing `target`/`resolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
+Move existing entry inside ``parent``'s `reference` at `oldIndex`
 inside ``parent``'s `reference` at `newIndex`.
 
 [horizontal]
@@ -1276,17 +1210,12 @@ parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 newIndex:: <<indexType>>
-target:: <<targetNodeType>>?
-resolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
 * `newIndex` is beyond (the number of `reference` entries of `parent`) - 1
 * `oldIndex` is beyond (the number of `reference` entries of `parent`) - 1
-* `target` is `null` and `resolveInfo` is `null`
-* ##?## `target` is not the target at ``parent``'s `reference` at `oldIndex`.
-* ##?## `resolveInfo` is not the resolveInfo at ``parent``'s `reference` at `oldIndex`.
 
 .Technical name
 `moveEntryInSameReference`
@@ -1296,10 +1225,10 @@ commandId:: <<commandIdType>>
 
 [[cmd-addReferenceResolveInfo]]
 ===== Add reference ResolveInfo
-Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
+Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `reference` at `index`.
 
 ****
-`target` MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
+Current target MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
 [horizontal]
@@ -1308,7 +1237,6 @@ parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 index:: <<indexType>>
 newResolveInfo:: <<resolveInfoType>>
-target:: <<targetNodeType>>
 commandId:: <<commandIdType>>
 
 .Errors
@@ -1325,10 +1253,10 @@ commandId:: <<commandIdType>>
 
 [[cmd-deleteReferenceResolveInfo]]
 ===== Delete reference ResolveInfo
-Delete existing `deletedResolveInfo` as ResolveInfo from existing entry inside ``parent``'s `reference` at `index` with `target`.
+Delete existing ResolveInfo from existing entry inside ``parent``'s `reference` at `index`.
 
 ****
-`target` MUST NOT be `null` as we're about to remove ResolveInfo, and at least one of target and ResolveInfo MUST always be non-`null`.
+Current target MUST NOT be `null` as we're about to remove ResolveInfo, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
 [horizontal]
@@ -1336,17 +1264,13 @@ Delete existing `deletedResolveInfo` as ResolveInfo from existing entry inside `
 parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 index:: <<indexType>>
-target:: <<targetNodeType>>
-deletedResolveInfo:: <<resolveInfoType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `deletedResolveInfo` is `null`
-* `target` is `null`
+* target is `null`
 * ##?## resolveInfo is not set in ``parent``'s `reference` at `index`.
-* ##?## resolveInfo currently is not `deletedResolveInfo` in ``parent``'s `reference` at `index`.
 
 .Technical name
 `deleteReferenceResolveInfo`
@@ -1356,10 +1280,10 @@ commandId:: <<commandIdType>>
 
 [[cmd-changeReferenceResolveInfo]]
 ===== Change reference ResolveInfo
-Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` from `oldResolveInfo` to `newResolveInfo`.
+Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` to `newResolveInfo`.
 
 ****
-`target` MAY be `null` as we can only change ResolveInfo if both `oldResolveInfo` and `newResolveInfo` is non-`null`.
+Current target MAY be `null` as we can only change ResolveInfo if both current ResolveInfo and `newResolveInfo` is non-`null`.
 ****
 
 [horizontal]
@@ -1368,17 +1292,13 @@ parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 index:: <<indexType>>
 newResolveInfo:: <<resolveInfoType>>
-target:: <<targetNodeType>>?
-oldResolveInfo:: <<resolveInfoType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `newResolveInfo` is `null`
-* `oldResolveInfo` is `null`
 * ##?## resolveInfo is not set in ``parent``'s `reference` at `index`
-* ##?## resolveInfo currently is not `oldResolveInfo` in ``parent``'s `reference` at `index`
 
 .Technical name
 `changeReferenceResolveInfo`
@@ -1388,10 +1308,10 @@ commandId:: <<commandIdType>>
 
 [[cmd-addReferenceTarget]]
 ===== Add reference target
-Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `index`.
 
 ****
-`resolveInfo` MUST NOT be `null` as we can only add target if target is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
+Current ResolveInfo MUST NOT be `null` as we can only add target if target is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
 [horizontal]
@@ -1400,7 +1320,6 @@ parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 index:: <<indexType>>
 newTarget:: <<targetNodeType>>
-resolveInfo:: <<resolveInfoType>>
 commandId:: <<commandIdType>>
 
 .Errors
@@ -1417,10 +1336,10 @@ commandId:: <<commandIdType>>
 
 [[cmd-deleteReferenceTarget]]
 ===== Delete reference target
-Delete existing `deletedTarget` as target from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+Delete existing target from existing entry inside ``parent``'s `reference` at `index`.
 
 ****
-`resolveInfo` MUST NOT be `null` as we're about to remove target, and at least one of target and ResolveInfo MUST always be non-`null`.
+Current ResolveInfo MUST NOT be `null` as we're about to remove target, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
 
 [horizontal]
@@ -1428,16 +1347,12 @@ Delete existing `deletedTarget` as target from existing entry inside ``parent``'
 parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 index:: <<indexType>>
-resolveInfo:: <<resolveInfoType>>
-deletedTarget:: <<targetNodeType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `deletedTarget` is `null`
 * ##?## target is not set in ``parent``'s `reference` at `index`.
-* ##?## target currently is not `deletedTarget` in ``parent``'s `reference` at `index`.
 
 .Technical name
 `deleteReferenceTarget`
@@ -1447,10 +1362,10 @@ commandId:: <<commandIdType>>
 
 [[cmd-changeReferenceTarget]]
 ===== Change reference target
-Change target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` from `oldTarget` to `newTarget`.
+Change target of existing entry inside ``parent``'s `reference` at `index` to `newTarget`.
 
 ****
-`resolveInfo` MAY be `null` as we can only change target if both `oldTarget` and `newTarget` is non-`null`.
+Current ResolveInfo MAY be `null` as we can only change target if both current Target and `newTarget` is non-`null`.
 ****
 
 [horizontal]
@@ -1459,17 +1374,13 @@ parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 index:: <<indexType>>
 newTarget:: <<targetNodeType>>
-resolveInfo:: <<resolveInfoType>>?
-oldTarget:: <<targetNodeType>>
 commandId:: <<commandIdType>>
 
 .Errors
 * `parent` does not exist
 * `index` is beyond (the number of `reference` entries of `parent`) - 1
 * `newTarget` is `null`
-* `oldTarget` is `null`
 * ##?## target is not set in ``parent``'s `reference` at `index`
-* ##?## target currently is not `oldTarget` in ``parent``'s `reference` at `index`
 
 .Technical name
 `changeReferenceTarget`
