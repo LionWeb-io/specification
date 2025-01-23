@@ -24,6 +24,13 @@ Processed --> [*]: <i>client</i>\ndiscards
 ===== Add partition
 Add `newPartition` node as new partition.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/addPartition.adoc[]
+|===
+
 [horizontal]
 .Parameters
 newPartition:: <<nodeType>> root node to form a new partition.
@@ -46,6 +53,13 @@ commandId:: <<commandIdType>> Id of this command.
 ===== Delete partition
 Delete partition `deletedPartition`, and all its descendants (including annotation instances).
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/deletePartition.adoc[]
+|===
+
 [horizontal]
 .Parameters
 deletedPartition:: <<nodeType>> or <<targetNodeType>> #TODO#
@@ -66,6 +80,13 @@ commandId:: <<commandIdType>> Id of this command.
 [[cmd-changeClassifier]]
 ===== Change classifier
 Change classifier of `node` from `oldClassifier` to `newClassifier`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/changeConcept.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -89,6 +110,13 @@ commandId:: <<commandIdType>> Id of this command.
 ===== Add property
 Add `newValue` as value of property `property` to `node`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/addProperty.adoc[]
+|===
+
 [horizontal]
 .Parameters
 node:: <<targetNodeType>>
@@ -110,6 +138,13 @@ commandId:: <<commandIdType>>
 ===== Delete property
 Delete existing `property` with `oldValue` from `node`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/deleteProperty.adoc[]
+|===
+
 [horizontal]
 .Parameters
 node:: <<targetNodeType>>
@@ -129,6 +164,13 @@ commandId:: <<commandIdType>>
 [[cmd-changeProperty]]
 ===== Change property
 Change existing `property` of `node` to `newValue`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/changeProperty.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -155,6 +197,13 @@ commandId:: <<commandIdType>>
 ===== Add child
 Add new node `newChild` to `parent` in `containment` at `index`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/addChild.adoc[]
+|===
+
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
@@ -178,6 +227,13 @@ commandId:: <<commandIdType>>
 ===== Delete child
 Delete existing node from ``parent``'s `containment` at `index`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/deleteChild.adoc[]
+|===
+
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
@@ -199,6 +255,13 @@ commandId:: <<commandIdType>>
 ===== Replace child
 Replace existing node inside ``parent``'s `containment` at `index` with new node `newChild`.
 Delete current child inside ``parent``'s `containment` at `index`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/replaceChild.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -223,6 +286,13 @@ commandId:: <<commandIdType>>
 ===== Move child from other containment
 Move existing node `movedChild` inside ``newParent``'s `newContainment` at `newIndex`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveChildFromOtherContainment.adoc[]
+|===
+
 [horizontal]
 .Parameters
 newParent:: <<targetNodeType>>
@@ -246,6 +316,13 @@ commandId:: <<commandIdType>>
 ===== Move child from other containment in same parent
 Move existing node `movedChild` (currently inside one of ``parent``'s containments other than `newContainment)
 inside ``parent``'s `newContainment` at `newIndex`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveChildFromOtherContainmentInSameParent.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -273,6 +350,13 @@ commandId:: <<commandIdType>>
 Move existing node `movedChild` (currently inside ``parent``'s `containment`)
 inside ``parent``'s `containment` at `newIndex`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveChildInSameContainment.adoc[]
+|===
+
 [horizontal]
 .Parameters
 newIndex:: <<indexType>>
@@ -299,6 +383,13 @@ commandId:: <<commandIdType>>
 Move existing node `movedChild` inside ``newParent``'s `newContainment` at `newIndex`.
 Delete current child inside ``newParent``'s `newContainment` at `newIndex`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveAndReplaceChildFromOtherContainment.adoc[]
+|===
+
 [horizontal]
 .Parameters
 newParent:: <<targetNodeType>>
@@ -323,6 +414,13 @@ commandId:: <<commandIdType>>
 Move existing node `movedChild` (currently inside one of ``parent``'s containments other than `newContainment)
 inside ``parent``'s `newContainment` at `newIndex`.
 Delete current child inside ``parent``'s `newContainment` at `newIndex`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveAndReplaceChildFromOtherContainmentInSameParent.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -350,6 +448,13 @@ commandId:: <<commandIdType>>
 Move existing node `movedChild` (currently inside ``parent``'s `containment`)
 inside ``parent``'s `containment` at `newIndex`.
 Delete current child inside ``parent``'s `newContainment` at `newIndex`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveAndReplaceChildInSameContainment.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -379,6 +484,13 @@ commandId:: <<commandIdType>>
 ===== Add annotation
 Add new node `newAnnotation` to ``parent``'s annotations at `index`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/addAnnotation.adoc[]
+|===
+
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
@@ -401,6 +513,13 @@ commandId:: <<commandIdType>>
 ===== Delete annotation
 Delete existing node from ``parent``'s annotations at `index`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/deleteAnnotation.adoc[]
+|===
+
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
@@ -421,6 +540,13 @@ commandId:: <<commandIdType>>
 ===== Replace annotation
 Replace existing node inside ``parent``'s annotations at `index` with new node `newAnnotation`.
 Delete current node at ``parent``'s annotations at `index`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/replaceAnnotation.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -443,6 +569,13 @@ commandId:: <<commandIdType>>
 [[cmd-moveAnnotationFromOtherParent]]
 ===== Move annotation from other parent
 Move existing node `movedAnnotation` inside ``newParent``'s annotations at `newIndex`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveAnnotationFromOtherParent.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -468,6 +601,13 @@ commandId:: <<commandIdType>>
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations)
 inside ``parent``'s annotations at `newIndex`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveAnnotationInSameParent.adoc[]
+|===
+
 [horizontal]
 .Parameters
 newIndex:: <<indexType>>
@@ -491,6 +631,13 @@ commandId:: <<commandIdType>>
 ===== Move annotation from other parent and replace existing annotation
 Move existing node `movedAnnotation` inside ``newParent``'s annotations at `newIndex`.
 Delete current node at ``newParent``'s annotations at `newIndex`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveAndReplaceAnnotationFromOtherParent.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -516,6 +663,13 @@ commandId:: <<commandIdType>>
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations)
 inside ``parent``'s annotations at `newIndex`.
 Delete current node at ``parent``'s annotations at `newIndex`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveAndReplaceAnnotationInSameParent.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -543,6 +697,13 @@ commandId:: <<commandIdType>>
 ===== Add reference
 Add `newTarget` / `newResolveInfo` to ``parent``'s `reference` at `index`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/addReference.adoc[]
+|===
+
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
@@ -567,6 +728,13 @@ commandId:: <<commandIdType>>
 ===== Delete reference
 Delete existing entry from ``parent``'s `reference` at `index`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/deleteReference.adoc[]
+|===
+
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
@@ -587,6 +755,13 @@ commandId:: <<commandIdType>>
 [[cmd-changeReference]]
 ===== Change reference
 Replace existing entry inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/changeReference.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -612,6 +787,13 @@ commandId:: <<commandIdType>>
 ===== Move entry from other reference
 Move existing entry inside ``oldParent``'s `oldReference` at `oldIndex`
 to ``newParent``'s `newReference` at `newIndex`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveEntryFromOtherReference.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -639,6 +821,13 @@ commandId:: <<commandIdType>>
 Move existing entry inside ``parent``'s `oldReference` at `oldIndex`
 to ``parent``'s `newReference` at `newIndex`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveEntryFromOtherReferenceInSameParent.adoc[]
+|===
+
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
@@ -664,6 +853,13 @@ commandId:: <<commandIdType>>
 Move existing entry inside ``parent``'s `reference` at `oldIndex`
 inside ``parent``'s `reference` at `newIndex`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveEntryInSameReference.adoc[]
+|===
+
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
@@ -688,6 +884,13 @@ commandId:: <<commandIdType>>
 Move existing entry inside ``oldParent``'s `oldReference` at `oldIndex`
 to ``newParent``'s `newReference` at `newIndex`,
 replacing existing entry in ``newParent``'s `newReference` at `newIndex`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveAndReplaceEntryFromOtherReference.adoc[]
+|===
 
 [horizontal]
 .Parameters
@@ -716,6 +919,13 @@ Move existing entry inside ``parent``'s `oldReference` at `oldIndex`
 to ``parent``'s `newReference` at `newIndex`,
 replacing existing entry in ``parent``'s `newReference` at `newIndex`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveAndReplaceEntryFromOtherReferenceInSameParent.adoc[]
+|===
+
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
@@ -742,6 +952,13 @@ Move existing entry inside ``parent``'s `reference` at `oldIndex`
 inside ``parent``'s `reference` at `newIndex`,
 replacing existing entry in ``parent``'s `reference` at `newIndex`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/moveAndReplaceEntryInSameReference.adoc[]
+|===
+
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
@@ -764,6 +981,13 @@ commandId:: <<commandIdType>>
 [[cmd-addReferenceResolveInfo]]
 ===== Add reference ResolveInfo
 Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `reference` at `index`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/addReferenceResolveInfo.adoc[]
+|===
 
 ****
 Current target MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
@@ -793,6 +1017,13 @@ commandId:: <<commandIdType>>
 ===== Delete reference ResolveInfo
 Delete existing ResolveInfo from existing entry inside ``parent``'s `reference` at `index`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/deleteReferenceResolveInfo.adoc[]
+|===
+
 ****
 Current target MUST NOT be `null` as we're about to remove ResolveInfo, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
@@ -819,6 +1050,13 @@ commandId:: <<commandIdType>>
 [[cmd-changeReferenceResolveInfo]]
 ===== Change reference ResolveInfo
 Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` to `newResolveInfo`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/changeReferenceResolveInfo.adoc[]
+|===
 
 ****
 Current target MAY be `null` as we can only change ResolveInfo if both current ResolveInfo and `newResolveInfo` is non-`null`.
@@ -848,6 +1086,13 @@ commandId:: <<commandIdType>>
 ===== Add reference target
 Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `index`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/addReferenceTarget.adoc[]
+|===
+
 ****
 Current ResolveInfo MUST NOT be `null` as we can only add target if target is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
@@ -876,6 +1121,13 @@ commandId:: <<commandIdType>>
 ===== Delete reference target
 Delete existing target from existing entry inside ``parent``'s `reference` at `index`.
 
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/deleteReferenceTarget.adoc[]
+|===
+
 ****
 Current ResolveInfo MUST NOT be `null` as we're about to remove target, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
@@ -901,6 +1153,13 @@ commandId:: <<commandIdType>>
 [[cmd-changeReferenceTarget]]
 ===== Change reference target
 Change target of existing entry inside ``parent``'s `reference` at `index` to `newTarget`.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::commandEventOverview/changeReferenceTarget.adoc[]
+|===
 
 ****
 Current ResolveInfo MAY be `null` as we can only change target if both current Target and `newTarget` is non-`null`.
