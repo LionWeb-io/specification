@@ -1,0 +1,101 @@
+[[queries]]
+=== Queries
+
+[[cmd-subscription]]
+==== Subscription
+
+[[qry-subscribePartitions]]
+===== Subscribe to partition changes
+This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions, and automatically subscribe (`partitions` is true) to newly created partitions.
+
+[horizontal]
+.Request parameters
+creation:: `boolean` Whether this client wants to receive events on newly created partitions (`true`), or not (`false`).
+
+deletion:: `boolean` Whether this client wants to receive events on deleted partitions (`true`), or not (`false`).
+
+partitions:: `boolean` Whether this client wants to automatically subscribe to newly created partitions (`true`), or not (`false`).
+
+queryId:: <<queryIdType>> Id of this query.
+
+[horizontal]
+.Response parameters
+queryId:: <<queryIdType>>  Id of this query.
+
+.Errors
+_none_
+
+.Technical name
+`subscribePartitions`
+
+[[qry-subscribePartition]]
+===== Subscribe to partition
+This client wants to receive events on any changes to `partition` or any of its descendants.
+
+[horizontal]
+.Request parameters
+partition:: <<targetNodeType>> Node id of the partition this client wants to receive events of.
+
+queryId:: <<queryIdType>> Id of this query.
+
+[horizontal]
+.Response parameters
+contents:: <<chunkType>> Complete contents of `partition`, i.e. the node with id `partition` and all of its descendants (including annotation instances).
+
+queryId:: <<queryIdType>> Id of this query.
+
+.Errors
+* already subscribed to `partition`
+
+.Technical name
+`subscribePartition`
+
+[[cmd-unsubscribePartition]]
+===== Unsubscribe from partition
+This client does not want to receive events on any changes to `partition` or any of its descendants anymore.
+
+[horizontal]
+.Request parameters
+partition:: <<targetNodeType>> Node id of the partition this client wants to stop receiving events of.
+queryId:: <<queryIdType>> Id of this query.
+
+[horizontal]
+.Response parameters
+queryId:: <<queryIdType>> Id of this query.
+
+.Errors
+* not subscribed to `partition`
+
+.Technical name
+`unsubscribePartition`
+
+[[cmd-misc]]
+==== Miscellaneous
+
+[[cmd-getAvailableIds]]
+===== Get available ids
+Request `count` number of unused <<{m3}.adoc#identifiers, valid ids>>.
+
+Same functionality as <<{bulk}.adoc#ids, bulk API ids command>>.
+
+We don't assume leases, i.e. ids handed out to one client are "owned" by that client forever.
+
+
+[horizontal]
+.Request parameters
+count:: `integer` Number of ids requested.
+queryId:: <<queryIdType>> Id of this query.
+
+[horizontal]
+.Response parameters
+ids:: <<freeIdType>>[] List of ids guaranteed to be free.
+The repository MUST return between one (inclusive) and `count` (inclusive) ids.
+It MAY return less than `count` ids.
+
+queryId:: <<queryIdType>> Id of this query.
+
+.Errors
+_none_
+
+.Technical name
+`getAvailableIds`

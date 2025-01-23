@@ -1,0 +1,919 @@
+[[events]]
+=== Events
+
+[[evnt-partitions]]
+==== Partitions
+
+[[evnt-partitionAdded]]
+===== Partition added
+Partition `newPartition` has been added to the repository.
+
+This client is now subscribed to any changes to `newPartition` or any of its descendants.
+
+[horizontal]
+.Parameters
+newPartition:: <<nodeType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`partitionAdded`
+
+.Related command
+<<cmd-addPartition>>
+
+[[evnt-partitionDeleted]]
+===== Partition deleted
+Partition `deletedPartition`, and all its descendants, have been deleted from the repository.
+
+This client is now unsubscribed from any changes to `deletedPartition` or any of its descendants.
+
+[horizontal]
+.Parameters
+deletedPartition:: <<nodeType>> or <<targetNodeType>> #TODO#
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`partitionDeleted`
+
+.Related command
+<<cmd-deletePartition>>
+
+[[evnt-nodes]]
+==== Nodes
+
+[[evnt-conceptChanged]]
+===== Concept changed
+Concept of `node` has been changed from `oldConcept` to `newConcept`.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+newConcept:: <<metaPointerType>>
+oldConcept:: <<metaPointerType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`conceptChanged`
+
+.Related command
+<<cmd-changeClassifier>>
+
+[[evnt-properties]]
+==== Properties
+
+[[evnt-propertyAdded]]
+===== Property added
+`property` of `node` has been set to `newValue`.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+newValue:: <<propertyValueType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`propertyAdded`
+
+.Related command
+<<cmd-addProperty>>
+
+[[evnt-propertyDeleted]]
+===== Property deleted
+Existing `property` of `node` with `oldValue` has been deleted.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+oldValue:: <<propertyValueType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`propertyDeleted`
+
+.Related command
+<<cmd-deleteProperty>>
+
+[[evnt-propertyChanged]]
+===== Property changed
+Existing `property` of `node` has been changed from `oldValue` to `newValue`.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+newValue:: <<propertyValueType>>
+oldValue:: <<propertyValueType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`propertyChanged`
+
+.Related command
+<<cmd-changeProperty>>
+
+[[evnt-children]]
+==== Children
+
+[[evnt-childAdded]]
+===== Child added
+New node `newChild` has been added to ``parent``'s  `containment` at `index`.
+All other children inside ``parent``'s `containment` with index >= `index` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newChild:: <<nodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`childAdded`
+
+.Related command
+<<cmd-addChild>>
+
+[[evnt-childDeleted]]
+===== Child deleted
+Existing node `deletedChild`, and all its descendants, have been deleted from ``parent``'s `containment` at `index`.
+All other children inside ``parent``'s `containment` with index > `index` have been moved to next lower index.
+
+[horizontal]
+.Parameters
+deletedChild:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`childDeleted`
+
+.Related command
+<<cmd-deleteChild>>
+
+[[evnt-childReplaced]]
+===== Child replaced
+Existing node `replacedChild` inside ``parent``'s `containment` at `index` has been replaced with new node `newChild`.
+`replacedChild`, and all its descendants, have been deleted.
+
+[horizontal]
+.Parameters
+newChild:: <<nodeType>>
+replacedChild:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`childReplaced`
+
+.Related command
+<<cmd-replaceChild>>
+
+[[evnt-childMovedFromOtherContainment]]
+===== Child moved from other containment
+Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has been moved
+inside ``newParent``'s `newContainment` at `newIndex`.
+
+All other children inside ``oldParent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+All other children inside ``newParent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`childMovedFromOtherContainment`
+
+.Related command
+<<cmd-moveChildFromOtherContainment>>
+
+[[evnt-childMovedFromOtherContainmentInSameParent]]
+===== Child moved from other containment in same parent
+Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has been moved
+inside ``parent``'s `newContainment` at `newIndex`.
+
+All other children inside ``parent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+All other children inside ``parent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`childMovedFromOtherContainmentInSameParent`
+
+.Related command
+<<cmd-moveChildFromOtherContainmentInSameParent>>
+
+[[evnt-childMovedInSameContainment]]
+===== Child moved in same containment
+Existing node `movedChild` (previously inside ``parent``'s `containment` at `oldIndex`) has been moved
+inside ``parent``'s `containment` at `newIndex`.
+
+If `oldIndex` < `newIndex`: All other children inside ``parent``'s `containment` with previous index > `oldIndex` and previous index <= `newIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* F[6]`
+
+If `oldIndex` > `newIndex`: All other children inside ``parent``'s `containment` with previous index >= `newIndex` and previous index < `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6]`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`childMovedInSameContainment`
+
+.Related command
+<<cmd-moveChildInSameContainment>>
+
+[[evnt-childMovedAndReplacedFromOtherContainment]]
+===== Child moved from other containment and replaced existing child
+Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has replaced the existing `replacedChild` inside ``newParent``'s `newContainment` at `newIndex`.
+`replacedChild`, and all its descendants, have been deleted.
+
+All other children inside ``oldParent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+No other children inside ``newParent``'s `newContainment` have been moved.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+replacedChild:: <<nodeType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`childMovedAndReplacedFromOtherContainment`
+
+.Related command
+<<cmd-moveAndReplaceChildFromOtherContainment>>
+
+[[evnt-childMovedAndReplacedFromOtherContainmentInSameParent]]
+===== Child moved from other containment in same parent and replaced existing child
+Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has replaced the existing `replacedChild` inside ``parent``'s `newContainment` at `newIndex`.
+`replacedChild`, and all its descendants, have been deleted.
+
+All other children inside ``parent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+No other children inside ``parent``'s `newContainment` have been moved.
+
+[horizontal]
+.Parameters
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+replacedChild:: <<nodeType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`childMovedAndReplacedFromOtherContainmentInSameParent`
+
+.Related command
+<<cmd-moveAndReplaceChildFromOtherContainmentInSameParent>>
+
+[[evnt-childMovedAndReplacedInSameContainment]]
+===== Child moved in same containment and replaced existing child
+Existing node `movedChild` (previously inside ``parent``'s `containment` at `oldIndex`) has replaced the existing `replacedChild` inside ``parent``'s `containment` at `newIndex`.
+`replacedChild`, and all its descendants, have been deleted.
+
+If `oldIndex` < `newIndex`: All other children inside ``parent``'s `containment` with previous index > `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_`
+
+If `oldIndex` > `newIndex`: All other children inside ``parent``'s `containment` with previous index >= `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+replacedChild:: <<nodeType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`childMovedAndReplacedInSameContainment`
+
+.Related command
+<<cmd-moveAndReplaceChildInSameContainment>>
+
+[[evnt-annotations]]
+==== Annotations
+
+[[evnt-annotationAdded]]
+===== Annotation added
+New node `newAnnotation` has been added to ``parent``'s annotations at `index`.
+All other annotations inside ``parent``'s annotations with index >= `index` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newAnnotation:: <<nodeType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`annotationAdded`
+
+.Related command
+<<cmd-addAnnotation>>
+
+[[evnt-annotationDeleted]]
+===== Annotation deleted
+Existing node `deletedAnnotation`, and all its descendants, have been deleted from ``parent``'s annotations at `index`.
+All other annotations inside ``parent``'s annotations with index > `index` have been moved to next lower index.
+
+[horizontal]
+.Parameters
+deletedAnnotation:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`annotationDeleted`
+
+.Related command
+<<cmd-deleteAnnotation>>
+
+[[evnt-annotationReplaced]]
+===== Annotation replaced
+Existing node `replacedAnnotation` inside ``parent``'s annotations at `index` has been replaced with new node `newAnnotation`.
+`replacedAnnotation`, and all its descendants, have been deleted.
+
+[horizontal]
+.Parameters
+newAnnotation:: <<nodeType>>
+replacedAnnotation:: <<nodeType>> or <<targetNodeType>> #TODO#
+parent:: <<targetNodeType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`annotationReplaced`
+
+.Related command
+<<cmd-replaceAnnotation>>
+
+[[evnt-annotationMovedFromOtherParent]]
+===== Annotation moved from other parent
+Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has been moved
+inside ``newParent``'s annotations at `newIndex`.
+
+All other annotations inside ``oldParent``'s annotations with index > `oldIndex` have been moved to next lower index.
+
+All other annotations inside ``newParent``'s annotations with index >= `newIndex` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`annotationMovedFromOtherParent`
+
+.Related command
+<<cmd-moveAnnotationFromOtherParent>>
+
+[[evnt-annotationMovedInSameParent]]
+===== Annotation moved in same parent
+Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has been moved
+inside ``parent``'s annotations at `newIndex`.
+
+If `oldIndex` < `newIndex`: All other annotations inside ``parent``'s annotations with previous index > `oldIndex` and previous index <= `newIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* F[6]`
+
+If `oldIndex` > `newIndex`: All other annotations inside ``parent``'s annotations with previous index >= `newIndex` and previous index < `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6]`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldIndex:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`annotationMovedInSameParent`
+
+.Related command
+<<cmd-moveAnnotationInSameParent>>
+
+[[evnt-annotationMovedAndReplacedFromOtherParent]]
+===== Annotation moved from other parent and replaced existing annotation
+Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has replaced the existing `replacedAnnotation` inside ``newParent``'s annotations at `newIndex`.
+`replacedAnnotation`, and all its descendants, have been deleted.
+
+All other annotations inside ``oldParent``'s annotations with index > `oldIndex` have been moved to next lower index.
+
+No other annotations inside ``newParent``'s annotations have been moved.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldIndex:: <<indexType>>
+replacedAnnotation:: <<nodeType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`annotationMovedAndReplacedFromOtherParent`
+
+.Related command
+<<cmd-moveAndReplaceAnnotationFromOtherParent>>
+
+[[evnt-annotationMovedAndReplacedInSameParent]]
+===== Annotation moved in same parent and replaced existing annotation
+Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has replaced the existing `replacedAnnotation` inside ``parent``'s annotations at `newIndex`.
+`replacedAnnotation`, and all its descendants, have been deleted.
+
+If `oldIndex` < `newIndex`: All other annotations inside ``parent``'s `containment` with previous index > `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_`
+
+If `oldIndex` > `newIndex`: All other annotations inside ``parent``'s `containment` with previous index >= `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldIndex:: <<targetNodeType>>
+replacedAnnotation:: <<nodeType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`annotationMovedAndReplacedInSameParent`
+
+.Related command
+<<cmd-moveAndReplaceAnnotationInSameParent>>
+
+[[evnt-references]]
+==== References
+
+[[evnt-referenceAdded]]
+===== Reference added
+Reference with `newTarget`/`newResolveInfo` has been added to ``parent``'s `reference` at `index`.
+All other entries inside ``parent``'s `reference` with index >= `index` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>?
+newResolveInfo:: <<resolveInfoType>>?
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`referenceAdded`
+
+.Related command
+<<cmd-addReference>>
+
+[[evnt-referenceDeleted]]
+===== Reference deleted
+Existing reference with `deletedTarget`/`deletedResolveInfo` has been deleted from ``parent``'s `reference` at `index`.
+All other entries inside ``parent``'s `reference` with index > `index` have been moved to next lower index.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+deletedTarget:: <<targetNodeType>>
+deletedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`referenceDeleted`
+
+.Related command
+<<cmd-deleteReference>>
+
+[[evnt-referenceChanged]]
+===== Reference changed
+Existing reference with `replacedTarget`/`replacedResolveInfo` inside ``parent``'s annotations at `index` has been replaced with `newTarget`/`newResolveInfo`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>?
+newResolveInfo:: <<targetNodeType>>?
+replacedTarget:: <<targetNodeType>>
+replacedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`referenceChanged`
+
+.Related command
+<<cmd-changeReference>>
+
+[[evnt-entryMovedFromOtherReference]]
+===== Entry moved from other reference
+Existing reference `target`/`resolveInfo` (previously inside ``oldParent``'s `oldReference` at `oldIndex`) has been moved
+to ``newParent``'s `newReference` at `newIndex`.
+
+All other entries inside ``oldParent``'s `oldReference` with index > `oldIndex` have been moved to next lower index.
+
+All other entries inside ``newParent``'s `newReference` with index >= `newIndex` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldParent:: <<targetNodeType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+target:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`entryMovedFromOtherReference`
+
+.Related command
+<<cmd-moveEntryFromOtherReference>>
+
+[[evnt-entryMovedFromOtherReferenceInSameParent]]
+===== Entry moved from other reference in same parent
+Existing reference `target`/`resolveInfo` (previously inside ``parent``'s `oldReference` at `oldIndex`) has been moved
+to ``parent``'s `newReference` at `newIndex`.
+
+All other entries inside ``parent``'s `oldReference` with index > `oldIndex` have been moved to next lower index.
+
+All other entries inside ``parent``'s `newReference` with index >= `newIndex` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+target:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`entryMovedFromOtherReferenceInSameParent`
+
+.Related command
+<<cmd-moveEntryFromOtherReferenceInSameParent>>
+
+[[evnt-entryMovedInSameReference]]
+===== Entry moved in same reference
+Existing reference `target`/`resolveInfo` (previously inside ``parent``'s `reference` at `oldIndex`) has been moved
+to ``parent``'s `reference` at `newIndex`.
+
+If `oldIndex` < `newIndex`: All other entries inside ``parent``'s `reference` with previous index > `oldIndex` and previous index <= `newIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* F[6]`
+
+If `oldIndex` > `newIndex`: All other entries inside ``parent``'s `reference` with previous index >= `newIndex` and previous index < `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6]`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+newIndex:: <<indexType>>
+target:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`entryMovedInSameReference`
+
+.Related command
+<<cmd-moveEntryInSameReference>>
+
+[[evnt-entryMovedAndReplacedFromOtherReference]]
+===== Entry moved from other reference and replaced existing entry
+Existing reference `movedTarget`/`movedResolveInfo` (previously inside ``oldParent``'s `oldReference` at `oldIndex`) has replaced existing `replacedTarget`/`replacedResolveInfo` at ``newParent``'s `newReference` at `newIndex`.
+
+All other entries inside ``oldParent``'s `oldReference` with index > `oldIndex` have been moved to next lower index.
+
+No other entries inside ``newParent``'s `newReference` have been moved.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedTarget:: <<targetNodeType>>
+movedResolveInfo:: <<resolveInfoType>>
+oldParent:: <<targetNodeType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+replacedTarget:: <<targetNodeType>>
+replacedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`entryMovedAndReplacedFromOtherReference`
+
+.Related command
+<<cmd-moveAndReplaceEntryFromOtherReference>>
+
+[[evnt-entryMovedAndReplacedFromOtherReferenceInSameParent]]
+===== Entry moved from other reference in same parent and replaced existing entry
+Existing reference `movedTarget`/`movedResolveInfo` (previously inside ``parent``'s `oldReference` at `oldIndex`) has replaced existing `replacedTarget`/`replacedResolveInfo` at ``parent``'s `newReference` at `newIndex`.
+
+All other entries inside ``parent``'s `oldReference` with index > `oldIndex` have been moved to next lower index.
+
+No other entries inside ``parent``'s `newReference` have been moved.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedTarget:: <<targetNodeType>>
+movedResolveInfo:: <<resolveInfoType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+replacedTarget:: <<targetNodeType>>
+replacedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`entryMovedAndReplacedFromOtherReferenceInSameParent`
+
+.Related command
+<<cmd-moveAndReplaceEntryFromOtherReferenceInSameParent>>
+
+[[evnt-entryMovedAndReplacedInSameReference]]
+===== Entry moved in same reference and replaced existing entry
+Existing reference `movedTarget`/`movedResolveInfo` (previously inside ``parent``'s `reference` at `oldIndex`) has replaced existing `replacedTarget`/`replacedResolveInfo` at ``parent``'s `reference` at `newIndex`.
+
+If `oldIndex` < `newIndex`: All other entries inside ``parent``'s `containment` with previous index > `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_`
+
+If `oldIndex` > `newIndex`: All other entries inside ``parent``'s `containment` with previous index >= `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedTarget:: <<targetNodeType>>
+movedResolveInfo:: <<resolveInfoType>>
+oldIndex:: <<indexType>>
+replacedTarget:: <<targetNodeType>>
+replacedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`entryMovedAndReplacedInSameReference`
+
+.Related command
+<<cmd-moveAndReplaceEntryInSameReference>>
+
+[[evnt-referenceResolveInfoAdded]]
+===== Reference ResolveInfo added
+`newResolveInfo` has been added as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newResolveInfo:: <<resolveInfoType>>
+target:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`referenceResolveInfoAdded`
+
+.Related command
+<<cmd-addReferenceResolveInfo>>
+
+[[evnt-referenceResolveInfoDeleted]]
+===== Reference ResolveInfo deleted
+ResolveInfo `deletedResolveInfo` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `target`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+target:: <<targetNodeType>>
+deletedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`referenceResolveInfoDeleted`
+
+.Related command
+<<cmd-deleteReferenceResolveInfo>>
+
+[[evnt-referenceResolveInfoChanged]]
+===== Reference ResolveInfo changed
+ResolveInfo of existing entry inside ``parent``'s `reference` at `index` with `target` has been changed from `oldResolveInfo` to `newResolveInfo`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newResolveInfo:: <<resolveInfoType>>
+target:: <<targetNodeType>>?
+replacedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`referenceResolveInfoChanged`
+
+.Related command
+<<cmd-changeReferenceResolveInfo>>
+
+[[evnt-referenceTargetAdded]]
+===== Reference target added
+`newTarget` has been added as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`referenceTargetAdded`
+
+.Related command
+<<cmd-addReferenceTarget>>
+
+[[evnt-referenceTargetDeleted]]
+===== Reference target deleted
+Target `deletedTarget` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+resolveInfo:: <<resolveInfoType>>
+deletedTarget:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`referenceTargetDeleted`
+
+.Related command
+<<cmd-deleteReferenceTarget>>
+
+[[evnt-referenceTargetChanged]]
+===== Reference target changed
+Target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` has been changed from `oldTarget` to `newTarget`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>?
+replacedTarget:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`referenceTargetChanged`
+
+.Related command
+<<cmd-changeReferenceTarget>>
+
+[[evnt-miscellaneous]]
+==== Miscellaneous
+
+[[evnt-composite]]
+===== Composite
+The events in `parts` have happened in the given order.
+
+All `originCommands` have been handled (maybe by discarding them).
+
+[horizontal]
+.Parameters
+parts:: <<eventType>>[]
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`composite`
+
+.Related command
+<<cmd-composite>>
+
+[[evnt-noOp]]
+===== No-op
+Nothing happened as result of one or more command(s).
+
+[horizontal]
+.Parameters
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`noOp`
+
+.Related command
+_none_
+
+[[evnt-error]]
+===== Error
+Repository couldn't handle one or more command(s).
+
+[horizontal]
+.Parameters
+errorCode:: `String`
+message:: `String`
+originCommands:: <<commandSourceType>>[]
+
+.Technical name
+`error`
+
+.Related command
+_none_
