@@ -2,15 +2,11 @@
 == Open questions
 #TODO#
 
-* For new nodes, do we only send their id + classifier, or a complete node?
-
 * Which of the events can potentially create invalid (recursively contained) trees?
 
 * Which kind of errors do we accept?
 How does this interact with concurrent edits?
 Example: Does <<cmd-deleteChild>> fail if the `removedChild` does not exist?
-
-* in removal cases (e.g. <<cmd-deleteChild>>), do we want to send only the removed id or the whole node?
 
 * Do we need "swapNodes" event?
 
