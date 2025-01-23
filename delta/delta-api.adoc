@@ -79,6 +79,95 @@ It emits one `propertyChanged` event, correlated with both commands.
 A client stays up-to-date with the repository's contents if it applies all events in order.
 A client can either decide to apply its own change immediately and filter out events based on that command, or wait for the correlated event to arrive and apply the change only then.
 
+=== Command overview
+
+[cols="2,3,3,3,1,1"]
+|===
+|Action |Child |Annotation |Reference |Property |Partition / Classifier
+
+|Add
+|<<cmd-addChild>>
+|<<cmd-addAnnotation>>
+|
+<<cmd-addReference>>
+
+<<cmd-addReferenceTarget>>
+
+<<cmd-addReferenceResolveInfo>>
+|<<cmd-addProperty>>
+|<<cmd-addPartition>>
+
+|Delete
+|<<cmd-deleteChild>>
+|<<cmd-deleteAnnotation>>
+|
+<<cmd-deleteReference>>
+
+<<cmd-deleteReferenceTarget>>
+
+<<cmd-deleteReferenceResolveInfo>>
+|<<cmd-deleteProperty>>
+|<<cmd-deletePartition>>
+
+|Change
+|<<cmd-replaceChild>>
+|<<cmd-replaceAnnotation>>
+|
+<<cmd-changeReference>>
+
+<<cmd-changeReferenceTarget>>
+
+<<cmd-changeReferenceResolveInfo>>
+|<<cmd-changeProperty>>
+|<<cmd-changeClassifier>>
+
+|Move from other node
+|<<cmd-moveChildFromOtherContainment>>
+|<<cmd-moveAnnotationFromOtherParent>>
+|<<cmd-moveEntryFromOtherReference>>
+|
+|
+
+|Move from other feature in same node
+|<<cmd-moveChildFromOtherContainmentInSameParent>>
+|
+|<<cmd-moveEntryFromOtherReferenceInSameParent>>
+|
+|
+
+|Move in same feature in same node
+|<<cmd-moveChildInSameContainment>>
+|<<cmd-moveAnnotationInSameParent>>
+|<<cmd-moveEntryInSameReference>>
+|
+|
+
+|Move from other node and replace existing
+|<<cmd-moveAndReplaceChildFromOtherContainment>>
+|<<cmd-moveAndReplaceAnnotationFromOtherParent>>
+|<<cmd-moveAndReplaceEntryFromOtherReference>>
+|
+|
+
+|Move from other feature in same node and replace existing
+|<<cmd-moveAndReplaceChildFromOtherContainmentInSameParent>>
+|
+|<<cmd-moveAndReplaceEntryFromOtherReferenceInSameParent>>
+|
+|
+
+|Move in same feature in same node and replace existing
+|<<cmd-moveAndReplaceChildInSameContainment>>
+|<<cmd-moveAndReplaceAnnotationInSameParent>>
+|<<cmd-moveAndReplaceEntryInSameReference>>
+|
+|
+
+|Composite
+5+|<<cmd-composite>>
+|===
+
+
 == Description
 === Client characteristics
 A client MUST identify with the repository with a _client id_.
