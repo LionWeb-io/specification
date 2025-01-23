@@ -1,0 +1,30 @@
+[[description]]
+== Description
+=== Client characteristics
+A client MUST identify with the repository with a _client id_.
+The client id MUST be a valid <<{m3}.adoc#node-id, identifier>>.
+It serves as a technical identifier.
+Authentication and authorization are out of scope of this API.
+
+=== Channel characteristics
+Logically, the channel has independent parts for each kind of message;
+in practice, we might transmit some or all of them through a shared channel.
+
+This protocol is agnostic of its underlying technical implementation.
+We can use any (e.g. stateless, stateful) protocol, as long as it fulfills request/response characteristics for client-initiated query, command, and session messages, and repository-initiated broadcast characteristics for event messages.
+
+[[session, session]]
+=== Session characteristics
+One client may have more than one open session.
+The client has the responsibility to guarantee uniqueness of query / command / session message ids.
+
+=== Message characteristics
+Each message is atomic; it cannot be split.
+
+We assume the underlying protocol handles quality of service concerns (e.g. guaranteed one-time complete delivery of messages), they are out of scope of this API.
+
+Each message has some id unique to the session:
+
+* Queries have a _query id_.
+* Commands have a _command id_.
+* Events have _origin commands_.

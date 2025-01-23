@@ -212,7 +212,7 @@ containment:: <<metaPointerType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
 
-.Events
+.Errors
 * `parent` does not exist
 * `newChild` id already exists
 * `index` is beyond the number of `containment` entries in `parent`

@@ -1,0 +1,62 @@
+[[messages]]
+== Messages
+=== Parameter types
+[horizontal]
+[[nodeType]]Node:: Whole node encoded as <<{serialization}.adoc#node, node>>.
+
+[[targetNodeType]]TargetNode:: Target's node as <<{m3}.adoc#identifiers, id>>.
+
+[[metaPointerType]]MetaPointer:: MetaPointer-tuple to describe an M2 element (classifier, feature, etc.).
+Encoded as <<{serialization}.adoc#meta-pointer, meta-pointer>>.
+
+[[propertyValueType]]PropertyValue:: Property value encoded as <<{serialization}.adoc#property-values, property value>>.
+
+[[resolveInfoType]]ResolveInfo:: ResolveInfo of a reference as string.
+Can be `null`.
+
+[[indexType]]Index:: Position inside a multiple link or annotations as integer >= 0.
+Cannot be `null`.
+Use value `0` for <<{m3}.adoc#multiplicity, single links>>.
+
+[[commandType]]Command:: Any <<commands, command>>.
+
+[[commandIdType]]CommandId:: Id of a command.{fn-org305}
+Same format as <<{m3}.adoc#identifiers, node ids>>; must be unique per <<session>>.
+
+[[queryIdType]]QueryId:: Id of a query.
+Same format as <<{m3}.adoc#identifiers, node ids>>; must be unique per <<session>>.
+
+[[chunkType]]SerializationChunk:: <<{serialization}.adoc, Chunk of nodes>>.
+
+[[eventType]]Event:: Any <<events, event>>.
+
+[[commandSourceType]]CommandSource:: _[clientId, commandId]_ tuple{fn-org306} this event is based on.
+This allows a client to know when its command has been processed (either successful or not).
+
+[[freeIdType]]FreeId:: Free <<{m3}.adoc#identifiers, node id>>.
+
+==== How to calculate a CommandSource
+`commandSource = base64urlEncode(sha256(concat(clientId, commandId)))`{fn-org306}
+
+1. Concatenate the `clientId` and `commandId`
+2. Calculate sha256 hash of that concatenated string
+3. Encode the hash with base64url scheme.
+
+Rationale: The originating client for this command does know both the client id and command id.
+The same applies for the repository, but NOT other clients.
+So the originating client and the repository can calculate the `commandSource`, but not any other client.
+Thus, the command -- event correlation is possible for the originating client without revealing any origin information to other clients.
+
+==== How to address references
+We refer to references by the tuple of _[parent, reference, index]_.
+Rationale: Both reference `target` and `resolveInfo` can be `null`, so they aren't suitable for identifying the reference.
+However, `target` and `resolveInfo` MUST NOT both be `null`.
+
+
+include::queries.adoc[]
+
+include::commandEventOverview/command-event-overview.adoc[]
+
+include::commands.adoc[]
+
+include::events.adoc[]
