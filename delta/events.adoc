@@ -12,7 +12,7 @@ This client is now subscribed to any changes to `newPartition` or any of its des
 
 [horizontal]
 .Parameters
-newPartition:: <<nodeType>>
+newPartition:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
 
 .Technical name
@@ -29,7 +29,7 @@ This client is now unsubscribed from any changes to `deletedPartition` or any of
 
 [horizontal]
 .Parameters
-deletedPartition:: <<nodeType>> or <<targetNodeType>> #TODO#
+deletedPartition:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
 
 .Technical name
@@ -128,7 +128,7 @@ All other children inside ``parent``'s `containment` with index >= `index` have 
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
-newChild:: <<nodeType>>
+newChild:: <<chunkType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
@@ -146,7 +146,7 @@ All other children inside ``parent``'s `containment` with index > `index` have b
 
 [horizontal]
 .Parameters
-deletedChild:: <<nodeType>> or <<targetNodeType>> #TODO#
+deletedChild:: <<chunkType>>
 parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
@@ -170,8 +170,8 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 
 [horizontal]
 .Parameters
-newChild:: <<nodeType>>
-replacedChild:: <<nodeType>> or <<targetNodeType>> #TODO#
+newChild:: <<chunkType>>
+replacedChild:: <<chunkType>>
 parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
@@ -284,7 +284,7 @@ movedChild:: <<targetNodeType>>
 oldParent:: <<targetNodeType>>
 oldContainment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
-replacedChild:: <<nodeType>>
+replacedChild:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
 
 .Technical name
@@ -310,7 +310,7 @@ movedChild:: <<targetNodeType>>
 parent:: <<targetNodeType>>
 oldContainment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
-replacedChild:: <<nodeType>>
+replacedChild:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
 
 .Technical name
@@ -343,7 +343,7 @@ movedChild:: <<targetNodeType>>
 parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
-replacedChild:: <<nodeType>>
+replacedChild:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
 
 .Technical name
@@ -367,7 +367,7 @@ All other annotations inside ``parent``'s annotations with index >= `index` have
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
-newAnnotation:: <<nodeType>>
+newAnnotation:: <<chunkType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
 
@@ -384,7 +384,7 @@ All other annotations inside ``parent``'s annotations with index > `index` have 
 
 [horizontal]
 .Parameters
-deletedAnnotation:: <<nodeType>> or <<targetNodeType>> #TODO#
+deletedAnnotation:: <<chunkType>>
 parent:: <<targetNodeType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
@@ -406,8 +406,8 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 
 [horizontal]
 .Parameters
-newAnnotation:: <<nodeType>>
-replacedAnnotation:: <<nodeType>> or <<targetNodeType>> #TODO#
+newAnnotation:: <<chunkType>>
+replacedAnnotation:: <<chunkType>>
 parent:: <<targetNodeType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
@@ -489,7 +489,7 @@ newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
 oldParent:: <<targetNodeType>>
 oldIndex:: <<indexType>>
-replacedAnnotation:: <<nodeType>>
+replacedAnnotation:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
 
 .Technical name
@@ -521,7 +521,7 @@ newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
 parent:: <<targetNodeType>>
 oldIndex:: <<targetNodeType>>
-replacedAnnotation:: <<nodeType>>
+replacedAnnotation:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
 
 .Technical name
@@ -907,7 +907,7 @@ originCommands:: <<commandSourceType>>[]
 
 [[evnt-noOp]]
 ===== No-op
-Nothing happened as result of one or more command(s).
+Nothing happened as result of one or more command(s).{fn-org314}
 
 [horizontal]
 .Parameters
@@ -921,7 +921,7 @@ _none_
 
 [[evnt-error]]
 ===== Error
-Repository couldn't handle one or more command(s).
+Repository couldn't handle one or more command(s).{fn-org316}
 
 [horizontal]
 .Parameters
