@@ -33,10 +33,8 @@ include::commandEventOverview/addPartition.adoc[]
 
 [horizontal]
 .Parameters
-newPartition:: <<nodeType>> root node to form a new partition.
-It MUST contain _id_ and _classifier_.
-It MAY contain _properties_.
-It MUST NOT contain _containments_, _references_, _annotations_, or _parent_ (as this is a partition, thus cannot have a parent).
+newPartition:: <<chunkType>>{fn-org327} root node to form a new partition.
+The root node MUST NOT contain a _parent_ (as this is a partition, thus cannot have a parent).
 
 commandId:: <<commandIdType>> Id of this command.
 
@@ -62,7 +60,7 @@ include::commandEventOverview/deletePartition.adoc[]
 
 [horizontal]
 .Parameters
-deletedPartition:: <<nodeType>> or <<targetNodeType>> #TODO#
+deletedPartition:: <<targetNodeType>>
 commandId:: <<commandIdType>> Id of this command.
 
 .Errors
@@ -211,7 +209,7 @@ include::commandEventOverview/addChild.adoc[]
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
-newChild:: <<nodeType>>
+newChild:: <<chunkType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
@@ -272,7 +270,7 @@ include::commandEventOverview/replaceChild.adoc[]
 
 [horizontal]
 .Parameters
-newChild:: <<nodeType>>
+newChild:: <<chunkType>>
 parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
@@ -494,7 +492,7 @@ include::commandEventOverview/addAnnotation.adoc[]
 [horizontal]
 .Parameters
 parent:: <<targetNodeType>>
-newAnnotation:: <<nodeType>>
+newAnnotation:: <<chunkType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
 
@@ -553,7 +551,7 @@ include::commandEventOverview/replaceAnnotation.adoc[]
 
 [horizontal]
 .Parameters
-newAnnotation:: <<nodeType>>
+newAnnotation:: <<chunkType>>
 parent:: <<targetNodeType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
