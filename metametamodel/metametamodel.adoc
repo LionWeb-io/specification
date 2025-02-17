@@ -180,7 +180,7 @@ An Annotation CAN have any number of <<Classifier.features, `features`>>, given 
 We CANNOT redefine `annotates` in a sub-annotation (i.e. an annotation that `extends` another).{fn-org154}
 
 We MUST attach an instance of an Annotation only to instances of the Concept the Annotation `annotates` (and sub-concepts thereof).
-We can attach be zero, one, or more instances to a single annotated node.{fn-org32}
+We can attach zero, one, or more instances to a single annotated node.{fn-org32}
 
 We MUST NOT use instances of <<Concept, Concepts>> as annotations to any other node.{fn-org320}
 
