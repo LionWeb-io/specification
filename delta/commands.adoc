@@ -1192,10 +1192,11 @@ The parts are ordered.
 
 Command groups don't guarantee anything; the repository MAY take the group as a hint to resolve conflicts in a different manner.
 
+Composite commands don't have a command id on their own; they are only mentioned in each part.{fn-org306}
+
 [horizontal]
 .Parameters
 parts:: <<commandType>>[]
-commandId:: <<commandIdType>>
 
 .Errors
 * accumulation of all errors of `parts`
