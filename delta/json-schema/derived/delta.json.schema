@@ -1,0 +1,1643 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "Version: 0",
+  "definitions": {
+    "CommandSource": {
+      "properties": {
+        "Source": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Source"
+      ]
+    },
+    "DeltaSerializationChunk": {
+      "properties": {
+        "Nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SerializedNode"
+          }
+        }
+      },
+      "required": [
+        "Nodes"
+      ]
+    },
+    "SerializedNode": {
+      "properties": {},
+      "required": []
+    },
+    "ProtocolMessage": {
+      "properties": {
+        "Kind": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProtocolMessageData"
+          }
+        }
+      },
+      "required": [
+        "Kind",
+        "Message",
+        "Data"
+      ]
+    },
+    "ProtocolMessageData": {
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "DeltaProperty": {
+      "properties": {
+        "Parent": {
+          "type": "string"
+        },
+        "Property": {
+          "$ref": "#/definitions/MetaPointer"
+        }
+      },
+      "required": [
+        "Parent",
+        "Property"
+      ]
+    },
+    "MetaPointer": {
+      "properties": {
+        "Language": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Language",
+        "Version",
+        "Key"
+      ]
+    },
+    "SerializedProperty": {
+      "properties": {
+        "Property": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Property"
+      ]
+    },
+    "SerializedContainment": {
+      "properties": {
+        "Containment": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "Children": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Containment",
+        "Children"
+      ]
+    },
+    "SerializedReferenceTarget": {
+      "properties": {
+        "ResolveInfo": {
+          "type": "string"
+        },
+        "Reference": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "SerializedReference": {
+      "properties": {
+        "Reference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "Targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SerializedReferenceTarget"
+          }
+        }
+      },
+      "required": [
+        "Reference",
+        "Targets"
+      ]
+    },
+    "DeltaContainment": {
+      "properties": {
+        "Parent": {
+          "type": "string"
+        },
+        "Containment": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "Index": {
+          "type": "number",
+          "format": "int"
+        }
+      },
+      "required": [
+        "Parent",
+        "Containment",
+        "Index"
+      ]
+    },
+    "DeltaAnnotation": {
+      "properties": {
+        "Parent": {
+          "type": "string"
+        },
+        "Index": {
+          "type": "number",
+          "format": "int"
+        }
+      },
+      "required": [
+        "Parent",
+        "Index"
+      ]
+    },
+    "DeltaReference": {
+      "properties": {
+        "Parent": {
+          "type": "string"
+        },
+        "Reference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "Index": {
+          "type": "number",
+          "format": "int"
+        }
+      },
+      "required": [
+        "Parent",
+        "Reference",
+        "Index"
+      ]
+    },
+    "IDeltaContent": {
+      "properties": {
+        "Message": {
+          "$ref": "#/definitions/ProtocolMessage"
+        }
+      },
+      "required": []
+    },
+    "IDeltaQuery": {
+      "properties": {
+        "QueryId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "QueryId"
+      ]
+    },
+    "IDeltaQueryRequest": {
+      "properties": {},
+      "required": []
+    },
+    "IDeltaQueryResponse": {
+      "properties": {},
+      "required": []
+    },
+    "DeltaQueryBase": {
+      "properties": {
+        "Message": {
+          "$ref": "#/definitions/ProtocolMessage"
+        }
+      },
+      "required": []
+    },
+    "SubscribePartitionsRequest": {
+      "properties": {
+        "Creation": {
+          "type": "boolean"
+        },
+        "Deletion": {
+          "type": "boolean"
+        },
+        "Partitions": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Creation",
+        "Deletion",
+        "Partitions"
+      ]
+    },
+    "SubscribePartitionsResponse": {
+      "properties": {},
+      "required": []
+    },
+    "SubscribePartitionRequest": {
+      "properties": {
+        "Partition": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Partition"
+      ]
+    },
+    "SubscribePartitionResponse": {
+      "properties": {
+        "Contents": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "Contents"
+      ]
+    },
+    "UnsubscribePartitionResponse": {
+      "properties": {},
+      "required": []
+    },
+    "GetAvailableIdsRequest": {
+      "properties": {
+        "Count": {
+          "type": "number",
+          "format": "int"
+        }
+      },
+      "required": [
+        "Count"
+      ]
+    },
+    "GetAvailableIdsResponse": {
+      "properties": {
+        "Ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Ids"
+      ]
+    },
+    "IDeltaCommand": {
+      "properties": {},
+      "required": []
+    },
+    "ISingleDeltaCommand": {
+      "properties": {
+        "CommandId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CommandId"
+      ]
+    },
+    "CommandResponse": {
+      "properties": {},
+      "required": []
+    },
+    "IPartitionCommand": {
+      "properties": {},
+      "required": []
+    },
+    "AddPartition": {
+      "properties": {
+        "NewPartition": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "NewPartition"
+      ]
+    },
+    "DeletePartition": {
+      "properties": {
+        "DeletedPartition": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "DeletedPartition"
+      ]
+    },
+    "INodeCommand": {
+      "properties": {},
+      "required": []
+    },
+    "ChangeClassifier": {
+      "properties": {
+        "Node": {
+          "type": "string"
+        },
+        "NewClassifier": {
+          "$ref": "#/definitions/MetaPointer"
+        }
+      },
+      "required": [
+        "Node",
+        "NewClassifier"
+      ]
+    },
+    "IFeatureCommand": {
+      "properties": {},
+      "required": []
+    },
+    "IPropertyCommand": {
+      "properties": {
+        "Propert": {
+          "$ref": "#/definitions/DeltaProperty"
+        },
+        "Parent": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Propert",
+        "Parent"
+      ]
+    },
+    "AddProperty": {
+      "properties": {
+        "Property": {
+          "$ref": "#/definitions/DeltaProperty"
+        },
+        "NewValue": {
+          "type": "string"
+        },
+        "CommandId": {
+          "type": "string"
+        },
+        "Message": {
+          "$ref": "#/definitions/ProtocolMessage"
+        }
+      },
+      "required": [
+        "Property",
+        "NewValue",
+        "CommandId"
+      ]
+    },
+    "DeleteProperty": {
+      "properties": {
+        "Property": {
+          "$ref": "#/definitions/DeltaProperty"
+        }
+      },
+      "required": [
+        "Property"
+      ]
+    },
+    "IContainmentCommand": {
+      "properties": {},
+      "required": []
+    },
+    "AddChild": {
+      "properties": {
+        "Containment": {
+          "$ref": "#/definitions/DeltaContainment"
+        },
+        "NewChild": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "Containment",
+        "NewChild"
+      ]
+    },
+    "DeleteChild": {
+      "properties": {
+        "Containment": {
+          "$ref": "#/definitions/DeltaContainment"
+        }
+      },
+      "required": [
+        "Containment"
+      ]
+    },
+    "ReplaceChild": {
+      "properties": {
+        "Containment": {
+          "$ref": "#/definitions/DeltaContainment"
+        },
+        "NewChild": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "Containment",
+        "NewChild"
+      ]
+    },
+    "MoveChildFromOtherContainment": {
+      "properties": {
+        "NewContainment": {
+          "$ref": "#/definitions/DeltaContainment"
+        },
+        "MovedChild": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewContainment",
+        "MovedChild"
+      ]
+    },
+    "MoveChildFromOtherContainmentInSameParent": {
+      "properties": {
+        "NewContainment": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedChild": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewContainment",
+        "NewIndex",
+        "MovedChild"
+      ]
+    },
+    "MoveChildInSameContainment": {
+      "properties": {
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedChild": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewIndex",
+        "MovedChild"
+      ]
+    },
+    "MoveAndReplaceChildFromOtherContainment": {
+      "properties": {
+        "NewContainment": {
+          "$ref": "#/definitions/DeltaContainment"
+        },
+        "MovedChild": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewContainment",
+        "MovedChild"
+      ]
+    },
+    "MoveAndReplaceChildFromOtherContainmentInSameParent": {
+      "properties": {
+        "NewContainment": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedChild": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewContainment",
+        "NewIndex",
+        "MovedChild"
+      ]
+    },
+    "MoveAndReplaceChildInSameContainment": {
+      "properties": {
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedChild": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewIndex",
+        "MovedChild"
+      ]
+    },
+    "IAnnotationCommand": {
+      "properties": {},
+      "required": []
+    },
+    "AddAnnotation": {
+      "properties": {
+        "Parent": {
+          "$ref": "#/definitions/DeltaAnnotation"
+        },
+        "NewAnnotation": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "Parent",
+        "NewAnnotation"
+      ]
+    },
+    "DeleteAnnotation": {
+      "properties": {
+        "Parent": {
+          "$ref": "#/definitions/DeltaAnnotation"
+        }
+      },
+      "required": [
+        "Parent"
+      ]
+    },
+    "ReplaceAnnotation": {
+      "properties": {
+        "Parent": {
+          "$ref": "#/definitions/DeltaAnnotation"
+        },
+        "NewAnnotation": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "Parent",
+        "NewAnnotation"
+      ]
+    },
+    "MoveAnnotationFromOtherParent": {
+      "properties": {
+        "NewParent": {
+          "$ref": "#/definitions/DeltaAnnotation"
+        },
+        "MovedAnnotation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewParent",
+        "MovedAnnotation"
+      ]
+    },
+    "MoveAnnotationInSameParent": {
+      "properties": {
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedAnnotation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewIndex",
+        "MovedAnnotation"
+      ]
+    },
+    "MoveAndReplaceAnnotationFromOtherParent": {
+      "properties": {
+        "NewParent": {
+          "$ref": "#/definitions/DeltaAnnotation"
+        },
+        "MovedAnnotation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewParent",
+        "MovedAnnotation"
+      ]
+    },
+    "MoveAndReplaceAnnotationInSameParent": {
+      "properties": {
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedAnnotation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewIndex",
+        "MovedAnnotation"
+      ]
+    },
+    "IReferenceCommand": {
+      "properties": {},
+      "required": []
+    },
+    "ChangeReference": {
+      "properties": {
+        "Reference": {
+          "$ref": "#/definitions/DeltaReference"
+        },
+        "NewTarget": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        }
+      },
+      "required": [
+        "Reference",
+        "NewTarget"
+      ]
+    },
+    "MoveEntryFromOtherReference": {
+      "properties": {
+        "NewReference": {
+          "$ref": "#/definitions/DeltaReference"
+        },
+        "OldReference": {
+          "$ref": "#/definitions/DeltaReference"
+        }
+      },
+      "required": [
+        "NewReference",
+        "OldReference"
+      ]
+    },
+    "MoveEntryFromOtherReferenceInSameParent": {
+      "properties": {
+        "Parent": {
+          "type": "string"
+        },
+        "NewReference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "OldReference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        }
+      },
+      "required": [
+        "Parent",
+        "NewReference",
+        "NewIndex",
+        "OldReference",
+        "OldIndex"
+      ]
+    },
+    "MoveEntryInSameReference": {
+      "properties": {
+        "Parent": {
+          "type": "string"
+        },
+        "Reference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        }
+      },
+      "required": [
+        "Parent",
+        "Reference",
+        "NewIndex",
+        "OldIndex"
+      ]
+    },
+    "MoveAndReplaceEntryFromOtherReference": {
+      "properties": {
+        "NewReference": {
+          "$ref": "#/definitions/DeltaReference"
+        },
+        "OldReference": {
+          "$ref": "#/definitions/DeltaReference"
+        }
+      },
+      "required": [
+        "NewReference",
+        "OldReference"
+      ]
+    },
+    "MoveAndReplaceEntryFromOtherReferenceInSameParent": {
+      "properties": {
+        "Parent": {
+          "type": "string"
+        },
+        "NewReference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "OldReference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        }
+      },
+      "required": [
+        "Parent",
+        "NewReference",
+        "NewIndex",
+        "OldReference",
+        "OldIndex"
+      ]
+    },
+    "MoveAndReplaceEntryInSameReference": {
+      "properties": {
+        "Parent": {
+          "type": "string"
+        },
+        "Reference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        }
+      },
+      "required": [
+        "Parent",
+        "Reference",
+        "NewIndex",
+        "OldIndex"
+      ]
+    },
+    "AddReferenceResolveInfo": {
+      "properties": {
+        "Reference": {
+          "$ref": "#/definitions/DeltaReference"
+        },
+        "NewResolveInfo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Reference",
+        "NewResolveInfo"
+      ]
+    },
+    "DeleteReferenceResolveInfo": {
+      "properties": {
+        "Reference": {
+          "$ref": "#/definitions/DeltaReference"
+        }
+      },
+      "required": [
+        "Reference"
+      ]
+    },
+    "ChangeReferenceResolveInfo": {
+      "properties": {
+        "Reference": {
+          "$ref": "#/definitions/DeltaReference"
+        },
+        "NewResolveInfo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Reference",
+        "NewResolveInfo"
+      ]
+    },
+    "AddReferenceTarget": {
+      "properties": {
+        "Reference": {
+          "$ref": "#/definitions/DeltaReference"
+        },
+        "NewTarget": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Reference",
+        "NewTarget"
+      ]
+    },
+    "DeleteReferenceTarget": {
+      "properties": {
+        "Reference": {
+          "$ref": "#/definitions/DeltaReference"
+        }
+      },
+      "required": [
+        "Reference"
+      ]
+    },
+    "ChangeReferenceTarget": {
+      "properties": {
+        "Reference": {
+          "$ref": "#/definitions/DeltaReference"
+        },
+        "NewTarget": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Reference",
+        "NewTarget"
+      ]
+    },
+    "CompositeCommand": {
+      "properties": {
+        "Commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ISingleDeltaCommand"
+          }
+        }
+      },
+      "required": [
+        "Commands"
+      ]
+    },
+    "IDeltaEvent": {
+      "properties": {},
+      "required": []
+    },
+    "ISingleDeltaEvent": {
+      "properties": {
+        "OriginCommands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommandSource"
+          }
+        }
+      },
+      "required": [
+        "OriginCommands"
+      ]
+    },
+    "IPartitionEvent": {
+      "properties": {},
+      "required": []
+    },
+    "PartitionAdded": {
+      "properties": {
+        "NewPartition": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "NewPartition"
+      ]
+    },
+    "PartitionDeleted": {
+      "properties": {
+        "DeletedPartition": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "DeletedPartition"
+      ]
+    },
+    "INodeEvent": {
+      "properties": {},
+      "required": []
+    },
+    "ClassifierChanged": {
+      "properties": {
+        "Node": {
+          "type": "string"
+        },
+        "NewClassifier": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "OldClassifier": {
+          "$ref": "#/definitions/MetaPointer"
+        }
+      },
+      "required": [
+        "Node",
+        "NewClassifier",
+        "OldClassifier"
+      ]
+    },
+    "IFeatureEvent": {
+      "properties": {
+        "Parent": {
+          "type": "string"
+        },
+        "Feature": {
+          "$ref": "#/definitions/MetaPointer"
+        }
+      },
+      "required": [
+        "Parent",
+        "Feature"
+      ]
+    },
+    "IPropertyEvent": {
+      "properties": {
+        "Property": {
+          "$ref": "#/definitions/DeltaProperty"
+        }
+      },
+      "required": [
+        "Property"
+      ]
+    },
+    "PropertyAdded": {
+      "properties": {
+        "NewValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewValue"
+      ]
+    },
+    "PropertyDeleted": {
+      "properties": {
+        "OldValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "OldValue"
+      ]
+    },
+    "PropertyChanged": {
+      "properties": {
+        "NewValue": {
+          "type": "string"
+        },
+        "OldValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewValue",
+        "OldValue"
+      ]
+    },
+    "IContainmentEvent": {
+      "properties": {
+        "Containment": {
+          "$ref": "#/definitions/MetaPointer"
+        }
+      },
+      "required": [
+        "Containment"
+      ]
+    },
+    "ChildAdded": {
+      "properties": {
+        "NewChild": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "NewChild"
+      ]
+    },
+    "ChildDeleted": {
+      "properties": {
+        "DeletedChild": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "DeletedChild"
+      ]
+    },
+    "ChildReplaced": {
+      "properties": {
+        "NewChid": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        },
+        "ReplacedChild": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "NewChid",
+        "ReplacedChild"
+      ]
+    },
+    "ChildMovedFromOtherContainment": {
+      "properties": {
+        "ModelChild": {
+          "type": "string"
+        },
+        "OldContainment": {
+          "$ref": "#/definitions/DeltaContainment"
+        }
+      },
+      "required": [
+        "ModelChild",
+        "OldContainment"
+      ]
+    },
+    "ChildMovedFromOtherContainmentInSameParent": {
+      "properties": {
+        "NewContainment": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedChild": {
+          "type": "string"
+        },
+        "OldContainment": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        }
+      },
+      "required": [
+        "NewContainment",
+        "NewIndex",
+        "MovedChild",
+        "OldContainment",
+        "OldIndex"
+      ]
+    },
+    "ChildMovedInSameContainment": {
+      "properties": {
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedChild": {
+          "type": "string"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        }
+      },
+      "required": [
+        "NewIndex",
+        "MovedChild",
+        "OldIndex"
+      ]
+    },
+    "ChildMovedAndReplacedFromOtherContainment": {
+      "properties": {
+        "NewContainment": {
+          "$ref": "#/definitions/DeltaContainment"
+        },
+        "MovedChild": {
+          "type": "string"
+        },
+        "OldContainment": {
+          "$ref": "#/definitions/DeltaContainment"
+        },
+        "ReplacedChild": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "NewContainment",
+        "MovedChild",
+        "OldContainment",
+        "ReplacedChild"
+      ]
+    },
+    "ChildMovedAndReplacedFromOtherContainmentInSameParent": {
+      "properties": {
+        "NewContainment": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedChild": {
+          "type": "string"
+        },
+        "OldContainment": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "ReplacedChild": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "NewContainment",
+        "NewIndex",
+        "MovedChild",
+        "OldContainment",
+        "OldIndex",
+        "ReplacedChild"
+      ]
+    },
+    "ChildMovedAndReplacedInSameContainment": {
+      "properties": {
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedChild": {
+          "type": "string"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "ReplacedChild": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "NewIndex",
+        "MovedChild",
+        "OldIndex",
+        "ReplacedChild"
+      ]
+    },
+    "IAnnotationEvent": {
+      "properties": {
+        "Parent": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Parent"
+      ]
+    },
+    "AnnotationAdded": {
+      "properties": {
+        "NewAnnotation": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "NewAnnotation"
+      ]
+    },
+    "AnnotationDeleted": {
+      "properties": {
+        "DeletedAnnotation": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "DeletedAnnotation"
+      ]
+    },
+    "AnnotationReplaced": {
+      "properties": {
+        "NewAnnotation": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        },
+        "ReplacedAnnotation": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "NewAnnotation",
+        "ReplacedAnnotation"
+      ]
+    },
+    "AnnotationMovedFromOtherParent": {
+      "properties": {
+        "NewParent": {
+          "$ref": "#/definitions/DeltaAnnotation"
+        },
+        "MovedAnnotation": {
+          "type": "string"
+        },
+        "OldParent": {
+          "$ref": "#/definitions/DeltaAnnotation"
+        }
+      },
+      "required": [
+        "NewParent",
+        "MovedAnnotation",
+        "OldParent"
+      ]
+    },
+    "AnnotationMovedInSameParent": {
+      "properties": {
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedAnnotation": {
+          "type": "string"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        }
+      },
+      "required": [
+        "NewIndex",
+        "MovedAnnotation",
+        "OldIndex"
+      ]
+    },
+    "AnnotationMovedAndReplacedFromOtherParent": {
+      "properties": {
+        "NewParent": {
+          "$ref": "#/definitions/DeltaAnnotation"
+        },
+        "MovedAnnotation": {
+          "type": "string"
+        },
+        "OldParent": {
+          "$ref": "#/definitions/DeltaAnnotation"
+        },
+        "ReplacedAnnotation": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "NewParent",
+        "MovedAnnotation",
+        "OldParent",
+        "ReplacedAnnotation"
+      ]
+    },
+    "AnnotationMovedAndReplacedInSameParent": {
+      "properties": {
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedAnnotation": {
+          "type": "string"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "ReplacedAnnotation": {
+          "$ref": "#/definitions/DeltaSerializationChunk"
+        }
+      },
+      "required": [
+        "NewIndex",
+        "MovedAnnotation",
+        "OldIndex",
+        "ReplacedAnnotation"
+      ]
+    },
+    "IReferenceEvent": {
+      "properties": {
+        "Reference": {
+          "$ref": "#/definitions/MetaPointer"
+        }
+      },
+      "required": [
+        "Reference"
+      ]
+    },
+    "ReferenceAdded": {
+      "properties": {
+        "NewTarget": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        }
+      },
+      "required": [
+        "NewTarget"
+      ]
+    },
+    "ReferenceDeleted": {
+      "properties": {
+        "DeletedTarget": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        }
+      },
+      "required": [
+        "DeletedTarget"
+      ]
+    },
+    "ReferenceChanged": {
+      "properties": {
+        "NewTarget": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        },
+        "ReplacedTarget": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        }
+      },
+      "required": [
+        "NewTarget",
+        "ReplacedTarget"
+      ]
+    },
+    "EntryMovedFromOtherReference": {
+      "properties": {
+        "NewReference": {
+          "$ref": "#/definitions/DeltaReference"
+        },
+        "OldReference": {
+          "$ref": "#/definitions/DeltaReference"
+        },
+        "MovedEntry": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        }
+      },
+      "required": [
+        "NewReference",
+        "OldReference",
+        "MovedEntry"
+      ]
+    },
+    "EntryMovedFromOtherReferenceInSameParent": {
+      "properties": {
+        "NewReference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "OldReference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedEntry": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        }
+      },
+      "required": [
+        "NewReference",
+        "NewIndex",
+        "OldReference",
+        "OldIndex",
+        "MovedEntry"
+      ]
+    },
+    "EntryMovedInSameReference": {
+      "properties": {
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedEntry": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        }
+      },
+      "required": [
+        "NewIndex",
+        "OldIndex",
+        "MovedEntry"
+      ]
+    },
+    "EntryMovedAndReplacedFromOtherReference": {
+      "properties": {
+        "NewReference": {
+          "$ref": "#/definitions/DeltaReference"
+        },
+        "OldReference": {
+          "$ref": "#/definitions/DeltaReference"
+        },
+        "MovedEntry": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        },
+        "ReplacedEntry": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        }
+      },
+      "required": [
+        "NewReference",
+        "OldReference",
+        "MovedEntry",
+        "ReplacedEntry"
+      ]
+    },
+    "EntryMovedAndReplacedFromOtherReferenceInSameParent": {
+      "properties": {
+        "NewReference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "OldReference": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedEntry": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        },
+        "ReplacedEntry": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        }
+      },
+      "required": [
+        "NewReference",
+        "NewIndex",
+        "OldReference",
+        "OldIndex",
+        "MovedEntry",
+        "ReplacedEntry"
+      ]
+    },
+    "EntryMovedAndReplacedInSameReference": {
+      "properties": {
+        "NewIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "OldIndex": {
+          "type": "number",
+          "format": "int"
+        },
+        "MovedEntry": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        },
+        "ReplacedEntry": {
+          "$ref": "#/definitions/SerializedReferenceTarget"
+        }
+      },
+      "required": [
+        "NewIndex",
+        "OldIndex",
+        "MovedEntry",
+        "ReplacedEntry"
+      ]
+    },
+    "ReferenceResolveInfoAdded": {
+      "properties": {
+        "NewResolveInfo": {
+          "type": "string"
+        },
+        "Target": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewResolveInfo",
+        "Target"
+      ]
+    },
+    "ReferenceResolveInfoDeleted": {
+      "properties": {
+        "Target": {
+          "type": "string"
+        },
+        "DeletedResolveInfo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Target",
+        "DeletedResolveInfo"
+      ]
+    },
+    "ReferenceResolveInfoChanged": {
+      "properties": {
+        "NewResolveInfo": {
+          "type": "string"
+        },
+        "Target": {
+          "type": "string"
+        },
+        "ReplacedResolveInfo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewResolveInfo",
+        "ReplacedResolveInfo"
+      ]
+    },
+    "ReferenceTargetAdded": {
+      "properties": {
+        "NewTarget": {
+          "type": "string"
+        },
+        "ResolveInfo": {
+          "type": "string"
+        },
+        "ReplacedResolveInfo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewTarget",
+        "ResolveInfo",
+        "ReplacedResolveInfo"
+      ]
+    },
+    "ReferenceTargetDeleted": {
+      "properties": {
+        "ResolveInfo": {
+          "type": "string"
+        },
+        "DeletedTarget": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ResolveInfo",
+        "DeletedTarget"
+      ]
+    },
+    "ReferenceTargetChanged": {
+      "properties": {
+        "NewTarget": {
+          "type": "string"
+        },
+        "ResolveInfo": {
+          "type": "string"
+        },
+        "ReplacedTarget": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewTarget",
+        "ReplacedTarget"
+      ]
+    },
+    "CompositeEvent": {
+      "properties": {
+        "Events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ISingleDeltaEvent"
+          }
+        }
+      },
+      "required": [
+        "Events"
+      ]
+    },
+    "NoOpEvent": {
+      "properties": {},
+      "required": []
+    },
+    "Error": {
+      "properties": {
+        "ErrorCode": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ErrorCode"
+      ]
+    }
+  }
+}
