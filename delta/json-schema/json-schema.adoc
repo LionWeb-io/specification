@@ -29,4 +29,4 @@ the inheritance to simple structures.
 2. Non public types and intermediate types & abstractions should be avoided 
 from the final JSON Schema to make it as simple as possible.
 3. There are many concepts with some kind of variant permutations. 
-Any simplification we can come up will definetly increase adoption chances.
+Any simplification we can come up will definitely increase adoption chances.
