@@ -20,6 +20,13 @@ namespace Lion.WebCore.Serialization
 	}
 	class SerializedNode
 	{
+		string Id;
+		MetaPointer Classifier;
+		List<SerializedProperty> Properties;
+		List<SerializedContainment> Containments;
+		List<SerializedReference> References;
+		List<string> Annotations;
+		string? Parent;
 	}
 	class ProtocolMessage
 	{
