@@ -26,8 +26,49 @@
       ]
     },
     "SerializedNode": {
-      "properties": {},
-      "required": []
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Classifier": {
+          "$ref": "#/definitions/MetaPointer"
+        },
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SerializedProperty"
+          }
+        },
+        "Containments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SerializedContainment"
+          }
+        },
+        "References": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SerializedReference"
+          }
+        },
+        "Annotations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Parent": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Id",
+        "Classifier",
+        "Properties",
+        "Containments",
+        "References",
+        "Annotations"
+      ]
     },
     "ProtocolMessage": {
       "properties": {
