@@ -8,7 +8,7 @@ representation for Delta Protocol Structures [delta-protocol.ess](./delta-protoc
 This file was created manually converting from the 
 [C# implementation](https://github.com/LionWeb-io/lionweb-csharp/blob/dsl-serialization-chunk/src/LionWeb-CSharp/core/serialization/Serialization.cs).
 2. A JSON Schema serialization from (1) derived automatically by Essential applying a 
-transformation. [derived/delta.json.schema](./derived/delta.json.schema) It can used for OpenAPI specs, f.e.
+transformation. [derived/delta.json.schema](./derived/delta.json.schema) It can used for OpenAPI specs, e.g.
 
 === Validation
 Sample online validator for JSON Schema: <https://json-schema.hyperjump.io/>
@@ -17,7 +17,7 @@ Sample online validator for JSON Schema: <https://json-schema.hyperjump.io/>
 
 Translation considerations from C# to Essential:
 
-1. The tranlation removed some type aliases to types used in C# and interfaces.
+1. The translation removed some type aliases to types used in C# and interfaces.
 2. The inheritance structure is still preserved in this version.
 
 
@@ -26,7 +26,7 @@ Design considerations
 1. Inheritance and interfaces are convenient on C# but not really needed 
 on JSON. We should consider pros & cons about preserving it or *flattening* 
 the inheritance to simple structures.
-2. Non public types and intermediate types & abstractions can be avoided 
+2. Non public types and intermediate types & abstractions should be avoided 
 from the final JSON Schema to make it as simple as possible.
 3. There are many concepts with some kind of variant permutations. 
-Any simplification we can come up will definelty increase adoption chances.
+Any simplification we can come up will definetly increase adoption chances.
