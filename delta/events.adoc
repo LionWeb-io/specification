@@ -14,6 +14,8 @@ This client is now subscribed to any changes to `newPartition` or any of its des
 .Parameters
 newPartition:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `partitionAdded`
@@ -31,6 +33,8 @@ This client is now unsubscribed from any changes to `deletedPartition` or any of
 .Parameters
 deletedPartition:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `partitionDeleted`
@@ -51,6 +55,8 @@ node:: <<targetNodeType>>
 newClassifier:: <<metaPointerType>>
 oldClassifier:: <<metaPointerType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `classifierChanged`
@@ -71,6 +77,8 @@ node:: <<targetNodeType>>
 property:: <<metaPointerType>>
 newValue:: <<propertyValueType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `propertyAdded`
@@ -88,6 +96,8 @@ node:: <<targetNodeType>>
 property:: <<metaPointerType>>
 oldValue:: <<propertyValueType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `propertyDeleted`
@@ -106,6 +116,8 @@ property:: <<metaPointerType>>
 newValue:: <<propertyValueType>>
 oldValue:: <<propertyValueType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `propertyChanged`
@@ -132,6 +144,8 @@ newChild:: <<chunkType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `childAdded`
@@ -151,6 +165,8 @@ parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `childDeleted`
@@ -176,6 +192,8 @@ parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `childReplaced`
@@ -202,6 +220,8 @@ oldParent:: <<targetNodeType>>
 oldContainment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `childMovedFromOtherContainment`
@@ -227,6 +247,8 @@ parent:: <<targetNodeType>>
 oldContainment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `childMovedFromOtherContainmentInSameParent`
@@ -259,6 +281,8 @@ parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `childMovedInSameContainment`
@@ -286,6 +310,8 @@ oldContainment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 replacedChild:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `childMovedAndReplacedFromOtherContainment`
@@ -312,6 +338,8 @@ oldContainment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 replacedChild:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `childMovedAndReplacedFromOtherContainmentInSameParent`
@@ -345,6 +373,8 @@ containment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 replacedChild:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `childMovedAndReplacedInSameContainment`
@@ -370,6 +400,8 @@ parent:: <<targetNodeType>>
 newAnnotation:: <<chunkType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `annotationAdded`
@@ -388,6 +420,8 @@ deletedAnnotation:: <<chunkType>>
 parent:: <<targetNodeType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `annotationDeleted`
@@ -411,6 +445,8 @@ replacedAnnotation:: <<chunkType>>
 parent:: <<targetNodeType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `annotationReplaced`
@@ -435,6 +471,8 @@ movedAnnotation:: <<targetNodeType>>
 oldParent:: <<targetNodeType>>
 oldIndex:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `annotationMovedFromOtherParent`
@@ -466,6 +504,8 @@ movedAnnotation:: <<targetNodeType>>
 parent:: <<targetNodeType>>
 oldIndex:: <<targetNodeType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `annotationMovedInSameParent`
@@ -491,6 +531,8 @@ oldParent:: <<targetNodeType>>
 oldIndex:: <<indexType>>
 replacedAnnotation:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `annotationMovedAndReplacedFromOtherParent`
@@ -523,6 +565,8 @@ parent:: <<targetNodeType>>
 oldIndex:: <<targetNodeType>>
 replacedAnnotation:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `annotationMovedAndReplacedInSameParent`
@@ -546,6 +590,8 @@ index:: <<indexType>>
 newTarget:: <<targetNodeType>>?
 newResolveInfo:: <<resolveInfoType>>?
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `referenceAdded`
@@ -566,6 +612,8 @@ index:: <<indexType>>
 deletedTarget:: <<targetNodeType>>
 deletedResolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `referenceDeleted`
@@ -587,6 +635,8 @@ newResolveInfo:: <<targetNodeType>>?
 replacedTarget:: <<targetNodeType>>
 replacedResolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `referenceChanged`
@@ -614,6 +664,8 @@ oldIndex:: <<indexType>>
 target:: <<targetNodeType>>
 resolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `entryMovedFromOtherReference`
@@ -640,6 +692,8 @@ oldIndex:: <<indexType>>
 target:: <<targetNodeType>>
 resolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `entryMovedFromOtherReferenceInSameParent`
@@ -673,6 +727,8 @@ newIndex:: <<indexType>>
 target:: <<targetNodeType>>
 resolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `entryMovedInSameReference`
@@ -701,6 +757,8 @@ oldIndex:: <<indexType>>
 replacedTarget:: <<targetNodeType>>
 replacedResolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `entryMovedAndReplacedFromOtherReference`
@@ -728,6 +786,8 @@ oldIndex:: <<indexType>>
 replacedTarget:: <<targetNodeType>>
 replacedResolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `entryMovedAndReplacedFromOtherReferenceInSameParent`
@@ -762,6 +822,8 @@ oldIndex:: <<indexType>>
 replacedTarget:: <<targetNodeType>>
 replacedResolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `entryMovedAndReplacedInSameReference`
@@ -781,6 +843,8 @@ index:: <<indexType>>
 newResolveInfo:: <<resolveInfoType>>
 target:: <<targetNodeType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `referenceResolveInfoAdded`
@@ -800,6 +864,8 @@ index:: <<indexType>>
 target:: <<targetNodeType>>
 deletedResolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `referenceResolveInfoDeleted`
@@ -820,6 +886,8 @@ newResolveInfo:: <<resolveInfoType>>
 target:: <<targetNodeType>>?
 replacedResolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `referenceResolveInfoChanged`
@@ -839,6 +907,8 @@ index:: <<indexType>>
 newTarget:: <<targetNodeType>>
 resolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `referenceTargetAdded`
@@ -858,6 +928,8 @@ index:: <<indexType>>
 resolveInfo:: <<resolveInfoType>>
 deletedTarget:: <<targetNodeType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `referenceTargetDeleted`
@@ -878,6 +950,8 @@ newTarget:: <<targetNodeType>>
 resolveInfo:: <<resolveInfoType>>?
 replacedTarget:: <<targetNodeType>>
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `referenceTargetChanged`
@@ -899,6 +973,7 @@ Composite events don't mention origin commands on their own; they are only menti
 [horizontal]
 .Parameters
 parts:: <<eventType>>[]
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `composite`
@@ -913,6 +988,8 @@ Nothing happened as result of one or more command(s).{fn-org314}
 [horizontal]
 .Parameters
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `noOp`
@@ -929,6 +1006,8 @@ Repository couldn't handle one or more command(s).{fn-org316}
 errorCode:: `String`
 message:: `String`
 originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `error`

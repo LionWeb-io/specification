@@ -14,7 +14,7 @@ box "Repository"
   participant Core as core
 end box
 
-== Client A connected with client id "client-a"\nsubscribed to "partition-id"\nassumes invalid nodeA (part of "partition-id") ==
+== Client A connected with participation id "client-a"\nsubscribed to "partition-id"\nassumes invalid nodeA (part of "partition-id") ==
 
 [->> editor ++
 editor -> clientCmd ++

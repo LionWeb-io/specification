@@ -13,7 +13,7 @@ include::../shared/issue-footnotes.adoc[]
 :sectnums:
 :!figure-caption:
 
-The delta API *version 2024.1* is used to store and retrieve changes to nodes.
+The delta API *version 2025.1* is used to store and retrieve changes to nodes.
 It is intended for fine-grained changes to single values.
 it is *not* intended as a bulk API that updates large chunks of the model at once.
 

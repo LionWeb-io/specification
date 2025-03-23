@@ -16,7 +16,7 @@ box "Repository"
   participant Core as core
 end box
 
-== Client A connected with client id "client-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
+== Client A connected with participation id "client-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
 
 [->> editor ++
 editor -> editor: update(nodeA.age = 23)
@@ -41,7 +41,7 @@ core -> repoEvent
 deactivate core
 
 activate repoEvent
-clientEvent <<- repoEvent: propertyAdded("nodeA", age, "42",\n  ["ZWUzN2Q0YTcwZjM4YzhjYzU3NmQ5YThk\n    NjczNTU0ODBmMDI4YTE0MjE4ZDU2MTRh\n    NGRjNTA3NmE1MTk3Y2U3ZiAgLQo",\n  "ZjJlM2FhMTVkZTllZjA1MmRiMzdjMzZj\n    YWE5YjVkYmUxMTI3ZmIzM2I0NDM3NTE1\n    MzgzNGYwMTczMTRkMDU5ZSAgLQo\n  "])
+clientEvent <<- repoEvent: propertyAdded("nodeA", age, "42", [("client-a", "cmd-1"), ("other-client", "cmd-x")], 1)
 deactivate repoEvent
 
 activate clientEvent
@@ -64,11 +64,10 @@ editor -> editor: update(nodeA.age = 42)
 9. Repository resolves concurrent updates t `nodeA`, `age` property with "last write wins" strategy.
 Repository updates internal representation with value `42`.
 10. Repository creates event for update.
-11. Repository emits event <<evnt-propertyAdded>> with `nodeA` node id, `age` property (details omitted) and `23` value.
-It includes one <<commandSourceType>> with values `base64url(sha256("client-acmd-1"))` and `base64url(sha256("client-acmd-x"))`.
-12. Client calculates `base64url(sha256(concat(__clientId__, __commandId__)))` for each registered processed command id.
-13. Client found a matching registered processed command id.
-Client unregisters processed command id `cmd-1`.
+11. Repository emits event <<evnt-propertyAdded>> with `nodeA` node id, `age` property (details omitted), `23` value and sequence number `1`.
+It includes one <<commandSourceType>> with values `(client-a, cmd-1)` and `(other-client, cmd-x)`.
+12. Client found a matching registered processed command id.
+13. Client unregisters processed command id `cmd-1`.
 14. Not all command sources could be matched against registered processed command ids.
 Client forwards information to editor.
 15. Client updates with new property value.

@@ -16,7 +16,7 @@ box "Repository"
   participant Core as core
 end box
 
-== Client A connected with client id "client-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
+== Client A connected with participation id "client-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
 
 [->> editor ++
 editor -> clientCmd ++
@@ -35,7 +35,7 @@ core -> repoEvent
 deactivate core
 
 activate repoEvent
-clientEvent <<- repoEvent: propertyAdded("nodeA", age, "23",\n  ["ZWUzN2Q0YTcwZjM4YzhjYzU3NmQ5YThk\n    NjczNTU0ODBmMDI4YTE0MjE4ZDU2MTRh\n    NGRjNTA3NmE1MTk3Y2U3ZiAgLQo\n  "])
+clientEvent <<- repoEvent: propertyAdded("nodeA", age, "23", [("client-a", "cmd-1")], 1)
 deactivate repoEvent
 
 activate clientEvent
@@ -53,7 +53,7 @@ editor -> editor: update(nodeA.age = 23)
 6. Client informs editor of command submission.
 7. Repository updates internal representation.
 8. Repository creates event for update.
-9. Repository emits event <<evnt-propertyAdded>> with `nodeA` node id, `age` property (details omitted) and `23` value.
-It includes one <<commandSourceType>> with value `base64url(sha256("client-acmd-1"))`
+9. Repository emits event <<evnt-propertyAdded>> with `nodeA` node id, `age` property (details omitted), `23` value and sequence number `1`.
+It includes one <<commandSourceType>> with value `(client-a, cmd-1)`
 10. Client receives event and forwards information to editor.
 11. Client updates `nodeA` with new property value.

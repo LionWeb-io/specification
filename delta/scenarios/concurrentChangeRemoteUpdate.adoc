@@ -16,7 +16,7 @@ box "Repository"
   participant Core as core
 end box
 
-== Client A connected with client id "client-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
+== Client A connected with participation id "client-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
 
 [->> editor ++
 editor -> clientCmd ++
@@ -37,7 +37,7 @@ core -> repoEvent
 deactivate core
 
 activate repoEvent
-clientEvent <<- repoEvent: propertyAdded("nodeA", age, "42",\n  ["ZWUzN2Q0YTcwZjM4YzhjYzU3NmQ5YThk\n    NjczNTU0ODBmMDI4YTE0MjE4ZDU2MTRh\n    NGRjNTA3NmE1MTk3Y2U3ZiAgLQo",\n  "ZjJlM2FhMTVkZTllZjA1MmRiMzdjMzZj\n    YWE5YjVkYmUxMTI3ZmIzM2I0NDM3NTE1\n    MzgzNGYwMTczMTRkMDU5ZSAgLQo\n  "])
+clientEvent <<- repoEvent: propertyAdded("nodeA", age, "42", [("client-a", "cmd-1"), ("other-client", "cmd-x")], 1)
 deactivate repoEvent
 
 activate clientEvent
@@ -57,7 +57,7 @@ editor -> editor: update(nodeA)
 8. Repository resolves concurrent updates t `nodeA`, `age` property with "last write wins" strategy.
 Repository updates internal representation with value `42`.
 9. Repository creates event for update.
-10. Repository emits event <<evnt-propertyAdded>> with `nodeA` node id, `age` property (details omitted) and `23` value.
-It includes one <<commandSourceType>> with values `base64url(sha256("client-acmd-1"))` and `base64url(sha256("client-acmd-x"))`.
+10. Repository emits event <<evnt-propertyAdded>> with `nodeA` node id, `age` property (details omitted), `23` value and sequence number `1`.
+It includes one <<commandSourceType>> with values `(client-a, cmd-1)` and `(other-client, cmd-x)`.
 11. Client receives event and forwards information to editor.
 12. Client updates `nodeA` with new property value.

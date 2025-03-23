@@ -16,7 +16,7 @@ box "Repository"
   participant Core as core
 end box
 
-== Client A connected with client id "client-a"\nsubscribed to "partition-id"\nassumes invalid nodeA (part of "partition-id") ==
+== Client A connected with participation id "client-a"\nsubscribed to "partition-id"\nassumes invalid nodeA (part of "partition-id") ==
 
 [->> editor ++
 editor -> clientCmd ++
@@ -39,7 +39,7 @@ core -> repoEvent
 deactivate core
 
 activate repoEvent
-clientEvent <<- repoEvent: error("unknownNode", "cannot add property to unknown node"\n  ["ZWUzN2Q0YTcwZjM4YzhjYzU3NmQ5YThk\n    NjczNTU0ODBmMDI4YTE0MjE4ZDU2MTRh\n    NGRjNTA3NmE1MTk3Y2U3ZiAgLQo\n  "])
+clientEvent <<- repoEvent: error("unknownNode", "cannot add property to unknown node"  [("client-a", "cmd-1")], 1)
 deactivate repoEvent
 
 activate clientEvent
@@ -55,6 +55,6 @@ deactivate clientEvent
 7. Client informs editor of command submission.
 8. Repository realizes it does not know a node with id `nodeA`
 9. Repository creates event for notification.
-10. Repository emits <<evnt-error>> event with `unknownNode` error code and `cannot add property to unknown node` message.
-It includes one <<commandSourceType>> with value `base64url(sha256("client-acmd-1"))`.
+10. Repository emits <<evnt-error>> event with `unknownNode` error code, `cannot add property to unknown node` message and sequence number `1`.
+It includes one <<commandSourceType>> with value `(client-a, cmd-1)`.
 11. Client removes `cmd-1` from open commands list.

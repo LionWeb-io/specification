@@ -14,7 +14,7 @@ box "Repository"
   participant Core as core
 end box
 
-== Client A connected with client id "client-a" ==
+== Client A connected with partition id "client-a" ==
 
 [->> clientQuery
 activate clientQuery

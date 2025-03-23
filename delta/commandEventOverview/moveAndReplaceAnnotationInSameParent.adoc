@@ -1,6 +1,6 @@
 |
 
-[plantuml,moveAnnotationInSameParent-before,svg]
+[plantuml,moveAndReplaceAnnotationInSameParent-before,svg]
 ----
 !include commandEventOverviewStyle.puml
 left to right direction
@@ -31,7 +31,7 @@ siblingA -[hidden]> movedAnnotation
 siblingB -[hidden]> replacedAnnotation
 ----
 |
-[plantuml,moveAnnotationInSameParent-after,svg]
+[plantuml,moveAndReplaceAnnotationInSameParent-after,svg]
 ----
 !include commandEventOverviewStyle.puml
 left to right direction

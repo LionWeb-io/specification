@@ -17,13 +17,15 @@ deletion:: `boolean` Whether this client wants to receive events on deleted part
 partitions:: `boolean` Whether this client wants to automatically subscribe to newly created partitions (`true`), or not (`false`).
 
 queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
 
 [horizontal]
 .Response parameters
 queryId:: <<queryIdType>>  Id of this query.
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-_none_
+* <<err-invalidParticipation>>
 
 .Technical name
 `subscribePartitions`
@@ -35,22 +37,23 @@ This client wants to receive events on any changes to `partition` or any of its 
 [horizontal]
 .Request parameters
 partition:: <<targetNodeType>> Node id of the partition this client wants to receive events of.
-
 queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
 
 [horizontal]
 .Response parameters
 contents:: <<chunkType>> Complete contents of `partition`, i.e. the node with id `partition` and all of its descendants (including annotation instances).
-
 queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
 * already subscribed to `partition`
+* <<err-invalidParticipation>>
 
 .Technical name
 `subscribePartition`
 
-[[cmd-unsubscribePartition]]
+[[qry-unsubscribePartition]]
 ===== Unsubscribe from partition
 This client does not want to receive events on any changes to `partition` or any of its descendants anymore.{fn-org270}
 
@@ -58,21 +61,73 @@ This client does not want to receive events on any changes to `partition` or any
 .Request parameters
 partition:: <<targetNodeType>> Node id of the partition this client wants to stop receiving events of.
 queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
 
 [horizontal]
 .Response parameters
 queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
 * not subscribed to `partition`
+* <<err-invalidParticipation>>
 
 .Technical name
 `unsubscribePartition`
 
-[[cmd-misc]]
+[[qry-participation]]
+==== Participation
+
+[[qry-signOn]]
+===== Sign On (start a participation)
+The <<client>> starts a <<participation>>.
+
+NOTE: signing on is not the same as logging in: The latter includes some authentication/authorization check, which is out of scope of this specification.
+
+[horizontal]
+.Request parameters
+queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
+
+[horizontal]
+.Response parameters
+participationId:: <<participationIdType>> the repository assigns to this participation.
+queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
+
+.Errors
+_none_
+
+.Technical name
+`signOn`
+
+[[qry-signOff]]
+===== Sign Off (end a participation)
+The <<client>> ends a <<participation>>.{fn-org344}
+
+NOTE: signing off is not the same as logging off: The latter includes some authentication/authorization invalidation, which is out of scope of this specification.
+
+[horizontal]
+.Request parameters
+queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
+
+[horizontal]
+.Response parameters
+queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
+
+.Errors
+* <<err-invalidParticipation>>
+
+.Technical name
+`signOff`
+
+
+[[qry-misc]]
 ==== Miscellaneous
 
-[[cmd-getAvailableIds]]
+[[qry-getAvailableIds]]
 ===== Get available ids
 Request `count` number of unused <<{m3}.adoc#identifiers, valid ids>>.
 
@@ -80,22 +135,22 @@ Same functionality as <<{bulk}.adoc#ids, bulk API ids command>>.
 
 We don't assume leases, i.e. ids handed out to one client are "owned" by that client forever.
 
-
 [horizontal]
 .Request parameters
 count:: `integer` Number of ids requested.
 queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
 
 [horizontal]
 .Response parameters
 ids:: <<freeIdType>>[] List of ids guaranteed to be free.
 The repository MUST return between one (inclusive) and `count` (inclusive) ids.
 It MAY return less than `count` ids.
-
 queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-_none_
+* <<err-invalidParticipation>>
 
 .Technical name
 `getAvailableIds`

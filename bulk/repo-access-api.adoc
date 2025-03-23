@@ -10,7 +10,7 @@ include::../shared/issue-footnotes.adoc[]
 :toc: preamble
 :toclevels: 2
 
-The bulk API *version 2024.1* is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
+The bulk API *version 2025.1* is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
 It is intended for CRUD operations on (larger) sets of nodes.
 it is *not* intended as a delta-oriented API that takes "modification commands" as arguments.
 
@@ -220,6 +220,11 @@ A _kind_ might imply presence of specific keys in `data`.
 [[apis]]
 == Commands
 
+Each _modifying_ command MUST contain a _[[commandId, commmand id]]command id_.{fn-org313}
+It has the same format as <<{m3}.adoc#identifiers, node ids>> and must be unique for all changes of this client.
+
+Modifying commands are <<createPartitions>>, <<deletePartitions>>, and <<store>>.
+
 [[listPartitions, listPartitions]]
 [[partitions, listPartitions]]
 === listPartitions: List available partitions
@@ -254,6 +259,8 @@ Nodes MUST use <<unknown-node-ids>>.
 ==== Parameters
 [[createPartitions.nodes]]
 `nodes`:: {chunk} containing all nodes we want to add as new partitions.
+[[createPartitions.commandId]]
+`commandId`:: <<commandId>> of this command.
 
 ==== Response
 Does not contain a `chunk`.
@@ -308,6 +315,8 @@ All (transitive) annotations and children become <<orphan, orphans>>.
 ==== Parameters:
 [[deletePartitions.nodeIds]]
 `nodeIds`:: List of node ids to delete.
+[[deletePartitions.commandId]]
+`commandId`:: <<commandId>> of this command.
 
 ==== Response
 Does not contain a chunk.
@@ -417,6 +426,8 @@ We do not support different modes.{fn-org230}
 ==== Parameters
 [[store.nodes]]
 `nodes`:: {chunk} containing all nodes to store to the repository.
+[[store.commandId]]
+`commandId`:: <<commandId>> of this command.
 
 ==== Semantics
 After completing this call, all sent nodes MUST have exactly the sent contents in the repository.

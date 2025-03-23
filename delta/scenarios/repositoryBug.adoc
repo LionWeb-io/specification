@@ -16,7 +16,7 @@ box "Repository"
   participant Core as core
 end box
 
-== Client A connected with client id "client-a"\nsubscribed to "partition-id"\nassumes invalid nodeA (part of "partition-id") ==
+== Client A connected with participation id "client-a"\nsubscribed to "partition-id"\nassumes invalid nodeA (part of "partition-id") ==
 
 [->> editor ++
 editor -> clientCmd ++
@@ -40,7 +40,7 @@ core -> repoEvent
 deactivate core
 
 activate repoEvent
-clientEvent <<- repoEvent: error("internalError", "internal error occurred."\n  ["ZWUzN2Q0YTcwZjM4YzhjYzU3NmQ5YThk\n    NjczNTU0ODBmMDI4YTE0MjE4ZDU2MTRh\n    NGRjNTA3NmE1MTk3Y2U3ZiAgLQo\n  "])
+clientEvent <<- repoEvent: error("internalError", "internal error occurred." [("client-a", "cmd-1")], 1)
 deactivate repoEvent
 
 activate clientEvent
@@ -58,6 +58,6 @@ deactivate clientEvent
 Some error occurs (e.g. database unavailable).
 9. Repository handles the error.
 10. Repository creates event for notification.
-11. Repository emits <<evnt-error>> event with `internalError` error code and `internal error occurred` message.
-It includes one <<commandSourceType>> with value `base64url(sha256("client-acmd-1"))`.
+11. Repository emits <<evnt-error>> event with `internalError` error code, `internal error occurred` message and sequence number `1`.
+It includes one <<commandSourceType>> with value `(client-a, cmd-1)`.
 12. Client removes `cmd-1` from open commands list.

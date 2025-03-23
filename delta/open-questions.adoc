@@ -8,10 +8,6 @@
 How does this interact with concurrent edits?
 Example: Does <<cmd-deleteChild>> fail if the `removedChild` does not exist?
 
-* Do we need "swapNodes" event?
-
 * Wording for commands/events: Shall we use "deleteXxx" everywhere? Or "removeXxx"? Or "deleteXxx" for deleting nodes, and "removeXxx" for removing properties / references?
 
 * Decide on errors marked with #?# (invalid optional parameter values){fn-org312}
-
-* How to report a command has completely been discarded, without any resulting event?{fn-org314}

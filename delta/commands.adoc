@@ -35,11 +35,12 @@ include::commandEventOverview/addPartition.adoc[]
 .Parameters
 newPartition:: <<chunkType>>{fn-org327} root node to form a new partition.
 The root node MUST NOT contain a _parent_ (as this is a partition, thus cannot have a parent).
-
 commandId:: <<commandIdType>> Id of this command.
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* node with `newPartition` id already exists
+* <<err-nodeAlreadyExists>> for `newPartition`
+* <<err-invalidParticipation>>
 
 .Technical name
 `addPartition`
@@ -50,6 +51,7 @@ commandId:: <<commandIdType>> Id of this command.
 [[cmd-deletePartition]]
 ===== Delete partition
 Delete partition `deletedPartition`, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]
 |===
@@ -62,9 +64,11 @@ include::commandEventOverview/deletePartition.adoc[]
 .Parameters
 deletedPartition:: <<targetNodeType>>
 commandId:: <<commandIdType>> Id of this command.
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `deletedPartition` does not exist
+* <<err-unknownNode>> for `deletedPartition`
+* <<err-invalidParticipation>>
 
 .Technical name
 `deletePartition`
@@ -91,9 +95,11 @@ include::commandEventOverview/changeClassifier.adoc[]
 node:: <<targetNodeType>>
 newClassifier:: <<metaPointerType>>
 commandId:: <<commandIdType>> Id of this command.
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `node` does not exist
+* <<err-unknownNode>> for `node`
+* <<err-invalidParticipation>>
 
 .Technical name
 `changeClassifier`
@@ -121,10 +127,12 @@ node:: <<targetNodeType>>
 property:: <<metaPointerType>>
 newValue:: <<propertyValueType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `node` does not exist
+* <<err-unknownNode>> for `node`
 * ##?## `property` already set in `node`
+* <<err-invalidParticipation>>
 
 .Technical name
 `addProperty`
@@ -148,10 +156,12 @@ include::commandEventOverview/deleteProperty.adoc[]
 node:: <<targetNodeType>>
 property:: <<metaPointerType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `node` does not exist
+* <<err-unknownNode>> for `node`
 * ##?## `property` is not set in `node`
+* <<err-invalidParticipation>>
 
 .Technical name
 `deleteProperty`
@@ -176,11 +186,13 @@ node:: <<targetNodeType>>
 property:: <<metaPointerType>>
 newValue:: <<propertyValueType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `node` does not exist
+* <<err-unknownNode>> for `node`
 * ##?## `property` is not set in `node`
 * ##?## `property` already has `newValue` in `node`
+* <<err-invalidParticipation>>
 
 
 .Technical name
@@ -213,11 +225,13 @@ newChild:: <<chunkType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `newChild` id already exists
-* `index` is beyond the number of `containment` entries in `parent`
+* <<err-unknownNode>> for `parent`
+* <<err-nodeAlreadyExists>> for `newChild`
+* <<err-unknownIndex>> for `index` (is beyond the number of `containment` entries in `parent`)
+* <<err-invalidParticipation>>
 
 .Technical name
 `addChild`
@@ -227,7 +241,8 @@ commandId:: <<commandIdType>>
 
 [[cmd-deleteChild]]
 ===== Delete child
-Delete existing node from ``parent``'s `containment` at `index`.
+Delete existing node from ``parent``'s `containment` at `index`, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]
 |===
@@ -242,10 +257,12 @@ parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
+* <<err-unknownNode>> for `parent`
 * ##?## `index` is beyond (the number of `containment` entries in `parent`) - 1
+* <<err-invalidParticipation>>
 
 .Technical name
 `deleteChild`
@@ -255,7 +272,9 @@ commandId:: <<commandIdType>>
 
 [[cmd-replaceChild]]
 ===== Replace child
-Delete current child inside ``parent``'s `containment` at `index`.
+Delete current child inside ``parent``'s `containment` at `index`, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
+
 Replace existing node inside ``parent``'s `containment` at `index` with new node `newChild`.
 `newChild` might be a single node or an arbitrary complex subtree.
 All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
@@ -275,11 +294,13 @@ parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newChild` id already exists
-* `parent` does not exist
+* <<err-nodeAlreadyExists>> `newChild`
+* <<err-unknownNode>> for `parent`
 * ##?## `index` is beyond (the number of `containment` entries in `parent`) - 1
+* <<err-invalidParticipation>>
 
 .Technical name
 `replaceChild`
@@ -305,12 +326,14 @@ newContainment:: <<metaPointerType>>
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newParent` does not exist
-* `newIndex` is beyond the number of `newContainment` entries in `newParent`
-* `movedChild` does not exist
+* <<err-nodeAlreadyExists>> for `newParent`
+* <<err-unknownIndex>> for `newIndex` (is beyond the number of `newContainment` entries in `newParent`)
+* <<err-unknownNode>> for `movedChild`
 * ##?## `movedChild` is already a child of `newParent`
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveChildFromOtherContainment`
@@ -336,12 +359,14 @@ newContainment:: <<metaPointerType>>
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newIndex` is beyond the number of `newContainment` entries in ``movedChild``'s parent
-* `movedChild` does not exist
-* `movedChild` does not have a parent
-* `movedChild` is already a child inside `newContainment`
+* <<err-unknownIndex>> for `newIndex` (is beyond the number of `newContainment` entries in ``movedChild``'s parent)
+* <<err-unknownNode>> for `movedChild`
+* <<err-moveWithoutParent>> for `movedChild`
+* <<err-invalidMove>> as `movedChild` is already a child inside `newContainment`
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveChildFromOtherContainmentInSameParent`
@@ -365,12 +390,14 @@ include::commandEventOverview/moveChildInSameContainment.adoc[]
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newIndex` is beyond (the number of ``movedChild``'s containment entries in ```movedChild``'s parent) - 1
-* `movedChild` does not exist
-* `movedChild` does not have a parent
-* `movedChild` is already at `newIndex`
+* <<err-unknownIndex>> for `newIndex` (is beyond (the number of ``movedChild``'s containment entries in ```movedChild``'s parent) - 1)
+* <<err-unknownNode>> for `movedChild`
+* <<err-moveWithoutParent>> for `movedChild`
+* <<err-invalidMove>> as `movedChild` is already at `newIndex`
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveChildInSameContainment`
@@ -381,7 +408,8 @@ commandId:: <<commandIdType>>
 [[cmd-moveAndReplaceChildFromOtherContainment]]
 ===== Move child from other containment and replace existing child
 Move existing node `movedChild` inside ``newParent``'s `newContainment` at `newIndex`.
-Delete current child inside ``newParent``'s `newContainment` at `newIndex`.
+Delete current child inside ``newParent``'s `newContainment` at `newIndex`, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]
 |===
@@ -397,12 +425,14 @@ newContainment:: <<metaPointerType>>
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newParent` does not exist
-* `newIndex` is beyond the number of `newContainment` entries in `newParent`
-* `movedChild` does not exist
+* <<err-unknownNode>> for `newParent`
+* <<err-unknownIndex>> for `newIndex` (is beyond the number of `newContainment` entries in `newParent`)
+* <<err-unknownNode>> for `movedChild`
 * ##?## `movedChild` is already a child of `newParent`
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveAndReplaceChildFromOtherContainment`
@@ -414,7 +444,8 @@ commandId:: <<commandIdType>>
 ===== Move child from other containment in same parent and replace existing child
 Move existing node `movedChild` (currently inside one of ``movedChild``'s parent's containments other than `newContainment`)
 inside ``movedChild``'s parent's `newContainment` at `newIndex`.
-Delete current child inside ``movedChild``'s parent's `newContainment` at `newIndex`.
+Delete current child inside ``movedChild``'s parent's `newContainment` at `newIndex`, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]
 |===
@@ -429,12 +460,14 @@ newContainment:: <<metaPointerType>>
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newIndex` is beyond the number of `newContainment` entries in `parent`
-* `movedChild` does not exist
-* `movedChild` does not have a parent
-* `movedChild` is already a child inside `newContainment`
+* <<err-unknownIndex>> for `newIndex` (is beyond the number of `newContainment` entries in `parent`)
+* <<err-unknownNode>> for `movedChild`
+* <<err-moveWithoutParent>> for `movedChild`
+* <<err-invalidMove>> as `movedChild` is already a child inside `newContainment`
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveAndReplaceChildFromOtherContainmentInSameParent`
@@ -445,7 +478,8 @@ commandId:: <<commandIdType>>
 [[cmd-moveAndReplaceChildInSameContainment]]
 ===== Move child in same containment and replace existing child
 Move existing node `movedChild` within its current containment to `newIndex`.
-Delete current child inside the same containment at `newIndex`.
+Delete current child inside the same containment at `newIndex`, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]
 |===
@@ -459,12 +493,14 @@ include::commandEventOverview/moveAndReplaceChildInSameContainment.adoc[]
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newIndex` is beyond (the number of ``movedChild``'s containment entries in ``movedChild``'s parent) - 2
-* `movedChild` does not exist
-* `movedChild` does not have a parent
-* `movedChild` is already at `newIndex`
+* <<err-unknownIndex>> for `newIndex` (is beyond (the number of ``movedChild``'s containment entries in ``movedChild``'s parent) - 2)
+* <<err-unknownNode>> for `movedChild`
+* <<err-moveWithoutParent>> for `movedChild`
+* <<err-invalidMove>> as `movedChild` is already at `newIndex`
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveAndReplaceChildInSameContainment`
@@ -495,11 +531,13 @@ parent:: <<targetNodeType>>
 newAnnotation:: <<chunkType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `newAnnotation` id already exists
-* `index` is beyond the number of annotations of `parent`
+* <<err-unknownNode>> for `parent`
+* <<err-nodeAlreadyExists>> for `newAnnotation`
+* <<err-unknownIndex>> for `index` (is beyond the number of annotations of `parent`)
+* <<err-invalidParticipation>>
 
 .Technical name
 `addAnnotation`
@@ -509,7 +547,8 @@ commandId:: <<commandIdType>>
 
 [[cmd-deleteAnnotation]]
 ===== Delete annotation
-Delete existing node from ``parent``'s annotations at `index`.
+Delete existing node from ``parent``'s annotations at `index`, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]
 |===
@@ -523,10 +562,12 @@ include::commandEventOverview/deleteAnnotation.adoc[]
 parent:: <<targetNodeType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `index` is beyond (the number of annotations of `parent`) - 1
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `index` (is beyond (the number of annotations of `parent`) - 1)
+* <<err-invalidParticipation>>
 
 .Technical name
 `deleteAnnotation`
@@ -536,7 +577,9 @@ commandId:: <<commandIdType>>
 
 [[cmd-replaceAnnotation]]
 ===== Replace annotation
-Delete current node at ``parent``'s annotations at `index`.
+Delete current node at ``parent``'s annotations at `index`, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
+
 Replace existing node inside ``parent``'s annotations at `index` with new node `newAnnotation`.
 `newAnnotation` might be a single node or an arbitrary complex subtree.
 All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
@@ -555,11 +598,13 @@ newAnnotation:: <<chunkType>>
 parent:: <<targetNodeType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newAnnotation` id already exists
-* `parent` does not exist
-* `index` is beyond (the number of annotations of `parent`) - 1
+* <<err-nodeAlreadyExists>> for `newAnnotation`
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `index` (is beyond (the number of annotations of `parent`) - 1)
+* <<err-invalidParticipation>>
 
 .Technical name
 `replaceAnnotation`
@@ -584,12 +629,14 @@ newParent:: <<targetNodeType>>
 newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newParent` does not exist
-* `index` is beyond the number of annotations of `newParent`
-* `movedAnnotation` does not exist
+* <<err-unknownNode>> for `newParent`
+* <<err-unknownIndex>> for `index` (is beyond the number of annotations of `newParent`)
+* <<err-unknownNode>> for `movedAnnotation`
 * ##?## `movedAnnotation` is already an annotation of `newParent`
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveAnnotationFromOtherParent`
@@ -614,11 +661,13 @@ include::commandEventOverview/moveAnnotationInSameParent.adoc[]
 newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newIndex` is beyond (the number of annotations of ``movedAnnotation``'s parent) - 1
-* `movedAnnotation` does not exist
-* `movedAnnotation` does not have a parent
+* <<err-unknownIndex>> for `newIndex` (is beyond (the number of annotations of ``movedAnnotation``'s parent) - 1)
+* <<err-unknownNode>> for `movedAnnotation`
+* <<err-moveWithoutParent>> for `movedAnnotation`
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveAnnotationInSameParent`
@@ -629,7 +678,8 @@ commandId:: <<commandIdType>>
 [[cmd-moveAndReplaceAnnotationFromOtherParent]]
 ===== Move annotation from other parent and replace existing annotation
 Move existing node `movedAnnotation` inside ``newParent``'s annotations at `newIndex`.
-Delete current node at ``newParent``'s annotations at `newIndex`.
+Delete current node at ``newParent``'s annotations at `newIndex`, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]
 |===
@@ -644,12 +694,14 @@ newParent:: <<targetNodeType>>
 newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newParent` does not exist
-* `index` is beyond the number of annotations of `newParent`
-* `movedAnnotation` does not exist
+* <<err-unknownNode>> for `newParent`
+* <<err-unknownIndex>> for `index` (is beyond the number of annotations of `newParent`)
+* <<err-unknownNode>> for `movedAnnotation`
 * ##?## `movedAnnotation` is already an annotation of `newParent`
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveAndReplaceAnnotationFromOtherParent`
@@ -661,7 +713,8 @@ commandId:: <<commandIdType>>
 [[cmd-moveAndReplaceAnnotationInSameParent]]
 ===== Move annotation in same parent and replace existing annotation
 Move existing node `movedAnnotation` within the same parent to `newIndex`.
-Delete current node at ``movedAnnotation``'s parent's annotations at `newIndex`.
+Delete current node at ``movedAnnotation``'s parent's annotations at `newIndex`, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]
 |===
@@ -675,11 +728,13 @@ include::commandEventOverview/moveAndReplaceAnnotationInSameParent.adoc[]
 newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newIndex` is beyond (the number of annotations of ``movedAnnotation``'s parent) - 1
-* `movedAnnotation` does not exist
-* `movedAnnotation` does not have a parent
+* <<err-unknownIndex>> for `newIndex` (is beyond (the number of annotations of ``movedAnnotation``'s parent) - 1)
+* <<err-unknownNode>> for `movedAnnotation`
+* <<err-moveWithoutParent>> for `movedAnnotation`
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveAndReplaceAnnotationInSameParent`
@@ -709,11 +764,13 @@ index:: <<indexType>>
 newTarget:: <<targetNodeType>>?
 newResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `index` is beyond the number of `reference` entries of `parent`
-* `newTarget` is `null` and `newResolveInfo` is `null`
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `index` (is beyond the number of `reference` entries of `parent`)
+* <<err-undefinedReferenceTarget>> for `newTarget` and `newResolveInfo`
+* <<err-invalidParticipation>>
 
 .Technical name
 `addReference`
@@ -738,10 +795,12 @@ parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `index` (is beyond (the number of `reference` entries of `parent`) - 1)
+* <<err-invalidParticipation>>
 
 .Technical name
 `deleteReference`
@@ -768,11 +827,13 @@ index:: <<indexType>>
 newTarget:: <<targetNodeType>>?
 newResolveInfo:: <<targetNodeType>>?
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `newTarget` is `null` and `newResolveInfo` is `null`
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `index` (is beyond (the number of `reference` entries of `parent`) - 1)
+* <<err-undefinedReferenceTarget>> for `newTarget` and `newResolveInfo`
+* <<err-invalidParticipation>>
 
 .Technical name
 `changeReference`
@@ -801,11 +862,13 @@ oldParent:: <<targetNodeType>>
 oldReference:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newParent` does not exist
-* `newIndex` is beyond (the number of `newReference` entries of `newParent`)
-* `oldIndex` is beyond (the number of `oldReference` entries of `oldParent`) - 1
+* <<err-unknownNode>> for `newParent`
+* <<err-unknownIndex>> for `newIndex` (is beyond (the number of `newReference` entries of `newParent`))
+* <<err-unknownIndex>> for `oldIndex` (is beyond (the number of `oldReference` entries of `oldParent`) - 1)
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveEntryFromOtherReference`
@@ -833,11 +896,13 @@ newIndex:: <<indexType>>
 oldReference:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `newIndex` is beyond (the number of `newReference` entries of `parent`)
-* `oldIndex` is beyond (the number of `oldReference` entries of `parent`) - 1
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `newIndex` (is beyond (the number of `newReference` entries of `parent`))
+* <<err-unknownIndex>> for `oldIndex` (is beyond (the number of `oldReference` entries of `parent`) - 1)
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveEntryFromOtherReferenceInSameParent`
@@ -864,11 +929,13 @@ reference:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 newIndex:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `newIndex` is beyond (the number of `reference` entries of `parent`) - 1
-* `oldIndex` is beyond (the number of `reference` entries of `parent`) - 1
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `newIndex` (is beyond (the number of `reference` entries of `parent`) - 1)
+* <<err-unknownIndex>> for `oldIndex` (is beyond (the number of `reference` entries of `parent`) - 1)
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveEntryInSameReference`
@@ -898,11 +965,13 @@ oldParent:: <<targetNodeType>>
 oldReference:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `newParent` does not exist
-* `newIndex` is beyond (the number of `newReference` entries of `newParent`) - 1
-* `oldIndex` is beyond (the number of `oldReference` entries of `oldParent`) - 1
+* <<err-unknownNode>> for `newParent`
+* <<err-unknownIndex>> for `newIndex` (is beyond (the number of `newReference` entries of `newParent`) - 1)
+* <<err-unknownIndex>> for `oldIndex` (is beyond (the number of `oldReference` entries of `oldParent`) - 1)
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveAndReplaceEntryFromOtherReference`
@@ -931,11 +1000,13 @@ newIndex:: <<indexType>>
 oldReference:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `newIndex` is beyond (the number of `newReference` entries of `parent`) - 1
-* `oldIndex` is beyond (the number of `oldReference` entries of `parent`) - 1
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `newIndex` (is beyond (the number of `newReference` entries of `parent`) - 1)
+* <<err-unknownIndex>> for `oldIndex` (is beyond (the number of `oldReference` entries of `parent`) - 1)
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveAndReplaceEntryFromOtherReferenceInSameParent`
@@ -963,11 +1034,13 @@ reference:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 newIndex:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `newIndex` is beyond (the number of `reference` entries of `parent`) - 2
-* `oldIndex` is beyond (the number of `reference` entries of `parent`) - 1
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `newIndex` (is beyond (the number of `reference` entries of `parent`) - 2)
+* <<err-unknownIndex>> for `oldIndex` (is beyond (the number of `reference` entries of `parent`) - 1)
+* <<err-invalidParticipation>>
 
 .Technical name
 `moveAndReplaceEntryInSameReference`
@@ -997,12 +1070,14 @@ reference:: <<metaPointerType>>
 index:: <<indexType>>
 newResolveInfo:: <<resolveInfoType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `newResolveInfo` is `null`
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `index` (is beyond (the number of `reference` entries of `parent`) - 1)
+* <<err-undefinedReferenceTarget>> for `newResolveInfo`
 * ##?## resolveInfo already set in ``parent``'s `reference` at `index`.
+* <<err-invalidParticipation>>
 
 .Technical name
 `addReferenceResolveInfo`
@@ -1031,12 +1106,14 @@ parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* target is `null`
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `index` (is beyond (the number of `reference` entries of `parent`) - 1)
+* <<err-undefinedReferenceTarget>> as target is `null`
 * ##?## resolveInfo is not set in ``parent``'s `reference` at `index`.
+* <<err-invalidParticipation>>
 
 .Technical name
 `deleteReferenceResolveInfo`
@@ -1066,12 +1143,14 @@ reference:: <<metaPointerType>>
 index:: <<indexType>>
 newResolveInfo:: <<resolveInfoType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `newResolveInfo` is `null`
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `index` (is beyond (the number of `reference` entries of `parent`) - 1)
+* <<err-undefinedReferenceTarget>> for `newResolveInfo`
 * ##?## resolveInfo is not set in ``parent``'s `reference` at `index`
+* <<err-invalidParticipation>>
 
 .Technical name
 `changeReferenceResolveInfo`
@@ -1101,12 +1180,14 @@ reference:: <<metaPointerType>>
 index:: <<indexType>>
 newTarget:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `newTarget` is `null`
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `index` (is beyond (the number of `reference` entries of `parent`) - 1)
+* <<err-undefinedReferenceTarget>> for `newTarget`
 * ##?## target already set in ``parent``'s `reference` at `index`.
+* <<err-invalidParticipation>>
 
 .Technical name
 `addReferenceTarget`
@@ -1135,11 +1216,13 @@ parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `index` (is beyond (the number of `reference` entries of `parent`) - 1)
 * ##?## target is not set in ``parent``'s `reference` at `index`.
+* <<err-invalidParticipation>>
 
 .Technical name
 `deleteReferenceTarget`
@@ -1169,12 +1252,14 @@ reference:: <<metaPointerType>>
 index:: <<indexType>>
 newTarget:: <<targetNodeType>>
 commandId:: <<commandIdType>>
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* `parent` does not exist
-* `index` is beyond (the number of `reference` entries of `parent`) - 1
-* `newTarget` is `null`
+* <<err-unknownNode>> for `parent`
+* <<err-unknownIndex>> for `index` (is beyond (the number of `reference` entries of `parent`) - 1)
+* <<err-undefinedReferenceTarget>> for `newTarget`
 * ##?## target is not set in ``parent``'s `reference` at `index`
+* <<err-invalidParticipation>>
 
 .Technical name
 `changeReferenceTarget`
@@ -1197,9 +1282,11 @@ Composite commands don't have a command id on their own; they are only mentioned
 [horizontal]
 .Parameters
 parts:: <<commandType>>[]
+protocolMessage:: <<protocolMessageType>>
 
 .Errors
 * accumulation of all errors of `parts`
+* <<err-invalidParticipation>>
 
 .Technical name
 `composite`
