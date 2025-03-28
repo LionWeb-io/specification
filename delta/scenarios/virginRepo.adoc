@@ -7,14 +7,13 @@ autonumber
 
 box "Client A"
   participant Editor as editor
-'  participant Queries as cQry
   participant Events as clientEvent
   participant Commands as clientCmd
-  participant Participation as clientParticipation
+  participant Queries as clientQuery
 end box
 
 box "Repository"
-  participant Participation as repoParticipation
+  participant Queries as repoQuery
   participant Commands as repoCmd
 '  participant Queries  as rQry
   participant Events as repoEvent
@@ -23,7 +22,7 @@ end box
 
 == Client A unconnected ==
 
-clientParticipation -> repoParticipation ++: signOn()
+clientQuery -> repoQuery ++: signOn()
 return participationId = "client-a"
 
 [->> clientCmd ++
@@ -50,8 +49,6 @@ deactivate clientEvent
 activate editor
 editor -> editor: draw(nodeA)
 ----
-
-#TODO: Update after discussing{fn-org350}#
 
 1. Client <<qry-signOn, signs on>> to repository.
 2. Repository confirms participation with participation id `client-a`.

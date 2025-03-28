@@ -77,6 +77,7 @@ protocolMessage:: <<protocolMessageType>>
 
 [[qry-participation]]
 ==== Participation
+Even though participation handling does not relate to repository contents, we consider them queries.{fn-org350}.
 
 [[qry-signOn]]
 ===== Sign On (start a participation)
@@ -123,13 +124,39 @@ protocolMessage:: <<protocolMessageType>>
 .Technical name
 `signOff`
 
+[[qry-reconnect]]
+===== Reconnect (resume an existing participation)
+The <<client>> has been technically disconnected, but still knows its <<participation-id>>.
+Then the client can ask to reconnect to the repository.{fn-org349}
+
+[horizontal]
+.Request parameters
+queryId:: <<queryIdType>> Id of this query.
+lastReceivedSequenceNumber:: <<eventSequenceType>> Last <<event-sequence-number>> received by the client.
+protocolMessage:: <<protocolMessageType>>
+
+[horizontal]
+.Response parameters
+queryId:: <<queryIdType>> Id of this query.
+participationValid:: `boolean` Whether the participation is still valid.
+lastSentSequenceNumber:: <<eventSequenceType>> Last <<event-sequence-number>> sent by the repository.
+Can be `null` if repository doesn't know the last sent sequence number; `null` MUST coincide with `false` for `participationValid`.
+protocolMessage:: <<protocolMessageType>>
+
+.Errors
+* <<err-invalidParticipation>> #TODO: Report invalid participation by error or by `participationValid` flag?#
+*
+
+.Technical name
+`reconnect`
+
 
 [[qry-misc]]
 ==== Miscellaneous
 
 [[qry-getAvailableIds]]
 ===== Get available ids
-Request `count` number of unused <<{m3}.adoc#identifiers, valid ids>>.
+Request `count` number of unused <<{m3}.adoc#node-id, valid ids>>.
 
 Same functionality as <<{bulk}.adoc#ids, bulk API ids command>>.
 

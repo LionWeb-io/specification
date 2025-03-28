@@ -25,7 +25,7 @@ We assume the underlying protocol handles quality of service concerns (i.e. guar
 === Participation characteristics
 Each participation has a _[[participation-id, participation id]]participation id_, unique for all concurrent participations.
 The repository assigns the participation id upon starting a new participation.
-The participation id MUST be a valid <<{m3}.adoc#node-id, identifier>>.
+The participation id MUST follow the same format as <<{m3}.adoc#identifiers, identifier>>.
 It serves as a technical identifier.
 
 A participation is transparent for reconnecting network connections,i.e. one participation can survive potential technical reconnects.
@@ -34,7 +34,7 @@ A participation spans over time: if we would e.g. used REST, a participation spa
 A participation <<qry-signOn, starts>> by the client connecting to the repository via delta protocol.
 A participation ends either by the <<qry-signOff, client ending>> it, or if the client disconnects involuntarily (e.g. by crashing or a connection failure).
 
-#TODO: Write about reconnection#
+A client can try to <<qry-reconnect, reconnect>> a participation if the client still knows a previously valid participation id, and the last <<event-sequence-number>> the client received.{fn-org349}
 
 [[event-sequence-number, event sequence number]]
 === Event sequence numbers
@@ -66,12 +66,12 @@ Each message has some id unique to the <<participation>>:
 
 Each message optionally can have one _[[protocolMessage, protocol message]]protocol message_ consisting of:{fn-org331}{fn-org332}
 
-* [[protocolMessage.kind]]`kind` is an <<{serialization}.adoc#id, id>>-compatible string identifying the message type.
+* [[protocolMessage.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the message type.
 Some message kinds are pre-defined in this specification.
 A repository MAY reply with other, additional message kinds.
 * [[protocolMessage.message]]`message` is a human-readable string describing the message.
 * [[protocolMessage.data]]`data` is a flat map with arbitrary keys and values.
-All values MUST be strings, the keys MUST be <<{serialization}.adoc#id, id>>-compatible.
+All values MUST be strings, the keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible.
 A _kind_ might imply presence of specific keys in `data`.
 
 This protocol message is symmetric to <<{bulk}.adoc#Response.messages, messages in bulk API>>.

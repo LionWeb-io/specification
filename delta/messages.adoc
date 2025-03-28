@@ -4,7 +4,7 @@
 [horizontal]
 [[protocolMessageType]]protocolMessage:: Optional <<protocolMessage>>.
 
-[[targetNodeType]]TargetNode:: Target's node as <<{m3}.adoc#identifiers, id>>.
+[[targetNodeType]]TargetNode:: Target's node as <<{m3}.adoc#node-id, id>>.
 
 [[metaPointerType]]MetaPointer:: MetaPointer-tuple to describe an M2 element (classifier, feature, etc.).
 Encoded as <<{serialization}.adoc#meta-pointer, meta-pointer>>.
@@ -21,24 +21,24 @@ Use value `0` for <<{m3}.adoc#multiplicity, single links>>.
 [[commandType]]Command:: Any <<commands, command>>.
 
 [[commandIdType]]CommandId:: Id of a command.{fn-org305}
-Same format as <<{m3}.adoc#identifiers, node ids>>; must be unique per <<participation>>.
+Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<participation>>.
 
 [[queryIdType]]QueryId:: Id of a query.
-Same format as <<{m3}.adoc#identifiers, node ids>>; must be unique per <<participation>>.
+Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<participation>>.
 
 [[chunkType]]SerializationChunk:: <<{serialization}.adoc, Chunk of nodes>>.
 
 [[eventType]]Event:: Any <<events, event>>.
 
 [[participationIdType]]ParticipationId:: Id of a <<participation>>.
-Same format as <<{m3}.adoc#identifiers, node ids>>; must be unique for all concurrent participations.
+Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique for all concurrent participations.
 
 [[commandSourceType]]CommandSource:: _(<<participationIdType>>, <<commandIdType>>)_ tuple{fn-org306} this event is based on.
 This allows a client to know when its command has been processed (either successful or not).
 
 [[eventSequenceType]]EventSequenceNumber:: <<event-sequence-number>> of this event.
 
-[[freeIdType]]FreeId:: Free <<{m3}.adoc#identifiers, node id>>.
+[[freeIdType]]FreeId:: Free <<{m3}.adoc#node-id, node id>>.
 
 ==== How to address references
 We refer to references by the tuple of _(parent, reference, index)_.

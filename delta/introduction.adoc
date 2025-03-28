@@ -10,6 +10,7 @@ Delta API supports these message kinds, loosely following CQRS patternfootnote:[
 A query requests some information from the repository without changing the repository's contents.
 The repository gathers all information needed to answer the query, and sends the information back.
 The repository might reply invalid queries with a failure message.
+We also use queries for managing <<participation, participations>>.{fn-org350}
 
 * <<commands>> initiated/requested by the client, with synchronous response by the repository.
 A command requests some change to the repository.
@@ -19,9 +20,7 @@ However, the repository processes the command asynchronously, and eventually bro
 * <<events>> initiated/broadcast by the repository, without response by the client.
 An event describes some change that has been applied to the repository's contents.
 Events correlate to their originating command(s){fn-org306}; this command might have been sent by this client or another client.{fn-org299}
-All clients receive the same events (given the same <<subscription, subscription scope>> and disregarding <<event-sequence-number, event sequence numbers>>).
-
-* Participation messages for bookkeeping.
+All clients receive the same events (given the same subscription scope and disregarding <<event-sequence-number, event sequence numbers>>).
 
 A client describes the interesting part of the repository's contents by specifying its <<subscription, subscription scope>>.
 The client receives only events on nodes within that scope.
