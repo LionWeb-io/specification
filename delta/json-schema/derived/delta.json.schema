@@ -1,6 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://lionweb.io/delta.schema.json",
+  "title": "LionWeb Delta Protocol",
   "description": "Version: 0",
+  type: "object",
+  oneOf: [
+  ],
   "definitions": {
     "CommandSource": {
       "properties": {
@@ -10,189 +15,6 @@
       },
       "required": [
         "Source"
-      ]
-    },
-    "DeltaSerializationChunk": {
-      "properties": {
-        "Nodes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SerializedNode"
-          }
-        }
-      },
-      "required": [
-        "Nodes"
-      ]
-    },
-    "SerializedNode": {
-      "properties": {
-        "Id": {
-          "type": "string"
-        },
-        "Classifier": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "Properties": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SerializedProperty"
-          }
-        },
-        "Containments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SerializedContainment"
-          }
-        },
-        "References": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SerializedReference"
-          }
-        },
-        "Annotations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "Parent": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Id",
-        "Classifier",
-        "Properties",
-        "Containments",
-        "References",
-        "Annotations"
-      ]
-    },
-    "ProtocolMessage": {
-      "properties": {
-        "Kind": {
-          "type": "string"
-        },
-        "Message": {
-          "type": "string"
-        },
-        "Data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProtocolMessageData"
-          }
-        }
-      },
-      "required": [
-        "Kind",
-        "Message",
-        "Data"
-      ]
-    },
-    "ProtocolMessageData": {
-      "properties": {
-        "Key": {
-          "type": "string"
-        },
-        "Value": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Key",
-        "Value"
-      ]
-    },
-    "DeltaProperty": {
-      "properties": {
-        "Parent": {
-          "type": "string"
-        },
-        "Property": {
-          "$ref": "#/definitions/MetaPointer"
-        }
-      },
-      "required": [
-        "Parent",
-        "Property"
-      ]
-    },
-    "MetaPointer": {
-      "properties": {
-        "Language": {
-          "type": "string"
-        },
-        "Version": {
-          "type": "string"
-        },
-        "Key": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Language",
-        "Version",
-        "Key"
-      ]
-    },
-    "SerializedProperty": {
-      "properties": {
-        "Property": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "Value": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Property"
-      ]
-    },
-    "SerializedContainment": {
-      "properties": {
-        "Containment": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "Children": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "Containment",
-        "Children"
-      ]
-    },
-    "SerializedReferenceTarget": {
-      "properties": {
-        "ResolveInfo": {
-          "type": "string"
-        },
-        "Reference": {
-          "type": "string"
-        }
-      },
-      "required": []
-    },
-    "SerializedReference": {
-      "properties": {
-        "Reference": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "Targets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SerializedReferenceTarget"
-          }
-        }
-      },
-      "required": [
-        "Reference",
-        "Targets"
       ]
     },
     "DeltaContainment": {
@@ -282,76 +104,6 @@
       },
       "required": []
     },
-    "SubscribePartitionsRequest": {
-      "properties": {
-        "Creation": {
-          "type": "boolean"
-        },
-        "Deletion": {
-          "type": "boolean"
-        },
-        "Partitions": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "Creation",
-        "Deletion",
-        "Partitions"
-      ]
-    },
-    "SubscribePartitionsResponse": {
-      "properties": {},
-      "required": []
-    },
-    "SubscribePartitionRequest": {
-      "properties": {
-        "Partition": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Partition"
-      ]
-    },
-    "SubscribePartitionResponse": {
-      "properties": {
-        "Contents": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "Contents"
-      ]
-    },
-    "UnsubscribePartitionResponse": {
-      "properties": {},
-      "required": []
-    },
-    "GetAvailableIdsRequest": {
-      "properties": {
-        "Count": {
-          "type": "number",
-          "format": "int"
-        }
-      },
-      "required": [
-        "Count"
-      ]
-    },
-    "GetAvailableIdsResponse": {
-      "properties": {
-        "Ids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "Ids"
-      ]
-    },
     "IDeltaCommand": {
       "properties": {},
       "required": []
@@ -374,43 +126,9 @@
       "properties": {},
       "required": []
     },
-    "AddPartition": {
-      "properties": {
-        "NewPartition": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "NewPartition"
-      ]
-    },
-    "DeletePartition": {
-      "properties": {
-        "DeletedPartition": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "DeletedPartition"
-      ]
-    },
     "INodeCommand": {
       "properties": {},
       "required": []
-    },
-    "ChangeClassifier": {
-      "properties": {
-        "Node": {
-          "type": "string"
-        },
-        "NewClassifier": {
-          "$ref": "#/definitions/MetaPointer"
-        }
-      },
-      "required": [
-        "Node",
-        "NewClassifier"
-      ]
     },
     "IFeatureCommand": {
       "properties": {},
@@ -430,513 +148,17 @@
         "Parent"
       ]
     },
-    "AddProperty": {
-      "properties": {
-        "Property": {
-          "$ref": "#/definitions/DeltaProperty"
-        },
-        "NewValue": {
-          "type": "string"
-        },
-        "CommandId": {
-          "type": "string"
-        },
-        "Message": {
-          "$ref": "#/definitions/ProtocolMessage"
-        }
-      },
-      "required": [
-        "Property",
-        "NewValue",
-        "CommandId"
-      ]
-    },
-    "DeleteProperty": {
-      "properties": {
-        "Property": {
-          "$ref": "#/definitions/DeltaProperty"
-        }
-      },
-      "required": [
-        "Property"
-      ]
-    },
     "IContainmentCommand": {
       "properties": {},
       "required": []
-    },
-    "AddChild": {
-      "properties": {
-        "Containment": {
-          "$ref": "#/definitions/DeltaContainment"
-        },
-        "NewChild": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "Containment",
-        "NewChild"
-      ]
-    },
-    "DeleteChild": {
-      "properties": {
-        "Containment": {
-          "$ref": "#/definitions/DeltaContainment"
-        }
-      },
-      "required": [
-        "Containment"
-      ]
-    },
-    "ReplaceChild": {
-      "properties": {
-        "Containment": {
-          "$ref": "#/definitions/DeltaContainment"
-        },
-        "NewChild": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "Containment",
-        "NewChild"
-      ]
-    },
-    "MoveChildFromOtherContainment": {
-      "properties": {
-        "NewContainment": {
-          "$ref": "#/definitions/DeltaContainment"
-        },
-        "MovedChild": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewContainment",
-        "MovedChild"
-      ]
-    },
-    "MoveChildFromOtherContainmentInSameParent": {
-      "properties": {
-        "NewContainment": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedChild": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewContainment",
-        "NewIndex",
-        "MovedChild"
-      ]
-    },
-    "MoveChildInSameContainment": {
-      "properties": {
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedChild": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewIndex",
-        "MovedChild"
-      ]
-    },
-    "MoveAndReplaceChildFromOtherContainment": {
-      "properties": {
-        "NewContainment": {
-          "$ref": "#/definitions/DeltaContainment"
-        },
-        "MovedChild": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewContainment",
-        "MovedChild"
-      ]
-    },
-    "MoveAndReplaceChildFromOtherContainmentInSameParent": {
-      "properties": {
-        "NewContainment": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedChild": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewContainment",
-        "NewIndex",
-        "MovedChild"
-      ]
-    },
-    "MoveAndReplaceChildInSameContainment": {
-      "properties": {
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedChild": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewIndex",
-        "MovedChild"
-      ]
     },
     "IAnnotationCommand": {
       "properties": {},
       "required": []
     },
-    "AddAnnotation": {
-      "properties": {
-        "Parent": {
-          "$ref": "#/definitions/DeltaAnnotation"
-        },
-        "NewAnnotation": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "Parent",
-        "NewAnnotation"
-      ]
-    },
-    "DeleteAnnotation": {
-      "properties": {
-        "Parent": {
-          "$ref": "#/definitions/DeltaAnnotation"
-        }
-      },
-      "required": [
-        "Parent"
-      ]
-    },
-    "ReplaceAnnotation": {
-      "properties": {
-        "Parent": {
-          "$ref": "#/definitions/DeltaAnnotation"
-        },
-        "NewAnnotation": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "Parent",
-        "NewAnnotation"
-      ]
-    },
-    "MoveAnnotationFromOtherParent": {
-      "properties": {
-        "NewParent": {
-          "$ref": "#/definitions/DeltaAnnotation"
-        },
-        "MovedAnnotation": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewParent",
-        "MovedAnnotation"
-      ]
-    },
-    "MoveAnnotationInSameParent": {
-      "properties": {
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedAnnotation": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewIndex",
-        "MovedAnnotation"
-      ]
-    },
-    "MoveAndReplaceAnnotationFromOtherParent": {
-      "properties": {
-        "NewParent": {
-          "$ref": "#/definitions/DeltaAnnotation"
-        },
-        "MovedAnnotation": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewParent",
-        "MovedAnnotation"
-      ]
-    },
-    "MoveAndReplaceAnnotationInSameParent": {
-      "properties": {
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedAnnotation": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewIndex",
-        "MovedAnnotation"
-      ]
-    },
     "IReferenceCommand": {
       "properties": {},
       "required": []
-    },
-    "ChangeReference": {
-      "properties": {
-        "Reference": {
-          "$ref": "#/definitions/DeltaReference"
-        },
-        "NewTarget": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
-        }
-      },
-      "required": [
-        "Reference",
-        "NewTarget"
-      ]
-    },
-    "MoveEntryFromOtherReference": {
-      "properties": {
-        "NewReference": {
-          "$ref": "#/definitions/DeltaReference"
-        },
-        "OldReference": {
-          "$ref": "#/definitions/DeltaReference"
-        }
-      },
-      "required": [
-        "NewReference",
-        "OldReference"
-      ]
-    },
-    "MoveEntryFromOtherReferenceInSameParent": {
-      "properties": {
-        "Parent": {
-          "type": "string"
-        },
-        "NewReference": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "OldReference": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
-        }
-      },
-      "required": [
-        "Parent",
-        "NewReference",
-        "NewIndex",
-        "OldReference",
-        "OldIndex"
-      ]
-    },
-    "MoveEntryInSameReference": {
-      "properties": {
-        "Parent": {
-          "type": "string"
-        },
-        "Reference": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
-        }
-      },
-      "required": [
-        "Parent",
-        "Reference",
-        "NewIndex",
-        "OldIndex"
-      ]
-    },
-    "MoveAndReplaceEntryFromOtherReference": {
-      "properties": {
-        "NewReference": {
-          "$ref": "#/definitions/DeltaReference"
-        },
-        "OldReference": {
-          "$ref": "#/definitions/DeltaReference"
-        }
-      },
-      "required": [
-        "NewReference",
-        "OldReference"
-      ]
-    },
-    "MoveAndReplaceEntryFromOtherReferenceInSameParent": {
-      "properties": {
-        "Parent": {
-          "type": "string"
-        },
-        "NewReference": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "OldReference": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
-        }
-      },
-      "required": [
-        "Parent",
-        "NewReference",
-        "NewIndex",
-        "OldReference",
-        "OldIndex"
-      ]
-    },
-    "MoveAndReplaceEntryInSameReference": {
-      "properties": {
-        "Parent": {
-          "type": "string"
-        },
-        "Reference": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
-        }
-      },
-      "required": [
-        "Parent",
-        "Reference",
-        "NewIndex",
-        "OldIndex"
-      ]
-    },
-    "AddReferenceResolveInfo": {
-      "properties": {
-        "Reference": {
-          "$ref": "#/definitions/DeltaReference"
-        },
-        "NewResolveInfo": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Reference",
-        "NewResolveInfo"
-      ]
-    },
-    "DeleteReferenceResolveInfo": {
-      "properties": {
-        "Reference": {
-          "$ref": "#/definitions/DeltaReference"
-        }
-      },
-      "required": [
-        "Reference"
-      ]
-    },
-    "ChangeReferenceResolveInfo": {
-      "properties": {
-        "Reference": {
-          "$ref": "#/definitions/DeltaReference"
-        },
-        "NewResolveInfo": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Reference",
-        "NewResolveInfo"
-      ]
-    },
-    "AddReferenceTarget": {
-      "properties": {
-        "Reference": {
-          "$ref": "#/definitions/DeltaReference"
-        },
-        "NewTarget": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Reference",
-        "NewTarget"
-      ]
-    },
-    "DeleteReferenceTarget": {
-      "properties": {
-        "Reference": {
-          "$ref": "#/definitions/DeltaReference"
-        }
-      },
-      "required": [
-        "Reference"
-      ]
-    },
-    "ChangeReferenceTarget": {
-      "properties": {
-        "Reference": {
-          "$ref": "#/definitions/DeltaReference"
-        },
-        "NewTarget": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Reference",
-        "NewTarget"
-      ]
-    },
-    "CompositeCommand": {
-      "properties": {
-        "Commands": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ISingleDeltaCommand"
-          }
-        }
-      },
-      "required": [
-        "Commands"
-      ]
     },
     "IDeltaEvent": {
       "properties": {},
@@ -959,47 +181,9 @@
       "properties": {},
       "required": []
     },
-    "PartitionAdded": {
-      "properties": {
-        "NewPartition": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "NewPartition"
-      ]
-    },
-    "PartitionDeleted": {
-      "properties": {
-        "DeletedPartition": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "DeletedPartition"
-      ]
-    },
     "INodeEvent": {
       "properties": {},
       "required": []
-    },
-    "ClassifierChanged": {
-      "properties": {
-        "Node": {
-          "type": "string"
-        },
-        "NewClassifier": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "OldClassifier": {
-          "$ref": "#/definitions/MetaPointer"
-        }
-      },
-      "required": [
-        "Node",
-        "NewClassifier",
-        "OldClassifier"
-      ]
     },
     "IFeatureEvent": {
       "properties": {
@@ -1025,40 +209,6 @@
         "Property"
       ]
     },
-    "PropertyAdded": {
-      "properties": {
-        "NewValue": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewValue"
-      ]
-    },
-    "PropertyDeleted": {
-      "properties": {
-        "OldValue": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "OldValue"
-      ]
-    },
-    "PropertyChanged": {
-      "properties": {
-        "NewValue": {
-          "type": "string"
-        },
-        "OldValue": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "NewValue",
-        "OldValue"
-      ]
-    },
     "IContainmentEvent": {
       "properties": {
         "Containment": {
@@ -1067,180 +217,6 @@
       },
       "required": [
         "Containment"
-      ]
-    },
-    "ChildAdded": {
-      "properties": {
-        "NewChild": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "NewChild"
-      ]
-    },
-    "ChildDeleted": {
-      "properties": {
-        "DeletedChild": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "DeletedChild"
-      ]
-    },
-    "ChildReplaced": {
-      "properties": {
-        "NewChid": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        },
-        "ReplacedChild": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "NewChid",
-        "ReplacedChild"
-      ]
-    },
-    "ChildMovedFromOtherContainment": {
-      "properties": {
-        "ModelChild": {
-          "type": "string"
-        },
-        "OldContainment": {
-          "$ref": "#/definitions/DeltaContainment"
-        }
-      },
-      "required": [
-        "ModelChild",
-        "OldContainment"
-      ]
-    },
-    "ChildMovedFromOtherContainmentInSameParent": {
-      "properties": {
-        "NewContainment": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedChild": {
-          "type": "string"
-        },
-        "OldContainment": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
-        }
-      },
-      "required": [
-        "NewContainment",
-        "NewIndex",
-        "MovedChild",
-        "OldContainment",
-        "OldIndex"
-      ]
-    },
-    "ChildMovedInSameContainment": {
-      "properties": {
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedChild": {
-          "type": "string"
-        },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
-        }
-      },
-      "required": [
-        "NewIndex",
-        "MovedChild",
-        "OldIndex"
-      ]
-    },
-    "ChildMovedAndReplacedFromOtherContainment": {
-      "properties": {
-        "NewContainment": {
-          "$ref": "#/definitions/DeltaContainment"
-        },
-        "MovedChild": {
-          "type": "string"
-        },
-        "OldContainment": {
-          "$ref": "#/definitions/DeltaContainment"
-        },
-        "ReplacedChild": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "NewContainment",
-        "MovedChild",
-        "OldContainment",
-        "ReplacedChild"
-      ]
-    },
-    "ChildMovedAndReplacedFromOtherContainmentInSameParent": {
-      "properties": {
-        "NewContainment": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedChild": {
-          "type": "string"
-        },
-        "OldContainment": {
-          "$ref": "#/definitions/MetaPointer"
-        },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "ReplacedChild": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "NewContainment",
-        "NewIndex",
-        "MovedChild",
-        "OldContainment",
-        "OldIndex",
-        "ReplacedChild"
-      ]
-    },
-    "ChildMovedAndReplacedInSameContainment": {
-      "properties": {
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedChild": {
-          "type": "string"
-        },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "ReplacedChild": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "NewIndex",
-        "MovedChild",
-        "OldIndex",
-        "ReplacedChild"
       ]
     },
     "IAnnotationEvent": {
@@ -1253,124 +229,6 @@
         "Parent"
       ]
     },
-    "AnnotationAdded": {
-      "properties": {
-        "NewAnnotation": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "NewAnnotation"
-      ]
-    },
-    "AnnotationDeleted": {
-      "properties": {
-        "DeletedAnnotation": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "DeletedAnnotation"
-      ]
-    },
-    "AnnotationReplaced": {
-      "properties": {
-        "NewAnnotation": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        },
-        "ReplacedAnnotation": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "NewAnnotation",
-        "ReplacedAnnotation"
-      ]
-    },
-    "AnnotationMovedFromOtherParent": {
-      "properties": {
-        "NewParent": {
-          "$ref": "#/definitions/DeltaAnnotation"
-        },
-        "MovedAnnotation": {
-          "type": "string"
-        },
-        "OldParent": {
-          "$ref": "#/definitions/DeltaAnnotation"
-        }
-      },
-      "required": [
-        "NewParent",
-        "MovedAnnotation",
-        "OldParent"
-      ]
-    },
-    "AnnotationMovedInSameParent": {
-      "properties": {
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedAnnotation": {
-          "type": "string"
-        },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
-        }
-      },
-      "required": [
-        "NewIndex",
-        "MovedAnnotation",
-        "OldIndex"
-      ]
-    },
-    "AnnotationMovedAndReplacedFromOtherParent": {
-      "properties": {
-        "NewParent": {
-          "$ref": "#/definitions/DeltaAnnotation"
-        },
-        "MovedAnnotation": {
-          "type": "string"
-        },
-        "OldParent": {
-          "$ref": "#/definitions/DeltaAnnotation"
-        },
-        "ReplacedAnnotation": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "NewParent",
-        "MovedAnnotation",
-        "OldParent",
-        "ReplacedAnnotation"
-      ]
-    },
-    "AnnotationMovedAndReplacedInSameParent": {
-      "properties": {
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "MovedAnnotation": {
-          "type": "string"
-        },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
-        },
-        "ReplacedAnnotation": {
-          "$ref": "#/definitions/DeltaSerializationChunk"
-        }
-      },
-      "required": [
-        "NewIndex",
-        "MovedAnnotation",
-        "OldIndex",
-        "ReplacedAnnotation"
-      ]
-    },
     "IReferenceEvent": {
       "properties": {
         "Reference": {
@@ -1381,183 +239,3664 @@
         "Reference"
       ]
     },
-    "ReferenceAdded": {
+    "Error": {
       "properties": {
-        "NewTarget": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "ErrorCode": {
+          "type": "string"
         }
       },
       "required": [
-        "NewTarget"
+        "ErrorCode"
       ]
+    },
+    "ProtocolMessage": {
+      "properties": {
+        "Kind": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProtocolMessageData"
+          }
+        }
+      },
+      "required": [
+        "Kind",
+        "Message",
+        "Data"
+      ]
+    },
+    "ProtocolMessageData": {
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "DeltaProperty": {
+      "properties": {
+        "Parent": {
+          "type": "string"
+        },
+        "Property": {
+          "$ref": "#/definitions/MetaPointer"
+        }
+      },
+      "required": [
+        "Parent",
+        "Property"
+      ]
+    },
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "key": {
+      "$ref": "#/$defs/id"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metaPointer": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/$defs/key"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "key": {
+          "$ref": "#/$defs/key"
+        }
+      },
+      "required": [
+        "language",
+        "version",
+        "key"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    },
+    "DeltaSerializationChunk": {
+      "type": "object",
+      "properties": {
+        "Nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SerializedNode"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "Nodes"
+      ],
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1
+    },
+    "SerializedNode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "classifier": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SerializedProperty"
+          }
+        },
+        "containments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SerializedContainment"
+          }
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SerializedReference"
+          },
+          "annotations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/id"
+            },
+            "uniqueItems": true
+          },
+          "parent": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "classifier",
+          "properties",
+          "containments",
+          "references",
+          "annotations",
+          "parent"
+        ],
+        "additionalProperties": false,
+        "minProperties": 7,
+        "maxProperties": 7,
+      },
+      "required": [
+        "id",
+        "classifier",
+        "properties",
+        "containments",
+        "references",
+        "annotations",
+        "parent"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 7
+    },
+    "SerializedProperty": {
+      "type": "object",
+      "properties": {
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "value": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/propertyValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "property",
+        "value"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2
+    },
+    "SerializedContainment": {
+      "type": "object",
+      "properties": {
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "containment",
+        "children"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2
+    },
+    "SerializedReference": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SerializedReferenceTarget"
+          }
+        }
+      },
+      "required": [
+        "reference",
+        "targets"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2
+    },
+    "SerializedReferenceTarget": {
+      "type": "object",
+      "properties": {
+        "resolveInfo": {
+          "$ref": "#/$defs/optionalResolveInfo"
+        },
+        "reference": {
+          "$ref": "#/$defs/optionalTargetNode"
+        }
+      },
+      "required": [
+        "resolveInfo",
+        "reference"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2
+    },
+    "queryId": {
+      "$ref": "#/$defs/id"
+    },
+    "commandId": {
+      "$ref": "#/$defs/id"
+    },
+    "commandSource": {
+      "type": "object",
+      "properties": {
+        "participationId": {
+          "$ref": "#/$defs/participationId"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        }
+      },
+      "required": [
+        "participationId",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2
+    },
+    "commandSources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/commandSource"
+      },
+      "uniqueItems": true
+    },
+    "participationId": {
+      "$ref": "#/$defs/id"
+    },
+    "targetNode": {
+      "$ref": "#/$defs/id"
+    },
+    "optionalTargetNode": {
+      oneOf: [
+        {
+          "$ref": "#/$defs/targetNode"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "resolveInfo": {
+      "type": "string"
+    },
+    "optionalResolveInfo": {
+      oneOf: [
+        {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "eventSequenceNumber": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[0-9]+$"
+    },
+    "propertyValue": {
+      "type": "string"
+    },
+    "index": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[0-9]+$"
+    },
+    "protocolMessageKind": {
+      "$ref": "#/$defs/id"
+    },
+    "protocolMessageDataKey": {
+      "$ref": "#/$defs/id"
+    },
+    "ProtocolMessage": {
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/protocolMessageKind"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProtocolMessageData"
+          }
+        }
+      },
+      "required": [
+        "Kind",
+        "Message",
+        "Data"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    },
+    "ProtocolMessageData": {
+      "properties": {
+        "Key": {
+          "$ref": "#/$defs/protocolMessageDataKey"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2
+    },
+    "QueryRequests": {
+      oneOf: [
+        {
+          "$ref": "#/$defs/SubscribePartitionsRequest"
+        },
+        {
+          "$ref": "#/$defs/SubscribePartitionRequest"
+        },
+        {
+          "$ref": "#/$defs/UnsubscribePartitionRequest"
+        },
+        {
+          "$ref": "#/$defs/SignOnRequest"
+        },
+        {
+          "$ref": "#/$defs/SignOffRequest"
+        },
+        {
+          "$ref": "#/$defs/ReconnectRequest"
+        },
+        {
+          "$ref": "#/$defs/GetAvailableIdsRequest"
+        }
+      ]
+    },
+    "QueryResponses": {
+      oneOf: [
+        {
+          "$ref": "#/$defs/SubscribePartitionsResponse"
+        },
+        {
+          "$ref": "#/$defs/SubscribePartitionResponse"
+        },
+        {
+          "$ref": "#/$defs/UnsubscribePartitionResponse"
+        },
+        {
+          "$ref": "#/$defs/SignOnResponse"
+        },
+        {
+          "$ref": "#/$defs/SignOffResponse"
+        },
+        {
+          "$ref": "#/$defs/ReconnectResponse"
+        },
+        {
+          "$ref": "#/$defs/GetAvailableIdsResponse"
+        }
+      ]
+    },
+    "SubscribePartitionsRequest": {
+      "properties": {
+        "messageKind": {
+          "const": "SubscribePartitionsRequest"
+        },
+        "creation": {
+          "type": "boolean"
+        },
+        "deletion": {
+          "type": "boolean"
+        },
+        "partitions": {
+          "type": "boolean"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "creation",
+        "deletion",
+        "partitions",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "SubscribePartitionsResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "SubscribePartitionsResponse"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 3
+    },
+    "SubscribePartitionRequest": {
+      "properties": {
+        "messageKind": {
+          "const": "SubscribePartitionRequest"
+        },
+        "partition": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "partition",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "SubscribePartitionResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "SubscribePartitionResponse"
+        },
+        "contents": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "contents",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "UnsubscribePartitionRequest": {
+      "properties": {
+        "messageKind": {
+          "const": "UnsubscribePartitionRequest"
+        },
+        "partition": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "partition",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "UnsubscribePartitionResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "UnsubscribePartitionResponse"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 3
+    },
+    "SignOnRequest": {
+      "properties": {
+        "messageKind": {
+          "const": "SignOnRequest"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 3
+    },
+    "SignOnResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "SignOnResponse"
+        },
+        "participationId": {
+          "$ref": "#/$defs/participationId"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "participationId",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "SignOffRequest": {
+      "properties": {
+        "messageKind": {
+          "const": "SignOffRequest"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 3
+    },
+    "SignOffResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "SignOffResponse"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 3
+    },
+    "ReconnectRequest": {
+      "properties": {
+        "messageKind": {
+          "const": "ReconnectRequest"
+        },
+        "participationId": {
+          "$ref": "#/$defs/participationId"
+        },
+        "lastReceivedSequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "participationId",
+        "lastReceivedSequenceNumber",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "ReconnectResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "ReconnectResponse"
+        },
+        "participationValid": {
+          "type": "boolean"
+        },
+        "lastSentSequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "participationValid",
+        "lastSentSequenceNumber",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "GetAvailableIdsRequest": {
+      "properties": {
+        "messageKind": {
+          "const": "GetAvailableIdsRequest"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "count",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "GetAvailableIdsResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "GetAvailableIdsResponse"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "ids",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "Commands": {
+      oneOf: [
+        {
+          "$ref": "#/$defs/SingleCommands"
+        },
+        {
+          "$ref": "#/$defs/CompositeCommand"
+        },
+      ]
+    },
+    "SingleCommands": {
+      oneOf: [
+        {
+          "$ref": "#/$defs/AddPartition"
+        },
+        {
+          "$ref": "#/$defs/DeletePartition"
+        },
+        {
+          "$ref": "#/$defs/ChangeClassifier"
+        },
+        {
+          "$ref": "#/$defs/AddProperty"
+        },
+        {
+          "$ref": "#/$defs/DeleteProperty"
+        },
+        {
+          "$ref": "#/$defs/ChangeProperty"
+        },
+        {
+          "$ref": "#/$defs/AddChild"
+        },
+        {
+          "$ref": "#/$defs/DeleteChild"
+        },
+        {
+          "$ref": "#/$defs/ReplaceChild"
+        },
+        {
+          "$ref": "#/$defs/MoveChildFromOtherContainment"
+        },
+        {
+          "$ref": "#/$defs/MoveChildFromOtherContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveChildInSameContainment"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceChildFromOtherContainment"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceChildFromOtherContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceChildInSameContainment"
+        },
+        {
+          "$ref": "#/$defs/AddAnnotation"
+        },
+        {
+          "$ref": "#/$defs/DeleteAnnotation"
+        },
+        {
+          "$ref": "#/$defs/ReplaceAnnotation"
+        },
+        {
+          "$ref": "#/$defs/MoveAnnotationFromOtherParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAnnotationInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceAnnotationFromOtherParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceAnnotationInSameParent"
+        },
+        {
+          "$ref": "#/$defs/AddReference"
+        },
+        {
+          "$ref": "#/$defs/DeleteReference"
+        },
+        {
+          "$ref": "#/$defs/ChangeReference"
+        },
+        {
+          "$ref": "#/$defs/MoveEntryFromOtherReference"
+        },
+        {
+          "$ref": "#/$defs/MoveEntryFromOtherReferenceInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveEntryInSameReference"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceEntryFromOtherReference"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceEntryFromOtherReferenceInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceEntryInSameReference"
+        },
+        {
+          "$ref": "#/$defs/AddReferenceResolveInfo"
+        },
+        {
+          "$ref": "#/$defs/DeleteReferenceResolveInfo"
+        },
+        {
+          "$ref": "#/$defs/ChangeReferenceResolveInfo"
+        },
+        {
+          "$ref": "#/$defs/AddReferenceTarget"
+        },
+        {
+          "$ref": "#/$defs/DeleteReferenceTarget"
+        },
+        {
+          "$ref": "#/$defs/ChangeReferenceTarget"
+        },
+      ]
+    },
+    "AddPartition": {
+      "properties": {
+        "messageKind": {
+          "const": "AddPartition"
+        },
+        "newPartition": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newPartition",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "DeletePartition": {
+      "properties": {
+        "messageKind": {
+          "const": "DeletePartition"
+        },
+        "deletedPartition": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "deletedPartition",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "ChangeClassifier": {
+      "properties": {
+        "messageKind": {
+          "const": "ChangeClassifier"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newClassifier": {
+          "$ref": "#/$defs/metaPointer",
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "newClassifier",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "AddProperty": {
+      "properties": {
+        "messageKind": {
+          "const": "AddProperty"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "property",
+        "newValue",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "DeleteProperty": {
+      "properties": {
+        "messageKind": {
+          "const": "DeleteProperty"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "property",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "ChangeProperty": {
+      "properties": {
+        "messageKind": {
+          "const": "ChangeProperty"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "property",
+        "newValue",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "AddChild": {
+      "properties": {
+        "messageKind": {
+          "const": "AddChild"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newChild": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newChild",
+        "containment",
+        "index",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "DeleteChild": {
+      "properties": {
+        "messageKind": {
+          "const": "DeleteChild"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "containment",
+        "index",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "ReplaceChild": {
+      "properties": {
+        "messageKind": {
+          "const": "ReplaceChild"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newChild": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newChild",
+        "containment",
+        "index",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "MoveChildFromOtherContainment": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveChildFromOtherContainment"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "MoveChildFromOtherContainmentInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveChildFromOtherContainmentInSameParent"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "MoveChildInSameContainment": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveChildInSameContainment"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newIndex",
+        "movedChild",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "MoveAndReplaceChildFromOtherContainment": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceChildFromOtherContainment"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "MoveAndReplaceChildFromOtherContainmentInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceChildFromOtherContainmentInSameParent"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "MoveAndReplaceChildInSameContainment": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceChildInSameContainment"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newIndex",
+        "movedChild",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "AddAnnotation": {
+      "properties": {
+        "messageKind": {
+          "const": "AddAnnotation"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newAnnotation": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newAnnotation",
+        "index",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "DeleteAnnotation": {
+      "messageKind": {
+        "const": "DeleteAnnotation"
+      },
+      "parent": {
+        "$ref": "#/$defs/targetNode"
+      },
+      "index": {
+        "$ref": "#/$defs/index"
+      },
+      "commandId": {
+        "$ref": "#/$defs/commandId"
+      },
+      "protocolMessage": {
+        "$ref": "#/$defs/ProtocolMessage"
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "index",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "ReplaceAnnotation": {
+      "properties": {
+        "messageKind": {
+          "const": "ReplaceAnnotation"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newAnnotation": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newAnnotation",
+        "index",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "MoveAnnotationFromOtherParent": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAnnotationFromOtherParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newIndex",
+        "movedAnnotation",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "MoveAnnotationInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAnnotationInSameParent"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newIndex",
+        "movedAnnotation",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "MoveAndReplaceAnnotationFromOtherParent": {
+      "properties": {
+        "NewParent": {
+          "$ref": "#/definitions/DeltaAnnotation"
+        },
+        "MovedAnnotation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NewParent",
+        "MovedAnnotation"
+      ]
+    },
+    "MoveAndReplaceAnnotationInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceAnnotationInSameParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newIndex",
+        "movedAnnotation",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "AddReference": {
+      "properties": {
+        "messageKind": {
+          "const": "AddReference"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "newTarget": {
+          "$ref": "#/$defs/optionalTargetNode"
+        },
+        "newResolveInfo": {
+          "$ref": "#/$defs/optionalResolveInfo"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "newTarget",
+        "newResolveInfo",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "DeleteReference": {
+      "properties": {
+        "messageKind": {
+          "const": "DeleteReference"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "ChangeReference": {
+      "properties": {
+        "messageKind": {
+          "const": "ChangeReference"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "newTarget": {
+          "$ref": "#/$defs/optionalTargetNode"
+        },
+        "newResolveInfo": {
+          "$ref": "#/$defs/optionalResolveInfo"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "newTarget",
+        "newResolveInfo",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "MoveEntryFromOtherReference": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveEntryFromOtherReference"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newReference",
+        "newIndex",
+        "oldParent",
+        "oldReference",
+        "oldIndex",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 9
+    },
+    "MoveEntryFromOtherReferenceInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveEntryFromOtherReferenceInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newReference",
+        "newIndex",
+        "oldReference",
+        "oldIndex",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "MoveEntryInSameReference": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveEntryInSameReference"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "newIndex",
+        "oldIndex",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "MoveAndReplaceEntryFromOtherReference": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceEntryFromOtherReference"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newReference",
+        "newIndex",
+        "oldParent",
+        "oldReference",
+        "oldIndex",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 9
+    },
+    "MoveAndReplaceEntryFromOtherReferenceInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceEntryFromOtherReferenceInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newReference",
+        "newIndex",
+        "oldReference",
+        "oldIndex",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "MoveAndReplaceEntryInSameReference": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceEntryInSameReference"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "newIndex",
+        "oldIndex",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "AddReferenceResolveInfo": {
+      "properties": {
+        "messageKind": {
+          "const": "AddReferenceResolveInfo"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "newResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "newResolveInfo",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "DeleteReferenceResolveInfo": {
+      "properties": {
+        "messageKind": {
+          "const": "DeleteReferenceResolveInfo"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "ChangeReferenceResolveInfo": {
+      "properties": {
+        "messageKind": {
+          "const": "ChangeReferenceResolveInfo"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "newResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "newResolveInfo",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "AddReferenceTarget": {
+      "properties": {
+        "messageKind": {
+          "const": "AddReferenceTarget"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "newTarget": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "newTarget",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "DeleteReferenceTarget": {
+      "properties": {
+        "messageKind": {
+          "const": "DeleteReferenceTarget"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "ChangeReferenceTarget": {
+      "properties": {
+        "messageKind": {
+          "const": "ChangeReferenceTarget"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "newTarget": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "newTarget",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "CompositeCommand": {
+      "properties": {
+        "messageKind": {
+          "const": "ChangeReferenceTarget"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SingleCommands"
+          }
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parts",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "Events": {
+      oneOf: [
+        {
+          "$ref": "#/$defs/SingleEvents"
+        },
+        {
+          "$ref": "#/$defs/CompositeEvent"
+        },
+      ]
+    },
+    "SingleEvents": {
+      oneOf: [
+        {
+          "$ref": "#/$defs/AddPartition"
+        },
+        {
+          "$ref": "#/$defs/DeletePartition"
+        },
+        {
+          "$ref": "#/$defs/ChangeClassifier"
+        },
+        {
+          "$ref": "#/$defs/AddProperty"
+        },
+        {
+          "$ref": "#/$defs/DeleteProperty"
+        },
+        {
+          "$ref": "#/$defs/ChangeProperty"
+        },
+        {
+          "$ref": "#/$defs/AddChild"
+        },
+        {
+          "$ref": "#/$defs/DeleteChild"
+        },
+        {
+          "$ref": "#/$defs/ReplaceChild"
+        },
+        {
+          "$ref": "#/$defs/MoveChildFromOtherContainment"
+        },
+        {
+          "$ref": "#/$defs/MoveChildFromOtherContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveChildInSameContainment"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceChildFromOtherContainment"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceChildFromOtherContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceChildInSameContainment"
+        },
+        {
+          "$ref": "#/$defs/AddAnnotation"
+        },
+        {
+          "$ref": "#/$defs/DeleteAnnotation"
+        },
+        {
+          "$ref": "#/$defs/ReplaceAnnotation"
+        },
+        {
+          "$ref": "#/$defs/MoveAnnotationFromOtherParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAnnotationInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceAnnotationFromOtherParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceAnnotationInSameParent"
+        },
+        {
+          "$ref": "#/$defs/AddReference"
+        },
+        {
+          "$ref": "#/$defs/DeleteReference"
+        },
+        {
+          "$ref": "#/$defs/ChangeReference"
+        },
+        {
+          "$ref": "#/$defs/MoveEntryFromOtherReference"
+        },
+        {
+          "$ref": "#/$defs/MoveEntryFromOtherReferenceInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveEntryInSameReference"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceEntryFromOtherReference"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceEntryFromOtherReferenceInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceEntryInSameReference"
+        },
+        {
+          "$ref": "#/$defs/AddReferenceResolveInfo"
+        },
+        {
+          "$ref": "#/$defs/DeleteReferenceResolveInfo"
+        },
+        {
+          "$ref": "#/$defs/ChangeReferenceResolveInfo"
+        },
+        {
+          "$ref": "#/$defs/AddReferenceTarget"
+        },
+        {
+          "$ref": "#/$defs/DeleteReferenceTarget"
+        },
+        {
+          "$ref": "#/$defs/ChangeReferenceTarget"
+        },
+      ]
+    },
+    "PartitionAdded": {
+      "properties": {
+        "messageKind": {
+          "const": "PartitionAdded"
+        },
+        "newPartition": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newPartition",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "PartitionDeleted": {
+      "properties": {
+        "messageKind": {
+          "const": "PartitionDeleted"
+        },
+        "deletedPartition": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "deletedPartition",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "ClassifierChanged": {
+      "properties": {
+        "messageKind": {
+          "const": "ClassifierChanged"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newClassifier": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldClassifier": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "newClassifier",
+        "oldClassifier",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "PropertyAdded": {
+      "properties": {
+        "messageKind": {
+          "const": "PropertyAdded"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "property",
+        "newValue",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "PropertyDeleted": {
+      "properties": {
+        "messageKind": {
+          "const": "PropertyDeleted"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "property",
+        "oldValue",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "PropertyChanged": {
+      "properties": {
+        "messageKind": {
+          "const": "PropertyChanged"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "newValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "property",
+        "oldValue",
+        "newValue",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "ChildAdded": {
+      "properties": {
+        "messageKind": {
+          "const": "ChildAdded"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newChild": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newChild",
+        "containment",
+        "index",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "ChildDeleted": {
+      "properties": {
+        "messageKind": {
+          "const": "ChildDeleted"
+        },
+        "deletedChild": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "deletedChild",
+        "parent",
+        "containment",
+        "index",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "ChildReplaced": {
+      "properties": {
+        "messageKind": {
+          "const": "ChildReplaced"
+        },
+        "newChild": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newChild",
+        "replacedChild",
+        "parent",
+        "containment",
+        "index",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 9
+    },
+    "ChildMovedFromOtherContainment": {
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedFromOtherContainment"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "oldParent",
+        "oldContainment",
+        "oldIndex",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 10,
+      "maxProperties": 11
+    },
+    "ChildMovedFromOtherContainmentInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedFromOtherContainmentInSameParent"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "parent",
+        "oldContainment",
+        "oldIndex",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 10
+    },
+    "ChildMovedInSameContainment": {
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedInSameContainment"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newIndex",
+        "movedChild",
+        "parent",
+        "containment",
+        "oldIndex",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 9
+    },
+    "ChildMovedAndReplacedFromOtherContainment": {
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedAndReplacedFromOtherContainment"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "oldParent",
+        "oldContainment",
+        "oldIndex",
+        "replacedChild",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 11,
+      "maxProperties": 12
+    },
+    "ChildMovedAndReplacedFromOtherContainmentInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedAndReplacedFromOtherContainmentInSameParent"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "parent",
+        "oldContainment",
+        "oldIndex",
+        "replacedChild",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 10,
+      "maxProperties": 11
+    },
+    "ChildMovedAndReplacedInSameContainment": {
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedAndReplacedInSameContainment"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newIndex",
+        "movedChild",
+        "parent",
+        "containment",
+        "oldIndex",
+        "replacedChild",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 10
+    },
+    "AnnotationAdded": {
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationAdded"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newAnnotation": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newAnnotation",
+        "index",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "AnnotationDeleted": {
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationDeleted"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "deletedAnnotation": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "deletedAnnotation",
+        "index",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "AnnotationReplaced": {
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationReplaced"
+        },
+        "newAnnotation": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "replacedAnnotation": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newAnnotation",
+        "replacedAnnotation",
+        "parent",
+        "index",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "AnnotationMovedFromOtherParent": {
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationMovedFromOtherParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newIndex",
+        "movedAnnotation",
+        "oldParent",
+        "oldIndex",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 9
+    },
+    "AnnotationMovedInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationMovedInSameParent"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newIndex",
+        "movedAnnotation",
+        "parent",
+        "oldIndex",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "AnnotationMovedAndReplacedFromOtherParent": {
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationMovedAndReplacedFromOtherParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedAnnotation": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newIndex",
+        "movedAnnotation",
+        "oldParent",
+        "oldIndex",
+        "replacedAnnotation",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 10
+    },
+    "AnnotationMovedAndReplacedInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationMovedAndReplacedInSameParent"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedAnnotation": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newIndex",
+        "movedAnnotation",
+        "parent",
+        "oldIndex",
+        "replacedAnnotation",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 9
+    },
+    "ReferenceAdded": {
+      "properties": {
+        "messageKind": {
+          "const": "ReferenceAdded"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "newTarget": {
+          "$ref": "#/$defs/optionalTargetNode"
+        },
+        "newResolveInfo": {
+          "$ref": "#/$defs/optionalResolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "newTarget",
+        "newResolveInfo",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 9
     },
     "ReferenceDeleted": {
       "properties": {
-        "DeletedTarget": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "messageKind": {
+          "const": "ReferenceDeleted"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "deletedTarget": {
+          "$ref": "#/$defs/optionalTargetNode"
+        },
+        "deletedResolveInfo": {
+          "$ref": "#/$defs/optionalResolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
         }
       },
       "required": [
-        "DeletedTarget"
-      ]
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "deletedTarget",
+        "deletedResolveInfo",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 9
     },
     "ReferenceChanged": {
       "properties": {
-        "NewTarget": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "messageKind": {
+          "const": "ReferenceDeleted"
         },
-        "ReplacedTarget": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "newTarget": {
+          "$ref": "#/$defs/optionalTargetNode"
+        },
+        "newResolveInfo": {
+          "$ref": "#/$defs/optionalResolveInfo"
+        },
+        "replacedTarget": {
+          "$ref": "#/$defs/optionalTargetNode"
+        },
+        "replacedResolveInfo": {
+          "$ref": "#/$defs/optionalResolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
         }
       },
       "required": [
-        "NewTarget",
-        "ReplacedTarget"
-      ]
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "newTarget",
+        "newResolveInfo",
+        "replacedTarget",
+        "replacedResolveInfo",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 10,
+      "maxProperties": 11
     },
     "EntryMovedFromOtherReference": {
       "properties": {
-        "NewReference": {
-          "$ref": "#/definitions/DeltaReference"
+        "messageKind": {
+          "const": "EntryMovedFromOtherReference"
         },
-        "OldReference": {
-          "$ref": "#/definitions/DeltaReference"
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
         },
-        "MovedEntry": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "newReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "target": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "resolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
         }
       },
       "required": [
-        "NewReference",
-        "OldReference",
-        "MovedEntry"
-      ]
+        "messageKind",
+        "newParent",
+        "newReference",
+        "newIndex",
+        "oldParent",
+        "oldReference",
+        "oldIndex",
+        "target",
+        "resolveInfo",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 11,
+      "maxProperties": 12
     },
     "EntryMovedFromOtherReferenceInSameParent": {
       "properties": {
-        "NewReference": {
-          "$ref": "#/definitions/MetaPointer"
+        "messageKind": {
+          "const": "EntryMovedFromOtherReferenceInSameParent"
         },
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
+        "parent": {
+          "$ref": "#/$defs/targetNode"
         },
-        "OldReference": {
-          "$ref": "#/definitions/MetaPointer"
+        "newReference": {
+          "$ref": "#/$defs/metaPointer"
         },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
+        "newIndex": {
+          "$ref": "#/$defs/index"
         },
-        "MovedEntry": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "oldReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "target": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "resolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
         }
       },
       "required": [
-        "NewReference",
-        "NewIndex",
-        "OldReference",
-        "OldIndex",
-        "MovedEntry"
-      ]
+        "messageKind",
+        "parent",
+        "newReference",
+        "newIndex",
+        "oldReference",
+        "oldIndex",
+        "target",
+        "resolveInfo",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 10,
+      "maxProperties": 11
     },
     "EntryMovedInSameReference": {
       "properties": {
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
+        "messageKind": {
+          "const": "EntryMovedInSameReference"
         },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
+        "parent": {
+          "$ref": "#/$defs/targetNode"
         },
-        "MovedEntry": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "target": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "resolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
         }
       },
       "required": [
-        "NewIndex",
-        "OldIndex",
-        "MovedEntry"
-      ]
+        "messageKind",
+        "parent",
+        "reference",
+        "newIndex",
+        "oldIndex",
+        "target",
+        "resolveInfo",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 10
     },
     "EntryMovedAndReplacedFromOtherReference": {
       "properties": {
-        "NewReference": {
-          "$ref": "#/definitions/DeltaReference"
+        "messageKind": {
+          "const": "EntryMovedAndReplacedFromOtherReference"
         },
-        "OldReference": {
-          "$ref": "#/definitions/DeltaReference"
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
         },
-        "MovedEntry": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "newReference": {
+          "$ref": "#/$defs/metaPointer"
         },
-        "ReplacedEntry": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedTarget": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "movedResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedTarget": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
         }
       },
       "required": [
-        "NewReference",
-        "OldReference",
-        "MovedEntry",
-        "ReplacedEntry"
-      ]
+        "messageKind",
+        "newParent",
+        "newReference",
+        "newIndex",
+        "movedTarget",
+        "movedResolveInfo",
+        "oldParent",
+        "oldReference",
+        "oldIndex",
+        "replacedTarget",
+        "replacedResolveInfo",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 13,
+      "maxProperties": 14
     },
     "EntryMovedAndReplacedFromOtherReferenceInSameParent": {
       "properties": {
-        "NewReference": {
-          "$ref": "#/definitions/MetaPointer"
+        "messageKind": {
+          "const": "EntryMovedAndReplacedFromOtherReferenceInSameParent"
         },
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
+        "parent": {
+          "$ref": "#/$defs/targetNode"
         },
-        "OldReference": {
-          "$ref": "#/definitions/MetaPointer"
+        "newReference": {
+          "$ref": "#/$defs/metaPointer"
         },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
+        "newIndex": {
+          "$ref": "#/$defs/index"
         },
-        "MovedEntry": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "movedTarget": {
+          "$ref": "#/$defs/targetNode"
         },
-        "ReplacedEntry": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "movedResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "oldReference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedTarget": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
         }
       },
       "required": [
-        "NewReference",
-        "NewIndex",
-        "OldReference",
-        "OldIndex",
-        "MovedEntry",
-        "ReplacedEntry"
-      ]
+        "messageKind",
+        "parent",
+        "newReference",
+        "newIndex",
+        "movedTarget",
+        "movedResolveInfo",
+        "oldReference",
+        "oldIndex",
+        "replacedTarget",
+        "replacedResolveInfo",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 12,
+      "maxProperties": 13
     },
     "EntryMovedAndReplacedInSameReference": {
       "properties": {
-        "NewIndex": {
-          "type": "number",
-          "format": "int"
+        "messageKind": {
+          "const": "EntryMovedAndReplacedInSameReference"
         },
-        "OldIndex": {
-          "type": "number",
-          "format": "int"
+        "parent": {
+          "$ref": "#/$defs/targetNode"
         },
-        "MovedEntry": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
         },
-        "ReplacedEntry": {
-          "$ref": "#/definitions/SerializedReferenceTarget"
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedTarget": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "movedResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedTarget": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
         }
       },
       "required": [
-        "NewIndex",
-        "OldIndex",
-        "MovedEntry",
-        "ReplacedEntry"
-      ]
+        "messageKind",
+        "parent",
+        "movedTarget",
+        "movedResolveInfo",
+        "reference",
+        "newIndex",
+        "oldIndex",
+        "resolvedTarget",
+        "resolvedResolveInfo",
+        "originCommands",
+        "sequenceNumber"
+      ],
+      "additionalProperties": false,
+      "minProperties": 11,
+      "maxProperties": 12
     },
     "ReferenceResolveInfoAdded": {
       "properties": {
@@ -1669,16 +4008,6 @@
     "NoOpEvent": {
       "properties": {},
       "required": []
-    },
-    "Error": {
-      "properties": {
-        "ErrorCode": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "ErrorCode"
-      ]
     }
-  }
+  },
 }
