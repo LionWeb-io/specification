@@ -3,8 +3,8 @@
   "$id": "https://lionweb.io/delta.schema.json",
   "title": "LionWeb Delta Protocol",
   "description": "Version: 0",
-  type: "object",
-  oneOf: [
+  "type": "object",
+  "oneOf": [
     {
       "$ref": "#/$defs/QueryRequests"
     },
@@ -16,7 +16,7 @@
     },
     {
       "$ref": "#/$defs/Events"
-    },
+    }
   ],
   "$defs": {
     "id": {
@@ -114,19 +114,7 @@
               }
             ]
           }
-        },
-        "required": [
-          "id",
-          "classifier",
-          "properties",
-          "containments",
-          "references",
-          "annotations",
-          "parent"
-        ],
-        "additionalProperties": false,
-        "minProperties": 7,
-        "maxProperties": 7,
+        }
       },
       "required": [
         "id",
@@ -265,7 +253,7 @@
       "$ref": "#/$defs/id"
     },
     "optionalTargetNode": {
-      oneOf: [
+      "oneOf": [
         {
           "$ref": "#/$defs/targetNode"
         },
@@ -278,7 +266,7 @@
       "type": "string"
     },
     "optionalResolveInfo": {
-      oneOf: [
+      "oneOf": [
         {
           "$ref": "#/$defs/resolveInfo"
         },
@@ -351,7 +339,7 @@
       "maxProperties": 2
     },
     "QueryRequests": {
-      oneOf: [
+      "oneOf": [
         {
           "$ref": "#/$defs/SubscribePartitionsRequest"
         },
@@ -376,7 +364,7 @@
       ]
     },
     "QueryResponses": {
-      oneOf: [
+      "oneOf": [
         {
           "$ref": "#/$defs/SubscribePartitionsResponse"
         },
@@ -736,17 +724,17 @@
       "maxProperties": 4
     },
     "Commands": {
-      oneOf: [
+      "oneOf": [
         {
           "$ref": "#/$defs/SingleCommands"
         },
         {
           "$ref": "#/$defs/CompositeCommand"
-        },
+        }
       ]
     },
     "SingleCommands": {
-      oneOf: [
+      "oneOf": [
         {
           "$ref": "#/$defs/AddPartition"
         },
@@ -857,7 +845,7 @@
         },
         {
           "$ref": "#/$defs/ChangeReferenceTarget"
-        },
+        }
       ]
     },
     "AddPartition": {
@@ -917,7 +905,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newClassifier": {
-          "$ref": "#/$defs/metaPointer",
+          "$ref": "#/$defs/metaPointer"
         },
         "commandId": {
           "$ref": "#/$defs/commandId"
@@ -2122,7 +2110,7 @@
       "maxProperties": 4
     },
     "Events": {
-      oneOf: [
+      "oneOf": [
         {
           "$ref": "#/$defs/SingleEvents"
         },
@@ -2131,11 +2119,11 @@
         },
         {
           "$ref": "#/$defs/Error"
-        },
+        }
       ]
     },
     "SingleEvents": {
-      oneOf: [
+      "oneOf": [
         {
           "$ref": "#/$defs/PartitionAdded"
         },
@@ -3925,7 +3913,7 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/SingleEvents"
-          },
+          }
         },
         "protocolMessage": {
           "$ref": "#/$defs/ProtocolMessage"
