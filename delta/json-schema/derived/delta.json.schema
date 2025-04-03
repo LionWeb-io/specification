@@ -1,10 +1,10 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lionweb.io/delta.schema.json",
   "title": "LionWeb Delta Protocol",
   "description": "Version: 0",
   "type": "object",
-  "oneOf": [
+  "anyOf": [
     {
       "$ref": "#/$defs/QueryRequests"
     },
@@ -54,22 +54,11 @@
       "maxProperties": 3
     },
     "DeltaSerializationChunk": {
-      "type": "object",
-      "properties": {
-        "Nodes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/SerializedNode"
-          },
-          "uniqueItems": true
-        }
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SerializedNode"
       },
-      "required": [
-        "Nodes"
-      ],
-      "additionalProperties": false,
-      "minProperties": 1,
-      "maxProperties": 1
+      "uniqueItems": true
     },
     "SerializedNode": {
       "type": "object",
@@ -97,23 +86,23 @@
           "items": {
             "$ref": "#/$defs/SerializedReference"
           },
-          "annotations": {
-            "type": "array",
-            "items": {
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "parent": {
+          "oneOf": [
+            {
               "$ref": "#/$defs/id"
             },
-            "uniqueItems": true
-          },
-          "parent": {
-            "oneOf": [
-              {
-                "$ref": "#/$defs/id"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -302,10 +291,10 @@
         "kind": {
           "$ref": "#/$defs/protocolMessageKind"
         },
-        "Message": {
+        "message": {
           "type": "string"
         },
-        "Data": {
+        "data": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/ProtocolMessageData"
@@ -313,9 +302,9 @@
         }
       },
       "required": [
-        "Kind",
-        "Message",
-        "Data"
+        "kind",
+        "message",
+        "data"
       ],
       "additionalProperties": false,
       "minProperties": 3,
@@ -323,23 +312,23 @@
     },
     "ProtocolMessageData": {
       "properties": {
-        "Key": {
+        "key": {
           "$ref": "#/$defs/protocolMessageDataKey"
         },
-        "Value": {
+        "value": {
           "type": "string"
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "key",
+        "value"
       ],
       "additionalProperties": false,
       "minProperties": 2,
       "maxProperties": 2
     },
     "QueryRequests": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/SubscribePartitionsRequest"
         },
@@ -364,7 +353,7 @@
       ]
     },
     "QueryResponses": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/SubscribePartitionsResponse"
         },
@@ -724,7 +713,7 @@
       "maxProperties": 4
     },
     "Commands": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/SingleCommands"
         },
@@ -734,7 +723,7 @@
       ]
     },
     "SingleCommands": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/AddPartition"
         },
@@ -961,6 +950,9 @@
         "messageKind": {
           "const": "DeleteProperty"
         },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
         "property": {
           "$ref": "#/$defs/metaPointer"
         },
@@ -973,12 +965,13 @@
       },
       "required": [
         "messageKind",
+        "node",
         "property",
         "commandId"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
-      "maxProperties": 4
+      "minProperties": 4,
+      "maxProperties": 5
     },
     "ChangeProperty": {
       "properties": {
@@ -2110,7 +2103,7 @@
       "maxProperties": 4
     },
     "Events": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/SingleEvents"
         },
@@ -2123,7 +2116,7 @@
       ]
     },
     "SingleEvents": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/PartitionAdded"
         },
