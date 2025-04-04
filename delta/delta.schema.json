@@ -85,7 +85,7 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/SerializedReference"
-          },
+          }
         },
         "annotations": {
           "type": "array",
