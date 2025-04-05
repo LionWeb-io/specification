@@ -90,6 +90,7 @@ NOTE: signing on is not the same as logging in: The latter includes some authent
 
 [horizontal]
 .Request parameters
+deltaProtocolVersion:: <<deltaProtocolVersionType>>
 queryId:: <<queryIdType>> Id of this query.
 protocolMessage:: <<protocolMessageType>>
 
@@ -100,7 +101,7 @@ queryId:: <<queryIdType>> Id of this query.
 protocolMessage:: <<protocolMessageType>>
 
 .Errors
-_none_
+* Unsupported delta protocol version
 
 .Technical name
 `SignOn`

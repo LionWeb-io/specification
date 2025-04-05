@@ -40,6 +40,8 @@ This allows a client to know when its command has been processed (either success
 
 [[freeIdType]]FreeId:: Free <<{m3}.adoc#node-id, node id>>.
 
+[[deltaProtocolVersionType]]DeltaProtocolVersion:: Version of the delta protocol, e.g. `2025.1`.
+
 ==== How to address references
 We refer to references by the tuple of _(parent, reference, index)_.
 Rationale: Both reference `target` and `resolveInfo` can be `null`, so they aren't suitable for identifying the reference.
