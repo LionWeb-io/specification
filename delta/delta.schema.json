@@ -24,6 +24,11 @@
       "minLength": 1,
       "pattern": "^[a-zA-Z0-9_-]+$"
     },
+    "deltaProtocolVersion": {
+      "enum": [
+        "2025.1"
+      ]
+    },
     "key": {
       "$ref": "#/$defs/id"
     },
@@ -64,7 +69,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "$ref": "#/$defs/id"
+          "$ref": "#/$defs/targetNode"
         },
         "classifier": {
           "$ref": "#/$defs/metaPointer"
@@ -526,6 +531,9 @@
         "messageKind": {
           "const": "SignOnRequest"
         },
+        "deltaProtocolVersion": {
+          "$ref": "#/$defs/deltaProtocolVersion"
+        },
         "queryId": {
           "$ref": "#/$defs/queryId"
         },
@@ -535,11 +543,12 @@
       },
       "required": [
         "messageKind",
+        "deltaProtocolVersion",
         "queryId"
       ],
       "additionalProperties": false,
-      "minProperties": 2,
-      "maxProperties": 3
+      "minProperties": 3,
+      "maxProperties": 4
     },
     "SignOnResponse": {
       "properties": {
@@ -1334,20 +1343,22 @@
       "maxProperties": 6
     },
     "DeleteAnnotation": {
-      "messageKind": {
-        "const": "DeleteAnnotation"
-      },
-      "parent": {
-        "$ref": "#/$defs/targetNode"
-      },
-      "index": {
-        "$ref": "#/$defs/index"
-      },
-      "commandId": {
-        "$ref": "#/$defs/commandId"
-      },
-      "protocolMessage": {
-        "$ref": "#/$defs/ProtocolMessage"
+      "properties": {
+        "messageKind": {
+          "const": "DeleteAnnotation"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
       },
       "required": [
         "messageKind",
@@ -1488,9 +1499,6 @@
         "messageKind": {
           "const": "MoveAndReplaceAnnotationInSameParent"
         },
-        "newParent": {
-          "$ref": "#/$defs/targetNode"
-        },
         "newIndex": {
           "$ref": "#/$defs/index"
         },
@@ -1506,14 +1514,13 @@
       },
       "required": [
         "messageKind",
-        "newParent",
         "newIndex",
         "movedAnnotation",
         "commandId"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
-      "maxProperties": 6
+      "minProperties": 4,
+      "maxProperties": 5
     },
     "AddReference": {
       "properties": {
@@ -2078,7 +2085,7 @@
     "CompositeCommand": {
       "properties": {
         "messageKind": {
-          "const": "ChangeReferenceTarget"
+          "const": "CompositeCommand"
         },
         "parts": {
           "type": "array",
@@ -2127,7 +2134,7 @@
           "$ref": "#/$defs/ClassifierChanged"
         },
         {
-          "$ref": "#/$defs/PartitionAdded"
+          "$ref": "#/$defs/PropertyAdded"
         },
         {
           "$ref": "#/$defs/PropertyDeleted"
@@ -3240,7 +3247,7 @@
     "ReferenceChanged": {
       "properties": {
         "messageKind": {
-          "const": "ReferenceDeleted"
+          "const": "ReferenceChanged"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3611,13 +3618,13 @@
       "required": [
         "messageKind",
         "parent",
-        "movedTarget",
-        "movedResolveInfo",
         "reference",
         "newIndex",
+        "movedTarget",
+        "movedResolveInfo",
         "oldIndex",
-        "resolvedTarget",
-        "resolvedResolveInfo",
+        "replacedTarget",
+        "replacedResolveInfo",
         "originCommands",
         "sequenceNumber"
       ],
