@@ -335,13 +335,13 @@
     "QueryRequests": {
       "anyOf": [
         {
-          "$ref": "#/$defs/SubscribePartitionsRequest"
+          "$ref": "#/$defs/SubscribeToChangingPartitionsRequest"
         },
         {
-          "$ref": "#/$defs/SubscribePartitionRequest"
+          "$ref": "#/$defs/SubscribeToPartitionContentsRequest"
         },
         {
-          "$ref": "#/$defs/UnsubscribePartitionRequest"
+          "$ref": "#/$defs/UnsubscribeFromPartitionContentsRequest"
         },
         {
           "$ref": "#/$defs/SignOnRequest"
@@ -360,13 +360,13 @@
     "QueryResponses": {
       "anyOf": [
         {
-          "$ref": "#/$defs/SubscribePartitionsResponse"
+          "$ref": "#/$defs/SubscribeToChangingPartitionsResponse"
         },
         {
-          "$ref": "#/$defs/SubscribePartitionResponse"
+          "$ref": "#/$defs/SubscribeToPartitionContentsResponse"
         },
         {
-          "$ref": "#/$defs/UnsubscribePartitionResponse"
+          "$ref": "#/$defs/UnsubscribeFromPartitionContentsResponse"
         },
         {
           "$ref": "#/$defs/SignOnResponse"
@@ -382,10 +382,10 @@
         }
       ]
     },
-    "SubscribePartitionsRequest": {
+    "SubscribeToChangingPartitionsRequest": {
       "properties": {
         "messageKind": {
-          "const": "SubscribePartitionsRequest"
+          "const": "SubscribeToChangingPartitionsRequest"
         },
         "creation": {
           "type": "boolean"
@@ -414,10 +414,10 @@
       "minProperties": 5,
       "maxProperties": 6
     },
-    "SubscribePartitionsResponse": {
+    "SubscribeToChangingPartitionsResponse": {
       "properties": {
         "messageKind": {
-          "const": "SubscribePartitionsResponse"
+          "const": "SubscribeToChangingPartitionsResponse"
         },
         "queryId": {
           "$ref": "#/$defs/queryId"
@@ -434,10 +434,10 @@
       "minProperties": 2,
       "maxProperties": 3
     },
-    "SubscribePartitionRequest": {
+    "SubscribeToPartitionContentsRequest": {
       "properties": {
         "messageKind": {
-          "const": "SubscribePartitionRequest"
+          "const": "SubscribeToPartitionContentsRequest"
         },
         "partition": {
           "$ref": "#/$defs/targetNode"
@@ -458,10 +458,10 @@
       "minProperties": 3,
       "maxProperties": 4
     },
-    "SubscribePartitionResponse": {
+    "SubscribeToPartitionContentsResponse": {
       "properties": {
         "messageKind": {
-          "const": "SubscribePartitionResponse"
+          "const": "SubscribeToPartitionContentsResponse"
         },
         "contents": {
           "$ref": "#/$defs/DeltaSerializationChunk"
@@ -482,10 +482,10 @@
       "minProperties": 3,
       "maxProperties": 4
     },
-    "UnsubscribePartitionRequest": {
+    "UnsubscribeFromPartitionContentsRequest": {
       "properties": {
         "messageKind": {
-          "const": "UnsubscribePartitionRequest"
+          "const": "UnsubscribeFromPartitionContentsRequest"
         },
         "partition": {
           "$ref": "#/$defs/targetNode"
@@ -506,10 +506,10 @@
       "minProperties": 3,
       "maxProperties": 4
     },
-    "UnsubscribePartitionResponse": {
+    "UnsubscribeFromPartitionContentsResponse": {
       "properties": {
         "messageKind": {
-          "const": "UnsubscribePartitionResponse"
+          "const": "UnsubscribeFromPartitionContentsResponse"
         },
         "queryId": {
           "$ref": "#/$defs/queryId"
