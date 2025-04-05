@@ -48,13 +48,13 @@ deactivate clientEvent
 ----
 1. User enters new property value on node `nodeA` that's known to the editor.
 2. Client editor forwards user action into command.
-3. Client sends <<cmd-addProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
+3. Client sends <<cmd-AddProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
 4. Repository registers command for processing.
 5. Repository acknowledges reception of command with id `cmd-1`.
 6. Client registers processed command id `cmd-1`.
 7. Client informs editor of command submission.
 8. Repository realizes it does not know a node with id `nodeA`
 9. Repository creates event for notification.
-10. Repository emits <<evnt-error>> event with `unknownNode` error code, `cannot add property to unknown node` message and sequence number `1`.
+10. Repository emits <<evnt-Error>> event with `unknownNode` error code, `cannot add property to unknown node` message and sequence number `1`.
 It includes one <<commandSourceType>> with value `(client-a, cmd-1)`.
 11. Client removes `cmd-1` from open commands list.

@@ -20,7 +20,7 @@ Processed --> [*]: <i>client</i>\ndiscards
 [[cmd-partitions]]
 ==== Partitions
 
-[[cmd-addPartition]]
+[[cmd-AddPartition]]
 ===== Add partition
 Add `newPartition` node as new partition.
 
@@ -43,12 +43,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`addPartition`
+`AddPartition`
 
 .Related event
-<<evnt-partitionAdded>>
+<<evnt-PartitionAdded>>
 
-[[cmd-deletePartition]]
+[[cmd-DeletePartition]]
 ===== Delete partition
 Delete partition `deletedPartition`, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
@@ -71,15 +71,15 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`deletePartition`
+`DeletePartition`
 
 .Related event
-<<evnt-partitionDeleted>>
+<<evnt-PartitionDeleted>>
 
 [[cmd-nodes]]
 ==== Nodes
 
-[[cmd-changeClassifier]]
+[[cmd-ChangeClassifier]]
 ===== Change classifier
 Change classifier of `node` from `oldClassifier` to `newClassifier`.
 
@@ -102,15 +102,15 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`changeClassifier`
+`ChangeClassifier`
 
 .Related event
-<<evnt-classifierChanged>>
+<<evnt-ClassifierChanged>>
 
 [[cmd-properties]]
 ==== Properties
 
-[[cmd-addProperty]]
+[[cmd-AddProperty]]
 ===== Add property
 Add `newValue` as value of property `property` to `node`.
 
@@ -135,12 +135,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`addProperty`
+`AddProperty`
 
 .Related event
-<<evnt-propertyAdded>>
+<<evnt-PropertyAdded>>
 
-[[cmd-deleteProperty]]
+[[cmd-DeleteProperty]]
 ===== Delete property
 Delete existing `property` with `oldValue` from `node`.
 
@@ -164,12 +164,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`deleteProperty`
+`DeleteProperty`
 
 .Related event
-<<evnt-propertyDeleted>>
+<<evnt-PropertyDeleted>>
 
-[[cmd-changeProperty]]
+[[cmd-ChangeProperty]]
 ===== Change property
 Change existing `property` of `node` to `newValue`.
 
@@ -196,15 +196,15 @@ protocolMessage:: <<protocolMessageType>>
 
 
 .Technical name
-`changeProperty`
+`ChangeProperty`
 
 .Related event
-<<evnt-propertyChanged>>
+<<evnt-PropertyChanged>>
 
 [[cmd-children]]
 ==== Children
 
-[[cmd-addChild]]
+[[cmd-AddChild]]
 ===== Add child
 Add new node `newChild` to `parent` in `containment` at `index`.
 `newChild` might be a single node or an arbitrary complex subtree.
@@ -234,12 +234,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`addChild`
+`AddChild`
 
 .Related event
-<<evnt-childAdded>>
+<<evnt-ChildAdded>>
 
-[[cmd-deleteChild]]
+[[cmd-DeleteChild]]
 ===== Delete child
 Delete existing node from ``parent``'s `containment` at `index`, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
@@ -265,12 +265,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`deleteChild`
+`DeleteChild`
 
 .Related event
-<<evnt-childDeleted>>
+<<evnt-ChildDeleted>>
 
-[[cmd-replaceChild]]
+[[cmd-ReplaceChild]]
 ===== Replace child
 Delete current child inside ``parent``'s `containment` at `index`, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
@@ -303,12 +303,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`replaceChild`
+`ReplaceChild`
 
 .Related event
-<<evnt-childReplaced>>
+<<evnt-ChildReplaced>>
 
-[[cmd-moveChildFromOtherContainment]]
+[[cmd-MoveChildFromOtherContainment]]
 ===== Move child from other containment
 Move existing node `movedChild` inside ``newParent``'s `newContainment` at `newIndex`.
 
@@ -336,12 +336,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveChildFromOtherContainment`
+`MoveChildFromOtherContainment`
 
 .Related event
-<<evnt-childMovedFromOtherContainment>>
+<<evnt-ChildMovedFromOtherContainment>>
 
-[[cmd-moveChildFromOtherContainmentInSameParent]]
+[[cmd-MoveChildFromOtherContainmentInSameParent]]
 ===== Move child from other containment in same parent
 Move existing node `movedChild` (currently inside one of ``movedChild``'s parent's containments other than `newContainment`)
 inside ``movedChild``'s parent's `newContainment` at `newIndex`.
@@ -369,12 +369,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveChildFromOtherContainmentInSameParent`
+`MoveChildFromOtherContainmentInSameParent`
 
 .Related event
-<<evnt-childMovedFromOtherContainmentInSameParent>>
+<<evnt-ChildMovedFromOtherContainmentInSameParent>>
 
-[[cmd-moveChildInSameContainment]]
+[[cmd-MoveChildInSameContainment]]
 ===== Move child in same containment
 Move existing node `movedChild` within its current containment to `newIndex`.
 
@@ -400,12 +400,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveChildInSameContainment`
+`MoveChildInSameContainment`
 
 .Related event
-<<evnt-childMovedInSameContainment>>
+<<evnt-ChildMovedInSameContainment>>
 
-[[cmd-moveAndReplaceChildFromOtherContainment]]
+[[cmd-MoveAndReplaceChildFromOtherContainment]]
 ===== Move child from other containment and replace existing child
 Move existing node `movedChild` inside ``newParent``'s `newContainment` at `newIndex`.
 Delete current child inside ``newParent``'s `newContainment` at `newIndex`, and all its descendants (including annotation instances).
@@ -435,12 +435,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveAndReplaceChildFromOtherContainment`
+`MoveAndReplaceChildFromOtherContainment`
 
 .Related event
-<<evnt-childMovedAndReplacedFromOtherContainment>>
+<<evnt-ChildMovedAndReplacedFromOtherContainment>>
 
-[[cmd-moveAndReplaceChildFromOtherContainmentInSameParent]]
+[[cmd-MoveAndReplaceChildFromOtherContainmentInSameParent]]
 ===== Move child from other containment in same parent and replace existing child
 Move existing node `movedChild` (currently inside one of ``movedChild``'s parent's containments other than `newContainment`)
 inside ``movedChild``'s parent's `newContainment` at `newIndex`.
@@ -470,12 +470,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveAndReplaceChildFromOtherContainmentInSameParent`
+`MoveAndReplaceChildFromOtherContainmentInSameParent`
 
 .Related event
-<<evnt-childMovedAndReplacedFromOtherContainmentInSameParent>>
+<<evnt-ChildMovedAndReplacedFromOtherContainmentInSameParent>>
 
-[[cmd-moveAndReplaceChildInSameContainment]]
+[[cmd-MoveAndReplaceChildInSameContainment]]
 ===== Move child in same containment and replace existing child
 Move existing node `movedChild` within its current containment to `newIndex`.
 Delete current child inside the same containment at `newIndex`, and all its descendants (including annotation instances).
@@ -503,15 +503,15 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveAndReplaceChildInSameContainment`
+`MoveAndReplaceChildInSameContainment`
 
 .Related event
-<<evnt-childMovedAndReplacedInSameContainment>>
+<<evnt-ChildMovedAndReplacedInSameContainment>>
 
 [[cmd-annotations]]
 ==== Annotations
 
-[[cmd-addAnnotation]]
+[[cmd-AddAnnotation]]
 ===== Add annotation
 Add new node `newAnnotation` to ``parent``'s annotations at `index`.
 `newAnnotation` might be a single node or an arbitrary complex subtree.
@@ -540,12 +540,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`addAnnotation`
+`AddAnnotation`
 
 .Related event
-<<evnt-annotationAdded>>
+<<evnt-AnnotationAdded>>
 
-[[cmd-deleteAnnotation]]
+[[cmd-DeleteAnnotation]]
 ===== Delete annotation
 Delete existing node from ``parent``'s annotations at `index`, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
@@ -570,12 +570,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`deleteAnnotation`
+`DeleteAnnotation`
 
 .Related event
-<<evnt-annotationDeleted>>
+<<evnt-AnnotationDeleted>>
 
-[[cmd-replaceAnnotation]]
+[[cmd-ReplaceAnnotation]]
 ===== Replace annotation
 Delete current node at ``parent``'s annotations at `index`, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
@@ -607,12 +607,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`replaceAnnotation`
+`ReplaceAnnotation`
 
 .Related event
-<<evnt-annotationReplaced>>
+<<evnt-AnnotationReplaced>>
 
-[[cmd-moveAnnotationFromOtherParent]]
+[[cmd-MoveAnnotationFromOtherParent]]
 ===== Move annotation from other parent
 Move existing node `movedAnnotation` inside ``newParent``'s annotations at `newIndex`.
 
@@ -639,13 +639,13 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveAnnotationFromOtherParent`
+`MoveAnnotationFromOtherParent`
 
 .Related event
-<<evnt-annotationMovedFromOtherParent>>
+<<evnt-AnnotationMovedFromOtherParent>>
 
 
-[[cmd-moveAnnotationInSameParent]]
+[[cmd-MoveAnnotationInSameParent]]
 ===== Move annotation in same parent
 Move existing node `movedAnnotation` within the same parent to `newIndex`.
 
@@ -670,12 +670,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveAnnotationInSameParent`
+`MoveAnnotationInSameParent`
 
 .Related event
-<<evnt-annotationMovedInSameParent>>
+<<evnt-AnnotationMovedInSameParent>>
 
-[[cmd-moveAndReplaceAnnotationFromOtherParent]]
+[[cmd-MoveAndReplaceAnnotationFromOtherParent]]
 ===== Move annotation from other parent and replace existing annotation
 Move existing node `movedAnnotation` inside ``newParent``'s annotations at `newIndex`.
 Delete current node at ``newParent``'s annotations at `newIndex`, and all its descendants (including annotation instances).
@@ -704,13 +704,13 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveAndReplaceAnnotationFromOtherParent`
+`MoveAndReplaceAnnotationFromOtherParent`
 
 .Related event
-<<evnt-annotationMovedAndReplacedFromOtherParent>>
+<<evnt-AnnotationMovedAndReplacedFromOtherParent>>
 
 
-[[cmd-moveAndReplaceAnnotationInSameParent]]
+[[cmd-MoveAndReplaceAnnotationInSameParent]]
 ===== Move annotation in same parent and replace existing annotation
 Move existing node `movedAnnotation` within the same parent to `newIndex`.
 Delete current node at ``movedAnnotation``'s parent's annotations at `newIndex`, and all its descendants (including annotation instances).
@@ -737,15 +737,15 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveAndReplaceAnnotationInSameParent`
+`MoveAndReplaceAnnotationInSameParent`
 
 .Related event
-<<evnt-annotationMovedAndReplacedInSameParent>>
+<<evnt-AnnotationMovedAndReplacedInSameParent>>
 
 [[cmd-references]]
 ==== References
 
-[[cmd-addReference]]
+[[cmd-AddReference]]
 ===== Add reference
 Add `newTarget` / `newResolveInfo` to ``parent``'s `reference` at `index`.
 
@@ -773,12 +773,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`addReference`
+`AddReference`
 
 .Related event
-<<evnt-referenceAdded>>
+<<evnt-ReferenceAdded>>
 
-[[cmd-deleteReference]]
+[[cmd-DeleteReference]]
 ===== Delete reference
 Delete existing entry from ``parent``'s `reference` at `index`.
 
@@ -803,12 +803,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`deleteReference`
+`DeleteReference`
 
 .Related event
-<<evnt-referenceDeleted>>
+<<evnt-ReferenceDeleted>>
 
-[[cmd-changeReference]]
+[[cmd-ChangeReference]]
 ===== Change reference
 Replace existing entry inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
 
@@ -836,12 +836,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`changeReference`
+`ChangeReference`
 
 .Related event
-<<evnt-referenceChanged>>
+<<evnt-ReferenceChanged>>
 
-[[cmd-moveEntryFromOtherReference]]
+[[cmd-MoveEntryFromOtherReference]]
 ===== Move entry from other reference
 Move existing entry inside ``oldParent``'s `oldReference` at `oldIndex`
 to ``newParent``'s `newReference` at `newIndex`.
@@ -871,12 +871,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveEntryFromOtherReference`
+`MoveEntryFromOtherReference`
 
 .Related event
-<<evnt-entryMovedFromOtherReference>>
+<<evnt-EntryMovedFromOtherReference>>
 
-[[cmd-moveEntryFromOtherReferenceInSameParent]]
+[[cmd-MoveEntryFromOtherReferenceInSameParent]]
 ===== Move entry from other reference in same parent
 Move existing entry inside ``parent``'s `oldReference` at `oldIndex`
 to ``parent``'s `newReference` at `newIndex`.
@@ -905,12 +905,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveEntryFromOtherReferenceInSameParent`
+`MoveEntryFromOtherReferenceInSameParent`
 
 .Related event
-<<evnt-entryMovedFromOtherReferenceInSameParent>>
+<<evnt-EntryMovedFromOtherReferenceInSameParent>>
 
-[[cmd-moveEntryInSameReference]]
+[[cmd-MoveEntryInSameReference]]
 ===== Move entry in same reference
 Move existing entry inside ``parent``'s `reference` at `oldIndex`
 inside ``parent``'s `reference` at `newIndex`.
@@ -938,12 +938,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveEntryInSameReference`
+`MoveEntryInSameReference`
 
 .Related event
-<<evnt-entryMovedInSameReference>>
+<<evnt-EntryMovedInSameReference>>
 
-[[cmd-moveAndReplaceEntryFromOtherReference]]
+[[cmd-MoveAndReplaceEntryFromOtherReference]]
 ===== Move entry from other reference and replace existing entry
 Move existing entry inside ``oldParent``'s `oldReference` at `oldIndex`
 to ``newParent``'s `newReference` at `newIndex`,
@@ -974,12 +974,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveAndReplaceEntryFromOtherReference`
+`MoveAndReplaceEntryFromOtherReference`
 
 .Related event
-<<evnt-entryMovedAndReplacedFromOtherReference>>
+<<evnt-EntryMovedAndReplacedFromOtherReference>>
 
-[[cmd-moveAndReplaceEntryFromOtherReferenceInSameParent]]
+[[cmd-MoveAndReplaceEntryFromOtherReferenceInSameParent]]
 ===== Move entry from other reference in same parent and replace existing entry
 Move existing entry inside ``parent``'s `oldReference` at `oldIndex`
 to ``parent``'s `newReference` at `newIndex`,
@@ -1009,12 +1009,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveAndReplaceEntryFromOtherReferenceInSameParent`
+`MoveAndReplaceEntryFromOtherReferenceInSameParent`
 
 .Related event
-<<evnt-entryMovedAndReplacedFromOtherReferenceInSameParent>>
+<<evnt-EntryMovedAndReplacedFromOtherReferenceInSameParent>>
 
-[[cmd-moveAndReplaceEntryInSameReference]]
+[[cmd-MoveAndReplaceEntryInSameReference]]
 ===== Move entry in same reference and replace existing entry
 Move existing entry inside ``parent``'s `reference` at `oldIndex`
 inside ``parent``'s `reference` at `newIndex`,
@@ -1043,12 +1043,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`moveAndReplaceEntryInSameReference`
+`MoveAndReplaceEntryInSameReference`
 
 .Related event
-<<evnt-entryMovedAndReplacedInSameReference>>
+<<evnt-EntryMovedAndReplacedInSameReference>>
 
-[[cmd-addReferenceResolveInfo]]
+[[cmd-AddReferenceResolveInfo]]
 ===== Add reference ResolveInfo
 Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `reference` at `index`.
 
@@ -1080,12 +1080,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`addReferenceResolveInfo`
+`AddReferenceResolveInfo`
 
 .Related event
-<<evnt-referenceResolveInfoAdded>>
+<<evnt-ReferenceResolveInfoAdded>>
 
-[[cmd-deleteReferenceResolveInfo]]
+[[cmd-DeleteReferenceResolveInfo]]
 ===== Delete reference ResolveInfo
 Delete existing ResolveInfo from existing entry inside ``parent``'s `reference` at `index`.
 
@@ -1116,12 +1116,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`deleteReferenceResolveInfo`
+`DeleteReferenceResolveInfo`
 
 .Related event
-<<evnt-referenceResolveInfoDeleted>>
+<<evnt-ReferenceResolveInfoDeleted>>
 
-[[cmd-changeReferenceResolveInfo]]
+[[cmd-ChangeReferenceResolveInfo]]
 ===== Change reference ResolveInfo
 Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` to `newResolveInfo`.
 
@@ -1153,12 +1153,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`changeReferenceResolveInfo`
+`ChangeReferenceResolveInfo`
 
 .Related event
-<<evnt-referenceResolveInfoChanged>>
+<<evnt-ReferenceResolveInfoChanged>>
 
-[[cmd-addReferenceTarget]]
+[[cmd-AddReferenceTarget]]
 ===== Add reference target
 Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `index`.
 
@@ -1190,12 +1190,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`addReferenceTarget`
+`AddReferenceTarget`
 
 .Related event
-<<evnt-referenceTargetAdded>>
+<<evnt-ReferenceTargetAdded>>
 
-[[cmd-deleteReferenceTarget]]
+[[cmd-DeleteReferenceTarget]]
 ===== Delete reference target
 Delete existing target from existing entry inside ``parent``'s `reference` at `index`.
 
@@ -1225,12 +1225,12 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`deleteReferenceTarget`
+`DeleteReferenceTarget`
 
 .Related event
-<<evnt-referenceTargetDeleted>>
+<<evnt-ReferenceTargetDeleted>>
 
-[[cmd-changeReferenceTarget]]
+[[cmd-ChangeReferenceTarget]]
 ===== Change reference target
 Change target of existing entry inside ``parent``'s `reference` at `index` to `newTarget`.
 
@@ -1262,15 +1262,16 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`changeReferenceTarget`
+`ChangeReferenceTarget`
 
 .Related event
-<<evnt-referenceTargetChanged>>
+<<evnt-ReferenceTargetChanged>>
 
 [[cmd-composite-section]]
 ==== Composite
 
-[[cmd-composite]]
+[[cmd-Composite]]
+[[cmd-CompositeCommand]]
 ===== Composite
 Groups several commands into a logical group.{fn-org281}
 The parts are ordered.
@@ -1289,7 +1290,7 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`composite`
+`CompositeCommand`
 
 .Related event
-<<evnt-composite>>
+<<evnt-CompositeEvent>>

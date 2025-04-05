@@ -5,6 +5,7 @@
 ==== Subscription
 
 [[qry-subscribePartitions]]
+[[qry-SubscribeToChangingPartitions]]
 ===== Subscribe to partition changes
 This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions, and automatically subscribe (`partitions` is true) to newly created partitions.{fn-org267}
 
@@ -28,9 +29,10 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`subscribePartitions`
+`SubscribeToChangingPartitions`
 
 [[qry-subscribePartition]]
+[[qry-SubscribeToPartitionContents]]
 ===== Subscribe to partition
 This client wants to receive events on any changes to `partition` or any of its descendants.{fn-org270}{fn-org269}
 
@@ -51,9 +53,10 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`subscribePartition`
+`SubscribeToPartitionContents`
 
 [[qry-unsubscribePartition]]
+[[qry-UnsubscribeFromPartitionContents]]
 ===== Unsubscribe from partition
 This client does not want to receive events on any changes to `partition` or any of its descendants anymore.{fn-org270}
 
@@ -73,13 +76,13 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`unsubscribePartition`
+`UnsubscribeFromPartitionContents`
 
 [[qry-participation]]
 ==== Participation
 Even though participation handling does not relate to repository contents, we consider them queries.{fn-org350}.
 
-[[qry-signOn]]
+[[qry-SignOn]]
 ===== Sign On (start a participation)
 The <<client>> starts a <<participation>>.
 
@@ -100,9 +103,9 @@ protocolMessage:: <<protocolMessageType>>
 _none_
 
 .Technical name
-`signOn`
+`SignOn`
 
-[[qry-signOff]]
+[[qry-SignOff]]
 ===== Sign Off (end a participation)
 The <<client>> ends a <<participation>>.{fn-org344}
 
@@ -122,9 +125,9 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`signOff`
+`SignOff`
 
-[[qry-reconnect]]
+[[qry-Reconnect]]
 ===== Reconnect (resume an existing participation)
 The <<client>> has been technically disconnected, but still knows its <<participation-id>>.
 Then the client can ask to reconnect to the repository.{fn-org349}
@@ -148,13 +151,13 @@ protocolMessage:: <<protocolMessageType>>
 *
 
 .Technical name
-`reconnect`
+`Reconnect`
 
 
 [[qry-misc]]
 ==== Miscellaneous
 
-[[qry-getAvailableIds]]
+[[qry-GetAvailableIds]]
 ===== Get available ids
 Request `count` number of unused <<{m3}.adoc#node-id, valid ids>>.
 
@@ -180,4 +183,4 @@ protocolMessage:: <<protocolMessageType>>
 * <<err-invalidParticipation>>
 
 .Technical name
-`getAvailableIds`
+`GetAvailableIds`

@@ -68,83 +68,83 @@ This table provides an overview of actions (rows) and element they apply to (col
 |Action |Child |Annotation |Reference |Property |Partition / Classifier
 
 |Add
-|<<cmd-addChild>>
-|<<cmd-addAnnotation>>
+|<<cmd-AddChild>>
+|<<cmd-AddAnnotation>>
 |
-<<cmd-addReference>>
+<<cmd-AddReference>>
 
-<<cmd-addReferenceResolveInfo>>
+<<cmd-AddReferenceResolveInfo>>
 
-<<cmd-addReferenceTarget>>{fn-org329}
-|<<cmd-addProperty>>
-|<<cmd-addPartition>>
+<<cmd-AddReferenceTarget>>{fn-org329}
+|<<cmd-AddProperty>>
+|<<cmd-AddPartition>>
 
 |Delete
-|<<cmd-deleteChild>>
-|<<cmd-deleteAnnotation>>
+|<<cmd-DeleteChild>>
+|<<cmd-DeleteAnnotation>>
 |
-<<cmd-deleteReference>>
+<<cmd-DeleteReference>>
 
-<<cmd-deleteReferenceResolveInfo>>
+<<cmd-DeleteReferenceResolveInfo>>
 
-<<cmd-deleteReferenceTarget>>
-|<<cmd-deleteProperty>>
-|<<cmd-deletePartition>>
+<<cmd-DeleteReferenceTarget>>
+|<<cmd-DeleteProperty>>
+|<<cmd-DeletePartition>>
 
 |Change
-|<<cmd-replaceChild>>
-|<<cmd-replaceAnnotation>>
+|<<cmd-ReplaceChild>>
+|<<cmd-ReplaceAnnotation>>
 |
-<<cmd-changeReference>>
+<<cmd-ChangeReference>>
 
-<<cmd-changeReferenceResolveInfo>>
+<<cmd-ChangeReferenceResolveInfo>>
 
-<<cmd-changeReferenceTarget>>
-|<<cmd-changeProperty>>
-|<<cmd-changeClassifier>>
+<<cmd-ChangeReferenceTarget>>
+|<<cmd-ChangeProperty>>
+|<<cmd-ChangeClassifier>>
 
 |Move from other node
-|<<cmd-moveChildFromOtherContainment>>
-|<<cmd-moveAnnotationFromOtherParent>>
-|<<cmd-moveEntryFromOtherReference>>
+|<<cmd-MoveChildFromOtherContainment>>
+|<<cmd-MoveAnnotationFromOtherParent>>
+|<<cmd-MoveEntryFromOtherReference>>
 |
 |
 
 |Move from other feature in same node
-|<<cmd-moveChildFromOtherContainmentInSameParent>>
+|<<cmd-MoveChildFromOtherContainmentInSameParent>>
 |
-|<<cmd-moveEntryFromOtherReferenceInSameParent>>
+|<<cmd-MoveEntryFromOtherReferenceInSameParent>>
 |
 |
 
 |Move in same feature in same node
-|<<cmd-moveChildInSameContainment>>
-|<<cmd-moveAnnotationInSameParent>>
-|<<cmd-moveEntryInSameReference>>
+|<<cmd-MoveChildInSameContainment>>
+|<<cmd-MoveAnnotationInSameParent>>
+|<<cmd-MoveEntryInSameReference>>
 |
 |
 
 |Move from other node and replace existing{fn-org321}
-|<<cmd-moveAndReplaceChildFromOtherContainment>>
-|<<cmd-moveAndReplaceAnnotationFromOtherParent>>
-|<<cmd-moveAndReplaceEntryFromOtherReference>>
+|<<cmd-MoveAndReplaceChildFromOtherContainment>>
+|<<cmd-MoveAndReplaceAnnotationFromOtherParent>>
+|<<cmd-MoveAndReplaceEntryFromOtherReference>>
 |
 |
 
 |Move from other feature in same node and replace existing{fn-org321}
-|<<cmd-moveAndReplaceChildFromOtherContainmentInSameParent>>
+|<<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
 |
-|<<cmd-moveAndReplaceEntryFromOtherReferenceInSameParent>>
+|<<cmd-MoveAndReplaceEntryFromOtherReferenceInSameParent>>
 |
 |
 
 |Move in same feature in same node and replace existing{fn-org321}
-|<<cmd-moveAndReplaceChildInSameContainment>>
-|<<cmd-moveAndReplaceAnnotationInSameParent>>
-|<<cmd-moveAndReplaceEntryInSameReference>>
+|<<cmd-MoveAndReplaceChildInSameContainment>>
+|<<cmd-MoveAndReplaceAnnotationInSameParent>>
+|<<cmd-MoveAndReplaceEntryInSameReference>>
 |
 |
 
 |Composite
-5+|<<cmd-composite>>
+5+|<<cmd-Composite>>
 |===

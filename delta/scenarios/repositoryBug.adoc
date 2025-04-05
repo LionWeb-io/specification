@@ -49,7 +49,7 @@ deactivate clientEvent
 ----
 1. User enters new property value on node `nodeA` that's known to the editor.
 2. Client editor forwards user action into command.
-3. Client sends <<cmd-addProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
+3. Client sends <<cmd-AddProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
 4. Repository registers command for processing.
 5. Repository acknowledges reception of command with id `cmd-1`.
 6. Client registers processed command id `cmd-1`.
@@ -58,6 +58,6 @@ deactivate clientEvent
 Some error occurs (e.g. database unavailable).
 9. Repository handles the error.
 10. Repository creates event for notification.
-11. Repository emits <<evnt-error>> event with `internalError` error code, `internal error occurred` message and sequence number `1`.
+11. Repository emits <<evnt-Error>> event with `internalError` error code, `internal error occurred` message and sequence number `1`.
 It includes one <<commandSourceType>> with value `(client-a, cmd-1)`.
 12. Client removes `cmd-1` from open commands list.

@@ -4,7 +4,7 @@
 [[evnt-partitions]]
 ==== Partitions
 
-[[evnt-partitionAdded]]
+[[evnt-PartitionAdded]]
 ===== Partition added
 Partition `newPartition` has been added to the repository.
 
@@ -18,12 +18,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`partitionAdded`
+`PartitionAdded`
 
 .Related command
-<<cmd-addPartition>>
+<<cmd-AddPartition>>
 
-[[evnt-partitionDeleted]]
+[[evnt-PartitionDeleted]]
 ===== Partition deleted
 Partition `deletedPartition`, and all its descendants, have been deleted from the repository.
 
@@ -37,15 +37,15 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`partitionDeleted`
+`PartitionDeleted`
 
 .Related command
-<<cmd-deletePartition>>
+<<cmd-DeletePartition>>
 
 [[evnt-nodes]]
 ==== Nodes
 
-[[evnt-classifierChanged]]
+[[evnt-ClassifierChanged]]
 ===== Classifier changed
 Classifier of `node` has been changed from `oldClassifier` to `newClassifier`.
 
@@ -59,15 +59,15 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`classifierChanged`
+`ClassifierChanged`
 
 .Related command
-<<cmd-changeClassifier>>
+<<cmd-ChangeClassifier>>
 
 [[evnt-properties]]
 ==== Properties
 
-[[evnt-propertyAdded]]
+[[evnt-PropertyAdded]]
 ===== Property added
 `property` of `node` has been set to `newValue`.
 
@@ -81,12 +81,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`propertyAdded`
+`PropertyAdded`
 
 .Related command
-<<cmd-addProperty>>
+<<cmd-AddProperty>>
 
-[[evnt-propertyDeleted]]
+[[evnt-PropertyDeleted]]
 ===== Property deleted
 Existing `property` of `node` with `oldValue` has been deleted.
 
@@ -100,12 +100,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`propertyDeleted`
+`PropertyDeleted`
 
 .Related command
-<<cmd-deleteProperty>>
+<<cmd-DeleteProperty>>
 
-[[evnt-propertyChanged]]
+[[evnt-PropertyChanged]]
 ===== Property changed
 Existing `property` of `node` has been changed from `oldValue` to `newValue`.
 
@@ -120,15 +120,15 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`propertyChanged`
+`PropertyChanged`
 
 .Related command
-<<cmd-changeProperty>>
+<<cmd-ChangeProperty>>
 
 [[evnt-children]]
 ==== Children
 
-[[evnt-childAdded]]
+[[evnt-ChildAdded]]
 ===== Child added
 New node `newChild` has been added to ``parent``'s  `containment` at `index`.
 `newChild` might be a single node or an arbitrary complex subtree.
@@ -148,12 +148,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`childAdded`
+`ChildAdded`
 
 .Related command
-<<cmd-addChild>>
+<<cmd-AddChild>>
 
-[[evnt-childDeleted]]
+[[evnt-ChildDeleted]]
 ===== Child deleted
 Existing node `deletedChild`, and all its descendants, have been deleted from ``parent``'s `containment` at `index`.{fn-org286}
 All other children inside ``parent``'s `containment` with index > `index` have been moved to next lower index.
@@ -169,12 +169,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`childDeleted`
+`ChildDeleted`
 
 .Related command
-<<cmd-deleteChild>>
+<<cmd-DeleteChild>>
 
-[[evnt-childReplaced]]
+[[evnt-ChildReplaced]]
 ===== Child replaced
 Existing node `replacedChild` inside ``parent``'s `containment` at `index` has been replaced with new node `newChild`.
 `newChild` might be a single node or an arbitrary complex subtree.
@@ -196,12 +196,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`childReplaced`
+`ChildReplaced`
 
 .Related command
-<<cmd-replaceChild>>
+<<cmd-ReplaceChild>>
 
-[[evnt-childMovedFromOtherContainment]]
+[[evnt-ChildMovedFromOtherContainment]]
 ===== Child moved from other containment
 Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has been moved
 inside ``newParent``'s `newContainment` at `newIndex`.
@@ -224,12 +224,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`childMovedFromOtherContainment`
+`ChildMovedFromOtherContainment`
 
 .Related command
-<<cmd-moveChildFromOtherContainment>>
+<<cmd-MoveChildFromOtherContainment>>
 
-[[evnt-childMovedFromOtherContainmentInSameParent]]
+[[evnt-ChildMovedFromOtherContainmentInSameParent]]
 ===== Child moved from other containment in same parent
 Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has been moved
 inside ``parent``'s `newContainment` at `newIndex`.
@@ -251,12 +251,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`childMovedFromOtherContainmentInSameParent`
+`ChildMovedFromOtherContainmentInSameParent`
 
 .Related command
-<<cmd-moveChildFromOtherContainmentInSameParent>>
+<<cmd-MoveChildFromOtherContainmentInSameParent>>
 
-[[evnt-childMovedInSameContainment]]
+[[evnt-ChildMovedInSameContainment]]
 ===== Child moved in same containment
 Existing node `movedChild` (previously inside ``parent``'s `containment` at `oldIndex`) has been moved
 inside ``parent``'s `containment` at `newIndex`.
@@ -285,12 +285,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`childMovedInSameContainment`
+`ChildMovedInSameContainment`
 
 .Related command
-<<cmd-moveChildInSameContainment>>
+<<cmd-MoveChildInSameContainment>>
 
-[[evnt-childMovedAndReplacedFromOtherContainment]]
+[[evnt-ChildMovedAndReplacedFromOtherContainment]]
 ===== Child moved from other containment and replaced existing child
 Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has replaced the existing `replacedChild` inside ``newParent``'s `newContainment` at `newIndex`.
 `replacedChild`, and all its descendants, have been deleted.
@@ -314,12 +314,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`childMovedAndReplacedFromOtherContainment`
+`ChildMovedAndReplacedFromOtherContainment`
 
 .Related command
-<<cmd-moveAndReplaceChildFromOtherContainment>>
+<<cmd-MoveAndReplaceChildFromOtherContainment>>
 
-[[evnt-childMovedAndReplacedFromOtherContainmentInSameParent]]
+[[evnt-ChildMovedAndReplacedFromOtherContainmentInSameParent]]
 ===== Child moved from other containment in same parent and replaced existing child
 Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has replaced the existing `replacedChild` inside ``parent``'s `newContainment` at `newIndex`.
 `replacedChild`, and all its descendants, have been deleted.
@@ -342,12 +342,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`childMovedAndReplacedFromOtherContainmentInSameParent`
+`ChildMovedAndReplacedFromOtherContainmentInSameParent`
 
 .Related command
-<<cmd-moveAndReplaceChildFromOtherContainmentInSameParent>>
+<<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
 
-[[evnt-childMovedAndReplacedInSameContainment]]
+[[evnt-ChildMovedAndReplacedInSameContainment]]
 ===== Child moved in same containment and replaced existing child
 Existing node `movedChild` (previously inside ``parent``'s `containment` at `oldIndex`) has replaced the existing `replacedChild` inside ``parent``'s `containment` at `newIndex`.
 `replacedChild`, and all its descendants, have been deleted.
@@ -377,15 +377,15 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`childMovedAndReplacedInSameContainment`
+`ChildMovedAndReplacedInSameContainment`
 
 .Related command
-<<cmd-moveAndReplaceChildInSameContainment>>
+<<cmd-MoveAndReplaceChildInSameContainment>>
 
 [[evnt-annotations]]
 ==== Annotations
 
-[[evnt-annotationAdded]]
+[[evnt-AnnotationAdded]]
 ===== Annotation added
 New node `newAnnotation` has been added to ``parent``'s annotations at `index`.
 `newAnnotation` might be a single node or an arbitrary complex subtree.
@@ -404,12 +404,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`annotationAdded`
+`AnnotationAdded`
 
 .Related command
-<<cmd-addAnnotation>>
+<<cmd-AddAnnotation>>
 
-[[evnt-annotationDeleted]]
+[[evnt-AnnotationDeleted]]
 ===== Annotation deleted
 Existing node `deletedAnnotation`, and all its descendants, have been deleted from ``parent``'s annotations at `index`.{fn-org286}
 All other annotations inside ``parent``'s annotations with index > `index` have been moved to next lower index.
@@ -424,12 +424,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`annotationDeleted`
+`AnnotationDeleted`
 
 .Related command
-<<cmd-deleteAnnotation>>
+<<cmd-DeleteAnnotation>>
 
-[[evnt-annotationReplaced]]
+[[evnt-AnnotationReplaced]]
 ===== Annotation replaced
 Existing node `replacedAnnotation` inside ``parent``'s annotations at `index` has been replaced with new node `newAnnotation`.
 `newAnnotation` might be a single node or an arbitrary complex subtree.
@@ -449,12 +449,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`annotationReplaced`
+`AnnotationReplaced`
 
 .Related command
-<<cmd-replaceAnnotation>>
+<<cmd-ReplaceAnnotation>>
 
-[[evnt-annotationMovedFromOtherParent]]
+[[evnt-AnnotationMovedFromOtherParent]]
 ===== Annotation moved from other parent
 Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has been moved
 inside ``newParent``'s annotations at `newIndex`.
@@ -475,12 +475,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`annotationMovedFromOtherParent`
+`AnnotationMovedFromOtherParent`
 
 .Related command
-<<cmd-moveAnnotationFromOtherParent>>
+<<cmd-MoveAnnotationFromOtherParent>>
 
-[[evnt-annotationMovedInSameParent]]
+[[evnt-AnnotationMovedInSameParent]]
 ===== Annotation moved in same parent
 Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has been moved
 inside ``parent``'s annotations at `newIndex`.
@@ -508,12 +508,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`annotationMovedInSameParent`
+`AnnotationMovedInSameParent`
 
 .Related command
-<<cmd-moveAnnotationInSameParent>>
+<<cmd-MoveAnnotationInSameParent>>
 
-[[evnt-annotationMovedAndReplacedFromOtherParent]]
+[[evnt-AnnotationMovedAndReplacedFromOtherParent]]
 ===== Annotation moved from other parent and replaced existing annotation
 Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has replaced the existing `replacedAnnotation` inside ``newParent``'s annotations at `newIndex`.
 `replacedAnnotation`, and all its descendants, have been deleted.
@@ -535,12 +535,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`annotationMovedAndReplacedFromOtherParent`
+`AnnotationMovedAndReplacedFromOtherParent`
 
 .Related command
-<<cmd-moveAndReplaceAnnotationFromOtherParent>>
+<<cmd-MoveAndReplaceAnnotationFromOtherParent>>
 
-[[evnt-annotationMovedAndReplacedInSameParent]]
+[[evnt-AnnotationMovedAndReplacedInSameParent]]
 ===== Annotation moved in same parent and replaced existing annotation
 Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has replaced the existing `replacedAnnotation` inside ``parent``'s annotations at `newIndex`.
 `replacedAnnotation`, and all its descendants, have been deleted.
@@ -569,15 +569,15 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`annotationMovedAndReplacedInSameParent`
+`AnnotationMovedAndReplacedInSameParent`
 
 .Related command
-<<cmd-moveAndReplaceAnnotationInSameParent>>
+<<cmd-MoveAndReplaceAnnotationInSameParent>>
 
 [[evnt-references]]
 ==== References
 
-[[evnt-referenceAdded]]
+[[evnt-ReferenceAdded]]
 ===== Reference added
 Reference with `newTarget`/`newResolveInfo` has been added to ``parent``'s `reference` at `index`.
 All other entries inside ``parent``'s `reference` with index >= `index` have been moved to next higher index.
@@ -594,12 +594,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`referenceAdded`
+`ReferenceAdded`
 
 .Related command
-<<cmd-addReference>>
+<<cmd-AddReference>>
 
-[[evnt-referenceDeleted]]
+[[evnt-ReferenceDeleted]]
 ===== Reference deleted
 Existing reference with `deletedTarget`/`deletedResolveInfo` has been deleted from ``parent``'s `reference` at `index`.
 All other entries inside ``parent``'s `reference` with index > `index` have been moved to next lower index.
@@ -616,12 +616,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`referenceDeleted`
+`ReferenceDeleted`
 
 .Related command
-<<cmd-deleteReference>>
+<<cmd-DeleteReference>>
 
-[[evnt-referenceChanged]]
+[[evnt-ReferenceChanged]]
 ===== Reference changed
 Existing reference with `replacedTarget`/`replacedResolveInfo` inside ``parent``'s annotations at `index` has been replaced with `newTarget`/`newResolveInfo`.
 
@@ -639,12 +639,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`referenceChanged`
+`ReferenceChanged`
 
 .Related command
-<<cmd-changeReference>>
+<<cmd-ChangeReference>>
 
-[[evnt-entryMovedFromOtherReference]]
+[[evnt-EntryMovedFromOtherReference]]
 ===== Entry moved from other reference
 Existing reference `target`/`resolveInfo` (previously inside ``oldParent``'s `oldReference` at `oldIndex`) has been moved
 to ``newParent``'s `newReference` at `newIndex`.
@@ -668,12 +668,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`entryMovedFromOtherReference`
+`EntryMovedFromOtherReference`
 
 .Related command
-<<cmd-moveEntryFromOtherReference>>
+<<cmd-MoveEntryFromOtherReference>>
 
-[[evnt-entryMovedFromOtherReferenceInSameParent]]
+[[evnt-EntryMovedFromOtherReferenceInSameParent]]
 ===== Entry moved from other reference in same parent
 Existing reference `target`/`resolveInfo` (previously inside ``parent``'s `oldReference` at `oldIndex`) has been moved
 to ``parent``'s `newReference` at `newIndex`.
@@ -696,12 +696,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`entryMovedFromOtherReferenceInSameParent`
+`EntryMovedFromOtherReferenceInSameParent`
 
 .Related command
-<<cmd-moveEntryFromOtherReferenceInSameParent>>
+<<cmd-MoveEntryFromOtherReferenceInSameParent>>
 
-[[evnt-entryMovedInSameReference]]
+[[evnt-EntryMovedInSameReference]]
 ===== Entry moved in same reference
 Existing reference `target`/`resolveInfo` (previously inside ``parent``'s `reference` at `oldIndex`) has been moved
 to ``parent``'s `reference` at `newIndex`.
@@ -731,12 +731,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`entryMovedInSameReference`
+`EntryMovedInSameReference`
 
 .Related command
-<<cmd-moveEntryInSameReference>>
+<<cmd-MoveEntryInSameReference>>
 
-[[evnt-entryMovedAndReplacedFromOtherReference]]
+[[evnt-EntryMovedAndReplacedFromOtherReference]]
 ===== Entry moved from other reference and replaced existing entry
 Existing reference `movedTarget`/`movedResolveInfo` (previously inside ``oldParent``'s `oldReference` at `oldIndex`) has replaced existing `replacedTarget`/`replacedResolveInfo` at ``newParent``'s `newReference` at `newIndex`.
 
@@ -761,12 +761,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`entryMovedAndReplacedFromOtherReference`
+`EntryMovedAndReplacedFromOtherReference`
 
 .Related command
-<<cmd-moveAndReplaceEntryFromOtherReference>>
+<<cmd-MoveAndReplaceEntryFromOtherReference>>
 
-[[evnt-entryMovedAndReplacedFromOtherReferenceInSameParent]]
+[[evnt-EntryMovedAndReplacedFromOtherReferenceInSameParent]]
 ===== Entry moved from other reference in same parent and replaced existing entry
 Existing reference `movedTarget`/`movedResolveInfo` (previously inside ``parent``'s `oldReference` at `oldIndex`) has replaced existing `replacedTarget`/`replacedResolveInfo` at ``parent``'s `newReference` at `newIndex`.
 
@@ -790,12 +790,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`entryMovedAndReplacedFromOtherReferenceInSameParent`
+`EntryMovedAndReplacedFromOtherReferenceInSameParent`
 
 .Related command
-<<cmd-moveAndReplaceEntryFromOtherReferenceInSameParent>>
+<<cmd-MoveAndReplaceEntryFromOtherReferenceInSameParent>>
 
-[[evnt-entryMovedAndReplacedInSameReference]]
+[[evnt-EntryMovedAndReplacedInSameReference]]
 ===== Entry moved in same reference and replaced existing entry
 Existing reference `movedTarget`/`movedResolveInfo` (previously inside ``parent``'s `reference` at `oldIndex`) has replaced existing `replacedTarget`/`replacedResolveInfo` at ``parent``'s `reference` at `newIndex`.
 
@@ -826,12 +826,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`entryMovedAndReplacedInSameReference`
+`EntryMovedAndReplacedInSameReference`
 
 .Related command
-<<cmd-moveAndReplaceEntryInSameReference>>
+<<cmd-MoveAndReplaceEntryInSameReference>>
 
-[[evnt-referenceResolveInfoAdded]]
+[[evnt-ReferenceResolveInfoAdded]]
 ===== Reference ResolveInfo added
 `newResolveInfo` has been added as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
 
@@ -847,12 +847,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`referenceResolveInfoAdded`
+`ReferenceResolveInfoAdded`
 
 .Related command
-<<cmd-addReferenceResolveInfo>>
+<<cmd-AddReferenceResolveInfo>>
 
-[[evnt-referenceResolveInfoDeleted]]
+[[evnt-ReferenceResolveInfoDeleted]]
 ===== Reference ResolveInfo deleted
 ResolveInfo `deletedResolveInfo` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `target`.
 
@@ -868,12 +868,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`referenceResolveInfoDeleted`
+`ReferenceResolveInfoDeleted`
 
 .Related command
-<<cmd-deleteReferenceResolveInfo>>
+<<cmd-DeleteReferenceResolveInfo>>
 
-[[evnt-referenceResolveInfoChanged]]
+[[evnt-ReferenceResolveInfoChanged]]
 ===== Reference ResolveInfo changed
 ResolveInfo of existing entry inside ``parent``'s `reference` at `index` with `target` has been changed from `oldResolveInfo` to `newResolveInfo`.
 
@@ -890,12 +890,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`referenceResolveInfoChanged`
+`ReferenceResolveInfoChanged`
 
 .Related command
-<<cmd-changeReferenceResolveInfo>>
+<<cmd-ChangeReferenceResolveInfo>>
 
-[[evnt-referenceTargetAdded]]
+[[evnt-ReferenceTargetAdded]]
 ===== Reference target added
 `newTarget` has been added as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
 
@@ -911,12 +911,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`referenceTargetAdded`
+`ReferenceTargetAdded`
 
 .Related command
-<<cmd-addReferenceTarget>>
+<<cmd-AddReferenceTarget>>
 
-[[evnt-referenceTargetDeleted]]
+[[evnt-ReferenceTargetDeleted]]
 ===== Reference target deleted
 Target `deletedTarget` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
 
@@ -932,12 +932,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`referenceTargetDeleted`
+`ReferenceTargetDeleted`
 
 .Related command
-<<cmd-deleteReferenceTarget>>
+<<cmd-DeleteReferenceTarget>>
 
-[[evnt-referenceTargetChanged]]
+[[evnt-ReferenceTargetChanged]]
 ===== Reference target changed
 Target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` has been changed from `oldTarget` to `newTarget`.
 
@@ -954,15 +954,16 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`referenceTargetChanged`
+`ReferenceTargetChanged`
 
 .Related command
-<<cmd-changeReferenceTarget>>
+<<cmd-ChangeReferenceTarget>>
 
 [[evnt-miscellaneous]]
 ==== Miscellaneous
 
-[[evnt-composite]]
+[[evnt-Composite]]
+[[evnt-CompositeEvent]]
 ===== Composite
 The events in `parts` have happened in the given order.{fn-org281}
 
@@ -976,12 +977,13 @@ parts:: <<eventType>>[]
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`composite`
+`Composite`
 
 .Related command
-<<cmd-composite>>
+<<cmd-Composite>>
 
-[[evnt-noOp]]
+[[evnt-NoOp]]
+[[evnt-NoOpEvent]]
 ===== No-op
 Nothing happened as result of one or more command(s).{fn-org314}
 
@@ -992,12 +994,12 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`noOp`
+`NoOpEvent`
 
 .Related command
 _none_
 
-[[evnt-error]]
+[[evnt-Error]]
 ===== Error
 Repository couldn't handle one or more command(s).{fn-org316}
 
@@ -1010,7 +1012,7 @@ sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`error`
+`Error`
 
 .Related command
 _none_

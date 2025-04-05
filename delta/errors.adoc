@@ -8,7 +8,7 @@ The <<participation>> the <<client>> uses to communicate with the repository is 
 Possible reasons:
 
 * The participation never has been valid.
-* The client <<qry-signOff, signed off>>.
+* The client <<qry-SignOff, signed off>>.
 * The client <<participation, disconnected>>.
 
 .Technical name

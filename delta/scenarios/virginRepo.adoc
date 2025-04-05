@@ -50,15 +50,15 @@ activate editor
 editor -> editor: draw(nodeA)
 ----
 
-1. Client <<qry-signOn, signs on>> to repository.
+1. Client <<qry-SignOn, signs on>> to repository.
 2. Repository confirms participation with participation id `client-a`.
 3. Client initiates new partition.
-4. Client sends <<cmd-addPartition>> command with `nodeA` payload (details omitted) and command id `cmd-1`.
+4. Client sends <<cmd-AddPartition>> command with `nodeA` payload (details omitted) and command id `cmd-1`.
 5. Repository registers command for processing.
 6. Repository acknowledges reception of command with id `cmd-1`.
 7. Repository updates internal representation.
 8. Repository creates event for update.
-9. Repository emits event <<evnt-partitionAdded>> with `nodeA` payload and sequence number `1`.
+9. Repository emits event <<evnt-PartitionAdded>> with `nodeA` payload and sequence number `1`.
 It includes one <<commandSourceType>> with value `(client-a, cmd-1)`
 10. Client receives event and forwards information to editor.
 11. Client draws `nodeA`.
