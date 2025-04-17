@@ -970,6 +970,7 @@ The events in `parts` have happened in the given order.{fn-org281}
 All `originCommands` have been handled (maybe by discarding them).
 
 Composite events don't mention origin commands on their own; they are only mentioned in each part.{fn-org306}
+We can nest composite events arbitrarily.{fn-org360}
 
 [horizontal]
 .Parameters

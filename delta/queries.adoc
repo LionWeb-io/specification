@@ -142,14 +142,12 @@ protocolMessage:: <<protocolMessageType>>
 [horizontal]
 .Response parameters
 queryId:: <<queryIdType>> Id of this query.
-participationValid:: `boolean` Whether the participation is still valid.
 lastSentSequenceNumber:: <<eventSequenceType>> Last <<event-sequence-number>> sent by the repository.
 Can be `null` if repository doesn't know the last sent sequence number; `null` MUST coincide with `false` for `participationValid`.
 protocolMessage:: <<protocolMessageType>>
 
 .Errors
-* <<err-invalidParticipation>> #TODO: Report invalid participation by error or by `participationValid` flag?#
-*
+* <<err-invalidParticipation>> If the participation is not valid.{fn-org354}
 
 .Technical name
 `Reconnect`

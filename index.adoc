@@ -9,6 +9,7 @@
 * xref:metametamodel/metametamodel.adoc[Meta-Metamodel (M3)]
 * xref:serialization/serialization.adoc[Serialization Format]
 * xref:bulk/repo-access-api.adoc[Bulk Repository Access API]
+* xref:delta/delta-api.adoc[Delta Repository Access API]
 
 == Versions
 

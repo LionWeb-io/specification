@@ -647,9 +647,6 @@
         "messageKind": {
           "const": "ReconnectResponse"
         },
-        "participationValid": {
-          "type": "boolean"
-        },
         "lastSentSequenceNumber": {
           "$ref": "#/$defs/eventSequenceNumber"
         },
@@ -662,7 +659,6 @@
       },
       "required": [
         "messageKind",
-        "participationValid",
         "lastSentSequenceNumber",
         "queryId"
       ],
@@ -722,16 +718,6 @@
       "maxProperties": 4
     },
     "Commands": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/SingleCommands"
-        },
-        {
-          "$ref": "#/$defs/CompositeCommand"
-        }
-      ]
-    },
-    "SingleCommands": {
       "anyOf": [
         {
           "$ref": "#/$defs/AddPartition"
@@ -843,6 +829,9 @@
         },
         {
           "$ref": "#/$defs/ChangeReferenceTarget"
+        },
+        {
+          "$ref": "#/$defs/CompositeCommand"
         }
       ]
     },
@@ -2090,7 +2079,7 @@
         "parts": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/SingleCommands"
+            "$ref": "#/$defs/Commands"
           }
         },
         "commandId": {
@@ -2110,19 +2099,6 @@
       "maxProperties": 4
     },
     "Events": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/SingleEvents"
-        },
-        {
-          "$ref": "#/$defs/CompositeEvent"
-        },
-        {
-          "$ref": "#/$defs/Error"
-        }
-      ]
-    },
-    "SingleEvents": {
       "anyOf": [
         {
           "$ref": "#/$defs/PartitionAdded"
@@ -2237,6 +2213,12 @@
         },
         {
           "$ref": "#/$defs/NoOpEvent"
+        },
+        {
+          "$ref": "#/$defs/CompositeEvent"
+        },
+        {
+          "$ref": "#/$defs/Error"
         }
       ]
     },
@@ -3912,7 +3894,7 @@
         "parts": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/SingleEvents"
+            "$ref": "#/$defs/Events"
           }
         },
         "protocolMessage": {
