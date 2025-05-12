@@ -183,3 +183,29 @@ protocolMessage:: <<protocolMessageType>>
 
 .Technical name
 `GetAvailableIds`
+
+[[qry-ListPartitions]]
+===== List partitions
+Lists all non-language partitions accessible in the repository.{fn-org361}
+
+Same functionality as <<{bulk}.adoc#listPartitions, bulk API listPartitions command>>.
+
+[horizontal]
+.Request parameters
+queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
+
+[horizontal]
+.Response parameters
+partitions:: <<chunkType>> All accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
+The partitions are sent as complete nodes.
+Does NOT include any children or annotations of the root partition nodes.
+Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
+queryId:: <<queryIdType>> Id of this query.
+protocolMessage:: <<protocolMessageType>>
+
+.Errors
+* <<err-invalidParticipation>>
+
+.Technical name
+`ListPartitions`

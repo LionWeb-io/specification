@@ -365,6 +365,9 @@
         },
         {
           "$ref": "#/$defs/GetAvailableIdsRequest"
+        },
+        {
+          "$ref": "#/$defs/ListPartitionsRequest"
         }
       ]
     },
@@ -390,6 +393,9 @@
         },
         {
           "$ref": "#/$defs/GetAvailableIdsResponse"
+        },
+        {
+          "$ref": "#/$defs/ListPartitionsResponse"
         }
       ]
     },
@@ -722,6 +728,50 @@
       "required": [
         "messageKind",
         "ids",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "ListPartitionsRequest": {
+      "properties": {
+        "messageKind": {
+          "const": "ListPartitionsRequest"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 3
+    },
+    "ListPartitionsResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "ListPartitionsResponse"
+        },
+        "partitions": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessage": {
+          "$ref": "#/$defs/ProtocolMessage"
+        }
+      },
+      "required": [
+        "messageKind",
+        "partitions",
         "queryId"
       ],
       "additionalProperties": false,
