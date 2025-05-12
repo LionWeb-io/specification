@@ -240,6 +240,7 @@ None.
 ==== Response
 Contains a {chunk} with all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
 The partitions are sent as complete nodes.{fn-org202}
+Does NOT include any children or annotations of the root partition nodes.
 Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
 
 ==== Message kinds
