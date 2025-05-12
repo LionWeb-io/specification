@@ -59,11 +59,22 @@
       "maxProperties": 3
     },
     "DeltaSerializationChunk": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/SerializedNode"
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SerializedNode"
+          },
+          "uniqueItems": true
+        }
       },
-      "uniqueItems": true
+      "required": [
+        "nodes"
+      ],
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1
     },
     "SerializedNode": {
       "type": "object",
