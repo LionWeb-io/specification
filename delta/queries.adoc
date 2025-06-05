@@ -136,6 +136,7 @@ Then the client can ask to reconnect to the repository.{fn-org349}
 [horizontal]
 .Request parameters
 queryId:: <<queryIdType>> Id of this query.
+participationId:: <<participationIdType>> The previously used <<participation-id>>.
 lastReceivedSequenceNumber:: <<eventSequenceType>> Last <<event-sequence-number>> received by the client.
 protocolMessage:: <<protocolMessageType>>
 

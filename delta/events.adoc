@@ -978,7 +978,7 @@ parts:: <<eventType>>[]
 protocolMessage:: <<protocolMessageType>>
 
 .Technical name
-`Composite`
+`CompositeEvent`
 
 .Related command
 <<cmd-Composite>>

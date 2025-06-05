@@ -825,7 +825,7 @@ parent:: <<targetNodeType>>
 reference:: <<metaPointerType>>
 index:: <<indexType>>
 newTarget:: <<targetNodeType>>?
-newResolveInfo:: <<targetNodeType>>?
+newResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
 protocolMessage:: <<protocolMessageType>>
 
