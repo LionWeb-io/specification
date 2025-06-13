@@ -250,10 +250,10 @@ None.
 === createPartitions: Create new partitions
 Creates new partitions in the repository.{fn-org216}
 
-Each sent node is its own partition.
-Thus, we cannot send the contents (i.e. (indirect) annotations/containments) of a partition; We can send them in a later <<store>> call.
-We also MUST NOT mention any annotation/containment node ids in the partition nodes, as they cannot be part of the same request, and we don't allow moving nodes in this operation.
-We MAY send properties and references.{fn-org225}
+Each sent node with no parent node id is its own partition.
+All other nodes MUST NOT exist in the repository, and they MUST be descendants of on of the partition nodes.
+We cannot use <<store.semantics, move semantics>>.
+We MAY reference nodes already existing in the repository.{fn-org369}
 
 Nodes MUST use <<unknown-node-ids>>.
 
@@ -430,6 +430,7 @@ We do not support different modes.{fn-org230}
 [[store.commandId]]
 `commandId`:: <<commandId>> of this command.
 
+[[store.semantics]]
 ==== Semantics
 After completing this call, all sent nodes MUST have exactly the sent contents in the repository.
 We must send containments/annotations from the parent's view, because we need to know the containment and index of the contained node/annotation within its parent.
