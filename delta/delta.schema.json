@@ -296,9 +296,8 @@
       "type": "string"
     },
     "index": {
-      "type": "string",
-      "minLength": 1,
-      "pattern": "^[0-9]+$"
+      "type": "integer",
+      "minimum": 0
     },
     "protocolMessageKind": {
       "$ref": "#/$defs/id"
@@ -696,7 +695,8 @@
           "const": "GetAvailableIdsRequest"
         },
         "count": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0
         },
         "queryId": {
           "$ref": "#/$defs/queryId"
