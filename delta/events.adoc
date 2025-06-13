@@ -25,13 +25,14 @@ protocolMessage:: <<protocolMessageType>>
 
 [[evnt-PartitionDeleted]]
 ===== Partition deleted
-Partition `deletedPartition`, and all its descendants, have been deleted from the repository.
+Partition `deletedPartition`, and all its `deletedDescendants`{fn-org370}, have been deleted from the repository.
 
 This client is now unsubscribed from any changes to `deletedPartition` or any of its descendants.
 
 [horizontal]
 .Parameters
-deletedPartition:: <<chunkType>>
+deletedPartition:: <<targetNodeType>>
+deletedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
@@ -155,12 +156,13 @@ protocolMessage:: <<protocolMessageType>>
 
 [[evnt-ChildDeleted]]
 ===== Child deleted
-Existing node `deletedChild`, and all its descendants, have been deleted from ``parent``'s `containment` at `index`.{fn-org286}
+Existing node `deletedChild`, and all its `deletedDescendants`{fn-org370}, have been deleted from ``parent``'s `containment` at `index`.{fn-org286}
 All other children inside ``parent``'s `containment` with index > `index` have been moved to next lower index.
 
 [horizontal]
 .Parameters
-deletedChild:: <<chunkType>>
+deletedChild:: <<targetNodeType>>
+deletedDescendants:: <<targetNodeType>>[]
 parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
@@ -176,7 +178,7 @@ protocolMessage:: <<protocolMessageType>>
 
 [[evnt-ChildReplaced]]
 ===== Child replaced
-Existing node `replacedChild` inside ``parent``'s `containment` at `index` has been replaced with new node `newChild`.
+Existing node `replacedChild`, and all its `replacedDescendants`{fn-org370}, inside ``parent``'s `containment` at `index` has been replaced with new node `newChild`.
 `newChild` might be a single node or an arbitrary complex subtree.
 All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
 Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
@@ -187,7 +189,8 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 [horizontal]
 .Parameters
 newChild:: <<chunkType>>
-replacedChild:: <<chunkType>>
+replacedChild:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
 parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
@@ -293,7 +296,7 @@ protocolMessage:: <<protocolMessageType>>
 [[evnt-ChildMovedAndReplacedFromOtherContainment]]
 ===== Child moved from other containment and replaced existing child
 Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has replaced the existing `replacedChild` inside ``newParent``'s `newContainment` at `newIndex`.
-`replacedChild`, and all its descendants, have been deleted.
+`replacedChild`, and all its `replacedDescendants`{fn-org370}, have been deleted.
 
 All other children inside ``oldParent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
 
@@ -308,7 +311,8 @@ movedChild:: <<targetNodeType>>
 oldParent:: <<targetNodeType>>
 oldContainment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
-replacedChild:: <<chunkType>>
+replacedChild:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
@@ -322,7 +326,7 @@ protocolMessage:: <<protocolMessageType>>
 [[evnt-ChildMovedAndReplacedFromOtherContainmentInSameParent]]
 ===== Child moved from other containment in same parent and replaced existing child
 Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has replaced the existing `replacedChild` inside ``parent``'s `newContainment` at `newIndex`.
-`replacedChild`, and all its descendants, have been deleted.
+`replacedChild`, and all its `replacedDescendants`{fn-org370}, have been deleted.
 
 All other children inside ``parent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
 
@@ -336,7 +340,8 @@ movedChild:: <<targetNodeType>>
 parent:: <<targetNodeType>>
 oldContainment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
-replacedChild:: <<chunkType>>
+replacedChild:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
@@ -350,7 +355,7 @@ protocolMessage:: <<protocolMessageType>>
 [[evnt-ChildMovedAndReplacedInSameContainment]]
 ===== Child moved in same containment and replaced existing child
 Existing node `movedChild` (previously inside ``parent``'s `containment` at `oldIndex`) has replaced the existing `replacedChild` inside ``parent``'s `containment` at `newIndex`.
-`replacedChild`, and all its descendants, have been deleted.
+`replacedChild`, and all its `replacedDescendants`{fn-org370}, have been deleted.
 
 If `oldIndex` < `newIndex`: All other children inside ``parent``'s `containment` with previous index > `oldIndex` have been moved to next lower index.
 Example: +
@@ -371,7 +376,8 @@ movedChild:: <<targetNodeType>>
 parent:: <<targetNodeType>>
 containment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
-replacedChild:: <<chunkType>>
+replacedChild:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
@@ -411,12 +417,13 @@ protocolMessage:: <<protocolMessageType>>
 
 [[evnt-AnnotationDeleted]]
 ===== Annotation deleted
-Existing node `deletedAnnotation`, and all its descendants, have been deleted from ``parent``'s annotations at `index`.{fn-org286}
+Existing node `deletedAnnotation`, and all its `deletedDescendants`{fn-org370}, have been deleted from ``parent``'s annotations at `index`.{fn-org286}
 All other annotations inside ``parent``'s annotations with index > `index` have been moved to next lower index.
 
 [horizontal]
 .Parameters
-deletedAnnotation:: <<chunkType>>
+deletedAnnotation:: <<targetNodeType>>
+deletedDescendants:: <<targetNodeType>>[]
 parent:: <<targetNodeType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
@@ -431,7 +438,7 @@ protocolMessage:: <<protocolMessageType>>
 
 [[evnt-AnnotationReplaced]]
 ===== Annotation replaced
-Existing node `replacedAnnotation` inside ``parent``'s annotations at `index` has been replaced with new node `newAnnotation`.
+Existing node `replacedAnnotation`, and all its `replacedDescendants`{fn-org370}, inside ``parent``'s annotations at `index` has been replaced with new node `newAnnotation`.
 `newAnnotation` might be a single node or an arbitrary complex subtree.
 All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
 Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
@@ -441,7 +448,8 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 [horizontal]
 .Parameters
 newAnnotation:: <<chunkType>>
-replacedAnnotation:: <<chunkType>>
+replacedAnnotation:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
 parent:: <<targetNodeType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
@@ -516,7 +524,7 @@ protocolMessage:: <<protocolMessageType>>
 [[evnt-AnnotationMovedAndReplacedFromOtherParent]]
 ===== Annotation moved from other parent and replaced existing annotation
 Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has replaced the existing `replacedAnnotation` inside ``newParent``'s annotations at `newIndex`.
-`replacedAnnotation`, and all its descendants, have been deleted.
+`replacedAnnotation`, and all its `replacedDescendants`{fn-org370}, have been deleted.
 
 All other annotations inside ``oldParent``'s annotations with index > `oldIndex` have been moved to next lower index.
 
@@ -529,7 +537,8 @@ newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
 oldParent:: <<targetNodeType>>
 oldIndex:: <<indexType>>
-replacedAnnotation:: <<chunkType>>
+replacedAnnotation:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>
@@ -543,7 +552,7 @@ protocolMessage:: <<protocolMessageType>>
 [[evnt-AnnotationMovedAndReplacedInSameParent]]
 ===== Annotation moved in same parent and replaced existing annotation
 Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has replaced the existing `replacedAnnotation` inside ``parent``'s annotations at `newIndex`.
-`replacedAnnotation`, and all its descendants, have been deleted.
+`replacedAnnotation`, and all its `replacedDescendants`{fn-org370}, have been deleted.
 
 If `oldIndex` < `newIndex`: All other annotations inside ``parent``'s `containment` with previous index > `oldIndex` have been moved to next lower index.
 Example: +
@@ -563,7 +572,8 @@ newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
 parent:: <<targetNodeType>>
 oldIndex:: <<targetNodeType>>
-replacedAnnotation:: <<chunkType>>
+replacedAnnotation:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
 protocolMessage:: <<protocolMessageType>>

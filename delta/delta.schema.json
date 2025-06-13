@@ -267,6 +267,13 @@
         }
       ]
     },
+    "targetNodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/targetNode"
+      },
+      "uniqueItems": true
+    },
     "resolveInfo": {
       "type": "string"
     },
@@ -713,10 +720,7 @@
           "const": "GetAvailableIdsResponse"
         },
         "ids": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/id"
-          }
+          "$ref": "#/$defs/targetNodes"
         },
         "queryId": {
           "$ref": "#/$defs/queryId"
@@ -2481,7 +2485,10 @@
           "const": "PartitionDeleted"
         },
         "deletedPartition": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/targetNode"
+        },
+        "deletedDescendants": {
+          "$ref": "#/$defs/targetNodes"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
@@ -2496,12 +2503,13 @@
       "required": [
         "messageKind",
         "deletedPartition",
+        "deletedDescendants",
         "originCommands",
         "sequenceNumber"
       ],
       "additionalProperties": false,
-      "minProperties": 4,
-      "maxProperties": 5
+      "minProperties": 5,
+      "maxProperties": 6
     },
     "ClassifierChanged": {
       "properties": {
@@ -2697,7 +2705,10 @@
           "const": "ChildDeleted"
         },
         "deletedChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/targetNode"
+        },
+        "deletedDescendants": {
+          "$ref": "#/$defs/targetNodes"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -2721,6 +2732,7 @@
       "required": [
         "messageKind",
         "deletedChild",
+        "deletedDescendants",
         "parent",
         "containment",
         "index",
@@ -2728,8 +2740,8 @@
         "sequenceNumber"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 8
+      "minProperties": 8,
+      "maxProperties": 9
     },
     "ChildReplaced": {
       "properties": {
@@ -2740,7 +2752,10 @@
           "$ref": "#/$defs/DeltaSerializationChunk"
         },
         "replacedChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -2765,6 +2780,7 @@
         "messageKind",
         "newChild",
         "replacedChild",
+        "replacedDescendants",
         "parent",
         "containment",
         "index",
@@ -2772,8 +2788,8 @@
         "sequenceNumber"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
-      "maxProperties": 9
+      "minProperties": 9,
+      "maxProperties": 10
     },
     "ChildMovedFromOtherContainment": {
       "properties": {
@@ -2946,7 +2962,10 @@
           "$ref": "#/$defs/index"
         },
         "replacedChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
@@ -2968,12 +2987,13 @@
         "oldContainment",
         "oldIndex",
         "replacedChild",
+        "replacedDescendants",
         "originCommands",
         "sequenceNumber"
       ],
       "additionalProperties": false,
-      "minProperties": 11,
-      "maxProperties": 12
+      "minProperties": 12,
+      "maxProperties": 13
     },
     "ChildMovedAndReplacedFromOtherContainmentInSameParent": {
       "properties": {
@@ -2999,7 +3019,10 @@
           "$ref": "#/$defs/index"
         },
         "replacedChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
@@ -3020,12 +3043,13 @@
         "oldContainment",
         "oldIndex",
         "replacedChild",
+        "replacedDescendants",
         "originCommands",
         "sequenceNumber"
       ],
       "additionalProperties": false,
-      "minProperties": 10,
-      "maxProperties": 11
+      "minProperties": 11,
+      "maxProperties": 12
     },
     "ChildMovedAndReplacedInSameContainment": {
       "properties": {
@@ -3048,7 +3072,10 @@
           "$ref": "#/$defs/index"
         },
         "replacedChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
@@ -3068,12 +3095,13 @@
         "containment",
         "oldIndex",
         "replacedChild",
+        "replacedDescendants",
         "originCommands",
         "sequenceNumber"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
-      "maxProperties": 10
+      "minProperties": 10,
+      "maxProperties": 11
     },
     "AnnotationAdded": {
       "properties": {
@@ -3120,7 +3148,10 @@
           "$ref": "#/$defs/targetNode"
         },
         "deletedAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/targetNode"
+        },
+        "deletedDescendants": {
+          "$ref": "#/$defs/targetNodes"
         },
         "index": {
           "$ref": "#/$defs/index"
@@ -3139,13 +3170,14 @@
         "messageKind",
         "parent",
         "deletedAnnotation",
+        "deletedDescendants",
         "index",
         "originCommands",
         "sequenceNumber"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
-      "maxProperties": 7
+      "minProperties": 7,
+      "maxProperties": 8
     },
     "AnnotationReplaced": {
       "properties": {
@@ -3156,7 +3188,10 @@
           "$ref": "#/$defs/DeltaSerializationChunk"
         },
         "replacedAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3178,14 +3213,15 @@
         "messageKind",
         "newAnnotation",
         "replacedAnnotation",
+        "replacedDescendants",
         "parent",
         "index",
         "originCommands",
         "sequenceNumber"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 8
+      "minProperties": 8,
+      "maxProperties": 9
     },
     "AnnotationMovedFromOtherParent": {
       "properties": {
@@ -3292,7 +3328,10 @@
           "$ref": "#/$defs/index"
         },
         "replacedAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
@@ -3312,12 +3351,13 @@
         "oldParent",
         "oldIndex",
         "replacedAnnotation",
+        "replacedDescendants",
         "originCommands",
         "sequenceNumber"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
-      "maxProperties": 10
+      "minProperties": 10,
+      "maxProperties": 11
     },
     "AnnotationMovedAndReplacedInSameParent": {
       "properties": {
@@ -3337,7 +3377,10 @@
           "$ref": "#/$defs/index"
         },
         "replacedAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
@@ -3356,12 +3399,13 @@
         "parent",
         "oldIndex",
         "replacedAnnotation",
+        "replacedDescendants",
         "originCommands",
         "sequenceNumber"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
-      "maxProperties": 9
+      "minProperties": 9,
+      "maxProperties": 10
     },
     "ReferenceAdded": {
       "properties": {
