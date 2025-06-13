@@ -38,6 +38,13 @@ Client tries to operate on an index beyond the number of existing elements.
 .Technical name
 `unknownIndex`
 
+[[err-indexEntryMismatch]]
+==== Entry at index is not the given entry
+Client provided an entry (either a node or a target/resolveInfo) and an index, but the entry is not at the given index.
+
+.Technical name
+`indexNodeMismatch`
+
 
 [[err-moveWithoutParent]]
 ==== Move without parent
