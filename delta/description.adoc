@@ -69,7 +69,7 @@ Each message has some id unique to the <<participation>>:
 * Commands have a _command id_.{fn-org305}
 * Events have _command sources_.{fn-org306}
 
-Each message optionally can have one _[[protocolMessage, protocol message]]protocol message_ consisting of:{fn-org331}{fn-org332}
+Each message optionally can have one or more _[[protocolMessage, protocol message]]protocol message_ consisting of:{fn-org331}{fn-org332}
 
 * [[protocolMessage.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the message type.
 Some message kinds are pre-defined in this specification.
