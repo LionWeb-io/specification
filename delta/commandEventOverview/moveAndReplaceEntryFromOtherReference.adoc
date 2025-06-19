@@ -1,0 +1,63 @@
+|
+[plantuml,moveAndReplaceEntryFromOtherReference-before,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class oldParent
+class "old\nPrevious\nEntry" as oldPreviousEntry
+class "old\nNext\nEntry" as oldNextEntry
+
+class "moved\nTarget" as target #Orange
+class "replaced\nTarget" as replaced
+
+oldParent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
+oldParent .[thickness=2].> target #red: old\nReference\n[oldIndex]\n<color #red>{movedResolveInfo}</color>
+oldParent ..> oldNextEntry: old\nReference\n[oldIndex + 1]
+
+class newParent
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+oldPreviousEntry -[hidden]-> newPreviousEntry
+oldNextEntry -[hidden]-> newNextEntry
+
+newPreviousEntry <.. newParent: new\nReference\n[newIndex - 1]
+replaced <.. newParent #red: new\nReference\n[newIndex]\n<color #red>{replacedResolveInfo}</color>
+newNextEntry <.. newParent: new\nReference\n[newIndex + 1]
+
+target -[hidden]-> replaced
+oldPreviousEntry -[hidden]> target
+newPreviousEntry -[hidden]> replaced
+----
+|
+
+[plantuml,moveAndReplaceEntryFromOtherReference-after,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class oldParent
+class "old\nPrevious\nEntry" as oldPreviousEntry
+class "old\nNext\nEntry" as oldNextEntry
+
+class "moved\nTarget" as target #Orange
+class "replaced\nTarget" as replaced
+
+oldParent ..> oldPreviousEntry: old\nReference\n[oldIndex - 1]
+oldParent .[hidden].> target #red: old\nReference\n[oldIndex]\n<color #red>{resolveInfo}</color>
+oldParent ..> oldNextEntry: old\nReference\n[oldIndex]
+
+class newParent
+class "new\nPrevious\nEntry" as newPreviousEntry
+class "new\nNext\nEntry" as newNextEntry
+
+oldPreviousEntry -[hidden]-> newPreviousEntry
+oldNextEntry -[hidden]-> newNextEntry
+
+newPreviousEntry <.. newParent: new\nReference\n[newIndex - 1]
+target <.[thickness=2]. newParent #blue: new\nReference\n[newIndex]\n<color #blue>{movedResolveInfo}</color>
+newNextEntry <.. newParent: new\nReference\n[newIndex + 1]
+
+target -[hidden]-> replaced
+oldPreviousEntry -[hidden]> target
+newPreviousEntry -[hidden]> replaced
+----

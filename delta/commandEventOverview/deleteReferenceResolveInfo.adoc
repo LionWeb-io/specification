@@ -1,0 +1,22 @@
+|
+[plantuml,deleteReferenceResolveInfo-before,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class target
+
+parent ..> target: reference\n[index]\n<color #red>{deletedResolveInfo}</color>
+----
+|
+[plantuml, deleteReferenceResolveInfo-after, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class target
+
+parent ..> target: reference\n[index]\n<color #blue>{null}</color>
+----

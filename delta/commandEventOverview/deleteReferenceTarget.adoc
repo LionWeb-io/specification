@@ -1,0 +1,24 @@
+|
+[plantuml,deleteReferenceTarget-before,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class deletedTarget
+
+parent .[thickness=2].> deletedTarget #red: reference\n[index]\n{resolveInfo}
+----
+|
+[plantuml,deleteReferenceTarget-after,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class " " as target<<h>>
+class deletedTarget
+
+parent ..> target: reference\n[index]\n{resolveInfo}
+target -[hidden]-> deletedTarget
+----

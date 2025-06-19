@@ -1,0 +1,16 @@
+|
+[plantuml, deleteProperty-before, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class "node" {
+  <color #red>property = oldValue</color>
+}
+----
+|
+[plantuml, deleteProperty-after, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class "node"
+----

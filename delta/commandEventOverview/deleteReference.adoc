@@ -1,0 +1,30 @@
+|
+[plantuml,deleteReference-before,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class "deleted\nTarget" as deletedTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[thickness=2].> deletedTarget #red: reference\n[index]\n<color #red>{deleted</color>\n<color #red>ResolveInfo}</color>
+parent ..> nextEntry: reference\n[index + 1]
+----
+|
+[plantuml, deleteReference-after, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class "deleted\nTarget" as deletedTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[hidden].> deletedTarget #red: reference\n[index]\n{deleted\nResolveInfo}
+parent ..> nextEntry: reference\n[index + 1]
+----

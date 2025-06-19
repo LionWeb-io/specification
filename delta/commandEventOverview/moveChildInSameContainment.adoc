@@ -1,0 +1,49 @@
+|
+[plantuml,moveChildInSameContainment-before,svg]
+----
+!include commandEventOverviewStyle.puml
+left to right direction
+
+class parent
+
+class siblingA
+class movedChild #Orange
+class siblingB
+class siblingC
+
+class descendant #Orange
+
+parent *--> siblingA: containment\n[oldIndex - 1]
+parent *--> movedChild: containment\n[<color #red>oldIndex</color>]
+parent *--> siblingB: containment\n[oldIndex + 1]
+parent *--> siblingC: containment\n[oldIndex + 2]
+
+movedChild *-> descendant
+
+siblingA -[hidden]> movedChild
+----
+|
+[plantuml, moveChildInSameContainment-after, svg]
+----
+!include commandEventOverviewStyle.puml
+left to right direction
+
+class parent
+
+class siblingA
+class movedChild #Orange
+class siblingB
+class siblingC
+
+class descendant #Orange
+
+parent *--> siblingA: containment\n[oldIndex - 1]
+parent *--> siblingB: containment\n[oldIndex]
+parent *--> movedChild: containment\n[<color #Blue>newIndex</color>]
+parent *--> siblingC: containment\n[newIndex + 1]
+
+movedChild *-> descendant
+
+siblingA -[hidden]> siblingB
+siblingB -[hidden]> movedChild
+----

@@ -1,0 +1,150 @@
+[[introduction]]
+== Introduction
+Delta API assumes a bidirectional communication channel.
+The _client_ initiates the channel with the _repository_ to open a _participation_{fn-org337}.
+Both parties communicate through the established channel via _messages_.
+
+Delta API supports these message kinds, loosely following CQRS patternfootnote:[https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation]{fn-org291}:
+
+* <<queries>> initiated/requested by the client, with synchronous response by the repository.
+A query requests some information from the repository without changing the repository's contents.
+The repository gathers all information needed to answer the query, and sends the information back.
+The repository might reply invalid queries with a failure message.
+We also use queries for managing <<participation, participations>>.{fn-org350}
+
+* <<commands>> initiated/requested by the client, with synchronous response by the repository.
+A command requests some change to the repository.
+The repository quickly confirms having _received_ the command, or rejects a _failed_ command.{fn-org298}
+However, the repository processes the command asynchronously, and eventually broadcasts the effect(s) as _event_.
+
+* <<events>> initiated/broadcast by the repository, without response by the client.
+An event describes some change that has been applied to the repository's contents.
+Events correlate to their originating command(s){fn-org306}; this command might have been sent by this client or another client.{fn-org299}
+All clients receive the same events (given the same subscription scope and disregarding <<event-sequence-number, event sequence numbers>>).
+
+A client describes the interesting part of the repository's contents by specifying its <<subscription, subscription scope>>.
+The client receives only events on nodes within that scope.
+
+A typical workflow for a client would be:
+
+1. Client <<qry-SignOn, connects>> to repository and starts a participation.
+2. Client <<qry-SubscribeToPartitionContents, subscribes>> to some partitions with subscription queries.
+The response contains a <<{serialization}.adoc#SerializationChunk, serialization chunk>> with the current contents of these partitions.
+3. Client initiates its editor or processing with the chunk.
+4. Client <<commands, sends commands>> to request changes to some nodes in the subscribed partitions.
+5. Client <<events, receives events>> with the actual changes that have been applied to the subscribed nodes.
+6. Client updates its editor or processing with the event's contents.
+7. Client receives events originating from other clients' commands.
+8. Client updates its editor or processing with the event's contents.
+9. Client <<qry-SignOff, ends>> the participation.
+
+The repository is always the ultimate arbiter of its contents.{fn-org339}
+It can decide to apply each command verbatim, with some tweaks (e.g. because of concurrent changes), or not at all (e.g. because the command would introduce containment loops).
+
+Each repository might introduce its own strategy how to handle commands.{fn-org291}
+For example, assume client 1 sends a `deleteChild` command to delete node `X`, and then client 2 sends a `setProperty` command on node `X`.
+
+* Repository A applies all commands in order, thus deletes node `X` and ignores the second command.
+It emits one `childDeleted` event, correlated to both commands.
+* Repository B keeps an internal "trash can" of all deleted nodes.
+It deletes node `X` on the first command, but resurrects node `X` on the second command and changes the property as requested.
+It first emits a `childDeleted` event (correlated to the first command), but later `childAdded` and `propertyChanged` events (both correlated to the second command).
+* Repository C batches command processing.
+It looks at both messages together, and decides it's more important to keep the new property value around.
+It emits one `propertyChanged` event, correlated with both commands.
+
+A client stays up-to-date with the repository's contents if it applies all events in order.{fn-org297}
+The order is defined by the event's sequence number.{fn-org341}
+A client can either decide to apply its own change immediately and filter out events based on that command, or wait for the correlated event to arrive and apply the change only then.
+
+=== Command overview
+
+We specified the semantics of each command and event precisely, leading to lots of similar, but different commands/events.{fn-org317}
+
+This table provides an overview of actions (rows) and element they apply to (columns).
+
+[cols="2,3,3,3,1,1"]
+|===
+|Action |Child |Annotation |Reference |Property |Partition / Classifier
+
+|Add
+|<<cmd-AddChild>>
+|<<cmd-AddAnnotation>>
+|
+<<cmd-AddReference>>
+
+<<cmd-AddReferenceResolveInfo>>
+
+<<cmd-AddReferenceTarget>>{fn-org329}
+|<<cmd-AddProperty>>
+|<<cmd-AddPartition>>
+
+|Delete
+|<<cmd-DeleteChild>>
+|<<cmd-DeleteAnnotation>>
+|
+<<cmd-DeleteReference>>
+
+<<cmd-DeleteReferenceResolveInfo>>
+
+<<cmd-DeleteReferenceTarget>>
+|<<cmd-DeleteProperty>>
+|<<cmd-DeletePartition>>
+
+|Change
+|<<cmd-ReplaceChild>>
+|<<cmd-ReplaceAnnotation>>
+|
+<<cmd-ChangeReference>>
+
+<<cmd-ChangeReferenceResolveInfo>>
+
+<<cmd-ChangeReferenceTarget>>
+|<<cmd-ChangeProperty>>
+|<<cmd-ChangeClassifier>>
+
+|Move from other node
+|<<cmd-MoveChildFromOtherContainment>>
+|<<cmd-MoveAnnotationFromOtherParent>>
+|<<cmd-MoveEntryFromOtherReference>>
+|
+|
+
+|Move from other feature in same node
+|<<cmd-MoveChildFromOtherContainmentInSameParent>>
+|
+|<<cmd-MoveEntryFromOtherReferenceInSameParent>>
+|
+|
+
+|Move in same feature in same node
+|<<cmd-MoveChildInSameContainment>>
+|<<cmd-MoveAnnotationInSameParent>>
+|<<cmd-MoveEntryInSameReference>>
+|
+|
+
+|Move from other node and replace existing{fn-org321}
+|<<cmd-MoveAndReplaceChildFromOtherContainment>>
+|<<cmd-MoveAndReplaceAnnotationFromOtherParent>>
+|<<cmd-MoveAndReplaceEntryFromOtherReference>>
+|
+|
+
+|Move from other feature in same node and replace existing{fn-org321}
+|<<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
+|
+|<<cmd-MoveAndReplaceEntryFromOtherReferenceInSameParent>>
+|
+|
+
+|Move in same feature in same node and replace existing{fn-org321}
+|<<cmd-MoveAndReplaceChildInSameContainment>>
+|<<cmd-MoveAndReplaceAnnotationInSameParent>>
+|<<cmd-MoveAndReplaceEntryInSameReference>>
+|
+|
+
+|Composite
+5+|<<cmd-CompositeCommand>>
+|===

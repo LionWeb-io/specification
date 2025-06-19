@@ -9,7 +9,7 @@ include::../shared/issue-footnotes.adoc[]
 :toc: preamble
 :toclevels: 3
 
-This document describes the serialization format for LionWeb *version 2024.1* chunks.
+This document describes the serialization format for LionWeb *version 2025.1* chunks.
 
 == Conventions used in this document
 * _italic_ words refer to concepts defined by JSON.
@@ -42,21 +42,21 @@ plantuml::serialization.puml[format=svg]
 Root level MUST be an _object_ with three _members_, called *serialization chunk*.
 
 [[SerializationChunk.serializationFormatVersion, `serializationFormatVersion`]]
-The first _member_ SHOULD be _key_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}{fn-org159}{fn-org172}
+The first _member_ SHOULD be _name_ `serializationFormatVersion` with a _string_ _value_.{fn-org58}{fn-org159}{fn-org172}
 The value MUST be a non-empty string (without leading or trailing whitespace){fn-org165} describing the serialization format version used to create the processed document, according to <<versions>>.
 
 [[SerializationChunk.languages]]
-The second _member_ SHOULD be _key_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}{fn-org159}
+The second _member_ SHOULD be _name_ `languages` with an _array_ _value_.{fn-org76}{fn-org78}{fn-org159}
 Each _element_ in the value array MUST adhere to <<language>>.
 The order of _elements_ is undefined.
 _elements_ MUST contain all language/version referred to by any <<meta-pointer>> in the processed document.
 Each _element_ MUST be unique with respect to all its _members_.
 
 [[SerializationChunk.nodes]]
-The third _member_ SHOULD be _key_ `nodes` with an _array_ _value_.{fn-org33}{fn-org159}
+The third _member_ SHOULD be _name_ `nodes` with an _array_ _value_.{fn-org33}{fn-org159}
 Each _element_ in the value array MUST adhere to <<node>>.
 The order of _elements_ is undefined.
-Each _element_ MUST be unique with respect to the value of its _key_ `id`.
+Each _element_ MUST be unique with respect to the value of its _name_ `id`.
 
 [[language]]
 === Language structure
@@ -69,8 +69,8 @@ In this case, builtins MUST be listed as *used language* like any other language
 
 The _object_ MUST contain the following _members_:{fn-org76}
 
-* [[UsedLanguage.key]] _key_ `key` with _string_ _value_, adhering to <<language-key>>.
-* [[UsedLanguage.version]] _key_ `version` with _string_ _value_, adhering to <<language-version>>.
+* [[UsedLanguage.key]] _name_ `key` with _string_ _value_, adhering to <<language-key>>.
+* [[UsedLanguage.version]] _name_ `version` with _string_ _value_, adhering to <<language-version>>.
 
 [[language-key]]
 ==== Language key
@@ -93,9 +93,9 @@ The order of _members_ is undefined.
 
 The _object_ MUST contain the following _members_:
 
-* [[MetaPointer.lanuage]] _key_ `language` with _string_ _value_, adhering to <<language-key>>.
-* [[MetaPointer.version]] _key_ `version` with _string_ _value_, adhering to <<language-version>>.
-* [[MetaPointer.key]] _key_ `key` with _string_ _value_ according to <<{m3}.adoc#keys, Keys spec>>.
+* [[MetaPointer.lanuage]] _name_ `language` with _string_ _value_, adhering to <<language-key>>.
+* [[MetaPointer.version]] _name_ `version` with _string_ _value_, adhering to <<language-version>>.
+* [[MetaPointer.key]] _name_ `key` with _string_ _value_ according to <<{m3}.adoc#keys, Keys spec>>.
 Refers to some <<{m3}.adoc#IKeyed, element in the language>>.
 Which element exactly is specified for each usage of meta-pointer.
 
@@ -107,18 +107,18 @@ The order of _members_ is undefined.
 
 The _object_ MUST contain the following _members_:{fn-org59}{fn-java33}{fn-org55}
 
-* [[Node.id]] _key_ `id` with _string_ _value_, adhering to <<id>>.
-* [[Node.classifier]] _key_ `classifier`{fn-org37-name}{fn-org184} with _object_ _value_, adhering to <<meta-pointer>>.
-The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> or <<{m3}.adoc#Annotation, *Annotation*>> this *node* is an instance of.
-* [[Node.properties]] _key_ `properties` with _array_ _value_, each _element_ adhering to <<property>>.
+* [[Node.id]] _name_ `id` with _string_ _value_, adhering to <<id>>.
+* [[Node.classifier]] _name_ `classifier`{fn-org37-name}{fn-org184} with _object_ _value_, adhering to <<meta-pointer>>.
+  The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Concept, *Concept*>> or <<{m3}.adoc#Annotation, *Annotation*>> this *node* is an instance of.
+* [[Node.properties]] _name_ `properties` with _array_ _value_, each _element_ adhering to <<property>>.
 The order of _elements_ is undefined.{fn-org156}
-* [[Node.containments]] _key_ `containments`{fn-org55-name-children}{fn-org206} with _array_ _value_, each _element_ adhering to <<containment>>.
+* [[Node.containments]] _name_ `containments`{fn-org55-name-children}{fn-org206} with _array_ _value_, each _element_ adhering to <<containment>>.
 The order of _elements_ is undefined.{fn-org156}
-* [[Node.references]] _key_ `references`{fn-org55-name-references} with _array_ _value_, each _element_ adhering to <<reference>>.
+* [[Node.references]] _name_ `references`{fn-org55-name-references} with _array_ _value_, each _element_ adhering to <<reference>>.
 The order of _elements_ is undefined.{fn-org156}
-* [[Node.annotations]] _key_ `annotations`{fn-org150} with _array_ _value_, each _element_ adhering to <<annotation>>.
+* [[Node.annotations]] _name_ `annotations`{fn-org150} with _array_ _value_, each _element_ adhering to <<annotation>>.
 The order of _elements_ MUST be maintained.{fn-org157}
-* [[Node.parent]] _key_ `parent`{fn-org187} with _string_ or _null_ _value_, adhering to <<parent>>.
+* [[Node.parent]] _name_ `parent`{fn-org187} with _string_ or _null_ _value_, adhering to <<parent>>.
 
 For all features (i.e. `properties`, `containments`, and `references`) defined for a **node**'s classifier:{fn-org33}
 
@@ -148,9 +148,9 @@ The order of _members_ is undefined.
 
 The _object_ MUST contain the following _members_:
 
-* [[Property.property]] _key_ `property` with _object_ _value_, adhering to <<meta-pointer>>.
-The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Property, *Property*>> this *property* is an instance of.
-* [[Property.value]] _key_ `value` with _value_ as one of
+* [[Property.property]] _name_ `property` with _object_ _value_, adhering to <<meta-pointer>>.
+  The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Property, *Property*>> this *property* is an instance of.
+* [[Property.value]] _name_ `value` with _value_ as one of
 ** _string_{fn-org34} containing the value of the property referenced by the `property`.
 Refer to <<property-values>> for the specification of the value format.
 Can be an empty _string_.
@@ -165,9 +165,9 @@ The order of _members_ is undefined.
 
 The _object_ MUST contain the following _members_:
 
-* [[Containment.containment]] _key_ `containment` with _object_ _value_, adhering to <<meta-pointer>>.
+* [[Containment.containment]] _name_ `containment` with _object_ _value_, adhering to <<meta-pointer>>.
 The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Containment, *Containment*>> this *containment* is an instance of.
-* [[Containment.children]] _key_ `children` with _array_ _value_ with _string_ _elements_.
+* [[Containment.children]] _name_ `children` with _array_ _value_ with _string_ _elements_.
 Each _element_ adheres to <<{m3}.adoc#identifiers, Identifier spec>>, and refers to the *id* of the contained *node*.
 The order of _elements_ MUST be maintained.{fn-org157}
 +
@@ -183,19 +183,19 @@ The order of _members_ is undefined.
 
 The _object_ MUST contain the following _members_:
 
-* [[Reference.reference]] _key_ `reference` with _object_ _value_, adhering to <<meta-pointer>>.
+* [[Reference.reference]] _name_ `reference` with _object_ _value_, adhering to <<meta-pointer>>.
 The *meta-pointer*'s ``key``'s _value_ refers to the <<{m3}.adoc#IKeyed.key, *key*>> of the <<{m3}.adoc#Reference, *Reference*>> this *reference* is an instance of.
-* [[Reference.targets]] _key_ `targets` with _array_ _value_ with __object_ _elements_.
+* [[Reference.targets]] _name_ `targets` with _array_ _value_ with _object_ _elements_.
 The order of _elements_ MUST be maintained.{fn-org157}
 Each _element_ MUST have the following _members_ in undefined order:{fn-org55-name-references}
-** [[Reference.reference.resolveInfo]] _key_ `resolveInfo`{fn-org36} with _value_ as one of:
+** [[Reference.reference.resolveInfo]] _name_ `resolveInfo`{fn-org36} with _value_ as one of:
 *** _string_ containing *resolveInfo*, a textual hint that might be used to find the target *node* of this reference.
 Interface <<{m3}.adoc#INamed, INamed>> SHOULD be used as a default, if available.
 The exact value depends on the implementation.
 Can be an empty _string_.
 *** _null_ if no *resolveInfo* is available.
 
-** [[Reference.reference.reference]] _key_ `reference`{fn-org35} with _value_ as one of:
+** [[Reference.reference.reference]] _name_ `reference`{fn-org35} with _value_ as one of:
 *** _string_ according to <<{m3}.adoc#identifiers, Identifier spec>>.
 Refers to the *id* of the target *node*.
 +
@@ -223,14 +223,13 @@ NOTE: *parent* is the inverse relation of either one *containment* or one *annot
 +
 NOTE: The referred *node* can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
 
-* _null_ if
+* _null_ if{fn-org228}
 ** This *node* is a *root node*, i.e. this node does not have a parent.
-** This serialization is sent as an update request.
 
 [[property-values]]
 === Property serialization
 All property values MUST be serialized as JSON _string_.{fn-org34}{fn-org9}.
-An unset property SHOULD be serialized as JSON _null_.
+An unset property SHOULD be serialized as JSON _null_.{fn-org59}
 
 [[string]]
 ==== String
@@ -293,7 +292,7 @@ The string contains a JSON _object_ according to spec (RFC 8259) with proper esc
 
 The contents of the string are formed as follows:
 A <<{m3}.adoc#StructuredDataType, LionCore StructuredDataType>> is encoded as JSON _object_.
-Each <<{m3}.adoc#Field, Field>> forms one _member_, with the field's <<{m3}.adoc#IKeyed.key, key>> as JSON _key_ and the field's value as JSON _value_.
+Each <<{m3}.adoc#Field, Field>> forms one _member_, with the field's <<{m3}.adoc#IKeyed.key, key>> as JSON _name_ and the field's value as JSON _value_.
 For fields of type <<string>>, <<boolean>>, <<integer>>, and <<literal>>, the _value_ is encoded as JSON _string_ in the same way as for a property.
 For fields of type <<structuredDatatype>>, the value is encoded as JSON _object_.
 
@@ -564,6 +563,13 @@ include::annotation-variants.json[]
 
 NOTE: The term "version" is a bit ambiguous within LionWeb.{fn-org172}
 This section lists all versions as they appear in <<SerializationChunk.serializationFormatVersion>> and <<{m3}.adoc#Language.version, `Language.version`>> for languages `LionWeb-M3` and `LionWeb-builtins`.
+
+=== 2025.1
+Technical name: `2025.1`
+
+* Editorial changes and clarifications.
+
+Refer to <<{roadmap}.adoc#release-2025.1, roadmap>> for details.
 
 === 2024.1
 Technical name: `2024.1`

@@ -1,0 +1,59 @@
+=== Client changes known node with remote update
+[plantuml,changeKnownNodeRemoteUpdate,svg]
+----
+hide footbox
+autonumber
+
+box "Client A"
+  participant Editor as editor
+  participant Events as clientEvent
+  participant Commands as clientCmd
+end box
+
+box "Repository"
+  participant Commands as repoCmd
+  participant Events as repoEvent
+  participant Core as core
+end box
+
+== Client A connected with participation id "client-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
+
+[->> editor ++
+editor -> clientCmd ++
+clientCmd -> repoCmd ++: addProperty("nodeA", age, "23", "cmd-1")
+repoCmd ->> core
+activate core
+clientCmd <-- repoCmd: received("cmd-1")
+deactivate repoCmd
+editor <-- clientCmd
+deactivate clientCmd
+deactivate editor
+
+core -> core: update()
+
+core -> repoEvent
+deactivate core
+
+activate repoEvent
+clientEvent <<- repoEvent: propertyAdded("nodeA", age, "23", [("client-a", "cmd-1")], 1)
+deactivate repoEvent
+
+activate clientEvent
+clientEvent -> editor
+deactivate clientEvent
+
+activate editor
+editor -> editor: update(nodeA.age = 23)
+----
+1. User enters new property value.
+2. Client editor forwards user action into command.
+3. Client sends <<cmd-AddProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
+4. Repository registers command for processing.
+5. Repository acknowledges reception of command with id `cmd-1`.
+6. Client informs editor of command submission.
+7. Repository updates internal representation.
+8. Repository creates event for update.
+9. Repository emits event <<evnt-PropertyAdded>> with `nodeA` node id, `age` property (details omitted), `23` value and sequence number `1`.
+It includes one <<commandSourceType>> with value `(client-a, cmd-1)`
+10. Client receives event and forwards information to editor.
+11. Client updates `nodeA` with new property value.

@@ -1,0 +1,24 @@
+|
+[plantuml,addReferenceTarget-before,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class " " as target<<h>>
+class newTarget
+
+parent ..> target: reference\n[index]\n{resolveInfo}
+target -[hidden]-> newTarget
+----
+|
+[plantuml,addReferenceTarget-after,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class newTarget
+
+parent .[thickness=2].> newTarget #blue: reference\n[index]\n{resolveInfo}
+----

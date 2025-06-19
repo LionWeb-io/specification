@@ -4,6 +4,7 @@ include::../shared/issue-footnotes.adoc[]
 :refarch: ../reference-architecture/reference-architecture
 :serialization: ../serialization/serialization
 :bulk: ../bulk/repo-access-api
+:delta: ../delta/delta-api
 :v2023-1: ../2023.1/
 :v2024-1: ../2024.1/
 
@@ -19,20 +20,18 @@ As a volunteer-run Open Source effort, we cannot commit to a timeline.
 We're actively looking for corporate sponsors, with some prospects in sight.
 
 [[in-progress]]
-=== In progress for _after_ version 2024.1
-
-[[delta-protocol]]
-==== Delta protocol
-As described in our <<{refarch}.adoc#delta, reference architecture>>, via delta protocol a client receives an initial snapshot similar to the bulk case.
-Afterwards, the client continues to receive changes (aka deltas) from the repo; it also writes back changes continuously.{fn-org28}
+=== In progress for _after_ version 2025.1
 
 [[derived-models]]
 ==== Derived models
 As described in our <<{refarch}.adoc#derivedModel, reference architecture>>, derived models are calculated from other (original or derived) models without direct human interaction.
 They are usually some form of analysis result, such as one related to a type system.
 Nodes in derived models are typically associated with an original node – e.g., the type computed for an AST node.
-The repository manages this association.
-Derived models may be persisted or be recalculated on the fly.footnote:[https://github.com/LionWeb-io/specification/issues?q=is%3Aissue+label%3Aderived[issues on derived models]]
+
+The repository manages this association. Derived models may be persisted or be recalculated on the fly.
+
+https://github.com/LionWeb-io/specification/issues?q=is%3Aissue%20label%3Aderived%20[Existing issues on derived models]
+
 
 [[envisioned]]
 === Envisioned
@@ -157,6 +156,13 @@ Model-to-model generators would be implemented as <<{refarch}.adoc#processor, Pr
 [[releases]]
 [[versions]]
 == Versions
+
+[[release-2025.1]]
+[[version-2025.1]]
+=== 2025.1
+* [[delta-protocol]] Specified <<{delta}.adoc#delta, Delta Repository Access API>> +
+As described in our <<{refarch}.adoc#delta, reference architecture>>, via delta protocol a client receives an initial snapshot similar to the bulk case.
+Afterwards, the client continues to receive changes (aka deltas) from the repo; it also writes back changes continuously.{fn-org28}
 
 [[release-2024.1]]
 [[version-2024.1]]

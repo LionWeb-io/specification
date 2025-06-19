@@ -1,0 +1,70 @@
+[[errors]]
+=== Errors
+
+[[err-invalidParticipation]]
+==== Invalid participation
+The <<participation>> the <<client>> uses to communicate with the repository is not valid.
+
+Possible reasons:
+
+* The participation never has been valid.
+* The client <<qry-SignOff, signed off>>.
+* The client <<participation, disconnected>>.
+
+.Technical name
+`invalidParticipation`
+
+
+[[err-nodeAlreadyExists]]
+==== Node already exists
+Client tries to create a node with an id that already exists.
+
+.Technical name
+`nodeAlreadyExists`
+
+
+[[err-unknownNode]]
+==== Unknown node
+Client tries to operate on a node unknown to the repository.
+
+.Technical name
+`unknownNode`
+
+
+[[err-unknownIndex]]
+==== Unknown index
+Client tries to operate on an index beyond the number of existing elements.
+
+.Technical name
+`unknownIndex`
+
+[[err-indexEntryMismatch]]
+==== Entry at index is not the given entry
+Client provided an entry (either a node or a target/resolveInfo) and an index, but the entry is not at the given index.
+
+.Technical name
+`indexNodeMismatch`
+
+
+[[err-moveWithoutParent]]
+==== Move without parent
+Client tries to move a node that doesn't have a parent.
+
+.Technical name
+`moveWithoutParent`
+
+
+[[err-invalidMove]]
+==== Invalid move
+Client tries to move a node incompatible with the emitted command.
+
+.Technical name
+`invalidMove`
+
+
+[[err-undefinedReferenceTarget]]
+==== Undefined reference target
+Client tries to set a reference with neither `target` nor `resolveInfo`
+
+.Technical name
+`undefinedReferenceTarget`

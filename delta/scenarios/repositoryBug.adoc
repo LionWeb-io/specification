@@ -1,0 +1,63 @@
+=== Repository has bug, needs to tell client it couldn't apply its commands
+[plantuml,repositoryBug,svg]
+----
+hide footbox
+autonumber
+
+box "Client A"
+  participant Editor as editor
+  participant Events as clientEvent
+  participant Commands as clientCmd
+end box
+
+box "Repository"
+  participant Commands as repoCmd
+  participant Events as repoEvent
+  participant Core as core
+end box
+
+== Client A connected with participation id "client-a"\nsubscribed to "partition-id"\nassumes invalid nodeA (part of "partition-id") ==
+
+[->> editor ++
+editor -> clientCmd ++
+clientCmd -> repoCmd ++: addProperty("nodeA", age, "23", "cmd-1")
+repoCmd ->> core
+activate core
+clientCmd <-- repoCmd: received("cmd-1")
+deactivate repoCmd
+clientCmd -> clientEvent: registerProcessedCmd("cmd-1")
+activate clientEvent
+deactivate clientEvent
+deactivate repoCmd
+editor <-- clientCmd
+deactivate clientCmd
+deactivate editor
+
+core -> core: update()
+core -> core: handleError()
+
+core -> repoEvent
+deactivate core
+
+activate repoEvent
+clientEvent <<- repoEvent: error("internalError", "internal error occurred." [("client-a", "cmd-1")], 1)
+deactivate repoEvent
+
+activate clientEvent
+clientEvent -> clientEvent: removeProcessedCmd("cmd-1")
+deactivate clientEvent
+----
+1. User enters new property value on node `nodeA` that's known to the editor.
+2. Client editor forwards user action into command.
+3. Client sends <<cmd-AddProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
+4. Repository registers command for processing.
+5. Repository acknowledges reception of command with id `cmd-1`.
+6. Client registers processed command id `cmd-1`.
+7. Client informs editor of command submission.
+8. Repository tries to update internal representation.
+Some error occurs (e.g. database unavailable).
+9. Repository handles the error.
+10. Repository creates event for notification.
+11. Repository emits <<evnt-Error>> event with `internalError` error code, `internal error occurred` message and sequence number `1`.
+It includes one <<commandSourceType>> with value `(client-a, cmd-1)`.
+12. Client removes `cmd-1` from open commands list.

@@ -1,0 +1,34 @@
+|
+[plantuml,deleteAnnotation-before,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "deleted\nAnnotation" as deletedAnnotation #red
+class "next\nSibling" as nextSibling
+
+class descendant #red
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> deletedAnnotation #red: <<annotations>>\n[index]
+parent *--> nextSibling: <<annotations>>\n[index + 1]
+
+deletedAnnotation *--> descendant #red
+----
+|
+[plantuml, deleteAnnotation-after, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class " " as dummy <<h>>
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *-[hidden]-> dummy #red: <<annotations>>\n[index]
+parent *--> nextSibling: <<annotations>>\n[index]
+----

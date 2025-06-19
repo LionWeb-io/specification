@@ -1,0 +1,21 @@
+[[scenarios]]
+== Scenarios
+include::virginRepo.adoc[]
+
+include::reconnectKnownPartition.adoc[]
+
+include::changeKnownNodeRemoteUpdate.adoc[]
+
+include::changeKnownNodeLocalUpdate.adoc[]
+
+include::changeUnknownNodeFailedCommand.adoc[]
+
+include::changeUnknownNodeFailedEvent.adoc[]
+
+include::changeSameValueRemoteUpdate.adoc[]
+
+include::repositoryBug.adoc[]
+
+include::concurrentChangeLocalUpdate.adoc[]
+
+include::concurrentChangeRemoteUpdate.adoc[]

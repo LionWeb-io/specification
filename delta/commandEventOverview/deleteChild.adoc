@@ -1,0 +1,34 @@
+|
+[plantuml, deleteChild-before, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "deleted\nChild" as deletedChild #red
+class "next\nSibling" as nextSibling
+
+class descendant #red
+
+parent *--> previousSibling: containment\n[index - 1]
+parent *--> deletedChild #red: containment\n[index]
+parent *--> nextSibling: containment\n[index + 1]
+
+deletedChild *--> descendant #red
+----
+|
+[plantuml, deleteChild-after, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class " " as deletedChild <<h>>
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: containment\n[index - 1]
+parent *-[hidden]-> deletedChild #red: containment\n[index]
+parent *--> nextSibling: containment\n[index]
+----

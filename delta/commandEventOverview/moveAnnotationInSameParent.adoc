@@ -1,0 +1,49 @@
+|
+[plantuml,moveAnnotationInSameParent-before,svg]
+----
+!include commandEventOverviewStyle.puml
+left to right direction
+
+class parent
+
+class siblingA
+class "moved\nAnnotation" as movedAnnotation #Orange
+class siblingB
+class siblingC
+
+class descendant #Orange
+
+parent *--> siblingA: <<annotations>>\n[oldIndex - 1]
+parent *--> movedAnnotation: <<annotations>>\n[<color #red>oldIndex</color>]
+parent *--> siblingB: <<annotations>>\n[oldIndex + 1]
+parent *--> siblingC: <<annotations>>\n[oldIndex + 2]
+
+movedAnnotation *-> descendant
+
+siblingA -[hidden]> movedAnnotation
+----
+|
+[plantuml,moveAnnotationInSameParent-after,svg]
+----
+!include commandEventOverviewStyle.puml
+left to right direction
+
+class parent
+
+class siblingA
+class "moved\nAnnotation" as movedAnnotation #Orange
+class siblingB
+class siblingC
+
+class descendant #Orange
+
+parent *--> siblingA: <<annotations>>\n[oldIndex - 1]
+parent *--> siblingB: <<annotations>>\n[oldIndex]
+parent *--> movedAnnotation: <<annotations>>\n[<color #Blue>newIndex</color>]
+parent *--> siblingC: <<annotations>>\n[newIndex + 1]
+
+movedAnnotation *-> descendant
+
+siblingA -[hidden]> siblingB
+siblingB -[hidden]> movedAnnotation
+----

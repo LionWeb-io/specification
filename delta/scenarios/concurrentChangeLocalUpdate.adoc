@@ -1,0 +1,73 @@
+=== Concurrent changes to known node with local update
+[plantuml,concurrentChangeLocalUpdate,svg]
+----
+hide footbox
+autonumber
+
+box "Client A"
+  participant Editor as editor
+  participant Events as clientEvent
+  participant Commands as clientCmd
+end box
+
+box "Repository"
+  participant Commands as repoCmd
+  participant Events as repoEvent
+  participant Core as core
+end box
+
+== Client A connected with participation id "client-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
+
+[->> editor ++
+editor -> editor: update(nodeA.age = 23)
+editor ->> clientCmd
+deactivate editor
+activate clientCmd
+clientCmd -> repoCmd ++: addProperty("nodeA",\n  age, "23", "cmd-1")
+repoCmd ->> core
+activate core
+clientCmd <-- repoCmd: received("cmd-1")
+deactivate repoCmd
+clientCmd -> clientEvent: registerProcessedCmd("cmd-1")
+activate clientEvent
+deactivate clientEvent
+deactivate clientCmd
+
+core <<-]: addProperty("nodeA",\n  age, "42", "cmd-x")
+
+core -> core: resolveConcurrentUpdates()
+
+core -> repoEvent
+deactivate core
+
+activate repoEvent
+clientEvent <<- repoEvent: propertyAdded("nodeA", age, "42", [("client-a", "cmd-1"), ("other-client", "cmd-x")], 1)
+deactivate repoEvent
+
+activate clientEvent
+clientEvent -> clientEvent: checkForProcessedCmd()
+clientEvent -> clientEvent: removeProcessedCmd("cmd-1")
+clientEvent -> editor
+deactivate clientEvent
+
+activate editor
+editor -> editor: update(nodeA.age = 42)
+----
+1. User enters new property value.
+2. Client updates `nodeA` with new property value.
+3. Client editor forwards user action into command.
+4. Client sends <<cmd-AddProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
+5. Repository registers command for processing.
+6. Repository acknowledges reception of command with id `cmd-1`.
+7. Client registers processed command id `cmd-1`.
+8. Another client sends <<cmd-AddProperty>> command `nodeA` node id, `age` property (details omitted), `42` value and command id `cmd-x`.
+9. Repository resolves concurrent updates t `nodeA`, `age` property with "last write wins" strategy.
+Repository updates internal representation with value `42`.
+10. Repository creates event for update.
+11. Repository emits event <<evnt-PropertyAdded>> with `nodeA` node id, `age` property (details omitted), `23` value and sequence number `1`.
+It includes one <<commandSourceType>> with values `(client-a, cmd-1)` and `(other-client, cmd-x)`.
+12. Client found a matching registered processed command id.
+13. Client unregisters processed command id `cmd-1`.
+14. Not all command sources could be matched against registered processed command ids.
+Client forwards information to editor.
+15. Client updates with new property value.

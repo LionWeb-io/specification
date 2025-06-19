@@ -1,0 +1,13 @@
+|
+_nothing_
+|
+[plantuml, addPartition, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class newPartition:Person <<Partition>> #LightSkyBlue {
+  name: String = "John"
+  age: Integer = 23
+  alive: Boolean = true
+}
+----

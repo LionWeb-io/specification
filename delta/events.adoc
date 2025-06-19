@@ -1,0 +1,1029 @@
+[[events]]
+=== Events
+
+[[evnt-partitions]]
+==== Partitions
+
+[[evnt-PartitionAdded]]
+===== Partition added
+Partition `newPartition` has been added to the repository.
+
+This client is now subscribed to any changes to `newPartition` or any of its descendants.
+
+[horizontal]
+.Parameters
+newPartition:: <<chunkType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`PartitionAdded`
+
+.Related command
+<<cmd-AddPartition>>
+
+[[evnt-PartitionDeleted]]
+===== Partition deleted
+Partition `deletedPartition`, and all its `deletedDescendants`{fn-org370}, have been deleted from the repository.
+
+This client is now unsubscribed from any changes to `deletedPartition` or any of its descendants.
+
+[horizontal]
+.Parameters
+deletedPartition:: <<targetNodeType>>
+deletedDescendants:: <<targetNodeType>>[]
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`PartitionDeleted`
+
+.Related command
+<<cmd-DeletePartition>>
+
+[[evnt-nodes]]
+==== Nodes
+
+[[evnt-ClassifierChanged]]
+===== Classifier changed
+Classifier of `node` has been changed from `oldClassifier` to `newClassifier`.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+newClassifier:: <<metaPointerType>>
+oldClassifier:: <<metaPointerType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ClassifierChanged`
+
+.Related command
+<<cmd-ChangeClassifier>>
+
+[[evnt-properties]]
+==== Properties
+
+[[evnt-PropertyAdded]]
+===== Property added
+`property` of `node` has been set to `newValue`.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+newValue:: <<propertyValueType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`PropertyAdded`
+
+.Related command
+<<cmd-AddProperty>>
+
+[[evnt-PropertyDeleted]]
+===== Property deleted
+Existing `property` of `node` with `oldValue` has been deleted.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+oldValue:: <<propertyValueType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`PropertyDeleted`
+
+.Related command
+<<cmd-DeleteProperty>>
+
+[[evnt-PropertyChanged]]
+===== Property changed
+Existing `property` of `node` has been changed from `oldValue` to `newValue`.
+
+[horizontal]
+.Parameters
+node:: <<targetNodeType>>
+property:: <<metaPointerType>>
+newValue:: <<propertyValueType>>
+oldValue:: <<propertyValueType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`PropertyChanged`
+
+.Related command
+<<cmd-ChangeProperty>>
+
+[[evnt-children]]
+==== Children
+
+[[evnt-ChildAdded]]
+===== Child added
+New node `newChild` has been added to ``parent``'s  `containment` at `index`.
+`newChild` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
+
+All other children inside ``parent``'s `containment` with index >= `index` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newChild:: <<chunkType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ChildAdded`
+
+.Related command
+<<cmd-AddChild>>
+
+[[evnt-ChildDeleted]]
+===== Child deleted
+Existing node `deletedChild`, and all its `deletedDescendants`{fn-org370}, have been deleted from ``parent``'s `containment` at `index`.{fn-org286}
+All other children inside ``parent``'s `containment` with index > `index` have been moved to next lower index.
+
+[horizontal]
+.Parameters
+deletedChild:: <<targetNodeType>>
+deletedDescendants:: <<targetNodeType>>[]
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ChildDeleted`
+
+.Related command
+<<cmd-DeleteChild>>
+
+[[evnt-ChildReplaced]]
+===== Child replaced
+Existing node `replacedChild`, and all its `replacedDescendants`{fn-org370}, inside ``parent``'s `containment` at `index` has been replaced with new node `newChild`.
+`newChild` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
+
+
+`replacedChild`, and all its descendants, have been deleted.
+
+[horizontal]
+.Parameters
+newChild:: <<chunkType>>
+replacedChild:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ChildReplaced`
+
+.Related command
+<<cmd-ReplaceChild>>
+
+[[evnt-ChildMovedFromOtherContainment]]
+===== Child moved from other containment
+Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has been moved
+inside ``newParent``'s `newContainment` at `newIndex`.
+
+All other children inside ``oldParent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+All other children inside ``newParent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ChildMovedFromOtherContainment`
+
+.Related command
+<<cmd-MoveChildFromOtherContainment>>
+
+[[evnt-ChildMovedFromOtherContainmentInSameParent]]
+===== Child moved from other containment in same parent
+Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has been moved
+inside ``parent``'s `newContainment` at `newIndex`.
+
+All other children inside ``parent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+All other children inside ``parent``'s `newContainment` with index >= `newIndex` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ChildMovedFromOtherContainmentInSameParent`
+
+.Related command
+<<cmd-MoveChildFromOtherContainmentInSameParent>>
+
+[[evnt-ChildMovedInSameContainment]]
+===== Child moved in same containment
+Existing node `movedChild` (previously inside ``parent``'s `containment` at `oldIndex`) has been moved
+inside ``parent``'s `containment` at `newIndex`.
+
+If `oldIndex` < `newIndex`: All other children inside ``parent``'s `containment` with previous index > `oldIndex` and previous index <= `newIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* F[6]`
+
+If `oldIndex` > `newIndex`: All other children inside ``parent``'s `containment` with previous index >= `newIndex` and previous index < `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6]`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ChildMovedInSameContainment`
+
+.Related command
+<<cmd-MoveChildInSameContainment>>
+
+[[evnt-ChildMovedAndReplacedFromOtherContainment]]
+===== Child moved from other containment and replaced existing child
+Existing node `movedChild` (previously inside ``oldParent``'s `oldContainment` at `oldIndex`) has replaced the existing `replacedChild` inside ``newParent``'s `newContainment` at `newIndex`.
+`replacedChild`, and all its `replacedDescendants`{fn-org370}, have been deleted.
+
+All other children inside ``oldParent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+No other children inside ``newParent``'s `newContainment` have been moved.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+replacedChild:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ChildMovedAndReplacedFromOtherContainment`
+
+.Related command
+<<cmd-MoveAndReplaceChildFromOtherContainment>>
+
+[[evnt-ChildMovedAndReplacedFromOtherContainmentInSameParent]]
+===== Child moved from other containment in same parent and replaced existing child
+Existing node `movedChild` (previously inside ``parent``'s `oldContainment` at `oldIndex`) has replaced the existing `replacedChild` inside ``parent``'s `newContainment` at `newIndex`.
+`replacedChild`, and all its `replacedDescendants`{fn-org370}, have been deleted.
+
+All other children inside ``parent``'s `oldContainment` with index > `oldIndex` have been moved to next lower index.
+
+No other children inside ``parent``'s `newContainment` have been moved.
+
+[horizontal]
+.Parameters
+newContainment:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldContainment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+replacedChild:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ChildMovedAndReplacedFromOtherContainmentInSameParent`
+
+.Related command
+<<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
+
+[[evnt-ChildMovedAndReplacedInSameContainment]]
+===== Child moved in same containment and replaced existing child
+Existing node `movedChild` (previously inside ``parent``'s `containment` at `oldIndex`) has replaced the existing `replacedChild` inside ``parent``'s `containment` at `newIndex`.
+`replacedChild`, and all its `replacedDescendants`{fn-org370}, have been deleted.
+
+If `oldIndex` < `newIndex`: All other children inside ``parent``'s `containment` with previous index > `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_`
+
+If `oldIndex` > `newIndex`: All other children inside ``parent``'s `containment` with previous index >= `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedChild:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+containment:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+replacedChild:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ChildMovedAndReplacedInSameContainment`
+
+.Related command
+<<cmd-MoveAndReplaceChildInSameContainment>>
+
+[[evnt-annotations]]
+==== Annotations
+
+[[evnt-AnnotationAdded]]
+===== Annotation added
+New node `newAnnotation` has been added to ``parent``'s annotations at `index`.
+`newAnnotation` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
+
+All other annotations inside ``parent``'s annotations with index >= `index` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newAnnotation:: <<chunkType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`AnnotationAdded`
+
+.Related command
+<<cmd-AddAnnotation>>
+
+[[evnt-AnnotationDeleted]]
+===== Annotation deleted
+Existing node `deletedAnnotation`, and all its `deletedDescendants`{fn-org370}, have been deleted from ``parent``'s annotations at `index`.{fn-org286}
+All other annotations inside ``parent``'s annotations with index > `index` have been moved to next lower index.
+
+[horizontal]
+.Parameters
+deletedAnnotation:: <<targetNodeType>>
+deletedDescendants:: <<targetNodeType>>[]
+parent:: <<targetNodeType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`AnnotationDeleted`
+
+.Related command
+<<cmd-DeleteAnnotation>>
+
+[[evnt-AnnotationReplaced]]
+===== Annotation replaced
+Existing node `replacedAnnotation`, and all its `replacedDescendants`{fn-org370}, inside ``parent``'s annotations at `index` has been replaced with new node `newAnnotation`.
+`newAnnotation` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
+
+`replacedAnnotation`, and all its descendants, have been deleted.
+
+[horizontal]
+.Parameters
+newAnnotation:: <<chunkType>>
+replacedAnnotation:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
+parent:: <<targetNodeType>>
+index:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`AnnotationReplaced`
+
+.Related command
+<<cmd-ReplaceAnnotation>>
+
+[[evnt-AnnotationMovedFromOtherParent]]
+===== Annotation moved from other parent
+Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has been moved
+inside ``newParent``'s annotations at `newIndex`.
+
+All other annotations inside ``oldParent``'s annotations with index > `oldIndex` have been moved to next lower index.
+
+All other annotations inside ``newParent``'s annotations with index >= `newIndex` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldIndex:: <<indexType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`AnnotationMovedFromOtherParent`
+
+.Related command
+<<cmd-MoveAnnotationFromOtherParent>>
+
+[[evnt-AnnotationMovedInSameParent]]
+===== Annotation moved in same parent
+Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has been moved
+inside ``parent``'s annotations at `newIndex`.
+
+If `oldIndex` < `newIndex`: All other annotations inside ``parent``'s annotations with previous index > `oldIndex` and previous index <= `newIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* F[6]`
+
+If `oldIndex` > `newIndex`: All other annotations inside ``parent``'s annotations with previous index >= `newIndex` and previous index < `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6]`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldIndex:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`AnnotationMovedInSameParent`
+
+.Related command
+<<cmd-MoveAnnotationInSameParent>>
+
+[[evnt-AnnotationMovedAndReplacedFromOtherParent]]
+===== Annotation moved from other parent and replaced existing annotation
+Existing node `movedAnnotation` (previously inside ``oldParent``'s annotations at `oldIndex`) has replaced the existing `replacedAnnotation` inside ``newParent``'s annotations at `newIndex`.
+`replacedAnnotation`, and all its `replacedDescendants`{fn-org370}, have been deleted.
+
+All other annotations inside ``oldParent``'s annotations with index > `oldIndex` have been moved to next lower index.
+
+No other annotations inside ``newParent``'s annotations have been moved.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+oldParent:: <<targetNodeType>>
+oldIndex:: <<indexType>>
+replacedAnnotation:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`AnnotationMovedAndReplacedFromOtherParent`
+
+.Related command
+<<cmd-MoveAndReplaceAnnotationFromOtherParent>>
+
+[[evnt-AnnotationMovedAndReplacedInSameParent]]
+===== Annotation moved in same parent and replaced existing annotation
+Existing node `movedAnnotation` (previously inside ``parent``'s annotations at `oldIndex`) has replaced the existing `replacedAnnotation` inside ``parent``'s annotations at `newIndex`.
+`replacedAnnotation`, and all its `replacedDescendants`{fn-org370}, have been deleted.
+
+If `oldIndex` < `newIndex`: All other annotations inside ``parent``'s `containment` with previous index > `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_`
+
+If `oldIndex` > `newIndex`: All other annotations inside ``parent``'s `containment` with previous index >= `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+newIndex:: <<indexType>>
+movedAnnotation:: <<targetNodeType>>
+parent:: <<targetNodeType>>
+oldIndex:: <<targetNodeType>>
+replacedAnnotation:: <<targetNodeType>>
+replacedDescendants:: <<targetNodeType>>[]
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`AnnotationMovedAndReplacedInSameParent`
+
+.Related command
+<<cmd-MoveAndReplaceAnnotationInSameParent>>
+
+[[evnt-references]]
+==== References
+
+[[evnt-ReferenceAdded]]
+===== Reference added
+Reference with `newTarget`/`newResolveInfo` has been added to ``parent``'s `reference` at `index`.
+All other entries inside ``parent``'s `reference` with index >= `index` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>?
+newResolveInfo:: <<resolveInfoType>>?
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ReferenceAdded`
+
+.Related command
+<<cmd-AddReference>>
+
+[[evnt-ReferenceDeleted]]
+===== Reference deleted
+Existing reference with `deletedTarget`/`deletedResolveInfo` has been deleted from ``parent``'s `reference` at `index`.
+All other entries inside ``parent``'s `reference` with index > `index` have been moved to next lower index.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+deletedTarget:: <<targetNodeType>>?
+deletedResolveInfo:: <<resolveInfoType>>?
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ReferenceDeleted`
+
+.Related command
+<<cmd-DeleteReference>>
+
+[[evnt-ReferenceChanged]]
+===== Reference changed
+Existing reference with `replacedTarget`/`replacedResolveInfo` inside ``parent``'s annotations at `index` has been replaced with `newTarget`/`newResolveInfo`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>?
+newResolveInfo:: <<targetNodeType>>?
+replacedTarget:: <<targetNodeType>>?
+replacedResolveInfo:: <<resolveInfoType>>?
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ReferenceChanged`
+
+.Related command
+<<cmd-ChangeReference>>
+
+[[evnt-EntryMovedFromOtherReference]]
+===== Entry moved from other reference
+Existing reference `target`/`resolveInfo` (previously inside ``oldParent``'s `oldReference` at `oldIndex`) has been moved
+to ``newParent``'s `newReference` at `newIndex`.
+
+All other entries inside ``oldParent``'s `oldReference` with index > `oldIndex` have been moved to next lower index.
+
+All other entries inside ``newParent``'s `newReference` with index >= `newIndex` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldParent:: <<targetNodeType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+target:: <<targetNodeType>>?
+resolveInfo:: <<resolveInfoType>>?
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`EntryMovedFromOtherReference`
+
+.Related command
+<<cmd-MoveEntryFromOtherReference>>
+
+[[evnt-EntryMovedFromOtherReferenceInSameParent]]
+===== Entry moved from other reference in same parent
+Existing reference `target`/`resolveInfo` (previously inside ``parent``'s `oldReference` at `oldIndex`) has been moved
+to ``parent``'s `newReference` at `newIndex`.
+
+All other entries inside ``parent``'s `oldReference` with index > `oldIndex` have been moved to next lower index.
+
+All other entries inside ``parent``'s `newReference` with index >= `newIndex` have been moved to next higher index.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+target:: <<targetNodeType>>?
+resolveInfo:: <<resolveInfoType>>?
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`EntryMovedFromOtherReferenceInSameParent`
+
+.Related command
+<<cmd-MoveEntryFromOtherReferenceInSameParent>>
+
+[[evnt-EntryMovedInSameReference]]
+===== Entry moved in same reference
+Existing reference `target`/`resolveInfo` (previously inside ``parent``'s `reference` at `oldIndex`) has been moved
+to ``parent``'s `reference` at `newIndex`.
+
+If `oldIndex` < `newIndex`: All other entries inside ``parent``'s `reference` with previous index > `oldIndex` and previous index <= `newIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* F[6]`
+
+If `oldIndex` > `newIndex`: All other entries inside ``parent``'s `reference` with previous index >= `newIndex` and previous index < `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6]`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+newIndex:: <<indexType>>
+target:: <<targetNodeType>>?
+resolveInfo:: <<resolveInfoType>>?
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`EntryMovedInSameReference`
+
+.Related command
+<<cmd-MoveEntryInSameReference>>
+
+[[evnt-EntryMovedAndReplacedFromOtherReference]]
+===== Entry moved from other reference and replaced existing entry
+Existing reference `movedTarget`/`movedResolveInfo` (previously inside ``oldParent``'s `oldReference` at `oldIndex`) has replaced existing `replacedTarget`/`replacedResolveInfo` at ``newParent``'s `newReference` at `newIndex`.
+
+All other entries inside ``oldParent``'s `oldReference` with index > `oldIndex` have been moved to next lower index.
+
+No other entries inside ``newParent``'s `newReference` have been moved.
+
+[horizontal]
+.Parameters
+newParent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedTarget:: <<targetNodeType>>?
+movedResolveInfo:: <<resolveInfoType>>?
+oldParent:: <<targetNodeType>>
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+replacedTarget:: <<targetNodeType>>?
+replacedResolveInfo:: <<resolveInfoType>>?
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`EntryMovedAndReplacedFromOtherReference`
+
+.Related command
+<<cmd-MoveAndReplaceEntryFromOtherReference>>
+
+[[evnt-EntryMovedAndReplacedFromOtherReferenceInSameParent]]
+===== Entry moved from other reference in same parent and replaced existing entry
+Existing reference `movedTarget`/`movedResolveInfo` (previously inside ``parent``'s `oldReference` at `oldIndex`) has replaced existing `replacedTarget`/`replacedResolveInfo` at ``parent``'s `newReference` at `newIndex`.
+
+All other entries inside ``parent``'s `oldReference` with index > `oldIndex` have been moved to next lower index.
+
+No other entries inside ``parent``'s `newReference` have been moved.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+newReference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedTarget:: <<targetNodeType>>?
+movedResolveInfo:: <<resolveInfoType>>?
+oldReference:: <<metaPointerType>>
+oldIndex:: <<indexType>>
+replacedTarget:: <<targetNodeType>>?
+replacedResolveInfo:: <<resolveInfoType>>?
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`EntryMovedAndReplacedFromOtherReferenceInSameParent`
+
+.Related command
+<<cmd-MoveAndReplaceEntryFromOtherReferenceInSameParent>>
+
+[[evnt-EntryMovedAndReplacedInSameReference]]
+===== Entry moved in same reference and replaced existing entry
+Existing reference `movedTarget`/`movedResolveInfo` (previously inside ``parent``'s `reference` at `oldIndex`) has replaced existing `replacedTarget`/`replacedResolveInfo` at ``parent``'s `reference` at `newIndex`.
+
+If `oldIndex` < `newIndex`: All other entries inside ``parent``'s `containment` with previous index > `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_`
+
+If `oldIndex` > `newIndex`: All other entries inside ``parent``'s `containment` with previous index >= `oldIndex` have been moved to next lower index.
+Example: +
+`oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
+
+`oldIndex` MUST NOT be equal to `newIndex`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+newIndex:: <<indexType>>
+movedTarget:: <<targetNodeType>>?
+movedResolveInfo:: <<resolveInfoType>>?
+oldIndex:: <<indexType>>
+replacedTarget:: <<targetNodeType>>?
+replacedResolveInfo:: <<resolveInfoType>>?
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`EntryMovedAndReplacedInSameReference`
+
+.Related command
+<<cmd-MoveAndReplaceEntryInSameReference>>
+
+[[evnt-ReferenceResolveInfoAdded]]
+===== Reference ResolveInfo added
+`newResolveInfo` has been added as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newResolveInfo:: <<resolveInfoType>>
+target:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ReferenceResolveInfoAdded`
+
+.Related command
+<<cmd-AddReferenceResolveInfo>>
+
+[[evnt-ReferenceResolveInfoDeleted]]
+===== Reference ResolveInfo deleted
+ResolveInfo `deletedResolveInfo` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `target`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+target:: <<targetNodeType>>
+deletedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ReferenceResolveInfoDeleted`
+
+.Related command
+<<cmd-DeleteReferenceResolveInfo>>
+
+[[evnt-ReferenceResolveInfoChanged]]
+===== Reference ResolveInfo changed
+ResolveInfo of existing entry inside ``parent``'s `reference` at `index` with `target` has been changed from `oldResolveInfo` to `newResolveInfo`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newResolveInfo:: <<resolveInfoType>>
+target:: <<targetNodeType>>?
+replacedResolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ReferenceResolveInfoChanged`
+
+.Related command
+<<cmd-ChangeReferenceResolveInfo>>
+
+[[evnt-ReferenceTargetAdded]]
+===== Reference target added
+`newTarget` has been added as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ReferenceTargetAdded`
+
+.Related command
+<<cmd-AddReferenceTarget>>
+
+[[evnt-ReferenceTargetDeleted]]
+===== Reference target deleted
+Target `deletedTarget` has been deleted from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+resolveInfo:: <<resolveInfoType>>
+deletedTarget:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ReferenceTargetDeleted`
+
+.Related command
+<<cmd-DeleteReferenceTarget>>
+
+[[evnt-ReferenceTargetChanged]]
+===== Reference target changed
+Target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` has been changed from `oldTarget` to `newTarget`.
+
+[horizontal]
+.Parameters
+parent:: <<targetNodeType>>
+reference:: <<metaPointerType>>
+index:: <<indexType>>
+newTarget:: <<targetNodeType>>
+resolveInfo:: <<resolveInfoType>>?
+replacedTarget:: <<targetNodeType>>
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`ReferenceTargetChanged`
+
+.Related command
+<<cmd-ChangeReferenceTarget>>
+
+[[evnt-miscellaneous]]
+==== Miscellaneous
+
+[[evnt-Composite]]
+[[evnt-CompositeEvent]]
+===== Composite
+The events in `parts` have happened in the given order.{fn-org281}
+
+All `originCommands` have been handled (maybe by discarding them).
+
+Composite events don't mention origin commands on their own; they are only mentioned in each part.{fn-org306}
+We can nest composite events arbitrarily.{fn-org360}
+
+[horizontal]
+.Parameters
+parts:: <<eventType>>[]
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`CompositeEvent`
+
+.Related command
+<<cmd-CompositeCommand>>
+
+[[evnt-NoOp]]
+[[evnt-NoOpEvent]]
+===== No-op
+Nothing happened as result of one or more command(s).{fn-org314}
+
+[horizontal]
+.Parameters
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`NoOpEvent`
+
+.Related command
+_none_
+
+[[evnt-Error]]
+===== Error
+Repository couldn't handle one or more command(s).{fn-org316}
+
+[horizontal]
+.Parameters
+errorCode:: `String`
+message:: `String`
+originCommands:: <<commandSourceType>>[]
+sequenceNumber:: <<event-sequence-number>>
+protocolMessages:: <<protocolMessagesType>>
+
+.Technical name
+`Error`
+
+.Related command
+_none_
