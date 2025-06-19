@@ -15,7 +15,7 @@ This client is now subscribed to any changes to `newPartition` or any of its des
 newPartition:: <<chunkType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `PartitionAdded`
@@ -35,7 +35,7 @@ deletedPartition:: <<targetNodeType>>
 deletedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `PartitionDeleted`
@@ -57,7 +57,7 @@ newClassifier:: <<metaPointerType>>
 oldClassifier:: <<metaPointerType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ClassifierChanged`
@@ -79,7 +79,7 @@ property:: <<metaPointerType>>
 newValue:: <<propertyValueType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `PropertyAdded`
@@ -98,7 +98,7 @@ property:: <<metaPointerType>>
 oldValue:: <<propertyValueType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `PropertyDeleted`
@@ -118,7 +118,7 @@ newValue:: <<propertyValueType>>
 oldValue:: <<propertyValueType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `PropertyChanged`
@@ -146,7 +146,7 @@ containment:: <<metaPointerType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ChildAdded`
@@ -168,7 +168,7 @@ containment:: <<metaPointerType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ChildDeleted`
@@ -196,7 +196,7 @@ containment:: <<metaPointerType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ChildReplaced`
@@ -224,7 +224,7 @@ oldContainment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ChildMovedFromOtherContainment`
@@ -251,7 +251,7 @@ oldContainment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ChildMovedFromOtherContainmentInSameParent`
@@ -285,7 +285,7 @@ containment:: <<metaPointerType>>
 oldIndex:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ChildMovedInSameContainment`
@@ -315,7 +315,7 @@ replacedChild:: <<targetNodeType>>
 replacedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ChildMovedAndReplacedFromOtherContainment`
@@ -344,7 +344,7 @@ replacedChild:: <<targetNodeType>>
 replacedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ChildMovedAndReplacedFromOtherContainmentInSameParent`
@@ -380,7 +380,7 @@ replacedChild:: <<targetNodeType>>
 replacedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ChildMovedAndReplacedInSameContainment`
@@ -407,7 +407,7 @@ newAnnotation:: <<chunkType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `AnnotationAdded`
@@ -428,7 +428,7 @@ parent:: <<targetNodeType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `AnnotationDeleted`
@@ -454,7 +454,7 @@ parent:: <<targetNodeType>>
 index:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `AnnotationReplaced`
@@ -480,7 +480,7 @@ oldParent:: <<targetNodeType>>
 oldIndex:: <<indexType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `AnnotationMovedFromOtherParent`
@@ -513,7 +513,7 @@ parent:: <<targetNodeType>>
 oldIndex:: <<targetNodeType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `AnnotationMovedInSameParent`
@@ -541,7 +541,7 @@ replacedAnnotation:: <<targetNodeType>>
 replacedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `AnnotationMovedAndReplacedFromOtherParent`
@@ -576,7 +576,7 @@ replacedAnnotation:: <<targetNodeType>>
 replacedDescendants:: <<targetNodeType>>[]
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `AnnotationMovedAndReplacedInSameParent`
@@ -601,7 +601,7 @@ newTarget:: <<targetNodeType>>?
 newResolveInfo:: <<resolveInfoType>>?
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ReferenceAdded`
@@ -623,7 +623,7 @@ deletedTarget:: <<targetNodeType>>?
 deletedResolveInfo:: <<resolveInfoType>>?
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ReferenceDeleted`
@@ -646,7 +646,7 @@ replacedTarget:: <<targetNodeType>>?
 replacedResolveInfo:: <<resolveInfoType>>?
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ReferenceChanged`
@@ -675,7 +675,7 @@ target:: <<targetNodeType>>?
 resolveInfo:: <<resolveInfoType>>?
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `EntryMovedFromOtherReference`
@@ -703,7 +703,7 @@ target:: <<targetNodeType>>?
 resolveInfo:: <<resolveInfoType>>?
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `EntryMovedFromOtherReferenceInSameParent`
@@ -738,7 +738,7 @@ target:: <<targetNodeType>>?
 resolveInfo:: <<resolveInfoType>>?
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `EntryMovedInSameReference`
@@ -768,7 +768,7 @@ replacedTarget:: <<targetNodeType>>?
 replacedResolveInfo:: <<resolveInfoType>>?
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `EntryMovedAndReplacedFromOtherReference`
@@ -797,7 +797,7 @@ replacedTarget:: <<targetNodeType>>?
 replacedResolveInfo:: <<resolveInfoType>>?
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `EntryMovedAndReplacedFromOtherReferenceInSameParent`
@@ -833,7 +833,7 @@ replacedTarget:: <<targetNodeType>>?
 replacedResolveInfo:: <<resolveInfoType>>?
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `EntryMovedAndReplacedInSameReference`
@@ -854,7 +854,7 @@ newResolveInfo:: <<resolveInfoType>>
 target:: <<targetNodeType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ReferenceResolveInfoAdded`
@@ -875,7 +875,7 @@ target:: <<targetNodeType>>
 deletedResolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ReferenceResolveInfoDeleted`
@@ -897,7 +897,7 @@ target:: <<targetNodeType>>?
 replacedResolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ReferenceResolveInfoChanged`
@@ -918,7 +918,7 @@ newTarget:: <<targetNodeType>>
 resolveInfo:: <<resolveInfoType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ReferenceTargetAdded`
@@ -939,7 +939,7 @@ resolveInfo:: <<resolveInfoType>>
 deletedTarget:: <<targetNodeType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ReferenceTargetDeleted`
@@ -961,7 +961,7 @@ resolveInfo:: <<resolveInfoType>>?
 replacedTarget:: <<targetNodeType>>
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `ReferenceTargetChanged`
@@ -985,13 +985,13 @@ We can nest composite events arbitrarily.{fn-org360}
 [horizontal]
 .Parameters
 parts:: <<eventType>>[]
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `CompositeEvent`
 
 .Related command
-<<cmd-Composite>>
+<<cmd-CompositeCommand>>
 
 [[evnt-NoOp]]
 [[evnt-NoOpEvent]]
@@ -1002,7 +1002,7 @@ Nothing happened as result of one or more command(s).{fn-org314}
 .Parameters
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `NoOpEvent`
@@ -1020,7 +1020,7 @@ errorCode:: `String`
 message:: `String`
 originCommands:: <<commandSourceType>>[]
 sequenceNumber:: <<event-sequence-number>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
 `Error`

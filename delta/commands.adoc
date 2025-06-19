@@ -38,7 +38,7 @@ The root node MUST NOT contain a _parent_ (as this is a partition, thus cannot h
 All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
 Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
 commandId:: <<commandIdType>> Id of this command.
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-nodeAlreadyExists>> for `newPartition`
@@ -66,7 +66,7 @@ include::commandEventOverview/deletePartition.adoc[]
 .Parameters
 deletedPartition:: <<targetNodeType>>
 commandId:: <<commandIdType>> Id of this command.
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `deletedPartition`
@@ -97,7 +97,7 @@ include::commandEventOverview/changeClassifier.adoc[]
 node:: <<targetNodeType>>
 newClassifier:: <<metaPointerType>>
 commandId:: <<commandIdType>> Id of this command.
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `node`
@@ -129,7 +129,7 @@ node:: <<targetNodeType>>
 property:: <<metaPointerType>>
 newValue:: <<propertyValueType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `node`
@@ -158,7 +158,7 @@ include::commandEventOverview/deleteProperty.adoc[]
 node:: <<targetNodeType>>
 property:: <<metaPointerType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `node`
@@ -188,7 +188,7 @@ node:: <<targetNodeType>>
 property:: <<metaPointerType>>
 newValue:: <<propertyValueType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `node`
@@ -227,7 +227,7 @@ newChild:: <<chunkType>>
 containment:: <<metaPointerType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -260,7 +260,7 @@ containment:: <<metaPointerType>>
 index:: <<indexType>>
 deletedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -299,7 +299,7 @@ containment:: <<metaPointerType>>
 index:: <<indexType>>
 replacedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-nodeAlreadyExists>> `newChild`
@@ -332,7 +332,7 @@ newContainment:: <<metaPointerType>>
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-nodeAlreadyExists>> for `newParent`
@@ -365,7 +365,7 @@ newContainment:: <<metaPointerType>>
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownIndex>> for `newIndex` (is beyond the number of `newContainment` entries in ``movedChild``'s parent)
@@ -396,7 +396,7 @@ include::commandEventOverview/moveChildInSameContainment.adoc[]
 newIndex:: <<indexType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownIndex>> for `newIndex` (is beyond (the number of ``movedChild``'s containment entries in ```movedChild``'s parent) - 1)
@@ -432,7 +432,7 @@ newIndex:: <<indexType>>
 replacedChild:: <<targetNodeType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `newParent`
@@ -469,7 +469,7 @@ newIndex:: <<indexType>>
 replacedChild:: <<targetNodeType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownIndex>> for `newIndex` (is beyond the number of `newContainment` entries in `parent`)
@@ -504,7 +504,7 @@ newIndex:: <<indexType>>
 replacedChild:: <<targetNodeType>>
 movedChild:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownIndex>> for `newIndex` (is beyond (the number of ``movedChild``'s containment entries in ``movedChild``'s parent) - 2)
@@ -543,7 +543,7 @@ parent:: <<targetNodeType>>
 newAnnotation:: <<chunkType>>
 index:: <<indexType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -575,7 +575,7 @@ parent:: <<targetNodeType>>
 index:: <<indexType>>
 deletedAnnotation:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -613,7 +613,7 @@ parent:: <<targetNodeType>>
 index:: <<indexType>>
 replacedAnnotation:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-nodeAlreadyExists>> for `newAnnotation`
@@ -645,7 +645,7 @@ newParent:: <<targetNodeType>>
 newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `newParent`
@@ -677,7 +677,7 @@ include::commandEventOverview/moveAnnotationInSameParent.adoc[]
 newIndex:: <<indexType>>
 movedAnnotation:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownIndex>> for `newIndex` (is beyond (the number of annotations of ``movedAnnotation``'s parent) - 1)
@@ -711,7 +711,7 @@ newIndex:: <<indexType>>
 replacedAnnotation:: <<targetNodeType>>
 movedAnnotation:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `newParent`
@@ -747,7 +747,7 @@ newIndex:: <<indexType>>
 replacedAnnotation:: <<targetNodeType>>
 movedAnnotation:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownIndex>> for `newIndex` (is beyond (the number of annotations of ``movedAnnotation``'s parent) - 1)
@@ -784,7 +784,7 @@ index:: <<indexType>>
 newTarget:: <<targetNodeType>>?
 newResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -817,7 +817,7 @@ index:: <<indexType>>
 deletedTarget:: <<targetNodeType>>?
 deletedResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -853,7 +853,7 @@ oldResolveInfo:: <<resolveInfoType>>?
 newTarget:: <<targetNodeType>>?
 newResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -892,7 +892,7 @@ oldIndex:: <<indexType>>
 movedTarget:: <<targetNodeType>>?
 movedResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `newParent`
@@ -930,7 +930,7 @@ oldIndex:: <<indexType>>
 movedTarget:: <<targetNodeType>>?
 movedResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -967,7 +967,7 @@ newIndex:: <<indexType>>
 movedTarget:: <<targetNodeType>>?
 movedResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -1009,7 +1009,7 @@ oldIndex:: <<indexType>>
 movedTarget:: <<targetNodeType>>?
 movedResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `newParent`
@@ -1052,7 +1052,7 @@ oldIndex:: <<indexType>>
 movedTarget:: <<targetNodeType>>?
 movedResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -1094,7 +1094,7 @@ newIndex:: <<indexType>>
 replacedTarget:: <<targetNodeType>>?
 replacedResolveInfo:: <<resolveInfoType>>?
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -1135,7 +1135,7 @@ index:: <<indexType>>
 target:: <<targetNodeType>>
 newResolveInfo:: <<resolveInfoType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -1174,7 +1174,7 @@ index:: <<indexType>>
 target:: <<targetNodeType>>
 deletedResolveInfo:: <<resolveInfoType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -1214,7 +1214,7 @@ target:: <<targetNodeType>>?
 oldResolveInfo:: <<resolveInfoType>>
 newResolveInfo:: <<resolveInfoType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -1252,7 +1252,7 @@ index:: <<indexType>>
 resolveInfo:: <<resolveInfoType>>
 newTarget:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -1291,7 +1291,7 @@ index:: <<indexType>>
 deletedTarget:: <<targetNodeType>>
 resolveInfo:: <<resolveInfoType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -1330,7 +1330,7 @@ oldTarget:: <<targetNodeType>>
 resolveInfo:: <<resolveInfoType>>?
 newTarget:: <<targetNodeType>>
 commandId:: <<commandIdType>>
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for `parent`
@@ -1363,7 +1363,7 @@ We can nest composite commands arbitrarily.{fn-org360}
 [horizontal]
 .Parameters
 parts:: <<commandType>>[]
-protocolMessage:: <<protocolMessagesType>>
+protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * accumulation of all errors of `parts`
