@@ -27,16 +27,16 @@ The client receives only events on nodes within that scope.
 
 A typical workflow for a client would be:
 
-1. Client connects to repository and starts a participation.
-2. Client subscribes to some partitions with subscription queries.
+1. Client <<qry-SignOn, connects>> to repository and starts a participation.
+2. Client <<qry-SubscribeToPartitionContents, subscribes>> to some partitions with subscription queries.
 The response contains a <<{serialization}.adoc#SerializationChunk, serialization chunk>> with the current contents of these partitions.
 3. Client initiates its editor or processing with the chunk.
-4. Client sends commands to request changes to some nodes in the subscribed partitions.
-5. Client receives events with the actual changes that have been applied to the subscribed nodes.
+4. Client <<commands, sends commands>> to request changes to some nodes in the subscribed partitions.
+5. Client <<events, receives events>> with the actual changes that have been applied to the subscribed nodes.
 6. Client updates its editor or processing with the event's contents.
 7. Client receives events originating from other clients' commands.
 8. Client updates its editor or processing with the event's contents.
-9. Client ends the participation.
+9. Client <<qry-SignOff, ends>> the participation.
 
 The repository is always the ultimate arbiter of its contents.{fn-org339}
 It can decide to apply each command verbatim, with some tweaks (e.g. because of concurrent changes), or not at all (e.g. because the command would introduce containment loops).
