@@ -175,23 +175,43 @@ Example: `he!!o`
 
 [[responses]]
 == Responses
-The repository signals _success_ or _failure_ with each response.
-We call this part of the reponse [[Response.success]]`success` flag.
+The repository
 
-Besides the main response, the repository can reply each command with zero or more additional [[Response.messages]]`messages`.{fn-org236}
+Besides the main response, the repository can reply each command with zero or more additional
+
+
+[[parameter-types]]
+== Parameter types
+[horizontal]
+[[chunkType]]chunk:: A {chunk} of nodes.
+
+[[nodeIdType]]nodeId:: A <<{m3}.adoc#identifiers, valid node id>>.
+
+[[integerType]]integer:: An integer.
+
+[[commandIdType]]commandId:: Each _modifying_ command MUST contain a _[[commandId, commmand id]]command id_.{fn-org313}
+It has the same format as <<{m3}.adoc#identifiers, node ids>> and must be unique for all changes of this client.
++
+Modifying commands are <<createPartitions>>, <<deletePartitions>>, and <<store>>.
+
+[[successType]]success:: A boolean flag signalling _success_ or _failure_ with each response.
+
+[[messagesType]]message:: Optional [[Response.messages]] messages in either request or response.{fn-org236}{fn-org375}
 Each message MUST have the following properties:
 
 * [[message.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the message type.
 Some message kinds are pre-defined in this specification.
-A repository MAY reply with other, additional message kinds.
+A client or repository MAY reply with other, additional message kinds.
+
 * [[message.message]]`message` is a human-readable string describing the message.
+
 * [[message.data]]`data` is a flat map with arbitrary keys and values.
 All values MUST be strings, the keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible.
 A _kind_ might imply presence of specific keys in `data`.
 
++
 [[message-kinds-global]]
-== Message kinds for all commands
-
+.Message kinds for all commands
 [cols="3h,3,1,7a"]
 |===
 |Kind |Description |Success |Implied data
@@ -220,10 +240,7 @@ A _kind_ might imply presence of specific keys in `data`.
 [[apis]]
 == Commands
 
-Each _modifying_ command MUST contain a _[[commandId, commmand id]]command id_.{fn-org313}
-It has the same format as <<{m3}.adoc#identifiers, node ids>> and must be unique for all changes of this client.
 
-Modifying commands are <<createPartitions>>, <<deletePartitions>>, and <<store>>.
 
 [[listPartitions, listPartitions]]
 [[partitions, listPartitions]]
@@ -234,17 +251,19 @@ Calling this command MUST NOT change repository contents.
 
 NOTE: We might add filter capabilities in the future.
 
-==== Parameters
-None.
+.Request parameters
+[horizontal]
+[[listPartitions.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
+[[listPartitions.requestMessages]]messages:: <<messagesType>>[]?
 
-==== Response
-Contains a {chunk} with all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
+.Response parameters
+[horizontal]
+[[listPartitions.chunk]]chunk:: <<chunkType>> with all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
 The partitions are sent as complete nodes.{fn-org202}
 Does NOT include any children or annotations of the root partition nodes.
 Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
-
-==== Message kinds
-None.
+[[listPartitions.success]]success:: <<successType>>
+[[listPartitions.responseMessages]]messages:: <<messagesType>>[]? with no special message kinds.
 
 [[createPartitions, createPartitions]]
 === createPartitions: Create new partitions
@@ -257,16 +276,17 @@ We MAY reference nodes already existing in the repository.{fn-org369}
 
 Nodes MUST use <<unknown-node-ids>>.
 
-==== Parameters
-[[createPartitions.nodes]]
-`nodes`:: {chunk} containing all nodes we want to add as new partitions.
-[[createPartitions.commandId]]
-`commandId`:: <<commandId>> of this command.
+.Request parameters
+[horizontal]
+[[createPartitions.nodes]] nodes:: <<chunkType>> containing all nodes we want to add as new partitions.
+[[createPartitions.commandId]]commandId:: <<commandIdType>>
+[[createPartitions.requestMessages]]messages:: <<messagesType>>[]?
 
-==== Response
-Does not contain a `chunk`.
-
-==== Message kinds
+.Response parameters
+[horizontal]
+[[createPartitions.success]]success:: <<successType>>
+[[createPartitions.responseMessages]]messages:: <<messagesType>>[]?
++
 [cols="3h,3,1,7a"]
 |===
 |Kind |Description |Success |Implied data
@@ -313,17 +333,17 @@ All mentioned node ids MUST be ids of partition nodes.
 
 All (transitive) annotations and children become <<orphan, orphans>>.
 
-==== Parameters:
-[[deletePartitions.nodeIds]]
-`nodeIds`:: List of node ids to delete.
-[[deletePartitions.commandId]]
-`commandId`:: <<commandId>> of this command.
+.Request parameters
+[horizontal]
+[[deletePartitions.nodeIds]]nodeIds:: <<nodeIdType>>[] List of node ids to delete.
+[[deletePartitions.commandId]]commandId:: <<commandIdType>>
+[[deletePartitions.requestMessages]]messages:: <<messagesType>>[]?
 
-==== Response
-Does not contain a chunk.
-
-==== Message kinds
-
+.Response parameters
+[horizontal]
+[[deletePartitions.success]]success:: <<successType>>
+[[deletePartitions.responseMessages]]messages:: <<messagesType>>[]?
++
 [cols="3h,3,1,7a"]
 |===
 |Kind |Description |Success |Implied data
@@ -352,31 +372,33 @@ Calling this command MUST NOT change repository contents.
 
 NOTE: We might add advanced filtering capabilities in the future, or introduce an additional querying API.
 
-==== Parameters
-[[retrieve.nodeIds]]
-`nodeIds`:: List of node ids we want to retrieve from the repository.
+.Request parameters
+[horizontal]
+[[retrieve.nodeIds, `nodeIds`]]nodeIds:: <<nodeIdType>>[] List of node ids we want to retrieve from the repository.
 Can be partition node ids and/or nested node ids.
-
-[[retrieve.depthLimit]]
-`depthLimit`:: Limit the depth of retrieved subtrees.
+[[retrieve.depthLimit, `depthLimit`]]depthLimit:: <<integerType>>? Limit the depth of retrieved subtrees.
 Optional parameter, defaults to _infinite_.
 If present, MUST be an integer >= 0, with
 +
 --
-* 0 meaning "return only the nodes with ids listed in `nodeIds` parameter",
-* 1 meaning "return the nodes with id listed in the `nodeIds` parameter and their direct children/annotations",
-* 2 meaning "return the nodes with id listed in the `nodeIds` parameter, their direct children/annotations, and the direct children/annotations of these",
+* 0 meaning "return only the nodes with ids listed in <<retrieve.nodeIds>> parameter",
+* 1 meaning "return the nodes with id listed in the <<retrieve.nodeIds>> parameter and their direct children/annotations",
+* 2 meaning "return the nodes with id listed in the <<retrieve.nodeIds>> parameter, their direct children/annotations, and the direct children/annotations of these",
 * etc.
 --
 +
-NOTE: There's no _magic value_ of `depthLimit` to express _infinite_ depth.
+NOTE: There's no _magic value_ of <<retrieve.depthLimit>> to express _infinite_ depth.
 We need to omit the parameter if we don't want to limit the depth.
+[[retrieve.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
+[[retrieve.requestMessages]]messages:: <<messagesType>>[]?
 
-==== Response
-{chunk} containing all nodes according to `nodeIds` and `depthLimit` parameters.
+.Response parameters
+[horizontal]
+[[retrieve.chunk]]chunk:: <<chunkType>> containing all nodes according to <<retrieve.nodeIds>> and <<retrieve.depthLimit>> parameters.
 Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLanguages>>, only their <<{serialization}.adoc#MetaPointer, MetaPointers>>.
-
-==== Message kinds
+[[retrieve.success]]success:: <<successType>>
+[[retrieve.responseMessages]]messages:: <<messagesType>>[]?
++
 [cols="3h,3,1,7a"]
 |===
 |Kind |Description |Success |Implied data
@@ -424,14 +446,8 @@ Otherwise, we consider the node to be _updated_ (i.e. if a node with the same id
 
 We do not support different modes.{fn-org230}
 
-==== Parameters
-[[store.nodes]]
-`nodes`:: {chunk} containing all nodes to store to the repository.
-[[store.commandId]]
-`commandId`:: <<commandId>> of this command.
-
 [[store.semantics]]
-==== Semantics
+.Semantics
 After completing this call, all sent nodes MUST have exactly the sent contents in the repository.
 We must send containments/annotations from the parent's view, because we need to know the containment and index of the contained node/annotation within its parent.
 
@@ -443,11 +459,17 @@ The repository MUST NOT validate the metamodel constraints of the sent nodes.{fn
 
 The repository MUST support changing <<{serialization}.adoc#meta-pointer, meta-pointers>>, e.g.  a node's `classifier.language`, a property's `property.version` or an enumeration literal's `key`.{fn-org69}
 
+.Request parameters
+[horizontal]
+[[store.nodes, `nodes`]]nodes:: <<chunkType>> containing all nodes to store to the repository.
+[[store.commandId, `commandId`]]commandId:: <<commandIdType>>
+[[store.requestMessages]]messages:: <<messagesType>>[]?
 
-==== Response
-Does not contain a chunk.
-
-==== Message kinds
+.Response parameters
+[horizontal]
+[[store.success]]success:: <<successType>>
+[[store.responseMessages]]messages:: <<messagesType>>[]?
++
 [cols="3h,3,1,7a"]
 |===
 |Kind |Description |Success |Implied data
@@ -489,7 +511,7 @@ Does not contain a chunk.
 
 [[ids, ids]]
 === ids: Get available ids
-Provides unused <<{m3}.adoc#identifiers, valid ids>>.
+Provides unused <<{m3}.adoc#identifiers, valid node ids>>.
 
 The repository
 
@@ -507,17 +529,20 @@ This would exclude simple repository implementations.
 
 We assume infinite id space.
 
-==== Parameters
-[[ids.count]]
-`count`:: Number of ids requested.
+.Request parameters
+[horizontal]
+[[ids.count]]count:: <<integerType>> Number of ids requested.
 The repository MUST return between one (inclusive) and `count` (inclusive) ids.
 It MAY return less than `count` ids.
+[[ids.commandId, `commandId`]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
+[[ids.requestMessages]]messages:: <<messagesType>>[]?
 
-==== Response
-List of ids guaranteed to be free.
+.Response parameters
+[horizontal]
+[[ids.ids]]ids:: <<nodeIdType>>[] List of ids guaranteed to be free.
+[[ids.success]]success:: <<successType>>
+[[ids.responseMessages]]messages:: <<messagesType>>[]? with no special message kinds.
 
-==== Message kinds
-None.
 
 [[crud-mapping]]
 == Mapping CRUD operations
