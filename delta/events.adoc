@@ -632,7 +632,7 @@ All other entries inside <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.refere
 
 [[evnt-ReferenceChanged]]
 ===== Reference changed
-Existing reference with <<ReferenceChanged.replacedTarget>>/<<ReferenceChanged.replacedResolveInfo>> inside <<ReferenceChanged.parent>>'s annotations at <<ReferenceChanged.index>> has been replaced with <<ReferenceChanged.newTarget>>/<<ReferenceChanged.newResolveInfo>>.
+Existing reference with <<ReferenceChanged.oldTarget>>/<<ReferenceChanged.oldResolveInfo>> inside <<ReferenceChanged.parent>>'s annotations at <<ReferenceChanged.index>> has been replaced with <<ReferenceChanged.newTarget>>/<<ReferenceChanged.newResolveInfo>>.
 
 [horizontal]
 .Parameters
@@ -641,8 +641,8 @@ Existing reference with <<ReferenceChanged.replacedTarget>>/<<ReferenceChanged.r
 [[ReferenceChanged.index, `index`]]index:: <<indexType>>
 [[ReferenceChanged.newTarget, `newTarget`]]newTarget:: <<targetNodeType>>?
 [[ReferenceChanged.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<targetNodeType>>?
-[[ReferenceChanged.replacedTarget, `replacedTarget`]]replacedTarget:: <<targetNodeType>>?
-[[ReferenceChanged.replacedResolveInfo, `replacedResolveInfo`]]replacedResolveInfo:: <<resolveInfoType>>?
+[[ReferenceChanged.oldTarget, `oldTarget`]]oldTarget:: <<targetNodeType>>?
+[[ReferenceChanged.oldResolveInfo, `oldResolveInfo`]]oldResolveInfo:: <<resolveInfoType>>?
 [[ReferenceChanged.originCommands]]originCommands:: <<commandSourceType>>[]
 [[ReferenceChanged.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 [[ReferenceChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
