@@ -288,9 +288,8 @@
       ]
     },
     "eventSequenceNumber": {
-      "type": "string",
-      "minLength": 1,
-      "pattern": "^[0-9]+$"
+      "type": "integer",
+      "minimum": 0
     },
     "propertyValue": {
       "type": "string"
@@ -791,6 +790,9 @@
     "Commands": {
       "anyOf": [
         {
+          "$ref": "#/$defs/CommandResponse"
+        },
+        {
           "$ref": "#/$defs/AddPartition"
         },
         {
@@ -905,6 +907,26 @@
           "$ref": "#/$defs/CompositeCommand"
         }
       ]
+    },
+    "CommandResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "CommandResponse"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "protocolMessages": {
+          "$ref": "#/$defs/protocolMessages"
+        }
+      },
+      "required": [
+        "messageKind",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 3
     },
     "AddPartition": {
       "properties": {
