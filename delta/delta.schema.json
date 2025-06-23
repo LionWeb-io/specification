@@ -3521,10 +3521,10 @@
         "newResolveInfo": {
           "$ref": "#/$defs/optionalResolveInfo"
         },
-        "replacedTarget": {
+        "oldTarget": {
           "$ref": "#/$defs/optionalTargetNode"
         },
-        "replacedResolveInfo": {
+        "oldResolveInfo": {
           "$ref": "#/$defs/optionalResolveInfo"
         },
         "originCommands": {
@@ -3544,8 +3544,8 @@
         "index",
         "newTarget",
         "newResolveInfo",
-        "replacedTarget",
-        "replacedResolveInfo",
+        "oldTarget",
+        "oldResolveInfo",
         "originCommands",
         "sequenceNumber"
       ],

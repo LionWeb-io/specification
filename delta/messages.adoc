@@ -42,6 +42,10 @@ This allows a client to know when its command has been processed (either success
 
 [[deltaProtocolVersionType]]DeltaProtocolVersion:: Version of the delta protocol, e.g. `2025.1`.
 
+[[booleanType]]boolean:: A boolean value, i.e. either `true` or `false`.
+
+[[integerType]]integer type:: An integer value.
+
 ==== How to address references
 We refer to references by the tuple of _(parent, reference, index)_.
 Rationale: Both reference `target` and `resolveInfo` can be `null`, so they aren't suitable for identifying the reference.

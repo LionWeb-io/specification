@@ -7,23 +7,23 @@
 [[qry-subscribePartitions]]
 [[qry-SubscribeToChangingPartitions]]
 ===== Subscribe to partition changes
-This client wants to receive events on newly created (`creation` is true) or deleted (`deletion` is true) partitions, and automatically subscribe (`partitions` is true) to newly created partitions.{fn-org267}
+This client wants to receive events on newly created (<<SubscribeToChangingPartitions.creation>> is true) or deleted (<<SubscribeToChangingPartitions.deletion>> is true) partitions, and automatically subscribe (<<SubscribeToChangingPartitions.partitions>> is true) to newly created partitions.{fn-org267}
 
 [horizontal]
 .Request parameters
-creation:: `boolean` Whether this client wants to receive events on newly created partitions (`true`), or not (`false`).
+[[SubscribeToChangingPartitions.creation, `creation`]]creation:: <<booleanType>> Whether this client wants to receive events on newly created partitions (`true`), or not (`false`).
 
-deletion:: `boolean` Whether this client wants to receive events on deleted partitions (`true`), or not (`false`).
+[[SubscribeToChangingPartitions.deletion, `deletion`]]deletion:: <<booleanType>> Whether this client wants to receive events on deleted partitions (`true`), or not (`false`).
 
-partitions:: `boolean` Whether this client wants to automatically subscribe to newly created partitions (`true`), or not (`false`).
+[[SubscribeToChangingPartitions.partitions, `partitions`]]partitions:: <<booleanType>> Whether this client wants to automatically subscribe to newly created partitions (`true`), or not (`false`).
 
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[SubscribeToChangingPartitions.requestQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[SubscribeToChangingPartitions.requestProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 [horizontal]
 .Response parameters
-queryId:: <<queryIdType>>  Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[SubscribeToChangingPartitions.responseQueryId]]queryId:: <<queryIdType>>  Id of this query.
+[[SubscribeToChangingPartitions.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-invalidParticipation>>
@@ -34,22 +34,22 @@ protocolMessages:: <<protocolMessagesType>>
 [[qry-subscribePartition]]
 [[qry-SubscribeToPartitionContents]]
 ===== Subscribe to partition
-This client wants to receive events on any changes to `partition` or any of its descendants.{fn-org270}{fn-org269}
+This client wants to receive events on any changes to <<SubscribeToPartitionContents.partition>> or any of its descendants.{fn-org270}{fn-org269}
 
 [horizontal]
 .Request parameters
-partition:: <<targetNodeType>> Node id of the partition this client wants to receive events of.
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[SubscribeToPartitionContents.partition, `partition`]]partition:: <<targetNodeType>> Node id of the partition this client wants to receive events of.
+[[SubscribeToPartitionContents.requestQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[SubscribeToPartitionContents.requestProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 [horizontal]
 .Response parameters
-contents:: <<chunkType>> Complete contents of `partition`, i.e. the node with id `partition` and all of its descendants (including annotation instances).
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+contents:: <<chunkType>> Complete contents of <<SubscribeToPartitionContents.partition>>, i.e. the node with id <<SubscribeToPartitionContents.partition>> and all of its descendants (including annotation instances).
+[[SubscribeToPartitionContents.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[SubscribeToPartitionContents.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Errors
-* already subscribed to `partition`
+* already subscribed to <<SubscribeToPartitionContents.partition>>
 * <<err-invalidParticipation>>
 
 .Technical name
@@ -58,21 +58,21 @@ protocolMessages:: <<protocolMessagesType>>
 [[qry-unsubscribePartition]]
 [[qry-UnsubscribeFromPartitionContents]]
 ===== Unsubscribe from partition
-This client does not want to receive events on any changes to `partition` or any of its descendants anymore.{fn-org270}
+This client does not want to receive events on any changes to <<UnsubscribeFromPartitionContents.partition>> or any of its descendants anymore.{fn-org270}
 
 [horizontal]
 .Request parameters
-partition:: <<targetNodeType>> Node id of the partition this client wants to stop receiving events of.
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[UnsubscribeFromPartitionContents.partition, `partition`]]partition:: <<targetNodeType>> Node id of the partition this client wants to stop receiving events of.
+[[UnsubscribeFromPartitionContents.requestQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[UnsubscribeFromPartitionContents.requestProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 [horizontal]
 .Response parameters
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[UnsubscribeFromPartitionContents.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[UnsubscribeFromPartitionContents.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Errors
-* not subscribed to `partition`
+* not subscribed to <<UnsubscribeFromPartitionContents.partition>>
 * <<err-invalidParticipation>>
 
 .Technical name
@@ -90,15 +90,15 @@ NOTE: signing on is not the same as logging in: The latter includes some authent
 
 [horizontal]
 .Request parameters
-deltaProtocolVersion:: <<deltaProtocolVersionType>>
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[SignOn.deltaProtocolVersion]]deltaProtocolVersion:: <<deltaProtocolVersionType>>
+[[SignOn.requestQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[SignOn.requestProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 [horizontal]
 .Response parameters
 participationId:: <<participationIdType>> the repository assigns to this participation.
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[SignOn.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[SignOn.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * Unsupported delta protocol version
@@ -114,13 +114,13 @@ NOTE: signing off is not the same as logging off: The latter includes some authe
 
 [horizontal]
 .Request parameters
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[SignOff.requestQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[SignOff.requestProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 [horizontal]
 .Response parameters
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[SignOff.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[SignOff.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-invalidParticipation>>
@@ -135,16 +135,16 @@ Then the client can ask to reconnect to the repository.{fn-org349}
 
 [horizontal]
 .Request parameters
-participationId:: <<participationIdType>> The previously used <<participation-id>>.
-lastReceivedSequenceNumber:: <<eventSequenceType>> Last <<event-sequence-number>> received by the client.
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[Reconnect.participationId]]participationId:: <<participationIdType>> The previously used <<participation-id>>.
+[[Reconnect.lastReceivedSequenceNumber]]lastReceivedSequenceNumber:: <<eventSequenceType>> Last <<event-sequence-number>> received by the client.
+[[Reconnect.requestQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[Reconnect.requestProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 [horizontal]
 .Response parameters
 lastSentSequenceNumber:: <<eventSequenceType>> Last <<event-sequence-number>> sent by the repository.
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[Reconnect.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[Reconnect.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-invalidParticipation>> If the participation is not valid.{fn-org354}
@@ -158,7 +158,7 @@ protocolMessages:: <<protocolMessagesType>>
 
 [[qry-GetAvailableIds]]
 ===== Get available ids
-Request `count` number of unused <<{m3}.adoc#node-id, valid ids>>.
+Request <<GetAvailableIds.count>> number of unused <<{m3}.adoc#node-id, valid ids>>.
 
 Same functionality as <<{bulk}.adoc#ids, bulk API ids command>>.
 
@@ -166,17 +166,17 @@ We don't assume leases, i.e. ids handed out to one client are "owned" by that cl
 
 [horizontal]
 .Request parameters
-count:: `integer` Number of ids requested.
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[GetAvailableIds.count, `count`]]count:: <<integerType>> Number of ids requested.
+[[GetAvailableIds.requestQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[GetAvailableIds.requestProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 [horizontal]
 .Response parameters
 ids:: <<freeIdType>>[] List of ids guaranteed to be free.
-The repository MUST return between one (inclusive) and `count` (inclusive) ids.
-It MAY return less than `count` ids.
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+The repository MUST return between one (inclusive) and <<GetAvailableIds.count>> (inclusive) ids.
+It MAY return less than <<GetAvailableIds.count>> ids.
+[[GetAvailableIds.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[GetAvailableIds.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-invalidParticipation>>
@@ -192,17 +192,17 @@ Same functionality as <<{bulk}.adoc#listPartitions, bulk API listPartitions comm
 
 [horizontal]
 .Request parameters
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[ListPartitions.requestQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[ListPartitions.requestProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 [horizontal]
 .Response parameters
-partitions:: <<chunkType>> All accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
+[[ListPartitions.partitions]]partitions:: <<chunkType>> All accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
 The partitions are sent as complete nodes.
 Does NOT include any children or annotations of the root partition nodes.
 Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
-queryId:: <<queryIdType>> Id of this query.
-protocolMessages:: <<protocolMessagesType>>
+[[ListPartitions.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
+[[ListPartitions.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-invalidParticipation>>
