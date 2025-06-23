@@ -288,9 +288,8 @@
       ]
     },
     "eventSequenceNumber": {
-      "type": "string",
-      "minLength": 1,
-      "pattern": "^[0-9]+$"
+      "type": "integer",
+      "minimum": 0
     },
     "propertyValue": {
       "type": "string"
