@@ -32,6 +32,52 @@ and xref:{m3}.adoc#JSON[JSON].
 
 * Meta-metamodel{emquad}xref:{m3}.adoc[html]{emquad}link:serialization/serialization.pdf[pdf]
 
+== Known issues
+
+=== lioncore.json misses used language builtins
+Details: Is serialization chunk of LionCore missing dependencies? https://github.com/LionWeb-io/specification/issues/380[#380]
+
+The JSON representation of LionCore M3 uses elements of `builtins` language, but doesn't list it in the `usedLanguages` section.
+It is inlined into the metamodel specification at https://lionweb.io/specification/2023.1/metametamodel/metametamodel.html#_meta_meta_model, and available as separate file at https://lionweb.io/specification/2023.1/metametamodel/lioncore.json.
+
+Instead of
+
+.Incorrect beginning of `lioncore.json`
+[source,json]
+----
+{
+  "serializationFormatVersion": "2023.1",
+  "languages": [
+    {
+      "key": "LionCore-M3",
+      "version": "2023.1"
+    }
+  ],
+  "nodes": [
+  ...
+----
+
+It should state
+
+.Corrected beginning of `lioncore.json`
+[source,json]
+----
+{
+  "serializationFormatVersion": "2023.1",
+  "languages": [
+    {
+      "key": "LionCore-M3",
+      "version": "2023.1"
+    },
+    {
+      "key": "LionCore-builtins",
+      "version": "2023.1"
+    }
+  ],
+  "nodes": [
+  ...
+----
+
 == Example implementations
 
 * Java
