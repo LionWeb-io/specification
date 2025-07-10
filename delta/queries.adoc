@@ -91,6 +91,7 @@ NOTE: signing on is not the same as logging in: The latter includes some authent
 [horizontal]
 .Request parameters
 [[SignOn.deltaProtocolVersion]]deltaProtocolVersion:: <<deltaProtocolVersionType>>
+[[SignOn.clientId]]clientId:: <<clientIdType>> Id of the client signing on.{fn-org337}
 [[SignOn.requestQueryId]]queryId:: <<queryIdType>> Id of this query.
 [[SignOn.requestProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
@@ -163,6 +164,7 @@ Request <<GetAvailableIds.count>> number of unused <<{m3}.adoc#node-id, valid id
 Same functionality as <<{bulk}.adoc#ids, bulk API ids command>>.
 
 We don't assume leases, i.e. ids handed out to one client are "owned" by that client forever.
+We identify the client by its <<clientIdType>>.
 
 [horizontal]
 .Request parameters
