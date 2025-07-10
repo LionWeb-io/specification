@@ -57,6 +57,12 @@ A client stays up-to-date with the repository's contents if it applies all event
 The order is defined by the event's sequence number.{fn-org341}
 A client can either decide to apply its own change immediately and filter out events based on that command, or wait for the correlated event to arrive and apply the change only then.
 
+[[out-of-scope]]
+=== Out of scope
+This specification precisely describes the semantic content of each message.
+We don't describe the binding to any specific protocol (e.g. JSON over WebSockets, Protobuf over HTTP, message queues).
+
+[[command-overview]]
 === Command overview
 
 We specified the semantics of each command and event precisely, leading to lots of similar, but different commands/events.{fn-org317}

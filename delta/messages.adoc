@@ -26,12 +26,15 @@ Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<part
 [[queryIdType]]QueryId:: Id of a query.
 Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<participation>>.
 
-[[chunkType]]SerializationChunk:: <<{serialization}.adoc, Chunk of nodes>>.
+[[chunkType]]SerializationChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>.
 
 [[eventType]]Event:: Any <<events, event>>.
 
 [[participationIdType]]ParticipationId:: Id of a <<participation>>.
 Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique for all concurrent participations.
+
+[[clientIdType]]clientId:: Id of a <<client>>.
+Same format as <<{m3}.adoc#identifiers, identifiers>>; must be stable over time for the same client to use <<qry-GetAvailableIds, reserved free node ids>>.
 
 [[commandSourceType]]CommandSource:: _(<<participationIdType>>, <<commandIdType>>)_ tuple{fn-org306} this event is based on.
 This allows a client to know when its command has been processed (either successful or not).

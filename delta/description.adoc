@@ -60,6 +60,7 @@ Assume a client sends a command for a node that's part of a partition that clien
 The repository treats that command the same as from a client that was subscribed to the containing partition, i.e. applies it in accordance with the repository's policy.
 The repository also sends out the same events to subscribed clients, thus _not_ to the sending client.{fn-org352}
 
+[[message, message]]
 === Message characteristics
 Each message is atomic; it cannot be split.
 
@@ -68,6 +69,11 @@ Each message has some id unique to the <<participation>>:
 * Queries have a _query id_.
 * Commands have a _command id_.{fn-org305}
 * Events have _command sources_.{fn-org306}
+
+Every kind of message has a unique _technical name_.
+The technical name is a valid programming language identifier as described for <<{m3}.adoc#IKeyed, IKeyed>>.
+Each binding to a specific protocol might use the technical name in a different way.
+For example, a JSON binding might have a member containing the technical name of the message, or a Protobuf binding might use the technical name as type name.
 
 Each message optionally can have one or more _[[protocolMessage, protocol message]]protocol message_ consisting of:{fn-org331}{fn-org332}
 

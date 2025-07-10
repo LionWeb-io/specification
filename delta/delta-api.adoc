@@ -7,7 +7,7 @@ include::../shared/issue-footnotes.adoc[]
 
 [[delta]]
 = Delta Repository Access API
-:toc: preamble
+:toc: right
 :toclevels: 4
 :sectnumlevels: 4
 :sectnums:
