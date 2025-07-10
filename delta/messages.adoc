@@ -26,7 +26,7 @@ Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<part
 [[queryIdType]]QueryId:: Id of a query.
 Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<participation>>.
 
-[[chunkType]]SerializationChunk:: <<{serialization}.adoc, Chunk of nodes>>.
+[[chunkType]]SerializationChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>.
 
 [[eventType]]Event:: Any <<events, event>>.
 

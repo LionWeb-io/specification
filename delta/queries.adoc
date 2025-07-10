@@ -44,7 +44,7 @@ This client wants to receive events on any changes to <<SubscribeToPartitionCont
 
 [horizontal]
 .Response parameters
-contents:: <<chunkType>> Complete contents of <<SubscribeToPartitionContents.partition>>, i.e. the node with id <<SubscribeToPartitionContents.partition>> and all of its descendants (including annotation instances).
+[[SubscribeToPartitionContents.contents]]contents:: <<chunkType>> Complete contents of <<SubscribeToPartitionContents.partition>>, i.e. the node with id <<SubscribeToPartitionContents.partition>> and all of its descendants (including annotation instances).
 [[SubscribeToPartitionContents.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
 [[SubscribeToPartitionContents.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
@@ -96,7 +96,7 @@ NOTE: signing on is not the same as logging in: The latter includes some authent
 
 [horizontal]
 .Response parameters
-participationId:: <<participationIdType>> the repository assigns to this participation.
+[[SignOn.participationId]]participationId:: <<participationIdType>> the repository assigns to this participation.
 [[SignOn.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
 [[SignOn.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
@@ -142,7 +142,7 @@ Then the client can ask to reconnect to the repository.{fn-org349}
 
 [horizontal]
 .Response parameters
-lastSentSequenceNumber:: <<eventSequenceType>> Last <<event-sequence-number>> sent by the repository.
+[[Reconnect.lastSentSequenceNumber]]lastSentSequenceNumber:: <<eventSequenceType>> Last <<event-sequence-number>> sent by the repository.
 [[Reconnect.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
 [[Reconnect.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
@@ -172,7 +172,7 @@ We don't assume leases, i.e. ids handed out to one client are "owned" by that cl
 
 [horizontal]
 .Response parameters
-ids:: <<freeIdType>>[] List of ids guaranteed to be free.
+[[GetAvailableIds.ids]]ids:: <<freeIdType>>[] List of ids guaranteed to be free.
 The repository MUST return between one (inclusive) and <<GetAvailableIds.count>> (inclusive) ids.
 It MAY return less than <<GetAvailableIds.count>> ids.
 [[GetAvailableIds.responseQueryId]]queryId:: <<queryIdType>> Id of this query.

@@ -1011,6 +1011,8 @@ _none_
 ===== Error
 Repository couldn't handle one or more command(s).{fn-org316}
 
+The repository MAY send an error event to only one participation.{fn-org379}
+
 [horizontal]
 .Parameters
 [[Error.errorCode, `errorCode`]]errorCode:: `String`

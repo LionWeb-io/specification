@@ -313,3 +313,8 @@
 :fn-org373: footnote:org373[https://github.com/LionWeb-io/specification/issues/373[In ReferenceDeleted, properties incorrect #373]]
 :fn-org374: footnote:org374[https://github.com/LionWeb-io/specification/issues/374[Should we use JSON number or string type for index and/or count of available ids? #374]]
 :fn-org375: footnote:org375[https://github.com/LionWeb-io/specification/issues/375[Shall we have additional data/messages in bulk requests? #375]]
+:fn-org378: footnote:org378[https://github.com/LionWeb-io/specification/issues/378[Do we have a synchronous response to a Command? #378]]
+:fn-org379: footnote:org379[https://github.com/LionWeb-io/specification/issues/379[Do we broadcast ErrorEvent to everybody or only the originating client? #379]]
+:fn-org380: footnote:org380[https://github.com/LionWeb-io/specification/issues/380[Is serialization chunk of LionCore missing dependencies? #380]]
+:fn-org382: footnote:org382[https://github.com/LionWeb-io/specification/issues/382[ChangeReferenceResolveCommand has unneeded property "target" #382]]
+:fn-org384: footnote:org384[https://github.com/LionWeb-io/specification/issues/384[Do we want to add old/deleted/replaced values to all commands? #384]]

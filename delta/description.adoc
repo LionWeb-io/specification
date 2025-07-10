@@ -60,6 +60,7 @@ Assume a client sends a command for a node that's part of a partition that clien
 The repository treats that command the same as from a client that was subscribed to the containing partition, i.e. applies it in accordance with the repository's policy.
 The repository also sends out the same events to subscribed clients, thus _not_ to the sending client.{fn-org352}
 
+[[message, message]]
 === Message characteristics
 Each message is atomic; it cannot be split.
 
