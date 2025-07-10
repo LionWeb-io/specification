@@ -70,6 +70,11 @@ Each message has some id unique to the <<participation>>:
 * Commands have a _command id_.{fn-org305}
 * Events have _command sources_.{fn-org306}
 
+Every kind of message has a unique _technical name_.
+The technical name is a valid programming language identifier as described for <<{m3}.adoc#IKeyed, IKeyed>>.
+Each binding to a specific protocol might use the technical name in a different way.
+For example, a JSON binding might have a member containing the technical name of the message, or a Protobuf binding might use the technical name as type name.
+
 Each message optionally can have one or more _[[protocolMessage, protocol message]]protocol message_ consisting of:{fn-org331}{fn-org332}
 
 * [[protocolMessage.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the message type.
