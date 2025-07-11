@@ -16,14 +16,13 @@ box "Repository"
   participant Core as core
 end box
 
-== Client A connected with participation id "client-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
+== Client A connected with participation id "participation-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
 
 [->> editor ++
 editor -> clientCmd ++
-clientCmd -> repoCmd ++: addProperty("nodeA", age, "23", "cmd-1")
+clientCmd ->> repoCmd ++: addProperty("nodeA", age, "23", "cmd-1")
 repoCmd ->> core
 activate core
-clientCmd <-- repoCmd: received("cmd-1")
 deactivate repoCmd
 editor <-- clientCmd
 deactivate clientCmd
@@ -35,7 +34,7 @@ core -> repoEvent
 deactivate core
 
 activate repoEvent
-clientEvent <<- repoEvent: propertyAdded("nodeA", age, "23", [("client-a", "cmd-1")], 1)
+clientEvent <<- repoEvent: propertyAdded("nodeA", age, "23", [("participation-a", "cmd-1")], 1)
 deactivate repoEvent
 
 activate clientEvent
@@ -49,11 +48,10 @@ editor -> editor: update(nodeA.age = 23)
 2. Client editor forwards user action into command.
 3. Client sends <<cmd-AddProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
 4. Repository registers command for processing.
-5. Repository acknowledges reception of command with id `cmd-1`.
-6. Client informs editor of command submission.
-7. Repository updates internal representation.
-8. Repository creates event for update.
-9. Repository emits event <<evnt-PropertyAdded>> with `nodeA` node id, `age` property (details omitted), `23` value and sequence number `1`.
-It includes one <<commandSourceType>> with value `(client-a, cmd-1)`
-10. Client receives event and forwards information to editor.
-11. Client updates `nodeA` with new property value.
+5. Client informs editor of command submission.
+6. Repository updates internal representation.
+7. Repository creates event for update.
+8. Repository emits event <<evnt-PropertyAdded>> with `nodeA` node id, `age` property (details omitted), `23` value and sequence number `1`.
+It includes one <<commandSourceType>> with value `(participation-a, cmd-1)`
+9. Client receives event and forwards information to editor.
+10. Client updates `nodeA` with new property value.

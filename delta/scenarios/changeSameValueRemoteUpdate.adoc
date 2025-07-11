@@ -16,14 +16,13 @@ box "Repository"
   participant Core as core
 end box
 
-== Client A connected with participation id "client-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
+== Client A connected with participation id "participation-a"\nsubscribed to "partition-id"\nknows about nodeA (part of "partition-id") ==
 
 [->> editor ++
 editor -> clientCmd ++
-clientCmd -> repoCmd ++: changeProperty("nodeA", age, "23", "23", "cmd-1")
+clientCmd ->> repoCmd ++: changeProperty("nodeA", age, "23", "23", "cmd-1")
 repoCmd ->> core
 activate core
-clientCmd <-- repoCmd: received("cmd-1")
 deactivate repoCmd
 clientCmd -> clientEvent: registerProcessedCmd("cmd-1")
 activate clientEvent
@@ -38,7 +37,7 @@ core -> repoEvent
 deactivate core
 
 activate repoEvent
-clientEvent <<- repoEvent: noOp([("client-a", "cmd-1")], 1)
+clientEvent <<- repoEvent: noOp([("participation-a", "cmd-1")], 1)
 deactivate repoEvent
 
 activate clientEvent
@@ -49,10 +48,9 @@ deactivate clientEvent
 2. Client editor forwards user action into command.
 3. Client sends <<cmd-ChangeProperty>> command with `nodeA` node id, `age` property (details omitted), `23` old value, `23` new value and command id `cmd-1`.
 4. Repository registers command for processing.
-5. Repository acknowledges reception of command with id `cmd-1`.
-6. Client registers processed command id `cmd-1`.
-7. Client informs editor of command submission.
-8. Repository determines no change to internal representation.
-9. Repository creates event for notification.
-10. Repository emits <<evnt-NoOpEvent>> event with <<commandSourceType>> with value `(client-a, cmd-1)` and sequence number `1`.
-11. Client removes `cmd-1` from open commands list.
+5. Client registers processed command id `cmd-1`.
+6. Client informs editor of command submission.
+7. Repository determines no change to internal representation.
+8. Repository creates event for notification.
+9. Repository emits <<evnt-NoOpEvent>> event with <<commandSourceType>> with value `(participation-a, cmd-1)` and sequence number `1`.
+10. Client removes `cmd-1` from open commands list.
