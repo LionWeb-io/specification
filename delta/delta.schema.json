@@ -2078,9 +2078,6 @@
         "index": {
           "$ref": "#/$defs/index"
         },
-        "target": {
-          "$ref": "#/$defs/targetNode"
-        },
         "newResolveInfo": {
           "$ref": "#/$defs/resolveInfo"
         },
@@ -2096,13 +2093,12 @@
         "parent",
         "reference",
         "index",
-        "target",
         "newResolveInfo",
         "commandId"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 8
+      "minProperties": 6,
+      "maxProperties": 7
     },
     "DeleteReferenceResolveInfo": {
       "properties": {
@@ -2117,9 +2113,6 @@
         },
         "index": {
           "$ref": "#/$defs/index"
-        },
-        "target": {
-          "$ref": "#/$defs/targetNode"
         },
         "deletedResolveInfo": {
           "$ref": "#/$defs/resolveInfo"
@@ -2136,13 +2129,12 @@
         "parent",
         "reference",
         "index",
-        "target",
         "deletedResolveInfo",
         "commandId"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 8
+      "minProperties": 6,
+      "maxProperties": 7
     },
     "ChangeReferenceResolveInfo": {
       "properties": {
@@ -2157,9 +2149,6 @@
         },
         "index": {
           "$ref": "#/$defs/index"
-        },
-        "target": {
-          "$ref": "#/$defs/optionalTargetNode"
         },
         "oldResolveInfo": {
           "$ref": "#/$defs/resolveInfo"
@@ -2179,14 +2168,13 @@
         "parent",
         "reference",
         "index",
-        "target",
         "oldResolveInfo",
         "newResolveInfo",
         "commandId"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
-      "maxProperties": 9
+      "minProperties": 7,
+      "maxProperties": 8
     },
     "AddReferenceTarget": {
       "properties": {
@@ -2201,9 +2189,6 @@
         },
         "index": {
           "$ref": "#/$defs/index"
-        },
-        "resolveInfo": {
-          "$ref": "#/$defs/resolveInfo"
         },
         "newTarget": {
           "$ref": "#/$defs/targetNode"
@@ -2220,13 +2205,12 @@
         "parent",
         "reference",
         "index",
-        "resolveInfo",
         "newTarget",
         "commandId"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 8
+      "minProperties": 6,
+      "maxProperties": 7
     },
     "DeleteReferenceTarget": {
       "properties": {
@@ -2245,9 +2229,6 @@
         "deletedTarget": {
           "$ref": "#/$defs/targetNode"
         },
-        "resolveInfo": {
-          "$ref": "#/$defs/resolveInfo"
-        },
         "commandId": {
           "$ref": "#/$defs/commandId"
         },
@@ -2261,12 +2242,11 @@
         "reference",
         "index",
         "deletedTarget",
-        "resolveInfo",
         "commandId"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 8
+      "minProperties": 6,
+      "maxProperties": 7
     },
     "ChangeReferenceTarget": {
       "properties": {
@@ -2285,9 +2265,6 @@
         "oldTarget": {
           "$ref": "#/$defs/targetNode"
         },
-        "resolveInfo": {
-          "$ref": "#/$defs/optionalResolveInfo"
-        },
         "newTarget": {
           "$ref": "#/$defs/targetNode"
         },
@@ -2304,13 +2281,12 @@
         "reference",
         "index",
         "oldTarget",
-        "resolveInfo",
         "newTarget",
         "commandId"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
-      "maxProperties": 9
+      "minProperties": 7,
+      "maxProperties": 8
     },
     "CompositeCommand": {
       "properties": {
