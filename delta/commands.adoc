@@ -1114,7 +1114,7 @@ include::commandEventOverview/moveAndReplaceEntryInSameReference.adoc[]
 
 [[cmd-AddReferenceResolveInfo]]
 ===== Add reference ResolveInfo
-Add <<AddReferenceResolveInfo.newResolveInfo>> as ResolveInfo to existing entry <<AddReferenceResolveInfo.target>>{fn-org371} inside <<AddReferenceResolveInfo.parent>>'s <<AddReferenceResolveInfo.reference>> at <<AddReferenceResolveInfo.index>>.
+Add <<AddReferenceResolveInfo.newResolveInfo>> as ResolveInfo to existing entry inside <<AddReferenceResolveInfo.parent>>'s <<AddReferenceResolveInfo.reference>> at <<AddReferenceResolveInfo.index>>.
 
 [cols="a,a"]
 |===
@@ -1132,7 +1132,6 @@ Current target MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo 
 [[AddReferenceResolveInfo.parent, `parent`]]parent:: <<targetNodeType>>
 [[AddReferenceResolveInfo.reference, `reference`]]reference:: <<metaPointerType>>
 [[AddReferenceResolveInfo.index, `index`]]index:: <<indexType>>
-[[AddReferenceResolveInfo.target, `target`]]target:: <<targetNodeType>>
 [[AddReferenceResolveInfo.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>
 [[AddReferenceResolveInfo.commandId]]commandId:: <<commandIdType>>
 [[AddReferenceResolveInfo.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
@@ -1141,7 +1140,6 @@ Current target MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo 
 * <<err-unknownNode>> for <<AddReferenceResolveInfo.parent>>
 * <<err-unknownIndex>> for <<AddReferenceResolveInfo.index>> (is beyond (the number of <<AddReferenceResolveInfo.reference>> entries of <<AddReferenceResolveInfo.parent>>) - 1)
 * <<err-undefinedReferenceTarget>> for <<AddReferenceResolveInfo.newResolveInfo>>
-* <<err-indexEntryMismatch>> for <<AddReferenceResolveInfo.reference>>/<<AddReferenceResolveInfo.index>> and <<AddReferenceResolveInfo.target>>
 * ##?## resolveInfo already set in <<AddReferenceResolveInfo.parent>>'s <<AddReferenceResolveInfo.reference>> at <<AddReferenceResolveInfo.index>>.
 * <<err-invalidParticipation>>
 
@@ -1153,7 +1151,7 @@ Current target MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo 
 
 [[cmd-DeleteReferenceResolveInfo]]
 ===== Delete reference ResolveInfo
-Delete existing <<DeleteReferenceResolveInfo.deletedResolveInfo>> from existing entry <<DeleteReferenceResolveInfo.target>>{fn-org371} inside <<DeleteReferenceResolveInfo.parent>>'s <<DeleteReferenceResolveInfo.reference>> at <<DeleteReferenceResolveInfo.index>>.
+Delete existing <<DeleteReferenceResolveInfo.deletedResolveInfo>> from existing entry inside <<DeleteReferenceResolveInfo.parent>>'s <<DeleteReferenceResolveInfo.reference>> at <<DeleteReferenceResolveInfo.index>>.
 
 [cols="a,a"]
 |===
@@ -1171,7 +1169,6 @@ Current target MUST NOT be `null` as we're about to remove ResolveInfo, and at l
 [[DeleteReferenceResolveInfo.parent, `parent`]]parent:: <<targetNodeType>>
 [[DeleteReferenceResolveInfo.reference, `reference`]]reference:: <<metaPointerType>>
 [[DeleteReferenceResolveInfo.index, `index`]]index:: <<indexType>>
-[[DeleteReferenceResolveInfo.target, `target`]]target:: <<targetNodeType>>
 [[DeleteReferenceResolveInfo.deletedResolveInfo, `deletedResolveInfo`]]deletedResolveInfo:: <<resolveInfoType>>
 [[DeleteReferenceResolveInfo.commandId]]commandId:: <<commandIdType>>
 [[DeleteReferenceResolveInfo.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
@@ -1180,7 +1177,6 @@ Current target MUST NOT be `null` as we're about to remove ResolveInfo, and at l
 * <<err-unknownNode>> for <<DeleteReferenceResolveInfo.parent>>
 * <<err-unknownIndex>> for <<DeleteReferenceResolveInfo.index>> (is beyond (the number of <<DeleteReferenceResolveInfo.reference>> entries of <<DeleteReferenceResolveInfo.parent>>) - 1)
 * <<err-undefinedReferenceTarget>> as target is `null`
-* <<err-indexEntryMismatch>> for <<DeleteReferenceResolveInfo.reference>>/<<DeleteReferenceResolveInfo.index>> and <<DeleteReferenceResolveInfo.target>>/<<DeleteReferenceResolveInfo.deletedResolveInfo>>
 * ##?## resolveInfo is not set in <<DeleteReferenceResolveInfo.parent>>'s <<DeleteReferenceResolveInfo.reference>> at <<DeleteReferenceResolveInfo.index>>.
 * <<err-invalidParticipation>>
 
@@ -1192,7 +1188,7 @@ Current target MUST NOT be `null` as we're about to remove ResolveInfo, and at l
 
 [[cmd-ChangeReferenceResolveInfo]]
 ===== Change reference ResolveInfo
-Change <<ChangeReferenceResolveInfo.oldResolveInfo>> of existing entry <<ChangeReferenceResolveInfo.target>>{fn-org371} inside <<ChangeReferenceResolveInfo.parent>>'s <<ChangeReferenceResolveInfo.reference>> at <<ChangeReferenceResolveInfo.index>> to <<ChangeReferenceResolveInfo.newResolveInfo>>.
+Change <<ChangeReferenceResolveInfo.oldResolveInfo>> of existing entry inside <<ChangeReferenceResolveInfo.parent>>'s <<ChangeReferenceResolveInfo.reference>> at <<ChangeReferenceResolveInfo.index>> to <<ChangeReferenceResolveInfo.newResolveInfo>>.
 
 [cols="a,a"]
 |===
@@ -1210,7 +1206,6 @@ Current target MAY be `null` as we can only change ResolveInfo if both current R
 [[ChangeReferenceResolveInfo.parent, `parent`]]parent:: <<targetNodeType>>
 [[ChangeReferenceResolveInfo.reference, `reference`]]reference:: <<metaPointerType>>
 [[ChangeReferenceResolveInfo.index, `index`]]index:: <<indexType>>
-[[ChangeReferenceResolveInfo.target, `target`]]target:: <<targetNodeType>>?
 [[ChangeReferenceResolveInfo.oldResolveInfo, `oldResolveInfo`]]oldResolveInfo:: <<resolveInfoType>>
 [[ChangeReferenceResolveInfo.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>
 [[ChangeReferenceResolveInfo.commandId]]commandId:: <<commandIdType>>
@@ -1231,7 +1226,7 @@ Current target MAY be `null` as we can only change ResolveInfo if both current R
 
 [[cmd-AddReferenceTarget]]
 ===== Add reference target
-Add <<AddReferenceTarget.newTarget>> as target to existing entry <<AddReferenceTarget.resolveInfo>>{fn-org371} inside <<AddReferenceTarget.parent>>'s <<AddReferenceTarget.reference>> at <<AddReferenceTarget.index>>.
+Add <<AddReferenceTarget.newTarget>> as target to existing entry inside <<AddReferenceTarget.parent>>'s <<AddReferenceTarget.reference>> at <<AddReferenceTarget.index>>.
 
 [cols="a,a"]
 |===
@@ -1249,7 +1244,6 @@ Current ResolveInfo MUST NOT be `null` as we can only add target if target is `n
 [[AddReferenceTarget.parent, `parent`]]parent:: <<targetNodeType>>
 [[AddReferenceTarget.reference, `reference`]]reference:: <<metaPointerType>>
 [[AddReferenceTarget.index, `index`]]index:: <<indexType>>
-[[AddReferenceTarget.resolveInfo, `resolveInfo`]]resolveInfo:: <<resolveInfoType>>
 [[AddReferenceTarget.newTarget, `newTarget`]]newTarget:: <<targetNodeType>>
 [[AddReferenceTarget.commandId]]commandId:: <<commandIdType>>
 [[AddReferenceTarget.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
@@ -1258,7 +1252,6 @@ Current ResolveInfo MUST NOT be `null` as we can only add target if target is `n
 * <<err-unknownNode>> for <<AddReferenceTarget.parent>>
 * <<err-unknownIndex>> for <<AddReferenceTarget.index>> (is beyond (the number of <<AddReferenceTarget.reference>> entries of <<AddReferenceTarget.parent>>) - 1)
 * <<err-undefinedReferenceTarget>> for <<AddReferenceTarget.newTarget>>
-* <<err-indexEntryMismatch>> for <<AddReferenceTarget.reference>>/<<AddReferenceTarget.index>> and <<AddReferenceTarget.resolveInfo>>
 * ##?## target already set in <<AddReferenceTarget.parent>>'s <<AddReferenceTarget.reference>> at <<AddReferenceTarget.index>>.
 * <<err-invalidParticipation>>
 
@@ -1270,7 +1263,7 @@ Current ResolveInfo MUST NOT be `null` as we can only add target if target is `n
 
 [[cmd-DeleteReferenceTarget]]
 ===== Delete reference target
-Delete existing <<DeleteReferenceTarget.deletedTarget>> from existing entry <<DeleteReferenceTarget.resolveInfo>>{fn-org371} inside <<DeleteReferenceTarget.parent>>'s <<DeleteReferenceTarget.reference>> at <<DeleteReferenceTarget.index>>.
+Delete existing <<DeleteReferenceTarget.deletedTarget>> from existing entry inside <<DeleteReferenceTarget.parent>>'s <<DeleteReferenceTarget.reference>> at <<DeleteReferenceTarget.index>>.
 
 [cols="a,a"]
 |===
@@ -1289,14 +1282,12 @@ Current ResolveInfo MUST NOT be `null` as we're about to remove target, and at l
 [[DeleteReferenceTarget.reference, `reference`]]reference:: <<metaPointerType>>
 [[DeleteReferenceTarget.index, `index`]]index:: <<indexType>>
 [[DeleteReferenceTarget.deletedTarget, `deletedTarget`]]deletedTarget:: <<targetNodeType>>
-[[DeleteReferenceTarget.resolveInfo, `resolveInfo`]]resolveInfo:: <<resolveInfoType>>
 [[DeleteReferenceTarget.commandId]]commandId:: <<commandIdType>>
 [[DeleteReferenceTarget.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Errors
 * <<err-unknownNode>> for <<DeleteReferenceTarget.parent>>
 * <<err-unknownIndex>> for <<DeleteReferenceTarget.index>> (is beyond (the number of <<DeleteReferenceTarget.reference>> entries of <<DeleteReferenceTarget.parent>>) - 1)
-* <<err-indexEntryMismatch>> for <<DeleteReferenceTarget.reference>>/<<DeleteReferenceTarget.index>> and <<DeleteReferenceTarget.deletedTarget>>/<<DeleteReferenceTarget.resolveInfo>>
 * ##?## target is not set in <<DeleteReferenceTarget.parent>>'s <<DeleteReferenceTarget.reference>> at <<DeleteReferenceTarget.index>>.
 * <<err-invalidParticipation>>
 
@@ -1308,7 +1299,7 @@ Current ResolveInfo MUST NOT be `null` as we're about to remove target, and at l
 
 [[cmd-ChangeReferenceTarget]]
 ===== Change reference target
-Change <<ChangeReferenceTarget.oldTarget>> of existing entry <<ChangeReferenceTarget.resolveInfo>>{fn-org371} inside <<ChangeReferenceTarget.parent>>'s <<ChangeReferenceTarget.reference>> at <<ChangeReferenceTarget.index>> to <<ChangeReferenceTarget.newTarget>>.
+Change <<ChangeReferenceTarget.oldTarget>> of existing entry inside <<ChangeReferenceTarget.parent>>'s <<ChangeReferenceTarget.reference>> at <<ChangeReferenceTarget.index>> to <<ChangeReferenceTarget.newTarget>>.
 
 [cols="a,a"]
 |===
@@ -1327,7 +1318,6 @@ Current ResolveInfo MAY be `null` as we can only change target if both current T
 [[ChangeReferenceTarget.reference, `reference`]]reference:: <<metaPointerType>>
 [[ChangeReferenceTarget.index, `index`]]index:: <<indexType>>
 [[ChangeReferenceTarget.oldTarget, `oldTarget`]]oldTarget:: <<targetNodeType>>
-[[ChangeReferenceTarget.resolveInfo, `resolveInfo`]]resolveInfo:: <<resolveInfoType>>?
 [[ChangeReferenceTarget.newTarget, `newTarget`]]newTarget:: <<targetNodeType>>
 [[ChangeReferenceTarget.commandId]]commandId:: <<commandIdType>>
 [[ChangeReferenceTarget.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
@@ -1336,7 +1326,6 @@ Current ResolveInfo MAY be `null` as we can only change target if both current T
 * <<err-unknownNode>> for <<ChangeReferenceTarget.parent>>
 * <<err-unknownIndex>> for <<ChangeReferenceTarget.index>> (is beyond (the number of <<ChangeReferenceTarget.reference>> entries of <<ChangeReferenceTarget.parent>>) - 1)
 * <<err-undefinedReferenceTarget>> for <<ChangeReferenceTarget.newTarget>>
-* <<err-indexEntryMismatch>> for <<ChangeReferenceTarget.reference>>/<<ChangeReferenceTarget.index>> and <<ChangeReferenceTarget.oldTarget>>/<<ChangeReferenceTarget.resolveInfo>>
 * ##?## target is not set in <<ChangeReferenceTarget.parent>>'s <<ChangeReferenceTarget.reference>> at <<ChangeReferenceTarget.index>>
 * <<err-invalidParticipation>>
 
