@@ -18,7 +18,7 @@ This client is now subscribed to any changes to <<PartitionAdded.newPartition>> 
 [[PartitionAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`PartitionAdded`
+`PartitionAddedEvent`
 
 .Related command
 <<cmd-AddPartition>>
@@ -38,7 +38,7 @@ This client is now unsubscribed from any changes to <<PartitionDeleted.deletedPa
 [[PartitionDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`PartitionDeleted`
+`PartitionDeletedEvent`
 
 .Related command
 <<cmd-DeletePartition>>
@@ -60,7 +60,7 @@ Classifier of <<ClassifierChanged.node>> has been changed from <<ClassifierChang
 [[ClassifierChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ClassifierChanged`
+`ClassifierChangedEvent`
 
 .Related command
 <<cmd-ChangeClassifier>>
@@ -82,7 +82,7 @@ Classifier of <<ClassifierChanged.node>> has been changed from <<ClassifierChang
 [[PropertyAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`PropertyAdded`
+`PropertyAddedEvent`
 
 .Related command
 <<cmd-AddProperty>>
@@ -101,7 +101,7 @@ Existing <<PropertyDeleted.property>> of <<PropertyDeleted.node>> with <<Propert
 [[PropertyDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`PropertyDeleted`
+`PropertyDeletedEvent`
 
 .Related command
 <<cmd-DeleteProperty>>
@@ -121,7 +121,7 @@ Existing <<PropertyChanged.property>> of <<PropertyChanged.node>> has been chang
 [[PropertyChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`PropertyChanged`
+`PropertyChangedEvent`
 
 .Related command
 <<cmd-ChangeProperty>>
@@ -149,7 +149,7 @@ All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> wit
 [[ChildAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ChildAdded`
+`ChildAddedEvent`
 
 .Related command
 <<cmd-AddChild>>
@@ -171,7 +171,7 @@ All other children inside <<ChildDeleted.parent>>'s <<ChildDeleted.containment>>
 [[ChildDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ChildDeleted`
+`ChildDeletedEvent`
 
 .Related command
 <<cmd-DeleteChild>>
@@ -199,7 +199,7 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 [[ChildReplaced.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ChildReplaced`
+`ChildReplacedEvent`
 
 .Related command
 <<cmd-ReplaceChild>>
@@ -227,7 +227,7 @@ All other children inside <<ChildMovedFromOtherContainment.newParent>>'s <<Child
 [[ChildMovedFromOtherContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ChildMovedFromOtherContainment`
+`ChildMovedFromOtherContainmentEvent`
 
 .Related command
 <<cmd-MoveChildFromOtherContainment>>
@@ -254,7 +254,7 @@ All other children inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'
 [[ChildMovedFromOtherContainmentInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ChildMovedFromOtherContainmentInSameParent`
+`ChildMovedFromOtherContainmentInSameParentEvent`
 
 .Related command
 <<cmd-MoveChildFromOtherContainmentInSameParent>>
@@ -288,7 +288,7 @@ Example: +
 [[ChildMovedInSameContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ChildMovedInSameContainment`
+`ChildMovedInSameContainmentEvent`
 
 .Related command
 <<cmd-MoveChildInSameContainment>>
@@ -318,7 +318,7 @@ No other children inside <<ChildMovedAndReplacedFromOtherContainment.newParent>>
 [[ChildMovedAndReplacedFromOtherContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ChildMovedAndReplacedFromOtherContainment`
+`ChildMovedAndReplacedFromOtherContainmentEvent`
 
 .Related command
 <<cmd-MoveAndReplaceChildFromOtherContainment>>
@@ -347,7 +347,7 @@ No other children inside <<ChildMovedAndReplacedFromOtherContainmentInSameParent
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ChildMovedAndReplacedFromOtherContainmentInSameParent`
+`ChildMovedAndReplacedFromOtherContainmentInSameParentEvent`
 
 .Related command
 <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
@@ -383,7 +383,7 @@ Example: +
 [[ChildMovedAndReplacedInSameContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ChildMovedAndReplacedInSameContainment`
+`ChildMovedAndReplacedInSameContainmentEvent`
 
 .Related command
 <<cmd-MoveAndReplaceChildInSameContainment>>
@@ -410,7 +410,7 @@ All other annotations inside <<AnnotationAdded.parent>>'s annotations with index
 [[AnnotationAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`AnnotationAdded`
+`AnnotationAddedEvent`
 
 .Related command
 <<cmd-AddAnnotation>>
@@ -431,7 +431,7 @@ All other annotations inside <<AnnotationDeleted.parent>>'s annotations with ind
 [[AnnotationDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`AnnotationDeleted`
+`AnnotationDeletedEvent`
 
 .Related command
 <<cmd-DeleteAnnotation>>
@@ -457,7 +457,7 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 [[AnnotationReplaced.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`AnnotationReplaced`
+`AnnotationReplacedEvent`
 
 .Related command
 <<cmd-ReplaceAnnotation>>
@@ -483,7 +483,7 @@ All other annotations inside <<AnnotationMovedFromOtherParent.newParent>>'s anno
 [[AnnotationMovedFromOtherParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`AnnotationMovedFromOtherParent`
+`AnnotationMovedFromOtherParentEvent`
 
 .Related command
 <<cmd-MoveAnnotationFromOtherParent>>
@@ -515,7 +515,7 @@ Example: +
 [[AnnotationMovedInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`AnnotationMovedInSameParent`
+`AnnotationMovedInSameParentEvent`
 
 .Related command
 <<cmd-MoveAnnotationInSameParent>>
@@ -543,7 +543,7 @@ No other annotations inside <<AnnotationMovedAndReplacedFromOtherParent.newParen
 [[AnnotationMovedAndReplacedFromOtherParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`AnnotationMovedAndReplacedFromOtherParent`
+`AnnotationMovedAndReplacedFromOtherParentEvent`
 
 .Related command
 <<cmd-MoveAndReplaceAnnotationFromOtherParent>>
@@ -578,7 +578,7 @@ Example: +
 [[AnnotationMovedAndReplacedInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`AnnotationMovedAndReplacedInSameParent`
+`AnnotationMovedAndReplacedInSameParentEvent`
 
 .Related command
 <<cmd-MoveAndReplaceAnnotationInSameParent>>
@@ -603,7 +603,7 @@ All other entries inside <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>
 [[ReferenceAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ReferenceAdded`
+`ReferenceAddedEvent`
 
 .Related command
 <<cmd-AddReference>>
@@ -625,7 +625,7 @@ All other entries inside <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.refere
 [[ReferenceDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ReferenceDeleted`
+`ReferenceDeletedEvent`
 
 .Related command
 <<cmd-DeleteReference>>
@@ -648,7 +648,7 @@ Existing reference with <<ReferenceChanged.oldTarget>>/<<ReferenceChanged.oldRes
 [[ReferenceChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ReferenceChanged`
+`ReferenceChangedEvent`
 
 .Related command
 <<cmd-ChangeReference>>
@@ -677,7 +677,7 @@ All other entries inside <<EntryMovedFromOtherReference.newParent>>'s <<EntryMov
 [[EntryMovedFromOtherReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`EntryMovedFromOtherReference`
+`EntryMovedFromOtherReferenceEvent`
 
 .Related command
 <<cmd-MoveEntryFromOtherReference>>
@@ -705,7 +705,7 @@ All other entries inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <
 [[EntryMovedFromOtherReferenceInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`EntryMovedFromOtherReferenceInSameParent`
+`EntryMovedFromOtherReferenceInSameParentEvent`
 
 .Related command
 <<cmd-MoveEntryFromOtherReferenceInSameParent>>
@@ -740,7 +740,7 @@ Example: +
 [[EntryMovedInSameReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`EntryMovedInSameReference`
+`EntryMovedInSameReferenceEvent`
 
 .Related command
 <<cmd-MoveEntryInSameReference>>
@@ -770,7 +770,7 @@ No other entries inside <<EntryMovedAndReplacedFromOtherReference.newParent>>'s 
 [[EntryMovedAndReplacedFromOtherReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`EntryMovedAndReplacedFromOtherReference`
+`EntryMovedAndReplacedFromOtherReferenceEvent`
 
 .Related command
 <<cmd-MoveAndReplaceEntryFromOtherReference>>
@@ -799,7 +799,7 @@ No other entries inside <<EntryMovedAndReplacedFromOtherReferenceInSameParent.pa
 [[EntryMovedAndReplacedFromOtherReferenceInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`EntryMovedAndReplacedFromOtherReferenceInSameParent`
+`EntryMovedAndReplacedFromOtherReferenceInSameParentEvent`
 
 .Related command
 <<cmd-MoveAndReplaceEntryFromOtherReferenceInSameParent>>
@@ -835,7 +835,7 @@ Example: +
 [[EntryMovedAndReplacedInSameReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`EntryMovedAndReplacedInSameReference`
+`EntryMovedAndReplacedInSameReferenceEvent`
 
 .Related command
 <<cmd-MoveAndReplaceEntryInSameReference>>
@@ -856,7 +856,7 @@ Example: +
 [[ReferenceResolveInfoAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ReferenceResolveInfoAdded`
+`ReferenceResolveInfoAddedEvent`
 
 .Related command
 <<cmd-AddReferenceResolveInfo>>
@@ -877,7 +877,7 @@ ResolveInfo <<ReferenceResolveInfoDeleted.deletedResolveInfo>> has been deleted 
 [[ReferenceResolveInfoDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ReferenceResolveInfoDeleted`
+`ReferenceResolveInfoDeletedEvent`
 
 .Related command
 <<cmd-DeleteReferenceResolveInfo>>
@@ -899,7 +899,7 @@ ResolveInfo of existing entry inside <<ReferenceResolveInfoChanged.parent>>'s <<
 [[ReferenceResolveInfoChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ReferenceResolveInfoChanged`
+`ReferenceResolveInfoChangedEvent`
 
 .Related command
 <<cmd-ChangeReferenceResolveInfo>>
@@ -920,7 +920,7 @@ ResolveInfo of existing entry inside <<ReferenceResolveInfoChanged.parent>>'s <<
 [[ReferenceTargetAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ReferenceTargetAdded`
+`ReferenceTargetAddedEvent`
 
 .Related command
 <<cmd-AddReferenceTarget>>
@@ -941,7 +941,7 @@ Target <<ReferenceTargetDeleted.deletedTarget>> has been deleted from existing e
 [[ReferenceTargetDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ReferenceTargetDeleted`
+`ReferenceTargetDeletedEvent`
 
 .Related command
 <<cmd-DeleteReferenceTarget>>
@@ -963,7 +963,7 @@ Target of existing entry inside <<ReferenceTargetChanged.parent>>'s <<ReferenceT
 [[ReferenceTargetChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`ReferenceTargetChanged`
+`ReferenceTargetChangedEvent`
 
 .Related command
 <<cmd-ChangeReferenceTarget>>
@@ -1022,7 +1022,7 @@ The repository MAY send an error event to only one participation.{fn-org379}
 [[Error.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`Error`
+`ErrorEvent`
 
 .Related command
 _none_
