@@ -1,5 +1,12 @@
 = Serialization chunk correctness
 
+[WARNING]
+====
+This document is a **Work In Progress**!
+Take its contents as inspiration, but don't consider it to be part of the specification — in the way that the rest of this repository is.
+Its presence is mainly a matter of not wanting to hide the work already done in a branch for extremely-prolonged lengths of time.
+====
+
 Whether a model is _correct_ —or _valid_, or _consistent_— is an important question.
 
 [IMPORTANT]
@@ -21,7 +28,7 @@ We have the following reasons for that:
 
 * A model is —in principle— faithfully representable as a set of serialization chunks.
 In other words: a post-deserialization, programmatic representation should not add (non-derivable), nor loose information.
-Symmetrically: serialization should not loose or add information either.
+Symmetrically: serialization should not lose or add information either.
 
 * Programmatic representation of a model (post-deserialization) is quite context-specific, and is typically tied to the particular platform/language usedfootnote:[I.e.: JVM with Java, Kotlin, Java-/TypeScript, etc.].
 This means that the concrete API of the programmatic representation can vary quite a bit, making it more difficult to answer the question in a uniform way.
