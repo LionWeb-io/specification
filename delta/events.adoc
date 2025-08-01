@@ -985,13 +985,11 @@ We can nest composite events arbitrarily.{fn-org360}
 [[CompositeEvent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`CompositeEvent`
-
-****
+`CompositeEvent` footnote:[
 This event is the only one to have a `Event` suffix, which is necessary to distinguish it from its <<cmd-CompositeCommand, `CompositeCommand`>> counterpart.
-All other events can be distinguished from their command counterparts by looking at whether the technical name reads as an imperative (“add child” — for commands), or in past perfect tense (”child [has been] added” — for events).
+All other events can be distinguished from their command counterparts by looking at whether the technical name reads as an imperative (“add child” — for commands), or in past perfect tense (”child [has been\] added” — for events).
 (The <<evnt-NoOp, `NoOp`>> and <<evnt-Error, `Error`>> don't have command counterparts.)
-****
+]
 
 .Related command
 <<cmd-CompositeCommand>>
