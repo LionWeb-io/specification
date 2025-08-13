@@ -797,125 +797,125 @@
     "Commands": {
       "anyOf": [
         {
-          "$ref": "#/$defs/AddPartition"
+          "$ref": "#/$defs/AddPartitionCommand"
         },
         {
-          "$ref": "#/$defs/DeletePartition"
+          "$ref": "#/$defs/DeletePartitionCommand"
         },
         {
-          "$ref": "#/$defs/ChangeClassifier"
+          "$ref": "#/$defs/ChangeClassifierCommand"
         },
         {
-          "$ref": "#/$defs/AddProperty"
+          "$ref": "#/$defs/AddPropertyCommand"
         },
         {
-          "$ref": "#/$defs/DeleteProperty"
+          "$ref": "#/$defs/DeletePropertyCommand"
         },
         {
-          "$ref": "#/$defs/ChangeProperty"
+          "$ref": "#/$defs/ChangePropertyCommand"
         },
         {
-          "$ref": "#/$defs/AddChild"
+          "$ref": "#/$defs/AddChildCommand"
         },
         {
-          "$ref": "#/$defs/DeleteChild"
+          "$ref": "#/$defs/DeleteChildCommand"
         },
         {
-          "$ref": "#/$defs/ReplaceChild"
+          "$ref": "#/$defs/ReplaceChildCommand"
         },
         {
-          "$ref": "#/$defs/MoveChildFromOtherContainment"
+          "$ref": "#/$defs/MoveChildFromOtherContainmentCommand"
         },
         {
-          "$ref": "#/$defs/MoveChildFromOtherContainmentInSameParent"
+          "$ref": "#/$defs/MoveChildFromOtherContainmentInSameParentCommand"
         },
         {
-          "$ref": "#/$defs/MoveChildInSameContainment"
+          "$ref": "#/$defs/MoveChildInSameContainmentCommand"
         },
         {
-          "$ref": "#/$defs/MoveAndReplaceChildFromOtherContainment"
+          "$ref": "#/$defs/MoveAndReplaceChildFromOtherContainmentCommand"
         },
         {
-          "$ref": "#/$defs/MoveAndReplaceChildFromOtherContainmentInSameParent"
+          "$ref": "#/$defs/MoveAndReplaceChildFromOtherContainmentInSameParentCommand"
         },
         {
-          "$ref": "#/$defs/MoveAndReplaceChildInSameContainment"
+          "$ref": "#/$defs/MoveAndReplaceChildInSameContainmentCommand"
         },
         {
-          "$ref": "#/$defs/AddAnnotation"
+          "$ref": "#/$defs/AddAnnotationCommand"
         },
         {
-          "$ref": "#/$defs/DeleteAnnotation"
+          "$ref": "#/$defs/DeleteAnnotationCommand"
         },
         {
-          "$ref": "#/$defs/ReplaceAnnotation"
+          "$ref": "#/$defs/ReplaceAnnotationCommand"
         },
         {
-          "$ref": "#/$defs/MoveAnnotationFromOtherParent"
+          "$ref": "#/$defs/MoveAnnotationFromOtherParentCommand"
         },
         {
-          "$ref": "#/$defs/MoveAnnotationInSameParent"
+          "$ref": "#/$defs/MoveAnnotationInSameParentCommand"
         },
         {
-          "$ref": "#/$defs/MoveAndReplaceAnnotationFromOtherParent"
+          "$ref": "#/$defs/MoveAndReplaceAnnotationFromOtherParentCommand"
         },
         {
-          "$ref": "#/$defs/MoveAndReplaceAnnotationInSameParent"
+          "$ref": "#/$defs/MoveAndReplaceAnnotationInSameParentCommand"
         },
         {
-          "$ref": "#/$defs/AddReference"
+          "$ref": "#/$defs/AddReferenceCommand"
         },
         {
-          "$ref": "#/$defs/DeleteReference"
+          "$ref": "#/$defs/DeleteReferenceCommand"
         },
         {
-          "$ref": "#/$defs/ChangeReference"
+          "$ref": "#/$defs/ChangeReferenceCommand"
         },
         {
-          "$ref": "#/$defs/MoveEntryFromOtherReference"
+          "$ref": "#/$defs/MoveEntryFromOtherReferenceCommand"
         },
         {
-          "$ref": "#/$defs/MoveEntryFromOtherReferenceInSameParent"
+          "$ref": "#/$defs/MoveEntryFromOtherReferenceInSameParentCommand"
         },
         {
-          "$ref": "#/$defs/MoveEntryInSameReference"
+          "$ref": "#/$defs/MoveEntryInSameReferenceCommand"
         },
         {
-          "$ref": "#/$defs/MoveAndReplaceEntryFromOtherReference"
+          "$ref": "#/$defs/MoveAndReplaceEntryFromOtherReferenceCommand"
         },
         {
-          "$ref": "#/$defs/MoveAndReplaceEntryFromOtherReferenceInSameParent"
+          "$ref": "#/$defs/MoveAndReplaceEntryFromOtherReferenceInSameParentCommand"
         },
         {
-          "$ref": "#/$defs/MoveAndReplaceEntryInSameReference"
+          "$ref": "#/$defs/MoveAndReplaceEntryInSameReferenceCommand"
         },
         {
-          "$ref": "#/$defs/AddReferenceResolveInfo"
+          "$ref": "#/$defs/AddReferenceResolveInfoCommand"
         },
         {
-          "$ref": "#/$defs/DeleteReferenceResolveInfo"
+          "$ref": "#/$defs/DeleteReferenceResolveInfoCommand"
         },
         {
-          "$ref": "#/$defs/ChangeReferenceResolveInfo"
+          "$ref": "#/$defs/ChangeReferenceResolveInfoCommand"
         },
         {
-          "$ref": "#/$defs/AddReferenceTarget"
+          "$ref": "#/$defs/AddReferenceTargetCommand"
         },
         {
-          "$ref": "#/$defs/DeleteReferenceTarget"
+          "$ref": "#/$defs/DeleteReferenceTargetCommand"
         },
         {
-          "$ref": "#/$defs/ChangeReferenceTarget"
+          "$ref": "#/$defs/ChangeReferenceTargetCommand"
         },
         {
           "$ref": "#/$defs/CompositeCommand"
         }
       ]
     },
-    "AddPartition": {
+    "AddPartitionCommand": {
       "properties": {
         "messageKind": {
-          "const": "AddPartition"
+          "const": "AddPartitionCommand"
         },
         "newPartition": {
           "$ref": "#/$defs/DeltaSerializationChunk"
@@ -936,10 +936,10 @@
       "minProperties": 3,
       "maxProperties": 4
     },
-    "DeletePartition": {
+    "DeletePartitionCommand": {
       "properties": {
         "messageKind": {
-          "const": "DeletePartition"
+          "const": "DeletePartitionCommand"
         },
         "deletedPartition": {
           "$ref": "#/$defs/targetNode"
@@ -960,10 +960,10 @@
       "minProperties": 3,
       "maxProperties": 4
     },
-    "ChangeClassifier": {
+    "ChangeClassifierCommand": {
       "properties": {
         "messageKind": {
-          "const": "ChangeClassifier"
+          "const": "ChangeClassifierCommand"
         },
         "node": {
           "$ref": "#/$defs/targetNode"
@@ -988,10 +988,10 @@
       "minProperties": 4,
       "maxProperties": 5
     },
-    "AddProperty": {
+    "AddPropertyCommand": {
       "properties": {
         "messageKind": {
-          "const": "AddProperty"
+          "const": "AddPropertyCommand"
         },
         "node": {
           "$ref": "#/$defs/targetNode"
@@ -1020,10 +1020,10 @@
       "minProperties": 5,
       "maxProperties": 6
     },
-    "DeleteProperty": {
+    "DeletePropertyCommand": {
       "properties": {
         "messageKind": {
-          "const": "DeleteProperty"
+          "const": "DeletePropertyCommand"
         },
         "node": {
           "$ref": "#/$defs/targetNode"
@@ -1048,10 +1048,10 @@
       "minProperties": 4,
       "maxProperties": 5
     },
-    "ChangeProperty": {
+    "ChangePropertyCommand": {
       "properties": {
         "messageKind": {
-          "const": "ChangeProperty"
+          "const": "ChangePropertyCommand"
         },
         "node": {
           "$ref": "#/$defs/targetNode"
@@ -1080,10 +1080,10 @@
       "minProperties": 5,
       "maxProperties": 6
     },
-    "AddChild": {
+    "AddChildCommand": {
       "properties": {
         "messageKind": {
-          "const": "AddChild"
+          "const": "AddChildCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -1116,10 +1116,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "DeleteChild": {
+    "DeleteChildCommand": {
       "properties": {
         "messageKind": {
-          "const": "DeleteChild"
+          "const": "DeleteChildCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -1152,10 +1152,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "ReplaceChild": {
+    "ReplaceChildCommand": {
       "properties": {
         "messageKind": {
-          "const": "ReplaceChild"
+          "const": "ReplaceChildCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -1192,10 +1192,10 @@
       "minProperties": 7,
       "maxProperties": 8
     },
-    "MoveChildFromOtherContainment": {
+    "MoveChildFromOtherContainmentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveChildFromOtherContainment"
+          "const": "MoveChildFromOtherContainmentCommand"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -1228,10 +1228,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "MoveChildFromOtherContainmentInSameParent": {
+    "MoveChildFromOtherContainmentInSameParentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveChildFromOtherContainmentInSameParent"
+          "const": "MoveChildFromOtherContainmentInSameParentCommand"
         },
         "newContainment": {
           "$ref": "#/$defs/metaPointer"
@@ -1260,10 +1260,10 @@
       "minProperties": 5,
       "maxProperties": 6
     },
-    "MoveChildInSameContainment": {
+    "MoveChildInSameContainmentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveChildInSameContainment"
+          "const": "MoveChildInSameContainmentCommand"
         },
         "newIndex": {
           "$ref": "#/$defs/index"
@@ -1288,10 +1288,10 @@
       "minProperties": 4,
       "maxProperties": 5
     },
-    "MoveAndReplaceChildFromOtherContainment": {
+    "MoveAndReplaceChildFromOtherContainmentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveAndReplaceChildFromOtherContainment"
+          "const": "MoveAndReplaceChildFromOtherContainmentCommand"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -1328,10 +1328,10 @@
       "minProperties": 7,
       "maxProperties": 8
     },
-    "MoveAndReplaceChildFromOtherContainmentInSameParent": {
+    "MoveAndReplaceChildFromOtherContainmentInSameParentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveAndReplaceChildFromOtherContainmentInSameParent"
+          "const": "MoveAndReplaceChildFromOtherContainmentInSameParentCommand"
         },
         "newContainment": {
           "$ref": "#/$defs/metaPointer"
@@ -1364,10 +1364,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "MoveAndReplaceChildInSameContainment": {
+    "MoveAndReplaceChildInSameContainmentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveAndReplaceChildInSameContainment"
+          "const": "MoveAndReplaceChildInSameContainmentCommand"
         },
         "newIndex": {
           "$ref": "#/$defs/index"
@@ -1396,10 +1396,10 @@
       "minProperties": 5,
       "maxProperties": 6
     },
-    "AddAnnotation": {
+    "AddAnnotationCommand": {
       "properties": {
         "messageKind": {
-          "const": "AddAnnotation"
+          "const": "AddAnnotationCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -1428,10 +1428,10 @@
       "minProperties": 5,
       "maxProperties": 6
     },
-    "DeleteAnnotation": {
+    "DeleteAnnotationCommand": {
       "properties": {
         "messageKind": {
-          "const": "DeleteAnnotation"
+          "const": "DeleteAnnotationCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -1460,10 +1460,10 @@
       "minProperties": 5,
       "maxProperties": 6
     },
-    "ReplaceAnnotation": {
+    "ReplaceAnnotationCommand": {
       "properties": {
         "messageKind": {
-          "const": "ReplaceAnnotation"
+          "const": "ReplaceAnnotationCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -1496,10 +1496,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "MoveAnnotationFromOtherParent": {
+    "MoveAnnotationFromOtherParentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveAnnotationFromOtherParent"
+          "const": "MoveAnnotationFromOtherParentCommand"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -1528,10 +1528,10 @@
       "minProperties": 5,
       "maxProperties": 6
     },
-    "MoveAnnotationInSameParent": {
+    "MoveAnnotationInSameParentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveAnnotationInSameParent"
+          "const": "MoveAnnotationInSameParentCommand"
         },
         "newIndex": {
           "$ref": "#/$defs/index"
@@ -1556,10 +1556,10 @@
       "minProperties": 4,
       "maxProperties": 5
     },
-    "MoveAndReplaceAnnotationFromOtherParent": {
+    "MoveAndReplaceAnnotationFromOtherParentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveAndReplaceAnnotationFromOtherParent"
+          "const": "MoveAndReplaceAnnotationFromOtherParentCommand"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -1592,10 +1592,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "MoveAndReplaceAnnotationInSameParent": {
+    "MoveAndReplaceAnnotationInSameParentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveAndReplaceAnnotationInSameParent"
+          "const": "MoveAndReplaceAnnotationInSameParentCommand"
         },
         "newIndex": {
           "$ref": "#/$defs/index"
@@ -1624,10 +1624,10 @@
       "minProperties": 5,
       "maxProperties": 6
     },
-    "AddReference": {
+    "AddReferenceCommand": {
       "properties": {
         "messageKind": {
-          "const": "AddReference"
+          "const": "AddReferenceCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -1664,10 +1664,10 @@
       "minProperties": 7,
       "maxProperties": 8
     },
-    "DeleteReference": {
+    "DeleteReferenceCommand": {
       "properties": {
         "messageKind": {
-          "const": "DeleteReference"
+          "const": "DeleteReferenceCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -1704,10 +1704,10 @@
       "minProperties": 7,
       "maxProperties": 8
     },
-    "ChangeReference": {
+    "ChangeReferenceCommand": {
       "properties": {
         "messageKind": {
-          "const": "ChangeReference"
+          "const": "ChangeReferenceCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -1752,10 +1752,10 @@
       "minProperties": 9,
       "maxProperties": 10
     },
-    "MoveEntryFromOtherReference": {
+    "MoveEntryFromOtherReferenceCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveEntryFromOtherReference"
+          "const": "MoveEntryFromOtherReferenceCommand"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -1804,10 +1804,10 @@
       "minProperties": 10,
       "maxProperties": 11
     },
-    "MoveEntryFromOtherReferenceInSameParent": {
+    "MoveEntryFromOtherReferenceInSameParentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveEntryFromOtherReferenceInSameParent"
+          "const": "MoveEntryFromOtherReferenceInSameParentCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -1852,10 +1852,10 @@
       "minProperties": 9,
       "maxProperties": 10
     },
-    "MoveEntryInSameReference": {
+    "MoveEntryInSameReferenceCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveEntryInSameReference"
+          "const": "MoveEntryInSameReferenceCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -1896,10 +1896,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "MoveAndReplaceEntryFromOtherReference": {
+    "MoveAndReplaceEntryFromOtherReferenceCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveAndReplaceEntryFromOtherReference"
+          "const": "MoveAndReplaceEntryFromOtherReferenceCommand"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -1956,10 +1956,10 @@
       "minProperties": 12,
       "maxProperties": 13
     },
-    "MoveAndReplaceEntryFromOtherReferenceInSameParent": {
+    "MoveAndReplaceEntryFromOtherReferenceInSameParentCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveAndReplaceEntryFromOtherReferenceInSameParent"
+          "const": "MoveAndReplaceEntryFromOtherReferenceInSameParentCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -2012,10 +2012,10 @@
       "minProperties": 11,
       "maxProperties": 12
     },
-    "MoveAndReplaceEntryInSameReference": {
+    "MoveAndReplaceEntryInSameReferenceCommand": {
       "properties": {
         "messageKind": {
-          "const": "MoveAndReplaceEntryInSameReference"
+          "const": "MoveAndReplaceEntryInSameReferenceCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -2064,10 +2064,10 @@
       "minProperties": 10,
       "maxProperties": 11
     },
-    "AddReferenceResolveInfo": {
+    "AddReferenceResolveInfoCommand": {
       "properties": {
         "messageKind": {
-          "const": "AddReferenceResolveInfo"
+          "const": "AddReferenceResolveInfoCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -2100,10 +2100,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "DeleteReferenceResolveInfo": {
+    "DeleteReferenceResolveInfoCommand": {
       "properties": {
         "messageKind": {
-          "const": "DeleteReferenceResolveInfo"
+          "const": "DeleteReferenceResolveInfoCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -2136,10 +2136,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "ChangeReferenceResolveInfo": {
+    "ChangeReferenceResolveInfoCommand": {
       "properties": {
         "messageKind": {
-          "const": "ChangeReferenceResolveInfo"
+          "const": "ChangeReferenceResolveInfoCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -2176,10 +2176,10 @@
       "minProperties": 7,
       "maxProperties": 8
     },
-    "AddReferenceTarget": {
+    "AddReferenceTargetCommand": {
       "properties": {
         "messageKind": {
-          "const": "AddReferenceTarget"
+          "const": "AddReferenceTargetCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -2212,10 +2212,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "DeleteReferenceTarget": {
+    "DeleteReferenceTargetCommand": {
       "properties": {
         "messageKind": {
-          "const": "DeleteReferenceTarget"
+          "const": "DeleteReferenceTargetCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -2248,10 +2248,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "ChangeReferenceTarget": {
+    "ChangeReferenceTargetCommand": {
       "properties": {
         "messageKind": {
-          "const": "ChangeReferenceTarget"
+          "const": "ChangeReferenceTargetCommand"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -2318,115 +2318,115 @@
     "Events": {
       "anyOf": [
         {
-          "$ref": "#/$defs/PartitionAdded"
+          "$ref": "#/$defs/PartitionAddedEvent"
         },
         {
-          "$ref": "#/$defs/PartitionDeleted"
+          "$ref": "#/$defs/PartitionDeletedEvent"
         },
         {
-          "$ref": "#/$defs/ClassifierChanged"
+          "$ref": "#/$defs/ClassifierChangedEvent"
         },
         {
-          "$ref": "#/$defs/PropertyAdded"
+          "$ref": "#/$defs/PropertyAddedEvent"
         },
         {
-          "$ref": "#/$defs/PropertyDeleted"
+          "$ref": "#/$defs/PropertyDeletedEvent"
         },
         {
-          "$ref": "#/$defs/PropertyChanged"
+          "$ref": "#/$defs/PropertyChangedEvent"
         },
         {
-          "$ref": "#/$defs/ChildAdded"
+          "$ref": "#/$defs/ChildAddedEvent"
         },
         {
-          "$ref": "#/$defs/ChildDeleted"
+          "$ref": "#/$defs/ChildDeletedEvent"
         },
         {
-          "$ref": "#/$defs/ChildReplaced"
+          "$ref": "#/$defs/ChildReplacedEvent"
         },
         {
-          "$ref": "#/$defs/ChildMovedFromOtherContainment"
+          "$ref": "#/$defs/ChildMovedFromOtherContainmentEvent"
         },
         {
-          "$ref": "#/$defs/ChildMovedFromOtherContainmentInSameParent"
+          "$ref": "#/$defs/ChildMovedFromOtherContainmentInSameParentEvent"
         },
         {
-          "$ref": "#/$defs/ChildMovedInSameContainment"
+          "$ref": "#/$defs/ChildMovedInSameContainmentEvent"
         },
         {
-          "$ref": "#/$defs/ChildMovedAndReplacedFromOtherContainment"
+          "$ref": "#/$defs/ChildMovedAndReplacedFromOtherContainmentEvent"
         },
         {
-          "$ref": "#/$defs/ChildMovedAndReplacedFromOtherContainmentInSameParent"
+          "$ref": "#/$defs/ChildMovedAndReplacedFromOtherContainmentInSameParentEvent"
         },
         {
-          "$ref": "#/$defs/ChildMovedAndReplacedInSameContainment"
+          "$ref": "#/$defs/ChildMovedAndReplacedInSameContainmentEvent"
         },
         {
-          "$ref": "#/$defs/AnnotationAdded"
+          "$ref": "#/$defs/AnnotationAddedEvent"
         },
         {
-          "$ref": "#/$defs/AnnotationDeleted"
+          "$ref": "#/$defs/AnnotationDeletedEvent"
         },
         {
-          "$ref": "#/$defs/AnnotationReplaced"
+          "$ref": "#/$defs/AnnotationReplacedEvent"
         },
         {
-          "$ref": "#/$defs/AnnotationMovedFromOtherParent"
+          "$ref": "#/$defs/AnnotationMovedFromOtherParentEvent"
         },
         {
-          "$ref": "#/$defs/AnnotationMovedInSameParent"
+          "$ref": "#/$defs/AnnotationMovedInSameParentEvent"
         },
         {
-          "$ref": "#/$defs/AnnotationMovedAndReplacedFromOtherParent"
+          "$ref": "#/$defs/AnnotationMovedAndReplacedFromOtherParentEvent"
         },
         {
-          "$ref": "#/$defs/AnnotationMovedAndReplacedInSameParent"
+          "$ref": "#/$defs/AnnotationMovedAndReplacedInSameParentEvent"
         },
         {
-          "$ref": "#/$defs/ReferenceAdded"
+          "$ref": "#/$defs/ReferenceAddedEvent"
         },
         {
-          "$ref": "#/$defs/ReferenceDeleted"
+          "$ref": "#/$defs/ReferenceDeletedEvent"
         },
         {
-          "$ref": "#/$defs/ReferenceChanged"
+          "$ref": "#/$defs/ReferenceChangedEvent"
         },
         {
-          "$ref": "#/$defs/EntryMovedFromOtherReference"
+          "$ref": "#/$defs/EntryMovedFromOtherReferenceEvent"
         },
         {
-          "$ref": "#/$defs/EntryMovedFromOtherReferenceInSameParent"
+          "$ref": "#/$defs/EntryMovedFromOtherReferenceInSameParentEvent"
         },
         {
-          "$ref": "#/$defs/EntryMovedInSameReference"
+          "$ref": "#/$defs/EntryMovedInSameReferenceEvent"
         },
         {
-          "$ref": "#/$defs/EntryMovedAndReplacedFromOtherReference"
+          "$ref": "#/$defs/EntryMovedAndReplacedFromOtherReferenceEvent"
         },
         {
-          "$ref": "#/$defs/EntryMovedAndReplacedFromOtherReferenceInSameParent"
+          "$ref": "#/$defs/EntryMovedAndReplacedFromOtherReferenceInSameParentEvent"
         },
         {
-          "$ref": "#/$defs/EntryMovedAndReplacedInSameReference"
+          "$ref": "#/$defs/EntryMovedAndReplacedInSameReferenceEvent"
         },
         {
-          "$ref": "#/$defs/ReferenceResolveInfoAdded"
+          "$ref": "#/$defs/ReferenceResolveInfoAddedEvent"
         },
         {
-          "$ref": "#/$defs/ReferenceResolveInfoDeleted"
+          "$ref": "#/$defs/ReferenceResolveInfoDeletedEvent"
         },
         {
-          "$ref": "#/$defs/ReferenceResolveInfoChanged"
+          "$ref": "#/$defs/ReferenceResolveInfoChangedEvent"
         },
         {
-          "$ref": "#/$defs/ReferenceTargetAdded"
+          "$ref": "#/$defs/ReferenceTargetAddedEvent"
         },
         {
-          "$ref": "#/$defs/ReferenceTargetDeleted"
+          "$ref": "#/$defs/ReferenceTargetDeletedEvent"
         },
         {
-          "$ref": "#/$defs/ReferenceTargetChanged"
+          "$ref": "#/$defs/ReferenceTargetChangedEvent"
         },
         {
           "$ref": "#/$defs/NoOpEvent"
@@ -2435,14 +2435,14 @@
           "$ref": "#/$defs/CompositeEvent"
         },
         {
-          "$ref": "#/$defs/Error"
+          "$ref": "#/$defs/ErrorEvent"
         }
       ]
     },
-    "PartitionAdded": {
+    "PartitionAddedEvent": {
       "properties": {
         "messageKind": {
-          "const": "PartitionAdded"
+          "const": "PartitionAddedEvent"
         },
         "newPartition": {
           "$ref": "#/$defs/DeltaSerializationChunk"
@@ -2467,10 +2467,10 @@
       "minProperties": 4,
       "maxProperties": 5
     },
-    "PartitionDeleted": {
+    "PartitionDeletedEvent": {
       "properties": {
         "messageKind": {
-          "const": "PartitionDeleted"
+          "const": "PartitionDeletedEvent"
         },
         "deletedPartition": {
           "$ref": "#/$defs/targetNode"
@@ -2499,10 +2499,10 @@
       "minProperties": 5,
       "maxProperties": 6
     },
-    "ClassifierChanged": {
+    "ClassifierChangedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ClassifierChanged"
+          "const": "ClassifierChangedEvent"
         },
         "node": {
           "$ref": "#/$defs/targetNode"
@@ -2535,10 +2535,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "PropertyAdded": {
+    "PropertyAddedEvent": {
       "properties": {
         "messageKind": {
-          "const": "PropertyAdded"
+          "const": "PropertyAddedEvent"
         },
         "node": {
           "$ref": "#/$defs/targetNode"
@@ -2571,10 +2571,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "PropertyDeleted": {
+    "PropertyDeletedEvent": {
       "properties": {
         "messageKind": {
-          "const": "PropertyDeleted"
+          "const": "PropertyDeletedEvent"
         },
         "node": {
           "$ref": "#/$defs/targetNode"
@@ -2607,10 +2607,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "PropertyChanged": {
+    "PropertyChangedEvent": {
       "properties": {
         "messageKind": {
-          "const": "PropertyChanged"
+          "const": "PropertyChangedEvent"
         },
         "node": {
           "$ref": "#/$defs/targetNode"
@@ -2647,10 +2647,10 @@
       "minProperties": 7,
       "maxProperties": 8
     },
-    "ChildAdded": {
+    "ChildAddedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ChildAdded"
+          "const": "ChildAddedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -2687,10 +2687,10 @@
       "minProperties": 7,
       "maxProperties": 8
     },
-    "ChildDeleted": {
+    "ChildDeletedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ChildDeleted"
+          "const": "ChildDeletedEvent"
         },
         "deletedChild": {
           "$ref": "#/$defs/targetNode"
@@ -2731,10 +2731,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "ChildReplaced": {
+    "ChildReplacedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ChildReplaced"
+          "const": "ChildReplacedEvent"
         },
         "newChild": {
           "$ref": "#/$defs/DeltaSerializationChunk"
@@ -2779,10 +2779,10 @@
       "minProperties": 9,
       "maxProperties": 10
     },
-    "ChildMovedFromOtherContainment": {
+    "ChildMovedFromOtherContainmentEvent": {
       "properties": {
         "messageKind": {
-          "const": "ChildMovedFromOtherContainment"
+          "const": "ChildMovedFromOtherContainmentEvent"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -2831,10 +2831,10 @@
       "minProperties": 10,
       "maxProperties": 11
     },
-    "ChildMovedFromOtherContainmentInSameParent": {
+    "ChildMovedFromOtherContainmentInSameParentEvent": {
       "properties": {
         "messageKind": {
-          "const": "ChildMovedFromOtherContainmentInSameParent"
+          "const": "ChildMovedFromOtherContainmentInSameParentEvent"
         },
         "newContainment": {
           "$ref": "#/$defs/metaPointer"
@@ -2879,10 +2879,10 @@
       "minProperties": 9,
       "maxProperties": 10
     },
-    "ChildMovedInSameContainment": {
+    "ChildMovedInSameContainmentEvent": {
       "properties": {
         "messageKind": {
-          "const": "ChildMovedInSameContainment"
+          "const": "ChildMovedInSameContainmentEvent"
         },
         "newIndex": {
           "$ref": "#/$defs/index"
@@ -2923,10 +2923,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "ChildMovedAndReplacedFromOtherContainment": {
+    "ChildMovedAndReplacedFromOtherContainmentEvent": {
       "properties": {
         "messageKind": {
-          "const": "ChildMovedAndReplacedFromOtherContainment"
+          "const": "ChildMovedAndReplacedFromOtherContainmentEvent"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -2983,10 +2983,10 @@
       "minProperties": 12,
       "maxProperties": 13
     },
-    "ChildMovedAndReplacedFromOtherContainmentInSameParent": {
+    "ChildMovedAndReplacedFromOtherContainmentInSameParentEvent": {
       "properties": {
         "messageKind": {
-          "const": "ChildMovedAndReplacedFromOtherContainmentInSameParent"
+          "const": "ChildMovedAndReplacedFromOtherContainmentInSameParentEvent"
         },
         "newContainment": {
           "$ref": "#/$defs/metaPointer"
@@ -3039,10 +3039,10 @@
       "minProperties": 11,
       "maxProperties": 12
     },
-    "ChildMovedAndReplacedInSameContainment": {
+    "ChildMovedAndReplacedInSameContainmentEvent": {
       "properties": {
         "messageKind": {
-          "const": "ChildMovedAndReplacedInSameContainment"
+          "const": "ChildMovedAndReplacedInSameContainmentEvent"
         },
         "newIndex": {
           "$ref": "#/$defs/index"
@@ -3091,10 +3091,10 @@
       "minProperties": 10,
       "maxProperties": 11
     },
-    "AnnotationAdded": {
+    "AnnotationAddedEvent": {
       "properties": {
         "messageKind": {
-          "const": "AnnotationAdded"
+          "const": "AnnotationAddedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3127,10 +3127,10 @@
       "minProperties": 6,
       "maxProperties": 7
     },
-    "AnnotationDeleted": {
+    "AnnotationDeletedEvent": {
       "properties": {
         "messageKind": {
-          "const": "AnnotationDeleted"
+          "const": "AnnotationDeletedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3167,10 +3167,10 @@
       "minProperties": 7,
       "maxProperties": 8
     },
-    "AnnotationReplaced": {
+    "AnnotationReplacedEvent": {
       "properties": {
         "messageKind": {
-          "const": "AnnotationReplaced"
+          "const": "AnnotationReplacedEvent"
         },
         "newAnnotation": {
           "$ref": "#/$defs/DeltaSerializationChunk"
@@ -3211,10 +3211,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "AnnotationMovedFromOtherParent": {
+    "AnnotationMovedFromOtherParentEvent": {
       "properties": {
         "messageKind": {
-          "const": "AnnotationMovedFromOtherParent"
+          "const": "AnnotationMovedFromOtherParentEvent"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -3255,10 +3255,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "AnnotationMovedInSameParent": {
+    "AnnotationMovedInSameParentEvent": {
       "properties": {
         "messageKind": {
-          "const": "AnnotationMovedInSameParent"
+          "const": "AnnotationMovedInSameParentEvent"
         },
         "newIndex": {
           "$ref": "#/$defs/index"
@@ -3295,10 +3295,10 @@
       "minProperties": 7,
       "maxProperties": 8
     },
-    "AnnotationMovedAndReplacedFromOtherParent": {
+    "AnnotationMovedAndReplacedFromOtherParentEvent": {
       "properties": {
         "messageKind": {
-          "const": "AnnotationMovedAndReplacedFromOtherParent"
+          "const": "AnnotationMovedAndReplacedFromOtherParentEvent"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -3347,10 +3347,10 @@
       "minProperties": 10,
       "maxProperties": 11
     },
-    "AnnotationMovedAndReplacedInSameParent": {
+    "AnnotationMovedAndReplacedInSameParentEvent": {
       "properties": {
         "messageKind": {
-          "const": "AnnotationMovedAndReplacedInSameParent"
+          "const": "AnnotationMovedAndReplacedInSameParentEvent"
         },
         "newIndex": {
           "$ref": "#/$defs/index"
@@ -3395,10 +3395,10 @@
       "minProperties": 9,
       "maxProperties": 10
     },
-    "ReferenceAdded": {
+    "ReferenceAddedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ReferenceAdded"
+          "const": "ReferenceAddedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3439,10 +3439,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "ReferenceDeleted": {
+    "ReferenceDeletedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ReferenceDeleted"
+          "const": "ReferenceDeletedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3483,10 +3483,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "ReferenceChanged": {
+    "ReferenceChangedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ReferenceChanged"
+          "const": "ReferenceChangedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3535,10 +3535,10 @@
       "minProperties": 10,
       "maxProperties": 11
     },
-    "EntryMovedFromOtherReference": {
+    "EntryMovedFromOtherReferenceEvent": {
       "properties": {
         "messageKind": {
-          "const": "EntryMovedFromOtherReference"
+          "const": "EntryMovedFromOtherReferenceEvent"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -3591,10 +3591,10 @@
       "minProperties": 11,
       "maxProperties": 12
     },
-    "EntryMovedFromOtherReferenceInSameParent": {
+    "EntryMovedFromOtherReferenceInSameParentEvent": {
       "properties": {
         "messageKind": {
-          "const": "EntryMovedFromOtherReferenceInSameParent"
+          "const": "EntryMovedFromOtherReferenceInSameParentEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3643,10 +3643,10 @@
       "minProperties": 10,
       "maxProperties": 11
     },
-    "EntryMovedInSameReference": {
+    "EntryMovedInSameReferenceEvent": {
       "properties": {
         "messageKind": {
-          "const": "EntryMovedInSameReference"
+          "const": "EntryMovedInSameReferenceEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3691,10 +3691,10 @@
       "minProperties": 9,
       "maxProperties": 10
     },
-    "EntryMovedAndReplacedFromOtherReference": {
+    "EntryMovedAndReplacedFromOtherReferenceEvent": {
       "properties": {
         "messageKind": {
-          "const": "EntryMovedAndReplacedFromOtherReference"
+          "const": "EntryMovedAndReplacedFromOtherReferenceEvent"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"
@@ -3755,10 +3755,10 @@
       "minProperties": 13,
       "maxProperties": 14
     },
-    "EntryMovedAndReplacedFromOtherReferenceInSameParent": {
+    "EntryMovedAndReplacedFromOtherReferenceInSameParentEvent": {
       "properties": {
         "messageKind": {
-          "const": "EntryMovedAndReplacedFromOtherReferenceInSameParent"
+          "const": "EntryMovedAndReplacedFromOtherReferenceInSameParentEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3815,10 +3815,10 @@
       "minProperties": 12,
       "maxProperties": 13
     },
-    "EntryMovedAndReplacedInSameReference": {
+    "EntryMovedAndReplacedInSameReferenceEvent": {
       "properties": {
         "messageKind": {
-          "const": "EntryMovedAndReplacedInSameReference"
+          "const": "EntryMovedAndReplacedInSameReferenceEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3871,10 +3871,10 @@
       "minProperties": 11,
       "maxProperties": 12
     },
-    "ReferenceResolveInfoAdded": {
+    "ReferenceResolveInfoAddedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ReferenceResolveInfoAdded"
+          "const": "ReferenceResolveInfoAddedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3915,10 +3915,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "ReferenceResolveInfoDeleted": {
+    "ReferenceResolveInfoDeletedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ReferenceResolveInfoDeleted"
+          "const": "ReferenceResolveInfoDeletedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -3959,10 +3959,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "ReferenceResolveInfoChanged": {
+    "ReferenceResolveInfoChangedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ReferenceResolveInfoChanged"
+          "const": "ReferenceResolveInfoChangedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -4007,10 +4007,10 @@
       "minProperties": 9,
       "maxProperties": 10
     },
-    "ReferenceTargetAdded": {
+    "ReferenceTargetAddedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ReferenceTargetAdded"
+          "const": "ReferenceTargetAddedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -4051,10 +4051,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "ReferenceTargetDeleted": {
+    "ReferenceTargetDeletedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ReferenceTargetDeleted"
+          "const": "ReferenceTargetDeletedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -4095,10 +4095,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "ReferenceTargetChanged": {
+    "ReferenceTargetChangedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ReferenceTargetChanged"
+          "const": "ReferenceTargetChangedEvent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"
@@ -4190,10 +4190,10 @@
       "minProperties": 3,
       "maxProperties": 4
     },
-    "Error": {
+    "ErrorEvent": {
       "properties": {
         "messageKind": {
-          "const": "Error"
+          "const": "ErrorEvent"
         },
         "errorCode": {
           "$ref": "#/$defs/errorCode"
