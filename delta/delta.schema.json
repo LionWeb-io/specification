@@ -3582,8 +3582,8 @@
         "oldParent",
         "oldReference",
         "oldIndex",
-        "target",
-        "resolveInfo",
+        "movedTarget",
+        "movedResolveInfo",
         "originCommands",
         "sequenceNumber"
       ],
@@ -3634,8 +3634,8 @@
         "newIndex",
         "oldReference",
         "oldIndex",
-        "target",
-        "resolveInfo",
+        "movedTarget",
+        "movedResolveInfo",
         "originCommands",
         "sequenceNumber"
       ],
@@ -3682,8 +3682,8 @@
         "reference",
         "newIndex",
         "oldIndex",
-        "target",
-        "resolveInfo",
+        "movedTargettarget",
+        "movedResolveInfo",
         "originCommands",
         "sequenceNumber"
       ],
