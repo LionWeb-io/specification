@@ -884,7 +884,7 @@ ResolveInfo <<ReferenceResolveInfoDeleted.deletedResolveInfo>> has been deleted 
 
 [[evnt-ReferenceResolveInfoChanged]]
 ===== Reference ResolveInfo changed
-ResolveInfo of existing entry inside <<ReferenceResolveInfoChanged.parent>>'s <<ReferenceResolveInfoChanged.reference>> at <<ReferenceResolveInfoChanged.index>> with <<ReferenceResolveInfoChanged.target>> has been changed from <<ReferenceResolveInfoChanged.replacedResolveInfo>> to <<ReferenceResolveInfoChanged.newResolveInfo>>.
+ResolveInfo of existing entry inside <<ReferenceResolveInfoChanged.parent>>'s <<ReferenceResolveInfoChanged.reference>> at <<ReferenceResolveInfoChanged.index>> with <<ReferenceResolveInfoChanged.target>> has been changed from <<ReferenceResolveInfoChanged.oldResolveInfo>> to <<ReferenceResolveInfoChanged.newResolveInfo>>.
 
 [horizontal]
 .Parameters
@@ -893,7 +893,7 @@ ResolveInfo of existing entry inside <<ReferenceResolveInfoChanged.parent>>'s <<
 [[ReferenceResolveInfoChanged.index, `index`]]index:: <<indexType>>
 [[ReferenceResolveInfoChanged.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>
 [[ReferenceResolveInfoChanged.target, `target`]]target:: <<targetNodeType>>?
-[[ReferenceResolveInfoChanged.replacedResolveInfo, `replacedResolveInfo`]]replacedResolveInfo:: <<resolveInfoType>>
+[[ReferenceResolveInfoChanged.oldResolveInfo, `oldResolveInfo`]]oldResolveInfo:: <<resolveInfoType>>
 [[ReferenceResolveInfoChanged.originCommands]]originCommands:: <<commandSourceType>>[]
 [[ReferenceResolveInfoChanged.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 [[ReferenceResolveInfoChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>

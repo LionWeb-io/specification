@@ -3979,7 +3979,7 @@
         "target": {
           "$ref": "#/$defs/optionalTargetNode"
         },
-        "replacedResolveInfo": {
+        "oldResolveInfo": {
           "$ref": "#/$defs/resolveInfo"
         },
         "originCommands": {
@@ -3999,7 +3999,7 @@
         "index",
         "newResolveInfo",
         "target",
-        "replacedResolveInfo",
+        "oldResolveInfo",
         "originCommands",
         "sequenceNumber"
       ],
