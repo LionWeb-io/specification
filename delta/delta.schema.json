@@ -3558,10 +3558,10 @@
         "oldIndex": {
           "$ref": "#/$defs/index"
         },
-        "target": {
+        "movedTarget": {
           "$ref": "#/$defs/targetNode"
         },
-        "resolveInfo": {
+        "movedResolveInfo": {
           "$ref": "#/$defs/resolveInfo"
         },
         "originCommands": {
@@ -3611,10 +3611,10 @@
         "oldIndex": {
           "$ref": "#/$defs/index"
         },
-        "target": {
+        "movedTarget": {
           "$ref": "#/$defs/targetNode"
         },
-        "resolveInfo": {
+        "movedResolveInfo": {
           "$ref": "#/$defs/resolveInfo"
         },
         "originCommands": {
@@ -3660,10 +3660,10 @@
         "oldIndex": {
           "$ref": "#/$defs/index"
         },
-        "target": {
+        "movedTarget": {
           "$ref": "#/$defs/targetNode"
         },
-        "resolveInfo": {
+        "movedResolveInfo": {
           "$ref": "#/$defs/resolveInfo"
         },
         "originCommands": {

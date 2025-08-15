@@ -655,7 +655,7 @@ Existing reference with <<ReferenceChanged.oldTarget>>/<<ReferenceChanged.oldRes
 
 [[evnt-EntryMovedFromOtherReference]]
 ===== Entry moved from other reference
-Existing reference <<EntryMovedFromOtherReference.target>>/<<EntryMovedFromOtherReference.resolveInfo>> (previously inside <<EntryMovedFromOtherReference.oldParent>>'s <<EntryMovedFromOtherReference.oldReference>> at <<EntryMovedFromOtherReference.oldIndex>>) has been moved
+Existing reference <<EntryMovedFromOtherReference.movedTarget>>/<<EntryMovedFromOtherReference.movedResolveInfo>> (previously inside <<EntryMovedFromOtherReference.oldParent>>'s <<EntryMovedFromOtherReference.oldReference>> at <<EntryMovedFromOtherReference.oldIndex>>) has been moved
 to <<EntryMovedFromOtherReference.newParent>>'s <<EntryMovedFromOtherReference.newReference>> at <<EntryMovedFromOtherReference.newIndex>>.
 
 All other entries inside <<EntryMovedFromOtherReference.oldParent>>'s <<EntryMovedFromOtherReference.oldReference>> with index > <<EntryMovedFromOtherReference.oldIndex>> have been moved to next lower index.
@@ -670,8 +670,8 @@ All other entries inside <<EntryMovedFromOtherReference.newParent>>'s <<EntryMov
 [[EntryMovedFromOtherReference.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
 [[EntryMovedFromOtherReference.oldReference, `oldReference`]]oldReference:: <<metaPointerType>>
 [[EntryMovedFromOtherReference.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
-[[EntryMovedFromOtherReference.target, `target`]]target:: <<targetNodeType>>?
-[[EntryMovedFromOtherReference.resolveInfo, `resolveInfo`]]resolveInfo:: <<resolveInfoType>>?
+[[EntryMovedFromOtherReference.movedTarget, `movedTarget`]]movedTarget:: <<targetNodeType>>?
+[[EntryMovedFromOtherReference.movedResolveInfo, `movedResolveInfo`]]movedResolveInfo:: <<resolveInfoType>>?
 [[EntryMovedFromOtherReference.originCommands]]originCommands:: <<commandSourceType>>[]
 [[EntryMovedFromOtherReference.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 [[EntryMovedFromOtherReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
@@ -684,7 +684,7 @@ All other entries inside <<EntryMovedFromOtherReference.newParent>>'s <<EntryMov
 
 [[evnt-EntryMovedFromOtherReferenceInSameParent]]
 ===== Entry moved from other reference in same parent
-Existing reference <<EntryMovedFromOtherReferenceInSameParent.target>>/<<EntryMovedFromOtherReferenceInSameParent.resolveInfo>> (previously inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedFromOtherReferenceInSameParent.oldReference>> at <<EntryMovedFromOtherReferenceInSameParent.oldIndex>>) has been moved
+Existing reference <<EntryMovedFromOtherReferenceInSameParent.movedTarget>>/<<EntryMovedFromOtherReferenceInSameParent.movedResolveInfo>> (previously inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedFromOtherReferenceInSameParent.oldReference>> at <<EntryMovedFromOtherReferenceInSameParent.oldIndex>>) has been moved
 to <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedFromOtherReferenceInSameParent.newReference>> at <<EntryMovedFromOtherReferenceInSameParent.newIndex>>.
 
 All other entries inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedFromOtherReferenceInSameParent.oldReference>> with index > <<EntryMovedFromOtherReferenceInSameParent.oldIndex>> have been moved to next lower index.
@@ -698,8 +698,8 @@ All other entries inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <
 [[EntryMovedFromOtherReferenceInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
 [[EntryMovedFromOtherReferenceInSameParent.oldReference, `oldReference`]]oldReference:: <<metaPointerType>>
 [[EntryMovedFromOtherReferenceInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
-[[EntryMovedFromOtherReferenceInSameParent.target, `target`]]target:: <<targetNodeType>>?
-[[EntryMovedFromOtherReferenceInSameParent.resolveInfo, `resolveInfo`]]resolveInfo:: <<resolveInfoType>>?
+[[EntryMovedFromOtherReferenceInSameParent.movedTarget, `movedTarget`]]movedTarget:: <<targetNodeType>>?
+[[EntryMovedFromOtherReferenceInSameParent.movedResolveInfo, `movedResolveInfo`]]movedResolveInfo:: <<resolveInfoType>>?
 [[EntryMovedFromOtherReferenceInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 [[EntryMovedFromOtherReferenceInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 [[EntryMovedFromOtherReferenceInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
@@ -712,7 +712,7 @@ All other entries inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <
 
 [[evnt-EntryMovedInSameReference]]
 ===== Entry moved in same reference
-Existing reference <<EntryMovedInSameReference.target>>/<<EntryMovedInSameReference.resolveInfo>> (previously inside <<EntryMovedInSameReference.parent>>'s <<EntryMovedInSameReference.reference>> at <<EntryMovedInSameReference.oldIndex>>) has been moved
+Existing reference <<EntryMovedInSameReference.movedTarget>>/<<EntryMovedInSameReference.movedResolveInfo>> (previously inside <<EntryMovedInSameReference.parent>>'s <<EntryMovedInSameReference.reference>> at <<EntryMovedInSameReference.oldIndex>>) has been moved
 to <<EntryMovedInSameReference.parent>>'s <<EntryMovedInSameReference.reference>> at <<EntryMovedInSameReference.newIndex>>.
 
 If <<EntryMovedInSameReference.oldIndex>> < <<EntryMovedInSameReference.newIndex>>: All other entries inside <<EntryMovedInSameReference.parent>>'s <<EntryMovedInSameReference.reference>> with previous index > <<EntryMovedInSameReference.oldIndex>> and previous index <= <<EntryMovedInSameReference.newIndex>> have been moved to next lower index.
@@ -733,8 +733,8 @@ Example: +
 [[EntryMovedInSameReference.reference, `reference`]]reference:: <<metaPointerType>>
 [[EntryMovedInSameReference.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 [[EntryMovedInSameReference.newIndex, `newIndex`]]newIndex:: <<indexType>>
-[[EntryMovedInSameReference.target, `target`]]target:: <<targetNodeType>>?
-[[EntryMovedInSameReference.resolveInfo, `resolveInfo`]]resolveInfo:: <<resolveInfoType>>?
+[[EntryMovedInSameReference.movedTarget, `movedTarget`]]movedTarget:: <<targetNodeType>>?
+[[EntryMovedInSameReference.movedResolveInfo, `movedResolveInfo`]]movedResolveInfo:: <<resolveInfoType>>?
 [[EntryMovedInSameReference.originCommands]]originCommands:: <<commandSourceType>>[]
 [[EntryMovedInSameReference.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 [[EntryMovedInSameReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
