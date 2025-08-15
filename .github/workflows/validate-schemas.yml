@@ -1,0 +1,14 @@
+name: validate-schemas.yml
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Meta-validate delta JSON Schema
+        uses: cardinalby/schema-validator-action@v3
+        with:
+          schema: 'delta.schema.json'
+          file: ''
