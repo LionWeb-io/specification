@@ -52,5 +52,5 @@ deactivate clientEvent
 6. Client informs editor of command submission.
 7. Repository determines no change to internal representation.
 8. Repository creates event for notification.
-9. Repository emits <<evnt-NoOpEvent>> event with <<commandSourceType>> with value `(participation-a, cmd-1)` and sequence number `1`.
+9. Repository emits <<evnt-NoOp>> event with <<commandSourceType>> with value `(participation-a, cmd-1)` and sequence number `1`.
 10. Client removes `cmd-1` from open commands list.

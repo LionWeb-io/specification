@@ -32,4 +32,4 @@ Example: Does <<cmd-DeleteChild>> fail if the `removedChild` does not exist? -->
 
 * Decide on errors marked with #?# (invalid optional parameter values){fn-org312} --> postponed
 
-* How to report a command has completely been discarded, without any resulting event?{fn-org314} --> NoOpEvent
+* How to report a command has completely been discarded, without any resulting event?{fn-org314} --> NoOp
