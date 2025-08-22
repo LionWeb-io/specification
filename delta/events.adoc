@@ -985,24 +985,27 @@ We can nest composite events arbitrarily.{fn-org360}
 [[CompositeEvent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`CompositeEvent`
+`CompositeEvent` footnote:[
+This event is the only one to have a `Event` suffix, which is necessary to distinguish it from its <<cmd-CompositeCommand, `CompositeCommand`>> counterpart.
+All other events can be distinguished from their command counterparts by looking at whether the technical name reads as an imperative (“add child” — for commands), or in past perfect tense (”child [has been\] added” — for events).
+(The <<evnt-NoOp, `NoOp`>> and <<evnt-Error, `Error`>> don't have command counterparts.)
+]
 
 .Related command
 <<cmd-CompositeCommand>>
 
 [[evnt-NoOp]]
-[[evnt-NoOpEvent]]
 ===== No-op
 Nothing happened as result of one or more command(s).{fn-org314}
 
 [horizontal]
 .Parameters
-[[NoOpEvent.originCommands]]originCommands:: <<commandSourceType>>[]
-[[NoOpEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
-[[NoOpEvent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[NoOp.originCommands]]originCommands:: <<commandSourceType>>[]
+[[NoOp.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[NoOp.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`NoOpEvent`
+`NoOp`
 
 .Related command
 _none_
