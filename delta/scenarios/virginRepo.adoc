@@ -12,7 +12,7 @@ box "Client A"
   participant Queries as clientQuery
 end box
 
-box "Repository"
+box "Server"
   participant Queries as repoQuery
   participant Commands as repoCmd
 '  participant Queries  as rQry
@@ -22,7 +22,7 @@ end box
 
 == Client A unconnected ==
 
-clientQuery -> repoQuery ++: signOn("2025.1", "myClient")
+clientQuery -> repoQuery ++: signOn("repo-alpha", "2025.1", "myClient")
 return participationId = "participation-a"
 
 [->> clientCmd ++
@@ -49,14 +49,14 @@ activate editor
 editor -> editor: draw(nodeA)
 ----
 
-1. Client <<qry-SignOn, signs on>> to repository with protocol version `2025.1` and client id `myClient`.
-2. Repository confirms participation with participation id `participation-a`.
+1. Client <<qry-SignOn, signs on>> to repository `repo-alpha`, with protocol version `2025.1`, and client id `myClient`.
+2. Server confirms participation with participation id `participation-a`.
 3. Client initiates new partition.
 4. Client sends <<cmd-AddPartition>> command with `nodeA` payload (details omitted) and command id `cmd-1`.
-5. Repository registers command for processing.
-6. Repository updates internal representation.
-7. Repository creates event for update.
-8. Repository emits event <<evnt-PartitionAdded>> with `nodeA` payload and sequence number `1`.
+5. Server registers command for processing.
+6. Server updates internal representation.
+7. Server creates event for update.
+8. Server emits event <<evnt-PartitionAdded>> with `nodeA` payload and sequence number `1`.
 It includes one <<commandSourceType>> with value `(participation-a, cmd-1)`
 9. Client receives event and forwards information to editor.
 10. Client draws `nodeA`.

@@ -3,7 +3,7 @@
 
 [[err-invalidParticipation]]
 ==== Invalid participation
-The <<participation>> the <<client>> uses to communicate with the repository is not valid.
+The <<participation>> the <<client>> uses to communicate with the server is not valid.
 
 Possible reasons:
 
@@ -25,7 +25,7 @@ Client tries to create a node with an id that already exists.
 
 [[err-unknownNode]]
 ==== Unknown node
-Client tries to operate on a node unknown to the repository.
+Client tries to operate on a node unknown to the server.
 
 .Technical name
 `unknownNode`

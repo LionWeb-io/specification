@@ -1344,7 +1344,7 @@ Current ResolveInfo MAY be `null` as we can only change target if both current T
 Groups several commands into a logical group.{fn-org281}
 The parts are ordered.
 
-Command groups don't guarantee anything; the repository MAY take the group as a hint to resolve conflicts in a different manner.
+Command groups don't guarantee anything; the server MAY take the group as a hint to resolve conflicts in a different manner.
 
 Composite commands have a command id on their own.{fn-org353}
 We can nest composite commands arbitrarily.{fn-org360}

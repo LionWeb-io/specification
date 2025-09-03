@@ -10,7 +10,7 @@ box "Client A"
   participant Commands as clientCmd
 end box
 
-box "Repository"
+box "Server"
   participant Commands as repoCmd
   participant Events as repoEvent
   participant Core as core
@@ -51,11 +51,11 @@ activate editor
 1. User enters new property value on node `node with spaces` that's known to the editor.
 2. Client editor forwards user action into command.
 3. Client sends <<cmd-AddProperty>> command with `node with spaces` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
-4. Repository checks whether node id `node with spaces` is valid.
+4. Server checks whether node id `node with spaces` is valid.
 5. Client registers processed command id `cmd-1`.
 6. Client informs editor of command submission.
-7. Repository rejects invalid node id.
-8. Repository sends <<evnt-Error>> event only to this participation with `invalidNodeId` error code, `invalid node id 'node with spaces'` message and sequence number `1`.
+7. Server rejects invalid node id.
+8. Server sends <<evnt-Error>> event only to this participation with `invalidNodeId` error code, `invalid node id 'node with spaces'` message and sequence number `1`.
 It includes one <<commandSourceType>> with value `(participation-a, cmd-1)`.
 9. Client removes `cmd-1` from open commands list.
 10. Client informs editor of failed command.

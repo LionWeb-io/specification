@@ -2,7 +2,7 @@
 == Description
 [[client, client]]
 === Client characteristics
-A client is a program connecting to a repository.
+A client is a program connecting to a server.
 Each client has exactly one <<participation>> with one repository at one point in time.
 The same client can have several consecutive participations with the same repository, but never at the same time.
 A client might interact with several repositories, but they are completely independent (i.e. same as two clients connecting to two repositories).{fn-org337}
@@ -17,14 +17,14 @@ Logically, the channel has independent parts for each <<introduction, kind>> of 
 in practice, we might transmit some or all of them through a shared channel.
 
 This protocol is agnostic of its underlying technical implementation.
-We can use any (e.g. stateless, stateful) protocol, as long as it fulfills request/response characteristics for client-initiated query, command, and participation messages, and repository-initiated broadcast characteristics for event messages.
+We can use any (e.g. stateless, stateful) protocol, as long as it fulfills request/response characteristics for client-initiated query, command, and participation messages, and server-initiated broadcast characteristics for event messages.
 
 We assume the underlying protocol handles quality of service concerns (i.e. guaranteed one-time complete delivery of messages), they are out of scope of this API.
 
 [[participation, participation]]
 === Participation characteristics
 Each participation has a _[[participation-id, participation id]]participation id_, unique for all concurrent participations.
-The repository assigns the participation id upon starting a new participation.
+The server assigns the participation id upon starting a new participation.
 The participation id MUST follow the same format as <<{m3}.adoc#identifiers, identifier>>.
 It serves as a technical identifier.
 
@@ -57,8 +57,8 @@ A client can change the subscription scope at any time during a participation.
 
 A client can send commands for any node id, independent of the client's subscription.
 Assume a client sends a command for a node that's part of a partition that client is not subscribed to.
-The repository treats that command the same as from a client that was subscribed to the containing partition, i.e. applies it in accordance with the repository's policy.
-The repository also sends out the same events to subscribed clients, thus _not_ to the sending client.{fn-org352}
+The server treats that command the same as from a client that was subscribed to the containing partition, i.e. applies it in accordance with the server's policy.
+The server also sends out the same events to subscribed clients, thus _not_ to the sending client.{fn-org352}
 
 [[message, message]]
 === Message characteristics
@@ -79,7 +79,7 @@ Each message optionally can have one or more _[[protocolMessage, protocol messag
 
 * [[protocolMessage.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the message type.
 Some message kinds are pre-defined in this specification.
-A repository MAY reply with other, additional message kinds.
+A server MAY reply with other, additional message kinds.
 * [[protocolMessage.message]]`message` is a human-readable string describing the message.
 * [[protocolMessage.data]]`data` is a flat map with arbitrary keys and values.
 All values MUST be strings, the keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible.

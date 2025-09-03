@@ -143,7 +143,7 @@ Then the client can ask to reconnect to the repository.{fn-org349}
 
 [horizontal]
 .Response parameters
-[[Reconnect.lastSentSequenceNumber]]lastSentSequenceNumber:: <<eventSequenceType>> Last <<event-sequence-number>> sent by the repository.
+[[Reconnect.lastSentSequenceNumber]]lastSentSequenceNumber:: <<eventSequenceType>> Last <<event-sequence-number>> sent by the server.
 [[Reconnect.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
 [[Reconnect.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
@@ -175,7 +175,7 @@ We identify the client by its <<clientIdType>>.
 [horizontal]
 .Response parameters
 [[GetAvailableIds.ids]]ids:: <<freeIdType>>[] List of ids guaranteed to be free.
-The repository MUST return between one (inclusive) and <<GetAvailableIds.count>> (inclusive) ids.
+The server MUST return between one (inclusive) and <<GetAvailableIds.count>> (inclusive) ids.
 It MAY return less than <<GetAvailableIds.count>> ids.
 [[GetAvailableIds.responseQueryId]]queryId:: <<queryIdType>> Id of this query.
 [[GetAvailableIds.responseProtocolMessages]]protocolMessages:: <<protocolMessagesType>>

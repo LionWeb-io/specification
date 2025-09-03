@@ -9,12 +9,12 @@ box "Client A"
   participant Queries as clientQuery
 end box
 
-box "Repository"
-  participant Queries  as repoQuery
+box "Server"
+  participant Queries as repoQuery
   participant Core as core
 end box
 
-== Client A connected with partition id "participation-a" ==
+== Client A connected with participation id "participation-a" ==
 
 [->> clientQuery
 activate clientQuery
@@ -29,9 +29,9 @@ editor -> editor: draw(childNodeA, childNodeB)
 ----
 1. Client knows the relevant partition, wants to subscribe.
 2. Client sends <<qry-SubscribeToPartitionContents>> query with partition node id `partition-id`.
-3. Repository retrieves all contents of partition with node id `partition-id`.
-4. Repository found contents.
-5. Repository responds to query with id `qry-1` with contents of 3 nodes: `partitionNode`, `childNodeA`, `childNodeB` (details omitted).
+3. Server retrieves all contents of partition with node id `partition-id`.
+4. Server found contents.
+5. Server responds to query with id `qry-1` with contents of 3 nodes: `partitionNode`, `childNodeA`, `childNodeB` (details omitted).
 6. Client receives query result and forwards information to editor.
 7. Client draws `childNodeA` and `childNodeB`.
 `partitionNode` is not drawn, it represents the canvas.
