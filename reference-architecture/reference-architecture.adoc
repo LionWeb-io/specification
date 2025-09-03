@@ -3,13 +3,22 @@
 
 image:images/ref-arch-diagram.svg[Reference Architecture Diagram]
 
-A [[model]]*model* is a graph structure with nodes and edges and one primary containment hierarchy [.refletter]#B#.
-Nodes are typed by a reference to a concept (a node in the metamodel of the language) and edges are named and typed (with a primitive type or a concept).
-Nodes also have properties which have names and primitive types.
-Nodes are identified by unique IDs. A LionWeb language – or its metamodel – is an instance of the LionWeb meta-metamodel.
+A [[repository]]*repository* [.refletter]#B# is a graph structure with nodes and edges and one primary containment hierarchy [.refletter]#B#.
+You can think of a repository as a "`model`", but we like to avoid that word because it's so overused.
 
-A [[repository]]*repository* [.refletter]#A# stores models and provides clients [.refletter]#C#, [.refletter]#D#, [.refletter]#E# ,[.refletter]#F#, [.refletter]#G# access to the nodes in a model.
+Nodes are typed by a reference to a concept (a node in a LionWeb language) and edges are named and typed with a concept.
+A LionWeb language – or its metamodel – is an instance of the LionWeb meta-metamodel.
+Nodes also have properties which have names and primitive types.
+Nodes are identified by unique IDs.
+// Within the graph structure one can identify *roots* which are nodes that are typed by a reference to a concept that's marked as a *partition*.
+
+A repository is “its own universe”: nodes within it can't reference nodes, or be referenced from nodes from other repositories.
+// That also means that a repository's language can only reside in another repository.
+// Nodes can refer to nodes from the LionCore and built-in languages, though.
+
+A [[server]]*server* [.refletter]#A# stores repositories and provides clients [.refletter]#C#, [.refletter]#D#, [.refletter]#E# ,[.refletter]#F#, [.refletter]#G# access to the nodes in a specific repository.
 Conceptually, it is the center of a LionWeb system, with clients connected to it in a star topology (although the technical architecture may be different).
+It's an active, deployed piece of running software, whereas the repository is a Platonic abstraction that happens to "`live`" on a server.
 
 [[originalModel]]*Original models* are models that cannot be (re-)computed from other models.
 They are CRUDed by users (mediated by tools).
