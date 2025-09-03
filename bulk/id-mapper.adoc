@@ -101,8 +101,8 @@ See <<stable-uri-discussion>>.
 We can retrieve nodes via _Bulk.retrieve_ by the value of that property.
 We might have a boolean flag `unique` on that annotation, to signal that the value MUST be globally unique.
 +
-A supporting repository SHOULD create an index for such properties to access them efficiently.
-If we supported the `unique` flag, the repository can configure the index accordingly.
+The server implementing the repository SHOULD create an index for such properties to access them efficiently.
+If we supported the `unique` flag, the server can configure the index accordingly.
 
 2. Define an annotation `ResolveBy` on `Reference` on M2 level.
 The annotation has one reference `target` that points to a `Property` with `Id` annotation.
@@ -181,7 +181,7 @@ No change: We never ask for unused mapped ids.
 
 store::
 No change in syntax, might have in semantics:
-If we allowed `@Id(unique=true)`, the repository MUST reject nodes with the same node id, but different `@Id` property value.
+If we allowed `@Id(unique=true)`, the server MUST reject nodes with the same node id, but different `@Id` property value.
 
 retrieve::
 Add another parameter `idProperty` as described above.
