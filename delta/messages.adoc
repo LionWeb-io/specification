@@ -36,6 +36,9 @@ Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique for all co
 [[clientIdType]]clientId:: Id of a <<client>>.
 Same format as <<{m3}.adoc#identifiers, identifiers>>; must be stable over time for the same client to use <<qry-GetAvailableIds, reserved free node ids>>.
 
+[[repositoryIdType]]RepositoryId:: Id of a <<repository>>.
+Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique for all repositories on a server.
+
 [[commandSourceType]]CommandSource:: _(<<participationIdType>>, <<commandIdType>>)_ tuple{fn-org306} this event is based on.
 This allows a client to know when its command has been processed (either successful or not).
 
