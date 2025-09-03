@@ -3,14 +3,14 @@
 
 Definitions:
 
-* A _repository_ is a set of partitions comprising a "`forest`" of LionWeb nodes, all of which are guaranteed to have unique IDs.
+* A <<repository>> is a set of partitions (effectively comprising a "`forest`" of LionWeb nodes), all of which MUST have unique IDs.
 The repository has an ID itself as well that's separate from the IDs of the contained nodes.
 A repository is “its own universe”: nodes within it can't reference nodes, or be referenced from nodes from other repositories.
 As usual, nodes can refer to nodes from the LionCore and built-in languages, though.
 
-* A _server_ is a running piece of software that exposes one or more repositories.
-Repository IDs should be unique within the server.
-A server implements either the bulk or the delta protocols, or both, and exposing those through an API.
+* A <<server>> is a running piece of software that exposes one or more repositories.
+Repository IDs SHOULD be unique within the server.
+A server implements either the bulk or the delta protocols, or both, and exposes those through an API.
 Different servers are identified solely through where they’re deployed to, but not through a LionWeb-specific scheme.
 
 Delta API assumes a bidirectional communication channel between a client and a server.

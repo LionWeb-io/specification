@@ -3,18 +3,15 @@
 
 image:images/ref-arch-diagram.svg[Reference Architecture Diagram]
 
-A [[repository]]*repository* [.refletter]#B# is a graph structure with nodes and edges and one primary containment hierarchy [.refletter]#B#.
-You can think of a repository as a "`model`", but we like to avoid that word because it's so overused.
-
+A [[model]]*model* [.refletter]#B# is a graph structure with nodes and edges and one primary containment hierarchy [.refletter]#B#.
 Nodes are typed by a reference to a concept (a node in a LionWeb language) and edges are named and typed with a concept.
 A LionWeb language – or its metamodel – is an instance of the LionWeb meta-metamodel.
 Nodes also have properties which have names and primitive types.
 Nodes are identified by unique IDs.
 // Within the graph structure one can identify *roots* which are nodes that are typed by a reference to a concept that's marked as a *partition*.
 
-A repository is “its own universe”: nodes within it can't reference nodes, or be referenced from nodes from other repositories.
-// That also means that a repository's language can only reside in another repository.
-// Nodes can refer to nodes from the LionCore and built-in languages, though.
+A [[repository]]*repository* [.refletter]#B# is a set of original and derived models.
+A repository is “its own universe”: nodes within it can't reference nodes, or be referenced from nodes from other repositories, but cross-model references are permitted.
 
 A [[server]]*server* [.refletter]#A# stores repositories and provides clients [.refletter]#C#, [.refletter]#D#, [.refletter]#E# ,[.refletter]#F#, [.refletter]#G# access to the nodes in a specific repository.
 Conceptually, it is the center of a LionWeb system, with clients connected to it in a star topology (although the technical architecture may be different).
