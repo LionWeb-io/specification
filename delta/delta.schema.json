@@ -254,6 +254,9 @@
     "participationId": {
       "$ref": "#/$defs/id"
     },
+    "repositoryId": {
+      "$ref": "#/$defs/id"
+    },
     "clientId": {
       "$ref": "#/$defs/id"
     },
@@ -568,6 +571,9 @@
         "clientId": {
           "$ref": "#/$defs/clientId"
         },
+        "repositoryId": {
+          "$ref": "#/$defs/repositoryId"
+        },
         "queryId": {
           "$ref": "#/$defs/queryId"
         },
@@ -579,11 +585,12 @@
         "messageKind",
         "deltaProtocolVersion",
         "clientId",
+        "repositoryId",
         "queryId"
       ],
       "additionalProperties": false,
-      "minProperties": 4,
-      "maxProperties": 5
+      "minProperties": 5,
+      "maxProperties": 6
     },
     "SignOnResponse": {
       "properties": {
