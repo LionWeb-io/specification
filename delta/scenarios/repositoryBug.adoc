@@ -1,5 +1,5 @@
-=== Server has bug, needs to tell client it couldn't apply its commands
-[plantuml,serverBug,svg]
+=== Repository has bug, needs to tell client it couldn't apply its commands
+[plantuml,repositoryBug,svg]
 ----
 hide footbox
 autonumber
@@ -10,7 +10,7 @@ box "Client A"
   participant Commands as clientCmd
 end box
 
-box "Server"
+box "Repository"
   participant Commands as repoCmd
   participant Events as repoEvent
   participant Core as core
@@ -49,13 +49,13 @@ deactivate clientEvent
 1. User enters new property value on node `nodeA` that's known to the editor.
 2. Client editor forwards user action into command.
 3. Client sends <<cmd-AddProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
-4. Server registers command for processing.
+4. Repository registers command for processing.
 5. Client registers processed command id `cmd-1`.
 6. Client informs editor of command submission.
-7. Server tries to update internal representation.
+7. Repository tries to update internal representation.
 Some error occurs (e.g. database unavailable).
-8. Server handles the error.
-9. Server creates event for notification.
-10. Server emits <<evnt-Error>> event with `internalError` error code, `internal error occurred` message and sequence number `1`.
+8. Repository handles the error.
+9. Repository creates event for notification.
+10. Repository emits <<evnt-Error>> event with `internalError` error code, `internal error occurred` message and sequence number `1`.
 It includes one <<commandSourceType>> with value `(participation-a, cmd-1)`.
 11. Client removes `cmd-1` from open commands list.

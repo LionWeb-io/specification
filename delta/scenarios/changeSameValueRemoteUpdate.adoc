@@ -10,7 +10,7 @@ box "Client A"
   participant Commands as clientCmd
 end box
 
-box "Server"
+box "Repository"
   participant Commands as repoCmd
   participant Events as repoEvent
   participant Core as core
@@ -47,10 +47,10 @@ deactivate clientEvent
 1. User enters changed property value that's the same value as the old value.
 2. Client editor forwards user action into command.
 3. Client sends <<cmd-ChangeProperty>> command with `nodeA` node id, `age` property (details omitted), `23` old value, `23` new value and command id `cmd-1`.
-4. Server registers command for processing.
+4. Repository registers command for processing.
 5. Client registers processed command id `cmd-1`.
 6. Client informs editor of command submission.
-7. Server determines no change to internal representation.
-8. Server creates event for notification.
-9. Server emits <<evnt-NoOp>> event with <<commandSourceType>> with value `(participation-a, cmd-1)` and sequence number `1`.
+7. Repository determines no change to internal representation.
+8. Repository creates event for notification.
+9. Repository emits <<evnt-NoOp>> event with <<commandSourceType>> with value `(participation-a, cmd-1)` and sequence number `1`.
 10. Client removes `cmd-1` from open commands list.

@@ -1,36 +1,23 @@
 [[introduction]]
 == Introduction
-
-Definitions:
-
-* A <<repository>> is a set of partitions (effectively comprising a "`forest`" of LionWeb nodes), all of which MUST have unique IDs.
-The repository has an ID itself as well that's separate from the IDs of the contained nodes.
-A repository is “its own universe”: nodes within it can't reference nodes, or be referenced from nodes from other repositories.
-As usual, nodes can refer to nodes from the LionCore and built-in languages, though.
-
-* A <<server>> is a running piece of software that exposes one or more repositories.
-Repository IDs SHOULD be unique within the server.
-A server implements either the bulk or the delta protocols, or both, and exposes those through an API.
-Different servers are identified solely through where they’re deployed to, but not through a LionWeb-specific scheme.
-
-Delta API assumes a bidirectional communication channel between a client and a server.
-The client initiates the channel with the server to open a _participation_{fn-org337} for a specific repository.
+Delta API assumes a bidirectional communication channel between a <<client>> and a <<repository>>.
+The client initiates the channel with the repository to open a <<participation>>{fn-org337}.
 Both parties communicate through the established channel via _messages_.
 
 Delta API supports these message kinds, loosely following CQRS patternfootnote:[https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation]{fn-org291}:
 
-* <<queries>> initiated/requested by the client, with synchronous response by the server.
-A query requests some information from the server without changing the repository's contents.
-The server gathers all information needed to answer the query, and sends the information back.
-The server might reply to invalid queries with a failure message.
+* <<queries>> initiated/requested by the client, with synchronous response by the repository.
+A query requests some information from the repository without changing the repository's contents.
+The repository gathers all information needed to answer the query, and sends the information back.
+The repository might reply to invalid queries with a failure message.
 We also use queries for managing <<participation, participations>>.{fn-org350}
 
-* <<commands>> initiated/requested by the client, with synchronous response by the server.
+* <<commands>> initiated/requested by the client, with synchronous response by the repository.
 A command requests some change to the repository.
-The server quickly confirms having _received_ the command, or rejects a _failed_ command.{fn-org298}
-However, the server processes the command asynchronously, and eventually broadcasts the effect(s) as _event(s)_.
+The repository quickly confirms having _received_ the command, or rejects a _failed_ command.{fn-org298}
+However, the repository processes the command asynchronously, and eventually broadcasts the effect(s) as _event(s)_.
 
-* <<events>> initiated/broadcast by the server, without response by the client.
+* <<events>> initiated/broadcast by the repository, without response by the client.
 An event describes some change that has been applied to the repository's contents.
 Events correlate to their originating command(s){fn-org306}; this command might have been sent by this client or another client.{fn-org299}
 All clients receive the same events (given the same subscription scope and disregarding <<event-sequence-number, event sequence numbers>>).
@@ -40,7 +27,7 @@ The client receives only events on nodes within that scope.
 
 A typical workflow for a client would be:
 
-1. Client <<qry-SignOn, connects>> to the server and starts a participation.
+1. Client <<qry-SignOn, connects>> to repository and starts a participation.
 2. Client <<qry-SubscribeToPartitionContents, subscribes>> to some partitions with subscription queries.
 The response contains a <<{serialization}.adoc#SerializationChunk, serialization chunk>> with the current contents of these partitions.
 3. Client initiates its editor or processing with the chunk.
@@ -51,18 +38,18 @@ The response contains a <<{serialization}.adoc#SerializationChunk, serialization
 8. Client updates its editor or processing with the event's contents.
 9. Client <<qry-SignOff, ends>> the participation.
 
-The server is always the ultimate arbiter of its contents.{fn-org339}
+The repository is always the ultimate arbiter of its contents.{fn-org339}
 It can decide to apply each command verbatim, with some tweaks (e.g. because of concurrent changes), or not at all (e.g. because the command would introduce containment loops).
 
-Each server might introduce its own strategy how to handle commands.{fn-org291}
+Each repository might introduce its own strategy how to handle commands.{fn-org291}
 For example, assume client 1 sends a `deleteChild` command to delete node `X`, and then client 2 sends a `setProperty` command on node `X`.
 
-* Server A applies all commands in order, thus deletes node `X` and ignores the second command.
+* Repository A applies all commands in order, thus deletes node `X` and ignores the second command.
 It emits one `childDeleted` event, correlated to both commands.
-* Server B keeps an internal "trash can" of all deleted nodes.
+* Repository B keeps an internal "trash can" of all deleted nodes.
 It deletes node `X` on the first command, but resurrects node `X` on the second command and changes the property as requested.
 It first emits a `childDeleted` event (correlated to the first command), but later `childAdded` and `propertyChanged` events (both correlated to the second command).
-* Server C batches command processing.
+* Repository C batches command processing.
 It looks at both messages together, and decides it's more important to keep the new property value around.
 It emits one `propertyChanged` event, correlated with both commands.
 

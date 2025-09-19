@@ -10,7 +10,7 @@ box "Client A"
   participant Commands as clientCmd
 end box
 
-box "Server"
+box "Repository"
   participant Commands as repoCmd
   participant Events as repoEvent
   participant Core as core
@@ -71,18 +71,18 @@ editor -> editor: update()
 2. Client updates `nodeA` with new property value.
 3. Client editor forwards user action into command.
 4. Client sends <<cmd-AddProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
-5. Server registers command for processing.
+5. Repository registers command for processing.
 6. Client registers processed command id `cmd-1`.
-7. Server updates internal representation.
-8. Server creates event for update.
-9. Server emits event <<evnt-PropertyAdded>> with `nodeA` node id, `age` property (details omitted), `23` value and sequence number `1`.
+7. Repository updates internal representation.
+8. Repository creates event for update.
+9. Repository emits event <<evnt-PropertyAdded>> with `nodeA` node id, `age` property (details omitted), `23` value and sequence number `1`.
 It includes one <<commandSourceType>> with value `(participation-a, cmd-1)`
 10. Client found a matching registered processed command id.
 11. Client unregisters processed command id `cmd-1`, and does NOT forward information to editor -- the event originates from this client, thus has already been processed.
 12. Another client sends <<cmd-AddProperty>> command with command id `cmd-x` (other parameters omitted).
-13. Server updates internal representation.
-14. Server creates event for update.
-15. Server emits event <<evnt-PropertyAdded>> with sequence number `2` (other parameters omitted).
+13. Repository updates internal representation.
+14. Repository creates event for update.
+15. Repository emits event <<evnt-PropertyAdded>> with sequence number `2` (other parameters omitted).
 It includes one <<commandSourceType>> with value `(other-client, cmd-x)`
 16. Client did not find any matching registered processed command id.
 17. Client forwards information to editor.

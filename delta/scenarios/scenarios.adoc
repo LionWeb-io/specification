@@ -14,7 +14,7 @@ include::changeUnknownNodeFailedEvent.adoc[]
 
 include::changeSameValueRemoteUpdate.adoc[]
 
-include::serverBug.adoc[]
+include::repositoryBug.adoc[]
 
 include::concurrentChangeLocalUpdate.adoc[]
 

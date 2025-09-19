@@ -8,11 +8,11 @@ include::../shared/issue-footnotes.adoc[]
 :toclevels: 3
 
 <<{bulk}.adoc#orphan, Orphans>> are nodes that fall out of the original model tree.{fn-org219}
-Instead of just forgetting about them, a server can optionally move them into a special place called _trash_.{fn-org217}
+Instead of just forgetting about them, a repository can optionally move them into a special place called _trash_.{fn-org217}
 Orphans can be _recovered_ from there by re-inserting them into the original model tree.
 
 == Trash lifetime
-The server MAY delete nodes in _trash_ according to its own _garbage collection_ rules (e.g. after some time, or on memory pressure).
+The repository MAY delete nodes in _trash_ according to its own _garbage collection_ rules (e.g. after some time, or on memory pressure).
 
 == Adjustments to Bulk Repository Access API
 
@@ -29,7 +29,7 @@ This can only happen if the client "remembers" the id of an orphan node, as ther
 [[store]]
 === store
 The <<{bulk}.adoc#store, store>> command SHOULD move orphans to _trash_.
-The server MAY choose to directly delete an orphan on some criteria, e.g. low resources.
+The repository MAY choose to directly delete an orphan on some criteria, e.g. low resources.
 
 Changing nodes within _trash_ fails the whole call without changes to the repository, except if we _recover_ the node.
 _Recovering_ means to re-add the orphan node as containment/annotation to a regular node.

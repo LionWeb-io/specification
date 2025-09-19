@@ -1,11 +1,6 @@
 = Implementation Notes for Bulk Repository Access API
 
-Describes how a server might implement <<repo-acces-api.adoc#apis, Bulk Repository Access API>> for one or more repositories.
-
-====
-*Note* that the server is an active, deployed piece of running software, whereas a repository is less concrete, and more abstract.
-Generally, you'll find we speak about the server as the object and/or in active voice ("`The server will send...`"), and about the repository as the subject and/or in passive voice (e.g., "`into the repository`", "`we don't change the repository`", etc.).
-====
+Describes how a repository might implement <<repo-acces-api.adoc#apis, Bulk Repository Access API>>.
 
 [[store, store]]
 == store: Put nodes into repository
@@ -19,7 +14,7 @@ We describe the semantics of `replace` mode.
 The other modes behave the same, except that they first compare the _sent_ nodes to the _repo_ nodes and might abort the call without any change to the repository.
 
 ====
-**Jos** _All of the below is **very** much dependent on the way the server is implemented.
+**Jos** _All of the below is **very** much dependent on the way the repository is implemented.
 
 **Jos** _It seems to assume that there are separate fields for every metapointer, property, property value, etc etc. 
 I am currently working with a repo (implementing the bulp API) that uses a different storage scheme (use partly JSON, partly relational tables)  where the text below make no sense at all._

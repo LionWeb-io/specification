@@ -1012,9 +1012,9 @@ _none_
 
 [[evnt-Error]]
 ===== Error
-Server couldn't handle one or more command(s).{fn-org316}
+Repository couldn't handle one or more command(s).{fn-org316}
 
-The server MAY send an error event to only one participation.{fn-org379}
+The repository MAY send an error event to only one participation.{fn-org379}
 
 [horizontal]
 .Parameters

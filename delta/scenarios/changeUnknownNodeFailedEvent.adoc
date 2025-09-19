@@ -10,7 +10,7 @@ box "Client A"
   participant Commands as clientCmd
 end box
 
-box "Server"
+box "Repository"
   participant Commands as repoCmd
   participant Events as repoEvent
   participant Core as core
@@ -48,11 +48,11 @@ deactivate clientEvent
 1. User enters new property value on node `nodeA` that's known to the editor.
 2. Client editor forwards user action into command.
 3. Client sends <<cmd-AddProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
-4. Server registers command for processing.
+4. Repository registers command for processing.
 5. Client registers processed command id `cmd-1`.
 6. Client informs editor of command submission.
-7. Server realizes it does not know a node with id `nodeA`.
-8. Server creates event for notification.
-9. Server emits <<evnt-Error>> event with `unknownNode` error code, `cannot add property to unknown node` message and sequence number `1`.
+7. Repository realizes it does not know a node with id `nodeA`
+8. Repository creates event for notification.
+9. Repository emits <<evnt-Error>> event with `unknownNode` error code, `cannot add property to unknown node` message and sequence number `1`.
 It includes one <<commandSourceType>> with value `(participation-a, cmd-1)`.
 10. Client removes `cmd-1` from open commands list.

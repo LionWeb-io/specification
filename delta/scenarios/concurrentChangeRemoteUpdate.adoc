@@ -10,7 +10,7 @@ box "Client A"
   participant Commands as clientCmd
 end box
 
-box "Server"
+box "Repository"
   participant Commands as repoCmd
   participant Events as repoEvent
   participant Core as core
@@ -49,13 +49,13 @@ editor -> editor: update(nodeA)
 1. User enters new property value.
 2. Client editor forwards user action into command.
 3. Client sends <<cmd-AddProperty>> command with `nodeA` node id, `age` property (details omitted), `23` value and command id `cmd-1`.
-4. Server registers command for processing.
+4. Repository registers command for processing.
 5. Client informs editor of command submission.
 6. Another client sends <<cmd-AddProperty>> command `nodeA` node id, `age` property (details omitted), `42` value and command id `cmd-x`.
-7. Server resolves concurrent updates t `nodeA`, `age` property with "last write wins" strategy.
-Server updates internal representation with value `42`.
-8. Server creates event for update.
-9. Server emits event <<evnt-PropertyAdded>> with `nodeA` node id, `age` property (details omitted), `23` value and sequence number `1`.
+7. Repository resolves concurrent updates t `nodeA`, `age` property with "last write wins" strategy.
+Repository updates internal representation with value `42`.
+8. Repository creates event for update.
+9. Repository emits event <<evnt-PropertyAdded>> with `nodeA` node id, `age` property (details omitted), `23` value and sequence number `1`.
 It includes one <<commandSourceType>> with values `(participation-a, cmd-1)` and `(other-client, cmd-x)`.
 10. Client receives event and forwards information to editor.
 11. Client updates `nodeA` with new property value.
