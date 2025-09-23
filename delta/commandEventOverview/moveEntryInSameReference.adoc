@@ -31,10 +31,10 @@ class "moved\nTarget" as target #Orange
 class "sibling\nEntryB" as siblingB
 class "sibling\nEntryC" as siblingC
 
-parent *--> siblingA: reference\n[oldIndex - 1]
-parent *--> siblingB: reference\n[oldIndex]
-parent *--> target: reference\n[<color #Blue>newIndex</color>]\n<color #blue>{movedResolveInfo}</color>
-parent *--> siblingC: reference\n[newIndex + 1]
+parent ..> siblingA: reference\n[oldIndex - 1]
+parent ..> siblingB: reference\n[oldIndex]
+parent ..> target: reference\n[<color #Blue>newIndex</color>]\n<color #blue>{movedResolveInfo}</color>
+parent ..> siblingC: reference\n[newIndex + 1]
 
 siblingA -[hidden]> siblingB
 siblingB -[hidden]> target
