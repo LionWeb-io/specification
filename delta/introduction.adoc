@@ -1,7 +1,7 @@
 [[introduction]]
 == Introduction
-Delta API assumes a bidirectional communication channel.
-The _client_ initiates the channel with the _repository_ to open a _participation_{fn-org337}.
+Delta API assumes a bidirectional communication channel between a <<client>> and a <<repository>>.
+The client initiates the channel with the repository to open a <<participation>>{fn-org337}.
 Both parties communicate through the established channel via _messages_.
 
 Delta API supports these message kinds, loosely following CQRS patternfootnote:[https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation]{fn-org291}:
@@ -9,13 +9,13 @@ Delta API supports these message kinds, loosely following CQRS patternfootnote:[
 * <<queries>> initiated/requested by the client, with synchronous response by the repository.
 A query requests some information from the repository without changing the repository's contents.
 The repository gathers all information needed to answer the query, and sends the information back.
-The repository might reply invalid queries with a failure message.
+The repository might reply to invalid queries with a failure message.
 We also use queries for managing <<participation, participations>>.{fn-org350}
 
 * <<commands>> initiated/requested by the client, with synchronous response by the repository.
 A command requests some change to the repository.
 The repository quickly confirms having _received_ the command, or rejects a _failed_ command.{fn-org298}
-However, the repository processes the command asynchronously, and eventually broadcasts the effect(s) as _event_.
+However, the repository processes the command asynchronously, and eventually broadcasts the effect(s) as _event(s)_.
 
 * <<events>> initiated/broadcast by the repository, without response by the client.
 An event describes some change that has been applied to the repository's contents.

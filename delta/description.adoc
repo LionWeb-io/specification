@@ -1,13 +1,24 @@
 [[description]]
 == Description
+
+[[repository, repository]]
+=== Repository characteristics
+A repository is a set of partitions, and a set of APIs, amongst them this delta API.
+The repository has an ID that must be unique for all repositories in the same context.
+LionWeb doesn't specify the scope of the context.{fn-org401}
+
+A repository is “its own universe”: nodes within it can't reference nodes, or be referenced from nodes from other repositories.
+All nodes within the same repository MUST have unique IDs.
+Nodes can refer to nodes from the LionCore and built-in languages.
+
 [[client, client]]
 === Client characteristics
-A client is a program connecting to a repository.
+A client is a program connecting to a <<repository>>.
 Each client has exactly one <<participation>> with one repository at one point in time.
 The same client can have several consecutive participations with the same repository, but never at the same time.
 A client might interact with several repositories, but they are completely independent (i.e. same as two clients connecting to two repositories).{fn-org337}
 
-The client has the responsibility to guarantee uniqueness of <<queryIdType, query>> and <<commandIdType, command ids>> within the same participation.
+The client has the responsibility to guarantee uniqueness of <<queryIdType, query ids>> and <<commandIdType, command ids>> within the same participation.
 
 Authentication and authorization are out of scope of this API.
 
