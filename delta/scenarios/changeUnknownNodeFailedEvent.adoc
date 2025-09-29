@@ -53,6 +53,6 @@ deactivate clientEvent
 6. Client informs editor of command submission.
 7. Repository realizes it does not know a node with id `nodeA`
 8. Repository creates event for notification.
-9. Repository emits <<evnt-Error>> event with `unknownNode` error code, `cannot add property to unknown node` message and sequence number `1`.
+9. Repository emits <<evnt-ErrorEvent>> with `unknownNode` error code, `cannot add property to unknown node` message and sequence number `1`.
 It includes one <<commandSourceType>> with value `(participation-a, cmd-1)`.
 10. Client removes `cmd-1` from open commands list.
