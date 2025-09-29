@@ -2,7 +2,7 @@
 == Messages
 === Parameter types
 [horizontal]
-[[protocolMessagesType]]protocolMessages:: Optional <<protocolMessage>>s.
+[[protocolMessagesType]]protocolMessages:: Optionally empty{fn-org402} list of <<protocolMessage>>s.
 
 [[targetNodeType]]TargetNode:: Target's node as <<{m3}.adoc#node-id, id>>.
 

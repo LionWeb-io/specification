@@ -445,10 +445,11 @@
         "creation",
         "deletion",
         "partitions",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     },
     "SubscribeToChangingPartitionsResponse": {
@@ -465,10 +466,11 @@
       },
       "required": [
         "messageKind",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 2,
+      "minProperties": 3,
       "maxProperties": 3
     },
     "SubscribeToPartitionContentsRequest": {
@@ -489,10 +491,11 @@
       "required": [
         "messageKind",
         "partition",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
+      "minProperties": 4,
       "maxProperties": 4
     },
     "SubscribeToPartitionContentsResponse": {
@@ -513,10 +516,11 @@
       "required": [
         "messageKind",
         "contents",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
+      "minProperties": 4,
       "maxProperties": 4
     },
     "UnsubscribeFromPartitionContentsRequest": {
@@ -537,10 +541,11 @@
       "required": [
         "messageKind",
         "partition",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
+      "minProperties": 4,
       "maxProperties": 4
     },
     "UnsubscribeFromPartitionContentsResponse": {
@@ -557,10 +562,11 @@
       },
       "required": [
         "messageKind",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 2,
+      "minProperties": 3,
       "maxProperties": 3
     },
     "SignOnRequest": {
@@ -589,10 +595,11 @@
         "deltaProtocolVersion",
         "clientId",
         "repositoryId",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     },
     "SignOnResponse": {
@@ -613,10 +620,11 @@
       "required": [
         "messageKind",
         "participationId",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
+      "minProperties": 4,
       "maxProperties": 4
     },
     "SignOffRequest": {
@@ -633,10 +641,11 @@
       },
       "required": [
         "messageKind",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 2,
+      "minProperties": 3,
       "maxProperties": 3
     },
     "SignOffResponse": {
@@ -653,10 +662,11 @@
       },
       "required": [
         "messageKind",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 2,
+      "minProperties": 3,
       "maxProperties": 3
     },
     "ReconnectRequest": {
@@ -681,10 +691,11 @@
         "messageKind",
         "participationId",
         "lastReceivedSequenceNumber",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 4,
+      "minProperties": 5,
       "maxProperties": 5
     },
     "ReconnectResponse": {
@@ -705,11 +716,12 @@
       "required": [
         "messageKind",
         "lastSentSequenceNumber",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
       "minProperties": 4,
-      "maxProperties": 5
+      "maxProperties": 4
     },
     "GetAvailableIdsRequest": {
       "properties": {
@@ -730,10 +742,11 @@
       "required": [
         "messageKind",
         "count",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
+      "minProperties": 4,
       "maxProperties": 4
     },
     "GetAvailableIdsResponse": {
@@ -754,10 +767,11 @@
       "required": [
         "messageKind",
         "ids",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
+      "minProperties": 4,
       "maxProperties": 4
     },
     "ListPartitionsRequest": {
@@ -774,10 +788,11 @@
       },
       "required": [
         "messageKind",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 2,
+      "minProperties": 3,
       "maxProperties": 3
     },
     "ListPartitionsResponse": {
@@ -798,10 +813,11 @@
       "required": [
         "messageKind",
         "partitions",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
+      "minProperties": 4,
       "maxProperties": 4
     },
     "ErrorResponse": {
@@ -826,11 +842,12 @@
         "messageKind",
         "errorCode",
         "message",
-        "queryId"
+        "queryId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
       "minProperties": 5,
-      "maxProperties": 6
+      "maxProperties": 5
     },
     "Commands": {
       "anyOf": [
@@ -968,10 +985,11 @@
       "required": [
         "messageKind",
         "newPartition",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
+      "minProperties": 4,
       "maxProperties": 4
     },
     "DeletePartition": {
@@ -992,10 +1010,11 @@
       "required": [
         "messageKind",
         "deletedPartition",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
+      "minProperties": 4,
       "maxProperties": 4
     },
     "ChangeClassifier": {
@@ -1020,10 +1039,11 @@
         "messageKind",
         "node",
         "newClassifier",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 4,
+      "minProperties": 5,
       "maxProperties": 5
     },
     "AddProperty": {
@@ -1052,10 +1072,11 @@
         "node",
         "property",
         "newValue",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     },
     "DeleteProperty": {
@@ -1080,10 +1101,11 @@
         "messageKind",
         "node",
         "property",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 4,
+      "minProperties": 5,
       "maxProperties": 5
     },
     "ChangeProperty": {
@@ -1112,10 +1134,11 @@
         "node",
         "property",
         "newValue",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     },
     "AddChild": {
@@ -1148,10 +1171,11 @@
         "newChild",
         "containment",
         "index",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "DeleteChild": {
@@ -1184,10 +1208,11 @@
         "containment",
         "index",
         "deletedChild",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "ReplaceChild": {
@@ -1224,10 +1249,11 @@
         "containment",
         "index",
         "replacedChild",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
+      "minProperties": 8,
       "maxProperties": 8
     },
     "MoveChildFromOtherContainment": {
@@ -1260,10 +1286,11 @@
         "newContainment",
         "newIndex",
         "movedChild",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "MoveChildFromOtherContainmentInSameParent": {
@@ -1292,10 +1319,11 @@
         "newContainment",
         "newIndex",
         "movedChild",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     },
     "MoveChildInSameContainment": {
@@ -1320,10 +1348,11 @@
         "messageKind",
         "newIndex",
         "movedChild",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 4,
+      "minProperties": 5,
       "maxProperties": 5
     },
     "MoveAndReplaceChildFromOtherContainment": {
@@ -1360,10 +1389,11 @@
         "newIndex",
         "replacedChild",
         "movedChild",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
+      "minProperties": 8,
       "maxProperties": 8
     },
     "MoveAndReplaceChildFromOtherContainmentInSameParent": {
@@ -1396,10 +1426,11 @@
         "newIndex",
         "replacedChild",
         "movedChild",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "MoveAndReplaceChildInSameContainment": {
@@ -1428,10 +1459,11 @@
         "newIndex",
         "replacedChild",
         "movedChild",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     },
     "AddAnnotation": {
@@ -1460,10 +1492,11 @@
         "parent",
         "newAnnotation",
         "index",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     },
     "DeleteAnnotation": {
@@ -1492,10 +1525,11 @@
         "parent",
         "index",
         "deletedAnnotation",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     },
     "ReplaceAnnotation": {
@@ -1528,10 +1562,11 @@
         "newAnnotation",
         "index",
         "replacedAnnotation",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "MoveAnnotationFromOtherParent": {
@@ -1560,10 +1595,11 @@
         "newParent",
         "newIndex",
         "movedAnnotation",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     },
     "MoveAnnotationInSameParent": {
@@ -1588,10 +1624,11 @@
         "messageKind",
         "newIndex",
         "movedAnnotation",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 4,
+      "minProperties": 5,
       "maxProperties": 5
     },
     "MoveAndReplaceAnnotationFromOtherParent": {
@@ -1624,10 +1661,11 @@
         "newIndex",
         "replacedAnnotation",
         "movedAnnotation",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "MoveAndReplaceAnnotationInSameParent": {
@@ -1656,10 +1694,11 @@
         "newIndex",
         "replacedAnnotation",
         "movedAnnotation",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     },
     "AddReference": {
@@ -1696,10 +1735,11 @@
         "index",
         "newTarget",
         "newResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
+      "minProperties": 8,
       "maxProperties": 8
     },
     "DeleteReference": {
@@ -1736,10 +1776,11 @@
         "index",
         "deletedTarget",
         "deletedResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
+      "minProperties": 8,
       "maxProperties": 8
     },
     "ChangeReference": {
@@ -1784,10 +1825,11 @@
         "oldResolveInfo",
         "newTarget",
         "newResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 10,
       "maxProperties": 10
     },
     "MoveEntryFromOtherReference": {
@@ -1836,10 +1878,11 @@
         "oldIndex",
         "movedTarget",
         "movedResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 10,
+      "minProperties": 11,
       "maxProperties": 11
     },
     "MoveEntryFromOtherReferenceInSameParent": {
@@ -1884,10 +1927,11 @@
         "oldIndex",
         "movedTarget",
         "movedResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 10,
       "maxProperties": 10
     },
     "MoveEntryInSameReference": {
@@ -1928,10 +1972,11 @@
         "oldIndex",
         "movedTarget",
         "movedResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 9,
       "maxProperties": 9
     },
     "MoveAndReplaceEntryFromOtherReference": {
@@ -1988,10 +2033,11 @@
         "oldIndex",
         "movedTarget",
         "movedResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 12,
+      "minProperties": 13,
       "maxProperties": 13
     },
     "MoveAndReplaceEntryFromOtherReferenceInSameParent": {
@@ -2044,10 +2090,11 @@
         "oldIndex",
         "movedTarget",
         "movedResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 11,
+      "minProperties": 12,
       "maxProperties": 12
     },
     "MoveAndReplaceEntryInSameReference": {
@@ -2096,10 +2143,11 @@
         "oldIndex",
         "movedTarget",
         "movedResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 10,
+      "minProperties": 11,
       "maxProperties": 11
     },
     "AddReferenceResolveInfo": {
@@ -2132,10 +2180,11 @@
         "reference",
         "index",
         "newResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "DeleteReferenceResolveInfo": {
@@ -2168,10 +2217,11 @@
         "reference",
         "index",
         "deletedResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "ChangeReferenceResolveInfo": {
@@ -2208,10 +2258,11 @@
         "index",
         "oldResolveInfo",
         "newResolveInfo",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
+      "minProperties": 8,
       "maxProperties": 8
     },
     "AddReferenceTarget": {
@@ -2244,10 +2295,11 @@
         "reference",
         "index",
         "newTarget",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "DeleteReferenceTarget": {
@@ -2280,10 +2332,11 @@
         "reference",
         "index",
         "deletedTarget",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "ChangeReferenceTarget": {
@@ -2320,10 +2373,11 @@
         "index",
         "oldTarget",
         "newTarget",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
+      "minProperties": 8,
       "maxProperties": 8
     },
     "CompositeCommand": {
@@ -2347,10 +2401,11 @@
       "required": [
         "messageKind",
         "parts",
-        "commandId"
+        "commandId",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
+      "minProperties": 4,
       "maxProperties": 4
     },
     "Events": {
@@ -2499,10 +2554,11 @@
         "messageKind",
         "newPartition",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 4,
+      "minProperties": 5,
       "maxProperties": 5
     },
     "PartitionDeleted": {
@@ -2531,10 +2587,11 @@
         "deletedPartition",
         "deletedDescendants",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     },
     "ClassifierChanged": {
@@ -2567,10 +2624,11 @@
         "newClassifier",
         "oldClassifier",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "PropertyAdded": {
@@ -2603,10 +2661,11 @@
         "property",
         "newValue",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "PropertyDeleted": {
@@ -2639,10 +2698,11 @@
         "property",
         "oldValue",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "PropertyChanged": {
@@ -2679,10 +2739,11 @@
         "oldValue",
         "newValue",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
+      "minProperties": 8,
       "maxProperties": 8
     },
     "ChildAdded": {
@@ -2719,10 +2780,11 @@
         "containment",
         "index",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
+      "minProperties": 8,
       "maxProperties": 8
     },
     "ChildDeleted": {
@@ -2763,10 +2825,11 @@
         "containment",
         "index",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 9,
       "maxProperties": 9
     },
     "ChildReplaced": {
@@ -2811,10 +2874,11 @@
         "containment",
         "index",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 10,
       "maxProperties": 10
     },
     "ChildMovedFromOtherContainment": {
@@ -2863,10 +2927,11 @@
         "oldContainment",
         "oldIndex",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 10,
+      "minProperties": 11,
       "maxProperties": 11
     },
     "ChildMovedFromOtherContainmentInSameParent": {
@@ -2911,10 +2976,11 @@
         "oldContainment",
         "oldIndex",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 10,
       "maxProperties": 10
     },
     "ChildMovedInSameContainment": {
@@ -2955,10 +3021,11 @@
         "containment",
         "oldIndex",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 9,
       "maxProperties": 9
     },
     "ChildMovedAndReplacedFromOtherContainment": {
@@ -3015,10 +3082,11 @@
         "replacedChild",
         "replacedDescendants",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 12,
+      "minProperties": 13,
       "maxProperties": 13
     },
     "ChildMovedAndReplacedFromOtherContainmentInSameParent": {
@@ -3071,10 +3139,11 @@
         "replacedChild",
         "replacedDescendants",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 11,
+      "minProperties": 12,
       "maxProperties": 12
     },
     "ChildMovedAndReplacedInSameContainment": {
@@ -3123,10 +3192,11 @@
         "replacedChild",
         "replacedDescendants",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 10,
+      "minProperties": 11,
       "maxProperties": 11
     },
     "AnnotationAdded": {
@@ -3159,10 +3229,11 @@
         "newAnnotation",
         "index",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 7,
       "maxProperties": 7
     },
     "AnnotationDeleted": {
@@ -3199,10 +3270,11 @@
         "deletedDescendants",
         "index",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
+      "minProperties": 8,
       "maxProperties": 8
     },
     "AnnotationReplaced": {
@@ -3243,10 +3315,11 @@
         "parent",
         "index",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 9,
       "maxProperties": 9
     },
     "AnnotationMovedFromOtherParent": {
@@ -3287,10 +3360,11 @@
         "oldParent",
         "oldIndex",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 9,
       "maxProperties": 9
     },
     "AnnotationMovedInSameParent": {
@@ -3327,10 +3401,11 @@
         "parent",
         "oldIndex",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
+      "minProperties": 8,
       "maxProperties": 8
     },
     "AnnotationMovedAndReplacedFromOtherParent": {
@@ -3379,10 +3454,11 @@
         "replacedAnnotation",
         "replacedDescendants",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 10,
+      "minProperties": 11,
       "maxProperties": 11
     },
     "AnnotationMovedAndReplacedInSameParent": {
@@ -3427,10 +3503,11 @@
         "replacedAnnotation",
         "replacedDescendants",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 10,
       "maxProperties": 10
     },
     "ReferenceAdded": {
@@ -3471,10 +3548,11 @@
         "newTarget",
         "newResolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 9,
       "maxProperties": 9
     },
     "ReferenceDeleted": {
@@ -3515,10 +3593,11 @@
         "deletedTarget",
         "deletedResolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 9,
       "maxProperties": 9
     },
     "ReferenceChanged": {
@@ -3567,10 +3646,11 @@
         "oldTarget",
         "oldResolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 10,
+      "minProperties": 11,
       "maxProperties": 11
     },
     "EntryMovedFromOtherReference": {
@@ -3623,10 +3703,11 @@
         "movedTarget",
         "movedResolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 11,
+      "minProperties": 12,
       "maxProperties": 12
     },
     "EntryMovedFromOtherReferenceInSameParent": {
@@ -3675,10 +3756,11 @@
         "movedTarget",
         "movedResolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 10,
+      "minProperties": 11,
       "maxProperties": 11
     },
     "EntryMovedInSameReference": {
@@ -3723,10 +3805,11 @@
         "movedTarget",
         "movedResolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 10,
       "maxProperties": 10
     },
     "EntryMovedAndReplacedFromOtherReference": {
@@ -3787,10 +3870,11 @@
         "replacedTarget",
         "replacedResolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 13,
+      "minProperties": 14,
       "maxProperties": 14
     },
     "EntryMovedAndReplacedFromOtherReferenceInSameParent": {
@@ -3847,10 +3931,11 @@
         "replacedTarget",
         "replacedResolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 12,
+      "minProperties": 13,
       "maxProperties": 13
     },
     "EntryMovedAndReplacedInSameReference": {
@@ -3903,10 +3988,11 @@
         "replacedTarget",
         "replacedResolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 11,
+      "minProperties": 12,
       "maxProperties": 12
     },
     "ReferenceResolveInfoAdded": {
@@ -3947,10 +4033,11 @@
         "newResolveInfo",
         "target",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 9,
       "maxProperties": 9
     },
     "ReferenceResolveInfoDeleted": {
@@ -3991,10 +4078,11 @@
         "target",
         "deletedResolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 9,
       "maxProperties": 9
     },
     "ReferenceResolveInfoChanged": {
@@ -4039,10 +4127,11 @@
         "target",
         "oldResolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 10,
       "maxProperties": 10
     },
     "ReferenceTargetAdded": {
@@ -4083,10 +4172,11 @@
         "newTarget",
         "resolveInfo",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 9,
       "maxProperties": 9
     },
     "ReferenceTargetDeleted": {
@@ -4127,10 +4217,11 @@
         "resolveInfo",
         "deletedTarget",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 9,
       "maxProperties": 9
     },
     "ReferenceTargetChanged": {
@@ -4175,10 +4266,11 @@
         "resolveInfo",
         "replacedTarget",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 10,
       "maxProperties": 10
     },
     "CompositeEvent": {
@@ -4198,10 +4290,11 @@
       },
       "required": [
         "messageKind",
-        "parts"
+        "parts",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 2,
+      "minProperties": 3,
       "maxProperties": 3
     },
     "NoOpEvent": {
@@ -4222,10 +4315,11 @@
       "required": [
         "messageKind",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
+      "minProperties": 4,
       "maxProperties": 4
     },
     "ErrorEvent": {
@@ -4254,10 +4348,11 @@
         "errorCode",
         "message",
         "originCommands",
-        "sequenceNumber"
+        "sequenceNumber",
+        "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 6,
       "maxProperties": 6
     }
   }
