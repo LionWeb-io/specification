@@ -413,6 +413,9 @@
         },
         {
           "$ref": "#/$defs/ListPartitionsResponse"
+        },
+        {
+          "$ref": "#/$defs/ErrorResponse"
         }
       ]
     },
@@ -800,6 +803,34 @@
       "additionalProperties": false,
       "minProperties": 3,
       "maxProperties": 4
+    },
+    "ErrorResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "ErrorResponse"
+        },
+        "errorCode": {
+          "$ref": "#/$defs/errorCode"
+        },
+        "message": {
+          "type": "string"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "protocolMessages": {
+          "$ref": "#/$defs/protocolMessages"
+        }
+      },
+      "required": [
+        "messageKind",
+        "errorCode",
+        "message",
+        "queryId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
     },
     "Commands": {
       "anyOf": [
@@ -2442,7 +2473,7 @@
           "$ref": "#/$defs/CompositeEvent"
         },
         {
-          "$ref": "#/$defs/Error"
+          "$ref": "#/$defs/ErrorEvent"
         }
       ]
     },
@@ -4197,10 +4228,10 @@
       "minProperties": 3,
       "maxProperties": 4
     },
-    "Error": {
+    "ErrorEvent": {
       "properties": {
         "messageKind": {
-          "const": "Error"
+          "const": "ErrorEvent"
         },
         "errorCode": {
           "$ref": "#/$defs/errorCode"

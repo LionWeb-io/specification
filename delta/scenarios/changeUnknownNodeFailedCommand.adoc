@@ -55,7 +55,7 @@ activate editor
 5. Client registers processed command id `cmd-1`.
 6. Client informs editor of command submission.
 7. Repository rejects invalid node id.
-8. Repository sends <<evnt-Error>> event only to this participation with `invalidNodeId` error code, `invalid node id 'node with spaces'` message and sequence number `1`.
+8. Repository sends <<evnt-ErrorEvent>> only to this participation with `invalidNodeId` error code, `invalid node id 'node with spaces'` message and sequence number `1`.
 It includes one <<commandSourceType>> with value `(participation-a, cmd-1)`.
 9. Client removes `cmd-1` from open commands list.
 10. Client informs editor of failed command.

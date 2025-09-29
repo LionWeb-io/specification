@@ -56,6 +56,6 @@ deactivate clientEvent
 Some error occurs (e.g. database unavailable).
 8. Repository handles the error.
 9. Repository creates event for notification.
-10. Repository emits <<evnt-Error>> event with `internalError` error code, `internal error occurred` message and sequence number `1`.
+10. Repository emits <<evnt-ErrorEvent>> with `internalError` error code, `internal error occurred` message and sequence number `1`.
 It includes one <<commandSourceType>> with value `(participation-a, cmd-1)`.
 11. Client removes `cmd-1` from open commands list.

@@ -988,7 +988,7 @@ We can nest composite events arbitrarily.{fn-org360}
 `CompositeEvent` footnote:[
 This event is the only one to have a `Event` suffix, which is necessary to distinguish it from its <<cmd-CompositeCommand, `CompositeCommand`>> counterpart.
 All other events can be distinguished from their command counterparts by looking at whether the technical name reads as an imperative (“add child” — for commands), or in past perfect tense (”child [has been\] added” — for events).
-(The <<evnt-NoOp, `NoOp`>> and <<evnt-Error, `Error`>> don't have command counterparts.)
+(The <<evnt-NoOp, `NoOp`>> and <<evnt-ErrorEvent, `Error`>> don't have command counterparts.)
 ]
 
 .Related command
@@ -1011,8 +1011,9 @@ Nothing happened as result of one or more command(s).{fn-org314}
 _none_
 
 [[evnt-Error]]
-===== Error
-Repository couldn't handle one or more command(s).{fn-org316}
+[[evnt-ErrorEvent]]
+===== ErrorEvent
+Repository couldn't handle one or more command(s).{fn-org316}{fn-org405}
 
 The repository MAY send an error event to only one participation.{fn-org379}
 
@@ -1025,7 +1026,7 @@ The repository MAY send an error event to only one participation.{fn-org379}
 [[Error.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Technical name
-`Error`
+`ErrorEvent`
 
 .Related command
 _none_

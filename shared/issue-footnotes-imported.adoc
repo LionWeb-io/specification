@@ -326,3 +326,6 @@
 :fn-org396: footnote:org396[https://github.com/LionWeb-io/specification/issues/396[Details w.r.t. target/resolveInfo #396]]
 :fn-org399: footnote:org399[https://github.com/LionWeb-io/specification/issues/399[Unordered annotation on links #399]]
 :fn-org401: footnote:org401[https://github.com/LionWeb-io/specification/issues/401[Clarifying terms "repository" vs. "server" vs. "forest" #401]]
+:fn-org402: footnote:org402[https://github.com/LionWeb-io/specification/issues/402[Representation of empty protocol messages part of delta messages #402]]
+:fn-org403: footnote:org403[https://github.com/LionWeb-io/specification/issues/403[Incorrect representation of reference in plantuml graph in Delta Repository Access API #403]]
+:fn-org405: footnote:org405[https://github.com/LionWeb-io/specification/issues/405[Introduce ErrorResponse #405]]
