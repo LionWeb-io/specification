@@ -33,7 +33,7 @@ This client wants to receive events on newly created (<<SubscribeToChangingParti
 
 [[qry-subscribePartition]]
 [[qry-SubscribeToPartitionContents]]
-===== Subscribe to partition
+===== Subscribe to partition contents
 This client wants to receive events on any changes to <<SubscribeToPartitionContents.partition>> or any of its descendants.{fn-org270}{fn-org269}
 
 [horizontal]
@@ -57,7 +57,7 @@ This client wants to receive events on any changes to <<SubscribeToPartitionCont
 
 [[qry-unsubscribePartition]]
 [[qry-UnsubscribeFromPartitionContents]]
-===== Unsubscribe from partition
+===== Unsubscribe from partition contents
 This client does not want to receive events on any changes to <<UnsubscribeFromPartitionContents.partition>> or any of its descendants anymore.{fn-org270}
 
 [horizontal]
