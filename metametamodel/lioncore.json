@@ -1845,7 +1845,7 @@
       "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Language-dependsO-2024-1",
+      "id": "-id-Language-dependsOn-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
@@ -2149,7 +2149,7 @@
       "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-IKeyed-key",
+      "id": "-id-IKeyed-key-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
