@@ -33,3 +33,25 @@ xref:{m3}.adoc#Integer[Integer]
 * Meta-metamodel{emquad}xref:{m3}.adoc[html]{emquad}link:{m3}.pdf[pdf]
 
 * Bulk Repository Access API{emquad}xref:{bulk}.adoc[html]{emquad}link:{bulk}.pdf[pdf]
+
+== Known issues
+
+=== M3 (lioncore.json) Mismatched child vs. node id
+
+Details: lioncore.json: Mismatched child vs. node id `-id-Classifier-features-2024-1` https://github.com/LionWeb-io/specification/issues/412[#412]
+
+xref:metametamodel/lioncore.json[lioncore.json] line 1484 mentions id `-id-Classifier-features-2024-1` as child.
+
+[%linenums,json,highlight=1484,start=1476,indent=0]
+----
+include::metametamodel/lioncore.json[lines=1476..1487]
+----
+
+However, the intended child node id in line 1515 spells `-id-Classifier-feature-2024-1` (singular "feature").
+
+[%linenums,json,highlight=1515,start=1514,indent=0]
+----
+include::metametamodel/lioncore.json[lines=1514..1520]
+----
+
+They both MUST be the same, i.e. `-id-Classifier-features-2024-1`.

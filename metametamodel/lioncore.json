@@ -1512,7 +1512,7 @@
       "parent": "-id-LionCore-M3-2024-1"
     },
     {
-      "id": "-id-Classifier-feature-2024-1",
+      "id": "-id-Classifier-features-2024-1",
       "classifier": {
         "language": "LionCore-M3",
         "version": "2024.1",
