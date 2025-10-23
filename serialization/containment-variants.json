@@ -62,7 +62,7 @@
       "containments": [],
       "references": [],
       "annotations": [],
-      "parent": null
+      "parent": "ccc"
     },
     {
       "id": "cdd",
@@ -88,7 +88,7 @@
       "containments": [],
       "references": [],
       "annotations": [],
-      "parent": null
+      "parent": "ccc"
     }
   ]
 }
