@@ -68,3 +68,26 @@ Client tries to set a reference with neither `target` nor `resolveInfo`
 
 .Technical name
 `undefinedReferenceTarget`
+
+[[err-notAProperTree]]
+==== Not a proper tree
+The `DeltaJsonChunk` given by the client does not form a proper tree
+
+.Technical name
+`notAProperTree`
+
+[[err-childNotFound]]
+==== Child not found
+The `DeltaJsonChunk` given by the client does not cintain anode with the correct `parent`
+
+.Technical name
+`childNotFound`
+
+[[err-unknownContainment]]
+==== The containment cannot be found
+The `parent` has no such containment
+
+.Technical name
+`unknownContainment`
+
+err-unknownContainment
