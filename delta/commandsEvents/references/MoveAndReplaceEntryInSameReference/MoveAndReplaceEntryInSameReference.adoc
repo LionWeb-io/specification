@@ -1,0 +1,50 @@
+[[cmd-MoveAndReplaceEntryInSameReference]]
+===== Move entry in same reference and replace existing entry
+Move existing entry <<MoveAndReplaceEntryInSameReference.movedTarget>>/<<MoveAndReplaceEntryInSameReference.movedResolveInfo>>{fn-org371} inside <<MoveAndReplaceEntryInSameReference.parent>>'s <<MoveAndReplaceEntryInSameReference.reference>> at <<MoveAndReplaceEntryInSameReference.oldIndex>>
+inside <<MoveAndReplaceEntryInSameReference.parent>>'s <<MoveAndReplaceEntryInSameReference.reference>> at <<MoveAndReplaceEntryInSameReference.newIndex>>,
+replacing existing entry <<MoveAndReplaceEntryInSameReference.replacedTarget>>/<<MoveAndReplaceEntryInSameReference.replacedResolveInfo>>{fn-org371} in <<MoveAndReplaceEntryInSameReference.parent>>'s <<MoveAndReplaceEntryInSameReference.reference>> at <<MoveAndReplaceEntryInSameReference.newIndex>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::MoveAndReplaceEntryInSameReference-diagram.adoc[]
+|===
+
+.Technical name
+`MoveAndReplaceEntryInSameReference`
+
+[horizontal]
+.Parameters
+[[MoveAndReplaceEntryInSameReference.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[MoveAndReplaceEntryInSameReference.reference, `reference`]]reference:: <<metaPointerType>>
+
+[[MoveAndReplaceEntryInSameReference.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[MoveAndReplaceEntryInSameReference.movedTarget, `movedTarget`]]movedTarget:: <<targetNodeType>>?
+
+[[MoveAndReplaceEntryInSameReference.movedResolveInfo, `movedResolveInfo`]]movedResolveInfo:: <<resolveInfoType>>?
+
+[[MoveAndReplaceEntryInSameReference.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveAndReplaceEntryInSameReference.replacedTarget, `replacedTarget`]]replacedTarget:: <<targetNodeType>>?
+
+[[MoveAndReplaceEntryInSameReference.replacedResolveInfo, `replacedResolveInfo`]]replacedResolveInfo:: <<resolveInfoType>>?
+
+[[MoveAndReplaceEntryInSameReference.commandId]]commandId:: <<commandIdType>>
+
+[[MoveAndReplaceEntryInSameReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<MoveAndReplaceEntryInSameReference.parent>>
+* <<err-unknownIndex>> for <<MoveAndReplaceEntryInSameReference.newIndex>> (is beyond (the number of <<MoveAndReplaceEntryInSameReference.reference>> entries of <<MoveAndReplaceEntryInSameReference.parent>>) - 2)
+* <<err-unknownIndex>> for <<MoveAndReplaceEntryInSameReference.oldIndex>> (is beyond (the number of <<MoveAndReplaceEntryInSameReference.reference>> entries of <<MoveAndReplaceEntryInSameReference.parent>>) - 1)
+* <<err-indexEntryMismatch>> for <<MoveAndReplaceEntryInSameReference.reference>>/<<MoveAndReplaceEntryInSameReference.oldIndex>> and <<MoveAndReplaceEntryInSameReference.movedTarget>>/<<MoveAndReplaceEntryInSameReference.movedResolveInfo>>
+* <<err-indexEntryMismatch>> for <<MoveAndReplaceEntryInSameReference.reference>>/<<MoveAndReplaceEntryInSameReference.newIndex>> and <<MoveAndReplaceEntryInSameReference.replacedTarget>>/<<MoveAndReplaceEntryInSameReference.replacedResolveInfo>>
+* <<err-undefinedReferenceTarget>> for <<MoveAndReplaceEntryInSameReference.replacedTarget>>/<<MoveAndReplaceEntryInSameReference.replacedResolveInfo>>
+* <<err-undefinedReferenceTarget>> for <<MoveAndReplaceEntryInSameReference.movedTarget>>/<<MoveAndReplaceEntryInSameReference.movedResolveInfo>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-EntryMovedAndReplacedInSameReference>>

@@ -1,0 +1,18 @@
+[[cmd-annotations]]
+==== Annotations
+
+include::AddAnnotation/AddAnnotation.adoc[]
+
+include::DeleteAnnotation/DeleteAnnotation.adoc[]
+
+include::ReplaceAnnotation/ReplaceAnnotation.adoc[]
+
+
+include::MoveAnnotationFromOtherParent/MoveAnnotationFromOtherParent.adoc[]
+
+include::MoveAnnotationInSameParent/MoveAnnotationInSameParent.adoc[]
+
+
+include::MoveAndReplaceAnnotationFromOtherParent/MoveAndReplaceAnnotationFromOtherParent.adoc[]
+
+include::MoveAndReplaceAnnotationInSameParent/MoveAndReplaceAnnotationInSameParent.adoc[]

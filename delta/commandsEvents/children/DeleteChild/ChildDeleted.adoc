@@ -1,0 +1,28 @@
+[[evnt-ChildDeleted]]
+===== Child deleted
+Existing node <<ChildDeleted.deletedChild>>, and all its <<ChildDeleted.deletedDescendants>>{fn-org370}, have been deleted from <<ChildDeleted.parent>>'s <<ChildDeleted.containment>> at <<ChildDeleted.index>>.{fn-org286}
+All other children inside <<ChildDeleted.parent>>'s <<ChildDeleted.containment>> with index > <<ChildDeleted.index>> have been moved to next lower index.
+
+.Technical name
+`ChildDeleted`
+
+[horizontal]
+.Parameters
+[[ChildDeleted.deletedChild, `deletedChild`]]deletedChild:: <<targetNodeType>>
+
+[[ChildDeleted.deletedDescendants, `deletedDescendants`]]deletedDescendants:: <<targetNodeType>>[]
+
+[[ChildDeleted.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[ChildDeleted.containment, `containment`]]containment:: <<metaPointerType>>
+
+[[ChildDeleted.index, `index`]]index:: <<indexType>>
+
+[[ChildDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ChildDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ChildDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-DeleteChild>>

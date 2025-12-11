@@ -1,0 +1,39 @@
+[[cmd-DeleteReference]]
+===== Delete reference
+Delete existing entry <<DeleteReference.deletedTarget>>/<<DeleteReference.deletedResolveInfo>>{fn-org371} from <<DeleteReference.parent>>'s <<DeleteReference.reference>> at <<DeleteReference.index>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::DeleteReference-diagram.adoc[]
+|===
+
+.Technical name
+`DeleteReference`
+
+[horizontal]
+.Parameters
+[[DeleteReference.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[DeleteReference.reference, `reference`]]reference:: <<metaPointerType>>
+
+[[DeleteReference.index, `index`]]index:: <<indexType>>
+
+[[DeleteReference.deletedTarget, `deletedTarget`]]deletedTarget:: <<targetNodeType>>?
+
+[[DeleteReference.deletedResolveInfo, `deletedResolveInfo`]]deletedResolveInfo:: <<resolveInfoType>>?
+
+[[DeleteReference.commandId]]commandId:: <<commandIdType>>
+
+[[DeleteReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<DeleteReference.parent>>
+* <<err-unknownIndex>> for <<DeleteReference.index>> (is beyond (the number of <<DeleteReference.reference>> entries of <<DeleteReference.parent>>) - 1)
+* <<err-indexEntryMismatch>> for <<DeleteReference.reference>>/<<DeleteReference.index>> and <<DeleteReference.deletedTarget>>/<<DeleteReference.deletedResolveInfo>>
+* <<err-undefinedReferenceTarget>> for <<DeleteReference.deletedTarget>>/<<DeleteReference.deletedResolveInfo>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ReferenceDeleted>>

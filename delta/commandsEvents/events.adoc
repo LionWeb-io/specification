@@ -1,0 +1,16 @@
+[[events]]
+=== Events
+
+include::partitions/EventPartitions.adoc[]
+
+include::nodes/EventNodes.adoc[]
+
+include::properties/EventProperties.adoc[]
+
+include::children/EventChildren.adoc[]
+
+include::annotations/EventAnnotations.adoc[]
+
+include::references/EventReferences.adoc[]
+
+include::miscellaneous/EventMiscellaneous.adoc[]

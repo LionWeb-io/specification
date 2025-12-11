@@ -1,0 +1,39 @@
+[[cmd-AddChild]]
+===== Add child
+Add new node <<AddChild.newChild>> to <<AddChild.parent>> in <<AddChild.containment>> at <<AddChild.index>>.
+<<AddChild.newChild>> might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::AddChild-diagram.adoc[]
+|===
+
+.Technical name
+`AddChild`
+
+[horizontal]
+.Parameters
+[[AddChild.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[AddChild.newChild, `newChild`]]newChild:: <<chunkType>>
+
+[[AddChild.containment, `containment`]]containment:: <<metaPointerType>>
+
+[[AddChild.index, `index`]]index:: <<indexType>>
+
+[[AddChild.commandId]]commandId:: <<commandIdType>>
+
+[[AddChild.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<AddChild.parent>>
+* <<err-nodeAlreadyExists>> for <<AddChild.newChild>>
+* <<err-unknownIndex>> for <<AddChild.index>> (is beyond the number of <<AddChild.containment>> entries in <<AddChild.parent>>)
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ChildAdded>>

@@ -1,0 +1,17 @@
+[[evnt-NoOp]]
+===== No-op
+Nothing happened as result of one or more command(s).{fn-org314}
+
+.Technical name
+`NoOp`
+
+[horizontal]
+.Parameters
+[[NoOp.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[NoOp.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[NoOp.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+_none_

@@ -1,0 +1,43 @@
+[[cmd-MoveEntryInSameReference]]
+===== Move entry in same reference
+Move existing entry <<MoveEntryInSameReference.movedTarget>>/<<MoveEntryInSameReference.movedResolveInfo>>{fn-org371} inside <<MoveEntryInSameReference.parent>>'s <<MoveEntryInSameReference.reference>> at <<MoveEntryInSameReference.oldIndex>>
+inside <<MoveEntryInSameReference.parent>>'s <<MoveEntryInSameReference.reference>> at <<MoveEntryInSameReference.newIndex>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::MoveEntryInSameReference-diagram.adoc[]
+|===
+
+.Technical name
+`MoveEntryInSameReference`
+
+[horizontal]
+.Parameters
+[[MoveEntryInSameReference.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[MoveEntryInSameReference.reference, `reference`]]reference:: <<metaPointerType>>
+
+[[MoveEntryInSameReference.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[MoveEntryInSameReference.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveEntryInSameReference.movedTarget, `movedTarget`]]movedTarget:: <<targetNodeType>>?
+
+[[MoveEntryInSameReference.movedResolveInfo, `movedResolveInfo`]]movedResolveInfo:: <<resolveInfoType>>?
+
+[[MoveEntryInSameReference.commandId]]commandId:: <<commandIdType>>
+
+[[MoveEntryInSameReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<MoveEntryInSameReference.parent>>
+* <<err-unknownIndex>> for <<MoveEntryInSameReference.newIndex>> (is beyond (the number of <<MoveEntryInSameReference.reference>> entries of <<MoveEntryInSameReference.parent>>) - 1)
+* <<err-unknownIndex>> for <<MoveEntryInSameReference.oldIndex>> (is beyond (the number of <<MoveEntryInSameReference.reference>> entries of <<MoveEntryInSameReference.parent>>) - 1)
+* <<err-indexEntryMismatch>> for <<MoveEntryInSameReference.reference>>/<<MoveEntryInSameReference.oldIndex>> and <<MoveEntryInSameReference.movedTarget>>/<<MoveEntryInSameReference.movedResolveInfo>>
+* <<err-undefinedReferenceTarget>> for <<MoveEntryInSameReference.movedTarget>>/<<MoveEntryInSameReference.movedResolveInfo>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-EntryMovedInSameReference>>

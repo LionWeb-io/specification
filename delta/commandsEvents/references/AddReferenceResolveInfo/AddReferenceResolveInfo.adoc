@@ -1,0 +1,41 @@
+[[cmd-AddReferenceResolveInfo]]
+===== Add reference ResolveInfo
+Add <<AddReferenceResolveInfo.newResolveInfo>> as ResolveInfo to existing entry inside <<AddReferenceResolveInfo.parent>>'s <<AddReferenceResolveInfo.reference>> at <<AddReferenceResolveInfo.index>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::AddReferenceResolveInfo-diagram.adoc[]
+|===
+
+****
+Current target MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
+****
+
+.Technical name
+`AddReferenceResolveInfo`
+
+[horizontal]
+.Parameters
+[[AddReferenceResolveInfo.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[AddReferenceResolveInfo.reference, `reference`]]reference:: <<metaPointerType>>
+
+[[AddReferenceResolveInfo.index, `index`]]index:: <<indexType>>
+
+[[AddReferenceResolveInfo.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>
+
+[[AddReferenceResolveInfo.commandId]]commandId:: <<commandIdType>>
+
+[[AddReferenceResolveInfo.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<AddReferenceResolveInfo.parent>>
+* <<err-unknownIndex>> for <<AddReferenceResolveInfo.index>> (is beyond (the number of <<AddReferenceResolveInfo.reference>> entries of <<AddReferenceResolveInfo.parent>>) - 1)
+* <<err-undefinedReferenceTarget>> for <<AddReferenceResolveInfo.newResolveInfo>>
+* ##?## resolveInfo already set in <<AddReferenceResolveInfo.parent>>'s <<AddReferenceResolveInfo.reference>> at <<AddReferenceResolveInfo.index>>.
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ReferenceResolveInfoAdded>>

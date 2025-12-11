@@ -1,0 +1,37 @@
+[[cmd-DeleteChild]]
+===== Delete child
+Delete existing node <<DeleteChild.deletedChild>>{fn-org371} from <<DeleteChild.parent>>'s <<DeleteChild.containment>> at <<DeleteChild.index>>, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::DeleteChild-diagram.adoc[]
+|===
+
+.Technical name
+`DeleteChild`
+
+[horizontal]
+.Parameters
+[[DeleteChild.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[DeleteChild.containment, `containment`]]containment:: <<metaPointerType>>
+
+[[DeleteChild.index, `index`]]index:: <<indexType>>
+
+[[DeleteChild.deletedChild, `deletedChild`]]deletedChild:: <<targetNodeType>>
+
+[[DeleteChild.commandId]]commandId:: <<commandIdType>>
+
+[[DeleteChild.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<DeleteChild.parent>>
+* ##?## <<DeleteChild.index>> is beyond (the number of <<DeleteChild.containment>> entries in <<DeleteChild.parent>>) - 1
+* <<err-indexEntryMismatch>> for <<DeleteChild.containment>>/<<DeleteChild.index>> and <<DeleteChild.deletedChild>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ChildDeleted>>

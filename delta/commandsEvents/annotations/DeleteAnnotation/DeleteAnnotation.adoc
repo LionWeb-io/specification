@@ -1,0 +1,35 @@
+[[cmd-DeleteAnnotation]]
+===== Delete annotation
+Delete existing node <<DeleteAnnotation.deletedAnnotation>>{fn-org371} from <<DeleteAnnotation.parent>>'s annotations at <<DeleteAnnotation.index>>, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::DeleteAnnotation-diagram.adoc[]
+|===
+
+.Technical name
+`DeleteAnnotation`
+
+[horizontal]
+.Parameters
+[[DeleteAnnotation.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[DeleteAnnotation.index, `index`]]index:: <<indexType>>
+
+[[DeleteAnnotation.deletedAnnotation, `deletedAnnotation`]]deletedAnnotation:: <<targetNodeType>>
+
+[[DeleteAnnotation.commandId]]commandId:: <<commandIdType>>
+
+[[DeleteAnnotation.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<DeleteAnnotation.parent>>
+* <<err-unknownIndex>> for <<DeleteAnnotation.index>> (is beyond (the number of annotations of <<DeleteAnnotation.parent>>) - 1)
+* <<err-indexEntryMismatch>> for <<DeleteAnnotation.index>> and <<DeleteAnnotation.deletedAnnotation>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-AnnotationDeleted>>

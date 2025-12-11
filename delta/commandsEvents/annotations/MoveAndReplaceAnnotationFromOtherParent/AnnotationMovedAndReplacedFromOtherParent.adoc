@@ -1,0 +1,36 @@
+[[evnt-AnnotationMovedAndReplacedFromOtherParent]]
+===== Annotation moved from other parent and replaced existing annotation
+Existing node <<AnnotationMovedAndReplacedFromOtherParent.movedAnnotation>> (previously inside <<AnnotationMovedAndReplacedFromOtherParent.oldParent>>'s annotations at <<AnnotationMovedAndReplacedFromOtherParent.oldIndex>>) has replaced the existing <<AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation>> inside <<AnnotationMovedAndReplacedFromOtherParent.newParent>>'s annotations at <<AnnotationMovedAndReplacedFromOtherParent.newIndex>>.
+<<AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation>>, and all its <<AnnotationMovedAndReplacedFromOtherParent.replacedDescendants>>{fn-org370}, have been deleted.
+
+All other annotations inside <<AnnotationMovedAndReplacedFromOtherParent.oldParent>>'s annotations with index > <<AnnotationMovedAndReplacedFromOtherParent.oldIndex>> have been moved to next lower index.
+
+No other annotations inside <<AnnotationMovedAndReplacedFromOtherParent.newParent>>'s annotations have been moved.
+
+.Technical name
+`AnnotationMovedAndReplacedFromOtherParent`
+
+[horizontal]
+.Parameters
+[[AnnotationMovedAndReplacedFromOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+
+[[AnnotationMovedAndReplacedFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[AnnotationMovedAndReplacedFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
+
+[[AnnotationMovedAndReplacedFromOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+
+[[AnnotationMovedAndReplacedFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
+
+[[AnnotationMovedAndReplacedFromOtherParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+
+[[AnnotationMovedAndReplacedFromOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[AnnotationMovedAndReplacedFromOtherParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[AnnotationMovedAndReplacedFromOtherParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-MoveAndReplaceAnnotationFromOtherParent>>

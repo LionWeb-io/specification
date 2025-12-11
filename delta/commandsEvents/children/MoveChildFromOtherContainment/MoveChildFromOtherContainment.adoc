@@ -1,0 +1,37 @@
+[[cmd-MoveChildFromOtherContainment]]
+===== Move child from other containment
+Move existing node <<MoveChildFromOtherContainment.movedChild>> inside <<MoveChildFromOtherContainment.newParent>>'s <<MoveChildFromOtherContainment.newContainment>> at <<MoveChildFromOtherContainment.newIndex>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::MoveChildFromOtherContainment-diagram.adoc[]
+|===
+
+.Technical name
+`MoveChildFromOtherContainment`
+
+[horizontal]
+.Parameters
+[[MoveChildFromOtherContainment.newParent, `newParent`]]newParent:: <<targetNodeType>>
+
+[[MoveChildFromOtherContainment.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
+
+[[MoveChildFromOtherContainment.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveChildFromOtherContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+
+[[MoveChildFromOtherContainment.commandId]]commandId:: <<commandIdType>>
+
+[[MoveChildFromOtherContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-nodeAlreadyExists>> for <<MoveChildFromOtherContainment.newParent>>
+* <<err-unknownIndex>> for <<MoveChildFromOtherContainment.newIndex>> (is beyond the number of <<MoveChildFromOtherContainment.newContainment>> entries in <<MoveChildFromOtherContainment.newParent>>)
+* <<err-unknownNode>> for <<MoveChildFromOtherContainment.movedChild>>
+* ##?## <<MoveChildFromOtherContainment.movedChild>> is already a child of <<MoveChildFromOtherContainment.newParent>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ChildMovedFromOtherContainment>>

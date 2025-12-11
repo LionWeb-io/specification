@@ -1,0 +1,29 @@
+[[evnt-ReferenceTargetChanged]]
+===== Reference target changed
+Target of existing entry inside <<ReferenceTargetChanged.parent>>'s <<ReferenceTargetChanged.reference>> at <<ReferenceTargetChanged.index>> with <<ReferenceTargetChanged.resolveInfo>> has been changed from <<ReferenceTargetChanged.replacedTarget>> to <<ReferenceTargetChanged.newTarget>>.
+
+.Technical name
+`ReferenceTargetChanged`
+
+[horizontal]
+.Parameters
+[[ReferenceTargetChanged.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[ReferenceTargetChanged.reference, `reference`]]reference:: <<metaPointerType>>
+
+[[ReferenceTargetChanged.index, `index`]]index:: <<indexType>>
+
+[[ReferenceTargetChanged.newTarget, `newTarget`]]newTarget:: <<targetNodeType>>
+
+[[ReferenceTargetChanged.resolveInfo, `resolveInfo`]]resolveInfo:: <<resolveInfoType>>?
+
+[[ReferenceTargetChanged.replacedTarget, `replacedTarget`]]replacedTarget:: <<targetNodeType>>
+
+[[ReferenceTargetChanged.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ReferenceTargetChanged.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ReferenceTargetChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-ChangeReferenceTarget>>

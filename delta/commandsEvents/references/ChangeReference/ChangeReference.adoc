@@ -1,0 +1,44 @@
+[[cmd-ChangeReference]]
+===== Change reference
+Replace existing entry <<ChangeReference.oldTarget>>/<<ChangeReference.oldResolveInfo>>{fn-org371} inside <<ChangeReference.parent>>'s <<ChangeReference.reference>> at <<ChangeReference.index>> with <<ChangeReference.newTarget>>/<<ChangeReference.newResolveInfo>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::ChangeReference-diagram.adoc[]
+|===
+
+.Technical name
+`ChangeReference`
+
+[horizontal]
+.Parameters
+[[ChangeReference.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[ChangeReference.reference, `reference`]]reference:: <<metaPointerType>>
+
+[[ChangeReference.index, `index`]]index:: <<indexType>>
+
+[[ChangeReference.oldTarget, `oldTarget`]]oldTarget:: <<targetNodeType>>?
+
+[[ChangeReference.oldResolveInfo, `oldResolveInfo`]]oldResolveInfo:: <<resolveInfoType>>?
+
+[[ChangeReference.newTarget, `newTarget`]]newTarget:: <<targetNodeType>>?
+
+[[ChangeReference.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
+
+[[ChangeReference.commandId]]commandId:: <<commandIdType>>
+
+[[ChangeReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<ChangeReference.parent>>
+* <<err-unknownIndex>> for <<ChangeReference.index>> (is beyond (the number of <<ChangeReference.reference>> entries of <<ChangeReference.parent>>) - 1)
+* <<err-undefinedReferenceTarget>> for <<ChangeReference.newTarget>> and <<ChangeReference.newResolveInfo>>
+* <<err-indexEntryMismatch>> for <<ChangeReference.reference>>/<<ChangeReference.index>> and <<ChangeReference.oldTarget>>/<<ChangeReference.oldResolveInfo>>
+* <<err-undefinedReferenceTarget>> for <<ChangeReference.oldTarget>>/<<ChangeReference.oldResolveInfo>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ReferenceChanged>>

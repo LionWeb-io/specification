@@ -1,0 +1,30 @@
+[[cmd-DeletePartition]]
+===== Delete partition
+Delete partition <<DeletePartition.deletedPartition>>, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::DeletePartition-diagram.adoc[]
+|===
+
+.Technical name
+`DeletePartition`
+
+[horizontal]
+.Parameters
+[[DeletePartition.deletedPartition, `deletedPartition`]]deletedPartition:: <<targetNodeType>>
+
+[[DeletePartition.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
+[[DeletePartition.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<DeletePartition.deletedPartition>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-PartitionDeleted>>

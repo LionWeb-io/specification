@@ -1,0 +1,22 @@
+[[cmd-children]]
+==== Children
+
+include::AddChild/AddChild.adoc[]
+
+include::DeleteChild/DeleteChild.adoc[]
+
+include::ReplaceChild/ReplaceChild.adoc[]
+
+
+include::MoveChildFromOtherContainment/MoveChildFromOtherContainment.adoc[]
+
+include::MoveChildFromOtherContainmentInSameParent/MoveChildFromOtherContainmentInSameParent.adoc[]
+
+include::MoveChildInSameContainment/MoveChildInSameContainment.adoc[]
+
+
+include::MoveAndReplaceChildFromOtherContainment/MoveAndReplaceChildFromOtherContainment.adoc[]
+
+include::MoveAndReplaceChildFromOtherContainmentInSameParent/MoveAndReplaceChildFromOtherContainmentInSameParent.adoc[]
+
+include::MoveAndReplaceChildInSameContainment/MoveAndReplaceChildInSameContainment.adoc[]

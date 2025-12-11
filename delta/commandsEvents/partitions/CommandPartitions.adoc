@@ -1,0 +1,6 @@
+[[cmd-partitions]]
+==== Partitions
+
+include::AddPartition/AddPartition.adoc[]
+
+include::DeletePartition/DeletePartition.adoc[]

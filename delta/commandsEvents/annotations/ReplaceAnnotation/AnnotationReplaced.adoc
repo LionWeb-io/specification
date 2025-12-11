@@ -1,0 +1,32 @@
+[[evnt-AnnotationReplaced]]
+===== Annotation replaced
+Existing node <<AnnotationReplaced.replacedAnnotation>>, and all its <<AnnotationReplaced.replacedDescendants>>{fn-org370}, inside <<AnnotationReplaced.parent>>'s annotations at <<AnnotationReplaced.index>> has been replaced with new node <<AnnotationReplaced.newAnnotation>>.
+<<AnnotationReplaced.newAnnotation>> might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
+
+<<AnnotationReplaced.replacedAnnotation>>, and all its descendants, have been deleted.
+
+.Technical name
+`AnnotationReplaced`
+
+[horizontal]
+.Parameters
+[[AnnotationReplaced.newAnnotation, `newAnnotation`]]newAnnotation:: <<chunkType>>
+
+[[AnnotationReplaced.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
+
+[[AnnotationReplaced.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+
+[[AnnotationReplaced.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[AnnotationReplaced.index, `index`]]index:: <<indexType>>
+
+[[AnnotationReplaced.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[AnnotationReplaced.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[AnnotationReplaced.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-ReplaceAnnotation>>

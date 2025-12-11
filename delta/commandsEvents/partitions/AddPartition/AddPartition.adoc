@@ -1,0 +1,33 @@
+[[cmd-AddPartition]]
+===== Add partition
+Add <<AddPartition.newPartition>> node as new partition.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::AddPartition-diagram.adoc[]
+|===
+
+.Technical name
+`AddPartition`
+
+[horizontal]
+.Parameters
+[[AddPartition.newPartition, `newPartition`]]newPartition:: <<chunkType>>
+{fn-org327} root node to form a new partition.
+The root node MUST NOT contain a _parent_ (as this is a partition, thus cannot have a parent).
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
+
+[[AddPartition.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
+[[AddPartition.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-nodeAlreadyExists>> for <<AddPartition.newPartition>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-PartitionAdded>>

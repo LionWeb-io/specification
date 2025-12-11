@@ -1,0 +1,8 @@
+[[evnt-properties]]
+==== Properties
+
+include::AddProperty/PropertyAdded.adoc[]
+
+include::DeleteProperty/PropertyDeleted.adoc[]
+
+include::ChangeProperty/PropertyChanged.adoc[]

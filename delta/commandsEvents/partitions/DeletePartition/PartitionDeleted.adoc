@@ -1,0 +1,23 @@
+[[evnt-PartitionDeleted]]
+===== Partition deleted
+Partition <<PartitionDeleted.deletedPartition>>, and all its <<PartitionDeleted.deletedDescendants>>{fn-org370}, have been deleted from the repository.
+
+This client is now unsubscribed from any changes to <<PartitionDeleted.deletedPartition>> or any of its descendants.
+
+.Technical name
+`PartitionDeleted`
+
+[horizontal]
+.Parameters
+[[PartitionDeleted.deletedPartition, `deletedPartition`]]deletedPartition:: <<targetNodeType>>
+
+[[PartitionDeleted.deletedDescendants, `deletedDescendants`]]deletedDescendants:: <<targetNodeType>>[]
+
+[[PartitionDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[PartitionDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[PartitionDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-DeletePartition>>

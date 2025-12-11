@@ -62,8 +62,8 @@ include::errors.adoc[]
 
 include::queries/queries.adoc[]
 
-include::commandEventOverview/command-event-overview.adoc[]
+include::commandsEvents/command-event-overview.adoc[]
 
-include::commands.adoc[]
+include::commandsEvents/commands.adoc[]
 
-include::events.adoc[]
+include::commandsEvents/events.adoc[]
