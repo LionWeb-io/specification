@@ -1,0 +1,8 @@
+[[cmd-subscription]]
+==== Subscription
+
+include::SubscribeToChangingPartitions.adoc[]
+
+include::SubscribeToPartitionContents.adoc[]
+
+include::UnsubscribeFromPartitionContents.adoc[]

@@ -1,0 +1,36 @@
+[[qry-GetAvailableIds]]
+===== Get available ids
+Request <<GetAvailableIds.count>> number of unused <<{m3}.adoc#node-id, valid ids>>.
+
+Same functionality as <<{bulk}.adoc#ids, bulk API ids command>>.
+
+We don't assume leases, i.e. ids handed out to one client are "owned" by that client forever.
+We identify the client by its <<clientIdType>>.
+
+.Technical name
+`GetAvailableIds`
+
+[horizontal]
+.Request parameters
+[[GetAvailableIds.count, `count`]]count:: <<integerType>>
+Number of ids requested.
+
+[[GetAvailableIds.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[GetAvailableIds.requestProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+
+[horizontal]
+.Response parameters
+[[GetAvailableIds.ids, `ids`]]ids:: <<freeIdType>>[]
+List of ids guaranteed to be free.
+The repository MUST return between one (inclusive) and <<GetAvailableIds.count>> (inclusive) ids.
+It MAY return less than <<GetAvailableIds.count>> ids.
+
+[[GetAvailableIds.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[GetAvailableIds.responseProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-invalidParticipation>>

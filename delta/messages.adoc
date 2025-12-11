@@ -60,7 +60,7 @@ However, `target` and `resolveInfo` MUST NOT both be `null`.
 
 include::errors.adoc[]
 
-include::queries.adoc[]
+include::queries/queries.adoc[]
 
 include::commandEventOverview/command-event-overview.adoc[]
 

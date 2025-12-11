@@ -1,0 +1,36 @@
+[[qry-SignOn]]
+===== Sign On (start a participation)
+The <<client>> starts a <<participation>> for a specific <<repository>>.
+
+NOTE: signing on is not the same as logging in: The latter includes some authentication/authorization check, which is out of scope of this specification.
+
+.Technical name
+`SignOn`
+
+[horizontal]
+.Request parameters
+[[SignOn.deltaProtocolVersion, `deltaProtocolVersion`]]deltaProtocolVersion:: <<deltaProtocolVersionType>>
+
+[[SignOn.clientId, `clientId`]]clientId:: <<clientIdType>>
+Id of the client signing on.{fn-org337}
+
+[[SignOn.repositoryId, `repositoryId`]]repositoryId:: <<repositoryIdType>>
+Id of the repository to which the client wants to establish a participation.
+
+[[SignOn.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[SignOn.requestProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+
+[horizontal]
+.Response parameters
+[[SignOn.participationId, `participationId`]]participationId:: <<participationIdType>>
+the repository assigns to this participation.
+
+[[SignOn.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[SignOn.responseProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* Unsupported delta protocol version
