@@ -10,6 +10,9 @@ Partition <<PartitionAdded.newPartition>> has been added to the repository.
 
 This client is now subscribed to any changes to <<PartitionAdded.newPartition>> or any of its descendants.
 
+.Technical name
+`PartitionAdded`
+
 [horizontal]
 .Parameters
 [[PartitionAdded.newPartition, `newPartition`]]newPartition:: <<chunkType>>
@@ -20,9 +23,6 @@ This client is now subscribed to any changes to <<PartitionAdded.newPartition>> 
 
 [[PartitionAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`PartitionAdded`
-
 .Related command
 <<cmd-AddPartition>>
 
@@ -31,6 +31,9 @@ This client is now subscribed to any changes to <<PartitionAdded.newPartition>> 
 Partition <<PartitionDeleted.deletedPartition>>, and all its <<PartitionDeleted.deletedDescendants>>{fn-org370}, have been deleted from the repository.
 
 This client is now unsubscribed from any changes to <<PartitionDeleted.deletedPartition>> or any of its descendants.
+
+.Technical name
+`PartitionDeleted`
 
 [horizontal]
 .Parameters
@@ -44,9 +47,6 @@ This client is now unsubscribed from any changes to <<PartitionDeleted.deletedPa
 
 [[PartitionDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`PartitionDeleted`
-
 .Related command
 <<cmd-DeletePartition>>
 
@@ -56,6 +56,9 @@ This client is now unsubscribed from any changes to <<PartitionDeleted.deletedPa
 [[evnt-ClassifierChanged]]
 ===== Classifier changed
 Classifier of <<ClassifierChanged.node>> has been changed from <<ClassifierChanged.oldClassifier>> to <<ClassifierChanged.newClassifier>>.
+
+.Technical name
+`ClassifierChanged`
 
 [horizontal]
 .Parameters
@@ -71,9 +74,6 @@ Classifier of <<ClassifierChanged.node>> has been changed from <<ClassifierChang
 
 [[ClassifierChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ClassifierChanged`
-
 .Related command
 <<cmd-ChangeClassifier>>
 
@@ -83,6 +83,9 @@ Classifier of <<ClassifierChanged.node>> has been changed from <<ClassifierChang
 [[evnt-PropertyAdded]]
 ===== Property added
 <<PropertyAdded.property>> of <<PropertyAdded.node>> has been set to <<PropertyAdded.newValue>>.
+
+.Technical name
+`PropertyAdded`
 
 [horizontal]
 .Parameters
@@ -98,15 +101,15 @@ Classifier of <<ClassifierChanged.node>> has been changed from <<ClassifierChang
 
 [[PropertyAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`PropertyAdded`
-
 .Related command
 <<cmd-AddProperty>>
 
 [[evnt-PropertyDeleted]]
 ===== Property deleted
 Existing <<PropertyDeleted.property>> of <<PropertyDeleted.node>> with <<PropertyDeleted.oldValue>> has been deleted.
+
+.Technical name
+`PropertyDeleted`
 
 [horizontal]
 .Parameters
@@ -122,15 +125,15 @@ Existing <<PropertyDeleted.property>> of <<PropertyDeleted.node>> with <<Propert
 
 [[PropertyDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`PropertyDeleted`
-
 .Related command
 <<cmd-DeleteProperty>>
 
 [[evnt-PropertyChanged]]
 ===== Property changed
 Existing <<PropertyChanged.property>> of <<PropertyChanged.node>> has been changed from <<PropertyChanged.oldValue>> to <<PropertyChanged.newValue>>.
+
+.Technical name
+`PropertyChanged`
 
 [horizontal]
 .Parameters
@@ -148,9 +151,6 @@ Existing <<PropertyChanged.property>> of <<PropertyChanged.node>> has been chang
 
 [[PropertyChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`PropertyChanged`
-
 .Related command
 <<cmd-ChangeProperty>>
 
@@ -165,6 +165,9 @@ All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repos
 Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
 
 All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> with index >= <<ChildAdded.index>> have been moved to next higher index.
+
+.Technical name
+`ChildAdded`
 
 [horizontal]
 .Parameters
@@ -182,9 +185,6 @@ All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> wit
 
 [[ChildAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ChildAdded`
-
 .Related command
 <<cmd-AddChild>>
 
@@ -192,6 +192,9 @@ All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> wit
 ===== Child deleted
 Existing node <<ChildDeleted.deletedChild>>, and all its <<ChildDeleted.deletedDescendants>>{fn-org370}, have been deleted from <<ChildDeleted.parent>>'s <<ChildDeleted.containment>> at <<ChildDeleted.index>>.{fn-org286}
 All other children inside <<ChildDeleted.parent>>'s <<ChildDeleted.containment>> with index > <<ChildDeleted.index>> have been moved to next lower index.
+
+.Technical name
+`ChildDeleted`
 
 [horizontal]
 .Parameters
@@ -211,9 +214,6 @@ All other children inside <<ChildDeleted.parent>>'s <<ChildDeleted.containment>>
 
 [[ChildDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ChildDeleted`
-
 .Related command
 <<cmd-DeleteChild>>
 
@@ -226,6 +226,9 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 
 
 <<ChildReplaced.replacedChild>>, and all its descendants, have been deleted.
+
+.Technical name
+`ChildReplaced`
 
 [horizontal]
 .Parameters
@@ -247,9 +250,6 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 
 [[ChildReplaced.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ChildReplaced`
-
 .Related command
 <<cmd-ReplaceChild>>
 
@@ -261,6 +261,9 @@ inside <<ChildMovedFromOtherContainment.newParent>>'s <<ChildMovedFromOtherConta
 All other children inside <<ChildMovedFromOtherContainment.oldParent>>'s <<ChildMovedFromOtherContainment.oldContainment>> with index > <<ChildMovedFromOtherContainment.oldIndex>> have been moved to next lower index.
 
 All other children inside <<ChildMovedFromOtherContainment.newParent>>'s <<ChildMovedFromOtherContainment.newContainment>> with index >= <<ChildMovedFromOtherContainment.newIndex>> have been moved to next higher index.
+
+.Technical name
+`ChildMovedFromOtherContainment`
 
 [horizontal]
 .Parameters
@@ -284,9 +287,6 @@ All other children inside <<ChildMovedFromOtherContainment.newParent>>'s <<Child
 
 [[ChildMovedFromOtherContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ChildMovedFromOtherContainment`
-
 .Related command
 <<cmd-MoveChildFromOtherContainment>>
 
@@ -298,6 +298,9 @@ inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'s <<ChildMovedFromO
 All other children inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'s <<ChildMovedFromOtherContainmentInSameParent.oldContainment>> with index > <<ChildMovedFromOtherContainmentInSameParent.oldIndex>> have been moved to next lower index.
 
 All other children inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'s <<ChildMovedFromOtherContainmentInSameParent.newContainment>> with index >= <<ChildMovedFromOtherContainmentInSameParent.newIndex>> have been moved to next higher index.
+
+.Technical name
+`ChildMovedFromOtherContainmentInSameParent`
 
 [horizontal]
 .Parameters
@@ -319,9 +322,6 @@ All other children inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'
 
 [[ChildMovedFromOtherContainmentInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ChildMovedFromOtherContainmentInSameParent`
-
 .Related command
 <<cmd-MoveChildFromOtherContainmentInSameParent>>
 
@@ -342,6 +342,9 @@ Example: +
 
 <<ChildMovedInSameContainment.oldIndex>> MUST NOT be equal to <<ChildMovedInSameContainment.newIndex>>.
 
+.Technical name
+`ChildMovedInSameContainment`
+
 [horizontal]
 .Parameters
 [[ChildMovedInSameContainment.newIndex, `newIndex`]]newIndex:: <<indexType>>
@@ -360,9 +363,6 @@ Example: +
 
 [[ChildMovedInSameContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ChildMovedInSameContainment`
-
 .Related command
 <<cmd-MoveChildInSameContainment>>
 
@@ -374,6 +374,9 @@ Existing node <<ChildMovedAndReplacedFromOtherContainment.movedChild>> (previous
 All other children inside <<ChildMovedAndReplacedFromOtherContainment.oldParent>>'s <<ChildMovedAndReplacedFromOtherContainment.oldContainment>> with index > <<ChildMovedAndReplacedFromOtherContainment.oldIndex>> have been moved to next lower index.
 
 No other children inside <<ChildMovedAndReplacedFromOtherContainment.newParent>>'s <<ChildMovedAndReplacedFromOtherContainment.newContainment>> have been moved.
+
+.Technical name
+`ChildMovedAndReplacedFromOtherContainment`
 
 [horizontal]
 .Parameters
@@ -401,9 +404,6 @@ No other children inside <<ChildMovedAndReplacedFromOtherContainment.newParent>>
 
 [[ChildMovedAndReplacedFromOtherContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ChildMovedAndReplacedFromOtherContainment`
-
 .Related command
 <<cmd-MoveAndReplaceChildFromOtherContainment>>
 
@@ -415,6 +415,9 @@ Existing node <<ChildMovedAndReplacedFromOtherContainmentInSameParent.movedChild
 All other children inside <<ChildMovedAndReplacedFromOtherContainmentInSameParent.parent>>'s <<ChildMovedAndReplacedFromOtherContainmentInSameParent.oldContainment>> with index > <<ChildMovedAndReplacedFromOtherContainmentInSameParent.oldIndex>> have been moved to next lower index.
 
 No other children inside <<ChildMovedAndReplacedFromOtherContainmentInSameParent.parent>>'s <<ChildMovedAndReplacedFromOtherContainmentInSameParent.newContainment>> have been moved.
+
+.Technical name
+`ChildMovedAndReplacedFromOtherContainmentInSameParent`
 
 [horizontal]
 .Parameters
@@ -440,9 +443,6 @@ No other children inside <<ChildMovedAndReplacedFromOtherContainmentInSameParent
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ChildMovedAndReplacedFromOtherContainmentInSameParent`
-
 .Related command
 <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
 
@@ -462,6 +462,9 @@ Example: +
 `newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
 
 <<ChildMovedAndReplacedInSameContainment.oldIndex>> MUST NOT be equal to <<ChildMovedAndReplacedInSameContainment.newIndex>>.
+
+.Technical name
+`ChildMovedAndReplacedInSameContainment`
 
 [horizontal]
 .Parameters
@@ -485,9 +488,6 @@ Example: +
 
 [[ChildMovedAndReplacedInSameContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ChildMovedAndReplacedInSameContainment`
-
 .Related command
 <<cmd-MoveAndReplaceChildInSameContainment>>
 
@@ -503,6 +503,9 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 
 All other annotations inside <<AnnotationAdded.parent>>'s annotations with index >= <<AnnotationAdded.index>> have been moved to next higher index.
 
+.Technical name
+`AnnotationAdded`
+
 [horizontal]
 .Parameters
 [[AnnotationAdded.parent, `parent`]]parent:: <<targetNodeType>>
@@ -517,9 +520,6 @@ All other annotations inside <<AnnotationAdded.parent>>'s annotations with index
 
 [[AnnotationAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`AnnotationAdded`
-
 .Related command
 <<cmd-AddAnnotation>>
 
@@ -527,6 +527,9 @@ All other annotations inside <<AnnotationAdded.parent>>'s annotations with index
 ===== Annotation deleted
 Existing node <<AnnotationDeleted.deletedAnnotation>>, and all its <<AnnotationDeleted.deletedDescendants>>{fn-org370}, have been deleted from <<AnnotationDeleted.parent>>'s annotations at <<AnnotationDeleted.index>>.{fn-org286}
 All other annotations inside <<AnnotationDeleted.parent>>'s annotations with index > <<AnnotationDeleted.index>> have been moved to next lower index.
+
+.Technical name
+`AnnotationDeleted`
 
 [horizontal]
 .Parameters
@@ -544,9 +547,6 @@ All other annotations inside <<AnnotationDeleted.parent>>'s annotations with ind
 
 [[AnnotationDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`AnnotationDeleted`
-
 .Related command
 <<cmd-DeleteAnnotation>>
 
@@ -558,6 +558,9 @@ All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repos
 Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
 
 <<AnnotationReplaced.replacedAnnotation>>, and all its descendants, have been deleted.
+
+.Technical name
+`AnnotationReplaced`
 
 [horizontal]
 .Parameters
@@ -577,9 +580,6 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 
 [[AnnotationReplaced.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`AnnotationReplaced`
-
 .Related command
 <<cmd-ReplaceAnnotation>>
 
@@ -591,6 +591,9 @@ inside <<AnnotationMovedFromOtherParent.newParent>>'s annotations at <<Annotatio
 All other annotations inside <<AnnotationMovedFromOtherParent.oldParent>>'s annotations with index > <<AnnotationMovedFromOtherParent.oldIndex>> have been moved to next lower index.
 
 All other annotations inside <<AnnotationMovedFromOtherParent.newParent>>'s annotations with index >= <<AnnotationMovedFromOtherParent.newIndex>> have been moved to next higher index.
+
+.Technical name
+`AnnotationMovedFromOtherParent`
 
 [horizontal]
 .Parameters
@@ -609,9 +612,6 @@ All other annotations inside <<AnnotationMovedFromOtherParent.newParent>>'s anno
 [[AnnotationMovedFromOtherParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
 [[AnnotationMovedFromOtherParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
-
-.Technical name
-`AnnotationMovedFromOtherParent`
 
 .Related command
 <<cmd-MoveAnnotationFromOtherParent>>
@@ -632,6 +632,9 @@ Example: +
 
 <<AnnotationMovedInSameParent.oldIndex>> MUST NOT be equal to <<AnnotationMovedInSameParent.newIndex>>.
 
+.Technical name
+`AnnotationMovedInSameParent`
+
 [horizontal]
 .Parameters
 [[AnnotationMovedInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
@@ -648,9 +651,6 @@ Example: +
 
 [[AnnotationMovedInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`AnnotationMovedInSameParent`
-
 .Related command
 <<cmd-MoveAnnotationInSameParent>>
 
@@ -662,6 +662,9 @@ Existing node <<AnnotationMovedAndReplacedFromOtherParent.movedAnnotation>> (pre
 All other annotations inside <<AnnotationMovedAndReplacedFromOtherParent.oldParent>>'s annotations with index > <<AnnotationMovedAndReplacedFromOtherParent.oldIndex>> have been moved to next lower index.
 
 No other annotations inside <<AnnotationMovedAndReplacedFromOtherParent.newParent>>'s annotations have been moved.
+
+.Technical name
+`AnnotationMovedAndReplacedFromOtherParent`
 
 [horizontal]
 .Parameters
@@ -685,9 +688,6 @@ No other annotations inside <<AnnotationMovedAndReplacedFromOtherParent.newParen
 
 [[AnnotationMovedAndReplacedFromOtherParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`AnnotationMovedAndReplacedFromOtherParent`
-
 .Related command
 <<cmd-MoveAndReplaceAnnotationFromOtherParent>>
 
@@ -707,6 +707,9 @@ Example: +
 `newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
 
 <<AnnotationMovedAndReplacedInSameParent.oldIndex>> MUST NOT be equal to <<AnnotationMovedAndReplacedInSameParent.newIndex>>.
+
+.Technical name
+`AnnotationMovedAndReplacedInSameParent`
 
 [horizontal]
 .Parameters
@@ -728,9 +731,6 @@ Example: +
 
 [[AnnotationMovedAndReplacedInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`AnnotationMovedAndReplacedInSameParent`
-
 .Related command
 <<cmd-MoveAndReplaceAnnotationInSameParent>>
 
@@ -741,6 +741,9 @@ Example: +
 ===== Reference added
 Reference with <<ReferenceAdded.newTarget>>/<<ReferenceAdded.newResolveInfo>> has been added to <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>> at <<ReferenceAdded.index>>.
 All other entries inside <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>> with index >= <<ReferenceAdded.index>> have been moved to next higher index.
+
+.Technical name
+`ReferenceAdded`
 
 [horizontal]
 .Parameters
@@ -760,9 +763,6 @@ All other entries inside <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>
 
 [[ReferenceAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ReferenceAdded`
-
 .Related command
 <<cmd-AddReference>>
 
@@ -770,6 +770,9 @@ All other entries inside <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>
 ===== Reference deleted
 Existing reference with <<ReferenceDeleted.deletedTarget>>/<<ReferenceDeleted.deletedResolveInfo>> has been deleted from <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.reference>> at <<ReferenceDeleted.index>>.
 All other entries inside <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.reference>> with index > <<ReferenceDeleted.index>> have been moved to next lower index.
+
+.Technical name
+`ReferenceDeleted`
 
 [horizontal]
 .Parameters
@@ -789,15 +792,15 @@ All other entries inside <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.refere
 
 [[ReferenceDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ReferenceDeleted`
-
 .Related command
 <<cmd-DeleteReference>>
 
 [[evnt-ReferenceChanged]]
 ===== Reference changed
 Existing reference with <<ReferenceChanged.oldTarget>>/<<ReferenceChanged.oldResolveInfo>> inside <<ReferenceChanged.parent>>'s annotations at <<ReferenceChanged.index>> has been replaced with <<ReferenceChanged.newTarget>>/<<ReferenceChanged.newResolveInfo>>.
+
+.Technical name
+`ReferenceChanged`
 
 [horizontal]
 .Parameters
@@ -821,9 +824,6 @@ Existing reference with <<ReferenceChanged.oldTarget>>/<<ReferenceChanged.oldRes
 
 [[ReferenceChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ReferenceChanged`
-
 .Related command
 <<cmd-ChangeReference>>
 
@@ -835,6 +835,9 @@ to <<EntryMovedFromOtherReference.newParent>>'s <<EntryMovedFromOtherReference.n
 All other entries inside <<EntryMovedFromOtherReference.oldParent>>'s <<EntryMovedFromOtherReference.oldReference>> with index > <<EntryMovedFromOtherReference.oldIndex>> have been moved to next lower index.
 
 All other entries inside <<EntryMovedFromOtherReference.newParent>>'s <<EntryMovedFromOtherReference.newReference>> with index >= <<EntryMovedFromOtherReference.newIndex>> have been moved to next higher index.
+
+.Technical name
+`EntryMovedFromOtherReference`
 
 [horizontal]
 .Parameters
@@ -860,9 +863,6 @@ All other entries inside <<EntryMovedFromOtherReference.newParent>>'s <<EntryMov
 
 [[EntryMovedFromOtherReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`EntryMovedFromOtherReference`
-
 .Related command
 <<cmd-MoveEntryFromOtherReference>>
 
@@ -874,6 +874,9 @@ to <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedFromOtherRe
 All other entries inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedFromOtherReferenceInSameParent.oldReference>> with index > <<EntryMovedFromOtherReferenceInSameParent.oldIndex>> have been moved to next lower index.
 
 All other entries inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedFromOtherReferenceInSameParent.newReference>> with index >= <<EntryMovedFromOtherReferenceInSameParent.newIndex>> have been moved to next higher index.
+
+.Technical name
+`EntryMovedFromOtherReferenceInSameParent`
 
 [horizontal]
 .Parameters
@@ -897,9 +900,6 @@ All other entries inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <
 
 [[EntryMovedFromOtherReferenceInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`EntryMovedFromOtherReferenceInSameParent`
-
 .Related command
 <<cmd-MoveEntryFromOtherReferenceInSameParent>>
 
@@ -919,6 +919,9 @@ Example: +
 `newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6]`
 
 <<EntryMovedInSameReference.oldIndex>> MUST NOT be equal to <<EntryMovedInSameReference.newIndex>>.
+
+.Technical name
+`EntryMovedInSameReference`
 
 [horizontal]
 .Parameters
@@ -940,9 +943,6 @@ Example: +
 
 [[EntryMovedInSameReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`EntryMovedInSameReference`
-
 .Related command
 <<cmd-MoveEntryInSameReference>>
 
@@ -953,6 +953,9 @@ Existing reference <<EntryMovedAndReplacedFromOtherReference.movedTarget>>/<<Ent
 All other entries inside <<EntryMovedAndReplacedFromOtherReference.oldParent>>'s <<EntryMovedAndReplacedFromOtherReference.oldReference>> with index > <<EntryMovedAndReplacedFromOtherReference.oldIndex>> have been moved to next lower index.
 
 No other entries inside <<EntryMovedAndReplacedFromOtherReference.newParent>>'s <<EntryMovedAndReplacedFromOtherReference.newReference>> have been moved.
+
+.Technical name
+`EntryMovedAndReplacedFromOtherReference`
 
 [horizontal]
 .Parameters
@@ -982,9 +985,6 @@ No other entries inside <<EntryMovedAndReplacedFromOtherReference.newParent>>'s 
 
 [[EntryMovedAndReplacedFromOtherReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`EntryMovedAndReplacedFromOtherReference`
-
 .Related command
 <<cmd-MoveAndReplaceEntryFromOtherReference>>
 
@@ -995,6 +995,9 @@ Existing reference <<EntryMovedAndReplacedFromOtherReferenceInSameParent.movedTa
 All other entries inside <<EntryMovedAndReplacedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedAndReplacedFromOtherReferenceInSameParent.oldReference>> with index > <<EntryMovedAndReplacedFromOtherReferenceInSameParent.oldIndex>> have been moved to next lower index.
 
 No other entries inside <<EntryMovedAndReplacedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedAndReplacedFromOtherReferenceInSameParent.newReference>> have been moved.
+
+.Technical name
+`EntryMovedAndReplacedFromOtherReferenceInSameParent`
 
 [horizontal]
 .Parameters
@@ -1022,9 +1025,6 @@ No other entries inside <<EntryMovedAndReplacedFromOtherReferenceInSameParent.pa
 
 [[EntryMovedAndReplacedFromOtherReferenceInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`EntryMovedAndReplacedFromOtherReferenceInSameParent`
-
 .Related command
 <<cmd-MoveAndReplaceEntryFromOtherReferenceInSameParent>>
 
@@ -1043,6 +1043,9 @@ Example: +
 `newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
 
 <<EntryMovedAndReplacedInSameReference.oldIndex>> MUST NOT be equal to <<EntryMovedAndReplacedInSameReference.newIndex>>.
+
+.Technical name
+`EntryMovedAndReplacedInSameReference`
 
 [horizontal]
 .Parameters
@@ -1068,15 +1071,15 @@ Example: +
 
 [[EntryMovedAndReplacedInSameReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`EntryMovedAndReplacedInSameReference`
-
 .Related command
 <<cmd-MoveAndReplaceEntryInSameReference>>
 
 [[evnt-ReferenceResolveInfoAdded]]
 ===== Reference ResolveInfo added
 <<ReferenceResolveInfoAdded.newResolveInfo>> has been added as ResolveInfo to existing entry inside <<ReferenceResolveInfoAdded.parent>>'s <<ReferenceResolveInfoAdded.reference>> at <<ReferenceResolveInfoAdded.index>> with <<ReferenceResolveInfoAdded.target>>.
+
+.Technical name
+`ReferenceResolveInfoAdded`
 
 [horizontal]
 .Parameters
@@ -1096,15 +1099,15 @@ Example: +
 
 [[ReferenceResolveInfoAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ReferenceResolveInfoAdded`
-
 .Related command
 <<cmd-AddReferenceResolveInfo>>
 
 [[evnt-ReferenceResolveInfoDeleted]]
 ===== Reference ResolveInfo deleted
 ResolveInfo <<ReferenceResolveInfoDeleted.deletedResolveInfo>> has been deleted from existing entry inside <<ReferenceResolveInfoDeleted.parent>>'s <<ReferenceResolveInfoDeleted.reference>> at <<ReferenceResolveInfoDeleted.index>> with <<ReferenceResolveInfoDeleted.target>>.
+
+.Technical name
+`ReferenceResolveInfoDeleted`
 
 [horizontal]
 .Parameters
@@ -1124,15 +1127,15 @@ ResolveInfo <<ReferenceResolveInfoDeleted.deletedResolveInfo>> has been deleted 
 
 [[ReferenceResolveInfoDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ReferenceResolveInfoDeleted`
-
 .Related command
 <<cmd-DeleteReferenceResolveInfo>>
 
 [[evnt-ReferenceResolveInfoChanged]]
 ===== Reference ResolveInfo changed
 ResolveInfo of existing entry inside <<ReferenceResolveInfoChanged.parent>>'s <<ReferenceResolveInfoChanged.reference>> at <<ReferenceResolveInfoChanged.index>> with <<ReferenceResolveInfoChanged.target>> has been changed from <<ReferenceResolveInfoChanged.oldResolveInfo>> to <<ReferenceResolveInfoChanged.newResolveInfo>>.
+
+.Technical name
+`ReferenceResolveInfoChanged`
 
 [horizontal]
 .Parameters
@@ -1154,15 +1157,15 @@ ResolveInfo of existing entry inside <<ReferenceResolveInfoChanged.parent>>'s <<
 
 [[ReferenceResolveInfoChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ReferenceResolveInfoChanged`
-
 .Related command
 <<cmd-ChangeReferenceResolveInfo>>
 
 [[evnt-ReferenceTargetAdded]]
 ===== Reference target added
 <<ReferenceTargetAdded.newTarget>> has been added as target to existing entry inside <<ReferenceTargetAdded.parent>>'s <<ReferenceTargetAdded.reference>> at <<ReferenceTargetAdded.index>> with <<ReferenceTargetAdded.resolveInfo>>.
+
+.Technical name
+`ReferenceTargetAdded`
 
 [horizontal]
 .Parameters
@@ -1182,15 +1185,15 @@ ResolveInfo of existing entry inside <<ReferenceResolveInfoChanged.parent>>'s <<
 
 [[ReferenceTargetAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ReferenceTargetAdded`
-
 .Related command
 <<cmd-AddReferenceTarget>>
 
 [[evnt-ReferenceTargetDeleted]]
 ===== Reference target deleted
 Target <<ReferenceTargetDeleted.deletedTarget>> has been deleted from existing entry inside <<ReferenceTargetDeleted.parent>>'s <<ReferenceTargetDeleted.reference>> at <<ReferenceTargetDeleted.index>> with <<ReferenceTargetDeleted.resolveInfo>>.
+
+.Technical name
+`ReferenceTargetDeleted`
 
 [horizontal]
 .Parameters
@@ -1210,15 +1213,15 @@ Target <<ReferenceTargetDeleted.deletedTarget>> has been deleted from existing e
 
 [[ReferenceTargetDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ReferenceTargetDeleted`
-
 .Related command
 <<cmd-DeleteReferenceTarget>>
 
 [[evnt-ReferenceTargetChanged]]
 ===== Reference target changed
 Target of existing entry inside <<ReferenceTargetChanged.parent>>'s <<ReferenceTargetChanged.reference>> at <<ReferenceTargetChanged.index>> with <<ReferenceTargetChanged.resolveInfo>> has been changed from <<ReferenceTargetChanged.replacedTarget>> to <<ReferenceTargetChanged.newTarget>>.
+
+.Technical name
+`ReferenceTargetChanged`
 
 [horizontal]
 .Parameters
@@ -1240,9 +1243,6 @@ Target of existing entry inside <<ReferenceTargetChanged.parent>>'s <<ReferenceT
 
 [[ReferenceTargetChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
-.Technical name
-`ReferenceTargetChanged`
-
 .Related command
 <<cmd-ChangeReferenceTarget>>
 
@@ -1257,18 +1257,18 @@ The events in <<CompositeEvent.parts>> have happened in the given order.{fn-org2
 Composite events don't mention origin commands on their own; they are only mentioned in each part.{fn-org306}
 We can nest composite events arbitrarily.{fn-org360}
 
-[horizontal]
-.Parameters
-[[CompositeEvent.parts, `parts`]]parts:: <<eventType>>[]
-
-[[CompositeEvent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
-
 .Technical name
 `CompositeEvent` footnote:[
 This event is the only one to have a `Event` suffix, which is necessary to distinguish it from its <<cmd-CompositeCommand, `CompositeCommand`>> counterpart.
 All other events can be distinguished from their command counterparts by looking at whether the technical name reads as an imperative (“add child” — for commands), or in past perfect tense (”child [has been\] added” — for events).
 (The <<evnt-NoOp, `NoOp`>> and <<evnt-ErrorEvent, `Error`>> don't have command counterparts.)
 ]
+
+[horizontal]
+.Parameters
+[[CompositeEvent.parts, `parts`]]parts:: <<eventType>>[]
+
+[[CompositeEvent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
 
 .Related command
 <<cmd-CompositeCommand>>
@@ -1277,6 +1277,9 @@ All other events can be distinguished from their command counterparts by looking
 ===== No-op
 Nothing happened as result of one or more command(s).{fn-org314}
 
+.Technical name
+`NoOp`
+
 [horizontal]
 .Parameters
 [[NoOp.originCommands]]originCommands:: <<commandSourceType>>[]
@@ -1284,9 +1287,6 @@ Nothing happened as result of one or more command(s).{fn-org314}
 [[NoOp.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
 [[NoOp.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
-
-.Technical name
-`NoOp`
 
 .Related command
 _none_
@@ -1297,6 +1297,9 @@ _none_
 Repository couldn't handle one or more command(s).{fn-org316}{fn-org405}
 
 The repository MAY send an error event to only one participation.{fn-org379}
+
+.Technical name
+`ErrorEvent`
 
 [horizontal]
 .Parameters
@@ -1309,9 +1312,6 @@ The repository MAY send an error event to only one participation.{fn-org379}
 [[Error.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
 [[Error.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
-
-.Technical name
-`ErrorEvent`
 
 .Related command
 _none_

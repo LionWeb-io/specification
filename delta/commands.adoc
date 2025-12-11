@@ -31,6 +31,9 @@ Add <<AddPartition.newPartition>> node as new partition.
 include::commandEventOverview/addPartition.adoc[]
 |===
 
+.Technical name
+`AddPartition`
+
 [horizontal]
 .Parameters
 [[AddPartition.newPartition, `newPartition`]]newPartition:: <<chunkType>>
@@ -48,9 +51,6 @@ Id of this command.
 * <<err-nodeAlreadyExists>> for <<AddPartition.newPartition>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`AddPartition`
-
 .Related event
 <<evnt-PartitionAdded>>
 
@@ -66,6 +66,9 @@ Does NOT change references to any of the deleted nodes.{fn-org285}
 include::commandEventOverview/deletePartition.adoc[]
 |===
 
+.Technical name
+`DeletePartition`
+
 [horizontal]
 .Parameters
 [[DeletePartition.deletedPartition, `deletedPartition`]]deletedPartition:: <<targetNodeType>>
@@ -78,9 +81,6 @@ Id of this command.
 .Errors
 * <<err-unknownNode>> for <<DeletePartition.deletedPartition>>
 * <<err-invalidParticipation>>
-
-.Technical name
-`DeletePartition`
 
 .Related event
 <<evnt-PartitionDeleted>>
@@ -99,6 +99,9 @@ Change classifier of <<ChangeClassifier.node>> to <<ChangeClassifier.newClassifi
 include::commandEventOverview/changeClassifier.adoc[]
 |===
 
+.Technical name
+`ChangeClassifier`
+
 [horizontal]
 .Parameters
 [[ChangeClassifier.node, `node`]]node:: <<targetNodeType>>
@@ -113,9 +116,6 @@ Id of this command.
 .Errors
 * <<err-unknownNode>> for <<ChangeClassifier.node>>
 * <<err-invalidParticipation>>
-
-.Technical name
-`ChangeClassifier`
 
 .Related event
 <<evnt-ClassifierChanged>>
@@ -134,6 +134,9 @@ Add <<AddProperty.newValue>> as value of property <<AddProperty.property>> to <<
 include::commandEventOverview/addProperty.adoc[]
 |===
 
+.Technical name
+`AddProperty`
+
 [horizontal]
 .Parameters
 [[AddProperty.node, `node`]]node:: <<targetNodeType>>
@@ -151,9 +154,6 @@ include::commandEventOverview/addProperty.adoc[]
 * ##?## <<AddProperty.property>> already set in <<AddProperty.node>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`AddProperty`
-
 .Related event
 <<evnt-PropertyAdded>>
 
@@ -167,6 +167,9 @@ Delete existing <<DeleteProperty.property>> from <<DeleteProperty.node>>.
 
 include::commandEventOverview/deleteProperty.adoc[]
 |===
+
+.Technical name
+`DeleteProperty`
 
 [horizontal]
 .Parameters
@@ -183,9 +186,6 @@ include::commandEventOverview/deleteProperty.adoc[]
 * ##?## <<DeleteProperty.property>> is not set in <<DeleteProperty.node>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`DeleteProperty`
-
 .Related event
 <<evnt-PropertyDeleted>>
 
@@ -199,6 +199,9 @@ Change existing <<ChangeProperty.property>> of <<ChangeProperty.node>> to <<Chan
 
 include::commandEventOverview/changeProperty.adoc[]
 |===
+
+.Technical name
+`ChangeProperty`
 
 [horizontal]
 .Parameters
@@ -218,9 +221,6 @@ include::commandEventOverview/changeProperty.adoc[]
 * ##?## <<ChangeProperty.property>> already has <<ChangeProperty.newValue>> in <<ChangeProperty.node>>
 * <<err-invalidParticipation>>
 
-
-.Technical name
-`ChangeProperty`
 
 .Related event
 <<evnt-PropertyChanged>>
@@ -242,6 +242,9 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 include::commandEventOverview/addChild.adoc[]
 |===
 
+.Technical name
+`AddChild`
+
 [horizontal]
 .Parameters
 [[AddChild.parent, `parent`]]parent:: <<targetNodeType>>
@@ -262,9 +265,6 @@ include::commandEventOverview/addChild.adoc[]
 * <<err-unknownIndex>> for <<AddChild.index>> (is beyond the number of <<AddChild.containment>> entries in <<AddChild.parent>>)
 * <<err-invalidParticipation>>
 
-.Technical name
-`AddChild`
-
 .Related event
 <<evnt-ChildAdded>>
 
@@ -279,6 +279,9 @@ Does NOT change references to any of the deleted nodes.{fn-org285}
 
 include::commandEventOverview/deleteChild.adoc[]
 |===
+
+.Technical name
+`DeleteChild`
 
 [horizontal]
 .Parameters
@@ -300,9 +303,6 @@ include::commandEventOverview/deleteChild.adoc[]
 * <<err-indexEntryMismatch>> for <<DeleteChild.containment>>/<<DeleteChild.index>> and <<DeleteChild.deletedChild>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`DeleteChild`
-
 .Related event
 <<evnt-ChildDeleted>>
 
@@ -322,6 +322,9 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 
 include::commandEventOverview/replaceChild.adoc[]
 |===
+
+.Technical name
+`ReplaceChild`
 
 [horizontal]
 .Parameters
@@ -346,9 +349,6 @@ include::commandEventOverview/replaceChild.adoc[]
 * ##?## <<ReplaceChild.index>> is beyond (the number of <<ReplaceChild.containment>> entries in <<ReplaceChild.parent>>) - 1
 * <<err-invalidParticipation>>
 
-.Technical name
-`ReplaceChild`
-
 .Related event
 <<evnt-ChildReplaced>>
 
@@ -362,6 +362,9 @@ Move existing node <<MoveChildFromOtherContainment.movedChild>> inside <<MoveChi
 
 include::commandEventOverview/moveChildFromOtherContainment.adoc[]
 |===
+
+.Technical name
+`MoveChildFromOtherContainment`
 
 [horizontal]
 .Parameters
@@ -384,9 +387,6 @@ include::commandEventOverview/moveChildFromOtherContainment.adoc[]
 * ##?## <<MoveChildFromOtherContainment.movedChild>> is already a child of <<MoveChildFromOtherContainment.newParent>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveChildFromOtherContainment`
-
 .Related event
 <<evnt-ChildMovedFromOtherContainment>>
 
@@ -401,6 +401,9 @@ inside <<MoveChildFromOtherContainmentInSameParent.movedChild>>'s parent's <<Mov
 
 include::commandEventOverview/moveChildFromOtherContainmentInSameParent.adoc[]
 |===
+
+.Technical name
+`MoveChildFromOtherContainmentInSameParent`
 
 [horizontal]
 .Parameters
@@ -421,9 +424,6 @@ include::commandEventOverview/moveChildFromOtherContainmentInSameParent.adoc[]
 * <<err-invalidMove>> as <<MoveChildFromOtherContainmentInSameParent.movedChild>> is already a child inside <<MoveChildFromOtherContainmentInSameParent.newContainment>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveChildFromOtherContainmentInSameParent`
-
 .Related event
 <<evnt-ChildMovedFromOtherContainmentInSameParent>>
 
@@ -437,6 +437,9 @@ Move existing node <<MoveChildInSameContainment.movedChild>> within its current 
 
 include::commandEventOverview/moveChildInSameContainment.adoc[]
 |===
+
+.Technical name
+`MoveChildInSameContainment`
 
 [horizontal]
 .Parameters
@@ -455,9 +458,6 @@ include::commandEventOverview/moveChildInSameContainment.adoc[]
 * <<err-invalidMove>> as <<MoveChildInSameContainment.movedChild>> is already at <<MoveChildInSameContainment.newIndex>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveChildInSameContainment`
-
 .Related event
 <<evnt-ChildMovedInSameContainment>>
 
@@ -473,6 +473,9 @@ Does NOT change references to any of the deleted nodes.{fn-org285}
 
 include::commandEventOverview/moveAndReplaceChildFromOtherContainment.adoc[]
 |===
+
+.Technical name
+`MoveAndReplaceChildFromOtherContainment`
 
 [horizontal]
 .Parameters
@@ -498,9 +501,6 @@ include::commandEventOverview/moveAndReplaceChildFromOtherContainment.adoc[]
 * ##?## <<MoveAndReplaceChildFromOtherContainment.movedChild>> is already a child of <<MoveAndReplaceChildFromOtherContainment.newParent>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveAndReplaceChildFromOtherContainment`
-
 .Related event
 <<evnt-ChildMovedAndReplacedFromOtherContainment>>
 
@@ -517,6 +517,9 @@ Does NOT change references to any of the deleted nodes.{fn-org285}
 
 include::commandEventOverview/moveAndReplaceChildFromOtherContainmentInSameParent.adoc[]
 |===
+
+.Technical name
+`MoveAndReplaceChildFromOtherContainmentInSameParent`
 
 [horizontal]
 .Parameters
@@ -540,9 +543,6 @@ include::commandEventOverview/moveAndReplaceChildFromOtherContainmentInSameParen
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>>/<<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>> and <<MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveAndReplaceChildFromOtherContainmentInSameParent`
-
 .Related event
 <<evnt-ChildMovedAndReplacedFromOtherContainmentInSameParent>>
 
@@ -558,6 +558,9 @@ Does NOT change references to any of the deleted nodes.{fn-org285}
 
 include::commandEventOverview/moveAndReplaceChildInSameContainment.adoc[]
 |===
+
+.Technical name
+`MoveAndReplaceChildInSameContainment`
 
 [horizontal]
 .Parameters
@@ -579,9 +582,6 @@ include::commandEventOverview/moveAndReplaceChildInSameContainment.adoc[]
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceChildInSameContainment.newIndex>> and <<MoveAndReplaceChildInSameContainment.replacedChild>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveAndReplaceChildInSameContainment`
-
 .Related event
 <<evnt-ChildMovedAndReplacedInSameContainment>>
 
@@ -602,6 +602,9 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 include::commandEventOverview/addAnnotation.adoc[]
 |===
 
+.Technical name
+`AddAnnotation`
+
 [horizontal]
 .Parameters
 [[AddAnnotation.parent, `parent`]]parent:: <<targetNodeType>>
@@ -620,9 +623,6 @@ include::commandEventOverview/addAnnotation.adoc[]
 * <<err-unknownIndex>> for <<AddAnnotation.index>> (is beyond the number of annotations of <<AddAnnotation.parent>>)
 * <<err-invalidParticipation>>
 
-.Technical name
-`AddAnnotation`
-
 .Related event
 <<evnt-AnnotationAdded>>
 
@@ -637,6 +637,9 @@ Does NOT change references to any of the deleted nodes.{fn-org285}
 
 include::commandEventOverview/deleteAnnotation.adoc[]
 |===
+
+.Technical name
+`DeleteAnnotation`
 
 [horizontal]
 .Parameters
@@ -655,9 +658,6 @@ include::commandEventOverview/deleteAnnotation.adoc[]
 * <<err-unknownIndex>> for <<DeleteAnnotation.index>> (is beyond (the number of annotations of <<DeleteAnnotation.parent>>) - 1)
 * <<err-indexEntryMismatch>> for <<DeleteAnnotation.index>> and <<DeleteAnnotation.deletedAnnotation>>
 * <<err-invalidParticipation>>
-
-.Technical name
-`DeleteAnnotation`
 
 .Related event
 <<evnt-AnnotationDeleted>>
@@ -678,6 +678,9 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 
 include::commandEventOverview/replaceAnnotation.adoc[]
 |===
+
+.Technical name
+`ReplaceAnnotation`
 
 [horizontal]
 .Parameters
@@ -700,9 +703,6 @@ include::commandEventOverview/replaceAnnotation.adoc[]
 * <<err-indexEntryMismatch>> for <<ReplaceAnnotation.index>> and <<ReplaceAnnotation.replacedAnnotation>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`ReplaceAnnotation`
-
 .Related event
 <<evnt-AnnotationReplaced>>
 
@@ -716,6 +716,9 @@ Move existing node <<MoveAnnotationFromOtherParent.movedAnnotation>> inside <<Mo
 
 include::commandEventOverview/moveAnnotationFromOtherParent.adoc[]
 |===
+
+.Technical name
+`MoveAnnotationFromOtherParent`
 
 [horizontal]
 .Parameters
@@ -736,9 +739,6 @@ include::commandEventOverview/moveAnnotationFromOtherParent.adoc[]
 * ##?## <<MoveAnnotationFromOtherParent.movedAnnotation>> is already an annotation of <<MoveAnnotationFromOtherParent.newParent>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveAnnotationFromOtherParent`
-
 .Related event
 <<evnt-AnnotationMovedFromOtherParent>>
 
@@ -753,6 +753,9 @@ Move existing node <<MoveAnnotationInSameParent.movedAnnotation>> within the sam
 
 include::commandEventOverview/moveAnnotationInSameParent.adoc[]
 |===
+
+.Technical name
+`MoveAnnotationInSameParent`
 
 [horizontal]
 .Parameters
@@ -770,9 +773,6 @@ include::commandEventOverview/moveAnnotationInSameParent.adoc[]
 * <<err-moveWithoutParent>> for <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveAnnotationInSameParent`
-
 .Related event
 <<evnt-AnnotationMovedInSameParent>>
 
@@ -788,6 +788,9 @@ Does NOT change references to any of the deleted nodes.{fn-org285}
 
 include::commandEventOverview/moveAndReplaceAnnotationFromOtherParent.adoc[]
 |===
+
+.Technical name
+`MoveAndReplaceAnnotationFromOtherParent`
 
 [horizontal]
 .Parameters
@@ -811,9 +814,6 @@ include::commandEventOverview/moveAndReplaceAnnotationFromOtherParent.adoc[]
 * ##?## <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>> is already an annotation of <<MoveAndReplaceAnnotationFromOtherParent.newParent>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveAndReplaceAnnotationFromOtherParent`
-
 .Related event
 <<evnt-AnnotationMovedAndReplacedFromOtherParent>>
 
@@ -830,6 +830,9 @@ Does NOT change references to any of the deleted nodes.{fn-org285}
 
 include::commandEventOverview/moveAndReplaceAnnotationInSameParent.adoc[]
 |===
+
+.Technical name
+`MoveAndReplaceAnnotationInSameParent`
 
 [horizontal]
 .Parameters
@@ -850,9 +853,6 @@ include::commandEventOverview/moveAndReplaceAnnotationInSameParent.adoc[]
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceAnnotationInSameParent.newIndex>> and <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveAndReplaceAnnotationInSameParent`
-
 .Related event
 <<evnt-AnnotationMovedAndReplacedInSameParent>>
 
@@ -869,6 +869,9 @@ Add <<AddReference.newTarget>> / <<AddReference.newResolveInfo>> to <<AddReferen
 
 include::commandEventOverview/addReference.adoc[]
 |===
+
+.Technical name
+`AddReference`
 
 [horizontal]
 .Parameters
@@ -892,9 +895,6 @@ include::commandEventOverview/addReference.adoc[]
 * <<err-undefinedReferenceTarget>> for <<AddReference.newTarget>> and <<AddReference.newResolveInfo>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`AddReference`
-
 .Related event
 <<evnt-ReferenceAdded>>
 
@@ -908,6 +908,9 @@ Delete existing entry <<DeleteReference.deletedTarget>>/<<DeleteReference.delete
 
 include::commandEventOverview/deleteReference.adoc[]
 |===
+
+.Technical name
+`DeleteReference`
 
 [horizontal]
 .Parameters
@@ -932,9 +935,6 @@ include::commandEventOverview/deleteReference.adoc[]
 * <<err-undefinedReferenceTarget>> for <<DeleteReference.deletedTarget>>/<<DeleteReference.deletedResolveInfo>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`DeleteReference`
-
 .Related event
 <<evnt-ReferenceDeleted>>
 
@@ -948,6 +948,9 @@ Replace existing entry <<ChangeReference.oldTarget>>/<<ChangeReference.oldResolv
 
 include::commandEventOverview/changeReference.adoc[]
 |===
+
+.Technical name
+`ChangeReference`
 
 [horizontal]
 .Parameters
@@ -977,9 +980,6 @@ include::commandEventOverview/changeReference.adoc[]
 * <<err-undefinedReferenceTarget>> for <<ChangeReference.oldTarget>>/<<ChangeReference.oldResolveInfo>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`ChangeReference`
-
 .Related event
 <<evnt-ReferenceChanged>>
 
@@ -994,6 +994,9 @@ to <<MoveEntryFromOtherReference.newParent>>'s <<MoveEntryFromOtherReference.new
 
 include::commandEventOverview/moveEntryFromOtherReference.adoc[]
 |===
+
+.Technical name
+`MoveEntryFromOtherReference`
 
 [horizontal]
 .Parameters
@@ -1025,9 +1028,6 @@ include::commandEventOverview/moveEntryFromOtherReference.adoc[]
 * <<err-undefinedReferenceTarget>> for <<MoveEntryFromOtherReference.movedTarget>>/<<MoveEntryFromOtherReference.movedResolveInfo>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveEntryFromOtherReference`
-
 .Related event
 <<evnt-EntryMovedFromOtherReference>>
 
@@ -1042,6 +1042,9 @@ to <<MoveEntryFromOtherReferenceInSameParent.parent>>'s <<MoveEntryFromOtherRefe
 
 include::commandEventOverview/moveEntryFromOtherReferenceInSameParent.adoc[]
 |===
+
+.Technical name
+`MoveEntryFromOtherReferenceInSameParent`
 
 [horizontal]
 .Parameters
@@ -1071,9 +1074,6 @@ include::commandEventOverview/moveEntryFromOtherReferenceInSameParent.adoc[]
 * <<err-undefinedReferenceTarget>> for <<MoveEntryFromOtherReferenceInSameParent.movedTarget>>/<<MoveEntryFromOtherReferenceInSameParent.movedResolveInfo>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveEntryFromOtherReferenceInSameParent`
-
 .Related event
 <<evnt-EntryMovedFromOtherReferenceInSameParent>>
 
@@ -1088,6 +1088,9 @@ inside <<MoveEntryInSameReference.parent>>'s <<MoveEntryInSameReference.referenc
 
 include::commandEventOverview/moveEntryInSameReference.adoc[]
 |===
+
+.Technical name
+`MoveEntryInSameReference`
 
 [horizontal]
 .Parameters
@@ -1115,9 +1118,6 @@ include::commandEventOverview/moveEntryInSameReference.adoc[]
 * <<err-undefinedReferenceTarget>> for <<MoveEntryInSameReference.movedTarget>>/<<MoveEntryInSameReference.movedResolveInfo>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveEntryInSameReference`
-
 .Related event
 <<evnt-EntryMovedInSameReference>>
 
@@ -1133,6 +1133,9 @@ replacing existing entry <<MoveAndReplaceEntryFromOtherReference.replacedTarget>
 
 include::commandEventOverview/moveAndReplaceEntryFromOtherReference.adoc[]
 |===
+
+.Technical name
+`MoveAndReplaceEntryFromOtherReference`
 
 [horizontal]
 .Parameters
@@ -1170,9 +1173,6 @@ include::commandEventOverview/moveAndReplaceEntryFromOtherReference.adoc[]
 * <<err-undefinedReferenceTarget>> for <<MoveAndReplaceEntryFromOtherReference.movedTarget>>/<<MoveAndReplaceEntryFromOtherReference.movedResolveInfo>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveAndReplaceEntryFromOtherReference`
-
 .Related event
 <<evnt-EntryMovedAndReplacedFromOtherReference>>
 
@@ -1188,6 +1188,9 @@ replacing existing entry <<MoveAndReplaceEntryFromOtherReferenceInSameParent.rep
 
 include::commandEventOverview/moveAndReplaceEntryFromOtherReferenceInSameParent.adoc[]
 |===
+
+.Technical name
+`MoveAndReplaceEntryFromOtherReferenceInSameParent`
 
 [horizontal]
 .Parameters
@@ -1223,9 +1226,6 @@ include::commandEventOverview/moveAndReplaceEntryFromOtherReferenceInSameParent.
 * <<err-undefinedReferenceTarget>> for <<MoveAndReplaceEntryFromOtherReferenceInSameParent.movedTarget>>/<<MoveAndReplaceEntryFromOtherReferenceInSameParent.movedResolveInfo>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveAndReplaceEntryFromOtherReferenceInSameParent`
-
 .Related event
 <<evnt-EntryMovedAndReplacedFromOtherReferenceInSameParent>>
 
@@ -1241,6 +1241,9 @@ replacing existing entry <<MoveAndReplaceEntryInSameReference.replacedTarget>>/<
 
 include::commandEventOverview/moveAndReplaceEntryInSameReference.adoc[]
 |===
+
+.Technical name
+`MoveAndReplaceEntryInSameReference`
 
 [horizontal]
 .Parameters
@@ -1274,9 +1277,6 @@ include::commandEventOverview/moveAndReplaceEntryInSameReference.adoc[]
 * <<err-undefinedReferenceTarget>> for <<MoveAndReplaceEntryInSameReference.movedTarget>>/<<MoveAndReplaceEntryInSameReference.movedResolveInfo>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`MoveAndReplaceEntryInSameReference`
-
 .Related event
 <<evnt-EntryMovedAndReplacedInSameReference>>
 
@@ -1294,6 +1294,9 @@ include::commandEventOverview/addReferenceResolveInfo.adoc[]
 ****
 Current target MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
+
+.Technical name
+`AddReferenceResolveInfo`
 
 [horizontal]
 .Parameters
@@ -1316,9 +1319,6 @@ Current target MUST NOT be `null` as we can only add ResolveInfo if ResolveInfo 
 * ##?## resolveInfo already set in <<AddReferenceResolveInfo.parent>>'s <<AddReferenceResolveInfo.reference>> at <<AddReferenceResolveInfo.index>>.
 * <<err-invalidParticipation>>
 
-.Technical name
-`AddReferenceResolveInfo`
-
 .Related event
 <<evnt-ReferenceResolveInfoAdded>>
 
@@ -1336,6 +1336,9 @@ include::commandEventOverview/deleteReferenceResolveInfo.adoc[]
 ****
 Current target MUST NOT be `null` as we're about to remove ResolveInfo, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
+
+.Technical name
+`DeleteReferenceResolveInfo`
 
 [horizontal]
 .Parameters
@@ -1358,9 +1361,6 @@ Current target MUST NOT be `null` as we're about to remove ResolveInfo, and at l
 * ##?## resolveInfo is not set in <<DeleteReferenceResolveInfo.parent>>'s <<DeleteReferenceResolveInfo.reference>> at <<DeleteReferenceResolveInfo.index>>.
 * <<err-invalidParticipation>>
 
-.Technical name
-`DeleteReferenceResolveInfo`
-
 .Related event
 <<evnt-ReferenceResolveInfoDeleted>>
 
@@ -1378,6 +1378,9 @@ include::commandEventOverview/changeReferenceResolveInfo.adoc[]
 ****
 Current target MAY be `null` as we can only change ResolveInfo if both current ResolveInfo and <<ChangeReferenceResolveInfo.newResolveInfo>> is non-`null`.
 ****
+
+.Technical name
+`ChangeReferenceResolveInfo`
 
 [horizontal]
 .Parameters
@@ -1402,9 +1405,6 @@ Current target MAY be `null` as we can only change ResolveInfo if both current R
 * ##?## resolveInfo is not set in <<ChangeReferenceResolveInfo.parent>>'s <<ChangeReferenceResolveInfo.reference>> at <<ChangeReferenceResolveInfo.index>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`ChangeReferenceResolveInfo`
-
 .Related event
 <<evnt-ReferenceResolveInfoChanged>>
 
@@ -1422,6 +1422,9 @@ include::commandEventOverview/addReferenceTarget.adoc[]
 ****
 Current ResolveInfo MUST NOT be `null` as we can only add target if target is `null`, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
+
+.Technical name
+`AddReferenceTarget`
 
 [horizontal]
 .Parameters
@@ -1444,9 +1447,6 @@ Current ResolveInfo MUST NOT be `null` as we can only add target if target is `n
 * ##?## target already set in <<AddReferenceTarget.parent>>'s <<AddReferenceTarget.reference>> at <<AddReferenceTarget.index>>.
 * <<err-invalidParticipation>>
 
-.Technical name
-`AddReferenceTarget`
-
 .Related event
 <<evnt-ReferenceTargetAdded>>
 
@@ -1464,6 +1464,9 @@ include::commandEventOverview/deleteReferenceTarget.adoc[]
 ****
 Current ResolveInfo MUST NOT be `null` as we're about to remove target, and at least one of target and ResolveInfo MUST always be non-`null`.
 ****
+
+.Technical name
+`DeleteReferenceTarget`
 
 [horizontal]
 .Parameters
@@ -1485,9 +1488,6 @@ Current ResolveInfo MUST NOT be `null` as we're about to remove target, and at l
 * ##?## target is not set in <<DeleteReferenceTarget.parent>>'s <<DeleteReferenceTarget.reference>> at <<DeleteReferenceTarget.index>>.
 * <<err-invalidParticipation>>
 
-.Technical name
-`DeleteReferenceTarget`
-
 .Related event
 <<evnt-ReferenceTargetDeleted>>
 
@@ -1505,6 +1505,9 @@ include::commandEventOverview/changeReferenceTarget.adoc[]
 ****
 Current ResolveInfo MAY be `null` as we can only change target if both current Target and <<ChangeReferenceTarget.newTarget>> is non-`null`.
 ****
+
+.Technical name
+`ChangeReferenceTarget`
 
 [horizontal]
 .Parameters
@@ -1529,9 +1532,6 @@ Current ResolveInfo MAY be `null` as we can only change target if both current T
 * ##?## target is not set in <<ChangeReferenceTarget.parent>>'s <<ChangeReferenceTarget.reference>> at <<ChangeReferenceTarget.index>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`ChangeReferenceTarget`
-
 .Related event
 <<evnt-ReferenceTargetChanged>>
 
@@ -1549,6 +1549,12 @@ Command groups don't guarantee anything; the repository MAY take the group as a 
 Composite commands have a command id on their own.{fn-org353}
 We can nest composite commands arbitrarily.{fn-org360}
 
+.Technical name
+`CompositeCommand` footnote:[
+This command is the only one to have a `Command` suffix, which is necessary to distinguish it from its <<evnt-CompositeEvent, `CompositeEvent`>> counterpart.
+All other commands can be distinguished from their event counterparts by looking at whether the technical name reads as an imperative (“add child” — for commands), or in past perfect tense (”child [has been\] added” — for events).
+]
+
 [horizontal]
 .Parameters
 [[CompositeCommand.parts, `parts`]]parts:: <<commandType>>[]
@@ -1559,11 +1565,6 @@ We can nest composite commands arbitrarily.{fn-org360}
 * accumulation of all errors of <<CompositeCommand.parts>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`CompositeCommand` footnote:[
-This command is the only one to have a `Command` suffix, which is necessary to distinguish it from its <<evnt-CompositeEvent, `CompositeEvent`>> counterpart.
-All other commands can be distinguished from their event counterparts by looking at whether the technical name reads as an imperative (“add child” — for commands), or in past perfect tense (”child [has been\] added” — for events).
-]
 
 .Related event
 <<evnt-CompositeEvent>>

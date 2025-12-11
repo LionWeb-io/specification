@@ -9,6 +9,9 @@
 ===== Subscribe to partition changes
 This client wants to receive events on newly created (<<SubscribeToChangingPartitions.creation>> is true) or deleted (<<SubscribeToChangingPartitions.deletion>> is true) partitions, and automatically subscribe (<<SubscribeToChangingPartitions.partitions>> is true) to newly created partitions.{fn-org267}
 
+.Technical name
+`SubscribeToChangingPartitions`
+
 [horizontal]
 .Request parameters
 [[SubscribeToChangingPartitions.creation, `creation`]]creation:: <<booleanType>>
@@ -35,13 +38,13 @@ Id of this query.
 .Errors
 * <<err-invalidParticipation>>
 
-.Technical name
-`SubscribeToChangingPartitions`
-
 [[qry-subscribePartition]]
 [[qry-SubscribeToPartitionContents]]
 ===== Subscribe to partition contents
 This client wants to receive events on any changes to <<SubscribeToPartitionContents.partition>> or any of its descendants.{fn-org270}{fn-org269}
+
+.Technical name
+`SubscribeToPartitionContents`
 
 [horizontal]
 .Request parameters
@@ -67,13 +70,13 @@ Id of this query.
 * already subscribed to <<SubscribeToPartitionContents.partition>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`SubscribeToPartitionContents`
-
 [[qry-unsubscribePartition]]
 [[qry-UnsubscribeFromPartitionContents]]
 ===== Unsubscribe from partition contents
 This client does not want to receive events on any changes to <<UnsubscribeFromPartitionContents.partition>> or any of its descendants anymore.{fn-org270}
+
+.Technical name
+`UnsubscribeFromPartitionContents`
 
 [horizontal]
 .Request parameters
@@ -96,9 +99,6 @@ Id of this query.
 * not subscribed to <<UnsubscribeFromPartitionContents.partition>>
 * <<err-invalidParticipation>>
 
-.Technical name
-`UnsubscribeFromPartitionContents`
-
 [[qry-participation]]
 ==== Participation
 Even though participation handling does not relate to repository contents, we consider them queries.{fn-org350}.
@@ -108,6 +108,9 @@ Even though participation handling does not relate to repository contents, we co
 The <<client>> starts a <<participation>> for a specific <<repository>>.
 
 NOTE: signing on is not the same as logging in: The latter includes some authentication/authorization check, which is out of scope of this specification.
+
+.Technical name
+`SignOn`
 
 [horizontal]
 .Request parameters
@@ -137,14 +140,14 @@ Id of this query.
 .Errors
 * Unsupported delta protocol version
 
-.Technical name
-`SignOn`
-
 [[qry-SignOff]]
 ===== Sign Off (end a participation)
 The <<client>> ends a <<participation>>.{fn-org344}
 
 NOTE: signing off is not the same as logging off: The latter includes some authentication/authorization invalidation, which is out of scope of this specification.
+
+.Technical name
+`SignOff`
 
 [horizontal]
 .Request parameters
@@ -163,13 +166,13 @@ Id of this query.
 .Errors
 * <<err-invalidParticipation>>
 
-.Technical name
-`SignOff`
-
 [[qry-Reconnect]]
 ===== Reconnect (resume an existing participation)
 The <<client>> has been technically disconnected, but still knows its <<participation-id>>.
 Then the client can ask to reconnect to the repository.{fn-org349}
+
+.Technical name
+`Reconnect`
 
 [horizontal]
 .Request parameters
@@ -197,9 +200,6 @@ Id of this query.
 .Errors
 * <<err-invalidParticipation>> If the participation is not valid.{fn-org354}
 
-.Technical name
-`Reconnect`
-
 
 [[qry-misc]]
 ==== Miscellaneous
@@ -212,6 +212,9 @@ Same functionality as <<{bulk}.adoc#ids, bulk API ids command>>.
 
 We don't assume leases, i.e. ids handed out to one client are "owned" by that client forever.
 We identify the client by its <<clientIdType>>.
+
+.Technical name
+`GetAvailableIds`
 
 [horizontal]
 .Request parameters
@@ -238,16 +241,15 @@ Id of this query.
 .Errors
 * <<err-invalidParticipation>>
 
-.Technical name
-`GetAvailableIds`
-
 [[qry-ListPartitions]]
 ===== List partitions
 Lists all non-language partitions accessible in the repository.{fn-org361}
 
 Same functionality as <<{bulk}.adoc#listPartitions, bulk API listPartitions command>>.
 
-[horizontal]
+.Technical name
+`ListPartitions`[horizontal]
+
 .Request parameters
 [[ListPartitions.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
@@ -269,6 +271,3 @@ Id of this query.
 
 .Errors
 * <<err-invalidParticipation>>
-
-.Technical name
-`ListPartitions`
