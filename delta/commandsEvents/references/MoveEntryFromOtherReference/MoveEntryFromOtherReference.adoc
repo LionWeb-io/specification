@@ -1,0 +1,47 @@
+[[cmd-MoveEntryFromOtherReference]]
+===== Move entry from other reference
+Move existing entry <<MoveEntryFromOtherReference.movedTarget>>/<<MoveEntryFromOtherReference.movedResolveInfo>>{fn-org371} inside <<MoveEntryFromOtherReference.oldParent>>'s <<MoveEntryFromOtherReference.oldReference>> at <<MoveEntryFromOtherReference.oldIndex>>
+to <<MoveEntryFromOtherReference.newParent>>'s <<MoveEntryFromOtherReference.newReference>> at <<MoveEntryFromOtherReference.newIndex>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::MoveEntryFromOtherReference-diagram.adoc[]
+|===
+
+.Technical name
+`MoveEntryFromOtherReference`
+
+[horizontal]
+.Parameters
+[[MoveEntryFromOtherReference.newParent, `newParent`]]newParent:: <<targetNodeType>>
+
+[[MoveEntryFromOtherReference.newReference, `newReference`]]newReference:: <<metaPointerType>>
+
+[[MoveEntryFromOtherReference.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveEntryFromOtherReference.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+
+[[MoveEntryFromOtherReference.oldReference, `oldReference`]]oldReference:: <<metaPointerType>>
+
+[[MoveEntryFromOtherReference.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[MoveEntryFromOtherReference.movedTarget, `movedTarget`]]movedTarget:: <<targetNodeType>>?
+
+[[MoveEntryFromOtherReference.movedResolveInfo, `movedResolveInfo`]]movedResolveInfo:: <<resolveInfoType>>?
+
+[[MoveEntryFromOtherReference.commandId]]commandId:: <<commandIdType>>
+
+[[MoveEntryFromOtherReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<MoveEntryFromOtherReference.newParent>>
+* <<err-unknownIndex>> for <<MoveEntryFromOtherReference.newIndex>> (is beyond (the number of <<MoveEntryFromOtherReference.newReference>> entries of <<MoveEntryFromOtherReference.newParent>>))
+* <<err-unknownIndex>> for <<MoveEntryFromOtherReference.oldIndex>> (is beyond (the number of <<MoveEntryFromOtherReference.oldReference>> entries of <<MoveEntryFromOtherReference.oldParent>>) - 1)
+* <<err-indexEntryMismatch>> for <<MoveEntryFromOtherReference.oldReference>>/<<MoveEntryFromOtherReference.oldIndex>> and <<MoveEntryFromOtherReference.movedTarget>>/<<MoveEntryFromOtherReference.movedResolveInfo>>
+* <<err-undefinedReferenceTarget>> for <<MoveEntryFromOtherReference.movedTarget>>/<<MoveEntryFromOtherReference.movedResolveInfo>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-EntryMovedFromOtherReference>>

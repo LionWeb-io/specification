@@ -1,0 +1,31 @@
+[[cmd-DeleteProperty]]
+===== Delete property
+Delete existing <<DeleteProperty.property>> from <<DeleteProperty.node>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::DeleteProperty-diagram.adoc[]
+|===
+
+.Technical name
+`DeleteProperty`
+
+[horizontal]
+.Parameters
+[[DeleteProperty.node, `node`]]node:: <<targetNodeType>>
+
+[[DeleteProperty.property, `property`]]property:: <<metaPointerType>>
+
+[[DeleteProperty.commandId]]commandId:: <<commandIdType>>
+
+[[DeleteProperty.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<DeleteProperty.node>>
+* ##?## <<DeleteProperty.property>> is not set in <<DeleteProperty.node>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-PropertyDeleted>>

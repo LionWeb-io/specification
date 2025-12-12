@@ -1,0 +1,21 @@
+[[evnt-PartitionAdded]]
+===== Partition added
+Partition <<PartitionAdded.newPartition>> has been added to the repository.
+
+This client is now subscribed to any changes to <<PartitionAdded.newPartition>> or any of its descendants.
+
+.Technical name
+`PartitionAdded`
+
+[horizontal]
+.Parameters
+[[PartitionAdded.newPartition, `newPartition`]]newPartition:: <<chunkType>>
+
+[[PartitionAdded.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[PartitionAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[PartitionAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-AddPartition>>

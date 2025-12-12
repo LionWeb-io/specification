@@ -1,0 +1,22 @@
+[[evnt-children]]
+==== Children
+
+include::AddChild/ChildAdded.adoc[]
+
+include::DeleteChild/ChildDeleted.adoc[]
+
+include::ReplaceChild/ChildReplaced.adoc[]
+
+
+include::MoveChildFromOtherContainment/ChildMovedFromOtherContainment.adoc[]
+
+include::MoveChildFromOtherContainmentInSameParent/ChildMovedFromOtherContainmentInSameParent.adoc[]
+
+include::MoveChildInSameContainment/ChildMovedInSameContainment.adoc[]
+
+
+include::MoveAndReplaceChildFromOtherContainment/ChildMovedAndReplacedFromOtherContainment.adoc[]
+
+include::MoveAndReplaceChildFromOtherContainmentInSameParent/ChildMovedAndReplacedFromOtherContainmentInSameParent.adoc[]
+
+include::MoveAndReplaceChildInSameContainment/ChildMovedAndReplacedInSameContainment.adoc[]

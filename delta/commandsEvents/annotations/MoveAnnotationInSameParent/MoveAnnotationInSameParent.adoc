@@ -1,0 +1,32 @@
+[[cmd-MoveAnnotationInSameParent]]
+===== Move annotation in same parent
+Move existing node <<MoveAnnotationInSameParent.movedAnnotation>> within the same parent to <<MoveAnnotationInSameParent.newIndex>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::MoveAnnotationInSameParent-diagram.adoc[]
+|===
+
+.Technical name
+`MoveAnnotationInSameParent`
+
+[horizontal]
+.Parameters
+[[MoveAnnotationInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveAnnotationInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
+
+[[MoveAnnotationInSameParent.commandId]]commandId:: <<commandIdType>>
+
+[[MoveAnnotationInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownIndex>> for <<MoveAnnotationInSameParent.newIndex>> (is beyond (the number of annotations of <<MoveAnnotationInSameParent.movedAnnotation>>'s parent) - 1)
+* <<err-unknownNode>> for <<MoveAnnotationInSameParent.movedAnnotation>>
+* <<err-moveWithoutParent>> for <<MoveAnnotationInSameParent.movedAnnotation>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-AnnotationMovedInSameParent>>

@@ -1,0 +1,8 @@
+[[evnt-miscellaneous]]
+==== Miscellaneous
+
+include::CompositeCommand/CompositeEvent.adoc[]
+
+include::NoOp/NoOp.adoc[]
+
+include::ErrorEvent/ErrorEvent.adoc[]

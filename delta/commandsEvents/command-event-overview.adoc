@@ -1,0 +1,356 @@
+[[command-event-overview]]
+=== Command -- event pairs overview
+include::legend.adoc[]
+
+==== Partitions
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-AddPartition>>
+
+<<evnt-PartitionAdded>>
+
+Add `newPartition` node as new partition.
+include::partitions/AddPartition/AddPartition-diagram.adoc[]
+
+|
+<<cmd-DeletePartition>>
+
+<<evnt-PartitionDeleted>>
+
+Delete partition `deletedPartition`.
+include::partitions/DeletePartition/DeletePartition-diagram.adoc[]
+|===
+
+==== Nodes
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-ChangeClassifier>>
+
+<<evnt-ClassifierChanged>>
+
+Change classifier of `node` from `oldClassifier` to `newClassifier`.
+include::nodes/ChangeClassifier/ChangeClassifier-diagram.adoc[]
+|===
+
+==== Properties
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-AddProperty>>
+
+<<evnt-PropertyAdded>>
+
+Add `newValue` as value of property `property` to `node`.
+include::properties/AddProperty/AddProperty-diagram.adoc[]
+
+|
+<<cmd-DeleteProperty>>
+
+<<evnt-PropertyDeleted>>
+
+Delete existing `property` with `oldValue` from `node`.
+include::properties/DeleteProperty/DeleteProperty-diagram.adoc[]
+
+|
+<<cmd-ChangeProperty>>
+
+<<evnt-PropertyChanged>>
+
+Change existing `property` of `node` from `oldValue` to `newValue`.
+include::properties/ChangeProperty/ChangeProperty-diagram.adoc[]
+|===
+
+==== Children
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-AddChild>>
+
+<<evnt-ChildAdded>>
+
+Add new node `newChild` to `parent` in `containment` at `index`.
+include::children/AddChild/AddChild-diagram.adoc[]
+
+|
+<<cmd-DeleteChild>>
+
+<<evnt-ChildDeleted>>
+
+Delete existing node `deletedChild` from ``parent``'s `containment` at `index`.
+include::children/DeleteChild/DeleteChild-diagram.adoc[]
+
+|
+<<cmd-ReplaceChild>>
+
+<<evnt-ChildReplaced>>
+
+Replace existing node `replacedChild` inside ``parent``'s `containment` at `index` with new node `newChild`.
+Delete `replacedChild`.
+include::children/ReplaceChild/ReplaceChild-diagram.adoc[]
+
+|
+<<cmd-MoveChildFromOtherContainment>>
+
+<<evnt-ChildMovedFromOtherContainment>>
+
+Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
+inside ``newParent``'s `newContainment` at `newIndex`.
+include::children/MoveChildFromOtherContainment/MoveChildFromOtherContainment-diagram.adoc[]
+|
+
+<<cmd-MoveChildFromOtherContainmentInSameParent>>
+
+<<evnt-ChildMovedFromOtherContainmentInSameParent>>
+
+Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
+inside ``parent``'s `newContainment` at `newIndex`.
+include::children/MoveChildFromOtherContainmentInSameParent/MoveChildFromOtherContainmentInSameParent-diagram.adoc[]
+
+|
+<<cmd-MoveChildInSameContainment>>
+
+<<evnt-ChildMovedInSameContainment>>
+
+Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
+inside ``parent``'s `containment` at `newIndex`.
+include::children/MoveChildInSameContainment/MoveChildInSameContainment-diagram.adoc[]
+
+|
+<<cmd-MoveAndReplaceChildFromOtherContainment>>
+
+<<evnt-ChildMovedAndReplacedFromOtherContainment>>
+
+Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
+inside ``newParent``'s `newContainment` at `newIndex`, replacing `replacedChild` that was previously inside ``newParent``'s `newContainment` at `newIndex`.
+include::children/MoveAndReplaceChildFromOtherContainment/MoveAndReplaceChildFromOtherContainment-diagram.adoc[]
+|
+
+<<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
+
+<<evnt-ChildMovedAndReplacedFromOtherContainmentInSameParent>>
+
+Move existing node `movedChild` (currently inside ``parent``'s `oldContainment` at `oldIndex`)
+inside ``parent``'s `newContainment` at `newIndex`, replacing `replacedChild` that was previously inside ``parent``'s `newContainment` at `newIndex`.
+include::children/MoveAndReplaceChildFromOtherContainmentInSameParent/MoveAndReplaceChildFromOtherContainmentInSameParent-diagram.adoc[]
+
+|
+<<cmd-MoveAndReplaceChildInSameContainment>>
+
+<<evnt-ChildMovedAndReplacedInSameContainment>>
+
+Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
+inside ``parent``'s `containment` at `newIndex`, replacing `replacedChild` that was previously inside ``parent``'s `containment` at `newIndex`.
+include::children/MoveAndReplaceChildInSameContainment/MoveAndReplaceChildInSameContainment-diagram.adoc[]
+
+|===
+
+==== Annotations
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-AddAnnotation>>
+
+<<evnt-AnnotationAdded>>
+
+Add new node `newAnnotation` to ``parent``'s annotations at `index`.
+include::annotations/AddAnnotation/AddAnnotation-diagram.adoc[]
+
+|
+<<cmd-DeleteAnnotation>>
+
+<<evnt-AnnotationDeleted>>
+
+Delete existing node `deletedAnnotation` from ``parent``'s annotations at `index`.
+include::annotations/DeleteAnnotation/DeleteAnnotation-diagram.adoc[]
+
+|
+<<cmd-ReplaceAnnotation>>
+
+<<evnt-AnnotationReplaced>>
+
+Replace existing node `replacedAnnotation` inside ``parent``'s annotations at `index` with new node `newAnnotation`.
+Delete `replacedAnnotation`.
+include::annotations/ReplaceAnnotation/ReplaceAnnotation-diagram.adoc[]
+
+|
+<<cmd-MoveAnnotationFromOtherParent>>
+
+<<evnt-AnnotationMovedFromOtherParent>>
+
+Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
+inside ``newParent``'s annotations at `newIndex`.
+include::annotations/MoveAnnotationFromOtherParent/MoveAnnotationFromOtherParent-diagram.adoc[]
+
+|
+<<cmd-MoveAnnotationInSameParent>>
+
+<<evnt-AnnotationMovedInSameParent>>
+
+Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
+inside ``parent``'s annotations at `newIndex`.
+include::annotations/MoveAnnotationInSameParent/MoveAnnotationInSameParent-diagram.adoc[]
+
+|
+<<cmd-MoveAndReplaceAnnotationFromOtherParent>>
+
+<<evnt-AnnotationMovedAndReplacedFromOtherParent>>
+
+Move existing node `movedAnnotation` (currently inside ``oldParent``'s annotations at `oldIndex`)
+inside ``newParent``'s annotations at `newIndex`, replacing `replacedAnnotation` that was previously inside ``newParent``'s annotations at `newIndex`.
+include::annotations/MoveAndReplaceAnnotationFromOtherParent/MoveAndReplaceAnnotationFromOtherParent-diagram.adoc[]
+
+|
+<<cmd-MoveAndReplaceAnnotationInSameParent>>
+
+<<evnt-AnnotationMovedAndReplacedInSameParent>>
+
+Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
+inside ``parent``'s annotations at `newIndex`, replacing `replacedAnnotation` that was previously inside ``parent``'s annotations at `newIndex`.
+include::annotations/MoveAndReplaceAnnotationInSameParent/MoveAndReplaceAnnotationInSameParent-diagram.adoc[]
+
+|===
+
+==== References
+[cols="30a,35a,35a"]
+|===
+|Command / Event / Description |Before |After
+
+|
+<<cmd-AddReference>>
+
+<<evnt-ReferenceAdded>>
+
+Add `newTarget` / `newResolveInfo` to ``parent``'s `reference` at `index`.
+include::references/AddReference/AddReference-diagram.adoc[]
+
+|
+<<cmd-DeleteReference>>
+
+<<evnt-ReferenceDeleted>>
+
+Delete existing `deletedTarget`/`deletedResolveInfo` from ``parent``'s `reference` at `index`.
+include::references/DeleteReference/DeleteReference-diagram.adoc[]
+
+|
+<<cmd-ChangeReference>>
+
+<<evnt-ReferenceChanged>>
+
+Replace existing `replacedTarget`/`replacedResolveInfo`  inside ``parent``'s `reference` at `index` with `newTarget`/`newResolveInfo`.
+include::references/ChangeReference/ChangeReference-diagram.adoc[]
+
+|
+<<cmd-MoveEntryFromOtherReference>>
+
+<<evnt-EntryMovedFromOtherReference>>
+
+Move existing `target`/`resolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
+to ``newParent``'s `newReference` at `newIndex`.
+include::references/MoveEntryFromOtherReference/MoveEntryFromOtherReference-diagram.adoc[]
+
+|
+<<cmd-MoveEntryFromOtherReferenceInSameParent>>
+
+<<evnt-EntryMovedFromOtherReferenceInSameParent>>
+
+Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
+to ``parent``'s `newReference` at `newIndex`.
+include::references/MoveEntryFromOtherReferenceInSameParent/MoveEntryFromOtherReferenceInSameParent-diagram.adoc[]
+
+|
+<<cmd-MoveEntryInSameReference>>
+
+<<evnt-EntryMovedInSameReference>>
+
+Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
+inside ``parent``'s `reference` at `newIndex`.
+include::references/MoveEntryInSameReference/MoveEntryInSameReference-diagram.adoc[]
+
+|
+<<cmd-MoveAndReplaceEntryFromOtherReference>>
+
+<<evnt-EntryMovedAndReplacedFromOtherReference>>
+
+Move existing `movedTarget`/`movedResolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
+to ``newParent``'s `newReference` at `newIndex`, replacing `replacedTarget`/`replacedResolveInfo` that was previously inside ``newParent``'s `newReference` at `newIndex`.
+include::references/MoveAndReplaceEntryFromOtherReference/MoveAndReplaceEntryFromOtherReference-diagram.adoc[]
+
+|
+<<cmd-MoveAndReplaceEntryFromOtherReferenceInSameParent>>
+
+<<evnt-EntryMovedAndReplacedFromOtherReferenceInSameParent>>
+
+Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
+to ``parent``'s `newReference` at `newIndex`, replacing `replacedTarget`/`replacedResolveInfo` that was previously inside ``parent``'s `newReference` at `newIndex`.
+include::references/MoveAndReplaceEntryFromOtherReferenceInSameParent/MoveAndReplaceEntryFromOtherReferenceInSameParent-diagram.adoc[]
+
+|
+<<cmd-MoveAndReplaceEntryInSameReference>>
+
+<<evnt-EntryMovedAndReplacedInSameReference>>
+
+Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
+inside ``parent``'s `reference` at `newIndex`, replacing `replacedTarget`/`replacedResolveInfo` that was previously inside ``parent``'s `reference` at `newIndex`.
+include::references/MoveAndReplaceEntryInSameReference/MoveAndReplaceEntryInSameReference-diagram.adoc[]
+
+|
+<<cmd-AddReferenceResolveInfo>>
+
+<<evnt-ReferenceResolveInfoAdded>>
+
+Add `newResolveInfo` as ResolveInfo to existing entry inside ``parent``'s `reference` at `index` with `target`.
+include::references/AddReferenceResolveInfo/AddReferenceResolveInfo-diagram.adoc[]
+
+|
+<<cmd-DeleteReferenceResolveInfo>>
+
+<<evnt-ReferenceResolveInfoDeleted>>
+
+Delete existing `deletedResolveInfo` as ResolveInfo from existing entry inside ``parent``'s `reference` at `index` with `target`.
+include::references/DeleteReferenceResolveInfo/DeleteReferenceResolveInfo-diagram.adoc[]
+
+|
+<<cmd-ChangeReferenceResolveInfo>>
+
+<<evnt-ReferenceResolveInfoChanged>>
+
+Change ResolveInfo of existing entry inside ``parent``'s `reference` at `index` from `oldResolveInfo` to `newResolveInfo`.
+include::references/ChangeReferenceResolveInfo/ChangeReferenceResolveInfo-diagram.adoc[]
+
+|
+<<cmd-AddReferenceTarget>>
+
+<<evnt-ReferenceTargetAdded>>
+
+Add `newTarget` as target to existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+include::references/AddReferenceTarget/AddReferenceTarget-diagram.adoc[]
+
+|
+<<cmd-DeleteReferenceTarget>>
+
+<<evnt-ReferenceTargetDeleted>>
+
+Delete existing `deletedTarget` as target from existing entry inside ``parent``'s `reference` at `index` with `resolveInfo`.
+include::references/DeleteReferenceTarget/DeleteReferenceTarget-diagram.adoc[]
+
+|
+<<cmd-ChangeReferenceTarget>>
+
+<<evnt-ReferenceTargetChanged>>
+
+Change target of existing entry inside ``parent``'s `reference` at `index` with `resolveInfo` from `oldTarget` to `newTarget`.
+include::references/ChangeReferenceTarget/ChangeReferenceTarget-diagram.adoc[]
+
+|===

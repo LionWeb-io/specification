@@ -1,0 +1,37 @@
+[[cmd-AddAnnotation]]
+===== Add annotation
+Add new node <<AddAnnotation.newAnnotation>> to <<AddAnnotation.parent>>'s annotations at <<AddAnnotation.index>>.
+<<AddAnnotation.newAnnotation>> might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::AddAnnotation-diagram.adoc[]
+|===
+
+.Technical name
+`AddAnnotation`
+
+[horizontal]
+.Parameters
+[[AddAnnotation.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[AddAnnotation.newAnnotation, `newAnnotation`]]newAnnotation:: <<chunkType>>
+
+[[AddAnnotation.index, `index`]]index:: <<indexType>>
+
+[[AddAnnotation.commandId]]commandId:: <<commandIdType>>
+
+[[AddAnnotation.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<AddAnnotation.parent>>
+* <<err-nodeAlreadyExists>> for <<AddAnnotation.newAnnotation>>
+* <<err-unknownIndex>> for <<AddAnnotation.index>> (is beyond the number of annotations of <<AddAnnotation.parent>>)
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-AnnotationAdded>>

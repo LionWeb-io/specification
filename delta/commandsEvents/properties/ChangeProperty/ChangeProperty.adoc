@@ -1,0 +1,35 @@
+[[cmd-ChangeProperty]]
+===== Change property
+Change existing <<ChangeProperty.property>> of <<ChangeProperty.node>> to <<ChangeProperty.newValue>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::ChangeProperty-diagram.adoc[]
+|===
+
+.Technical name
+`ChangeProperty`
+
+[horizontal]
+.Parameters
+[[ChangeProperty.node, `node`]]node:: <<targetNodeType>>
+
+[[ChangeProperty.property, `property`]]property:: <<metaPointerType>>
+
+[[ChangeProperty.newValue, `newValue`]]newValue:: <<propertyValueType>>
+
+[[ChangeProperty.commandId]]commandId:: <<commandIdType>>
+
+[[ChangeProperty.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<ChangeProperty.node>>
+* ##?## <<ChangeProperty.property>> is not set in <<ChangeProperty.node>>
+* ##?## <<ChangeProperty.property>> already has <<ChangeProperty.newValue>> in <<ChangeProperty.node>>
+* <<err-invalidParticipation>>
+
+
+.Related event
+<<evnt-PropertyChanged>>

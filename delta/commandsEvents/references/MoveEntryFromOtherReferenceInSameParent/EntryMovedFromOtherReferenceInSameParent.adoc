@@ -1,0 +1,36 @@
+[[evnt-EntryMovedFromOtherReferenceInSameParent]]
+===== Entry moved from other reference in same parent
+Existing reference <<EntryMovedFromOtherReferenceInSameParent.movedTarget>>/<<EntryMovedFromOtherReferenceInSameParent.movedResolveInfo>> (previously inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedFromOtherReferenceInSameParent.oldReference>> at <<EntryMovedFromOtherReferenceInSameParent.oldIndex>>) has been moved
+to <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedFromOtherReferenceInSameParent.newReference>> at <<EntryMovedFromOtherReferenceInSameParent.newIndex>>.
+
+All other entries inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedFromOtherReferenceInSameParent.oldReference>> with index > <<EntryMovedFromOtherReferenceInSameParent.oldIndex>> have been moved to next lower index.
+
+All other entries inside <<EntryMovedFromOtherReferenceInSameParent.parent>>'s <<EntryMovedFromOtherReferenceInSameParent.newReference>> with index >= <<EntryMovedFromOtherReferenceInSameParent.newIndex>> have been moved to next higher index.
+
+.Technical name
+`EntryMovedFromOtherReferenceInSameParent`
+
+[horizontal]
+.Parameters
+[[EntryMovedFromOtherReferenceInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[EntryMovedFromOtherReferenceInSameParent.newReference, `newReference`]]newReference:: <<metaPointerType>>
+
+[[EntryMovedFromOtherReferenceInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[EntryMovedFromOtherReferenceInSameParent.oldReference, `oldReference`]]oldReference:: <<metaPointerType>>
+
+[[EntryMovedFromOtherReferenceInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[EntryMovedFromOtherReferenceInSameParent.movedTarget, `movedTarget`]]movedTarget:: <<targetNodeType>>?
+
+[[EntryMovedFromOtherReferenceInSameParent.movedResolveInfo, `movedResolveInfo`]]movedResolveInfo:: <<resolveInfoType>>?
+
+[[EntryMovedFromOtherReferenceInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[EntryMovedFromOtherReferenceInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[EntryMovedFromOtherReferenceInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-MoveEntryFromOtherReferenceInSameParent>>

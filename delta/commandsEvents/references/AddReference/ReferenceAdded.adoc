@@ -1,0 +1,28 @@
+[[evnt-ReferenceAdded]]
+===== Reference added
+Reference with <<ReferenceAdded.newTarget>>/<<ReferenceAdded.newResolveInfo>> has been added to <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>> at <<ReferenceAdded.index>>.
+All other entries inside <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>> with index >= <<ReferenceAdded.index>> have been moved to next higher index.
+
+.Technical name
+`ReferenceAdded`
+
+[horizontal]
+.Parameters
+[[ReferenceAdded.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[ReferenceAdded.reference, `reference`]]reference:: <<metaPointerType>>
+
+[[ReferenceAdded.index, `index`]]index:: <<indexType>>
+
+[[ReferenceAdded.newTarget, `newTarget`]]newTarget:: <<targetNodeType>>?
+
+[[ReferenceAdded.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
+
+[[ReferenceAdded.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ReferenceAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ReferenceAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-AddReference>>

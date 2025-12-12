@@ -1,0 +1,38 @@
+[[cmd-AddReference]]
+===== Add reference
+Add <<AddReference.newTarget>> / <<AddReference.newResolveInfo>> to <<AddReference.parent>>'s <<AddReference.reference>> at <<AddReference.index>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::AddReference-diagram.adoc[]
+|===
+
+.Technical name
+`AddReference`
+
+[horizontal]
+.Parameters
+[[AddReference.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[AddReference.reference, `reference`]]reference:: <<metaPointerType>>
+
+[[AddReference.index, `index`]]index:: <<indexType>>
+
+[[AddReference.newTarget, `newTarget`]]newTarget:: <<targetNodeType>>?
+
+[[AddReference.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
+
+[[AddReference.commandId]]commandId:: <<commandIdType>>
+
+[[AddReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<AddReference.parent>>
+* <<err-unknownIndex>> for <<AddReference.index>> (is beyond the number of <<AddReference.reference>> entries of <<AddReference.parent>>)
+* <<err-undefinedReferenceTarget>> for <<AddReference.newTarget>> and <<AddReference.newResolveInfo>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ReferenceAdded>>

@@ -1,0 +1,23 @@
+[[evnt-ClassifierChanged]]
+===== Classifier changed
+Classifier of <<ClassifierChanged.node>> has been changed from <<ClassifierChanged.oldClassifier>> to <<ClassifierChanged.newClassifier>>.
+
+.Technical name
+`ClassifierChanged`
+
+[horizontal]
+.Parameters
+[[ClassifierChanged.node, `node`]]node:: <<targetNodeType>>
+
+[[ClassifierChanged.newClassifier, `newClassifier`]]newClassifier:: <<metaPointerType>>
+
+[[ClassifierChanged.oldClassifier, `oldClassifier`]]oldClassifier:: <<metaPointerType>>
+
+[[ClassifierChanged.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ClassifierChanged.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ClassifierChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-ChangeClassifier>>

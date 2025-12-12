@@ -1,0 +1,32 @@
+[[evnt-AnnotationMovedFromOtherParent]]
+===== Annotation moved from other parent
+Existing node <<AnnotationMovedFromOtherParent.movedAnnotation>> (previously inside <<AnnotationMovedFromOtherParent.oldParent>>'s annotations at <<AnnotationMovedFromOtherParent.oldIndex>>) has been moved
+inside <<AnnotationMovedFromOtherParent.newParent>>'s annotations at <<AnnotationMovedFromOtherParent.newIndex>>.
+
+All other annotations inside <<AnnotationMovedFromOtherParent.oldParent>>'s annotations with index > <<AnnotationMovedFromOtherParent.oldIndex>> have been moved to next lower index.
+
+All other annotations inside <<AnnotationMovedFromOtherParent.newParent>>'s annotations with index >= <<AnnotationMovedFromOtherParent.newIndex>> have been moved to next higher index.
+
+.Technical name
+`AnnotationMovedFromOtherParent`
+
+[horizontal]
+.Parameters
+[[AnnotationMovedFromOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+
+[[AnnotationMovedFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[AnnotationMovedFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
+
+[[AnnotationMovedFromOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+
+[[AnnotationMovedFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[AnnotationMovedFromOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[AnnotationMovedFromOtherParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[AnnotationMovedFromOtherParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-MoveAnnotationFromOtherParent>>

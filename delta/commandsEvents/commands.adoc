@@ -1,0 +1,32 @@
+[[commands]]
+=== Commands
+
+==== Lifecycle
+[plantuml, commandsLifecycle, svg]
+----
+hide empty description
+
+[*] -> Created: <i>client</i>\ncreates
+Created -> Sent: <i>client</i>\nsends
+
+Sent --> Failed: <i>repository</i>\ninvalid command
+Failed -> [*]: <i>client</i>\ndiscards
+
+Sent -> Received: <i>repository</i>\nreceives
+Received -> Processed: <i>repository</i> emits event,\n<i>client</i> receives event
+Processed --> [*]: <i>client</i>\ndiscards
+----
+
+include::partitions/CommandPartitions.adoc[]
+
+include::nodes/CommandNodes.adoc[]
+
+include::properties/CommandProperties.adoc[]
+
+include::children/CommandChildren.adoc[]
+
+include::annotations/CommandAnnotations.adoc[]
+
+include::references/CommandReferences.adoc[]
+
+include::miscellaneous/CommandMiscellaneous.adoc[]

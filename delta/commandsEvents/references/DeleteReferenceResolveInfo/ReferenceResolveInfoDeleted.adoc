@@ -1,0 +1,27 @@
+[[evnt-ReferenceResolveInfoDeleted]]
+===== Reference ResolveInfo deleted
+ResolveInfo <<ReferenceResolveInfoDeleted.deletedResolveInfo>> has been deleted from existing entry inside <<ReferenceResolveInfoDeleted.parent>>'s <<ReferenceResolveInfoDeleted.reference>> at <<ReferenceResolveInfoDeleted.index>> with <<ReferenceResolveInfoDeleted.target>>.
+
+.Technical name
+`ReferenceResolveInfoDeleted`
+
+[horizontal]
+.Parameters
+[[ReferenceResolveInfoDeleted.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[ReferenceResolveInfoDeleted.reference, `reference`]]reference:: <<metaPointerType>>
+
+[[ReferenceResolveInfoDeleted.index, `index`]]index:: <<indexType>>
+
+[[ReferenceResolveInfoDeleted.target, `target`]]target:: <<targetNodeType>>
+
+[[ReferenceResolveInfoDeleted.deletedResolveInfo, `deletedResolveInfo`]]deletedResolveInfo:: <<resolveInfoType>>
+
+[[ReferenceResolveInfoDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ReferenceResolveInfoDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ReferenceResolveInfoDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-DeleteReferenceResolveInfo>>

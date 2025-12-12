@@ -1,0 +1,45 @@
+[[cmd-ReplaceChild]]
+===== Replace child
+Delete current child <<ReplaceChild.replacedChild>>{fn-org371} inside <<ReplaceChild.parent>>'s <<ReplaceChild.containment>> at <<ReplaceChild.index>>, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
+
+Replace existing node <<ReplaceChild.replacedChild>> inside <<ReplaceChild.parent>>'s <<ReplaceChild.containment>> at <<ReplaceChild.index>> with new node <<ReplaceChild.newChild>>.
+`newChild` might be a single node or an arbitrary complex subtree.
+All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
+Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::ReplaceChild-diagram.adoc[]
+|===
+
+.Technical name
+`ReplaceChild`
+
+[horizontal]
+.Parameters
+[[ReplaceChild.newChild, `newChild`]]newChild:: <<chunkType>>
+
+[[ReplaceChild.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[ReplaceChild.containment, `containment`]]containment:: <<metaPointerType>>
+
+[[ReplaceChild.index, `index`]]index:: <<indexType>>
+
+[[ReplaceChild.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+
+[[ReplaceChild.commandId]]commandId:: <<commandIdType>>
+
+[[ReplaceChild.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-nodeAlreadyExists>> <<ReplaceChild.newChild>>
+* <<err-unknownNode>> for <<ReplaceChild.parent>>
+* <<err-indexEntryMismatch>> for <<ReplaceChild.containment>>/<<ReplaceChild.index>> and <<ReplaceChild.replacedChild>>
+* ##?## <<ReplaceChild.index>> is beyond (the number of <<ReplaceChild.containment>> entries in <<ReplaceChild.parent>>) - 1
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ChildReplaced>>

@@ -1,0 +1,44 @@
+[[evnt-ChildMovedAndReplacedInSameContainment]]
+===== Child moved in same containment and replaced existing child
+Existing node <<ChildMovedAndReplacedInSameContainment.movedChild>> (previously inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> at <<ChildMovedAndReplacedInSameContainment.oldIndex>>) has replaced the existing <<ChildMovedAndReplacedInSameContainment.replacedChild>> inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> at <<ChildMovedAndReplacedInSameContainment.newIndex>>.
+<<ChildMovedAndReplacedInSameContainment.replacedChild>>, and all its <<ChildMovedAndReplacedInSameContainment.replacedDescendants>>{fn-org370}, have been deleted.
+
+If <<ChildMovedAndReplacedInSameContainment.oldIndex>> < <<ChildMovedAndReplacedInSameContainment.newIndex>>: All other children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> with previous index > <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to next lower index.
+Example: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_`
+
+If <<ChildMovedAndReplacedInSameContainment.oldIndex>> > <<ChildMovedAndReplacedInSameContainment.newIndex>>: All other children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> with previous index >= <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to next lower index.
+Example: +
+`oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
+`newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
+
+<<ChildMovedAndReplacedInSameContainment.oldIndex>> MUST NOT be equal to <<ChildMovedAndReplacedInSameContainment.newIndex>>.
+
+.Technical name
+`ChildMovedAndReplacedInSameContainment`
+
+[horizontal]
+.Parameters
+[[ChildMovedAndReplacedInSameContainment.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[ChildMovedAndReplacedInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+
+[[ChildMovedAndReplacedInSameContainment.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[ChildMovedAndReplacedInSameContainment.containment, `containment`]]containment:: <<metaPointerType>>
+
+[[ChildMovedAndReplacedInSameContainment.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[ChildMovedAndReplacedInSameContainment.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+
+[[ChildMovedAndReplacedInSameContainment.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+
+[[ChildMovedAndReplacedInSameContainment.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ChildMovedAndReplacedInSameContainment.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ChildMovedAndReplacedInSameContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-MoveAndReplaceChildInSameContainment>>

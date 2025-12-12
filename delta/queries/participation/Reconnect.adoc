@@ -1,0 +1,33 @@
+[[qry-Reconnect]]
+===== Reconnect (resume an existing participation)
+The <<client>> has been technically disconnected, but still knows its <<participation-id>>.
+Then the client can ask to reconnect to the repository.{fn-org349}
+
+.Technical name
+`Reconnect`
+
+[horizontal]
+.Request parameters
+[[Reconnect.participationId, `participationId`]]participationId:: <<participationIdType>>
+The previously used <<participation-id>>.
+
+[[Reconnect.lastReceivedSequenceNumber, `lastReceivedSequenceNumber`]]lastReceivedSequenceNumber:: <<eventSequenceType>>
+Last <<event-sequence-number>> received by the client.
+
+[[Reconnect.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[Reconnect.requestProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+
+[horizontal]
+.Response parameters
+[[Reconnect.lastSentSequenceNumber, `lastSentSequenceNumber`]]lastSentSequenceNumber:: <<eventSequenceType>>
+Last <<event-sequence-number>> sent by the repository.
+
+[[Reconnect.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[Reconnect.responseProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-invalidParticipation>> If the participation is not valid.{fn-org354}

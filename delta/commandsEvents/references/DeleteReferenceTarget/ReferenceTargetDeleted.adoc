@@ -1,0 +1,27 @@
+[[evnt-ReferenceTargetDeleted]]
+===== Reference target deleted
+Target <<ReferenceTargetDeleted.deletedTarget>> has been deleted from existing entry inside <<ReferenceTargetDeleted.parent>>'s <<ReferenceTargetDeleted.reference>> at <<ReferenceTargetDeleted.index>> with <<ReferenceTargetDeleted.resolveInfo>>.
+
+.Technical name
+`ReferenceTargetDeleted`
+
+[horizontal]
+.Parameters
+[[ReferenceTargetDeleted.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[ReferenceTargetDeleted.reference, `reference`]]reference:: <<metaPointerType>>
+
+[[ReferenceTargetDeleted.index, `index`]]index:: <<indexType>>
+
+[[ReferenceTargetDeleted.resolveInfo, `resolveInfo`]]resolveInfo:: <<resolveInfoType>>
+
+[[ReferenceTargetDeleted.deletedTarget, `deletedTarget`]]deletedTarget:: <<targetNodeType>>
+
+[[ReferenceTargetDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ReferenceTargetDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ReferenceTargetDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-DeleteReferenceTarget>>

@@ -1,0 +1,24 @@
+[[evnt-Error]]
+[[evnt-ErrorEvent]]
+===== ErrorEvent
+Repository couldn't handle one or more command(s).{fn-org316}{fn-org405}
+
+The repository MAY send an error event to only one participation.{fn-org379}
+
+.Technical name
+`ErrorEvent`
+
+[horizontal]
+.Parameters
+[[Error.errorCode, `errorCode`]]errorCode:: `String`
+
+[[Error.message, `message`]]message:: `String`
+
+[[Error.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[Error.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[Error.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+_none_

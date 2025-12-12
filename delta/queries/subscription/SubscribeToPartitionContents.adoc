@@ -1,0 +1,31 @@
+[[qry-subscribePartition]]
+[[qry-SubscribeToPartitionContents]]
+===== Subscribe to partition contents
+This client wants to receive events on any changes to <<SubscribeToPartitionContents.partition>> or any of its descendants.{fn-org270}{fn-org269}
+
+.Technical name
+`SubscribeToPartitionContents`
+
+[horizontal]
+.Request parameters
+[[SubscribeToPartitionContents.partition, `partition`]]partition:: <<targetNodeType>>
+Node id of the partition this client wants to receive events of.
+
+[[SubscribeToPartitionContents.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[SubscribeToPartitionContents.requestProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+
+[horizontal]
+.Response parameters
+[[SubscribeToPartitionContents.contents, `contents`]]contents:: <<chunkType>>
+Complete contents of <<SubscribeToPartitionContents.partition>>, i.e. the node with id <<SubscribeToPartitionContents.partition>> and all of its descendants (including annotation instances).
+
+[[SubscribeToPartitionContents.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[SubscribeToPartitionContents.responseProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* already subscribed to <<SubscribeToPartitionContents.partition>>
+* <<err-invalidParticipation>>

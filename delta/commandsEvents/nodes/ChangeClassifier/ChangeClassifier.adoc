@@ -1,0 +1,31 @@
+[[cmd-ChangeClassifier]]
+===== Change classifier
+Change classifier of <<ChangeClassifier.node>> to <<ChangeClassifier.newClassifier>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::ChangeClassifier-diagram.adoc[]
+|===
+
+.Technical name
+`ChangeClassifier`
+
+[horizontal]
+.Parameters
+[[ChangeClassifier.node, `node`]]node:: <<targetNodeType>>
+
+[[ChangeClassifier.newClassifier, `newClassifier`]]newClassifier:: <<metaPointerType>>
+
+[[ChangeClassifier.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
+[[ChangeClassifier.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* <<err-unknownNode>> for <<ChangeClassifier.node>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ClassifierChanged>>

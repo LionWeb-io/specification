@@ -1,0 +1,28 @@
+[[qry-unsubscribePartition]]
+[[qry-UnsubscribeFromPartitionContents]]
+===== Unsubscribe from partition contents
+This client does not want to receive events on any changes to <<UnsubscribeFromPartitionContents.partition>> or any of its descendants anymore.{fn-org270}
+
+.Technical name
+`UnsubscribeFromPartitionContents`
+
+[horizontal]
+.Request parameters
+[[UnsubscribeFromPartitionContents.partition, `partition`]]partition:: <<targetNodeType>>
+Node id of the partition this client wants to stop receiving events of.
+
+[[UnsubscribeFromPartitionContents.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[UnsubscribeFromPartitionContents.requestProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+
+[horizontal]
+.Response parameters
+[[UnsubscribeFromPartitionContents.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[UnsubscribeFromPartitionContents.responseProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+
+.Errors
+* not subscribed to <<UnsubscribeFromPartitionContents.partition>>
+* <<err-invalidParticipation>>

@@ -1,0 +1,34 @@
+[[evnt-ChildMovedFromOtherContainmentInSameParent]]
+===== Child moved from other containment in same parent
+Existing node <<ChildMovedFromOtherContainmentInSameParent.movedChild>> (previously inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'s <<ChildMovedFromOtherContainmentInSameParent.oldContainment>> at <<ChildMovedFromOtherContainmentInSameParent.oldIndex>>) has been moved
+inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'s <<ChildMovedFromOtherContainmentInSameParent.newContainment>> at <<ChildMovedFromOtherContainmentInSameParent.newIndex>>.
+
+All other children inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'s <<ChildMovedFromOtherContainmentInSameParent.oldContainment>> with index > <<ChildMovedFromOtherContainmentInSameParent.oldIndex>> have been moved to next lower index.
+
+All other children inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'s <<ChildMovedFromOtherContainmentInSameParent.newContainment>> with index >= <<ChildMovedFromOtherContainmentInSameParent.newIndex>> have been moved to next higher index.
+
+.Technical name
+`ChildMovedFromOtherContainmentInSameParent`
+
+[horizontal]
+.Parameters
+[[ChildMovedFromOtherContainmentInSameParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
+
+[[ChildMovedFromOtherContainmentInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[ChildMovedFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+
+[[ChildMovedFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[ChildMovedFromOtherContainmentInSameParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+
+[[ChildMovedFromOtherContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[ChildMovedFromOtherContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ChildMovedFromOtherContainmentInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ChildMovedFromOtherContainmentInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-MoveChildFromOtherContainmentInSameParent>>

@@ -1,0 +1,23 @@
+[[evnt-PropertyDeleted]]
+===== Property deleted
+Existing <<PropertyDeleted.property>> of <<PropertyDeleted.node>> with <<PropertyDeleted.oldValue>> has been deleted.
+
+.Technical name
+`PropertyDeleted`
+
+[horizontal]
+.Parameters
+[[PropertyDeleted.node, `node`]]node:: <<targetNodeType>>
+
+[[PropertyDeleted.property, `property`]]property:: <<metaPointerType>>
+
+[[PropertyDeleted.oldValue, `oldValue`]]oldValue:: <<propertyValueType>>
+
+[[PropertyDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[PropertyDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[PropertyDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-DeleteProperty>>

@@ -1,0 +1,8 @@
+[[queries]]
+=== Queries
+
+include::subscription/Subscription.adoc[]
+
+include::participation/Participation.adoc[]
+
+include::miscellaneous/Miscellaneous.adoc[]
