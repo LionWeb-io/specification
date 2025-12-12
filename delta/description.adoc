@@ -73,20 +73,51 @@ The repository also sends out the same events to subscribed clients, thus _not_ 
 
 [[message, message]]
 === Message characteristics
-Each message is atomic; it cannot be split.
 
+[[messageAtomicity]]
+.Atomicity
+Most message is atomic; they cannot be split.
+The exceptions are all messages containing a <<chunkType>>.
+
+[[chunkedMessages]]
+.Chunked messages
+
+Queries::
+* <<qry-SubscribeToPartitionContents>> <<SubscribeToPartitionContents.contents>> response
+* <<qry-ListPartitions>> <<ListPartitions.partitions>> response
+
+Commands::
+* <<cmd-AddPartition>> <<AddPartition.newPartition>>
+* <<cmd-AddChild>> <<AddChild.newChild>>
+* <<cmd-ReplaceChild>> <<ReplaceChild.newChild>>
+* <<cmd-AddAnnotation>> <<AddAnnotation.parent>>
+* <<cmd-ReplaceAnnotation>> <<ReplaceAnnotation.newAnnotation>>
+
+Events::
+* <<evnt-PartitionAdded>> <<PartitionAdded.newPartition>>
+* <<evnt-ChildAdded>> <<ChildAdded.newChild>>
+* <<evnt-ChildReplaced>> <<ChildReplaced.newChild>>
+* <<evnt-AnnotationAdded>> <<AnnotationAdded.newAnnotation>>
+* <<evnt-AnnotationReplaced>> <<AnnotationReplaced.newAnnotation>>
+
+[[messageIdentity, message identity]]
+.Message identity
 Each message has some id unique to the <<participation>>:
 
 * Queries have a _query id_.
 * Commands have a _command id_.{fn-org305}
 * Events have _command sources_.{fn-org306}
 
+[[technicalName, technical name]]
+.Technical name
 Every kind of message has a unique _technical name_.
 The technical name is a valid programming language identifier as described for <<{m3}.adoc#IKeyed, IKeyed>>.
 Each binding to a specific protocol might use the technical name in a different way.
 For example, a JSON binding might have a member containing the technical name of the message, or a Protobuf binding might use the technical name as type name.
 
-Each message optionally can have one or more _[[protocolMessage, protocol message]]protocol message_ consisting of:{fn-org331}{fn-org332}
+[[protocolMessage, protocol message]]
+.Protocol messages
+Each message optionally can have one or more _protocol message_ consisting of:{fn-org331}{fn-org332}
 
 * [[protocolMessage.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the message type.
 Some message kinds are pre-defined in this specification.
