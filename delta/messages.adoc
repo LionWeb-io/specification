@@ -36,6 +36,13 @@ MUST contain one single _shallow node_.
 The _shallow node_ SHOULD contain all properties of that node, and CAN contain containments, references, and annotations.
 However, the chunk MUST NOT contain the actual nodes referenced by containments, references, or annotations (except if the referenced node is the _shallow node_ itself).{fn-org425}
 
+[[splitFlagType]]SplitFlag:: boolean flag whether the chunk is complete within this <<splittableMessage>>.{fn-org425}
+
+[[continuedChunkCompletedFlagType]]ContinuedChunkCompletedFlag:: boolean flag whether this <<continuedChunk>> completes its <<splittableMessage>>.{fn-org425}
+
+[[continuedChunkSequenceNumberType]]ContinuedChunkSequenceNumber:: Orders connected <<continuedChunk, continued chunks>>.
+Positive integer that starts at 0 and increments by one for each consecutive <<continuedChunk>>.{fn-org425}
+
 [[eventType]]Event:: Any <<events, event>>.
 
 [[participationIdType]]ParticipationId:: Id of a <<participation>>.
