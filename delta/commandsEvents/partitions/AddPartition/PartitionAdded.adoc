@@ -13,6 +13,8 @@ This client is now subscribed to any changes to <<PartitionAdded.newPartition>> 
 NOTE: This parameter differs from the <<AddPartition.newPartition, corresponding command parameter>>:
 The command parameter contains a whole subtree, whereas the event parameter only contains the partition node.
 
+[[PartitionAdded.split, `split`]]split:: <<splitFlagType>>
+
 [[PartitionAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 
 [[PartitionAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>

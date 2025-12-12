@@ -26,6 +26,8 @@ All nodes in that subtree MUST either be <<new-nodes>> or <<replaced-nodes>>.
 
 [[ReplaceAnnotation.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
 
+[[ReplaceAnnotation.split, `split`]]split:: <<splitFlagType>>
+
 [[ReplaceAnnotation.commandId]]commandId:: <<commandIdType>>
 
 [[ReplaceAnnotation.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
