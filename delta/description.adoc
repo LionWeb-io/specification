@@ -83,8 +83,8 @@ The exceptions are <<splittableMessage, splittable messages>>.
 .Message identity
 Each message has some id unique to the <<participation>>:
 
-* Queries have a <<queryIdType>>.
-* Commands have a <<commandIdType>>.{fn-org305}
+* Queries have a <<queryIdType>> (for <<qry-ChunkedQueryResponse>> together with its <<continuedChunkSequenceNumberType>>).
+* Commands have a <<commandIdType>> (for <<cmd-ChunkedCommand>> together with its <<continuedChunkSequenceNumberType>>).{fn-org305}
 * Events have <<eventSequenceType>>.{fn-org423}
 
 [[technicalName, technical name]]
