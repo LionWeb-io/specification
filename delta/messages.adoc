@@ -31,6 +31,11 @@ Might be a single _anchor node_ or an arbitrary complex subtree with one _anchor
 All other nodes MUST be direct or indirect children or annotations of the _anchor node_.
 Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
 
+[[shallowChunkType]]ShallowSerializationChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>.
+MUST contain one single _shallow node_.
+The _shallow node_ SHOULD contain all properties of that node, and CAN contain containments, references, and annotations.
+However, the chunk MUST NOT contain the actual nodes referenced by containments, references, or annotations (except if the referenced node is the _shallow node_ itself).{fn-org425}
+
 [[eventType]]Event:: Any <<events, event>>.
 
 [[participationIdType]]ParticipationId:: Id of a <<participation>>.

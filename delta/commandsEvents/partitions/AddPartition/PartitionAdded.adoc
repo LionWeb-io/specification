@@ -9,7 +9,9 @@ This client is now subscribed to any changes to <<PartitionAdded.newPartition>> 
 
 [horizontal]
 .Parameters
-[[PartitionAdded.newPartition, `newPartition`]]newPartition:: <<chunkType>>
+[[PartitionAdded.newPartition, `newPartition`]]newPartition:: <<shallowChunkType>>
+NOTE: This parameter differs from the <<AddPartition.newPartition, corresponding command parameter>>:
+The command parameter contains a whole subtree, whereas the event parameter only contains the partition node.
 
 [[PartitionAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 
