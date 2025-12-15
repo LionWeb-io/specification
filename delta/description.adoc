@@ -76,7 +76,7 @@ The repository also sends out the same events to subscribed clients, thus _not_ 
 
 [[messageAtomicity]]
 .Atomicity
-Most message is atomic; they cannot be split.
+Most messages are atomic; they cannot be split.
 The exceptions are <<splittableMessage, splittable messages>>.
 
 [[messageIdentity, message identity]]
