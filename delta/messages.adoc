@@ -72,9 +72,9 @@ This allows a client to know when its command has been processed (either success
 ==== New nodes
 The term "new node" refers to nodes that MUST NOT yet exist in the repository.{fn-org327}
 
-[[replaced-nodes, replaced nodes]]
+[[reused-nodes, reused nodes]]
 ==== Replaced nodes
-The term "replaced node" refers to nodes that are removed and re-added in the same command/event.{fn-org422}
+The term "reused node" refers to nodes that are removed and re-added in the same command/event.{fn-org422}
 
 These [[replace-with-new-content-commands]] _replace with new content commands_ / [[replace-with-new-content-events]] _replace with new content events_ are:
 
