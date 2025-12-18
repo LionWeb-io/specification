@@ -119,7 +119,6 @@ Commands::
 * <<cmd-ReplaceAnnotation>> <<ReplaceAnnotation.newAnnotation>>
 
 Events::
-* <<evnt-PartitionAdded>> <<PartitionAdded.newPartition>>
 * <<evnt-ChildAdded>> <<ChildAdded.newChild>>
 * <<evnt-ChildReplaced>> <<ChildReplaced.newChild>>
 * <<evnt-AnnotationAdded>> <<AnnotationAdded.newAnnotation>>
