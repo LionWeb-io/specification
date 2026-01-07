@@ -29,7 +29,7 @@ in practice, we might transmit some or all of them through a shared channel.
 
 This protocol is agnostic of its underlying transport or technical implementation.
 By default, this protocol uses JSON encoding over a text-based, single channel, stateful, bi-directional, asynchronous, reliable, and trustworthy transport.{fn-org429}
-Any transport that fits these criteria (e.g. WebSocketfootnote:[https://websockets.spec.whatwg.org/]) MUST use the same encoding.
+Any transport that fits these criteria (e.g. WebSocketfootnote:[https://websockets.spec.whatwg.org/]) MUST use the same encoding.{fn-org428}
 
 We assume the underlying protocol handles quality of service concerns (i.e. guaranteed one-time complete delivery of messages), they are out of scope of this API.
 
