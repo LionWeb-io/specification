@@ -19,3 +19,5 @@ include::repositoryBug.adoc[]
 include::concurrentChangeLocalUpdate.adoc[]
 
 include::concurrentChangeRemoteUpdate.adoc[]
+
+include::splitQueryResponse.adoc[]

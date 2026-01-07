@@ -22,6 +22,8 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 
 [[AnnotationReplaced.index, `index`]]index:: <<indexType>>
 
+[[AnnotationReplaced.split, `split`]]split:: <<splitFlagType>>
+
 [[AnnotationReplaced.originCommands]]originCommands:: <<commandSourceType>>[]
 
 [[AnnotationReplaced.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
