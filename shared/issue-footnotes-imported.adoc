@@ -343,3 +343,6 @@
 :fn-org422: footnote:org422[https://github.com/LionWeb-io/specification/issues/422[Clarify semantics of Replace (with new content) commands #422]]
 :fn-org423: footnote:org423[https://github.com/LionWeb-io/specification/issues/423[Do we need a dedicated eventId? #423]]
 :fn-org425: footnote:org425[https://github.com/LionWeb-io/specification/issues/425[Provide partition contents only on explicit request #425]]
+:fn-org427: footnote:org427[https://github.com/LionWeb-io/specification/issues/427[Clarify use of "?" for parameters in specification #427]]
+:fn-org428: footnote:org428[https://github.com/LionWeb-io/specification/issues/428[How do LW specs relate to specific bindings / implementations #428]]
+:fn-org429: footnote:org429[https://github.com/LionWeb-io/specification/issues/429[Assumed connection properties of default delta serialization #429]]
