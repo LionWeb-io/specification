@@ -252,60 +252,6 @@ Replace existing `replacedTarget`/`replacedResolveInfo`  inside ``parent``'s `re
 include::references/ChangeReference/ChangeReference-diagram.adoc[]
 
 |
-<<cmd-MoveEntryFromOtherReference>>
-
-<<evnt-EntryMovedFromOtherReference>>
-
-Move existing `target`/`resolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
-to ``newParent``'s `newReference` at `newIndex`.
-include::references/MoveEntryFromOtherReference/MoveEntryFromOtherReference-diagram.adoc[]
-
-|
-<<cmd-MoveEntryFromOtherReferenceInSameParent>>
-
-<<evnt-EntryMovedFromOtherReferenceInSameParent>>
-
-Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
-to ``parent``'s `newReference` at `newIndex`.
-include::references/MoveEntryFromOtherReferenceInSameParent/MoveEntryFromOtherReferenceInSameParent-diagram.adoc[]
-
-|
-<<cmd-MoveEntryInSameReference>>
-
-<<evnt-EntryMovedInSameReference>>
-
-Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
-inside ``parent``'s `reference` at `newIndex`.
-include::references/MoveEntryInSameReference/MoveEntryInSameReference-diagram.adoc[]
-
-|
-<<cmd-MoveAndReplaceEntryFromOtherReference>>
-
-<<evnt-EntryMovedAndReplacedFromOtherReference>>
-
-Move existing `movedTarget`/`movedResolveInfo` (currently inside ``oldParent``'s `oldReference` at `oldIndex`)
-to ``newParent``'s `newReference` at `newIndex`, replacing `replacedTarget`/`replacedResolveInfo` that was previously inside ``newParent``'s `newReference` at `newIndex`.
-include::references/MoveAndReplaceEntryFromOtherReference/MoveAndReplaceEntryFromOtherReference-diagram.adoc[]
-
-|
-<<cmd-MoveAndReplaceEntryFromOtherReferenceInSameParent>>
-
-<<evnt-EntryMovedAndReplacedFromOtherReferenceInSameParent>>
-
-Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `oldReference` at `oldIndex`)
-to ``parent``'s `newReference` at `newIndex`, replacing `replacedTarget`/`replacedResolveInfo` that was previously inside ``parent``'s `newReference` at `newIndex`.
-include::references/MoveAndReplaceEntryFromOtherReferenceInSameParent/MoveAndReplaceEntryFromOtherReferenceInSameParent-diagram.adoc[]
-
-|
-<<cmd-MoveAndReplaceEntryInSameReference>>
-
-<<evnt-EntryMovedAndReplacedInSameReference>>
-
-Move existing `movedTarget`/`movedResolveInfo` (currently inside ``parent``'s `reference` at `oldIndex`)
-inside ``parent``'s `reference` at `newIndex`, replacing `replacedTarget`/`replacedResolveInfo` that was previously inside ``parent``'s `reference` at `newIndex`.
-include::references/MoveAndReplaceEntryInSameReference/MoveAndReplaceEntryInSameReference-diagram.adoc[]
-
-|
 <<cmd-AddReferenceResolveInfo>>
 
 <<evnt-ReferenceResolveInfoAdded>>

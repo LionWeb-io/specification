@@ -8,20 +8,6 @@ include::DeleteReference/ReferenceDeleted.adoc[]
 include::ChangeReference/ReferenceChanged.adoc[]
 
 
-include::MoveEntryFromOtherReference/EntryMovedFromOtherReference.adoc[]
-
-include::MoveEntryFromOtherReferenceInSameParent/EntryMovedFromOtherReferenceInSameParent.adoc[]
-
-include::MoveEntryInSameReference/EntryMovedInSameReference.adoc[]
-
-
-include::MoveAndReplaceEntryFromOtherReference/EntryMovedAndReplacedFromOtherReference.adoc[]
-
-include::MoveAndReplaceEntryFromOtherReferenceInSameParent/EntryMovedAndReplacedFromOtherReferenceInSameParent.adoc[]
-
-include::MoveAndReplaceEntryInSameReference/EntryMovedAndReplacedInSameReference.adoc[]
-
-
 include::AddReferenceResolveInfo/ReferenceResolveInfoAdded.adoc[]
 
 include::DeleteReferenceResolveInfo/ReferenceResolveInfoDeleted.adoc[]
