@@ -6,18 +6,3 @@ include::AddReference/AddReference.adoc[]
 include::DeleteReference/DeleteReference.adoc[]
 
 include::ChangeReference/ChangeReference.adoc[]
-
-
-include::AddReferenceResolveInfo/AddReferenceResolveInfo.adoc[]
-
-include::DeleteReferenceResolveInfo/DeleteReferenceResolveInfo.adoc[]
-
-include::ChangeReferenceResolveInfo/ChangeReferenceResolveInfo.adoc[]
-
-
-include::AddReferenceTarget/AddReferenceTarget.adoc[]
-
-include::DeleteReferenceTarget/DeleteReferenceTarget.adoc[]
-
-include::ChangeReferenceTarget/ChangeReferenceTarget.adoc[]
-

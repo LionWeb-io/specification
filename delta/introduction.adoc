@@ -76,36 +76,21 @@ This table provides an overview of actions (rows) and element they apply to (col
 |Add
 |<<cmd-AddChild>>
 |<<cmd-AddAnnotation>>
-|
-<<cmd-AddReference>>
-
-<<cmd-AddReferenceResolveInfo>>
-
-<<cmd-AddReferenceTarget>>{fn-org329}
+|<<cmd-AddReference>>{fn-org329}{fn-org431}
 |<<cmd-AddProperty>>
 |<<cmd-AddPartition>>
 
 |Delete
 |<<cmd-DeleteChild>>
 |<<cmd-DeleteAnnotation>>
-|
-<<cmd-DeleteReference>>
-
-<<cmd-DeleteReferenceResolveInfo>>
-
-<<cmd-DeleteReferenceTarget>>
+|<<cmd-DeleteReference>>
 |<<cmd-DeleteProperty>>
 |<<cmd-DeletePartition>>
 
 |Change
 |<<cmd-ReplaceChild>>
 |<<cmd-ReplaceAnnotation>>
-|
-<<cmd-ChangeReference>>
-
-<<cmd-ChangeReferenceResolveInfo>>
-
-<<cmd-ChangeReferenceTarget>>
+|<<cmd-ChangeReference>>
 |<<cmd-ChangeProperty>>
 |<<cmd-ChangeClassifier>>
 
