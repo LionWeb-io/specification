@@ -324,6 +324,9 @@
         "kind": {
           "$ref": "#/$defs/protocolMessageKind"
         },
+        "reach": {
+          "$ref": "#/$defs/protocolMessageReach"
+        },
         "message": {
           "type": "string"
         },
@@ -342,6 +345,14 @@
       "additionalProperties": false,
       "minProperties": 3,
       "maxProperties": 3
+    },
+    "protocolMessageReach": {
+      "enum": [
+        "clientToRepositoryOnly",
+        "clientToAllClients",
+        "repositoryToSingleClient",
+        "repositoryToAllClients"
+      ]
     },
     "ProtocolMessageData": {
       "properties": {
