@@ -1,3 +1,4 @@
+#!/usr/bin/pwsh
 (gh issue list --limit 1000 --state all) |
 Sort-Object {[int]($_ -replace '(\d+).*', '$1')} |
 Foreach-Object {

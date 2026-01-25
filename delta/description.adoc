@@ -86,11 +86,34 @@ The technical name is a valid programming language identifier as described for <
 Each binding to a specific protocol might use the technical name in a different way.
 For example, a JSON binding might have a member containing the technical name of the message, or a Protobuf binding might use the technical name as type name.
 
-Each message optionally can have one or more _[[protocolMessage, protocol message]]protocol message_ consisting of:{fn-org331}{fn-org332}
+[[protocolMessage, protocol message]]
+==== Protocol Message
+Each message optionally can have one or more _protocol message_ consisting of:{fn-org331}{fn-org332}{fn-org430}
 
 * [[protocolMessage.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the message type.
 Some message kinds are pre-defined in this specification.
 A repository MAY reply with other, additional message kinds.
+* [[protocolMessage.reach]]`reach` describes who should receive this protocol message.{fn-org421}
+Its value MUST be one of:
++
+[horizontal]
+`clientToRepositoryOnly`:: A client sends this protocol message to the repository.
+The repository MUST NOT deliver this protocol message to any client.
+The repository MUST NOT use this value for self-initiated protocol messages.
+
+`clientToAllClients`:: A client sends this protocol message to the repository.
+The client MUST NOT use this value in <<queries>>, i.e. only in <<commands>>.
+The repository MUST deliver this protocol message to all clients in the event corresponding to the client's command.
+If the event is an <<evnt-ErrorEvent>>, the repository MUST deliver this protocol message to all recipients of the error event.
+The repository MUST NOT use this value for self-initiated protocol messages.
+
+`repositoryToSingleClient`:: A repository sends this protocol message to only one client.
+Clients MUST NOT use this value.
+
+`repositoryToAllClients`:: A repository sends this protocol message to all clients.
+The repository MUST NOT use this value in <<queries>>, i.e. only in <<events>>.
+Clients MUST NOT use this value.
+
 * [[protocolMessage.message]]`message` is a human-readable string describing the message.
 * [[protocolMessage.data]]`data` is a flat map with arbitrary keys and values.
 All values MUST be strings, the keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible.
