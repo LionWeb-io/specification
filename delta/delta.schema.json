@@ -339,12 +339,13 @@
       },
       "required": [
         "kind",
+        "reach",
         "message",
         "data"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
-      "maxProperties": 3
+      "minProperties": 4,
+      "maxProperties": 4
     },
     "protocolMessageReach": {
       "enum": [
