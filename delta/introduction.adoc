@@ -76,78 +76,63 @@ This table provides an overview of actions (rows) and element they apply to (col
 |Add
 |<<cmd-AddChild>>
 |<<cmd-AddAnnotation>>
-|
-<<cmd-AddReference>>
-
-<<cmd-AddReferenceResolveInfo>>
-
-<<cmd-AddReferenceTarget>>{fn-org329}
+|<<cmd-AddReference>>{fn-org329}{fn-org431}
 |<<cmd-AddProperty>>
 |<<cmd-AddPartition>>
 
 |Delete
 |<<cmd-DeleteChild>>
 |<<cmd-DeleteAnnotation>>
-|
-<<cmd-DeleteReference>>
-
-<<cmd-DeleteReferenceResolveInfo>>
-
-<<cmd-DeleteReferenceTarget>>
+|<<cmd-DeleteReference>>
 |<<cmd-DeleteProperty>>
 |<<cmd-DeletePartition>>
 
 |Change
 |<<cmd-ReplaceChild>>
 |<<cmd-ReplaceAnnotation>>
-|
-<<cmd-ChangeReference>>
-
-<<cmd-ChangeReferenceResolveInfo>>
-
-<<cmd-ChangeReferenceTarget>>
+|<<cmd-ChangeReference>>
 |<<cmd-ChangeProperty>>
 |<<cmd-ChangeClassifier>>
 
 |Move from other node
 |<<cmd-MoveChildFromOtherContainment>>
 |<<cmd-MoveAnnotationFromOtherParent>>
-|<<cmd-MoveEntryFromOtherReference>>
+|
 |
 |
 
 |Move from other feature in same node
 |<<cmd-MoveChildFromOtherContainmentInSameParent>>
 |
-|<<cmd-MoveEntryFromOtherReferenceInSameParent>>
+|
 |
 |
 
 |Move in same feature in same node
 |<<cmd-MoveChildInSameContainment>>
 |<<cmd-MoveAnnotationInSameParent>>
-|<<cmd-MoveEntryInSameReference>>
+|
 |
 |
 
 |Move from other node and replace existing{fn-org321}
 |<<cmd-MoveAndReplaceChildFromOtherContainment>>
 |<<cmd-MoveAndReplaceAnnotationFromOtherParent>>
-|<<cmd-MoveAndReplaceEntryFromOtherReference>>
+|
 |
 |
 
 |Move from other feature in same node and replace existing{fn-org321}
 |<<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
 |
-|<<cmd-MoveAndReplaceEntryFromOtherReferenceInSameParent>>
+|
 |
 |
 
 |Move in same feature in same node and replace existing{fn-org321}
 |<<cmd-MoveAndReplaceChildInSameContainment>>
 |<<cmd-MoveAndReplaceAnnotationInSameParent>>
-|<<cmd-MoveAndReplaceEntryInSameReference>>
+|
 |
 |
 
