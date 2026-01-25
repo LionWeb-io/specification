@@ -31,10 +31,29 @@ Might be a single _anchor node_ or an arbitrary complex subtree with one _anchor
 All other nodes MUST be direct or indirect children or annotations of the _anchor node_.
 Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
 
+[[depthLimitType, depth limit]]DepthLimit:: Depth of returned <<shallowChunkType>>.
+MUST be an integer >= 0, with
++
+--
+* 0 meaning "return only the _root node(s)_",
+* 1 meaning "return the _root node(s)_ and their direct children/annotations",
+* 2 meaning "return the _root node(s)_, their direct children/annotations, and the direct children/annotations of these",
+* etc.
+--
+
 [[shallowChunkType]]ShallowSerializationChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>.
-MUST contain one single _shallow node_.
-The _shallow node_ SHOULD contain all properties of that node, and CAN contain containments, references, and annotations.
-However, the chunk MUST NOT contain the actual nodes referenced by containments, references, or annotations (except if the referenced node is the _shallow node_ itself).{fn-org425}
+MUST contain one or more __root nodes__, and all properties, references, and direct or indirect containments/annotations up to the requested <<depthLimitType>>.
+
+[NOTE]
+====
+<<chunkType>> and <<shallowChunkType>> have the same structure, but different constraints:
+
+* <<chunkType>> MUST contain a single _anchor node_, and all other nodes MUST be descendants of the _anchor node_.
+The chunk contains all features of the _anchor node_ and all its descendants, i.e. the _anchor node_ is complete.
+
+* <<shallowChunkType>> MAY contain more than one _root node_ (i.e. independent subtrees), and each root node might be incomplete.
+====
+
 
 [[splitFlagType]]SplitFlag:: boolean flag whether the chunk is complete within this <<splittableMessage>>.{fn-org425}
 

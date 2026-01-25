@@ -9,9 +9,11 @@ This client is now subscribed to any changes to <<PartitionAdded.newPartition>> 
 
 [horizontal]
 .Parameters
-[[PartitionAdded.newPartition, `newPartition`]]newPartition:: <<shallowChunkType>>
+[[PartitionAdded.newPartition, `newPartition`]]newPartition:: <<shallowChunkType>> up to <<qry-SubscribeToChangingPartitions>>.<<SubscribeToChangingPartitions.depthLimit>>.
 NOTE: This parameter differs from the <<AddPartition.newPartition, corresponding command parameter>>:
-The command's parameter contains a whole subtree, whereas the event's parameter only contains the partition node.
+The command's parameter contains a whole subtree, whereas the event's parameter only contains the partition node.{fn-org425}
+
+[[PartitionAdded.split, `split`]]split:: <<splitFlagType>>
 
 [[PartitionAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 

@@ -20,7 +20,7 @@ The _anchor node_ MUST NOT contain a _parent_ (as this is a partition, thus cann
 All nodes in that subtree MUST be <<new-nodes, new nodes>>.
 +
 NOTE: This parameter differs from the <<PartitionAdded.newPartition, corresponding event parameter>>:
-The command's parameter contains a whole subtree, whereas the event's parameter only contains the partition node.
+The command's parameter contains a whole subtree, whereas the event's parameter only contains the partition node.{fn-org425}
 
 [[AddPartition.split, `split`]]split:: <<splitFlagType>>
 
