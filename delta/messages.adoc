@@ -1,5 +1,12 @@
 [[messages]]
 == Messages
+[[parameter-syntax]]
+=== Parameter syntax
+* Parameters suffixed with `?` CAN be omitted, or CAN have a value of `null`.
+Both representations express the parameter to be unset.{fn-org427}
+
+* Parameters suffixed with `[]` are ordered lists with zero or more elements.
+
 === Parameter types
 [horizontal]
 [[protocolMessagesType]]protocolMessages:: Optionally empty{fn-org402} list of <<protocolMessage>>s.

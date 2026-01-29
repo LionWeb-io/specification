@@ -1680,10 +1680,10 @@
           "$ref": "#/$defs/index"
         },
         "newTarget": {
-          "$ref": "#/$defs/optionalTargetNode"
+          "$ref": "#/$defs/targetNode"
         },
         "newResolveInfo": {
-          "$ref": "#/$defs/optionalResolveInfo"
+          "$ref": "#/$defs/resolveInfo"
         },
         "commandId": {
           "$ref": "#/$defs/commandId"
@@ -1697,13 +1697,11 @@
         "parent",
         "reference",
         "index",
-        "newTarget",
-        "newResolveInfo",
         "commandId",
         "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 6,
       "maxProperties": 8
     },
     "DeleteReference": {
@@ -1721,10 +1719,10 @@
           "$ref": "#/$defs/index"
         },
         "deletedTarget": {
-          "$ref": "#/$defs/optionalTargetNode"
+          "$ref": "#/$defs/targetNode"
         },
         "deletedResolveInfo": {
-          "$ref": "#/$defs/optionalResolveInfo"
+          "$ref": "#/$defs/resolveInfo"
         },
         "commandId": {
           "$ref": "#/$defs/commandId"
@@ -1738,13 +1736,11 @@
         "parent",
         "reference",
         "index",
-        "deletedTarget",
-        "deletedResolveInfo",
         "commandId",
         "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 6,
       "maxProperties": 8
     },
     "ChangeReference": {
@@ -1762,16 +1758,16 @@
           "$ref": "#/$defs/index"
         },
         "oldTarget": {
-          "$ref": "#/$defs/optionalTargetNode"
+          "$ref": "#/$defs/targetNode"
         },
         "oldResolveInfo": {
-          "$ref": "#/$defs/optionalResolveInfo"
+          "$ref": "#/$defs/resolveInfo"
         },
         "newTarget": {
-          "$ref": "#/$defs/optionalTargetNode"
+          "$ref": "#/$defs/targetNode"
         },
         "newResolveInfo": {
-          "$ref": "#/$defs/optionalResolveInfo"
+          "$ref": "#/$defs/resolveInfo"
         },
         "commandId": {
           "$ref": "#/$defs/commandId"
@@ -1785,15 +1781,11 @@
         "parent",
         "reference",
         "index",
-        "oldTarget",
-        "oldResolveInfo",
-        "newTarget",
-        "newResolveInfo",
         "commandId",
         "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 10,
+      "minProperties": 6,
       "maxProperties": 10
     },
     "CompositeCommand": {
@@ -2941,10 +2933,10 @@
           "$ref": "#/$defs/index"
         },
         "newTarget": {
-          "$ref": "#/$defs/optionalTargetNode"
+          "$ref": "#/$defs/targetNode"
         },
         "newResolveInfo": {
-          "$ref": "#/$defs/optionalResolveInfo"
+          "$ref": "#/$defs/resolveInfo"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
@@ -2961,14 +2953,12 @@
         "parent",
         "reference",
         "index",
-        "newTarget",
-        "newResolveInfo",
         "originCommands",
         "sequenceNumber",
         "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 7,
       "maxProperties": 9
     },
     "ReferenceDeleted": {
@@ -2986,10 +2976,10 @@
           "$ref": "#/$defs/index"
         },
         "deletedTarget": {
-          "$ref": "#/$defs/optionalTargetNode"
+          "$ref": "#/$defs/targetNode"
         },
         "deletedResolveInfo": {
-          "$ref": "#/$defs/optionalResolveInfo"
+          "$ref": "#/$defs/resolveInfo"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
@@ -3006,14 +2996,12 @@
         "parent",
         "reference",
         "index",
-        "deletedTarget",
-        "deletedResolveInfo",
         "originCommands",
         "sequenceNumber",
         "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 7,
       "maxProperties": 9
     },
     "ReferenceChanged": {
@@ -3031,16 +3019,16 @@
           "$ref": "#/$defs/index"
         },
         "newTarget": {
-          "$ref": "#/$defs/optionalTargetNode"
+          "$ref": "#/$defs/targetNode"
         },
         "newResolveInfo": {
-          "$ref": "#/$defs/optionalResolveInfo"
+          "$ref": "#/$defs/resolveInfo"
         },
         "oldTarget": {
-          "$ref": "#/$defs/optionalTargetNode"
+          "$ref": "#/$defs/targetNode"
         },
         "oldResolveInfo": {
-          "$ref": "#/$defs/optionalResolveInfo"
+          "$ref": "#/$defs/resolveInfo"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
@@ -3057,16 +3045,12 @@
         "parent",
         "reference",
         "index",
-        "newTarget",
-        "newResolveInfo",
-        "oldTarget",
-        "oldResolveInfo",
         "originCommands",
         "sequenceNumber",
         "protocolMessages"
       ],
       "additionalProperties": false,
-      "minProperties": 11,
+      "minProperties": 7,
       "maxProperties": 11
     },
     "EntryMovedFromOtherReference": {

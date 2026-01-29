@@ -179,6 +179,12 @@ The repository
 
 Besides the main response, the repository can reply each command with zero or more additional
 
+[[parameter-syntax]]
+=== Parameter syntax
+* Parameters suffixed with `?` CAN be omitted, or CAN have a value of `null`.
+Both representations express the parameter to be unset.{fn-org427}
+
+* Parameters suffixed with `[]` are ordered lists with zero or more elements.
 
 [[parameter-types]]
 == Parameter types
