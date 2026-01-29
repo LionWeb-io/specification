@@ -5,7 +5,7 @@
 * Parameters suffixed with `?` CAN be omitted, or CAN have a value of `null`.
 Both representations express the parameter to be unset.{fn-org427}
 
-* Parameters suffixed with `[]` are ordered lists with at least one entry.
+* Parameters suffixed with `[]` are ordered lists with zero or more elements.
 
 === Parameter types
 [horizontal]
