@@ -1679,7 +1679,7 @@
         "index": {
           "$ref": "#/$defs/index"
         },
-        "newTarget": {
+        "newReference": {
           "$ref": "#/$defs/targetNode"
         },
         "newResolveInfo": {
@@ -1718,7 +1718,7 @@
         "index": {
           "$ref": "#/$defs/index"
         },
-        "deletedTarget": {
+        "deletedReference": {
           "$ref": "#/$defs/targetNode"
         },
         "deletedResolveInfo": {
@@ -1757,13 +1757,13 @@
         "index": {
           "$ref": "#/$defs/index"
         },
-        "oldTarget": {
+        "oldReference": {
           "$ref": "#/$defs/targetNode"
         },
         "oldResolveInfo": {
           "$ref": "#/$defs/resolveInfo"
         },
-        "newTarget": {
+        "newReference": {
           "$ref": "#/$defs/targetNode"
         },
         "newResolveInfo": {
@@ -2932,7 +2932,7 @@
         "index": {
           "$ref": "#/$defs/index"
         },
-        "newTarget": {
+        "newReference": {
           "$ref": "#/$defs/targetNode"
         },
         "newResolveInfo": {
@@ -2975,7 +2975,7 @@
         "index": {
           "$ref": "#/$defs/index"
         },
-        "deletedTarget": {
+        "deletedReference": {
           "$ref": "#/$defs/targetNode"
         },
         "deletedResolveInfo": {
@@ -3018,13 +3018,13 @@
         "index": {
           "$ref": "#/$defs/index"
         },
-        "newTarget": {
+        "newReference": {
           "$ref": "#/$defs/targetNode"
         },
         "newResolveInfo": {
           "$ref": "#/$defs/resolveInfo"
         },
-        "oldTarget": {
+        "oldReference": {
           "$ref": "#/$defs/targetNode"
         },
         "oldResolveInfo": {
