@@ -1,6 +1,6 @@
 [[evnt-ReferenceDeleted]]
 ===== Reference deleted
-Existing reference with <<ReferenceDeleted.deletedTarget>>/<<ReferenceDeleted.deletedResolveInfo>> has been deleted from <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.reference>> at <<ReferenceDeleted.index>>.
+Existing reference with <<ReferenceDeleted.deletedReference>>/<<ReferenceDeleted.deletedResolveInfo>> has been deleted from <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.reference>> at <<ReferenceDeleted.index>>.
 All other entries inside <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.reference>> with index > <<ReferenceDeleted.index>> have been moved to next lower index.
 
 .Technical name
@@ -14,7 +14,7 @@ All other entries inside <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.refere
 
 [[ReferenceDeleted.index, `index`]]index:: <<indexType>>
 
-[[ReferenceDeleted.deletedTarget, `deletedTarget`]]deletedTarget:: <<targetNodeType>>?
+[[ReferenceDeleted.deletedReference, `deletedReference`]]deletedReference:: <<targetNodeType>>?
 
 [[ReferenceDeleted.deletedResolveInfo, `deletedResolveInfo`]]deletedResolveInfo:: <<resolveInfoType>>?
 

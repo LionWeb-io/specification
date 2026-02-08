@@ -1,6 +1,6 @@
 [[evnt-ReferenceChanged]]
 ===== Reference changed
-Existing reference with <<ReferenceChanged.oldTarget>>/<<ReferenceChanged.oldResolveInfo>> inside <<ReferenceChanged.parent>>'s annotations at <<ReferenceChanged.index>> has been replaced with <<ReferenceChanged.newTarget>>/<<ReferenceChanged.newResolveInfo>>.
+Existing reference with <<ReferenceChanged.oldReference>>/<<ReferenceChanged.oldResolveInfo>> inside <<ReferenceChanged.parent>>'s annotations at <<ReferenceChanged.index>> has been replaced with <<ReferenceChanged.newReference>>/<<ReferenceChanged.newResolveInfo>>.
 
 .Technical name
 `ReferenceChanged`
@@ -13,11 +13,11 @@ Existing reference with <<ReferenceChanged.oldTarget>>/<<ReferenceChanged.oldRes
 
 [[ReferenceChanged.index, `index`]]index:: <<indexType>>
 
-[[ReferenceChanged.newTarget, `newTarget`]]newTarget:: <<targetNodeType>>?
+[[ReferenceChanged.newReference, `newReference`]]newReference:: <<targetNodeType>>?
 
-[[ReferenceChanged.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<targetNodeType>>?
+[[ReferenceChanged.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
 
-[[ReferenceChanged.oldTarget, `oldTarget`]]oldTarget:: <<targetNodeType>>?
+[[ReferenceChanged.oldReference, `oldReference`]]oldReference:: <<targetNodeType>>?
 
 [[ReferenceChanged.oldResolveInfo, `oldResolveInfo`]]oldResolveInfo:: <<resolveInfoType>>?
 

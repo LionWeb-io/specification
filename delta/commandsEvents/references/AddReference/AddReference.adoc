@@ -1,6 +1,6 @@
 [[cmd-AddReference]]
 ===== Add reference
-Add <<AddReference.newTarget>> / <<AddReference.newResolveInfo>> to <<AddReference.parent>>'s <<AddReference.reference>> at <<AddReference.index>>.
+Add <<AddReference.newReference>> / <<AddReference.newResolveInfo>> to <<AddReference.parent>>'s <<AddReference.reference>> at <<AddReference.index>>.
 
 [cols="a,a"]
 |===
@@ -20,7 +20,7 @@ include::AddReference-diagram.adoc[]
 
 [[AddReference.index, `index`]]index:: <<indexType>>
 
-[[AddReference.newTarget, `newTarget`]]newTarget:: <<targetNodeType>>?
+[[AddReference.newReference, `newReference`]]newReference:: <<targetNodeType>>?
 
 [[AddReference.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
 
@@ -31,7 +31,7 @@ include::AddReference-diagram.adoc[]
 .Errors
 * <<err-unknownNode>> for <<AddReference.parent>>
 * <<err-unknownIndex>> for <<AddReference.index>> (is beyond the number of <<AddReference.reference>> entries of <<AddReference.parent>>)
-* <<err-undefinedReferenceTarget>> for <<AddReference.newTarget>> and <<AddReference.newResolveInfo>>
+* <<err-undefinedReferenceTarget>> for <<AddReference.newReference>> and <<AddReference.newResolveInfo>>
 * <<err-invalidParticipation>>
 
 .Related event

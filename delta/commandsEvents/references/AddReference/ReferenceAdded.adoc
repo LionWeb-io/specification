@@ -1,6 +1,6 @@
 [[evnt-ReferenceAdded]]
 ===== Reference added
-Reference with <<ReferenceAdded.newTarget>>/<<ReferenceAdded.newResolveInfo>> has been added to <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>> at <<ReferenceAdded.index>>.
+Reference with <<ReferenceAdded.newReference>>/<<ReferenceAdded.newResolveInfo>> has been added to <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>> at <<ReferenceAdded.index>>.
 All other entries inside <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>> with index >= <<ReferenceAdded.index>> have been moved to next higher index.
 
 .Technical name
@@ -14,7 +14,7 @@ All other entries inside <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>
 
 [[ReferenceAdded.index, `index`]]index:: <<indexType>>
 
-[[ReferenceAdded.newTarget, `newTarget`]]newTarget:: <<targetNodeType>>?
+[[ReferenceAdded.newReference, `newReference`]]newReference:: <<targetNodeType>>?
 
 [[ReferenceAdded.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
 
