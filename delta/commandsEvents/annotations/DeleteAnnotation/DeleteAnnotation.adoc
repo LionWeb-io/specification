@@ -1,6 +1,6 @@
 [[cmd-DeleteAnnotation]]
 ===== Delete annotation
-Delete existing node <<DeleteAnnotation.deletedAnnotation>>{fn-org371} from <<DeleteAnnotation.parent>>'s annotations at <<DeleteAnnotation.index>>, and all its descendants (including annotation instances).
+Delete <<existing-nodes, existing node>> <<DeleteAnnotation.deletedAnnotation>>{fn-org371} from <<DeleteAnnotation.parent>>'s annotations at <<DeleteAnnotation.index>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]

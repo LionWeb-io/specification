@@ -1,6 +1,6 @@
 [[cmd-ChangeClassifier]]
 ===== Change classifier
-Change classifier of <<ChangeClassifier.node>> to <<ChangeClassifier.newClassifier>>.
+Change classifier of <<existing-nodes, existing node>> <<ChangeClassifier.node>> to <<ChangeClassifier.newClassifier>>.
 
 [cols="a,a"]
 |===

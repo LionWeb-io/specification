@@ -1,7 +1,7 @@
 [[cmd-MoveAndReplaceChildInSameContainment]]
 ===== Move child in same containment and replace existing child
-Move existing node <<MoveAndReplaceChildInSameContainment.movedChild>> within its current containment to <<MoveAndReplaceChildInSameContainment.newIndex>>.
-Delete current child <<MoveAndReplaceChildInSameContainment.replacedChild>>{fn-org371} inside the same containment at <<MoveAndReplaceChildInSameContainment.newIndex>>, and all its descendants (including annotation instances).
+Move <<existing-nodes, existing node>> <<MoveAndReplaceChildInSameContainment.movedChild>> within its current containment to <<MoveAndReplaceChildInSameContainment.newIndex>>.
+Delete <<existing-nodes, current child>> <<MoveAndReplaceChildInSameContainment.replacedChild>>{fn-org371} inside the same containment at <<MoveAndReplaceChildInSameContainment.newIndex>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]

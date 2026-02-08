@@ -1,6 +1,6 @@
 [[cmd-DeletePartition]]
 ===== Delete partition
-Delete partition <<DeletePartition.deletedPartition>>, and all its descendants (including annotation instances).
+Delete <<existing-nodes, existing>> partition <<DeletePartition.deletedPartition>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]

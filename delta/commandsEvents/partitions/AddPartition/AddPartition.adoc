@@ -1,6 +1,7 @@
 [[cmd-AddPartition]]
 ===== Add partition
 Add <<AddPartition.newPartition>> node as new partition.
+Add <<AddPartition.newPartition>> node as <<new-nodes, new>> partition.
 
 [cols="a,a"]
 |===

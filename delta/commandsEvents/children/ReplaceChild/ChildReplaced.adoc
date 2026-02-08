@@ -1,10 +1,6 @@
 [[evnt-ChildReplaced]]
 ===== Child replaced
-Existing node <<ChildReplaced.replacedChild>>, and all its <<ChildReplaced.replacedDescendants>>{fn-org370}, inside <<ChildReplaced.parent>>'s <<ChildReplaced.containment>> at <<ChildReplaced.index>> has been replaced with new node <<ChildReplaced.newChild>>.
-<<ChildReplaced.newChild>> might be a single node or an arbitrary complex subtree.
-All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
-Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
-
+<<existing-nodes, Existing node>> <<ChildReplaced.replacedChild>>, and all its <<ChildReplaced.replacedDescendants>>{fn-org370}, inside <<ChildReplaced.parent>>'s <<ChildReplaced.containment>> at <<ChildReplaced.index>> has been replaced with <<new-nodes, new>> or <<reused-nodes, reused>> node <<ChildReplaced.newChild>>.
 
 <<ChildReplaced.replacedChild>>, and all its descendants, have been deleted.
 

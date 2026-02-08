@@ -1,6 +1,6 @@
 [[cmd-MoveAnnotationInSameParent]]
 ===== Move annotation in same parent
-Move existing node <<MoveAnnotationInSameParent.movedAnnotation>> within the same parent to <<MoveAnnotationInSameParent.newIndex>>.
+Move <<existing-nodes, existing node>> <<MoveAnnotationInSameParent.movedAnnotation>> within the same parent to <<MoveAnnotationInSameParent.newIndex>>.
 
 [cols="a,a"]
 |===

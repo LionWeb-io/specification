@@ -1,6 +1,6 @@
 [[cmd-MoveChildFromOtherContainment]]
 ===== Move child from other containment
-Move existing node <<MoveChildFromOtherContainment.movedChild>> inside <<MoveChildFromOtherContainment.newParent>>'s <<MoveChildFromOtherContainment.newContainment>> at <<MoveChildFromOtherContainment.newIndex>>.
+Move <<existing-nodes, existing node>> <<MoveChildFromOtherContainment.movedChild>> inside <<MoveChildFromOtherContainment.newParent>>'s <<MoveChildFromOtherContainment.newContainment>> at <<MoveChildFromOtherContainment.newIndex>>.
 
 [cols="a,a"]
 |===

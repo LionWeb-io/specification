@@ -1,7 +1,7 @@
 [[cmd-MoveAndReplaceAnnotationFromOtherParent]]
 ===== Move annotation from other parent and replace existing annotation
-Move existing node <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>> inside <<MoveAndReplaceAnnotationFromOtherParent.newParent>>'s annotations at <<MoveAndReplaceAnnotationFromOtherParent.newIndex>>.
-Delete current node <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>{fn-org371} at <<MoveAndReplaceAnnotationFromOtherParent.newParent>>'s annotations at <<MoveAndReplaceAnnotationFromOtherParent.newIndex>>, and all its descendants (including annotation instances).
+Move <<existing-nodes, existing node>> <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>> inside <<MoveAndReplaceAnnotationFromOtherParent.newParent>>'s annotations at <<MoveAndReplaceAnnotationFromOtherParent.newIndex>>.
+Delete <<existing-nodes, current node>> <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>{fn-org371} at <<MoveAndReplaceAnnotationFromOtherParent.newParent>>'s annotations at <<MoveAndReplaceAnnotationFromOtherParent.newIndex>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]

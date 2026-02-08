@@ -1,6 +1,6 @@
 [[cmd-MoveAnnotationFromOtherParent]]
 ===== Move annotation from other parent
-Move existing node <<MoveAnnotationFromOtherParent.movedAnnotation>> inside <<MoveAnnotationFromOtherParent.newParent>>'s annotations at <<MoveAnnotationFromOtherParent.newIndex>>.
+Move <<existing-nodes, existing node>> <<MoveAnnotationFromOtherParent.movedAnnotation>> inside <<MoveAnnotationFromOtherParent.newParent>>'s annotations at <<MoveAnnotationFromOtherParent.newIndex>>.
 
 [cols="a,a"]
 |===

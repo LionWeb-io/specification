@@ -1,9 +1,6 @@
 [[evnt-ChildAdded]]
 ===== Child added
-New node <<ChildAdded.newChild>> has been added to <<ChildAdded.parent>>'s  <<ChildAdded.containment>> at <<ChildAdded.index>>.
-<<ChildAdded.newChild>> might be a single node or an arbitrary complex subtree.
-All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
-Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
+<<new-nodes, New node>> <<ChildAdded.newChild>> has been added to <<ChildAdded.parent>>'s  <<ChildAdded.containment>> at <<ChildAdded.index>>.
 
 All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> with index >= <<ChildAdded.index>> have been moved to next higher index.
 

@@ -60,6 +60,24 @@ This allows a client to know when its command has been processed (either success
 
 [[integerType]]integer type:: An integer value.
 
+[[new-nodes, new nodes]]
+==== New nodes
+The term "new node" refers to nodes that MUST NOT yet exist in the repository.{fn-org327}
+
+[[existing-nodes, existing nodes]]
+==== Existing nodes
+The term "existing node" refers to nodes that MUST exist in the repository.
+
+[[reused-nodes, reused nodes]]
+==== Reused nodes
+The term "reused node" refers to nodes that are removed and re-added in the same command/event.{fn-org422}
+A client SHOULD keep the identity of the reused node in its internal representation.
+
+These [[replace-with-new-content-commands]] _replace with new content commands_ / [[replace-with-new-content-events]] _replace with new content events_ are:
+
+* <<cmd-ReplaceChild>> / <<evnt-ChildReplaced>>
+* <<cmd-ReplaceAnnotation>> / <<evnt-AnnotationReplaced>>
+
 ==== How to address references
 We refer to references by the tuple of _(parent, reference, index)_.
 Rationale: Both reference `target` and `resolveInfo` can be `null`, so they aren't suitable for identifying the reference.
