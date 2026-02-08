@@ -27,7 +27,7 @@ include::MoveAndReplaceChildFromOtherContainmentInSameParent-diagram.adoc[]
 
 [[MoveAndReplaceChildFromOtherContainmentInSameParent.commandId]]commandId:: <<commandIdType>>
 
-[[MoveAndReplaceChildFromOtherContainmentInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[MoveAndReplaceChildFromOtherContainmentInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownIndex>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>> (is beyond the number of <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>> entries in <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>'s parent)

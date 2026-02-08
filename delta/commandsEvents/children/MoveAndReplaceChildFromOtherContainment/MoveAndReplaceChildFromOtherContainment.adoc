@@ -28,7 +28,7 @@ include::MoveAndReplaceChildFromOtherContainment-diagram.adoc[]
 
 [[MoveAndReplaceChildFromOtherContainment.commandId]]commandId:: <<commandIdType>>
 
-[[MoveAndReplaceChildFromOtherContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[MoveAndReplaceChildFromOtherContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<MoveAndReplaceChildFromOtherContainment.newParent>>

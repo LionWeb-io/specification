@@ -30,7 +30,7 @@ All other children inside <<ChildMovedFromOtherContainment.newParent>>'s <<Child
 
 [[ChildMovedFromOtherContainment.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ChildMovedFromOtherContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ChildMovedFromOtherContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-MoveChildFromOtherContainment>>

@@ -18,7 +18,7 @@ Number of ids requested.
 [[GetAvailableIds.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
-[[GetAvailableIds.requestProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+[[GetAvailableIds.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 [horizontal]
 .Response parameters
@@ -30,7 +30,7 @@ It MAY return less than <<GetAvailableIds.count>> ids.
 [[GetAvailableIds.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
-[[GetAvailableIds.responseProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+[[GetAvailableIds.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-invalidParticipation>>

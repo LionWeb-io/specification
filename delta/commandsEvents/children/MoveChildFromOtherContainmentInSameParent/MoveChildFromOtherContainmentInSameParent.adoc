@@ -23,7 +23,7 @@ include::MoveChildFromOtherContainmentInSameParent-diagram.adoc[]
 
 [[MoveChildFromOtherContainmentInSameParent.commandId]]commandId:: <<commandIdType>>
 
-[[MoveChildFromOtherContainmentInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[MoveChildFromOtherContainmentInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownIndex>> for <<MoveChildFromOtherContainmentInSameParent.newIndex>> (is beyond the number of <<MoveChildFromOtherContainmentInSameParent.newContainment>> entries in <<MoveChildFromOtherContainmentInSameParent.movedChild>>'s parent)

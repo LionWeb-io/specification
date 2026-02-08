@@ -36,7 +36,7 @@ Example: +
 
 [[AnnotationMovedAndReplacedInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[AnnotationMovedAndReplacedInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[AnnotationMovedAndReplacedInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-MoveAndReplaceAnnotationInSameParent>>

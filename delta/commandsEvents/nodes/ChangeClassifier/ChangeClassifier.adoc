@@ -21,7 +21,7 @@ include::ChangeClassifier-diagram.adoc[]
 [[ChangeClassifier.commandId]]commandId:: <<commandIdType>>
 Id of this command.
 
-[[ChangeClassifier.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ChangeClassifier.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<ChangeClassifier.node>>

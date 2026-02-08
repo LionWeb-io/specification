@@ -86,14 +86,14 @@ The technical name is a valid programming language identifier as described for <
 Each binding to a specific protocol might use the technical name in a different way.
 For example, a JSON binding might have a member containing the technical name of the message, or a Protobuf binding might use the technical name as type name.
 
-[[protocolMessage, protocol message]]
-==== Protocol Message
-Each message optionally can have one or more _protocol message_ consisting of:{fn-org331}{fn-org332}{fn-org430}
+[[additionalInfo, additional info]]
+==== Additional Info
+Each message optionally can have one or more _additional infos_ consisting of:{fn-org331}{fn-org332}{fn-org430}
 
-* [[protocolMessage.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the message type.
-Some message kinds are pre-defined in this specification.
-A repository MAY reply with other, additional message kinds.
-* [[protocolMessage.reach]]`reach` describes who should receive this protocol message.{fn-org421}
+* [[additionalInfo.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the additional info type.
+Some kinds are pre-defined in this specification.
+A repository MAY reply with other, additional kinds.
+* [[additionalInfo.reach]]`reach` describes who should receive this additional info.{fn-org421}
 Its value MUST be one of:
 +
 [horizontal]
@@ -114,9 +114,9 @@ Clients MUST NOT use this value.
 The repository MUST NOT use this value in <<queries>>, i.e. only in <<events>>.
 Clients MUST NOT use this value.
 
-* [[protocolMessage.message]]`message` is a human-readable string describing the message.
-* [[protocolMessage.data]]`data` is a flat map with arbitrary keys and values.
+* [[additionalInfo.message]]`message` is a human-readable string describing the additional info.
+* [[additionalInfo.data]]`data` is a flat map with arbitrary keys and values.
 All values MUST be strings, the keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible.
 A _kind_ might imply presence of specific keys in `data`.
 
-This protocol message is symmetric to <<{bulk}.adoc#Response.messages, messages in bulk API>>.
+This additional info is symmetric to <<{bulk}.adoc#Response.additionalInfos, additional infos in bulk API>>.

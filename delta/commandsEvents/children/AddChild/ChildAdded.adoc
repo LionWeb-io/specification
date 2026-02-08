@@ -24,7 +24,7 @@ All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> wit
 
 [[ChildAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ChildAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ChildAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-AddChild>>

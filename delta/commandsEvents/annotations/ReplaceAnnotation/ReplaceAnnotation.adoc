@@ -30,7 +30,7 @@ include::ReplaceAnnotation-diagram.adoc[]
 
 [[ReplaceAnnotation.commandId]]commandId:: <<commandIdType>>
 
-[[ReplaceAnnotation.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ReplaceAnnotation.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-nodeAlreadyExists>> for <<ReplaceAnnotation.newAnnotation>>

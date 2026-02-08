@@ -17,7 +17,7 @@ Last <<event-sequence-number>> received by the client.
 [[Reconnect.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
-[[Reconnect.requestProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+[[Reconnect.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 [horizontal]
 .Response parameters
@@ -27,7 +27,7 @@ Last <<event-sequence-number>> sent by the repository.
 [[Reconnect.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
-[[Reconnect.responseProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+[[Reconnect.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-invalidParticipation>> If the participation is not valid.{fn-org354}

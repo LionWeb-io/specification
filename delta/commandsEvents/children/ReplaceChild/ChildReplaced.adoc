@@ -29,7 +29,7 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 
 [[ChildReplaced.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ChildReplaced.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ChildReplaced.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-ReplaceChild>>

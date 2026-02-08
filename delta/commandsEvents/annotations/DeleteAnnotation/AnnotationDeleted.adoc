@@ -20,7 +20,7 @@ All other annotations inside <<AnnotationDeleted.parent>>'s annotations with ind
 
 [[AnnotationDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[AnnotationDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[AnnotationDeleted.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-DeleteAnnotation>>

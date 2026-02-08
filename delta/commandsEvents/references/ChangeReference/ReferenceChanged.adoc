@@ -25,7 +25,7 @@ Existing reference with <<ReferenceChanged.oldReference>>/<<ReferenceChanged.old
 
 [[ReferenceChanged.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ReferenceChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ReferenceChanged.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-ChangeReference>>

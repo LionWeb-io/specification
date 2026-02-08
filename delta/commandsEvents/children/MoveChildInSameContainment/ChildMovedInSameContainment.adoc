@@ -34,7 +34,7 @@ Example: +
 
 [[ChildMovedInSameContainment.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ChildMovedInSameContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ChildMovedInSameContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-MoveChildInSameContainment>>

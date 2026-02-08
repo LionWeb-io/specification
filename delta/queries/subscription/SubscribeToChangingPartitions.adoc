@@ -20,14 +20,14 @@ Whether this client wants to automatically subscribe to newly created partitions
 [[SubscribeToChangingPartitions.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
-[[SubscribeToChangingPartitions.requestProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+[[SubscribeToChangingPartitions.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 [horizontal]
 .Response parameters
 [[SubscribeToChangingPartitions.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
-[[SubscribeToChangingPartitions.responseProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+[[SubscribeToChangingPartitions.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-invalidParticipation>>

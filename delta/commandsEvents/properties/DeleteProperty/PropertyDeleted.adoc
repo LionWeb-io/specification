@@ -17,7 +17,7 @@ Existing <<PropertyDeleted.property>> of <<PropertyDeleted.node>> with <<Propert
 
 [[PropertyDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[PropertyDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[PropertyDeleted.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-DeleteProperty>>

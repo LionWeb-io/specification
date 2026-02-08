@@ -22,7 +22,7 @@ All other annotations inside <<AnnotationAdded.parent>>'s annotations with index
 
 [[AnnotationAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[AnnotationAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[AnnotationAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-AddAnnotation>>

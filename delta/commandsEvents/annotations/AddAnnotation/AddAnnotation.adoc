@@ -25,7 +25,7 @@ include::AddAnnotation-diagram.adoc[]
 
 [[AddAnnotation.commandId]]commandId:: <<commandIdType>>
 
-[[AddAnnotation.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[AddAnnotation.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<AddAnnotation.parent>>

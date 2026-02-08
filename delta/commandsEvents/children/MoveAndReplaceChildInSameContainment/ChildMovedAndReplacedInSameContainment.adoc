@@ -38,7 +38,7 @@ Example: +
 
 [[ChildMovedAndReplacedInSameContainment.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ChildMovedAndReplacedInSameContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ChildMovedAndReplacedInSameContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-MoveAndReplaceChildInSameContainment>>

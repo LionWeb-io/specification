@@ -17,7 +17,7 @@ Classifier of <<ClassifierChanged.node>> has been changed from <<ClassifierChang
 
 [[ClassifierChanged.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ClassifierChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ClassifierChanged.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-ChangeClassifier>>

@@ -12,7 +12,7 @@ Same functionality as <<{bulk}.adoc#listPartitions, bulk API listPartitions comm
 [[ListPartitions.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
-[[ListPartitions.requestProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+[[ListPartitions.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 [horizontal]
 .Response parameters
@@ -25,7 +25,7 @@ Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotat
 [[ListPartitions.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
-[[ListPartitions.responseProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+[[ListPartitions.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-invalidParticipation>>

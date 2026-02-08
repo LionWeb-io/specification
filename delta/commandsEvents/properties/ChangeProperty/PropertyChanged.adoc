@@ -19,7 +19,7 @@ Existing <<PropertyChanged.property>> of <<PropertyChanged.node>> has been chang
 
 [[PropertyChanged.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[PropertyChanged.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[PropertyChanged.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-ChangeProperty>>

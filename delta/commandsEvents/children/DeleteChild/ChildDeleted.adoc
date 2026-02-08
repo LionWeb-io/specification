@@ -22,7 +22,7 @@ All other children inside <<ChildDeleted.parent>>'s <<ChildDeleted.containment>>
 
 [[ChildDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ChildDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ChildDeleted.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-DeleteChild>>

@@ -18,7 +18,7 @@ The repository MAY send an error event to only one participation.{fn-org379}
 
 [[Error.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[Error.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[Error.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 _none_

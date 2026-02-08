@@ -26,7 +26,7 @@ include::AddReference-diagram.adoc[]
 
 [[AddReference.commandId]]commandId:: <<commandIdType>>
 
-[[AddReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[AddReference.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<AddReference.parent>>

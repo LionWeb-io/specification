@@ -20,7 +20,7 @@ include::MoveChildInSameContainment-diagram.adoc[]
 
 [[MoveChildInSameContainment.commandId]]commandId:: <<commandIdType>>
 
-[[MoveChildInSameContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[MoveChildInSameContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownIndex>> for <<MoveChildInSameContainment.newIndex>> (is beyond (the number of <<MoveChildInSameContainment.movedChild>>'s containment entries in <<MoveChildInSameContainment.movedChild>>'s parent) - 1)

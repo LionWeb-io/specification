@@ -24,7 +24,7 @@ include::MoveChildFromOtherContainment-diagram.adoc[]
 
 [[MoveChildFromOtherContainment.commandId]]commandId:: <<commandIdType>>
 
-[[MoveChildFromOtherContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[MoveChildFromOtherContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-nodeAlreadyExists>> for <<MoveChildFromOtherContainment.newParent>>

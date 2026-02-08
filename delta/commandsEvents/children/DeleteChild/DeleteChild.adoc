@@ -25,7 +25,7 @@ include::DeleteChild-diagram.adoc[]
 
 [[DeleteChild.commandId]]commandId:: <<commandIdType>>
 
-[[DeleteChild.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[DeleteChild.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<DeleteChild.parent>>
