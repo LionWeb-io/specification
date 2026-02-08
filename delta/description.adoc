@@ -93,30 +93,14 @@ Each message optionally can have one or more _additional infos_ consisting of:{f
 * [[additionalInfo.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the additional info type.
 Some kinds are pre-defined in this specification.
 A repository MAY reply with other, additional kinds.
-* [[additionalInfo.reach]]`reach` describes who should receive this additional info.{fn-org421}
-Its value MUST be one of:
-+
-[horizontal]
-`clientToRepositoryOnly`:: A client sends this protocol message to the repository.
-The repository MUST NOT deliver this protocol message to any client.
-The repository MUST NOT use this value for self-initiated protocol messages.
-
-`clientToAllClients`:: A client sends this protocol message to the repository.
-The client MUST NOT use this value in <<queries>>, i.e. only in <<commands>>.
-The repository MUST deliver this protocol message to all clients in the event corresponding to the client's command.
-If the event is an <<evnt-ErrorEvent>>, the repository MUST deliver this protocol message to all recipients of the error event.
-The repository MUST NOT use this value for self-initiated protocol messages.
-
-`repositoryToSingleClient`:: A repository sends this protocol message to only one client.
-Clients MUST NOT use this value.
-
-`repositoryToAllClients`:: A repository sends this protocol message to all clients.
-The repository MUST NOT use this value in <<queries>>, i.e. only in <<events>>.
-Clients MUST NOT use this value.
+* [[additionalInfo.distribute]]`distribute`? is an optional <<booleanType>> flag with default value `false`.
+It is only valid in <<commands>>, i.e. MUST NOT be used for <<events>> or <<queries>>.
+If present and set to `true`, the repository MUST copy the additional info to all events that result from the command, and distribute the additional info to all participants receiving the event.
 
 * [[additionalInfo.message]]`message` is a human-readable string describing the additional info.
-* [[additionalInfo.data]]`data` is a flat map with arbitrary keys and values.
-All values MUST be strings, the keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible.
+* [[additionalInfo.data]]`data` is a flat map with 0 or more arbitrary keys and values.
+All keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible and MUST be unique within the same additional info.
+All values MUST be strings.
 A _kind_ might imply presence of specific keys in `data`.
 
-This additional info is symmetric to <<{bulk}.adoc#Response.additionalInfos, additional infos in bulk API>>.
+This additional info is symmetric to <<{bulk}.adoc#additionalInfo, additional infos in bulk API>>.

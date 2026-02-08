@@ -202,17 +202,20 @@ Modifying commands are <<createPartitions>>, <<deletePartitions>>, and <<store>>
 
 [[successType]]success:: A boolean flag signalling _success_ or _failure_ with each response.
 
-[[additionalInfosType]]additionalInfo:: Optionally empty{fn-org402} list of [[Response.additionalInfos]] _additional infos_ in either request or response.{fn-org236}{fn-org375}{fn-org430}
-Each additional info MUST have the following properties:
+[[additionalInfosType]]additionalInfos:: Optionally empty{fn-org402} list of [[additionalInfo]] _additional infos_ in either request or response.{fn-org236}{fn-org375}{fn-org430}
+Each additional info consists of:
 
 * [[additionalInfo.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the additional info type.
 Some kinds are pre-defined in this specification.
-A client or repository MAY reply with other, additional kinds.
+A repository MAY reply with other, additional kinds.
+* [[additionalInfo.distribute]]`distribute`? is an optional <<booleanType>> flag with default value `false`.
+It is only valid in <<createPartitions>>, <<deletePartitions>>, and <<store>>, i.e. MUST NOT be used for <<listPartitions>>, <<retrieve>> or <<ids>>.
+If present and set to `true`, the repository MUST copy the additional info to all <<{delta}.adoc#events, delta protocol events>> that result from the command, and distribute the additional info to all participants receiving the event.
 
 * [[additionalInfo.message]]`message` is a human-readable string describing the additional info.
-
-* [[additionalInfo.data]]`data` is a flat map with arbitrary keys and values.
-All values MUST be strings, the keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible.
+* [[additionalInfo.data]]`data` is a flat map with 0 or more arbitrary keys and values.
+All keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible and MUST be unique within the same additional info.
+All values MUST be strings.
 A _kind_ might imply presence of specific keys in `data`.
 
 +
@@ -240,6 +243,9 @@ A _kind_ might imply presence of specific keys in `data`.
 |#TODO#
 
 |===
+
++
+This additional info is symmetric to <<{delta}.adoc#additionalInfo, additional infos in delta API>>.
 
 
 [[commands]]

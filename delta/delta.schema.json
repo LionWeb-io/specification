@@ -324,8 +324,8 @@
         "kind": {
           "$ref": "#/$defs/additionalInfoKind"
         },
-        "reach": {
-          "$ref": "#/$defs/additionalInfoReach"
+        "distribute": {
+          "$ref": "#/$defs/additionalInfoDistribute"
         },
         "message": {
           "type": "string"
@@ -347,13 +347,9 @@
       "minProperties": 4,
       "maxProperties": 4
     },
-    "additionalInfoReach": {
-      "enum": [
-        "clientToRepositoryOnly",
-        "clientToAllClients",
-        "repositoryToSingleClient",
-        "repositoryToAllClients"
-      ]
+    "additionalInfoDistribute": {
+      "type": "boolean",
+      "default": false
     },
     "AdditionalInfoData": {
       "properties": {
