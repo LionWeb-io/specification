@@ -26,7 +26,7 @@ include::MoveAndReplaceAnnotationFromOtherParent-diagram.adoc[]
 
 [[MoveAndReplaceAnnotationFromOtherParent.commandId]]commandId:: <<commandIdType>>
 
-[[MoveAndReplaceAnnotationFromOtherParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[MoveAndReplaceAnnotationFromOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.newParent>>

@@ -30,7 +30,7 @@ include::ChangeReference-diagram.adoc[]
 
 [[ChangeReference.commandId]]commandId:: <<commandIdType>>
 
-[[ChangeReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ChangeReference.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<ChangeReference.parent>>

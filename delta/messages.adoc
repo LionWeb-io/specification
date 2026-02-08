@@ -9,7 +9,7 @@ Both representations express the parameter to be unset.{fn-org427}
 
 === Parameter types
 [horizontal]
-[[protocolMessagesType]]protocolMessages:: Optionally empty{fn-org402} list of <<protocolMessage>>s.
+[[additionalInfosType]]additionalInfos:: Optionally empty{fn-org402} list of <<additionalInfo>>s.
 
 [[targetNodeType]]TargetNode:: Target's node as <<{m3}.adoc#node-id, id>>.
 

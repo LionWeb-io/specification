@@ -20,7 +20,7 @@ Id of the repository to which the client wants to establish a participation.
 [[SignOn.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
-[[SignOn.requestProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+[[SignOn.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 [horizontal]
 .Response parameters
@@ -30,7 +30,7 @@ the repository assigns to this participation.
 [[SignOn.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
-[[SignOn.responseProtocolMessages, `protocolMessages`]]protocolMessages:: <<protocolMessagesType>>
+[[SignOn.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * Unsupported delta protocol version

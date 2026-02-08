@@ -23,7 +23,7 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 [[AddPartition.commandId]]commandId:: <<commandIdType>>
 Id of this command.
 
-[[AddPartition.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[AddPartition.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-nodeAlreadyExists>> for <<AddPartition.newPartition>>

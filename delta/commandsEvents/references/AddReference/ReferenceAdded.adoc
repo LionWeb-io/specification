@@ -22,7 +22,7 @@ All other entries inside <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>
 
 [[ReferenceAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ReferenceAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ReferenceAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-AddReference>>

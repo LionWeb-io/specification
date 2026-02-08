@@ -26,7 +26,7 @@ include::DeleteReference-diagram.adoc[]
 
 [[DeleteReference.commandId]]commandId:: <<commandIdType>>
 
-[[DeleteReference.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[DeleteReference.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<DeleteReference.parent>>

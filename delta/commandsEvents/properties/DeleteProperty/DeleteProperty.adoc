@@ -20,7 +20,7 @@ include::DeleteProperty-diagram.adoc[]
 
 [[DeleteProperty.commandId]]commandId:: <<commandIdType>>
 
-[[DeleteProperty.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[DeleteProperty.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<DeleteProperty.node>>

@@ -202,22 +202,25 @@ Modifying commands are <<createPartitions>>, <<deletePartitions>>, and <<store>>
 
 [[successType]]success:: A boolean flag signalling _success_ or _failure_ with each response.
 
-[[messagesType]]message:: Optionally empty{fn-org402} list of [[Response.messages]] messages in either request or response.{fn-org236}{fn-org375}
-Each message MUST have the following properties:
+[[additionalInfosType]]additionalInfos:: Optionally empty{fn-org402} list of [[additionalInfo]] _additional infos_ in either request or response.{fn-org236}{fn-org375}{fn-org430}
+Each additional info consists of:
 
-* [[message.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the message type.
-Some message kinds are pre-defined in this specification.
-A client or repository MAY reply with other, additional message kinds.
+* [[additionalInfo.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the additional info type.
+Some kinds are pre-defined in this specification.
+A repository MAY reply with other, additional kinds.
+* [[additionalInfo.distribute]]`distribute`? is an optional <<booleanType>> flag with default value `false`.
+It is only valid in <<createPartitions>>, <<deletePartitions>>, and <<store>>, i.e. MUST NOT be used for <<listPartitions>>, <<retrieve>> or <<ids>>.
+If present and set to `true`, the repository MUST copy the additional info to all <<{delta}.adoc#events, delta protocol events>> that result from the command, and distribute the additional info to all participants receiving the event.
 
-* [[message.message]]`message` is a human-readable string describing the message.
-
-* [[message.data]]`data` is a flat map with arbitrary keys and values.
-All values MUST be strings, the keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible.
+* [[additionalInfo.message]]`message` is a human-readable string describing the additional info.
+* [[additionalInfo.data]]`data` is a flat map with 0 or more arbitrary keys and values.
+All keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible and MUST be unique within the same additional info.
+All values MUST be strings.
 A _kind_ might imply presence of specific keys in `data`.
 
 +
-[[message-kinds-global]]
-.Message kinds for all commands
+[[additionalInfo-kinds-global]]
+.Additional info kinds for all commands
 [cols="3h,3,1,7a"]
 |===
 |Kind |Description |Success |Implied data
@@ -241,6 +244,9 @@ A _kind_ might imply presence of specific keys in `data`.
 
 |===
 
++
+This additional info is symmetric to <<{delta}.adoc#additionalInfo, additional infos in delta API>>.
+
 
 [[commands]]
 [[apis]]
@@ -260,7 +266,7 @@ NOTE: We might add filter capabilities in the future.
 .Request parameters
 [horizontal]
 [[listPartitions.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
-[[listPartitions.requestMessages]]messages:: <<messagesType>>[]
+[[listPartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
 [horizontal]
@@ -269,7 +275,7 @@ The partitions are sent as complete nodes.{fn-org202}
 Does NOT include any children or annotations of the root partition nodes.
 Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
 [[listPartitions.success]]success:: <<successType>>
-[[listPartitions.responseMessages]]messages:: <<messagesType>>[] with no special message kinds.
+[[listPartitions.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[] with no special additional info kinds.
 
 [[createPartitions, createPartitions]]
 === createPartitions: Create new partitions
@@ -286,12 +292,12 @@ Nodes MUST use <<unknown-node-ids>>.
 [horizontal]
 [[createPartitions.nodes]] nodes:: <<chunkType>> containing all nodes we want to add as new partitions.
 [[createPartitions.commandId]]commandId:: <<commandIdType>>
-[[createPartitions.requestMessages]]messages:: <<messagesType>>[]
+[[createPartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
 [horizontal]
 [[createPartitions.success]]success:: <<successType>>
-[[createPartitions.responseMessages]]messages:: <<messagesType>>[]
+[[createPartitions.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 +
 [cols="3h,3,1,7a"]
 |===
@@ -343,12 +349,12 @@ All (transitive) annotations and children become <<orphan, orphans>>.
 [horizontal]
 [[deletePartitions.nodeIds]]nodeIds:: <<nodeIdType>>[] List of node ids to delete.
 [[deletePartitions.commandId]]commandId:: <<commandIdType>>
-[[deletePartitions.requestMessages]]messages:: <<messagesType>>[]
+[[deletePartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
 [horizontal]
 [[deletePartitions.success]]success:: <<successType>>
-[[deletePartitions.responseMessages]]messages:: <<messagesType>>[]
+[[deletePartitions.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 +
 [cols="3h,3,1,7a"]
 |===
@@ -396,14 +402,14 @@ If present, MUST be an integer >= 0, with
 NOTE: There's no _magic value_ of <<retrieve.depthLimit>> to express _infinite_ depth.
 We need to omit the parameter if we don't want to limit the depth.
 [[retrieve.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
-[[retrieve.requestMessages]]messages:: <<messagesType>>[]
+[[retrieve.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
 [horizontal]
 [[retrieve.chunk]]chunk:: <<chunkType>> containing all nodes according to <<retrieve.nodeIds>> and <<retrieve.depthLimit>> parameters.
 Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLanguages>>, only their <<{serialization}.adoc#MetaPointer, MetaPointers>>.
 [[retrieve.success]]success:: <<successType>>
-[[retrieve.responseMessages]]messages:: <<messagesType>>[]
+[[retrieve.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 +
 [cols="3h,3,1,7a"]
 |===
@@ -469,12 +475,12 @@ The repository MUST support changing <<{serialization}.adoc#meta-pointer, meta-p
 [horizontal]
 [[store.nodes, `nodes`]]nodes:: <<chunkType>> containing all nodes to store to the repository.
 [[store.commandId, `commandId`]]commandId:: <<commandIdType>>
-[[store.requestMessages]]messages:: <<messagesType>>[]
+[[store.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
 [horizontal]
 [[store.success]]success:: <<successType>>
-[[store.responseMessages]]messages:: <<messagesType>>[]
+[[store.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 +
 [cols="3h,3,1,7a"]
 |===
@@ -541,13 +547,13 @@ We assume infinite id space.
 The repository MUST return between one (inclusive) and `count` (inclusive) ids.
 It MAY return less than `count` ids.
 [[ids.commandId, `commandId`]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
-[[ids.requestMessages]]messages:: <<messagesType>>[]
+[[ids.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
 [horizontal]
 [[ids.ids]]ids:: <<nodeIdType>>[] List of ids guaranteed to be free.
 [[ids.success]]success:: <<successType>>
-[[ids.responseMessages]]messages:: <<messagesType>>[] with no special message kinds.
+[[ids.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[] with no special additional info kinds.
 
 
 [[crud-mapping]]

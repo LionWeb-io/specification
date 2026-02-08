@@ -26,7 +26,7 @@ Nodes in that subtree MAY have references to already existing nodes, and already
 
 [[AnnotationReplaced.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[AnnotationReplaced.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[AnnotationReplaced.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-ReplaceAnnotation>>

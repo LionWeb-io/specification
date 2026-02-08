@@ -34,7 +34,7 @@ No other children inside <<ChildMovedAndReplacedFromOtherContainment.newParent>>
 
 [[ChildMovedAndReplacedFromOtherContainment.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ChildMovedAndReplacedFromOtherContainment.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ChildMovedAndReplacedFromOtherContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-MoveAndReplaceChildFromOtherContainment>>

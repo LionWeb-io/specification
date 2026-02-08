@@ -31,7 +31,7 @@ Example: +
 
 [[AnnotationMovedInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[AnnotationMovedInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[AnnotationMovedInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-MoveAnnotationInSameParent>>

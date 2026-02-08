@@ -15,7 +15,7 @@ This client is now subscribed to any changes to <<PartitionAdded.newPartition>> 
 
 [[PartitionAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[PartitionAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[PartitionAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-AddPartition>>

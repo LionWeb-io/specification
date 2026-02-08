@@ -17,7 +17,7 @@ This client is now unsubscribed from any changes to <<PartitionDeleted.deletedPa
 
 [[PartitionDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[PartitionDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[PartitionDeleted.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-DeletePartition>>

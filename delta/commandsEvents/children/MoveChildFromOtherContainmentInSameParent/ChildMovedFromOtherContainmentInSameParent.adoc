@@ -28,7 +28,7 @@ All other children inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'
 
 [[ChildMovedFromOtherContainmentInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ChildMovedFromOtherContainmentInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ChildMovedFromOtherContainmentInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-MoveChildFromOtherContainmentInSameParent>>

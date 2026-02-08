@@ -30,7 +30,7 @@ No other annotations inside <<AnnotationMovedAndReplacedFromOtherParent.newParen
 
 [[AnnotationMovedAndReplacedFromOtherParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[AnnotationMovedAndReplacedFromOtherParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[AnnotationMovedAndReplacedFromOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-MoveAndReplaceAnnotationFromOtherParent>>

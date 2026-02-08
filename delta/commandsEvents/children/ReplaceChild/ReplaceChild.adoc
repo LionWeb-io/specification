@@ -32,7 +32,7 @@ include::ReplaceChild-diagram.adoc[]
 
 [[ReplaceChild.commandId]]commandId:: <<commandIdType>>
 
-[[ReplaceChild.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ReplaceChild.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-nodeAlreadyExists>> <<ReplaceChild.newChild>>

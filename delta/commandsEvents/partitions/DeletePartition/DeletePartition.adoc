@@ -20,7 +20,7 @@ include::DeletePartition-diagram.adoc[]
 [[DeletePartition.commandId]]commandId:: <<commandIdType>>
 Id of this command.
 
-[[DeletePartition.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[DeletePartition.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<DeletePartition.deletedPartition>>

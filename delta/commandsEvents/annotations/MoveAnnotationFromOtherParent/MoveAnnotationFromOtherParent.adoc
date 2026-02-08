@@ -22,7 +22,7 @@ include::MoveAnnotationFromOtherParent-diagram.adoc[]
 
 [[MoveAnnotationFromOtherParent.commandId]]commandId:: <<commandIdType>>
 
-[[MoveAnnotationFromOtherParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[MoveAnnotationFromOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<MoveAnnotationFromOtherParent.newParent>>

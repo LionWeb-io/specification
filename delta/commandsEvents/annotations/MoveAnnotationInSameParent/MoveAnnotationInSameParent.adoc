@@ -20,7 +20,7 @@ include::MoveAnnotationInSameParent-diagram.adoc[]
 
 [[MoveAnnotationInSameParent.commandId]]commandId:: <<commandIdType>>
 
-[[MoveAnnotationInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[MoveAnnotationInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownIndex>> for <<MoveAnnotationInSameParent.newIndex>> (is beyond (the number of annotations of <<MoveAnnotationInSameParent.movedAnnotation>>'s parent) - 1)

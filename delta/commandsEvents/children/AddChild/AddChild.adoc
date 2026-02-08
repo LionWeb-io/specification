@@ -27,7 +27,7 @@ include::AddChild-diagram.adoc[]
 
 [[AddChild.commandId]]commandId:: <<commandIdType>>
 
-[[AddChild.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[AddChild.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<AddChild.parent>>

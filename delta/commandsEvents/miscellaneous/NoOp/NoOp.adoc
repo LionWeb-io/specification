@@ -11,7 +11,7 @@ Nothing happened as result of one or more command(s).{fn-org314}
 
 [[NoOp.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[NoOp.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[NoOp.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 _none_

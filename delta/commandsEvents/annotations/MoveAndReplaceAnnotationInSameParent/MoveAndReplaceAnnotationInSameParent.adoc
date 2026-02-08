@@ -24,7 +24,7 @@ include::MoveAndReplaceAnnotationInSameParent-diagram.adoc[]
 
 [[MoveAndReplaceAnnotationInSameParent.commandId]]commandId:: <<commandIdType>>
 
-[[MoveAndReplaceAnnotationInSameParent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[MoveAndReplaceAnnotationInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownIndex>> for <<MoveAndReplaceAnnotationInSameParent.newIndex>> (is beyond (the number of annotations of <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>'s parent) - 1)

@@ -22,7 +22,7 @@ All other entries inside <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.refere
 
 [[ReferenceDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[ReferenceDeleted.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[ReferenceDeleted.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-DeleteReference>>

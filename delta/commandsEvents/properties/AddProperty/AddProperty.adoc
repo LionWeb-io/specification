@@ -22,7 +22,7 @@ include::AddProperty-diagram.adoc[]
 
 [[AddProperty.commandId]]commandId:: <<commandIdType>>
 
-[[AddProperty.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[AddProperty.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<AddProperty.node>>

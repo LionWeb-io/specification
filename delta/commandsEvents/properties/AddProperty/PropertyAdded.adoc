@@ -17,7 +17,7 @@
 
 [[PropertyAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
-[[PropertyAdded.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[PropertyAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-AddProperty>>

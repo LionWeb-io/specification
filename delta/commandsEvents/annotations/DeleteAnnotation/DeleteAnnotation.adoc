@@ -23,7 +23,7 @@ include::DeleteAnnotation-diagram.adoc[]
 
 [[DeleteAnnotation.commandId]]commandId:: <<commandIdType>>
 
-[[DeleteAnnotation.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[DeleteAnnotation.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * <<err-unknownNode>> for <<DeleteAnnotation.parent>>
