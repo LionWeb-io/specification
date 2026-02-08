@@ -1,0 +1,38 @@
+[[qry-InformAboutChangingPartitions]]
+===== Inform about partition changes
+This client wants to receive <<evnt-PartitionAdded>> events on newly created (if <<InformAboutChangingPartitions.creation>> is true)
+or <<evnt-PartitionDeleted>> events on deleted (if <<InformAboutChangingPartitions.deletion>> is true) partitions.
+The client receives partitions contents up to <<InformAboutChangingPartitions.depthLimit>>.
+The client _does not_ subscribe to newly created partitions.{fn-org425}
+
+See also <<qry-SubscribeToChangingPartitions>>.
+
+.Technical name
+`InformAboutChangingPartitions`
+
+[horizontal]
+.Request parameters
+[[InformAboutChangingPartitions.creation, `creation`]]creation:: <<booleanType>>
+Whether this client wants to receive events on newly created partitions (`true`), or not (`false`).
+
+[[InformAboutChangingPartitions.deletion, `deletion`]]deletion:: <<booleanType>>
+Whether this client wants to receive events on deleted partitions (`true`), or not (`false`).
+
+[[InformAboutChangingPartitions.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>
+Depth of <<evnt-PartitionAdded>>.<<PartitionAdded.newPartition>>.
+
+[[InformAboutChangingPartitions.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[InformAboutChangingPartitions.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+
+[horizontal]
+.Response parameters
+[[InformAboutChangingPartitions.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[InformAboutChangingPartitions.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+
+.Errors
+* <<err-invalidParticipation>>
+* Client already requested <<qry-SubscribeToChangingPartitions>>

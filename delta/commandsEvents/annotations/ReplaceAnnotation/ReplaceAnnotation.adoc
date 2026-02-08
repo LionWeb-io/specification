@@ -17,7 +17,10 @@ include::ReplaceAnnotation-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[ReplaceAnnotation.newAnnotation, `newAnnotation`]]newAnnotation:: <<chunkType>>
+[[ReplaceAnnotation.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
+Subtree to form a new annotation.
+The _anchor node_ MUST contain the <<ReplaceAnnotation.parent>> as _parent_.{fn-org357}
+All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 
 [[ReplaceAnnotation.parent, `parent`]]parent:: <<targetNodeType>>
 

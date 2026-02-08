@@ -11,7 +11,10 @@ All other annotations inside <<AnnotationAdded.parent>>'s annotations with index
 .Parameters
 [[AnnotationAdded.parent, `parent`]]parent:: <<targetNodeType>>
 
-[[AnnotationAdded.newAnnotation, `newAnnotation`]]newAnnotation:: <<chunkType>>
+[[AnnotationAdded.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
+Subtree that formed the new annotation.
+The _anchor node_ MUST contain the <<AnnotationAdded.parent>> as _parent_.{fn-org357}
+All nodes in that subtree MUST be <<new-nodes>>.{fn-org326}
 
 [[AnnotationAdded.index, `index`]]index:: <<indexType>>
 

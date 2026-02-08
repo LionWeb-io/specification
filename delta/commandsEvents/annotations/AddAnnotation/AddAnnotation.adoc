@@ -16,7 +16,10 @@ include::AddAnnotation-diagram.adoc[]
 .Parameters
 [[AddAnnotation.parent, `parent`]]parent:: <<targetNodeType>>
 
-[[AddAnnotation.newAnnotation, `newAnnotation`]]newAnnotation:: <<chunkType>>
+[[AddAnnotation.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
+Subtree to form a new annotation.
+The _anchor node_ MUST contain the <<AddAnnotation.parent>> as _parent_.{fn-org357}
+All nodes in that subtree MUST be <<new-nodes>>.
 
 [[AddAnnotation.index, `index`]]index:: <<indexType>>
 

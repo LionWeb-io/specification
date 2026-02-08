@@ -58,6 +58,10 @@
       "minProperties": 3,
       "maxProperties": 3
     },
+    "depthLimit": {
+      "type": "integer",
+      "minimum": 0
+    },
     "split": {
       "type": "boolean"
     },
@@ -384,6 +388,9 @@
           "$ref": "#/$defs/SubscribeToChangingPartitionsRequest"
         },
         {
+          "$ref": "#/$defs/InformAboutChangingPartitionsRequest"
+        },
+        {
           "$ref": "#/$defs/SubscribeToPartitionContentsRequest"
         },
         {
@@ -403,6 +410,9 @@
         },
         {
           "$ref": "#/$defs/ListPartitionsRequest"
+        },
+        {
+          "$ref": "#/$defs/ListAndSubscribePartitionsRequest"
         }
       ]
     },
@@ -410,6 +420,9 @@
       "anyOf": [
         {
           "$ref": "#/$defs/SubscribeToChangingPartitionsResponse"
+        },
+        {
+          "$ref": "#/$defs/InformAboutChangingPartitionsResponse"
         },
         {
           "$ref": "#/$defs/SubscribeToPartitionContentsResponse"
@@ -433,6 +446,9 @@
           "$ref": "#/$defs/ListPartitionsResponse"
         },
         {
+          "$ref": "#/$defs/ListAndSubscribePartitionsResponse"
+        },
+        {
           "$ref": "#/$defs/ErrorResponse"
         },
         {
@@ -451,8 +467,58 @@
         "deletion": {
           "type": "boolean"
         },
-        "partitions": {
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "creation",
+        "deletion",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 5
+    },
+    "SubscribeToChangingPartitionsResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "SubscribeToChangingPartitionsResponse"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    },
+    "InformAboutChangingPartitionsRequest": {
+      "properties": {
+        "messageKind": {
+          "const": "InformAboutChangingPartitionsRequest"
+        },
+        "creation": {
           "type": "boolean"
+        },
+        "deletion": {
+          "type": "boolean"
+        },
+        "depthLimit": {
+          "$ref": "#/$defs/depthLimit"
         },
         "queryId": {
           "$ref": "#/$defs/queryId"
@@ -465,7 +531,7 @@
         "messageKind",
         "creation",
         "deletion",
-        "partitions",
+        "depthLimit",
         "queryId",
         "additionalInfos"
       ],
@@ -473,10 +539,10 @@
       "minProperties": 6,
       "maxProperties": 6
     },
-    "SubscribeToChangingPartitionsResponse": {
+    "InformAboutChangingPartitionsResponse": {
       "properties": {
         "messageKind": {
-          "const": "SubscribeToChangingPartitionsResponse"
+          "const": "InformAboutChangingPartitionsResponse"
         },
         "queryId": {
           "$ref": "#/$defs/queryId"
@@ -804,6 +870,60 @@
         "messageKind": {
           "const": "ListPartitionsRequest"
         },
+        "depthLimit": {
+          "$ref": "#/$defs/depthLimit"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "depthLimit",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "ListPartitionsResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "ListPartitionsResponse"
+        },
+        "partitions": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "partitions",
+        "split",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 5
+    },
+    "ListAndSubscribePartitionsRequest": {
+      "properties": {
+        "messageKind": {
+          "const": "ListAndSubscribePartitionsRequest"
+        },
         "queryId": {
           "$ref": "#/$defs/queryId"
         },
@@ -820,10 +940,10 @@
       "minProperties": 3,
       "maxProperties": 3
     },
-    "ListPartitionsResponse": {
+    "ListAndSubscribePartitionsResponse": {
       "properties": {
         "messageKind": {
-          "const": "ListPartitionsResponse"
+          "const": "ListAndSubscribePartitionsResponse"
         },
         "partitions": {
           "$ref": "#/$defs/DeltaSerializationChunk"

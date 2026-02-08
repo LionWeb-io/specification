@@ -33,7 +33,34 @@ Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<part
 [[queryIdType]]QueryId:: Id of a query.
 Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<participation>>.
 
-[[chunkType]]SerializationChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>.
+[[unconstrainedChunkType]]SerializationChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>.
+Nodes in the chunk MAY have references to already <<existing-nodes>>, and already <<existing-nodes>> MAY have references to nodes in the chunk.{fn-org327}
++
+Chunks have different constraints, depending on use case:
++
+
+[horizontal]
+[[singleChunkType, single chunk]]Single:::
+MUST contain a single _anchor node_, and all other nodes MUST be descendants of the _anchor node_.
+The chunk MUST contain all features of the _anchor node_ and all its descendants, i.e. the _anchor node_ is complete.
+
+[[multiChunkType, multi chunk]]Multi:::
+MAY contain more than one _root node_ (i.e. independent subtrees), and the chunk MUST contain all descendants of each _root node_.
+MUST contain all features of all contained nodes.
+
+[[shallowChunkType, shallow chunk]]Shallow:::
+MAY contain more than one _root node_ (i.e. independent subtrees), and each root node might be incomplete.
+
+[[depthLimitType, depth limit]]DepthLimit:: Depth of returned <<shallowChunkType>>.
+MUST be an integer >= 0, with
++
+--
+* 0 meaning "return only the _root node(s)_",
+* 1 meaning "return the _root node(s)_ and their direct children/annotations",
+* 2 meaning "return the _root node(s)_, their direct children/annotations, and the direct children/annotations of these",
+* etc.
+--
+
 [[splitFlagType]]SplitFlag:: boolean flag whether the chunk is complete within this <<splittableMessage>>.{fn-org425}
 
 [[continuedChunkCompletedFlagType]]ContinuedChunkCompletedFlag:: boolean flag whether this <<continuedChunk>> completes its <<splittableMessage>>.{fn-org425}

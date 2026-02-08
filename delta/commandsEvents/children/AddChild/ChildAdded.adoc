@@ -11,7 +11,10 @@ All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> wit
 .Parameters
 [[ChildAdded.parent, `parent`]]parent:: <<targetNodeType>>
 
-[[ChildAdded.newChild, `newChild`]]newChild:: <<chunkType>>
+[[ChildAdded.newChild, `newChild`]]newChild:: <<singleChunkType>>
+Subtree that formed the new child.
+The _anchor node_ MUST contain the <<ChildAdded.parent>> as _parent_.{fn-org357}
+All nodes in that subtree MUST be <<new-nodes>>.{fn-org326}
 
 [[ChildAdded.containment, `containment`]]containment:: <<metaPointerType>>
 

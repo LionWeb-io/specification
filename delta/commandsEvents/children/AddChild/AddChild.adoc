@@ -16,7 +16,10 @@ include::AddChild-diagram.adoc[]
 .Parameters
 [[AddChild.parent, `parent`]]parent:: <<targetNodeType>>
 
-[[AddChild.newChild, `newChild`]]newChild:: <<chunkType>>
+[[AddChild.newChild, `newChild`]]newChild:: <<singleChunkType>>
+Subtree to form a new child.
+The _anchor node_ MUST contain the <<AddChild.parent>> as _parent_.{fn-org357}
+All nodes in that subtree MUST be <<new-nodes>>.
 
 [[AddChild.containment, `containment`]]containment:: <<metaPointerType>>
 

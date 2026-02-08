@@ -9,7 +9,10 @@
 
 [horizontal]
 .Parameters
-[[AnnotationReplaced.newAnnotation, `newAnnotation`]]newAnnotation:: <<chunkType>>
+[[AnnotationReplaced.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
+Subtree that formed the new annotation.
+The _anchor node_ MUST contain the <<ReplaceAnnotation.newAnnotation>> as _parent_.{fn-org357}
+All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.{fn-org326}
 
 [[AnnotationReplaced.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
 

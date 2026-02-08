@@ -64,7 +64,14 @@ A subscription does not have an identity on its own; it is bound to one particip
 Scope is defined by the node id of a <<{m3}.adoc#partition, partition>>; it includes all changes to the partition and all its descendants (including annotation instances).{fn-org269}
 
 At the start of a participation, the subscription scope is empty.
-A client can change its subscription scope by <<qry-SubscribeToChangingPartitions, subscribing to newly created partitions>>, or <<qry-SubscribeToPartitionContents, subscribe>> / <<qry-UnsubscribeFromPartitionContents, unsubscribe>> a specific partition.
+A client can change its subscription scope by
+
+* <<qry-ListAndSubscribePartitions, requesting and subscribing to all existing partitions>>,
+* <<qry-InformAboutChangingPartitions, being informed about newly created partitions>>,
+* <<qry-SubscribeToChangingPartitions, subscribing to newly created partitions>>,
+* <<qry-SubscribeToPartitionContents, subscribe>> / <<qry-UnsubscribeFromPartitionContents, unsubscribe>> to a specific partition, or
+* <<cmd-AddPartition, adding a new partition>>.
+
 A client can change the subscription scope at any time during a participation.
 
 A client can send commands for any node id, independent of the client's subscription.

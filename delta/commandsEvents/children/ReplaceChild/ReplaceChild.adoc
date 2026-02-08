@@ -17,7 +17,10 @@ include::ReplaceChild-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[ReplaceChild.newChild, `newChild`]]newChild:: <<chunkType>>
+[[ReplaceChild.newChild, `newChild`]]newChild:: <<singleChunkType>>
+Subtree to form a new child.
+The _anchor node_ MUST contain the <<ReplaceChild.parent>> as _parent_.{fn-org357}
+All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 
 [[ReplaceChild.parent, `parent`]]parent:: <<targetNodeType>>
 

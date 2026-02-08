@@ -9,7 +9,10 @@
 
 [horizontal]
 .Parameters
-[[ChildReplaced.newChild, `newChild`]]newChild:: <<chunkType>>
+[[ChildReplaced.newChild, `newChild`]]newChild:: <<singleChunkType>>
+Subtree that formed the new child.
+The _anchor node_ MUST contain the <<ChildReplaced.parent>> as _parent_.{fn-org357}
+All nodes in that subtree MUST be <<new-nodes>> or <<reused-nodes>>.{fn-org326}
 
 [[ChildReplaced.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
 
