@@ -24,7 +24,7 @@ Authentication and authorization are out of scope of this API.
 
 [[channel, channel]]
 === Channel characteristics
-Logically, the channel has independent parts for each <<introduction, kind>> of message;
+Logically, the channel has independent parts for each <<introduction, category>> of message;
 in practice, we might transmit some or all of them through a shared channel.
 
 This protocol is agnostic of its underlying transport or technical implementation.
@@ -83,6 +83,7 @@ Each message has some id unique to the <<participation>>:
 * Events have _command sources_.{fn-org306}
 
 Every kind of message has a unique _technical name_.
+Every defined message has a unique _technical name_.
 The technical name is a valid programming language identifier as described for <<{m3}.adoc#IKeyed, IKeyed>>.
 Each binding to a specific protocol might use the technical name in a different way.
 For example, a JSON binding might have a member containing the technical name of the message, or a Protobuf binding might use the technical name as type name.
