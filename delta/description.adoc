@@ -27,8 +27,9 @@ Authentication and authorization are out of scope of this API.
 Logically, the channel has independent parts for each <<introduction, kind>> of message;
 in practice, we might transmit some or all of them through a shared channel.
 
-This protocol is agnostic of its underlying technical implementation.
-We can use any (e.g. stateless, stateful) protocol, as long as it fulfills request/response characteristics for client-initiated query, command, and participation messages, and repository-initiated broadcast characteristics for event messages.
+This protocol is agnostic of its underlying transport or technical implementation.
+By default, this protocol uses JSON encoding over a text-based, single channel, stateful, bi-directional, asynchronous, reliable, and trustworthy transport.{fn-org429}
+Any transport that fits these criteria (e.g. WebSocketfootnote:[https://websockets.spec.whatwg.org/]) MUST use the same encoding and MUST adhere to the <<deltaJsonSchema>>.{fn-org428}
 
 We assume the underlying protocol handles quality of service concerns (i.e. guaranteed one-time complete delivery of messages), they are out of scope of this API.
 
