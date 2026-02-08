@@ -74,15 +74,22 @@ The repository also sends out the same events to subscribed clients, thus _not_ 
 
 [[message, message]]
 === Message characteristics
-Each message is atomic; it cannot be split.
 
+[[messageAtomicity]]
+.Atomicity
+Most messages are atomic; they cannot be split.
+The exceptions are <<splittableMessage, splittable messages>>.
+
+[[messageIdentity, message identity]]
+.Message identity
 Each message has some id unique to the <<participation>>:
 
-* Queries have a _query id_.
-* Commands have a _command id_.{fn-org305}
-* Events have _command sources_.{fn-org306}
+* Queries have a <<queryIdType>> (for <<qry-ChunkedQueryResponse>> together with its <<continuedChunkSequenceNumberType>>).
+* Commands have a <<commandIdType>> (for <<cmd-ChunkedCommand>> together with its <<continuedChunkSequenceNumberType>>).{fn-org305}
+* Events have <<eventSequenceType>>.{fn-org423}
 
-Every kind of message has a unique _technical name_.
+[[technicalName, technical name]]
+.Technical name
 Every defined message has a unique _technical name_.
 The technical name is a valid programming language identifier as described for <<{m3}.adoc#IKeyed, IKeyed>>.
 Each binding to a specific protocol might use the technical name in a different way.
