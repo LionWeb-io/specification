@@ -1,7 +1,6 @@
 [[evnt-PartitionAdded]]
 ===== Partition added
-
-This client is now subscribed to any changes to <<PartitionAdded.newPartition>> or any of its descendants.
+<<new-nodes, New>> partition <<PartitionAdded.newPartition>> has been added to the repository.
 
 .Technical name
 `PartitionAdded`
