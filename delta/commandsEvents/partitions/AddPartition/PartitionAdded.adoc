@@ -9,6 +9,8 @@
 .Parameters
 [[PartitionAdded.newPartition, `newPartition`]]newPartition:: <<chunkType>>
 
+[[PartitionAdded.split, `split`]]split:: <<splitFlagType>>
+
 [[PartitionAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 
 [[PartitionAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>

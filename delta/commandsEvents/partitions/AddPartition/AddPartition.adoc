@@ -22,6 +22,8 @@ The root node MUST NOT contain a _parent_ (as this is a partition, thus cannot h
 All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
 Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
 
+[[AddPartition.split, `split`]]split:: <<splitFlagType>>
+
 [[AddPartition.commandId]]commandId:: <<commandIdType>>
 Id of this command.
 

@@ -58,6 +58,16 @@
       "minProperties": 3,
       "maxProperties": 3
     },
+    "split": {
+      "type": "boolean"
+    },
+    "continuedChunkCompleted": {
+      "type": "boolean"
+    },
+    "continuedChunkSequenceNumber": {
+      "type": "integer",
+      "minimum": 0
+    },
     "DeltaSerializationChunk": {
       "type": "object",
       "properties": {
@@ -424,6 +434,9 @@
         },
         {
           "$ref": "#/$defs/ErrorResponse"
+        },
+        {
+          "$ref": "#/$defs/ChunkedQueryResponse"
         }
       ]
     },
@@ -514,6 +527,9 @@
         "contents": {
           "$ref": "#/$defs/DeltaSerializationChunk"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "queryId": {
           "$ref": "#/$defs/queryId"
         },
@@ -524,12 +540,13 @@
       "required": [
         "messageKind",
         "contents",
+        "split",
         "queryId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 4,
-      "maxProperties": 4
+      "minProperties": 5,
+      "maxProperties": 5
     },
     "UnsubscribeFromPartitionContentsRequest": {
       "properties": {
@@ -811,6 +828,9 @@
         "partitions": {
           "$ref": "#/$defs/DeltaSerializationChunk"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "queryId": {
           "$ref": "#/$defs/queryId"
         },
@@ -821,12 +841,13 @@
       "required": [
         "messageKind",
         "partitions",
+        "split",
         "queryId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 4,
-      "maxProperties": 4
+      "minProperties": 5,
+      "maxProperties": 5
     },
     "ErrorResponse": {
       "properties": {
@@ -850,6 +871,38 @@
         "messageKind",
         "errorCode",
         "message",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 5
+    },
+    "ChunkedQueryResponse": {
+      "properties": {
+        "messageKind": {
+          "const": "ChunkedQueryResponse"
+        },
+        "chunk": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "continuedChunkCompleted": {
+          "$ref": "#/$defs/continuedChunkCompleted"
+        },
+        "continuedChunkSequenceNumber": {
+          "$ref": "#/$defs/continuedChunkSequenceNumber"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "continuedChunkCompleted",
+        "continuedChunkSequenceNumber",
         "queryId",
         "additionalInfos"
       ],
@@ -933,6 +986,9 @@
         },
         {
           "$ref": "#/$defs/ChangeReference"
+        },
+        {
+          "$ref": "#/$defs/ChunkedCommand"
         }
       ]
     },
@@ -944,6 +1000,9 @@
         "newPartition": {
           "$ref": "#/$defs/DeltaSerializationChunk"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "commandId": {
           "$ref": "#/$defs/commandId"
         },
@@ -954,12 +1013,13 @@
       "required": [
         "messageKind",
         "newPartition",
+        "split",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 4,
-      "maxProperties": 4
+      "minProperties": 5,
+      "maxProperties": 5
     },
     "DeletePartition": {
       "properties": {
@@ -1127,6 +1187,9 @@
         "index": {
           "$ref": "#/$defs/index"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "commandId": {
           "$ref": "#/$defs/commandId"
         },
@@ -1140,12 +1203,13 @@
         "newChild",
         "containment",
         "index",
+        "split",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 7
+      "minProperties": 8,
+      "maxProperties": 8
     },
     "DeleteChild": {
       "properties": {
@@ -1204,6 +1268,9 @@
         "replacedChild": {
           "$ref": "#/$defs/targetNode"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "commandId": {
           "$ref": "#/$defs/commandId"
         },
@@ -1218,12 +1285,13 @@
         "containment",
         "index",
         "replacedChild",
+        "split",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
-      "maxProperties": 8
+      "minProperties": 9,
+      "maxProperties": 9
     },
     "MoveChildFromOtherContainment": {
       "properties": {
@@ -1449,6 +1517,9 @@
         "index": {
           "$ref": "#/$defs/index"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "commandId": {
           "$ref": "#/$defs/commandId"
         },
@@ -1461,12 +1532,13 @@
         "parent",
         "newAnnotation",
         "index",
+        "split",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
-      "maxProperties": 6
+      "minProperties": 7,
+      "maxProperties": 7
     },
     "DeleteAnnotation": {
       "properties": {
@@ -1518,6 +1590,9 @@
         "replacedAnnotation": {
           "$ref": "#/$defs/targetNode"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "commandId": {
           "$ref": "#/$defs/commandId"
         },
@@ -1531,12 +1606,13 @@
         "newAnnotation",
         "index",
         "replacedAnnotation",
+        "split",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 7
+      "minProperties": 8,
+      "maxProperties": 8
     },
     "MoveAnnotationFromOtherParent": {
       "properties": {
@@ -1793,6 +1869,39 @@
       "minProperties": 6,
       "maxProperties": 10
     },
+    "ChunkedCommand": {
+      "properties": {
+        "messageKind": {
+          "const": "ChunkedCommand"
+        },
+        "chunk": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "continuedChunkCompleted": {
+          "$ref": "#/$defs/continuedChunkCompleted"
+        },
+        "continuedChunkSequenceNumber": {
+          "$ref": "#/$defs/continuedChunkSequenceNumber"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "chunk",
+        "continuedChunkCompleted",
+        "continuedChunkSequenceNumber",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 6
+    },
     "Events": {
       "anyOf": [
         {
@@ -1922,6 +2031,9 @@
         "newPartition": {
           "$ref": "#/$defs/DeltaSerializationChunk"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
         },
@@ -1935,13 +2047,14 @@
       "required": [
         "messageKind",
         "newPartition",
+        "split",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
-      "maxProperties": 5
+      "minProperties": 6,
+      "maxProperties": 6
     },
     "PartitionDeleted": {
       "properties": {
@@ -2145,6 +2258,9 @@
         "index": {
           "$ref": "#/$defs/index"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
         },
@@ -2161,13 +2277,14 @@
         "newChild",
         "containment",
         "index",
+        "split",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
-      "maxProperties": 8
+      "minProperties": 9,
+      "maxProperties": 9
     },
     "ChildDeleted": {
       "properties": {
@@ -2237,6 +2354,9 @@
         "index": {
           "$ref": "#/$defs/index"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
         },
@@ -2255,13 +2375,14 @@
         "parent",
         "containment",
         "index",
+        "split",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 10,
-      "maxProperties": 10
+      "minProperties": 11,
+      "maxProperties": 11
     },
     "ChildMovedFromOtherContainment": {
       "properties": {
@@ -2595,6 +2716,9 @@
         "index": {
           "$ref": "#/$defs/index"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
         },
@@ -2610,13 +2734,14 @@
         "parent",
         "newAnnotation",
         "index",
+        "split",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 7
+      "minProperties": 8,
+      "maxProperties": 8
     },
     "AnnotationDeleted": {
       "properties": {
@@ -2679,6 +2804,9 @@
         "index": {
           "$ref": "#/$defs/index"
         },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
         },
@@ -2696,13 +2824,14 @@
         "replacedDescendants",
         "parent",
         "index",
+        "split",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
-      "maxProperties": 9
+      "minProperties": 10,
+      "maxProperties": 10
     },
     "AnnotationMovedFromOtherParent": {
       "properties": {
@@ -3698,6 +3827,39 @@
         "errorCode",
         "message",
         "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 6
+    },
+    "ChunkedEvent": {
+      "properties": {
+        "messageKind": {
+          "const": "ChunkedEvent"
+        },
+        "chunk": {
+          "$ref": "#/$defs/DeltaSerializationChunk"
+        },
+        "continuedChunkCompleted": {
+          "$ref": "#/$defs/continuedChunkCompleted"
+        },
+        "continuedChunkSequenceNumber": {
+          "$ref": "#/$defs/continuedChunkSequenceNumber"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "chunk",
+        "continuedChunkCompleted",
+        "continuedChunkSequenceNumber",
         "sequenceNumber",
         "additionalInfos"
       ],

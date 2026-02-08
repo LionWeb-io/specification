@@ -22,6 +22,8 @@ include::AddChild-diagram.adoc[]
 
 [[AddChild.index, `index`]]index:: <<indexType>>
 
+[[AddChild.split, `split`]]split:: <<splitFlagType>>
+
 [[AddChild.commandId]]commandId:: <<commandIdType>>
 
 [[AddChild.additionalInfos]]additionalInfos:: <<additionalInfosType>>

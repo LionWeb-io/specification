@@ -95,6 +95,53 @@ The technical name is a valid programming language identifier as described for <
 Each binding to a specific protocol might use the technical name in a different way.
 For example, a JSON binding might have a member containing the technical name of the message, or a Protobuf binding might use the technical name as type name.
 
+[[splittableMessage, splittable message]]
+==== Splittable messages
+All messages containing a <<unconstrainedChunkType>>.
+
+A client or repository CAN decide to split up a _splittable message_ if that message would exceed the acceptable message size.
+LionWeb does not define the acceptable message size, it SHOULD be a parameter for each implementation.
+
+All _splittable messages_ contain a <<splitFlagType>>.
+If the flag is `false`, the splittable message is self-contained.
+If the flag is `true`, one or more <<continuedChunk>> messages will follow.{fn-org425}
+
+_Splittable messages_ include:
+
+Queries::
+* <<qry-SubscribeToPartitionContents>> response <<SubscribeToPartitionContents.contents>>
+* <<qry-ListPartitions>> response <<ListPartitions.partitions>>
+* <<qry-ListAndSubscribePartitions>> response <<ListAndSubscribePartitions.partitions>>
+
+Commands::
+* <<cmd-AddPartition>> <<AddPartition.newPartition>>
+* <<cmd-AddChild>> <<AddChild.newChild>>
+* <<cmd-ReplaceChild>> <<ReplaceChild.newChild>>
+* <<cmd-AddAnnotation>> <<AddAnnotation.parent>>
+* <<cmd-ReplaceAnnotation>> <<ReplaceAnnotation.newAnnotation>>
+
+Events::
+* <<evnt-ChildAdded>> <<ChildAdded.newChild>>
+* <<evnt-ChildReplaced>> <<ChildReplaced.newChild>>
+* <<evnt-AnnotationAdded>> <<AnnotationAdded.newAnnotation>>
+* <<evnt-AnnotationReplaced>> <<AnnotationReplaced.newAnnotation>>
+
+[[continuedChunk, continued chunk]]
+.Continued chunks
+_Continued chunks_ continue the chunk from the related <<splittableMessage>>.
+Each _continued chunk_ refers to the <<splittableMessage>> it belongs to.
+The _continued chunk_ contains a chunk, a consecutive sequence number, and a <<continuedChunkCompletedFlagType>> to signal whether it is the last _continued chunk_, or more will follow.
+If the flag is `true`, this is the last _continued chunk_.
+If the flag is `false`, one or more _continued chunk_ messages will follow.{fn-org425}
+
+There MUST NOT be any message in the same <<channel>> between the _chunked message_ and all related _continued chunks_.
+
+_Continued chunks_ include:
+
+* <<qry-ChunkedQueryResponse>>
+* <<cmd-ChunkedCommand>>
+* <<evnt-ChunkedEvent>>
+
 [[additionalInfo, additional info]]
 ==== Additional Info
 Each message optionally can have one or more _additional infos_ consisting of:{fn-org331}{fn-org332}{fn-org430}

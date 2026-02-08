@@ -15,6 +15,8 @@ All other annotations inside <<AnnotationAdded.parent>>'s annotations with index
 
 [[AnnotationAdded.index, `index`]]index:: <<indexType>>
 
+[[AnnotationAdded.split, `split`]]split:: <<splitFlagType>>
+
 [[AnnotationAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 
 [[AnnotationAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>

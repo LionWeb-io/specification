@@ -19,6 +19,8 @@
 
 [[AnnotationReplaced.index, `index`]]index:: <<indexType>>
 
+[[AnnotationReplaced.split, `split`]]split:: <<splitFlagType>>
+
 [[AnnotationReplaced.originCommands]]originCommands:: <<commandSourceType>>[]
 
 [[AnnotationReplaced.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>

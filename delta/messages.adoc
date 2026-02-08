@@ -34,6 +34,12 @@ Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<part
 Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<participation>>.
 
 [[chunkType]]SerializationChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>.
+[[splitFlagType]]SplitFlag:: boolean flag whether the chunk is complete within this <<splittableMessage>>.{fn-org425}
+
+[[continuedChunkCompletedFlagType]]ContinuedChunkCompletedFlag:: boolean flag whether this <<continuedChunk>> completes its <<splittableMessage>>.{fn-org425}
+
+[[continuedChunkSequenceNumberType]]ContinuedChunkSequenceNumber:: orders connected <<continuedChunk, continued chunks>>.
+Positive integer that starts at 0 and increments by one for each consecutive <<continuedChunk>>.{fn-org425}
 
 [[eventType]]Event:: Any <<events, event>>.
 

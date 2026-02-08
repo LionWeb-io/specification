@@ -17,6 +17,8 @@ All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> wit
 
 [[ChildAdded.index, `index`]]index:: <<indexType>>
 
+[[ChildAdded.split, `split`]]split:: <<splitFlagType>>
+
 [[ChildAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 
 [[ChildAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>

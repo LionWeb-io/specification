@@ -1,6 +1,8 @@
 [[queries]]
 === Queries
 
+include::../continuedChunk/ChunkedQueryResponse.adoc[]
+
 include::subscription/Subscription.adoc[]
 
 include::participation/Participation.adoc[]

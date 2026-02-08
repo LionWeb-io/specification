@@ -25,6 +25,8 @@ include::ReplaceAnnotation-diagram.adoc[]
 
 [[ReplaceAnnotation.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
 
+[[ReplaceAnnotation.split, `split`]]split:: <<splitFlagType>>
+
 [[ReplaceAnnotation.commandId]]commandId:: <<commandIdType>>
 
 [[ReplaceAnnotation.additionalInfos]]additionalInfos:: <<additionalInfosType>>

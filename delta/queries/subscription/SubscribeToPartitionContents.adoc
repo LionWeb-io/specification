@@ -21,6 +21,8 @@ Id of this query.
 [[SubscribeToPartitionContents.contents, `contents`]]contents:: <<chunkType>>
 Complete contents of <<SubscribeToPartitionContents.partition>>, i.e. the node with id <<SubscribeToPartitionContents.partition>> and all of its descendants (including annotation instances).
 
+[[SubscribeToPartitionContents.split, `split`]]split:: <<splitFlagType>>
+
 [[SubscribeToPartitionContents.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 

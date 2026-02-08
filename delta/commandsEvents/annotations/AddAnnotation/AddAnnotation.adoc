@@ -20,6 +20,8 @@ include::AddAnnotation-diagram.adoc[]
 
 [[AddAnnotation.index, `index`]]index:: <<indexType>>
 
+[[AddAnnotation.split, `split`]]split:: <<splitFlagType>>
+
 [[AddAnnotation.commandId]]commandId:: <<commandIdType>>
 
 [[AddAnnotation.additionalInfos]]additionalInfos:: <<additionalInfosType>>

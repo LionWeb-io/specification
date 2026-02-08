@@ -22,6 +22,8 @@ The partitions are sent as complete nodes.
 Does NOT include any children or annotations of the root partition nodes.
 Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
 
+[[ListPartitions.split, `split`]]split:: <<splitFlagType>>
+
 [[ListPartitions.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 

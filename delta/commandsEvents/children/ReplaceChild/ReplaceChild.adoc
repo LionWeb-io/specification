@@ -27,6 +27,8 @@ include::ReplaceChild-diagram.adoc[]
 
 [[ReplaceChild.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
 
+[[ReplaceChild.split, `split`]]split:: <<splitFlagType>>
+
 [[ReplaceChild.commandId]]commandId:: <<commandIdType>>
 
 [[ReplaceChild.additionalInfos]]additionalInfos:: <<additionalInfosType>>
