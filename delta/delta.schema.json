@@ -925,9 +925,6 @@
         },
         {
           "$ref": "#/$defs/ChangeReference"
-        },
-        {
-          "$ref": "#/$defs/CompositeCommand"
         }
       ]
     },
@@ -1788,34 +1785,6 @@
       "minProperties": 6,
       "maxProperties": 10
     },
-    "CompositeCommand": {
-      "properties": {
-        "messageKind": {
-          "const": "CompositeCommand"
-        },
-        "parts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/Commands"
-          }
-        },
-        "commandId": {
-          "$ref": "#/$defs/commandId"
-        },
-        "protocolMessages": {
-          "$ref": "#/$defs/protocolMessages"
-        }
-      },
-      "required": [
-        "messageKind",
-        "parts",
-        "commandId",
-        "protocolMessages"
-      ],
-      "additionalProperties": false,
-      "minProperties": 4,
-      "maxProperties": 4
-    },
     "Events": {
       "anyOf": [
         {
@@ -1931,9 +1900,6 @@
         },
         {
           "$ref": "#/$defs/NoOpEvent"
-        },
-        {
-          "$ref": "#/$defs/CompositeEvent"
         },
         {
           "$ref": "#/$defs/ErrorEvent"
@@ -3672,30 +3638,6 @@
       "additionalProperties": false,
       "minProperties": 10,
       "maxProperties": 10
-    },
-    "CompositeEvent": {
-      "properties": {
-        "messageKind": {
-          "const": "CompositeEvent"
-        },
-        "parts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/Events"
-          }
-        },
-        "protocolMessages": {
-          "$ref": "#/$defs/protocolMessages"
-        }
-      },
-      "required": [
-        "messageKind",
-        "parts",
-        "protocolMessages"
-      ],
-      "additionalProperties": false,
-      "minProperties": 3,
-      "maxProperties": 3
     },
     "NoOpEvent": {
       "properties": {
