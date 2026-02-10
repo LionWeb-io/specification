@@ -13,7 +13,7 @@ A <<continuedChunk>> for a <<splittableMessage, splittable>> response of one of 
 .Response parameters
 [[ChunkedQueryResponse.chunk, `chunk`]]chunk:: <<unconstrainedChunkType>>
 The continued chunk.
-MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
+The combination of all continued chunks MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
 
 [[ChunkedQueryResponse.continuedChunkCompleted, `continuedChunkCompleted`]]continuedChunkCompleted:: <<continuedChunkCompletedFlagType>>
 

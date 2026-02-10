@@ -15,7 +15,7 @@ A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> 
 .Parameters
 [[ChunkedCommand.chunk, `chunk`]]chunk:: <<unconstrainedChunkType>>
 The continued chunk.
-MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
+The combination of all continued chunks MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
 
 [[ChunkedCommand.continuedChunkCompleted, `continuedChunkCompleted`]]continuedChunkCompleted:: <<continuedChunkCompletedFlagType>>
 
