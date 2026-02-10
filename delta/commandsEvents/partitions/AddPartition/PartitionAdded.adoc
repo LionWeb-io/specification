@@ -13,7 +13,7 @@
 NOTE: This parameter differs from the <<AddPartition.newPartition, corresponding command parameter>>:
 The command's parameter always contains a whole subtree, whereas the event's parameter may contain only the top of the subtree.{fn-org425}
 
-[[PartitionAdded.split, `split`]]split:: <<splitFlagType>>
+[[PartitionAdded.split, `split`]]split?:: <<splitFlagType>>
 
 [[PartitionAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 

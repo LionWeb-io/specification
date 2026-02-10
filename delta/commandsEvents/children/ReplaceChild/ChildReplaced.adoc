@@ -24,7 +24,7 @@ All nodes in that subtree MUST be <<new-nodes>> or <<reused-nodes>>.{fn-org326}
 
 [[ChildReplaced.index, `index`]]index:: <<indexType>>
 
-[[ChildReplaced.split, `split`]]split:: <<splitFlagType>>
+[[ChildReplaced.split, `split`]]split?:: <<splitFlagType>>
 
 [[ChildReplaced.originCommands]]originCommands:: <<commandSourceType>>[]
 

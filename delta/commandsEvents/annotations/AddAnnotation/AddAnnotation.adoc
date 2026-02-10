@@ -23,7 +23,7 @@ All nodes in that subtree MUST be <<new-nodes>>.
 
 [[AddAnnotation.index, `index`]]index:: <<indexType>>
 
-[[AddAnnotation.split, `split`]]split:: <<splitFlagType>>
+[[AddAnnotation.split, `split`]]split?:: <<splitFlagType>>
 
 [[AddAnnotation.commandId]]commandId:: <<commandIdType>>
 

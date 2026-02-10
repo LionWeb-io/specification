@@ -20,7 +20,7 @@ All nodes in that subtree MUST be <<new-nodes>>.{fn-org326}
 
 [[ChildAdded.index, `index`]]index:: <<indexType>>
 
-[[ChildAdded.split, `split`]]split:: <<splitFlagType>>
+[[ChildAdded.split, `split`]]split?:: <<splitFlagType>>
 
 [[ChildAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 

@@ -24,7 +24,7 @@ All nodes in that subtree MUST be <<new-nodes, new nodes>>.
 NOTE: This parameter differs from the <<PartitionAdded.newPartition, corresponding event parameter>>:
 The command's parameter contains a whole subtree, whereas the event's parameter may contain only the top of the subtree.{fn-org425}
 
-[[AddPartition.split, `split`]]split:: <<splitFlagType>>
+[[AddPartition.split, `split`]]split?:: <<splitFlagType>>
 
 [[AddPartition.commandId]]commandId:: <<commandIdType>>
 Id of this command.

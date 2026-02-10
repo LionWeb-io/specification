@@ -30,7 +30,7 @@ All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 
 [[ReplaceChild.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
 
-[[ReplaceChild.split, `split`]]split:: <<splitFlagType>>
+[[ReplaceChild.split, `split`]]split?:: <<splitFlagType>>
 
 [[ReplaceChild.commandId]]commandId:: <<commandIdType>>
 

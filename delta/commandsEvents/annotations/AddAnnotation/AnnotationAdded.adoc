@@ -18,7 +18,7 @@ All nodes in that subtree MUST be <<new-nodes>>.{fn-org326}
 
 [[AnnotationAdded.index, `index`]]index:: <<indexType>>
 
-[[AnnotationAdded.split, `split`]]split:: <<splitFlagType>>
+[[AnnotationAdded.split, `split`]]split?:: <<splitFlagType>>
 
 [[AnnotationAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 

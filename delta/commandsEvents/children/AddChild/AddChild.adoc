@@ -25,7 +25,7 @@ All nodes in that subtree MUST be <<new-nodes>>.
 
 [[AddChild.index, `index`]]index:: <<indexType>>
 
-[[AddChild.split, `split`]]split:: <<splitFlagType>>
+[[AddChild.split, `split`]]split?:: <<splitFlagType>>
 
 [[AddChild.commandId]]commandId:: <<commandIdType>>
 

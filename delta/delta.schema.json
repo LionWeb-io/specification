@@ -606,12 +606,11 @@
       "required": [
         "messageKind",
         "contents",
-        "split",
         "queryId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 4,
       "maxProperties": 5
     },
     "UnsubscribeFromPartitionContentsRequest": {
@@ -911,12 +910,11 @@
       "required": [
         "messageKind",
         "partitions",
-        "split",
         "queryId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 4,
       "maxProperties": 5
     },
     "ListAndSubscribePartitionsRequest": {
@@ -961,12 +959,11 @@
       "required": [
         "messageKind",
         "partitions",
-        "split",
         "queryId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 4,
       "maxProperties": 5
     },
     "ErrorResponse": {
@@ -1133,12 +1130,11 @@
       "required": [
         "messageKind",
         "newPartition",
-        "split",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
+      "minProperties": 4,
       "maxProperties": 5
     },
     "DeletePartition": {
@@ -1323,12 +1319,11 @@
         "newChild",
         "containment",
         "index",
-        "split",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 7,
       "maxProperties": 8
     },
     "DeleteChild": {
@@ -1405,12 +1400,11 @@
         "containment",
         "index",
         "replacedChild",
-        "split",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 8,
       "maxProperties": 9
     },
     "MoveChildFromOtherContainment": {
@@ -1652,12 +1646,11 @@
         "parent",
         "newAnnotation",
         "index",
-        "split",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
+      "minProperties": 6,
       "maxProperties": 7
     },
     "DeleteAnnotation": {
@@ -1726,12 +1719,11 @@
         "newAnnotation",
         "index",
         "replacedAnnotation",
-        "split",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 7,
       "maxProperties": 8
     },
     "MoveAnnotationFromOtherParent": {
@@ -2167,13 +2159,12 @@
       "required": [
         "messageKind",
         "newPartition",
-        "split",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
+      "minProperties": 5,
       "maxProperties": 6
     },
     "PartitionDeleted": {
@@ -2397,13 +2388,12 @@
         "newChild",
         "containment",
         "index",
-        "split",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 9,
+      "minProperties": 8,
       "maxProperties": 9
     },
     "ChildDeleted": {
@@ -2495,13 +2485,12 @@
         "parent",
         "containment",
         "index",
-        "split",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 11,
+      "minProperties": 10,
       "maxProperties": 11
     },
     "ChildMovedFromOtherContainment": {
@@ -2854,13 +2843,12 @@
         "parent",
         "newAnnotation",
         "index",
-        "split",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
+      "minProperties": 7,
       "maxProperties": 8
     },
     "AnnotationDeleted": {
@@ -2944,13 +2932,12 @@
         "replacedDescendants",
         "parent",
         "index",
-        "split",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 10,
+      "minProperties": 9,
       "maxProperties": 10
     },
     "AnnotationMovedFromOtherParent": {

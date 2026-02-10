@@ -20,7 +20,7 @@ Id of this query.
 [[ListAndSubscribePartitions.partitions, `partitions`]]partitions:: <<multiChunkType>>
 All accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
 
-[[ListAndSubscribePartitions.split, `split`]]split:: <<splitFlagType>>
+[[ListAndSubscribePartitions.split, `split`]]split?:: <<splitFlagType>>
 
 [[ListAndSubscribePartitions.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.

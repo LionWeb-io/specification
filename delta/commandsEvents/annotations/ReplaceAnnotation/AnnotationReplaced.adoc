@@ -22,7 +22,7 @@ All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.{fn-o
 
 [[AnnotationReplaced.index, `index`]]index:: <<indexType>>
 
-[[AnnotationReplaced.split, `split`]]split:: <<splitFlagType>>
+[[AnnotationReplaced.split, `split`]]split?:: <<splitFlagType>>
 
 [[AnnotationReplaced.originCommands]]originCommands:: <<commandSourceType>>[]
 

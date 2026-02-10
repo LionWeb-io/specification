@@ -24,7 +24,7 @@ Id of this query.
 [[ListPartitions.partitions, `partitions`]]partitions:: <<shallowChunkType>>
 All accessible <<{m3}.adoc#partition, Partitions>> in the Repository up to <<ListPartitions.depthLimit>>.
 
-[[ListPartitions.split, `split`]]split:: <<splitFlagType>>
+[[ListPartitions.split, `split`]]split?:: <<splitFlagType>>
 
 [[ListPartitions.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
