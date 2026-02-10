@@ -5,6 +5,12 @@ Add new node <<AddChild.newChild>> to <<AddChild.parent>> in <<AddChild.containm
 All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
 Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
 
+The list of nodes in <<AddChild.newChild>> must form a proper tree, meaning that
+
+- There must be exactly one node (let's call it `child`) within  with `node.parent` equal to <<AddChild.parent>>. This is the node that will be added at <<AddChild.index>> to the <<AddChild.containment>> of  <<AddChild.parent>>
+- each other node must be in the subtree of `child`.
+
+
 [cols="a,a"]
 |===
 |Before |After
@@ -31,7 +37,9 @@ include::AddChild-diagram.adoc[]
 
 .Errors
 * <<err-unknownNode>> for <<AddChild.parent>>
-* <<err-nodeAlreadyExists>> for <<AddChild.newChild>>
+* <<err-nodeAlreadyExists>> for any node in <<AddChild.newChild>>
+* <<err-notAProperTree>> the nodes in <<AddChild.newChild>> do not form a proper tree
+* <<err-childNotFound>> there is no node in <<AddChild.newChild>> with parent <<AddChild.parent>>
 * <<err-unknownIndex>> for <<AddChild.index>> (is beyond the number of <<AddChild.containment>> entries in <<AddChild.parent>>)
 * <<err-invalidParticipation>>
 

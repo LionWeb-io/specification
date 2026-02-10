@@ -29,6 +29,8 @@ include::DeleteChild-diagram.adoc[]
 
 .Errors
 * <<err-unknownNode>> for <<DeleteChild.parent>>
+* <<err-unknownContainment>> The <<DeleteChild.containment>> does not exist in <<DeleteChild.parent>>
+* <<err-unknownIndex>> <<DeleteChild.index>> is beyond (the number of <<DeleteChild.containment>> entries in <<DeleteChild.parent>>) - 1
 * ##?## <<DeleteChild.index>> is beyond (the number of <<DeleteChild.containment>> entries in <<DeleteChild.parent>>) - 1
 * <<err-indexEntryMismatch>> for <<DeleteChild.containment>>/<<DeleteChild.index>> and <<DeleteChild.deletedChild>>
 * <<err-invalidParticipation>>
