@@ -24,7 +24,7 @@ Authentication and authorization are out of scope of this API.
 
 [[channel, channel]]
 === Channel characteristics
-Logically, the channel has independent parts for each <<introduction, category>> of message;
+Logically, the channel has independent parts for each <<category>> of message;
 in practice, we might transmit some or all of them through a shared channel.
 
 This protocol is agnostic of its underlying transport or technical implementation.
@@ -89,7 +89,7 @@ The exceptions are <<splittableMessage, splittable messages>>.
 
 [[messageIdentity, message identity]]
 .Message identity
-Each message has some id unique to the <<participation>>:
+Each message has some id unique to the <<participation>> and <<category>>:
 
 * Queries have a <<queryIdType>> (for <<qry-ChunkedQueryResponse>> together with its <<continuedChunkSequenceNumberType>>).
 * Commands have a <<commandIdType>> (for <<cmd-ChunkedCommand>> together with its <<continuedChunkSequenceNumberType>>).{fn-org305}
