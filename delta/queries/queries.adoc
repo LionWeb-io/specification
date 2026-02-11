@@ -1,6 +1,10 @@
 [[queries]]
 === Queries
 
+==== Special responses
+
+include::ErrorResponse.adoc[]
+
 include::../continuedChunk/ChunkedQueryResponse.adoc[]
 
 include::subscription/Subscription.adoc[]
