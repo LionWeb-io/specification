@@ -1,28 +1,28 @@
 {
-  "serializationFormatVersion": "2024.1",
+  "serializationFormatVersion": "2026.1",
   "languages": [
     {
       "key": "LionCore-M3",
-      "version": "2024.1"
+      "version": "2026.1"
     },
     {
       "key": "LionCore-builtins",
-      "version": "2024.1"
+      "version": "2026.1"
     }
   ],
   "nodes": [
     {
-      "id": "LionCore-builtins-2024-1",
+      "id": "LionCore-builtins-2026-1",
       "classifier": {
         "language": "LionCore-M3",
-        "version": "2024.1",
+        "version": "2026.1",
         "key": "Language"
       },
       "properties": [
         {
           "property": {
             "language": "LionCore-builtins",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "LionCore-builtins-INamed-name"
           },
           "value": "LionCore_builtins"
@@ -30,15 +30,15 @@
         {
           "property": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Language-version"
           },
-          "value": "2024.1"
+          "value": "2026.1"
         },
         {
           "property": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "IKeyed-key"
           },
           "value": "LionCore-builtins"
@@ -48,15 +48,15 @@
         {
           "containment": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Language-entities"
           },
           "children": [
-            "LionCore-builtins-String-2024-1",
-            "LionCore-builtins-Boolean-2024-1",
-            "LionCore-builtins-Integer-2024-1",
-            "LionCore-builtins-Node-2024-1",
-            "LionCore-builtins-INamed-2024-1"
+            "LionCore-builtins-String-2026-1",
+            "LionCore-builtins-Boolean-2026-1",
+            "LionCore-builtins-Integer-2026-1",
+            "LionCore-builtins-Node-2026-1",
+            "LionCore-builtins-INamed-2026-1"
           ]
         }
       ],
@@ -64,7 +64,7 @@
         {
           "reference": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Language-dependsOn"
           },
           "targets": []
@@ -74,17 +74,17 @@
       "parent": null
     },
     {
-      "id": "LionCore-builtins-String-2024-1",
+      "id": "LionCore-builtins-String-2026-1",
       "classifier": {
         "language": "LionCore-M3",
-        "version": "2024.1",
+        "version": "2026.1",
         "key": "PrimitiveType"
       },
       "properties": [
         {
           "property": {
             "language": "LionCore-builtins",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "LionCore-builtins-INamed-name"
           },
           "value": "String"
@@ -92,7 +92,7 @@
         {
           "property": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "IKeyed-key"
           },
           "value": "LionCore-builtins-String"
@@ -101,20 +101,20 @@
       "containments": [],
       "references": [],
       "annotations": [],
-      "parent": "LionCore-builtins-2024-1"
+      "parent": "LionCore-builtins-2026-1"
     },
     {
-      "id": "LionCore-builtins-Boolean-2024-1",
+      "id": "LionCore-builtins-Boolean-2026-1",
       "classifier": {
         "language": "LionCore-M3",
-        "version": "2024.1",
+        "version": "2026.1",
         "key": "PrimitiveType"
       },
       "properties": [
         {
           "property": {
             "language": "LionCore-builtins",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "LionCore-builtins-INamed-name"
           },
           "value": "Boolean"
@@ -122,7 +122,7 @@
         {
           "property": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "IKeyed-key"
           },
           "value": "LionCore-builtins-Boolean"
@@ -131,20 +131,20 @@
       "containments": [],
       "references": [],
       "annotations": [],
-      "parent": "LionCore-builtins-2024-1"
+      "parent": "LionCore-builtins-2026-1"
     },
     {
-      "id": "LionCore-builtins-Integer-2024-1",
+      "id": "LionCore-builtins-Integer-2026-1",
       "classifier": {
         "language": "LionCore-M3",
-        "version": "2024.1",
+        "version": "2026.1",
         "key": "PrimitiveType"
       },
       "properties": [
         {
           "property": {
             "language": "LionCore-builtins",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "LionCore-builtins-INamed-name"
           },
           "value": "Integer"
@@ -152,7 +152,7 @@
         {
           "property": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "IKeyed-key"
           },
           "value": "LionCore-builtins-Integer"
@@ -161,20 +161,20 @@
       "containments": [],
       "references": [],
       "annotations": [],
-      "parent": "LionCore-builtins-2024-1"
+      "parent": "LionCore-builtins-2026-1"
     },
     {
-      "id": "LionCore-builtins-Node-2024-1",
+      "id": "LionCore-builtins-Node-2026-1",
       "classifier": {
         "language": "LionCore-M3",
-        "version": "2024.1",
+        "version": "2026.1",
         "key": "Concept"
       },
       "properties": [
         {
           "property": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Concept-abstract"
           },
           "value": "true"
@@ -182,7 +182,7 @@
         {
           "property": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Concept-partition"
           },
           "value": "false"
@@ -190,7 +190,7 @@
         {
           "property": {
             "language": "LionCore-builtins",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "LionCore-builtins-INamed-name"
           },
           "value": "Node"
@@ -198,7 +198,7 @@
         {
           "property": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "IKeyed-key"
           },
           "value": "LionCore-builtins-Node"
@@ -208,7 +208,7 @@
         {
           "containment": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Classifier-features"
           },
           "children": []
@@ -218,7 +218,7 @@
         {
           "reference": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Concept-extends"
           },
           "targets": []
@@ -226,27 +226,27 @@
         {
           "reference": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Concept-implements"
           },
           "targets": []
         }
       ],
       "annotations": [],
-      "parent": "LionCore-builtins-2024-1"
+      "parent": "LionCore-builtins-2026-1"
     },
     {
-      "id": "LionCore-builtins-INamed-2024-1",
+      "id": "LionCore-builtins-INamed-2026-1",
       "classifier": {
         "language": "LionCore-M3",
-        "version": "2024.1",
+        "version": "2026.1",
         "key": "Interface"
       },
       "properties": [
         {
           "property": {
             "language": "LionCore-builtins",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "LionCore-builtins-INamed-name"
           },
           "value": "INamed"
@@ -254,7 +254,7 @@
         {
           "property": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "IKeyed-key"
           },
           "value": "LionCore-builtins-INamed"
@@ -264,11 +264,11 @@
         {
           "containment": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Classifier-features"
           },
           "children": [
-            "LionCore-builtins-INamed-name-2024-1"
+            "LionCore-builtins-INamed-name-2026-1"
           ]
         }
       ],
@@ -276,27 +276,27 @@
         {
           "reference": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Interface-extends"
           },
           "targets": []
         }
       ],
       "annotations": [],
-      "parent": "LionCore-builtins-2024-1"
+      "parent": "LionCore-builtins-2026-1"
     },
     {
-      "id": "LionCore-builtins-INamed-name-2024-1",
+      "id": "LionCore-builtins-INamed-name-2026-1",
       "classifier": {
         "language": "LionCore-M3",
-        "version": "2024.1",
+        "version": "2026.1",
         "key": "Property"
       },
       "properties": [
         {
           "property": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Feature-optional"
           },
           "value": "false"
@@ -304,7 +304,7 @@
         {
           "property": {
             "language": "LionCore-builtins",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "LionCore-builtins-INamed-name"
           },
           "value": "name"
@@ -312,7 +312,7 @@
         {
           "property": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "IKeyed-key"
           },
           "value": "LionCore-builtins-INamed-name"
@@ -323,7 +323,7 @@
         {
           "reference": {
             "language": "LionCore-M3",
-            "version": "2024.1",
+            "version": "2026.1",
             "key": "Property-type"
           },
           "targets": [
@@ -335,7 +335,7 @@
         }
       ],
       "annotations": [],
-      "parent": "LionCore-builtins-INamed-2024-1"
+      "parent": "LionCore-builtins-INamed-2026-1"
     }
   ]
 }

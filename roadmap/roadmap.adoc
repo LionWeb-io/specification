@@ -20,7 +20,7 @@ As a volunteer-run Open Source effort, we cannot commit to a timeline.
 We're actively looking for corporate sponsors, with some prospects in sight.
 
 [[in-progress]]
-=== In progress for _after_ version 2025.1
+=== In progress for _after_ version 2026.1
 
 [[derived-models]]
 ==== Derived models
@@ -157,9 +157,11 @@ Model-to-model generators would be implemented as <<{refarch}.adoc#processor, Pr
 [[versions]]
 == Versions
 
+[[release-2026.1]]
+[[version-2026.1]]
 [[release-2025.1]]
 [[version-2025.1]]
-=== 2025.1
+=== 2026.1
 * [[delta-protocol]] Specified <<{delta}.adoc#delta, Delta Repository Access API>> +
 As described in our <<{refarch}.adoc#delta, reference architecture>>, via delta protocol a client receives an initial snapshot similar to the bulk case.
 Afterwards, the client continues to receive changes (aka deltas) from the repo; it also writes back changes continuously.{fn-org28}
