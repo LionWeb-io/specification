@@ -1,6 +1,6 @@
 [[evnt-AnnotationMovedAndReplacedInSameParent]]
 ===== Annotation moved in same parent and replaced existing annotation
-Existing node <<AnnotationMovedAndReplacedInSameParent.movedAnnotation>> (previously inside <<AnnotationMovedAndReplacedInSameParent.parent>>'s annotations at <<AnnotationMovedAndReplacedInSameParent.oldIndex>>) has replaced the existing <<AnnotationMovedAndReplacedInSameParent.replacedAnnotation>> inside <<AnnotationMovedAndReplacedInSameParent.parent>>'s annotations at <<AnnotationMovedAndReplacedInSameParent.newIndex>>.
+<<existing-nodes, Existing node>> <<AnnotationMovedAndReplacedInSameParent.movedAnnotation>> (previously inside <<AnnotationMovedAndReplacedInSameParent.parent>>'s annotations at <<AnnotationMovedAndReplacedInSameParent.oldIndex>>) has replaced the <<existing-nodes, existing>> <<AnnotationMovedAndReplacedInSameParent.replacedAnnotation>> inside <<AnnotationMovedAndReplacedInSameParent.parent>>'s annotations at <<AnnotationMovedAndReplacedInSameParent.newIndex>>.
 <<AnnotationMovedAndReplacedInSameParent.replacedAnnotation>>, and all its <<AnnotationMovedAndReplacedInSameParent.replacedDescendants>>{fn-org370}, have been deleted.
 
 If <<AnnotationMovedAndReplacedInSameParent.oldIndex>> < <<AnnotationMovedAndReplacedInSameParent.newIndex>>: All other annotations inside <<AnnotationMovedAndReplacedInSameParent.parent>>'s annotations with previous index > <<AnnotationMovedAndReplacedInSameParent.oldIndex>> have been moved to next lower index.

@@ -4,11 +4,16 @@ Lists all non-language partitions accessible in the repository.{fn-org361}
 
 Same functionality as <<{bulk}.adoc#listPartitions, bulk API listPartitions command>>.
 
+See also <<qry-ListAndSubscribePartitions>>.
+
 .Technical name
 `ListPartitions`
 
 [horizontal]
 .Request parameters
+[[ListPartitions.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>
+Depth of <<ListPartitions.partitions>>.
+
 [[ListPartitions.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
@@ -16,11 +21,10 @@ Id of this query.
 
 [horizontal]
 .Response parameters
-[[ListPartitions.partitions, `partitions`]]partitions:: <<chunkType>>
-All accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
-The partitions are sent as complete nodes.
-Does NOT include any children or annotations of the root partition nodes.
-Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
+[[ListPartitions.partitions, `partitions`]]partitions:: <<shallowChunkType>>
+All accessible <<{m3}.adoc#partition, Partitions>> in the Repository up to <<ListPartitions.depthLimit>>.
+
+[[ListPartitions.split, `split`]]split?:: <<splitFlagType>>
 
 [[ListPartitions.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.

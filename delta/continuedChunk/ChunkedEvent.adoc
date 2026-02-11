@@ -1,0 +1,27 @@
+[[evnt-ChunkedEvent]]
+==== Chunked Event
+A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> events:
+
+* <<evnt-PartitionAdded>> <<PartitionAdded.newPartition>>
+* <<evnt-ChildAdded>> <<ChildAdded.newChild>>
+* <<evnt-ChildReplaced>> <<ChildReplaced.newChild>>
+* <<evnt-AnnotationAdded>> <<AnnotationAdded.newAnnotation>>
+* <<evnt-AnnotationReplaced>> <<AnnotationReplaced.newAnnotation>>
+
+.Technical name
+`ChunkedEvent`
+
+[horizontal]
+.Parameters
+[[ChunkedEvent.chunk, `chunk`]]chunk:: <<unconstrainedChunkType>>
+The continued chunk.
+The combination of all continued chunks MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
+
+[[ChunkedEvent.continuedChunkCompleted, `continuedChunkCompleted`]]continuedChunkCompleted:: <<continuedChunkCompletedFlagType>>
+
+[[ChunkedEvent.chunkedEventSequenceNumber]]chunkedEventSequenceNumber:: <<event-sequence-number>>
+Sequence number of the related <<splittableMessage, splittable event>>
+
+[[ChunkedEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ChunkedEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>

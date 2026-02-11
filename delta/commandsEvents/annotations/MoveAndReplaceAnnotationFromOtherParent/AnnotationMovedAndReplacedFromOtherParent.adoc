@@ -1,6 +1,6 @@
 [[evnt-AnnotationMovedAndReplacedFromOtherParent]]
 ===== Annotation moved from other parent and replaced existing annotation
-Existing node <<AnnotationMovedAndReplacedFromOtherParent.movedAnnotation>> (previously inside <<AnnotationMovedAndReplacedFromOtherParent.oldParent>>'s annotations at <<AnnotationMovedAndReplacedFromOtherParent.oldIndex>>) has replaced the existing <<AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation>> inside <<AnnotationMovedAndReplacedFromOtherParent.newParent>>'s annotations at <<AnnotationMovedAndReplacedFromOtherParent.newIndex>>.
+<<existing-nodes, Existing node>> <<AnnotationMovedAndReplacedFromOtherParent.movedAnnotation>> (previously inside <<AnnotationMovedAndReplacedFromOtherParent.oldParent>>'s annotations at <<AnnotationMovedAndReplacedFromOtherParent.oldIndex>>) has replaced the <<existing-nodes, existing>> <<AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation>> inside <<AnnotationMovedAndReplacedFromOtherParent.newParent>>'s annotations at <<AnnotationMovedAndReplacedFromOtherParent.newIndex>>.
 <<AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation>>, and all its <<AnnotationMovedAndReplacedFromOtherParent.replacedDescendants>>{fn-org370}, have been deleted.
 
 All other annotations inside <<AnnotationMovedAndReplacedFromOtherParent.oldParent>>'s annotations with index > <<AnnotationMovedAndReplacedFromOtherParent.oldIndex>> have been moved to next lower index.

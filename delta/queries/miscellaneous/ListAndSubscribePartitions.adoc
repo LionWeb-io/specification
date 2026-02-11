@@ -1,0 +1,31 @@
+[[qry-ListAndSubscribePartitions]]
+===== List and subscribe partitions
+Lists all non-language partitions accessible in the repository, and subscribes the client to all of them.{fn-org361}
+The client receives the full contents of all listed partitions.{fn-org425}
+
+See also <<qry-ListPartitions>>.
+
+.Technical name
+`ListAndSubscribePartitions`
+
+[horizontal]
+.Request parameters
+[[ListAndSubscribePartitions.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[ListAndSubscribePartitions.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+
+[horizontal]
+.Response parameters
+[[ListAndSubscribePartitions.partitions, `partitions`]]partitions:: <<multiChunkType>>
+All accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
+
+[[ListAndSubscribePartitions.split, `split`]]split?:: <<splitFlagType>>
+
+[[ListAndSubscribePartitions.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[ListAndSubscribePartitions.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+
+.Errors
+* <<err-invalidParticipation>>

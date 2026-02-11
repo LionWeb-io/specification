@@ -1,12 +1,9 @@
 [[cmd-ReplaceAnnotation]]
 ===== Replace annotation
-Delete current node <<ReplaceAnnotation.replacedAnnotation>>{fn-org371} at <<ReplaceAnnotation.parent>>'s annotations at <<ReplaceAnnotation.index>>, and all its descendants (including annotation instances).
+Delete <<existing-nodes, current node>> <<ReplaceAnnotation.replacedAnnotation>>{fn-org371} at <<ReplaceAnnotation.parent>>'s annotations at <<ReplaceAnnotation.index>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
 
-Replace existing node <<ReplaceAnnotation.replacedAnnotation>> inside <<ReplaceAnnotation.parent>>'s annotations at <<ReplaceAnnotation.index>> with new node <<ReplaceAnnotation.newAnnotation>>.
-<<ReplaceAnnotation.newAnnotation>> might be a single node or an arbitrary complex subtree.
-All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
-Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
+Replace <<existing-nodes, existing node>> <<ReplaceAnnotation.replacedAnnotation>> inside <<ReplaceAnnotation.parent>>'s annotations at <<ReplaceAnnotation.index>> with <<new-nodes, new>> or <<reused-nodes, reused>> node <<ReplaceAnnotation.newAnnotation>>.
 
 [cols="a,a"]
 |===
@@ -20,13 +17,18 @@ include::ReplaceAnnotation-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[ReplaceAnnotation.newAnnotation, `newAnnotation`]]newAnnotation:: <<chunkType>>
+[[ReplaceAnnotation.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
+Subtree to form a new annotation.
+The _anchor node_ MUST contain the <<ReplaceAnnotation.parent>> as _parent_.{fn-org357}
+All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 
 [[ReplaceAnnotation.parent, `parent`]]parent:: <<targetNodeType>>
 
 [[ReplaceAnnotation.index, `index`]]index:: <<indexType>>
 
 [[ReplaceAnnotation.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
+
+[[ReplaceAnnotation.split, `split`]]split?:: <<splitFlagType>>
 
 [[ReplaceAnnotation.commandId]]commandId:: <<commandIdType>>
 

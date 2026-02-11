@@ -1,6 +1,8 @@
 [[events]]
 === Events
 
+include::../continuedChunk/ChunkedEvent.adoc[]
+
 include::partitions/EventPartitions.adoc[]
 
 include::nodes/EventNodes.adoc[]

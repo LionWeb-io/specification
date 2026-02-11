@@ -1,6 +1,6 @@
 [[evnt-AnnotationMovedFromOtherParent]]
 ===== Annotation moved from other parent
-Existing node <<AnnotationMovedFromOtherParent.movedAnnotation>> (previously inside <<AnnotationMovedFromOtherParent.oldParent>>'s annotations at <<AnnotationMovedFromOtherParent.oldIndex>>) has been moved
+<<existing-nodes, Existing node>> <<AnnotationMovedFromOtherParent.movedAnnotation>> (previously inside <<AnnotationMovedFromOtherParent.oldParent>>'s annotations at <<AnnotationMovedFromOtherParent.oldIndex>>) has been moved
 inside <<AnnotationMovedFromOtherParent.newParent>>'s annotations at <<AnnotationMovedFromOtherParent.newIndex>>.
 
 All other annotations inside <<AnnotationMovedFromOtherParent.oldParent>>'s annotations with index > <<AnnotationMovedFromOtherParent.oldIndex>> have been moved to next lower index.

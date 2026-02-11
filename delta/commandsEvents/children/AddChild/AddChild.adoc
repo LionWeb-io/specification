@@ -1,9 +1,6 @@
 [[cmd-AddChild]]
 ===== Add child
-Add new node <<AddChild.newChild>> to <<AddChild.parent>> in <<AddChild.containment>> at <<AddChild.index>>.
-<<AddChild.newChild>> might be a single node or an arbitrary complex subtree.
-All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
-Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
+Add <<new-nodes, new node>> <<AddChild.newChild>> to <<AddChild.parent>> in <<AddChild.containment>> at <<AddChild.index>>.
 
 [cols="a,a"]
 |===
@@ -19,11 +16,16 @@ include::AddChild-diagram.adoc[]
 .Parameters
 [[AddChild.parent, `parent`]]parent:: <<targetNodeType>>
 
-[[AddChild.newChild, `newChild`]]newChild:: <<chunkType>>
+[[AddChild.newChild, `newChild`]]newChild:: <<singleChunkType>>
+Subtree to form a new child.
+The _anchor node_ MUST contain the <<AddChild.parent>> as _parent_.{fn-org357}
+All nodes in that subtree MUST be <<new-nodes>>.
 
 [[AddChild.containment, `containment`]]containment:: <<metaPointerType>>
 
 [[AddChild.index, `index`]]index:: <<indexType>>
+
+[[AddChild.split, `split`]]split?:: <<splitFlagType>>
 
 [[AddChild.commandId]]commandId:: <<commandIdType>>
 

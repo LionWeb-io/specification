@@ -1,12 +1,9 @@
 [[cmd-ReplaceChild]]
 ===== Replace child
-Delete current child <<ReplaceChild.replacedChild>>{fn-org371} inside <<ReplaceChild.parent>>'s <<ReplaceChild.containment>> at <<ReplaceChild.index>>, and all its descendants (including annotation instances).
+Delete <<existing-nodes, current child>> <<ReplaceChild.replacedChild>>{fn-org371} inside <<ReplaceChild.parent>>'s <<ReplaceChild.containment>> at <<ReplaceChild.index>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
 
-Replace existing node <<ReplaceChild.replacedChild>> inside <<ReplaceChild.parent>>'s <<ReplaceChild.containment>> at <<ReplaceChild.index>> with new node <<ReplaceChild.newChild>>.
-`newChild` might be a single node or an arbitrary complex subtree.
-All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
-Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
+Replace <<existing-nodes, existing node>> <<ReplaceChild.replacedChild>> inside <<ReplaceChild.parent>>'s <<ReplaceChild.containment>> at <<ReplaceChild.index>> with <<new-nodes, new>> or <<reused-nodes, reused>> node <<ReplaceChild.newChild>>.
 
 [cols="a,a"]
 |===
@@ -20,7 +17,10 @@ include::ReplaceChild-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[ReplaceChild.newChild, `newChild`]]newChild:: <<chunkType>>
+[[ReplaceChild.newChild, `newChild`]]newChild:: <<singleChunkType>>
+Subtree to form a new child.
+The _anchor node_ MUST contain the <<ReplaceChild.parent>> as _parent_.{fn-org357}
+All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 
 [[ReplaceChild.parent, `parent`]]parent:: <<targetNodeType>>
 
@@ -30,12 +30,14 @@ include::ReplaceChild-diagram.adoc[]
 
 [[ReplaceChild.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
 
+[[ReplaceChild.split, `split`]]split?:: <<splitFlagType>>
+
 [[ReplaceChild.commandId]]commandId:: <<commandIdType>>
 
 [[ReplaceChild.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-nodeAlreadyExists>> <<ReplaceChild.newChild>>
+* <<err-nodeAlreadyExists>> for <<ReplaceChild.newChild>>
 * <<err-unknownNode>> for <<ReplaceChild.parent>>
 * <<err-indexEntryMismatch>> for <<ReplaceChild.containment>>/<<ReplaceChild.index>> and <<ReplaceChild.replacedChild>>
 * ##?## <<ReplaceChild.index>> is beyond (the number of <<ReplaceChild.containment>> entries in <<ReplaceChild.parent>>) - 1

@@ -1,8 +1,8 @@
 [[cmd-MoveAndReplaceChildFromOtherContainmentInSameParent]]
 ===== Move child from other containment in same parent and replace existing child
-Move existing node <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>> (currently inside one of <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>'s parent's containments other than <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>>)
+Move <<existing-nodes, existing node>> <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>> (currently inside one of <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>'s parent's containments other than <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>>)
 inside <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>'s parent's <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>> at <<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>>.
-Delete current child <<MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild>>{fn-org371} inside <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>'s parent's <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>> at <<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>>, and all its descendants (including annotation instances).
+Delete <<existing-nodes, current child>> <<MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild>>{fn-org371} inside <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>'s parent's <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>> at <<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]

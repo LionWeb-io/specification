@@ -1,7 +1,11 @@
 [[qry-subscribePartitions]]
 [[qry-SubscribeToChangingPartitions]]
 ===== Subscribe to partition changes
-This client wants to receive events on newly created (<<SubscribeToChangingPartitions.creation>> is true) or deleted (<<SubscribeToChangingPartitions.deletion>> is true) partitions, and automatically subscribe (<<SubscribeToChangingPartitions.partitions>> is true) to newly created partitions.{fn-org267}
+This client wants to receive <<evnt-PartitionAdded>> events on newly created (if <<SubscribeToChangingPartitions.creation>> is true)
+or <<evnt-PartitionDeleted>> events on deleted (if <<SubscribeToChangingPartitions.deletion>> is true) partitions.
+The client automatically subscribes to newly created partitions (if <<SubscribeToChangingPartitions.creation>> is true), and receives the full contents of partitions.
+
+See also <<qry-InformAboutChangingPartitions>>.
 
 .Technical name
 `SubscribeToChangingPartitions`
@@ -13,9 +17,6 @@ Whether this client wants to receive events on newly created partitions (`true`)
 
 [[SubscribeToChangingPartitions.deletion, `deletion`]]deletion:: <<booleanType>>
 Whether this client wants to receive events on deleted partitions (`true`), or not (`false`).
-
-[[SubscribeToChangingPartitions.partitions, `partitions`]]partitions:: <<booleanType>>
-Whether this client wants to automatically subscribe to newly created partitions (`true`), or not (`false`).
 
 [[SubscribeToChangingPartitions.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
@@ -31,3 +32,4 @@ Id of this query.
 
 .Errors
 * <<err-invalidParticipation>>
+* Client already requested <<qry-InformAboutChangingPartitions>>

@@ -33,7 +33,42 @@ Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<part
 [[queryIdType]]QueryId:: Id of a query.
 Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<participation>>.
 
-[[chunkType]]SerializationChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>.
+[[unconstrainedChunkType]]SerializationChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>, but without top-level `serializationFormatVersion` and `languages`  members.
+Thus, the serialization chunk has only the top-level member `nodes`.{fn-org358}
+
+Nodes in the chunk MAY have references to already <<existing-nodes>>, and already <<existing-nodes>> MAY have references to nodes in the chunk.{fn-org327}
++
+Chunks have different constraints, depending on use case:
++
+
+[horizontal]
+[[singleChunkType, single chunk]]Single:::
+MUST contain a single _anchor node_, and all other nodes MUST be descendants of the _anchor node_.
+The chunk MUST contain all features of the _anchor node_ and all its descendants, i.e. the _anchor node_ is complete.
+
+[[multiChunkType, multi chunk]]Multi:::
+MAY contain more than one _root node_ (i.e. independent subtrees), and the chunk MUST contain all descendants of each _root node_.
+MUST contain all features of all contained nodes.
+
+[[shallowChunkType, shallow chunk]]Shallow:::
+MAY contain more than one _root node_ (i.e. independent subtrees), and each root node might be incomplete.
+
+[[depthLimitType, depth limit]]DepthLimit:: Depth of returned <<shallowChunkType>>.
+MUST be an integer >= 0, with
++
+--
+* 0 meaning "return only the _root node(s)_",
+* 1 meaning "return the _root node(s)_ and their direct children/annotations",
+* 2 meaning "return the _root node(s)_, their direct children/annotations, and the direct children/annotations of these",
+* etc.
+--
+
+[[splitFlagType]]SplitFlag:: boolean flag whether the chunk is complete within this <<splittableMessage>>.{fn-org425}
+
+[[continuedChunkCompletedFlagType]]ContinuedChunkCompletedFlag:: boolean flag whether this <<continuedChunk>> completes its <<splittableMessage>>.{fn-org425}
+
+[[continuedChunkSequenceNumberType]]ContinuedChunkSequenceNumber:: orders connected <<continuedChunk, continued chunks>>.
+Positive integer that starts at 0 and increments by one for each consecutive <<continuedChunk>>.{fn-org425}
 
 [[eventType]]Event:: Any <<events, event>>.
 
@@ -59,6 +94,24 @@ This allows a client to know when its command has been processed (either success
 [[booleanType]]boolean:: A boolean value, i.e. either `true` or `false`.
 
 [[integerType]]integer type:: An integer value.
+
+[[new-nodes, new nodes]]
+==== New nodes
+The term "new node" refers to nodes that MUST NOT yet exist in the repository.{fn-org327}
+
+[[existing-nodes, existing nodes]]
+==== Existing nodes
+The term "existing node" refers to nodes that MUST exist in the repository.
+
+[[reused-nodes, reused nodes]]
+==== Reused nodes
+The term "reused node" refers to nodes that are removed and re-added in the same command/event.{fn-org422}
+A client SHOULD keep the identity of the reused node in its internal representation.
+
+These [[replace-with-new-content-commands]] _replace with new content commands_ / [[replace-with-new-content-events]] _replace with new content events_ are:
+
+* <<cmd-ReplaceChild>> / <<evnt-ChildReplaced>>
+* <<cmd-ReplaceAnnotation>> / <<evnt-AnnotationReplaced>>
 
 ==== How to address references
 We refer to references by the tuple of _(parent, reference, index)_.

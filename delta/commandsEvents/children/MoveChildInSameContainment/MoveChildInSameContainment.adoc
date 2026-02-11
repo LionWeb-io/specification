@@ -1,6 +1,6 @@
 [[cmd-MoveChildInSameContainment]]
 ===== Move child in same containment
-Move existing node <<MoveChildInSameContainment.movedChild>> within its current containment to <<MoveChildInSameContainment.newIndex>>.
+Move <<existing-nodes, existing node>> <<MoveChildInSameContainment.movedChild>> within its current containment to <<MoveChildInSameContainment.newIndex>>.
 
 [cols="a,a"]
 |===

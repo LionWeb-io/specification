@@ -1,15 +1,19 @@
 [[evnt-PartitionAdded]]
 ===== Partition added
-Partition <<PartitionAdded.newPartition>> has been added to the repository.
-
-This client is now subscribed to any changes to <<PartitionAdded.newPartition>> or any of its descendants.
+<<new-nodes, New>> partition <<PartitionAdded.newPartition>> has been added to the repository.
 
 .Technical name
 `PartitionAdded`
 
 [horizontal]
 .Parameters
-[[PartitionAdded.newPartition, `newPartition`]]newPartition:: <<chunkType>>
+[[PartitionAdded.newPartition, `newPartition`]]newPartition:: <<singleChunkType>> (if subscribed via <<qry-ListAndSubscribePartitions>> or <<qry-SubscribeToChangingPartitions>>) or +
+<<shallowChunkType>> (if subscribed via <<qry-InformAboutChangingPartitions>>) up to <<InformAboutChangingPartitions.depthLimit>>.
++
+NOTE: This parameter differs from the <<AddPartition.newPartition, corresponding command parameter>>:
+The command's parameter always contains a whole subtree, whereas the event's parameter may contain only the top of the subtree.{fn-org425}
+
+[[PartitionAdded.split, `split`]]split?:: <<splitFlagType>>
 
 [[PartitionAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 

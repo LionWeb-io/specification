@@ -28,3 +28,14 @@ include::description.adoc[]
 include::scenarios/scenarios.adoc[]
 
 include::messages.adoc[]
+
+[[deltaJsonSchema]]
+[appendix]
+== Delta JSON Schema
+The LionWeb link:delta.schema.json[delta JSON Schema].
+
+[source, json]
+----
+include::delta.schema.json[]
+----
+

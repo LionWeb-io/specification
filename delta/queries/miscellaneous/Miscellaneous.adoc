@@ -4,3 +4,5 @@
 include::GetAvailableIds.adoc[]
 
 include::ListPartitions.adoc[]
+
+include::ListAndSubscribePartitions.adoc[]

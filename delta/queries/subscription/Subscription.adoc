@@ -3,6 +3,8 @@
 
 include::SubscribeToChangingPartitions.adoc[]
 
+include::InformAboutChangingPartitions.adoc[]
+
 include::SubscribeToPartitionContents.adoc[]
 
 include::UnsubscribeFromPartitionContents.adoc[]

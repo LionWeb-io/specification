@@ -18,8 +18,10 @@ Id of this query.
 
 [horizontal]
 .Response parameters
-[[SubscribeToPartitionContents.contents, `contents`]]contents:: <<chunkType>>
+[[SubscribeToPartitionContents.contents, `contents`]]contents:: <<singleChunkType>>
 Complete contents of <<SubscribeToPartitionContents.partition>>, i.e. the node with id <<SubscribeToPartitionContents.partition>> and all of its descendants (including annotation instances).
+
+[[SubscribeToPartitionContents.split, `split`]]split?:: <<splitFlagType>>
 
 [[SubscribeToPartitionContents.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.

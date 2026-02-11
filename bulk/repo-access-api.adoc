@@ -191,6 +191,19 @@ Both representations express the parameter to be unset.{fn-org427}
 [horizontal]
 [[chunkType]]chunk:: A {chunk} of nodes.
 
+[[depthLimitType]]depthLimit:: <<integerType>>? Limit the depth of retrieved subtrees.
+Optional parameter, defaults to _infinite_.
+If present, MUST be an integer >= 0, with
++
+--
+* 0 meaning "return only the nodes with ids listed in <<retrieve.nodeIds>> parameter",
+* 1 meaning "return the nodes with id listed in the <<retrieve.nodeIds>> parameter and their direct children/annotations",
+* 2 meaning "return the nodes with id listed in the <<retrieve.nodeIds>> parameter, their direct children/annotations, and the direct children/annotations of these",
+* etc.
+--
++
+NOTE: There's no _magic value_ of <<retrieve.depthLimit>> to express _infinite_ depth.
+We need to omit the parameter if we don't want to limit the depth.
 [[nodeIdType]]nodeId:: A <<{m3}.adoc#identifiers, valid node id>>.
 
 [[integerType]]integer:: An integer.
@@ -265,6 +278,7 @@ NOTE: We might add filter capabilities in the future.
 
 .Request parameters
 [horizontal]
+[[listPartitions.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>? Optionally limit the depth of retrieved partitions.
 [[listPartitions.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
 [[listPartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
@@ -388,19 +402,7 @@ NOTE: We might add advanced filtering capabilities in the future, or introduce a
 [horizontal]
 [[retrieve.nodeIds, `nodeIds`]]nodeIds:: <<nodeIdType>>[] List of node ids we want to retrieve from the repository.
 Can be partition node ids and/or nested node ids.
-[[retrieve.depthLimit, `depthLimit`]]depthLimit:: <<integerType>>? Limit the depth of retrieved subtrees.
-Optional parameter, defaults to _infinite_.
-If present, MUST be an integer >= 0, with
-+
---
-* 0 meaning "return only the nodes with ids listed in <<retrieve.nodeIds>> parameter",
-* 1 meaning "return the nodes with id listed in the <<retrieve.nodeIds>> parameter and their direct children/annotations",
-* 2 meaning "return the nodes with id listed in the <<retrieve.nodeIds>> parameter, their direct children/annotations, and the direct children/annotations of these",
-* etc.
---
-+
-NOTE: There's no _magic value_ of <<retrieve.depthLimit>> to express _infinite_ depth.
-We need to omit the parameter if we don't want to limit the depth.
+[[retrieve.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>? Optionally limit the depth of retrieved subtrees.
 [[retrieve.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
 [[retrieve.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 

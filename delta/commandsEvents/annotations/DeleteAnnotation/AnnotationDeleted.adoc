@@ -1,6 +1,6 @@
 [[evnt-AnnotationDeleted]]
 ===== Annotation deleted
-Existing node <<AnnotationDeleted.deletedAnnotation>>, and all its <<AnnotationDeleted.deletedDescendants>>{fn-org370}, have been deleted from <<AnnotationDeleted.parent>>'s annotations at <<AnnotationDeleted.index>>.{fn-org286}
+<<existing-nodes, Existing node>> <<AnnotationDeleted.deletedAnnotation>>, and all its <<AnnotationDeleted.deletedDescendants>>{fn-org370}, have been deleted from <<AnnotationDeleted.parent>>'s annotations at <<AnnotationDeleted.index>>.{fn-org286}
 All other annotations inside <<AnnotationDeleted.parent>>'s annotations with index > <<AnnotationDeleted.index>> have been moved to next lower index.
 
 .Technical name

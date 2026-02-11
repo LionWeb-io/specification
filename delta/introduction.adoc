@@ -4,7 +4,7 @@ Delta API assumes a bidirectional communication channel between a <<client>> and
 The client initiates the channel with the repository to open a <<participation>>{fn-org337}.
 Both parties communicate through the established channel via _messages_.
 
-Delta API supports these message kinds, loosely following CQRS patternfootnote:[https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation]{fn-org291}:
+Delta API supports these message [[category, category]]categories, loosely following CQRS patternfootnote:[https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation]{fn-org291}:
 
 * <<queries>> initiated/requested by the client, with synchronous response by the repository.
 A query requests some information from the repository without changing the repository's contents.

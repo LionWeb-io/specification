@@ -1,6 +1,6 @@
 [[evnt-ChildMovedInSameContainment]]
 ===== Child moved in same containment
-Existing node <<ChildMovedInSameContainment.movedChild>> (previously inside <<ChildMovedInSameContainment.parent>>'s <<ChildMovedInSameContainment.containment>> at <<ChildMovedInSameContainment.oldIndex>>) has been moved
+<<existing-nodes, Existing node>> <<ChildMovedInSameContainment.movedChild>> (previously inside <<ChildMovedInSameContainment.parent>>'s <<ChildMovedInSameContainment.containment>> at <<ChildMovedInSameContainment.oldIndex>>) has been moved
 inside <<ChildMovedInSameContainment.parent>>'s <<ChildMovedInSameContainment.containment>> at <<ChildMovedInSameContainment.newIndex>>.
 
 If <<ChildMovedInSameContainment.oldIndex>> < <<ChildMovedInSameContainment.newIndex>>: All other children inside <<ChildMovedInSameContainment.parent>>'s <<ChildMovedInSameContainment.containment>> with previous index > <<ChildMovedInSameContainment.oldIndex>> and previous index <= <<ChildMovedInSameContainment.newIndex>> have been moved to next lower index.

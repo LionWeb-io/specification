@@ -1,6 +1,6 @@
 [[evnt-ChildDeleted]]
 ===== Child deleted
-Existing node <<ChildDeleted.deletedChild>>, and all its <<ChildDeleted.deletedDescendants>>{fn-org370}, have been deleted from <<ChildDeleted.parent>>'s <<ChildDeleted.containment>> at <<ChildDeleted.index>>.{fn-org286}
+<<existing-nodes, Existing node>> <<ChildDeleted.deletedChild>>, and all its <<ChildDeleted.deletedDescendants>>{fn-org370}, have been deleted from <<ChildDeleted.parent>>'s <<ChildDeleted.containment>> at <<ChildDeleted.index>>.{fn-org286}
 All other children inside <<ChildDeleted.parent>>'s <<ChildDeleted.containment>> with index > <<ChildDeleted.index>> have been moved to next lower index.
 
 .Technical name

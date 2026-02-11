@@ -1,6 +1,8 @@
 [[cmd-AddPartition]]
 ===== Add partition
-Add <<AddPartition.newPartition>> node as new partition.
+Add <<AddPartition.newPartition>> node as <<new-nodes, new>> partition.
+
+The client implicitly subscribes to any changes to <<PartitionAdded.newPartition>> or any of its descendants.
 
 [cols="a,a"]
 |===
@@ -14,11 +16,15 @@ include::AddPartition-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[AddPartition.newPartition, `newPartition`]]newPartition:: <<chunkType>>
-{fn-org327} root node to form a new partition.
-The root node MUST NOT contain a _parent_ (as this is a partition, thus cannot have a parent).
-All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
-Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org327}
+[[AddPartition.newPartition, `newPartition`]]newPartition:: <<singleChunkType>>
+Subtree to form a new partition.
+The _anchor node_ MUST NOT contain a _parent_ (as this is a partition, thus cannot have a parent).
+All nodes in that subtree MUST be <<new-nodes, new nodes>>.
++
+NOTE: This parameter differs from the <<PartitionAdded.newPartition, corresponding event parameter>>:
+The command's parameter contains a whole subtree, whereas the event's parameter may contain only the top of the subtree.{fn-org425}
+
+[[AddPartition.split, `split`]]split?:: <<splitFlagType>>
 
 [[AddPartition.commandId]]commandId:: <<commandIdType>>
 Id of this command.

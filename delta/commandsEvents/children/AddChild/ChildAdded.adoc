@@ -1,9 +1,6 @@
 [[evnt-ChildAdded]]
 ===== Child added
-New node <<ChildAdded.newChild>> has been added to <<ChildAdded.parent>>'s  <<ChildAdded.containment>> at <<ChildAdded.index>>.
-<<ChildAdded.newChild>> might be a single node or an arbitrary complex subtree.
-All nodes in that subtree MUST be new, i.e. their id MUST NOT exist in the repository.
-Nodes in that subtree MAY have references to already existing nodes, and already existing nodes MAY have references to nodes in that subtree.{fn-org326}
+<<new-nodes, New node>> <<ChildAdded.newChild>> has been added to <<ChildAdded.parent>>'s  <<ChildAdded.containment>> at <<ChildAdded.index>>.
 
 All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> with index >= <<ChildAdded.index>> have been moved to next higher index.
 
@@ -14,11 +11,16 @@ All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> wit
 .Parameters
 [[ChildAdded.parent, `parent`]]parent:: <<targetNodeType>>
 
-[[ChildAdded.newChild, `newChild`]]newChild:: <<chunkType>>
+[[ChildAdded.newChild, `newChild`]]newChild:: <<singleChunkType>>
+Subtree that formed the new child.
+The _anchor node_ MUST contain the <<ChildAdded.parent>> as _parent_.{fn-org357}
+All nodes in that subtree MUST be <<new-nodes>>.{fn-org326}
 
 [[ChildAdded.containment, `containment`]]containment:: <<metaPointerType>>
 
 [[ChildAdded.index, `index`]]index:: <<indexType>>
+
+[[ChildAdded.split, `split`]]split?:: <<splitFlagType>>
 
 [[ChildAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 

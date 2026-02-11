@@ -1,0 +1,27 @@
+[[cmd-ChunkedCommand]]
+==== Chunked Command
+A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> commands:
+
+* <<cmd-AddPartition>> <<AddPartition.newPartition>>
+* <<cmd-AddChild>> <<AddChild.newChild>>
+* <<cmd-ReplaceChild>> <<ReplaceChild.newChild>>
+* <<cmd-AddAnnotation>> <<AddAnnotation.parent>>
+* <<cmd-ReplaceAnnotation>> <<ReplaceAnnotation.newAnnotation>>
+
+.Technical name
+`ChunkedCommand`
+
+[horizontal]
+.Parameters
+[[ChunkedCommand.chunk, `chunk`]]chunk:: <<unconstrainedChunkType>>
+The continued chunk.
+The combination of all continued chunks MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
+
+[[ChunkedCommand.continuedChunkCompleted, `continuedChunkCompleted`]]continuedChunkCompleted:: <<continuedChunkCompletedFlagType>>
+
+[[ChunkedCommand.continuedChunkSequenceNumber, `continuedChunkSequenceNumber`]]continuedChunkSequenceNumber:: <<continuedChunkSequenceNumberType>>
+
+[[ChunkedCommand.commandId]]commandId:: <<commandIdType>>
+Id of the related <<splittableMessage, splittable command>>
+
+[[ChunkedCommand.additionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
