@@ -6,3 +6,15 @@
 *.drawio.bkp
 *.drawio.dtmp
 
+/delta/delta-api.pdf
+/delta/delta-api.html
+/delta/*.svg
+/bulk/repo-access-api.pdf
+/bulk/repo-access-api.html
+/bulk/*.svg
+/metametamodel/metametamodel.pdf
+/metametamodel/metametamodel.html
+/metametamodel/*.svg
+/serialization/serialization.pdf
+/serialization/serialization.html
+/serialization/*.svg
