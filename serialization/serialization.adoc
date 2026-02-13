@@ -9,7 +9,7 @@ include::../shared/issue-footnotes.adoc[]
 :toc: preamble
 :toclevels: 3
 
-This document describes the serialization format for LionWeb *version 2025.1* chunks.
+This document describes the serialization format for LionWeb *version 2026.1* chunks.
 
 == Conventions used in this document
 * _italic_ words refer to concepts defined by JSON.
@@ -564,12 +564,12 @@ include::annotation-variants.json[]
 NOTE: The term "version" is a bit ambiguous within LionWeb.{fn-org172}
 This section lists all versions as they appear in <<SerializationChunk.serializationFormatVersion>> and <<{m3}.adoc#Language.version, `Language.version`>> for languages `LionWeb-M3` and `LionWeb-builtins`.
 
-=== 2025.1
-Technical name: `2025.1`
+=== 2026.1
+Technical name: `2026.1`
 
 * Editorial changes and clarifications.
 
-Refer to <<{roadmap}.adoc#release-2025.1, roadmap>> for details.
+Refer to <<{roadmap}.adoc#release-2026.1, roadmap>> for details.
 
 === 2024.1
 Technical name: `2024.1`
