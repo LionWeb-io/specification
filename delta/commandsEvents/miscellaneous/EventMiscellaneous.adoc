@@ -1,6 +1,0 @@
-[[evnt-miscellaneous]]
-==== Miscellaneous
-
-include::NoOp/NoOp.adoc[]
-
-include::ErrorEvent/ErrorEvent.adoc[]
