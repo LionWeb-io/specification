@@ -1,5 +1,5 @@
 [[qry-ErrorResponse]]
-==== Error response
+===== Error response
 Any query might return with error parameters instead of its declared response parameters.{fn-org405}
 
 See also <<evnt-ErrorEvent>>.

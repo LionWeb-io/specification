@@ -1,5 +1,5 @@
 [[qry-ChunkedQueryResponse]]
-==== Chunked query response
+===== Chunked query response
 A <<continuedChunk>> for a <<splittableMessage, splittable>> response of one of the following queries:
 
 * <<qry-SubscribeToPartitionContents>> response <<SubscribeToPartitionContents.contents>>
