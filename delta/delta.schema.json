@@ -1104,6 +1104,9 @@
           "$ref": "#/$defs/ChangeReference"
         },
         {
+          "$ref": "#/$defs/CompositeCommand"
+        },
+        {
           "$ref": "#/$defs/ChunkedCommand"
         }
       ]
@@ -1980,6 +1983,33 @@
       "minProperties": 6,
       "maxProperties": 10
     },
+    "CompositeCommand": {
+      "properties": {
+        "messageKind": {
+          "const": "CompositeCommand"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Commands"
+          }
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "parts",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
     "ChunkedCommand": {
       "properties": {
         "messageKind": {
@@ -2092,6 +2122,9 @@
         },
         {
           "$ref": "#/$defs/NoOpEvent"
+        },
+        {
+          "$ref": "#/$defs/CompositeEvent"
         },
         {
           "$ref": "#/$defs/ErrorEvent"
@@ -3228,6 +3261,30 @@
       "additionalProperties": false,
       "minProperties": 7,
       "maxProperties": 11
+    },
+    "CompositeEvent": {
+      "properties": {
+        "messageKind": {
+          "const": "CompositeEvent"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Events"
+          }
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parts",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
     },
     "NoOpEvent": {
       "properties": {

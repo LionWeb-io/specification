@@ -1,0 +1,23 @@
+[[evnt-Composite]]
+[[evnt-CompositeEvent]]
+===== Composite
+The events in <<CompositeEvent.parts>> have happened in the given order.{fn-org281}
+
+Composite events don't mention origin commands on their own; they are only mentioned in each part.{fn-org306}
+We can nest composite events arbitrarily.{fn-org360}
+
+.Technical name
+`CompositeEvent` footnote:[
+This event is the only one to have a `Event` suffix, which is necessary to distinguish it from its <<cmd-CompositeCommand, `CompositeCommand`>> counterpart.
+All other events can be distinguished from their command counterparts by looking at whether the technical name reads as an imperative (“add child” — for commands), or in past perfect tense (”child [has been\] added” — for events).
+(The <<evnt-NoOp, `NoOp`>> and <<evnt-ErrorEvent, `Error`>> don't have command counterparts.)
+]
+
+[horizontal]
+.Parameters
+[[CompositeEvent.parts, `parts`]]parts:: <<eventType>>[]
+
+[[CompositeEvent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+
+.Related command
+<<cmd-CompositeCommand>>
