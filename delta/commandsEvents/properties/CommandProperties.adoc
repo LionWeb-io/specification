@@ -1,8 +1,0 @@
-[[cmd-properties]]
-==== Properties
-
-include::AddProperty/AddProperty.adoc[]
-
-include::DeleteProperty/DeleteProperty.adoc[]
-
-include::ChangeProperty/ChangeProperty.adoc[]

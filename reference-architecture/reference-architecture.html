@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.26">
+<title>Reference Architecture</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+.refletter, .refnum {
+    background-color: black;
+    color:  white;
+    font-family: sans-serif;
+    padding: 0.3ex;
+}
+
+.refnum {
+
+}
+</style>
+</head>
+<body class="article">
+<div id="header">
+<h1>Reference Architecture</h1>
+</div>
+<div id="content">
+<div class="paragraph">
+<p><span class="image"><img src="images/ref-arch-diagram.svg" alt="Reference Architecture Diagram"></span></p>
+</div>
+<div class="paragraph">
+<p>A <a id="model"></a><strong>model</strong> <span class="refletter">B</span> is a graph structure with nodes and edges and one primary containment hierarchy <span class="refletter">B</span>.
+Nodes are typed by a reference to a concept (a node in a LionWeb language) and edges are named and typed with a concept.
+A LionWeb language – or its metamodel – is an instance of the LionWeb meta-metamodel.
+Nodes also have properties which have names and primitive types.
+Nodes are identified by unique IDs.
+Within the graph structure one can identify <strong>roots</strong> which are nodes that are typed by a reference to a concept that&#8217;s marked as a <strong>partition</strong>.</p>
+</div>
+<div class="paragraph">
+<p>A <a id="repository"></a><strong>repository</strong> <span class="refletter">A</span> stores models and provides clients <span class="refletter">C</span>, <span class="refletter">D</span>, <span class="refletter">E</span> ,<span class="refletter">F</span>, <span class="refletter">G</span> access to the nodes in a model.
+A repository is “its own universe”: nodes within it can&#8217;t reference nodes, or be referenced from nodes from other repositories, but cross-model references are permitted.
+Conceptually, it is the center of a LionWeb system, with clients connected to it in a star topology (although the technical architecture may be different).</p>
+</div>
+<div class="paragraph">
+<p><a id="originalModel"></a><strong>Original models</strong> are models that cannot be (re-)computed from other models.
+They are CRUDed by users (mediated by tools).
+Typically, they are what we&#8217;d call (a collection of) ASTs.
+They have to be persisted in the repository because they cannot be recomputed.
+<a id="derivedModel"></a><strong>Derived models</strong> are calculated from other (original or derived) models without direct human interaction.
+They are usually some form of analysis result, such as one related to a type system.
+Nodes in derived models are typically associated with an original node – e.g., the type computed for an AST node.
+The repository manages this association. Derived models may be persisted or be recalculated on the fly.</p>
+</div>
+<div class="paragraph">
+<p>A <a id="client"></a><strong>client</strong> is any program that works with models and nodes in the repository.
+We identify two kinds of clients, although there might be more: editors <span class="refletter">F</span> ,<span class="refletter">G</span> and processors <span class="refletter">C</span>, <span class="refletter">D</span>, <span class="refletter">E</span>.
+An <a id="editor"></a><strong>editor</strong> CRUDs original models based on its direct interactions with users.
+A <a id="processor"></a><strong>processor</strong> is a client that CRUDs models without direct user interaction.
+Processors can CRUD original models (e.g., importers <span class="refletter">D</span> or generators <span class="refletter">E</span>) or derived models <span class="refletter">C</span> (e.g., compute type systems, desugar models, or interpret models).</p>
+</div>
+<div class="paragraph">
+<p>One important design guideline for LionWeb is that we treat original and derived models similarly in terms of how they are transported to and from clients and/or how they are updated.</p>
+</div>
+<div class="paragraph">
+<p>Clients can communicate with the repository in two ways: bulk and delta.
+<a id="bulk"></a><strong>Bulk</strong> communication means that a client requests a set of nodes from the repository, processes those in isolation (e.g., import or otherwise create new nodes, modifies existing nodes, or generates output) and then writes the changed set of nodes.
+<a id="delta"></a><strong>Delta</strong> communication means that, after receiving an initial snapshot similar to the bulk case, the client continues to receive changes (aka deltas) from the repo; it also writes back changes continuously.
+Delta communication is also the basis for multi-client realtime collaboration.</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-02-20 14:57:01 UTC
+</div>
+</div>
+</body>
+</html>

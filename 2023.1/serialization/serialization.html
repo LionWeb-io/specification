@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.26">
+<title>LionWeb Serialization Format Version 2023.1</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock pre>code{display:block}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="article">
+<div id="header">
+<h1>LionWeb Serialization Format Version 2023.1</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document describes the serialization format for LionWeb chunks.</p>
+</div>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_conventions_used_in_this_document">Conventions used in this document</a></li>
+<li><a href="#_design_goals">Design goals</a></li>
+<li><a href="#_description">Description</a></li>
+<li><a href="#_overview_of_structures">Overview of structures</a>
+<ul class="sectlevel2">
+<li><a href="#_root_structure">Root structure</a></li>
+<li><a href="#language">Language structure</a>
+<ul class="sectlevel3">
+<li><a href="#language-key">Language key</a></li>
+<li><a href="#language-version">Language version</a></li>
+</ul>
+</li>
+<li><a href="#meta-pointer">Meta-pointer</a></li>
+<li><a href="#node">Node structure</a>
+<ul class="sectlevel3">
+<li><a href="#id">Id value</a></li>
+<li><a href="#property">Property</a></li>
+<li><a href="#containment">Containment</a></li>
+<li><a href="#reference">Reference</a></li>
+<li><a href="#annotation">Annotation</a></li>
+<li><a href="#parent">Parent</a></li>
+</ul>
+</li>
+<li><a href="#property-values">Property serialization</a>
+<ul class="sectlevel3">
+<li><a href="#string">String</a></li>
+<li><a href="#boolean">Boolean</a></li>
+<li><a href="#integer">Integer</a></li>
+<li><a href="#json">JSON</a></li>
+<li><a href="#literal">Enumeration literals</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_examples">Examples</a>
+<ul class="sectlevel2">
+<li><a href="#_minimal">Minimal</a></li>
+<li><a href="#_minimal_node">Minimal node</a></li>
+<li><a href="#_property_variants">Property variants</a></li>
+<li><a href="#_containment_variants">Containment variants</a></li>
+<li><a href="#_reference_variants">Reference variants</a></li>
+<li><a href="#_annotation_variants">Annotation variants</a></li>
+</ul>
+</li>
+<li><a href="#versions">Versions</a>
+<ul class="sectlevel2">
+<li><a href="#_2023_1">2023.1</a></li>
+</ul>
+</li>
+<li><a href="#json-schema">JSON Schema for serialization</a></li>
+</ul>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conventions_used_in_this_document">Conventions used in this document</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><em>italic</em> words refer to concepts defined by JSON.</p>
+</li>
+<li>
+<p><strong>bold</strong> words refer to concepts defined in this document.</p>
+</li>
+<li>
+<p><code>monospaced</code> words describe verbatim contents of the serialization.</p>
+</li>
+<li>
+<p>ALL-CAPS key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="https://datatracker.ietf.org/doc/html/bcp14">BCP14</a> (<a href="https://datatracker.ietf.org/doc/html/rfc2119">RFC2119</a>, <a href="https://datatracker.ietf.org/doc/html/rfc8174">RFC8174</a>) when, and only when, they appear in all capitals, as shown here.</p>
+</li>
+<li>
+<p>"processed document" refers to the character sequence that&#8217;s parsed or written, e.g. a file or network stream.</p>
+</li>
+<li>
+<p>Footnotes refer to more discussions and rationale, but are non-normative.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_design_goals">Design goals</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We want to provide boring and proven infrastructure, so that innovation can be built on top of it.
+We do not take any measures to reduce the amount of transmitted data.<sup class="footnote" id="_footnote_org73">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>
+We strive for shallow structures to enable stream-based processing.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description">Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>LionWeb node serialization format is defined in JSON (<a href="https://datatracker.ietf.org/doc/html/rfc8259">RFC 8259</a>).</p>
+</div>
+<div class="paragraph">
+<p>We follow the advice of RFC 8259 to be "interoperable", i.e. we assume object keys are unique, and their order is undefined.
+Any violations SHOULD be reported as error.<sup class="footnote" id="_footnote_org159">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview_of_structures">Overview of structures</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>No unspecified <em>members</em> are allowed anywhere in the structure.<sup class="footnote" id="_footnote_org67">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="serialization.svg" alt="Diagram" width="629" height="550">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_root_structure">Root structure</h3>
+<div id="SerializationChunk" class="paragraph">
+<p>Root level MUST be an <em>object</em> with three <em>members</em>, called <strong>serialization chunk</strong>.</p>
+</div>
+<div id="SerializationChunk.serializationFormatVersion" class="paragraph">
+<p>The first <em>member</em> SHOULD be <em>key</em> <code>serializationFormatVersion</code> with a <em>string</em> <em>value</em>.<sup class="footnote" id="_footnote_org58">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup><sup class="footnoteref">[<a class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup><sup class="footnote" id="_footnote_org172">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup>
+The value MUST be a non-empty string (without leading or trailing whitespace)<sup class="footnote" id="_footnote_org165">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup> describing the serialization format version used to create the processed document, according to <a href="#versions">Versions</a>.</p>
+</div>
+<div id="SerializationChunk.languages" class="paragraph">
+<p>The second <em>member</em> SHOULD be <em>key</em> <code>languages</code> with an <em>array</em> <em>value</em>.<sup class="footnote" id="_footnote_org76">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup><sup class="footnote" id="_footnote_org78">[<a id="_footnoteref_8" class="footnote" href="#_footnotedef_8" title="View footnote.">8</a>]</sup><sup class="footnoteref">[<a class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>
+Each <em>element</em> in the value array MUST adhere to <a href="#language">Language structure</a>.
+The order of <em>elements</em> is undefined.
+<em>elements</em> MUST contain all language/version referred to by any <a href="#meta-pointer">Meta-pointer</a> in the processed document.
+Each <em>element</em> MUST be unique with respect to all its <em>members</em>.</p>
+</div>
+<div id="SerializationChunk.nodes" class="paragraph">
+<p>The third <em>member</em> SHOULD be <em>key</em> <code>nodes</code> with an <em>array</em> <em>value</em>.<sup class="footnote" id="_footnote_org33">[<a id="_footnoteref_9" class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup><sup class="footnoteref">[<a class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>
+Each <em>element</em> in the value array MUST adhere to <a href="#node">Node structure</a>.
+The order of <em>elements</em> is undefined.
+Each <em>element</em> MUST be unique with respect to the value of its <em>key</em> <code>id</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="language">Language structure</h3>
+<div id="UsedLanguage" class="paragraph">
+<p>Each <strong>used language</strong> MUST be an <em>object</em>.<sup class="footnote" id="_footnote_org129">[<a id="_footnoteref_10" class="footnote" href="#_footnotedef_10" title="View footnote.">10</a>]</sup>
+The order of <em>members</em> is undefined.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If the chunk describes a language (M2), it might include instances of builtins' language entities.
+In this case, builtins MUST be listed as <strong>used language</strong> like any other language.<sup class="footnote" id="_footnote_org153">[<a id="_footnoteref_11" class="footnote" href="#_footnotedef_11" title="View footnote.">11</a>]</sup>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <em>object</em> MUST contain the following <em>members</em>:<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="UsedLanguage.key"></a> <em>key</em> <code>key</code> with <em>string</em> <em>value</em>, adhering to <a href="#language-key">Language key</a>.</p>
+</li>
+<li>
+<p><a id="UsedLanguage.version"></a> <em>key</em> <code>version</code> with <em>string</em> <em>value</em>, adhering to <a href="#language-version">Language version</a>.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="language-key">Language key</h4>
+<div class="paragraph">
+<p>A <em>string</em> according to <a href="../metametamodel/metametamodel.html#keys">Key spec</a>.
+Refers to the <a href="../metametamodel/metametamodel.html#IKeyed.key">key</a> of the language.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="language-version">Language version</h4>
+<div class="paragraph">
+<p>A <em>string</em> with any contents<sup class="footnote" id="_footnote_org128">[<a id="_footnoteref_12" class="footnote" href="#_footnotedef_12" title="View footnote.">12</a>]</sup><sup class="footnote" id="_footnote_org130">[<a id="_footnoteref_13" class="footnote" href="#_footnotedef_13" title="View footnote.">13</a>]</sup>, MUST NOT be empty.<sup class="footnote" id="_footnote_org92">[<a id="_footnoteref_14" class="footnote" href="#_footnotedef_14" title="View footnote.">14</a>]</sup>
+Refers to the <a href="../metametamodel/metametamodel.html#Language.version">version</a> of the language.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="meta-pointer">Meta-pointer</h3>
+<div id="MetaPointer" class="paragraph">
+<p>A <strong>meta-pointer</strong> is a reference from M1 to M2.<sup class="footnote" id="_footnote_org89">[<a id="_footnoteref_15" class="footnote" href="#_footnotedef_15" title="View footnote.">15</a>]</sup><sup class="footnote" id="_footnote_mof">[<a id="_footnoteref_16" class="footnote" href="#_footnotedef_16" title="View footnote.">16</a>]</sup>
+It&#8217;s used at several places within <a href="#node">Node structure</a>.</p>
+</div>
+<div class="paragraph">
+<p>Each meta-pointer MUST be an <em>object</em>.
+The order of <em>members</em> is undefined.</p>
+</div>
+<div class="paragraph">
+<p>The <em>object</em> MUST contain the following <em>members</em>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="MetaPointer.lanuage"></a> <em>key</em> <code>language</code> with <em>string</em> <em>value</em>, adhering to <a href="#language-key">Language key</a>.</p>
+</li>
+<li>
+<p><a id="MetaPointer.version"></a> <em>key</em> <code>version</code> with <em>string</em> <em>value</em>, adhering to <a href="#language-version">Language version</a>.</p>
+</li>
+<li>
+<p><a id="MetaPointer.key"></a> <em>key</em> <code>key</code> with <em>string</em> <em>value</em> according to <a href="../metametamodel/metametamodel.html#keys">Keys spec</a>.
+Refers to some <a href="../metametamodel/metametamodel.html#IKeyed">element in the language</a>.
+Which element exactly is specified for each usage of meta-pointer.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="node">Node structure</h3>
+<div id="Node" class="paragraph">
+<p>Each <strong>node</strong> MUST be an <em>object</em>.<sup class="footnote" id="_footnote_org37">[<a id="_footnoteref_17" class="footnote" href="#_footnotedef_17" title="View footnote.">17</a>]</sup>
+The order of <em>members</em> is undefined.</p>
+</div>
+<div class="paragraph">
+<p>The <em>object</em> MUST contain the following <em>members</em>:<sup class="footnote" id="_footnote_org59">[<a id="_footnoteref_18" class="footnote" href="#_footnotedef_18" title="View footnote.">18</a>]</sup><sup class="footnote" id="_footnote_java33">[<a id="_footnoteref_19" class="footnote" href="#_footnotedef_19" title="View footnote.">19</a>]</sup><sup class="footnote" id="_footnote_org55">[<a id="_footnoteref_20" class="footnote" href="#_footnotedef_20" title="View footnote.">20</a>]</sup></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="Node.id"></a> <em>key</em> <code>id</code> with <em>string</em> <em>value</em>, adhering to <a href="#id">Id value</a>.</p>
+</li>
+<li>
+<p><a id="Node.classifier"></a> <em>key</em> <code>classifier</code><sup class="footnote" id="_footnote_org37conc">[<a id="_footnoteref_21" class="footnote" href="#_footnotedef_21" title="View footnote.">21</a>]</sup><sup class="footnote" id="_footnote_org184">[<a id="_footnoteref_22" class="footnote" href="#_footnotedef_22" title="View footnote.">22</a>]</sup> with <em>object</em> <em>value</em>, adhering to <a href="#meta-pointer">Meta-pointer</a>.
+The <strong>meta-pointer</strong>'s <code>key</code>'s <em>value</em> refers to the <a href="../metametamodel/metametamodel.html#IKeyed.key"><strong>key</strong></a> of the <a href="../metametamodel/metametamodel.html#Concept"><strong>Concept</strong></a> or <a href="../metametamodel/metametamodel.html#Annotation"><strong>Annotation</strong></a> this <strong>node</strong> is an instance of.</p>
+</li>
+<li>
+<p><a id="Node.properties"></a> <em>key</em> <code>properties</code> with <em>array</em> <em>value</em>, each <em>element</em> adhering to <a href="#property">Property</a>.
+The order of <em>elements</em> is undefined.<sup class="footnote" id="_footnote_org156">[<a id="_footnoteref_23" class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup></p>
+</li>
+<li>
+<p><a id="Node.containments"></a> <em>key</em> <code>containments</code><sup class="footnote" id="_footnote_org55child">[<a id="_footnoteref_24" class="footnote" href="#_footnotedef_24" title="View footnote.">24</a>]</sup><sup class="footnote" id="_footnote_org206">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup> with <em>array</em> <em>value</em>, each <em>element</em> adhering to <a href="#containment">Containment</a>.
+The order of <em>elements</em> is undefined.<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup></p>
+</li>
+<li>
+<p><a id="Node.references"></a> <em>key</em> <code>references</code><sup class="footnote" id="_footnote_org55ref">[<a id="_footnoteref_26" class="footnote" href="#_footnotedef_26" title="View footnote.">26</a>]</sup> with <em>array</em> <em>value</em>, each <em>element</em> adhering to <a href="#reference">Reference</a>.
+The order of <em>elements</em> is undefined.<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup></p>
+</li>
+<li>
+<p><a id="Node.annotations"></a> <em>key</em> <code>annotations</code><sup class="footnote" id="_footnote_org150">[<a id="_footnoteref_27" class="footnote" href="#_footnotedef_27" title="View footnote.">27</a>]</sup> with <em>array</em> <em>value</em>, each <em>element</em> adhering to <a href="#annotation">Annotation</a>.
+The order of <em>elements</em> MUST be maintained.<sup class="footnote" id="_footnote_org157">[<a id="_footnoteref_28" class="footnote" href="#_footnotedef_28" title="View footnote.">28</a>]</sup></p>
+</li>
+<li>
+<p><a id="Node.parent"></a> <em>key</em> <code>parent</code><sup class="footnote" id="_footnote_org187">[<a id="_footnoteref_29" class="footnote" href="#_footnotedef_29" title="View footnote.">29</a>]</sup> with <em>string</em> or <em>null</em> <em>value</em>, adhering to <a href="#parent">Parent</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For all features (i.e. <code>properties</code>, <code>containments</code>, and <code>references</code>) defined for a <strong>node</strong>'s classifier:<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>During serialization, we SHOULD include every feature, even if unset.
+In the latter case:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>the <strong>property</strong> MUST have <code>value</code> = <em>null</em>;</p>
+</li>
+<li>
+<p>the <strong>containment</strong> MUST have <code>children</code> = <em>empty array</em>;</p>
+</li>
+<li>
+<p>the <strong>reference</strong> MUST have <code>targets</code> = <em>empty array</em>;</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>During deserialization, we MUST accept a <strong>node</strong> even if not all defined features are present.</p>
+</li>
+<li>
+<p>We MAY accept undefined features during deserialization if we can deal with them in a meaningful manner.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+We currently cannot store "invalid text" (i.e. user-entered text that does not adhere to the underlying structure and/or constraints) in the model.
+We will support this in a future release.<sup class="footnote" id="_footnote_org62">[<a id="_footnoteref_30" class="footnote" href="#_footnotedef_30" title="View footnote.">30</a>]</sup>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="id">Id value</h4>
+<div class="paragraph">
+<p>A <em>string</em> according to <a href="../metametamodel/metametamodel.html#identifiers">Identifier spec</a>.
+Defines the <strong>id</strong> of this <strong>node</strong>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="property">Property</h4>
+<div id="Property" class="paragraph">
+<p>Each <strong>property</strong> MUST be an <em>object</em>.
+The order of <em>members</em> is undefined.</p>
+</div>
+<div class="paragraph">
+<p>The <em>object</em> MUST contain the following <em>members</em>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="Property.property"></a> <em>key</em> <code>property</code> with <em>object</em> <em>value</em>, adhering to <a href="#meta-pointer">Meta-pointer</a>.
+The <strong>meta-pointer</strong>'s <code>key</code>'s <em>value</em> refers to the <a href="../metametamodel/metametamodel.html#IKeyed.key"><strong>key</strong></a> of the <a href="../metametamodel/metametamodel.html#Property"><strong>Property</strong></a> this <strong>property</strong> is an instance of.</p>
+</li>
+<li>
+<p><a id="Property.value"></a> <em>key</em> <code>value</code> with <em>value</em> as one of</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>string</em><sup class="footnote" id="_footnote_org34">[<a id="_footnoteref_31" class="footnote" href="#_footnotedef_31" title="View footnote.">31</a>]</sup> containing the value of the property referenced by the <code>property</code>.
+Refer to <a href="#property-values">Property serialization</a> for the specification of the value format.
+Can be an empty <em>string</em>.</p>
+</li>
+<li>
+<p><em>null</em> to explicitly specify the property to be unset.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="containment">Containment</h4>
+<div id="Containment" class="paragraph">
+<p>Each <strong>containment</strong> MUST be an <em>object</em>.
+The order of <em>members</em> is undefined.</p>
+</div>
+<div class="paragraph">
+<p>The <em>object</em> MUST contain the following <em>members</em>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="Containment.containment"></a> <em>key</em> <code>containment</code> with <em>object</em> <em>value</em>, adhering to <a href="#meta-pointer">Meta-pointer</a>.
+The <strong>meta-pointer</strong>'s <code>key</code>'s <em>value</em> refers to the <a href="../metametamodel/metametamodel.html#IKeyed.key"><strong>key</strong></a> of the <a href="../metametamodel/metametamodel.html#Containment"><strong>Containment</strong></a> this <strong>containment</strong> is an instance of.</p>
+</li>
+<li>
+<p><a id="Containment.children"></a> <em>key</em> <code>children</code> with <em>array</em> <em>value</em> with <em>string</em> <em>elements</em>.
+Each <em>element</em> adheres to <a href="../metametamodel/metametamodel.html#identifiers">Identifier spec</a>, and refers to the <strong>id</strong> of the contained <strong>node</strong>.
+The order of <em>elements</em> MUST be maintained.<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_28" title="View footnote.">28</a>]</sup></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Each <code>children</code> element is the inverse relation of a <strong>parent</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The <code>children</code> <strong>node</strong> can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reference">Reference</h4>
+<div id="Reference" class="paragraph">
+<p>Each <strong>reference</strong> MUST be an <em>object</em>.
+The order of <em>members</em> is undefined.</p>
+</div>
+<div class="paragraph">
+<p>The <em>object</em> MUST contain the following <em>members</em>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="Reference.reference"></a> <em>key</em> <code>reference</code> with <em>object</em> <em>value</em>, adhering to <a href="#meta-pointer">Meta-pointer</a>.
+The <strong>meta-pointer</strong>'s <code>key</code>'s <em>value</em> refers to the <a href="../metametamodel/metametamodel.html#IKeyed.key"><strong>key</strong></a> of the <a href="../metametamodel/metametamodel.html#Reference"><strong>Reference</strong></a> this <strong>reference</strong> is an instance of.</p>
+</li>
+<li>
+<p><a id="Reference.targets"></a> <em>key</em> <code>targets</code> with <em>array</em> <em>value</em> with <em>_object</em> <em>elements</em>.
+The order of <em>elements</em> MUST be maintained.<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_28" title="View footnote.">28</a>]</sup>
+Each <em>element</em> MUST have the following <em>members</em> in undefined order:<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_26" title="View footnote.">26</a>]</sup></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="Reference.reference.resolveInfo"></a> <em>key</em> <code>resolveInfo</code><sup class="footnote" id="_footnote_org36">[<a id="_footnoteref_32" class="footnote" href="#_footnotedef_32" title="View footnote.">32</a>]</sup> with <em>value</em> as one of:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>string</em> containing <strong>resolveInfo</strong>, a textual hint that might be used to find the target <strong>node</strong> of this reference.
+Interface <a href="../metametamodel/metametamodel.html#INamed">INamed</a> SHOULD be used as a default, if available.
+The exact value depends on the implementation.
+Can be an empty <em>string</em>.</p>
+</li>
+<li>
+<p><em>null</em> if no <strong>resolveInfo</strong> is available.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a id="Reference.reference.reference"></a> <em>key</em> <code>reference</code><sup class="footnote" id="_footnote_org35">[<a id="_footnoteref_33" class="footnote" href="#_footnotedef_33" title="View footnote.">33</a>]</sup> with <em>value</em> as one of:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>string</em> according to <a href="../metametamodel/metametamodel.html#identifiers">Identifier spec</a>.
+Refers to the <strong>id</strong> of the target <strong>node</strong>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The referred <strong>node</strong> can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p><em>null</em> if the <strong>id</strong> of the target <strong>node</strong> is not known.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="annotation">Annotation</h4>
+<div id="Annotation" class="paragraph">
+<p>Each <strong>annotation</strong> MUST be a <em>string</em>.
+It adheres to <a href="../metametamodel/metametamodel.html#identifiers">Identifier spec</a>, and refers to the <strong>id</strong> of the contained annotation <strong>node</strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Each <strong>annotation</strong> element is the inverse relation of a <strong>parent</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The annotation <strong>node</strong> can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="parent">Parent</h4>
+<div class="paragraph">
+<p>One of</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>string</em> according to <a href="{m3.acoc}.html#identifiers">Identifier spec</a>.
+Refers to the <strong>id</strong> of the <strong>node</strong> containing this <strong>node</strong>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<strong>parent</strong> is the inverse relation of either one <strong>containment</strong> or one <strong>annotation</strong>.<sup class="footnote" id="_footnote_org186">[<a id="_footnoteref_34" class="footnote" href="#_footnotedef_34" title="View footnote.">34</a>]</sup>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The referred <strong>node</strong> can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p><em>null</em> if</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This <strong>node</strong> is a <strong>root node</strong>, i.e. this node does not have a parent.</p>
+</li>
+<li>
+<p>This serialization is sent as an update request.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="property-values">Property serialization</h3>
+<div class="paragraph">
+<p>All property values MUST be serialized as JSON <em>string</em>.<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_31" title="View footnote.">31</a>]</sup><sup class="footnote" id="_footnote_org9">[<a id="_footnoteref_35" class="footnote" href="#_footnotedef_35" title="View footnote.">35</a>]</sup>.
+An unset property SHOULD be serialized as JSON <em>null</em>.</p>
+</div>
+<div class="sect3">
+<h4 id="string">String</h4>
+<div class="paragraph">
+<p><a href="../metametamodel/metametamodel.html#String">LionCore Strings</a> might be any string, of any length, including (but not limited to):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>empty string: <code>""</code></p>
+</li>
+<li>
+<p>only containing whitespace: <code>" "</code></p>
+</li>
+<li>
+<p>containing escaped characters as per JSON spec: <code>"They said:\n \"Hello!\""</code></p>
+</li>
+<li>
+<p>containing extended Unicode characters: <code>"😐"</code></p>
+</li>
+<li>
+<p>containing escaped Unicode characters: <code>"\uD83D\uDE10"</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="boolean">Boolean</h4>
+<div class="paragraph">
+<p><a href="../metametamodel/metametamodel.html#Boolean">LionCore Booleans</a> MUST be encoded as exactly one of these JSON <em>strings</em>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"true"</code></p>
+</li>
+<li>
+<p><code>"false"</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase characters, short forms (like <code>t</code> or <code>f</code>), or decimal representation (like <code>1</code>, <code>0</code>, <code>-1</code>).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="integer">Integer</h4>
+<div class="paragraph">
+<p><a href="../metametamodel/metametamodel.html#Integer">LionCore Integers</a> MUST be encoded as JSON <em>string</em>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Integers MUST be represented in base-10.</p>
+</li>
+<li>
+<p>The digits can be prefixed with either <code>+</code> (plus) or <code>-</code> (minus).<sup class="footnote" id="_footnote_org100">[<a id="_footnoteref_36" class="footnote" href="#_footnotedef_36" title="View footnote.">36</a>]</sup></p>
+</li>
+<li>
+<p>Integers MUST NOT be prefixed by leading zeros.</p>
+</li>
+<li>
+<p>Integers can contain value zero with any prefix, i.e. <code>0</code>, <code>-0</code>, or <code>+0</code>.</p>
+</li>
+<li>
+<p>Integers MUST NOT contain leading or trailing whitespace.</p>
+</li>
+<li>
+<p>LionWeb does NOT limit the range of the integer value.<sup class="footnote" id="_footnote_org149">[<a id="_footnoteref_37" class="footnote" href="#_footnotedef_37" title="View footnote.">37</a>]</sup>
+An implementation MAY refuse a model containing an integer value outside the supported range.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Examples of valid Integer encodings</div>
+<ul>
+<li>
+<p><code>"0"</code></p>
+</li>
+<li>
+<p><code>"+0"</code></p>
+</li>
+<li>
+<p><code>"-0"</code></p>
+</li>
+<li>
+<p><code>"123"</code></p>
+</li>
+<li>
+<p><code>"-100000"</code></p>
+</li>
+<li>
+<p><code>"+999"</code></p>
+</li>
+<li>
+<p><code>"100000000200000000300000000400000000500000000600000000700000000800000000900000000999999999"</code></p>
+</li>
+<li>
+<p><code>"-999999999900000000800000000700000000600000000500000000400000000300000000200000000100000000"</code></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Examples of invalid Integer encodings</div>
+<ul>
+<li>
+<p><code>""</code></p>
+</li>
+<li>
+<p><code>123</code></p>
+</li>
+<li>
+<p><code>-1</code></p>
+</li>
+<li>
+<p><code>"+-0"</code></p>
+</li>
+<li>
+<p><code>"++1"</code></p>
+</li>
+<li>
+<p><code>"00002"</code></p>
+</li>
+<li>
+<p><code>"0xAA12"</code></p>
+</li>
+<li>
+<p><code>" 5"</code></p>
+</li>
+<li>
+<p><code>"-6 "</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="json">JSON</h4>
+<div class="paragraph">
+<p><a href="../metametamodel/metametamodel.html#JSON">LionCore JSON</a> MUST be encoded as JSON <em>string</em>.
+All double quotes, line breaks, etc. MUST be escaped to form a proper JSON <em>string</em>.
+The value MUST adhere to JSON spec (RFC 8259).</p>
+</div>
+<div class="paragraph">
+<div class="title">Valid example</div>
+<p><code>"{ \"key\": \"my value\",\n\"myArray\": [1, -2, true] }"</code></p>
+</div>
+<div class="paragraph">
+<div class="title">Invalid example</div>
+<p><code>{ "key": "my value", "myArray": [1, -2, true] }</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="literal">Enumeration literals</h4>
+<div class="paragraph">
+<p><a href="../metametamodel/metametamodel.html#EnumerationLiteral">LionCore Enumeration literals</a> MUST be encoded as JSON <em>string</em> <em>value</em> according to <a href="../metametamodel/metametamodel.html#keys">Key spec</a>.
+MUST refer to the <a href="../metametamodel/metametamodel.html#IKeyed.key">key</a> of an <a href="../metametamodel/metametamodel.html#EnumerationLiteral">EnumerationLiteral</a> of the <a href="../metametamodel/metametamodel.html#Enumeration">Enumeration</a> defined as <a href="../metametamodel/metametamodel.html#Property.type">type</a> of this <strong>Property</strong>.<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_12" title="View footnote.">12</a>]</sup></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examples">Examples</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_minimal">Minimal</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "serializationFormatVersion": "2023.1",
+  "languages": [],
+  "nodes": []
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_minimal_node">Minimal node</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "serializationFormatVersion": "2023.1",
+  "languages": [
+    {
+      "key": "myLanguage",
+      "version": "2"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "aaa",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "myConceptId"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_property_variants">Property variants</h3>
+<div class="paragraph">
+<p>For this example, we need to define an enumeration and a concept that uses the enumeration.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The format used in this example is non-normative.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Assume this enumeration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>enumeration DaysOfWeek [id 23, key days-of-week]
+
+  literal Monday       [id 34, key monday]
+  literal Tuesday      [id 2,  key tttt]
+  literal Wednesday    [id 55, key 12398712]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And this concept:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>concept OpeningTime           [id 44, key time_to_open]
+  property day: DaysOfWeek    [id 42, key day]
+  property startHour: Integer [id 22, key starthour]
+  property endHour: Integer   [id 89, key endhour]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "serializationFormatVersion": "2023.1",
+  "languages": [
+    {
+      "key": "myLanguage",
+      "version": "2"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "bbb",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "myConceptId"
+      },
+      "properties": [
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "stringPropertyId"
+          },
+          "value": "my string value"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "integerPropertyId"
+          },
+          "value": "123"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "booleanPropertyId"
+          },
+          "value": "true"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "jsonPropertyId"
+          },
+          "value": "{ \"name\": \"Bob\" }"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "unsetPropertyId"
+          },
+          "value": null
+        }
+      ],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    },
+    {
+      "id": "21",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "time_to_open"
+      },
+      "properties": [
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "day"
+          },
+          "value": "tttt"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "starthour"
+          },
+          "value": "9"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "endhour"
+          },
+          "value": "5"
+        }
+      ],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_containment_variants">Containment variants</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "serializationFormatVersion": "2023.1",
+  "languages": [
+    {
+      "key": "myLanguage",
+      "version": "2"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ccc",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "myConceptId"
+      },
+      "properties": [],
+      "containments": [
+        {
+          "containment": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "emptyContainmentId"
+          },
+          "children": []
+        },
+        {
+          "containment": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "singleContainmentId"
+          },
+          "children": [
+            "cdd"
+          ]
+        },
+        {
+          "containment": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "multiContainmentId"
+          },
+          "children": [
+            "cee",
+            "cff",
+            "cgg"
+          ]
+        }
+      ],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    },
+    {
+      "id": "cgg",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "differentConceptId"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    },
+    {
+      "id": "cdd",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "otherConceptId"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": "ccc"
+    },
+    {
+      "id": "cee",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "differentConceptId"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>node</strong> with <strong>id</strong> <code>cff</code> is outside the processed document.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reference_variants">Reference variants</h3>
+<div class="paragraph">
+<p>We support different kinds of targets.<sup class="footnote" id="_footnote_org57">[<a id="_footnoteref_38" class="footnote" href="#_footnotedef_38" title="View footnote.">38</a>]</sup></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "serializationFormatVersion": "2023.1",
+  "languages": [
+    {
+      "key": "myLanguage",
+      "version": "2"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ddd",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "myConceptId"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "emptyReferenceId"
+          },
+          "targets": []
+        },
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "singleReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": "some name",
+              "reference": "dee"
+            }
+          ]
+        },
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "multiReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": "self-reference",
+              "reference": "ddd"
+            },
+            {
+              "resolveInfo": "only resolve info",
+              "reference": null
+            }
+          ]
+        },
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "noResolveInfoReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": null,
+              "reference": "dee"
+            }
+          ]
+        },
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "neitherResolveInfoNorReferenceId"
+          },
+          "targets": [
+            {
+              "resolveInfo": null,
+              "reference": null
+            }
+          ]
+        }
+      ],
+      "annotations": [],
+      "parent": null
+    },
+    {
+      "id": "dee",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "differentConceptId"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_annotation_variants">Annotation variants</h3>
+<div class="paragraph">
+<p>For this example, we need to define some annotations and their annotated concepts.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The format used in this example is non-normative.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Assume these annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>annotation Docu [id 23, key docuAnn]
+  multiple = true
+  annotates = IDocumentable
+  property docu: String [id 34, key Docu-docu]
+
+annotation ExtendedDocu extends Docu [id 20, key docuExtended]
+  property moreDocu: String [id mds, key MDS]
+
+annotation Marker [id 22, key myMarker]
+  multiple = false
+  annotates = Node
+
+annotation TrashCan [id 99, key throwAway]
+  multiple = false
+  annotates = Node
+  containment trash: 0..* Node  [id 2, key tat]
+
+interface JavaInfo [id 33, key jv]
+  property javaVersion: String  [id 33a, key jvA]
+
+annotation MappedToClass implements JavaInfo [id mtc, key MTC]
+  multiple = false
+  annotates = Classifier
+  reference javaClass: 1 BaseLanguageClass [id jjj, key JJJ]
+
+
+annotation UsesMapping implements JavaInfo [id um, key UM]
+  multiple = false
+  annotates = Feature
+  reference mapping: 1 MappedToClass [id jjj1, key JJJ1]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And these concepts:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>interface IDocumentable [id 50, key 51]
+
+concept BaseLanguageClass implements IDocumentable [id 60, key 61]
+
+concept OtherLanguageConcept [id 70, key otherLangConc]
+  reference usesTrashCan: 0..1 TrashCan [id 72, key usesTrashCan]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "serializationFormatVersion": "2023.1",
+  "languages": [
+    {
+      "key": "myLanguage",
+      "version": "2"
+    },
+    {
+      "key": "BaseLanguage",
+      "version": "1"
+    },
+    {
+      "key": "LionWeb-M3",
+      "version": "2023.1"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ccc",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "61"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [
+        "marker",
+        "docu1",
+        "docu2",
+        "localTrash"
+      ],
+      "parent": null
+    },
+    {
+      "id": "marker",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "myMarker"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": "61"
+    },
+    {
+      "id": "docu1",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "docuAnn"
+      },
+      "properties": [
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "Docu-docu"
+          },
+          "value": "This is a very important BaseLanguageClass"
+        }
+      ],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": "61"
+    },
+    {
+      "id": "docu2",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "docuExtended"
+      },
+      "properties": [
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "Docu-docu"
+          },
+          "value": "We want to say a few more things about this BaseLanguageClass"
+        },
+        {
+          "property": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "MDS"
+          },
+          "value": "Here be dragons"
+        }
+      ],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": "61"
+    },
+    {
+      "id": "localTrash",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "throwAway"
+      },
+      "properties": [],
+      "containments": [
+        {
+          "containment": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "tat"
+          },
+          "children": [
+            "old1",
+            "old2"
+          ]
+        }
+      ],
+      "references": [],
+      "annotations": [],
+      "parent": "61"
+    },
+    {
+      "id": "old1",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "SomeConcept"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": "localTrash"
+    },
+    {
+      "id": "old2",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "YetAnotherConcept"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": "localTrash"
+    },
+    {
+      "id": "bbb",
+      "classifier": {
+        "language": "LionWeb-M3",
+        "version": "2023.1",
+        "key": "Concept"
+      },
+      "properties": [],
+      "containments": [
+        {
+          "containment": {
+            "language": "LionWeb-M3",
+            "version": "2023.1",
+            "key": "Classifier-features"
+          },
+          "children": [
+            "bbb-prop"
+          ]
+        }
+      ],
+      "references": [],
+      "annotations": [
+        "javaMapping"
+      ],
+      "parent": null
+    },
+    {
+      "id": "bbb-prop",
+      "classifier": {
+        "language": "LionWeb-M3",
+        "version": "2023.1",
+        "key": "Property"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [
+        "typeUseMapping"
+      ],
+      "parent": "bbb"
+    },
+    {
+      "id": "javaMapping",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "MTC"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "JJJ"
+          },
+          "targets": [
+            {
+              "resolveInfo": null,
+              "reference": "javaClass"
+            }
+          ]
+        }
+      ],
+      "annotations": [],
+      "parent": "bbb"
+    },
+    {
+      "id": "typeUseMapping",
+      "classifier": {
+        "language": "myLanguage",
+        "version": "2",
+        "key": "UM"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [
+        {
+          "reference": {
+            "language": "myLanguage",
+            "version": "2",
+            "key": "JJJ1"
+          },
+          "targets": [
+            {
+              "resolveInfo": null,
+              "reference": "javaMapping"
+            }
+          ]
+        }
+      ],
+      "annotations": [],
+      "parent": "bbb-prop"
+    },
+    {
+      "id": "javaClass",
+      "classifier": {
+        "language": "BaseLanguage",
+        "version": "1",
+        "key": "ClassConcept"
+      },
+      "properties": [],
+      "containments": [],
+      "references": [],
+      "annotations": [],
+      "parent": null
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="versions">Versions</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The term "version" is a bit ambiguous within LionWeb.<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup>
+This section lists all versions as they appear in <a href="#SerializationChunk.serializationFormatVersion"><code>serializationFormatVersion</code></a> and <a href="../metametamodel/metametamodel.html#Language.version"><code>Language.version</code></a> for languages <code>LionWeb_M3</code> and <code>LionWeb_builtins</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_2023_1">2023.1</h3>
+<div class="paragraph">
+<p>Technical name: <code>2023.1</code></p>
+</div>
+<div class="paragraph">
+<p><a href="./../index.html">Initial version.</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="json-schema">JSON Schema for serialization</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lionweb.io/serialization.schema.json",
+  "title": "LionWeb Serialization",
+  "type": "object",
+  "properties": {
+    "serializationFormatVersion": {
+      "type": "string",
+      "pattern": "^\\S+(.*\\S)?$"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "$ref": "#/$defs/key"
+          },
+          "version": {
+            "$ref": "#/$defs/version"
+          }
+        },
+        "required": [
+          "key",
+          "version"
+        ],
+        "additionalProperties": false,
+        "minProperties": 2,
+        "maxProperties": 2
+      },
+      "uniqueItems": true
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "classifier": {
+            "$ref": "#/$defs/metaPointer"
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "property": {
+                  "$ref": "#/$defs/metaPointer"
+                },
+                "value": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "property",
+                "value"
+              ],
+              "additionalProperties": false,
+              "minProperties": 2,
+              "maxProperties": 2
+            }
+          },
+          "containments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "containment": {
+                  "$ref": "#/$defs/metaPointer"
+                },
+                "children": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/id"
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "containment",
+                "children"
+              ],
+              "additionalProperties": false,
+              "minProperties": 2,
+              "maxProperties": 2
+            }
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "reference": {
+                  "$ref": "#/$defs/metaPointer"
+                },
+                "targets": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "resolveInfo": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "reference": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/$defs/id"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "resolveInfo",
+                      "reference"
+                    ],
+                    "additionalProperties": false,
+                    "minProperties": 2,
+                    "maxProperties": 2
+                  }
+                }
+              },
+              "required": [
+                "reference",
+                "targets"
+              ],
+              "additionalProperties": false,
+              "minProperties": 2,
+              "maxProperties": 2
+            }
+          },
+          "annotations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/id"
+            },
+            "uniqueItems": true
+          },
+          "parent": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "classifier",
+          "properties",
+          "containments",
+          "references",
+          "annotations",
+          "parent"
+        ],
+        "additionalProperties": false,
+        "minProperties": 7,
+        "maxProperties": 7
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "serializationFormatVersion",
+    "languages",
+    "nodes"
+  ],
+  "additionalProperties": false,
+  "minProperties": 3,
+  "maxProperties": 3,
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "key": {
+      "$ref": "#/$defs/id"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metaPointer": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/$defs/key"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "key": {
+          "$ref": "#/$defs/key"
+        }
+      },
+      "required": [
+        "language",
+        "version",
+        "key"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. <a href="https://github.com/LionWeb-io/specification/issues/73">We don&#8217;t care about serialization verbosity #73</a>
+</div>
+<div class="footnote" id="_footnotedef_2">
+<a href="#_footnoteref_2">2</a>. <a href="https://github.com/LionWeb-io/specification/issues/159">Don&#8217;t rely on valid, but ambiguous JSON structures #159</a>
+</div>
+<div class="footnote" id="_footnotedef_3">
+<a href="#_footnoteref_3">3</a>. <a href="https://github.com/LionWeb-io/specification/issues/67">Allow additional info in serialization #67</a>
+</div>
+<div class="footnote" id="_footnotedef_4">
+<a href="#_footnoteref_4">4</a>. <a href="https://github.com/LionWeb-io/specification/issues/58">Include serialization format version in serialization #58</a>
+</div>
+<div class="footnote" id="_footnotedef_5">
+<a href="#_footnoteref_5">5</a>. <a href="https://github.com/LionWeb-io/specification/issues/172">Use term `release` instead of `version` for LionWeb? #172</a>
+</div>
+<div class="footnote" id="_footnotedef_6">
+<a href="#_footnoteref_6">6</a>. <a href="https://github.com/LionWeb-io/specification/issues/165">Version scheme for LionWeb? #165</a>
+</div>
+<div class="footnote" id="_footnotedef_7">
+<a href="#_footnoteref_7">7</a>. <a href="https://github.com/LionWeb-io/specification/issues/76">Should serialization contain a list of used languages? #76</a>
+</div>
+<div class="footnote" id="_footnotedef_8">
+<a href="#_footnoteref_8">8</a>. <a href="https://github.com/LionWeb-io/specification/issues/78">Rename M3 Metamodel to Language? #78</a>
+</div>
+<div class="footnote" id="_footnotedef_9">
+<a href="#_footnoteref_9">9</a>. <a href="https://github.com/LionWeb-io/specification/issues/33">Repo API: Node representation #33</a>
+</div>
+<div class="footnote" id="_footnotedef_10">
+<a href="#_footnoteref_10">10</a>. <a href="https://github.com/LionWeb-io/specification/issues/129">Establish name for entries in serialization/languages? #129</a>
+</div>
+<div class="footnote" id="_footnotedef_11">
+<a href="#_footnoteref_11">11</a>. <a href="https://github.com/LionWeb-io/specification/issues/153">Details on builtin language #153</a>
+</div>
+<div class="footnote" id="_footnotedef_12">
+<a href="#_footnoteref_12">12</a>. <a href="https://github.com/LionWeb-io/specification/issues/128">Refer to EnumLiteral by key? #128</a>
+</div>
+<div class="footnote" id="_footnotedef_13">
+<a href="#_footnoteref_13">13</a>. <a href="https://github.com/LionWeb-io/specification/issues/130">What does Language.version mean semantically? #130</a>
+</div>
+<div class="footnote" id="_footnotedef_14">
+<a href="#_footnoteref_14">14</a>. <a href="https://github.com/LionWeb-io/specification/issues/92">Add version property to M3 Metamodel #92</a>
+</div>
+<div class="footnote" id="_footnotedef_15">
+<a href="#_footnoteref_15">15</a>. <a href="https://github.com/LionWeb-io/specification/issues/89">Establish term meta-pointer #89</a>
+</div>
+<div class="footnote" id="_footnotedef_16">
+<a href="#_footnoteref_16">16</a>. <a href="https://en.wikipedia.org/wiki/Meta-Object_Facility">Meta-Object Facility</a>, also known as M3 model
+</div>
+<div class="footnote" id="_footnotedef_17">
+<a href="#_footnoteref_17">17</a>. <a href="https://github.com/LionWeb-io/specification/issues/37">Repo API: Node serialization #37</a>
+</div>
+<div class="footnote" id="_footnotedef_18">
+<a href="#_footnoteref_18">18</a>. <a href="https://github.com/LionWeb-io/specification/issues/59">Require empty members in serialization #59</a>
+</div>
+<div class="footnote" id="_footnotedef_19">
+<a href="#_footnoteref_19">19</a>. <a href="https://github.com/LionWeb-io/lioncore-java/issues/33">Require empty members in serialization #33</a>
+</div>
+<div class="footnote" id="_footnotedef_20">
+<a href="#_footnoteref_20">20</a>. <a href="https://github.com/LionWeb-io/specification/issues/55">Always provide both containment and parent id in serialization #55</a>
+</div>
+<div class="footnote" id="_footnotedef_21">
+<a href="#_footnoteref_21">21</a>. <a href="https://github.com/LionWeb-io/specification/issues/37#issuecomment-1411857068">Discussion on name `concept`</a>
+</div>
+<div class="footnote" id="_footnotedef_22">
+<a href="#_footnoteref_22">22</a>. <a href="https://github.com/LionWeb-io/specification/issues/184">Rename `concept` to `classifier` in node serialization #184</a>
+</div>
+<div class="footnote" id="_footnotedef_23">
+<a href="#_footnoteref_23">23</a>. <a href="https://github.com/LionWeb-io/specification/issues/156">Keep serialization order between different features? #156</a>
+</div>
+<div class="footnote" id="_footnotedef_24">
+<a href="#_footnoteref_24">24</a>. <a href="https://github.com/LionWeb-io/specification/issues/55#issuecomment-1409321113">Discussion on name `children`</a>
+</div>
+<div class="footnote" id="_footnotedef_25">
+<a href="#_footnoteref_25">25</a>. <a href="https://github.com/LionWeb-io/specification/issues/206">rename `nodes.children` &#8594; `nodes.containments`? #206</a>
+</div>
+<div class="footnote" id="_footnotedef_26">
+<a href="#_footnoteref_26">26</a>. <a href="https://github.com/LionWeb-io/specification/issues/55#issuecomment-1415994431">Discussion on names `references` and `reference`</a>
+</div>
+<div class="footnote" id="_footnotedef_27">
+<a href="#_footnoteref_27">27</a>. <a href="https://github.com/LionWeb-io/specification/issues/150">How to represent annotations in serialization #150</a>
+</div>
+<div class="footnote" id="_footnotedef_28">
+<a href="#_footnoteref_28">28</a>. <a href="https://github.com/LionWeb-io/specification/issues/157">Maintain order in serialization of each containment / reference / annotation #157</a>
+</div>
+<div class="footnote" id="_footnotedef_29">
+<a href="#_footnoteref_29">29</a>. <a href="https://github.com/LionWeb-io/specification/issues/187">Name of `parent` field in serialization #187</a>
+</div>
+<div class="footnote" id="_footnotedef_30">
+<a href="#_footnoteref_30">30</a>. <a href="https://github.com/LionWeb-io/specification/issues/62">How to store invalid text typed at arbitrary places? #62</a>
+</div>
+<div class="footnote" id="_footnotedef_31">
+<a href="#_footnoteref_31">31</a>. <a href="https://github.com/LionWeb-io/specification/issues/34">Repo API: Property value encondings #34</a>
+</div>
+<div class="footnote" id="_footnotedef_32">
+<a href="#_footnoteref_32">32</a>. <a href="https://github.com/LionWeb-io/specification/issues/36">Repo API: Store additional resolve info? #36</a>
+</div>
+<div class="footnote" id="_footnotedef_33">
+<a href="#_footnoteref_33">33</a>. <a href="https://github.com/LionWeb-io/specification/issues/35">Repo API: Represent dangling pointers #35</a>
+</div>
+<div class="footnote" id="_footnotedef_34">
+<a href="#_footnoteref_34">34</a>. <a href="https://github.com/LionWeb-io/specification/issues/186">In serialization, `parent` is inverse of either `children` or `annotations` #186</a>
+</div>
+<div class="footnote" id="_footnotedef_35">
+<a href="#_footnoteref_35">35</a>. <a href="https://github.com/LionWeb-io/specification/issues/9">Supported built-in primitive types #9</a>
+</div>
+<div class="footnote" id="_footnotedef_36">
+<a href="#_footnoteref_36">36</a>. <a href="https://github.com/LionWeb-io/specification/issues/100">Do we allow + prefix for integer property values? #100</a>
+</div>
+<div class="footnote" id="_footnotedef_37">
+<a href="#_footnoteref_37">37</a>. <a href="https://github.com/LionWeb-io/specification/issues/149">Don&#8217;t specify minimum supported range for integer #149</a>
+</div>
+<div class="footnote" id="_footnotedef_38">
+<a href="#_footnoteref_38">38</a>. <a href="https://github.com/LionWeb-io/specification/issues/57">Supported reference targets #57</a>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-02-20 14:57:01 UTC
+</div>
+</div>
+</body>
+</html>
