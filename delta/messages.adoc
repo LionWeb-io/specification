@@ -9,7 +9,7 @@ Both representations express the parameter to be unset.{fn-org427}
 
 === Parameter types
 [horizontal]
-[[additionalInfosType]]additionalInfos:: Optionally empty{fn-org402} list of <<additionalInfo>>s.
+[[additionalInfosType]]AdditionalInfos:: Optionally empty{fn-org402} list of <<additionalInfo>>s.
 
 [[targetNodeType]]TargetNode:: Target's node as <<{m3}.adoc#node-id, id>>.
 
@@ -37,9 +37,8 @@ Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<part
 Thus, the serialization chunk has only the top-level member `nodes`.{fn-org358}
 
 Nodes in the chunk MAY have references to already <<existing-nodes>>, and already <<existing-nodes>> MAY have references to nodes in the chunk.{fn-org327}
-+
+
 Chunks have different constraints, depending on use case:
-+
 
 [horizontal]
 [[singleChunkType, single chunk]]Single:::
@@ -115,8 +114,8 @@ These [[replace-with-new-content-commands]] _replace with new content commands_ 
 
 ==== How to address references
 We refer to references by the tuple of _(parent, reference, index)_.
-Rationale: Both reference `target` and `resolveInfo` can be `null`, so they aren't suitable for identifying the reference.
-However, `target` and `resolveInfo` MUST NOT both be `null`.
+Rationale: Both reference `reference` and `resolveInfo` can be `null`, so they aren't suitable for identifying the reference.
+However, `reference` and `resolveInfo` MUST NOT both be `null`.
 
 include::errors.adoc[]
 
