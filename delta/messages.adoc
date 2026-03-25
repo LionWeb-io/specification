@@ -116,6 +116,7 @@ These [[replace-with-new-content-commands]] _replace with new content commands_ 
 We refer to references by the tuple of _(parent, reference, index)_.
 Rationale: Both reference `reference` and `resolveInfo` can be `null`, so they aren't suitable for identifying the reference.
 However, `reference` and `resolveInfo` MUST NOT both be `null`.
+In addition: if `resolveInfo` is the empty string, then `reference` MUST NOT be `null`.
 
 include::errors.adoc[]
 
