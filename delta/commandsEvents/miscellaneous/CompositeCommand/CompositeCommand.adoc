@@ -19,7 +19,9 @@ All other commands can be distinguished from their event counterparts by looking
 .Parameters
 [[CompositeCommand.parts, `parts`]]parts:: <<commandType>>[]
 
-[[CompositeCommand.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[CompositeCommand.commandId]]commandId:: <<commandIdType>>
+
+[[CompositeCommand.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
 * accumulation of all errors of <<CompositeCommand.parts>>
