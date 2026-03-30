@@ -201,6 +201,9 @@ Refers to the *id* of the target *node*.
 +
 NOTE: The referred *node* can be contained in the processed document, but also can be outside the processed document (i.e. not contained in the processed document).
 *** _null_ if the *id* of the target *node* is not known.
++
+`resolveInfo` and `reference` MUST NOT both be `null`.
+The `reference` value has preference over the `resolveInfo` value in the following sense: if the `reference` value resolves to a node _n~1~_ and the `resolveInfo` value resolves to a different node _n~2~_, then the reference (as a whole) MUST resolve to _n~1~_.
 
 [[annotation]]
 ==== Annotation
