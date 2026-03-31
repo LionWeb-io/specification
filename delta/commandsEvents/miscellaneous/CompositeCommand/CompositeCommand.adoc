@@ -19,7 +19,7 @@ All other commands can be distinguished from their event counterparts by looking
 [[CompositeCommand.parts, `parts`]]parts:: <<commandType>>[]
 
 [[CompositeCommand.commandId]]commandId:: <<commandIdType>>
-Composite commands have their own command id, separate from the command ids of its parts/sub-commands.{fn-org353}
+Composite commands have their own command id, separate from the command ids of its <<CompositeCommand.parts>>.{fn-org353}
 
 [[CompositeCommand.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
