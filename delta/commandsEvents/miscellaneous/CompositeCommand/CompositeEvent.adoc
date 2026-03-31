@@ -7,6 +7,14 @@ We can nest composite events arbitrarily.{fn-org360}
 
 The repository MUST NOT create composite events on its own — (only as a result of composite commands).{fn-org353}
 
+Semantics:{fn-org420}
+
+* A <<evnt-CompositeEvent>> SHOULD be the result of processing exactly one <<cmd-CompositeCommand>>.
+* **No** transactional semantics: all <<CompositeEvent.parts>> are processed in order and independent of the outcome of previous ones.
+** The repo MUST be in valid state after having processed each event.
+** For client implementations: nodes detached and re-attached during a composite event SHOULD keep their identity in clients.
+* Node ids can only be reused after the outermost <<evnt-CompositeEvent>> has been processed.
+
 .Technical name
 `CompositeEvent` footnote:[
 This event is the only one to have a `Event` suffix, which is necessary to distinguish it from its <<cmd-CompositeCommand, `CompositeCommand`>> counterpart.

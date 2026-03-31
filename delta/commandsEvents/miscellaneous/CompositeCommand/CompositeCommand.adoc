@@ -8,6 +8,15 @@ Command groups don't guarantee anything; the repository MAY take the group as a 
 
 We can nest composite commands arbitrarily.{fn-org360}
 
+Semantics:{fn-org420}
+
+* One <<cmd-CompositeCommand>> SHOULD be processed as one <<evnt-CompositeEvent>>.
+* **No** transactional semantics: all <<CompositeCommand.parts>> are processed in order and independent of the outcome of previous ones.
+** The repo MUST be in valid state after having processed each command.
+** For client implementations: nodes detached and re-attached during a composite command SHOULD keep their identity in clients.
+* Node ids can only be reused after the outermost <<cmd-CompositeCommand>> has been processed.
+* If several <<cmd-CompositeCommand>>s overlap due to repository handling (e.g. conflict resolution), the behavior is **UNDEFINED**.
+
 .Technical name
 `CompositeCommand` footnote:[
 This command is the only one to have a `Command` suffix, which is necessary to distinguish it from its <<evnt-CompositeEvent, `CompositeEvent`>> counterpart.
