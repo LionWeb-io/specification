@@ -16,7 +16,7 @@ Semantics:{fn-org420}
 * **No** transactional semantics: all <<CompositeCommand.parts>> are processed in order and independent of the outcome of previous ones.
 ** The repository MUST be in valid state after having processed each command.
 ** For client implementations: nodes detached and re-attached during a composite command SHOULD keep their identity in clients.
-* Node ids can only be reused after the outermost <<cmd-CompositeCommand>> has been processed.
+* Node ids can only be <<reused-nodes, reused>> after the outermost <<cmd-CompositeCommand>> has been processed.
 * If several <<cmd-CompositeCommand>>s overlap due to repository handling (e.g. conflict resolution), the behavior is **UNDEFINED**.
 
 .Technical name

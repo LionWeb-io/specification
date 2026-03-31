@@ -9,11 +9,11 @@ The repository MUST NOT create composite events on its own — (only as a result
 
 Semantics:{fn-org420}
 
-* A <<evnt-CompositeEvent>> SHOULD be the result of processing exactly one <<cmd-CompositeCommand>>.
-* **No** transactional semantics: all <<CompositeEvent.parts>> are processed in order and independent of the outcome of previous ones.
+. A <<evnt-CompositeEvent>> SHOULD be the result of processing exactly one <<cmd-CompositeCommand>>.
+. **No** transactional semantics: all <<CompositeEvent.parts>> are processed in order and independent of the outcome of previous ones.
 ** The repo MUST be in valid state after having processed each event.
 ** For client implementations: nodes detached and re-attached during a composite event SHOULD keep their identity in clients.
-* Node ids can only be reused after the outermost <<evnt-CompositeEvent>> has been processed.
+. Node ids can only be reused after the outermost <<evnt-CompositeEvent>> has been processed.
 
 .Technical name
 `CompositeEvent` footnote:[
@@ -30,7 +30,7 @@ Events contained in <<CompositeEvent.parts>> MUST appear in ascending order of t
 [[CompositeEvent.originCommands]]originCommands:: <<commandSourceType>>[]
 The following constraints apply:{fn-org353}
 +
-* The originCommands of a composite event MUST only mention command ids of composite commands.
+* The originCommands of a composite event MUST only mention command ids of composite commands — (owing to semantics item 1).
 * Composite commands MUST only be mentioned as origins of composite events — not of their <<CompositeEvent.parts>>.
 As an example of relations of composite command `A` with sub-command `B` to composite event `C` and sub-event `D`:
 +
