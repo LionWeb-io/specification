@@ -31,7 +31,6 @@ As an example of relations of composite command `A` with sub-command `B` (which 
 
 [[CompositeEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 Composite events have their own sequence number, separate from the sequence numbers of its parts/sub-events.{fn-org351}
-(This reverses an earlier decision.{fn-org306})
 
 [[CompositeEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
