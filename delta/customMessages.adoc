@@ -2,7 +2,7 @@
 We support custom messages, i.e. messages that match the general structure of delta messages, but with custom content.{fn-org448}
 
 .Technical name
-The technical name MUST adhere to the same format as <<{m3}.adoc#identifiers, identifiers>>, MUST start with `custom-`, and MUST have at least 8 characters.
+The technical name of all custom messages and custom errors MUST adhere to the same format as <<{m3}.adoc#identifiers, identifiers>>, MUST start with `custom_`, and MUST have at least 8 characters.
 
 [[qry-custom]]
 ==== Custom queries
