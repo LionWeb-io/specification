@@ -270,7 +270,7 @@ This additional info is symmetric to <<{delta}.adoc#additionalInfo, additional i
 [[listPartitions, listPartitions]]
 [[partitions, listPartitions]]
 === listPartitions: List available partitions
-Lists all non-language partitions accessible in the repository.
+Lists all partitions{fn-org450} accessible in the repository.
 
 Calling this command MUST NOT change repository contents.
 
