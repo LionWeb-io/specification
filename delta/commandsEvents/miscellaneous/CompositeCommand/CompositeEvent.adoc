@@ -3,9 +3,9 @@
 ===== Composite
 The events in <<CompositeEvent.parts>> have happened in the given order.{fn-org281}
 
-Composite events have their own sequence number{fn-org353}, separate from the sequence numbers of its parts.{fn-351}
-(This reverses an earlier decision.{fn-org306})
 We can nest composite events arbitrarily.{fn-org360}
+
+The repository MUST NOT create composite events on its own — (only as a result of composite commands).{fn-org353}
 
 .Technical name
 `CompositeEvent` footnote:[
@@ -19,8 +19,19 @@ All other events can be distinguished from their command counterparts by looking
 [[CompositeEvent.parts, `parts`]]parts:: <<eventType>>[]
 
 [[CompositeEvent.originCommands]]originCommands:: <<commandSourceType>>[]
+The following constraints apply:{fn-org353}
++
+* The originCommands of a composite event MUST only mention command ids of composite commands.
+* Composite commands MUST only be mentioned as origins of composite events — not of their parts/sub-events.
+As an example of relations of composite command `A` with sub-command `B` (which can be a composite command!) to composite event `C` and sub-event `D` (which then could be a composite event):
++
+* `C` MUST mention `A` in its own originCommands
+* `D` MUST mention `B` in its originCommands
+* `D` MUST NOT mention `A` in its originCommands
 
 [[CompositeEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+Composite events have their own sequence number, separate from the sequence numbers of its parts/sub-events.{fn-org351}
+(This reverses an earlier decision.{fn-org306})
 
 [[CompositeEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 

@@ -6,7 +6,6 @@ The parts are ordered.
 
 Command groups don't guarantee anything; the repository MAY take the group as a hint to resolve conflicts in a different manner.
 
-Composite commands have their own command id, separate from the commmand ids of its parts.{fn-org353}
 We can nest composite commands arbitrarily.{fn-org360}
 
 .Technical name
@@ -20,6 +19,7 @@ All other commands can be distinguished from their event counterparts by looking
 [[CompositeCommand.parts, `parts`]]parts:: <<commandType>>[]
 
 [[CompositeCommand.commandId]]commandId:: <<commandIdType>>
+Composite commands have their own command id, separate from the command ids of its parts/sub-commands.{fn-org353}
 
 [[CompositeCommand.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
