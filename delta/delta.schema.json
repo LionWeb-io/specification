@@ -763,6 +763,12 @@
         "messageKind": {
           "const": "ReconnectRequest"
         },
+        "clientId": {
+          "$ref": "#/$defs/clientId"
+        },
+        "repositoryId": {
+          "$ref": "#/$defs/repositoryId"
+        },
         "participationId": {
           "$ref": "#/$defs/participationId"
         },
@@ -778,14 +784,16 @@
       },
       "required": [
         "messageKind",
+        "clientId",
+        "repositoryId",
         "participationId",
         "lastReceivedSequenceNumber",
         "queryId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
-      "maxProperties": 5
+      "minProperties": 7,
+      "maxProperties": 7
     },
     "ReconnectResponse": {
       "properties": {

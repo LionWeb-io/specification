@@ -8,6 +8,14 @@ Then the client can ask to reconnect to the repository.{fn-org349}
 
 [horizontal]
 .Request parameters
+[[Reconnect.clientId, `clientId`]]clientId:: <<clientIdType>>
+Id of the reconnecting client.
+MUST be the same id as used previously for the same <<Reconnect.participationId>>.{fn-org453}
+
+[[Reconnect.repositoryId, `repositoryId`]]repositoryId:: <<repositoryIdType>>
+Id of the repository to which the client wants to re-establish a participation.
+MUST be the same id as used previously for the same <<Reconnect.participationId>>.{fn-org453}
+
 [[Reconnect.participationId, `participationId`]]participationId:: <<participationIdType>>
 The previously used <<participation-id>>.
 
@@ -30,4 +38,4 @@ Id of this query.
 [[Reconnect.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-invalidParticipation>> If the participation is not valid.{fn-org354}
+* <<err-invalidParticipation>> If the participation is not valid, or the participation doesn't match with <<Reconnect.clientId>> and/or <<Reconnect.repositoryId>>.{fn-org354}
