@@ -1,6 +1,6 @@
 [[qry-ListPartitions]]
 ===== List partitions
-Lists all non-language partitions accessible in the repository.{fn-org361}
+Lists all partitions{fn-org450} accessible in the repository.{fn-org361}
 
 Same functionality as <<{bulk}.adoc#listPartitions, bulk API listPartitions command>>.
 

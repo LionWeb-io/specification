@@ -1,6 +1,6 @@
 [[qry-ListAndSubscribePartitions]]
 ===== List and subscribe partitions
-Lists all non-language partitions accessible in the repository, and subscribes the client to all of them.{fn-org361}
+Lists all partitions{fn-org450} accessible in the repository, and subscribes the client to all of them.{fn-org361}
 The client receives the full contents of all listed partitions.{fn-org425}
 
 See also <<qry-ListPartitions>>.
