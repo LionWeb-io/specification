@@ -3,7 +3,8 @@
 ===== Composite
 The events in <<CompositeEvent.parts>> have happened in the given order.{fn-org281}
 
-Composite events don't mention origin commands on their own; they are only mentioned in each part.{fn-org306}
+Composite events have their own sequence number{fn-org353}, separate from the sequence numbers of its parts.{fn-351}
+(This reverses an earlier decision.{fn-org306})
 We can nest composite events arbitrarily.{fn-org360}
 
 .Technical name

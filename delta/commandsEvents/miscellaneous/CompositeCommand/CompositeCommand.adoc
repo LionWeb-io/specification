@@ -6,7 +6,7 @@ The parts are ordered.
 
 Command groups don't guarantee anything; the repository MAY take the group as a hint to resolve conflicts in a different manner.
 
-Composite commands have a command id on their own.{fn-org353}
+Composite commands have their own command id, separate from the commmand ids of its parts.{fn-org353}
 We can nest composite commands arbitrarily.{fn-org360}
 
 .Technical name
