@@ -774,6 +774,15 @@
         "messageKind": {
           "const": "ReconnectRequest"
         },
+        "deltaProtocolVersion": {
+          "$ref": "#/$defs/deltaProtocolVersion"
+        },
+        "clientId": {
+          "$ref": "#/$defs/clientId"
+        },
+        "repositoryId": {
+          "$ref": "#/$defs/repositoryId"
+        },
         "participationId": {
           "$ref": "#/$defs/participationId"
         },
@@ -789,14 +798,17 @@
       },
       "required": [
         "messageKind",
+        "deltaProtocolVersion",
+        "clientId",
+        "repositoryId",
         "participationId",
         "lastReceivedSequenceNumber",
         "queryId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
-      "maxProperties": 5
+      "minProperties": 8,
+      "maxProperties": 8
     },
     "ReconnectResponse": {
       "properties": {
