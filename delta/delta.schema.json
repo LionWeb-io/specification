@@ -2068,6 +2068,7 @@
         }
       },
       "required": [
+        "messageKind",
         "parts",
         "commandId",
         "additionalInfos"
@@ -3362,6 +3363,12 @@
             "$ref": "#/$defs/Events"
           }
         },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
         "additionalInfos": {
           "$ref": "#/$defs/additionalInfos"
         }
@@ -3369,11 +3376,13 @@
       "required": [
         "messageKind",
         "parts",
+        "originCommands",
+        "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 3,
-      "maxProperties": 3
+      "minProperties": 5,
+      "maxProperties": 5
     },
     "NoOpEvent": {
       "properties": {

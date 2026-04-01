@@ -3,8 +3,16 @@
 ===== Composite
 The events in <<CompositeEvent.parts>> have happened in the given order.{fn-org281}
 
-Composite events don't mention origin commands on their own; they are only mentioned in each part.{fn-org306}
 We can nest composite events arbitrarily.{fn-org360}
+
+The repository MUST NOT create composite events on its own — (only as a result of composite commands).{fn-org353}
+
+Semantics:{fn-org420}
+
+. A <<evnt-CompositeEvent>> SHOULD be the result of processing exactly one <<cmd-CompositeCommand>>.
+. **No** transactional semantics: any client MUST process all <<CompositeEvent.parts>> in order and independent of the outcome of previous ones.
+Nodes detached and re-attached during a composite event SHOULD keep their identity in clients — this is effectively <<reused-nodes, reusing nodes>>.
+* Ids of nodes that are deleted – as in: detached and not re-attached; see also <<{bulk}.adoc#deleted-nodes, this paragraph in the Bulk API>> – by any of the <<CompositeEvent.parts>> are considered free _only after_ the outermost <<evnt-CompositeEvent>> has been processed.
 
 .Technical name
 `CompositeEvent` footnote:[
@@ -16,8 +24,26 @@ All other events can be distinguished from their command counterparts by looking
 [horizontal]
 .Parameters
 [[CompositeEvent.parts, `parts`]]parts:: <<eventType>>[]
+Events contained in <<CompositeEvent.parts>> MUST appear in ascending order of their sequence numbers.{fn-org351}
 
-[[CompositeEvent.protocolMessages]]protocolMessages:: <<protocolMessagesType>>
+[[CompositeEvent.originCommands]]originCommands:: <<commandSourceType>>[]
+The following constraints apply:{fn-org353}
++
+* The originCommands of a composite event MUST only mention command ids of composite commands — (owing to semantics item 1).
+* Composite commands MUST only be mentioned as origins of composite events — not of their <<CompositeEvent.parts>>.
+As an example of relations of composite command `A` with sub-command `B` to composite event `C` and sub-event `D`:
++
+* `C` MUST mention `A` in its own <<CompositeEvent.originCommands>>
+* `D` MUST mention `B` in its <<CompositeEvent.originCommands>>
+* `D` MUST NOT mention `A` in its <<CompositeEvent.originCommands>>
+
+(Note that command `B` can be composite, in which case event `D` would be composite as well.)
+
+[[CompositeEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+Composite events have their own sequence number, separate from the sequence numbers of its <<CompositeEvent.parts>>.{fn-org351}
+This sequence number MUST precede the sequence numbers of all its <<CompositeEvent.parts>>.{fn-org351}
+
+[[CompositeEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
 <<cmd-CompositeCommand>>
