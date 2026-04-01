@@ -324,6 +324,11 @@
     "errorCode": {
       "$ref": "#/$defs/id"
     },
+    "customMessageKind": {
+      "type": "string",
+      "minLength": 8,
+      "pattern": "^custom_[a-zA-Z0-9_-]+$"
+    },
     "additionalInfoDataKey": {
       "$ref": "#/$defs/id"
     },
@@ -412,6 +417,9 @@
         },
         {
           "$ref": "#/$defs/ListAndSubscribePartitionsRequest"
+        },
+        {
+          "$ref": "#/$defs/CustomQueryRequest"
         }
       ]
     },
@@ -452,6 +460,9 @@
         },
         {
           "$ref": "#/$defs/ChunkedQueryResponse"
+        },
+        {
+          "$ref": "#/$defs/CustomQueryResponse"
         }
       ]
     },
@@ -965,6 +976,46 @@
       "minProperties": 4,
       "maxProperties": 5
     },
+    "CustomQueryRequest": {
+      "properties": {
+        "messageKind": {
+          "$ref": "#/$defs/customMessageKind"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": true,
+      "minProperties": 3
+    },
+    "CustomQueryResponse": {
+      "properties": {
+        "messageKind": {
+          "$ref": "#/$defs/customMessageKind"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": true,
+      "minProperties": 3
+    },
     "ErrorResponse": {
       "properties": {
         "messageKind": {
@@ -1108,6 +1159,9 @@
         },
         {
           "$ref": "#/$defs/ChunkedCommand"
+        },
+        {
+          "$ref": "#/$defs/CustomCommand"
         }
       ]
     },
@@ -2043,6 +2097,26 @@
       "minProperties": 6,
       "maxProperties": 6
     },
+    "CustomCommand": {
+      "properties": {
+        "messageKind": {
+          "$ref": "#/$defs/customMessageKind"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": true,
+      "minProperties": 3
+    },
     "Events": {
       "anyOf": [
         {
@@ -2131,6 +2205,9 @@
         },
         {
           "$ref": "#/$defs/ChunkedEvent"
+        },
+        {
+          "$ref": "#/$defs/CustomEvent"
         }
       ]
     },
@@ -3380,6 +3457,30 @@
       "additionalProperties": false,
       "minProperties": 7,
       "maxProperties": 7
+    },
+    "CustomEvent": {
+      "properties": {
+        "messageKind": {
+          "$ref": "#/$defs/customMessageKind"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": true,
+      "minProperties": 4
     }
   }
 }

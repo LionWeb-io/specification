@@ -118,6 +118,8 @@ Rationale: Both reference `reference` and `resolveInfo` can be `null`, so they a
 However, `reference` and `resolveInfo` MUST NOT both be `null`.
 The `reference` value has preference over the `resolveInfo` value in the following sense: if the `reference` value resolves to a node _n~1~_ and the `resolveInfo` value resolves to a different node _n~2~_, then the reference (as a whole) MUST resolve to _n~1~_.
 
+include::customMessages.adoc[]
+
 include::errors.adoc[]
 
 include::queries/queries.adoc[]
