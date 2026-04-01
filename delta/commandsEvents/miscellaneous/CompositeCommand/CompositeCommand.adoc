@@ -12,10 +12,9 @@ We can nest composite commands arbitrarily.{fn-org360}
 
 Semantics:{fn-org420}
 
-* One <<cmd-CompositeCommand>> SHOULD be processed as one <<evnt-CompositeEvent>>.
-* **No** transactional semantics: all <<CompositeCommand.parts>> are processed in order and independent of the outcome of previous ones.
-** The repository MUST be in valid state after having processed each command.
-** For client implementations: nodes detached and re-attached during a composite command SHOULD keep their identity in clients — this is effectively <<reused-nodes, reusing nodes>>.
+* The repository SHOULD process one <<cmd-CompositeCommand>> as one <<evnt-CompositeEvent>>.
+* **No** transactional semantics: the repository MUST process all <<CompositeCommand.parts>> in order and independent of the outcome of previous ones.
+The repository MUST be in valid state after having processed each command.
 * If several <<cmd-CompositeCommand>>s overlap due to repository handling (e.g. conflict resolution), the behavior is **UNDEFINED**.
 
 .Technical name
