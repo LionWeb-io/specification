@@ -1,0 +1,65 @@
+=== Custom messages
+We support custom messages, i.e. messages that match the general structure of delta messages, but with custom content.{fn-org448}
+
+.Technical name
+The technical name of all custom messages and custom errors MUST adhere to the same format as <<{m3}.adoc#identifiers, identifiers>>, MUST start with `custom_`, and MUST have at least 8 characters.
+
+[[qry-custom]]
+==== Custom queries
+A client CAN send custom query messages.
+If the repository understands the custom query, it replies with a matching response; otherwise, the repository MUST send back an <<qry-ErrorResponse>>.
+
+Custom queries MUST have at least the following parameters:
+
+.Required request parameters
+[horizontal]
+[[CustomQuery.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[CustomQuery.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+
+[horizontal]
+.Required response parameters
+[[CustomQuery.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
+Id of this query.
+
+[[CustomQuery.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+
+.Errors
+* <<err-invalidParticipation>>
+* `unsupportedCustomQuery`: Repository does not support this custom query.
+
+
+[[cmd-custom]]
+==== Custom commands
+A client CAN send custom command messages.
+If the repository understands the custom command, it replies with a matching event; otherwise, the repository MUST send back an <<evnt-ErrorEvent>>.
+
+Custom commands MUST have at least the following parameters:
+
+[horizontal]
+.Required parameters
+[[CustomCommand.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
+[[CustomCommand.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+
+.Errors
+* <<err-invalidParticipation>>
+* `unsupportedCustomCommand`: Repository does not support this custom command.
+
+
+[[evnt-custom]]
+==== Custom events
+A repository CAN send custom event messages.
+If the client understands the custom event, it handles the event accordingly; otherwise, the client SHOULD ignore the message.
+
+Custom events MUST have at least the following parameters:
+
+[horizontal]
+.Parameters
+[[CustomEvent.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[CustomEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[CustomEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
