@@ -149,6 +149,14 @@ _Continued chunks_ include:
 * <<cmd-ChunkedCommand>>
 * <<evnt-ChunkedEvent>>
 
+[[compositeEvents, composite events]]
+==== Composite events
+For a composite event, arising from a composite command, the following MUST hold:
+
+* Every client gets a composite event with only the events it's subscribed to.
+* No client gets an empty composite event.
+* The client that sent the composite command always gets the complete composite event, modulo repo changes, e.g. conflict resolutions.
+
 [[additionalInfo, additional info]]
 ==== Additional Info
 Each message optionally can have one or more _additional infos_ consisting of:{fn-org331}{fn-org332}{fn-org430}
