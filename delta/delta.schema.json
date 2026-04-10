@@ -3384,10 +3384,10 @@
       "minProperties": 5,
       "maxProperties": 5
     },
-    "NoOpEvent": {
+    "NoOp": {
       "properties": {
         "messageKind": {
-          "const": "NoOpEvent"
+          "const": "NoOp"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
