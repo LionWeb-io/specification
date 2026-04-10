@@ -35,7 +35,8 @@ Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<part
 
 [[unconstrainedChunkType]]SerializationChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>, but without top-level `serializationFormatVersion` and `languages`  members.
 Thus, the serialization chunk has only the top-level member `nodes`.{fn-org358}
-
++
+--
 Nodes in the chunk MAY have references to already <<existing-nodes>>, and already <<existing-nodes>> MAY have references to nodes in the chunk.{fn-org327}
 
 Chunks have different constraints, depending on use case:
@@ -51,6 +52,7 @@ MUST contain all features of all contained nodes.
 
 [[shallowChunkType, shallow chunk]]Shallow:::
 MAY contain more than one _root node_ (i.e. independent subtrees), and each root node might be incomplete.
+--
 
 [[depthLimitType, depth limit]]DepthLimit:: Depth of returned <<shallowChunkType>>.
 MUST be an integer >= 0, with
