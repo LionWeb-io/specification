@@ -9,13 +9,13 @@
       "$ref": "#/$defs/QueryRequests"
     },
     {
-      "$ref": "#/$defs/QueryResponses"
+      "$ref": "#/$defs/QueryResponsesWithChunked"
     },
     {
-      "$ref": "#/$defs/Commands"
+      "$ref": "#/$defs/CommandsWithChunked"
     },
     {
-      "$ref": "#/$defs/Events"
+      "$ref": "#/$defs/EventsWithChunked"
     }
   ],
   "$defs": {
@@ -459,10 +459,17 @@
           "$ref": "#/$defs/ErrorResponse"
         },
         {
-          "$ref": "#/$defs/ChunkedQueryResponse"
+          "$ref": "#/$defs/CustomQueryResponse"
+        }
+      ]
+    },
+    "QueryResponsesWithChunked": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/QueryResponses"
         },
         {
-          "$ref": "#/$defs/CustomQueryResponse"
+          "$ref": "#/$defs/ChunkedQueryResponse"
         }
       ]
     },
@@ -1170,10 +1177,17 @@
           "$ref": "#/$defs/CompositeCommand"
         },
         {
-          "$ref": "#/$defs/ChunkedCommand"
+          "$ref": "#/$defs/CustomCommand"
+        }
+      ]
+    },
+    "CommandsWithChunked": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Commands"
         },
         {
-          "$ref": "#/$defs/CustomCommand"
+          "$ref": "#/$defs/ChunkedCommand"
         }
       ]
     },
@@ -2217,10 +2231,17 @@
           "$ref": "#/$defs/ErrorEvent"
         },
         {
-          "$ref": "#/$defs/ChunkedEvent"
+          "$ref": "#/$defs/CustomEvent"
+        }
+      ]
+    },
+    "EventsWithChunked": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Events"
         },
         {
-          "$ref": "#/$defs/CustomEvent"
+          "$ref": "#/$defs/ChunkedEvent"
         }
       ]
     },
