@@ -2208,7 +2208,7 @@
           "$ref": "#/$defs/ReferenceChanged"
         },
         {
-          "$ref": "#/$defs/NoOpEvent"
+          "$ref": "#/$defs/NoOp"
         },
         {
           "$ref": "#/$defs/CompositeEvent"
