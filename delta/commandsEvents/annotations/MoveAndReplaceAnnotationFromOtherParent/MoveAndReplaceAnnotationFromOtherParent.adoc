@@ -1,6 +1,11 @@
 [[cmd-MoveAndReplaceAnnotationFromOtherParent]]
 ===== Move annotation from other parent and replace existing annotation
-Move <<existing-nodes, existing node>> <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>> inside <<MoveAndReplaceAnnotationFromOtherParent.newParent>>'s annotations at <<MoveAndReplaceAnnotationFromOtherParent.newIndex>>.
+Move <<existing-nodes, existing node>> <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
+from <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>'s annotations 
+at <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> 
+to <<MoveAndReplaceAnnotationFromOtherParent.newIndex>>
+inside <<MoveAndReplaceAnnotationFromOtherParent.newParent>>'s annotations.
+
 Delete <<existing-nodes, current node>> <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>{fn-org371} at <<MoveAndReplaceAnnotationFromOtherParent.newParent>>'s annotations at <<MoveAndReplaceAnnotationFromOtherParent.newIndex>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
 
@@ -19,6 +24,10 @@ include::MoveAndReplaceAnnotationFromOtherParent-diagram.adoc[]
 [[MoveAndReplaceAnnotationFromOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
 
 [[MoveAndReplaceAnnotationFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveAndReplaceAnnotationFromOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+
+[[MoveAndReplaceAnnotationFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
 [[MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
 

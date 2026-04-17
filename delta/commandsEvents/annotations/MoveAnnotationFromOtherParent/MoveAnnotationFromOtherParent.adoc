@@ -1,6 +1,9 @@
 [[cmd-MoveAnnotationFromOtherParent]]
 ===== Move annotation from other parent
-Move <<existing-nodes, existing node>> <<MoveAnnotationFromOtherParent.movedAnnotation>> inside <<MoveAnnotationFromOtherParent.newParent>>'s annotations at <<MoveAnnotationFromOtherParent.newIndex>>.
+Move <<existing-nodes, existing node>> <<MoveAnnotationFromOtherParent.movedAnnotation>>
+from <<MoveAnnotationFromOtherParent.oldIndex>>
+in <<MoveAnnotationFromOtherParent.oldParent>>'s annotations
+to <<MoveAnnotationFromOtherParent.newParent>>'s annotations at <<MoveAnnotationFromOtherParent.newIndex>>.
 
 [cols="a,a"]
 |===
@@ -17,6 +20,10 @@ include::MoveAnnotationFromOtherParent-diagram.adoc[]
 [[MoveAnnotationFromOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
 
 [[MoveAnnotationFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveAnnotationFromOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+
+[[MoveAnnotationFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
 [[MoveAnnotationFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
 

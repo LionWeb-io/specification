@@ -1,7 +1,11 @@
 [[cmd-MoveChildFromOtherContainmentInSameParent]]
 ===== Move child from other containment in same parent
-Move <<existing-nodes, existing node>> <<MoveChildFromOtherContainmentInSameParent.movedChild>> (currently inside one of <<MoveChildFromOtherContainmentInSameParent.movedChild>>'s parent's containments other than <<MoveChildFromOtherContainmentInSameParent.newContainment>>)
-inside <<MoveChildFromOtherContainmentInSameParent.movedChild>>'s parent's <<MoveChildFromOtherContainmentInSameParent.newContainment>> at <<MoveChildFromOtherContainmentInSameParent.newIndex>>.
+Move <<existing-nodes, existing node>> <<MoveChildFromOtherContainmentInSameParent.movedChild>>
+from <<MoveChildFromOtherContainmentInSameParent.oldContainment>>
+at <<MoveChildFromOtherContainmentInSameParent.oldIndex>>
+to <<MoveChildFromOtherContainmentInSameParent.newContainment>> 
+at <<MoveChildFromOtherContainmentInSameParent.newIndex>>.
+Both containments are inside <<MoveChildFromOtherContainmentInSameParent.parent>>.
 
 [cols="a,a"]
 |===
@@ -15,9 +19,15 @@ include::MoveChildFromOtherContainmentInSameParent-diagram.adoc[]
 
 [horizontal]
 .Parameters
+[[MoveChildFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+
 [[MoveChildFromOtherContainmentInSameParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
 
 [[MoveChildFromOtherContainmentInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveChildFromOtherContainmentInSameParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+
+[[MoveChildFromOtherContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
 [[MoveChildFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
 

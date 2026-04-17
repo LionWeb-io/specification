@@ -1,6 +1,10 @@
 [[cmd-MoveChildInSameContainment]]
 ===== Move child in same containment
-Move <<existing-nodes, existing node>> <<MoveChildInSameContainment.movedChild>> within its current containment to <<MoveChildInSameContainment.newIndex>>.
+Move <<existing-nodes, existing node>> <<MoveChildInSameContainment.movedChild>>
+within its current <<MoveChildInSameContainment.containment>>
+from <<MoveChildInSameContainment.oldIndex>>
+to <<MoveChildInSameContainment.newIndex>>.
+The containment is inside <<MoveChildInSameContainment.parent>>.
 
 [cols="a,a"]
 |===
@@ -14,7 +18,13 @@ include::MoveChildInSameContainment-diagram.adoc[]
 
 [horizontal]
 .Parameters
+[[MoveChildInSameContainment.parent, `parent`]]parent:: <<targetNodeType>>
+
 [[MoveChildInSameContainment.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveChildInSameContainment.containment, `containment`]]containment:: <<metaPointerType>>
+
+[[MoveChildInSameContainment.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
 [[MoveChildInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
 

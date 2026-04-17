@@ -1,6 +1,9 @@
 [[cmd-MoveChildFromOtherContainment]]
 ===== Move child from other containment
-Move <<existing-nodes, existing node>> <<MoveChildFromOtherContainment.movedChild>> inside <<MoveChildFromOtherContainment.newParent>>'s <<MoveChildFromOtherContainment.newContainment>> at <<MoveChildFromOtherContainment.newIndex>>.
+Move <<existing-nodes, existing node>> <<MoveChildFromOtherContainment.movedChild>>
+from <<MoveChildFromOtherContainment.oldContainment>> at <<MoveChildFromOtherContainment.oldIndex>>
+in <<MoveChildFromOtherContainment.oldParent>>
+to <<MoveChildFromOtherContainment.newParent>>'s <<MoveChildFromOtherContainment.newContainment>> at <<MoveChildFromOtherContainment.newIndex>>.
 
 [cols="a,a"]
 |===
@@ -19,6 +22,12 @@ include::MoveChildFromOtherContainment-diagram.adoc[]
 [[MoveChildFromOtherContainment.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
 
 [[MoveChildFromOtherContainment.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveChildFromOtherContainment.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+
+[[MoveChildFromOtherContainment.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+
+[[MoveChildFromOtherContainment.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
 [[MoveChildFromOtherContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
 

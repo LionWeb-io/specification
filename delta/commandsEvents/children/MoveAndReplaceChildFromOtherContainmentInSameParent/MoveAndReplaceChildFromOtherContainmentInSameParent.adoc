@@ -1,8 +1,11 @@
 [[cmd-MoveAndReplaceChildFromOtherContainmentInSameParent]]
 ===== Move child from other containment in same parent and replace existing child
-Move <<existing-nodes, existing node>> <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>> (currently inside one of <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>'s parent's containments other than <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>>)
-inside <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>'s parent's <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>> at <<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>>.
-Delete <<existing-nodes, current child>> <<MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild>>{fn-org371} inside <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>'s parent's <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>> at <<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>>, and all its descendants (including annotation instances).
+Move <<existing-nodes, existing node>> <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>> from <<MoveAndReplaceChildFromOtherContainmentInSameParent.oldContainment>>
+at <<MoveAndReplaceChildFromOtherContainmentInSameParent.oldIndex>>
+to <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>> at <<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>>.
+Both containments are in the same <<MoveAndReplaceChildFromOtherContainmentInSameParent.parent>>.
+
+Delete <<existing-nodes, current child>> <<MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild>>{fn-org371} inside <<MoveAndReplaceChildFromOtherContainmentInSameParent.parent>>'s  <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>> at <<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
 
 [cols="a,a"]
@@ -17,9 +20,15 @@ include::MoveAndReplaceChildFromOtherContainmentInSameParent-diagram.adoc[]
 
 [horizontal]
 .Parameters
+[[MoveAndReplaceChildFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+
 [[MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
 
 [[MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveAndReplaceChildFromOtherContainmentInSameParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+
+[[MoveAndReplaceChildFromOtherContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
 [[MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
 

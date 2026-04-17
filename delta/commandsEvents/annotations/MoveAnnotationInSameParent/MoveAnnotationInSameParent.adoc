@@ -1,6 +1,9 @@
 [[cmd-MoveAnnotationInSameParent]]
 ===== Move annotation in same parent
-Move <<existing-nodes, existing node>> <<MoveAnnotationInSameParent.movedAnnotation>> within the same parent to <<MoveAnnotationInSameParent.newIndex>>.
+Move <<existing-nodes, existing node>> <<MoveAnnotationInSameParent.movedAnnotation>>
+within <<MoveAnnotationInSameParent.parent>>
+from <<MoveAnnotationInSameParent.oldIndex>>
+to <<MoveAnnotationInSameParent.newIndex>>.
 
 [cols="a,a"]
 |===
@@ -14,7 +17,11 @@ include::MoveAnnotationInSameParent-diagram.adoc[]
 
 [horizontal]
 .Parameters
+[[MoveAnnotationInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+
 [[MoveAnnotationInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveAnnotationInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<targetNodeType>>
 
 [[MoveAnnotationInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
 
