@@ -1489,6 +1489,15 @@
         "newIndex": {
           "$ref": "#/$defs/index"
         },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
         "movedChild": {
           "$ref": "#/$defs/targetNode"
         },
@@ -1504,18 +1513,24 @@
         "newParent",
         "newContainment",
         "newIndex",
+        "oldParent",
+        "oldIndex",
+        "oldContainment",
         "movedChild",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 7
+      "minProperties": 10,
+      "maxProperties": 10
     },
     "MoveChildFromOtherContainmentInSameParent": {
       "properties": {
         "messageKind": {
           "const": "MoveChildFromOtherContainmentInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
         },
         "newContainment": {
           "$ref": "#/$defs/metaPointer"
@@ -1523,34 +1538,10 @@
         "newIndex": {
           "$ref": "#/$defs/index"
         },
-        "movedChild": {
-          "$ref": "#/$defs/targetNode"
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
         },
-        "commandId": {
-          "$ref": "#/$defs/commandId"
-        },
-        "additionalInfos": {
-          "$ref": "#/$defs/additionalInfos"
-        }
-      },
-      "required": [
-        "messageKind",
-        "newContainment",
-        "newIndex",
-        "movedChild",
-        "commandId",
-        "additionalInfos"
-      ],
-      "additionalProperties": false,
-      "minProperties": 6,
-      "maxProperties": 6
-    },
-    "MoveChildInSameContainment": {
-      "properties": {
-        "messageKind": {
-          "const": "MoveChildInSameContainment"
-        },
-        "newIndex": {
+        "oldIndex": {
           "$ref": "#/$defs/index"
         },
         "movedChild": {
@@ -1565,14 +1556,59 @@
       },
       "required": [
         "messageKind",
+        "parent",
+        "newContainment",
         "newIndex",
+        "oldContainment",
+        "oldIndex",
         "movedChild",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
-      "maxProperties": 5
+      "minProperties": 9,
+      "maxProperties": 9
+    },
+    "MoveChildInSameContainment": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveChildInSameContainment"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "containment",
+        "newIndex",
+        "oldIndex",
+        "movedChild",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 8
     },
     "MoveAndReplaceChildFromOtherContainment": {
       "properties": {
@@ -1588,6 +1624,15 @@
         "newIndex": {
           "$ref": "#/$defs/index"
         },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
         "replacedChild": {
           "$ref": "#/$defs/targetNode"
         },
@@ -1606,19 +1651,25 @@
         "newParent",
         "newContainment",
         "newIndex",
+        "oldParent",
+        "oldContainment",
+        "oldIndex",
         "replacedChild",
         "movedChild",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 8,
-      "maxProperties": 8
+      "minProperties": 11,
+      "maxProperties": 11
     },
     "MoveAndReplaceChildFromOtherContainmentInSameParent": {
       "properties": {
         "messageKind": {
           "const": "MoveAndReplaceChildFromOtherContainmentInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
         },
         "newContainment": {
           "$ref": "#/$defs/metaPointer"
@@ -1626,38 +1677,10 @@
         "newIndex": {
           "$ref": "#/$defs/index"
         },
-        "replacedChild": {
-          "$ref": "#/$defs/targetNode"
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
         },
-        "movedChild": {
-          "$ref": "#/$defs/targetNode"
-        },
-        "commandId": {
-          "$ref": "#/$defs/commandId"
-        },
-        "additionalInfos": {
-          "$ref": "#/$defs/additionalInfos"
-        }
-      },
-      "required": [
-        "messageKind",
-        "newContainment",
-        "newIndex",
-        "replacedChild",
-        "movedChild",
-        "commandId",
-        "additionalInfos"
-      ],
-      "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 7
-    },
-    "MoveAndReplaceChildInSameContainment": {
-      "properties": {
-        "messageKind": {
-          "const": "MoveAndReplaceChildInSameContainment"
-        },
-        "newIndex": {
+        "oldIndex": {
           "$ref": "#/$defs/index"
         },
         "replacedChild": {
@@ -1675,15 +1698,64 @@
       },
       "required": [
         "messageKind",
+        "parent",
+        "newContainment",
         "newIndex",
+        "oldContainment",
+        "oldIndex",
         "replacedChild",
         "movedChild",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
-      "maxProperties": 6
+      "minProperties": 10,
+      "maxProperties": 10
+    },
+    "MoveAndReplaceChildInSameContainment": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceChildInSameContainment"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "containment",
+        "newIndex",
+        "oldIndex",
+        "replacedChild",
+        "movedChild",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 9
     },
     "AddAnnotation": {
       "properties": {
@@ -1805,34 +1877,10 @@
         "newIndex": {
           "$ref": "#/$defs/index"
         },
-        "movedAnnotation": {
+        "oldParent": {
           "$ref": "#/$defs/targetNode"
         },
-        "commandId": {
-          "$ref": "#/$defs/commandId"
-        },
-        "additionalInfos": {
-          "$ref": "#/$defs/additionalInfos"
-        }
-      },
-      "required": [
-        "messageKind",
-        "newParent",
-        "newIndex",
-        "movedAnnotation",
-        "commandId",
-        "additionalInfos"
-      ],
-      "additionalProperties": false,
-      "minProperties": 6,
-      "maxProperties": 6
-    },
-    "MoveAnnotationInSameParent": {
-      "properties": {
-        "messageKind": {
-          "const": "MoveAnnotationInSameParent"
-        },
-        "newIndex": {
+        "oldIndex": {
           "$ref": "#/$defs/index"
         },
         "movedAnnotation": {
@@ -1847,14 +1895,54 @@
       },
       "required": [
         "messageKind",
+        "newParent",
         "newIndex",
+        "oldParent",
+        "oldIndex",
         "movedAnnotation",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 5,
-      "maxProperties": 5
+      "minProperties": 8,
+      "maxProperties": 8
+    },
+    "MoveAnnotationInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAnnotationInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newIndex",
+        "oldIndex",
+        "movedAnnotation",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 7
     },
     "MoveAndReplaceAnnotationFromOtherParent": {
       "properties": {
@@ -1867,38 +1955,10 @@
         "newIndex": {
           "$ref": "#/$defs/index"
         },
-        "replacedAnnotation": {
+        "oldParent": {
           "$ref": "#/$defs/targetNode"
         },
-        "movedAnnotation": {
-          "$ref": "#/$defs/targetNode"
-        },
-        "commandId": {
-          "$ref": "#/$defs/commandId"
-        },
-        "additionalInfos": {
-          "$ref": "#/$defs/additionalInfos"
-        }
-      },
-      "required": [
-        "messageKind",
-        "newParent",
-        "newIndex",
-        "replacedAnnotation",
-        "movedAnnotation",
-        "commandId",
-        "additionalInfos"
-      ],
-      "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 7
-    },
-    "MoveAndReplaceAnnotationInSameParent": {
-      "properties": {
-        "messageKind": {
-          "const": "MoveAndReplaceAnnotationInSameParent"
-        },
-        "newIndex": {
+        "oldIndex": {
           "$ref": "#/$defs/index"
         },
         "replacedAnnotation": {
@@ -1916,15 +1976,59 @@
       },
       "required": [
         "messageKind",
+        "newParent",
         "newIndex",
+        "oldParent",
+        "oldIndex",
         "replacedAnnotation",
         "movedAnnotation",
         "commandId",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 6,
-      "maxProperties": 6
+      "minProperties": 9,
+      "maxProperties": 9
+    },
+    "MoveAndReplaceAnnotationInSameParent": {
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceAnnotationInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newIndex",
+        "oldIndex",
+        "replacedAnnotation",
+        "movedAnnotation",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 8
     },
     "AddReference": {
       "properties": {
