@@ -45,6 +45,19 @@ Client provided an entry (either a node or a target/resolveInfo) and an index, b
 .Technical name
 `indexNodeMismatch`
 
+[[err-unknownParentNode]]
+==== The parent of a node does not exist 
+Client provided a node with a parent, but the parent node does not exist.
+
+.Technical name
+`unknownParentNode`
+
+[[err-parentMismatch]]
+==== The given parent of a node is not its parent 
+Client provided an existing node with a parent, but the parent does not have the node as a child (annotation or containment).
+
+.Technical name
+`parentMismatch`
 
 [[err-moveWithoutParent]]
 ==== Move without parent

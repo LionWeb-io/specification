@@ -30,8 +30,11 @@ include::MoveAnnotationInSameParent-diagram.adoc[]
 [[MoveAnnotationInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-unknownIndex>> for <<MoveAnnotationInSameParent.newIndex>> (is beyond (the number of annotations of <<MoveAnnotationInSameParent.movedAnnotation>>'s parent) - 1)
+* <<err-unknownIndex>> for <<MoveAnnotationInSameParent.newIndex>> (is beyond (the number of annotations of <<MoveAnnotationInSameParent.parent>> - 1)
+* <<err-unknownIndex>> <<MoveAnnotationInSameParent.movedAnnotation>> is not at  <<MoveAnnotationInSameParent.oldIndex>> of <<MoveAnnotationInSameParent.parent>>
+* <<err-parentMismatch>> <<MoveAnnotationInSameParent.parent>> is not the parent of <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-unknownNode>> for <<MoveAnnotationInSameParent.movedAnnotation>>
+* <<err-unknownNode>> for <<MoveAnnotationInSameParent.parent>>
 * <<err-moveWithoutParent>> for <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-invalidParticipation>>
 

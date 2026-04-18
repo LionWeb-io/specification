@@ -34,6 +34,8 @@ include::MoveAnnotationFromOtherParent-diagram.adoc[]
 .Errors
 * <<err-unknownNode>> for <<MoveAnnotationFromOtherParent.newParent>>
 * <<err-unknownIndex>> for <<MoveAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.newParent>>)
+* <<err-unknownIndex>> for <<MoveAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.oldParent>>)
+* <<err-parentMismatch>> <<MoveAnnotationFromOtherParent.oldParent>> is not the parent of <<MoveAnnotationFromOtherParent.movedAnnotation>>
 * <<err-unknownNode>> for <<MoveAnnotationFromOtherParent.movedAnnotation>>
 * ##?## <<MoveAnnotationFromOtherParent.movedAnnotation>> is already an annotation of <<MoveAnnotationFromOtherParent.newParent>>
 * <<err-invalidParticipation>>

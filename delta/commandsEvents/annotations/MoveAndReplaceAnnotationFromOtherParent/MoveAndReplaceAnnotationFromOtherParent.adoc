@@ -38,10 +38,13 @@ include::MoveAndReplaceAnnotationFromOtherParent-diagram.adoc[]
 [[MoveAndReplaceAnnotationFromOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.newParent>>
+* <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.newParent>> and <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>
 * <<err-unknownIndex>> for <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.newParent>>)
+* <<err-unknownIndex>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>)
+* <<err-parentMismatch>> <<MoveAndReplaceAnnotationFromOtherParent.oldParent>> is not the parent of <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>
+* <<err-indexEntryMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
 * ##?## <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>> is already an annotation of <<MoveAndReplaceAnnotationFromOtherParent.newParent>>
 * <<err-invalidParticipation>>
 
