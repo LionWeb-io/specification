@@ -36,7 +36,13 @@ include::MoveChildFromOtherContainment-diagram.adoc[]
 [[MoveChildFromOtherContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-nodeAlreadyExists>> for <<MoveChildFromOtherContainment.newParent>>
+* <<err-unknownNode>> for <<MoveChildFromOtherContainment.oldParent>>
+* <<err-unknownNode>> for <<MoveChildFromOtherContainment.newParent>>
+* <<err-unknownNode>> for <<MoveChildFromOtherContainment.movedChild>>
+* <<err-parentMismatch>> The node <<MoveChildFromOtherContainment.oldParent>> does not have 
+<<MoveChildFromOtherContainment.movedChild>> as child.
+* <<err-indexEntryMismatch>> for <<MoveChildFromOtherContainment.oldContainment>>/<<MoveChildFromOtherContainment.oldIndex>> and
+<<MoveChildFromOtherContainment.movedChild>>
 * <<err-unknownIndex>> for <<MoveChildFromOtherContainment.newIndex>> (is beyond the number of <<MoveChildFromOtherContainment.newContainment>> entries in <<MoveChildFromOtherContainment.newParent>>)
 * <<err-unknownNode>> for <<MoveChildFromOtherContainment.movedChild>>
 * ##?## <<MoveChildFromOtherContainment.movedChild>> is already a child of <<MoveChildFromOtherContainment.newParent>>

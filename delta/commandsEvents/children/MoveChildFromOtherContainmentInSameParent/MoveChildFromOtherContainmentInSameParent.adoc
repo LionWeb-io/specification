@@ -38,6 +38,7 @@ include::MoveChildFromOtherContainmentInSameParent-diagram.adoc[]
 .Errors
 * <<err-unknownIndex>> for <<MoveChildFromOtherContainmentInSameParent.newIndex>> (is beyond the number of <<MoveChildFromOtherContainmentInSameParent.newContainment>> entries in <<MoveChildFromOtherContainmentInSameParent.movedChild>>'s parent)
 * <<err-unknownNode>> for <<MoveChildFromOtherContainmentInSameParent.movedChild>>
+* <<err-unknownNode>> for <<MoveChildFromOtherContainmentInSameParent.parent>>
 * <<err-moveWithoutParent>> for <<MoveChildFromOtherContainmentInSameParent.movedChild>>
 * <<err-invalidMove>> as <<MoveChildFromOtherContainmentInSameParent.movedChild>> is already a child inside <<MoveChildFromOtherContainmentInSameParent.newContainment>>
 * <<err-invalidParticipation>>

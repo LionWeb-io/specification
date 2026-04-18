@@ -33,9 +33,12 @@ include::MoveChildInSameContainment-diagram.adoc[]
 [[MoveChildInSameContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-unknownIndex>> for <<MoveChildInSameContainment.newIndex>> (is beyond (the number of <<MoveChildInSameContainment.movedChild>>'s containment entries in <<MoveChildInSameContainment.movedChild>>'s parent) - 1)
+* <<err-unknownIndex>> for <<MoveChildInSameContainment.newIndex>> (is beyond (the number of containment entries in <<MoveChildInSameContainment.containment>> - 1)
 * <<err-unknownNode>> for <<MoveChildInSameContainment.movedChild>>
+* <<err-unknownNode>> for <<MoveChildInSameContainment.parent>>
 * <<err-moveWithoutParent>> for <<MoveChildInSameContainment.movedChild>>
+* <<err-indexEntryMismatch>> for <<MoveChildInSameContainment.containment>>/<<MoveChildInSameContainment.oldIndex>> and
+<<MoveChildInSameContainment.movedChild>>
 * <<err-invalidMove>> as <<MoveChildInSameContainment.movedChild>> is already at <<MoveChildInSameContainment.newIndex>>
 * <<err-invalidParticipation>>
 

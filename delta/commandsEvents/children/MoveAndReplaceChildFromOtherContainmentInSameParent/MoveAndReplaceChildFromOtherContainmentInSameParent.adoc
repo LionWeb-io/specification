@@ -41,9 +41,13 @@ include::MoveAndReplaceChildFromOtherContainmentInSameParent-diagram.adoc[]
 .Errors
 * <<err-unknownIndex>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>> (is beyond the number of <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>> entries in <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>'s parent)
 * <<err-unknownNode>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>
+* <<err-unknownNode>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.parent>>
 * <<err-moveWithoutParent>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>
 * <<err-invalidMove>> as <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>> is already a child inside <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>>
-* <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>>/<<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>> and <<MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild>>
+* <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>>/<<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>> and
+<<MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild>>
+* <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.oldContainment>>/<<MoveAndReplaceChildFromOtherContainmentInSameParent.oldIndex>> and
+<<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>
 * <<err-invalidParticipation>>
 
 .Related event

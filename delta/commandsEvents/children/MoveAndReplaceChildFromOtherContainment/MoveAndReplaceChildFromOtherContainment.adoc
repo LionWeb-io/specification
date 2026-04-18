@@ -45,9 +45,11 @@ include::MoveAndReplaceChildFromOtherContainment-diagram.adoc[]
 
 .Errors
 * <<err-unknownNode>> for <<MoveAndReplaceChildFromOtherContainment.newParent>>
+* <<err-unknownNode>> for <<MoveAndReplaceChildFromOtherContainment.oldParent>>
 * <<err-unknownIndex>> for <<MoveAndReplaceChildFromOtherContainment.newIndex>> (is beyond the number of <<MoveAndReplaceChildFromOtherContainment.newContainment>> entries in <<MoveAndReplaceChildFromOtherContainment.newParent>>)
 * <<err-unknownNode>> for <<MoveAndReplaceChildFromOtherContainment.movedChild>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromOtherContainment.newContainment>>/<<MoveAndReplaceChildFromOtherContainment.newIndex>> and <<MoveAndReplaceChildFromOtherContainment.replacedChild>>
+* <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromOtherContainment.oldContainment>>/<<MoveAndReplaceChildFromOtherContainment.oldIndex>> and <<MoveAndReplaceChildFromOtherContainment.movedChild>>
 * ##?## <<MoveAndReplaceChildFromOtherContainment.movedChild>> is already a child of <<MoveAndReplaceChildFromOtherContainment.newParent>>
 * <<err-invalidParticipation>>
 
