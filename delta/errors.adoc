@@ -54,7 +54,8 @@ Client provided a node with a parent, but the parent node does not exist.
 
 [[err-parentMismatch]]
 ==== The given parent of a node is not its parent 
-Client provided an existing node with a parent, but the parent does not have the node as a child (annotation or containment).
+Client provided an existing node N with a parent id in its parent property, but the node with this parent-id
+does not have the existing node N as a child (annotation or containment).
 
 .Technical name
 `parentMismatch`
