@@ -53,6 +53,7 @@ A client can try to <<qry-Reconnect, reconnect>> a participation if the client s
 Each event contains a sequence number.{fn-org341}
 This number is a positive integer that increments by one for each consecutive event.
 It is unique per participation.{fn-org343}
+Events SHOULD be sent across the <<channel>> in increasing order of sequence number.
 
 A <<client>> SHOULD use this number to order incoming events, and check whether the client missed any event.
 
@@ -151,6 +152,7 @@ If the flag is `true`, this is the last _continued chunk_.
 If the flag is `false`, one or more _continued chunk_ messages will follow.{fn-org425}
 
 There MUST NOT be any message in the same <<channel>> between the _chunked message_ and all related _continued chunks_.
+The continued chunks SHOULD be sent across the <<channel>> in increasing order of consecutive sequence number.
 
 _Continued chunks_ include:
 
@@ -158,9 +160,16 @@ _Continued chunks_ include:
 * <<cmd-ChunkedCommand>>
 * <<evnt-ChunkedEvent>>
 
+.Errors
+* Split message already completed: continued chunk received with a higher consecutive sequence number than the first one for which the <<continuedChunkCompletedFlagType>> was `true`.
+* Continued chunk sequence declared complete more than once: multiple continued chunks (with different consecutive sequence numbers) had their <<continuedChunkCompletedFlagType>> set to `true`.
+* Received continued chunk with consecutive sequence number that was already seen.
+* Continued chunks refers to a non-existent query/command/event.
+* Continued chunk refers to a query/command/event that’s not splittable or doesn’t have its <<splitFlagType>> set to `true`.
+
 [[additionalInfo, additional info]]
 ==== Additional Info
-Each message optionally can have one or more _additional infos_ consisting of:{fn-org331}{fn-org332}{fn-org430}
+Each message has zero or more _additional infos_ – i.e., these appear as an optionally empty list – consisting of:{fn-org331}{fn-org332}{fn-org430}
 
 * [[additionalInfo.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the additional info type.
 Some kinds are pre-defined in this specification.
@@ -170,9 +179,9 @@ It is only valid in <<commands>>, i.e. MUST NOT be used for <<events>> or <<quer
 If present and set to `true`, the repository MUST copy the additional info to all events that result from the command, and distribute the additional info to all participants receiving the event.
 
 * [[additionalInfo.message]]`message` is a human-readable string describing the additional info.
-* [[additionalInfo.data]]`data` is a flat map with 0 or more arbitrary keys and values.
+* [[additionalInfo.data]]`data` is a map – meaning, a dictionary-like JSON object – with 0 or more arbitrary keys and values.
 All keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible and MUST be unique within the same additional info.
 All values MUST be strings.
-A _kind_ might imply presence of specific keys in `data`.
+A _kind_ might imply the presence of specific keys in `data`.
 
 This additional info is symmetric to <<{bulk}.adoc#additionalInfo, additional infos in bulk API>>.
