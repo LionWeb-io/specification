@@ -1,6 +1,13 @@
 [[cmd-MoveAndReplaceChildFromOtherContainment]]
 ===== Move child from other containment and replace existing child
-Move <<existing-nodes, existing node>> <<MoveAndReplaceChildFromOtherContainment.movedChild>> inside <<MoveAndReplaceChildFromOtherContainment.newParent>>'s <<MoveAndReplaceChildFromOtherContainment.newContainment>> at <<MoveAndReplaceChildFromOtherContainment.newIndex>>.
+Move <<existing-nodes, existing node>> <<MoveAndReplaceChildFromOtherContainment.movedChild>> 
+from <<MoveAndReplaceChildFromOtherContainment.oldIndex>> 
+inside <<MoveAndReplaceChildFromOtherContainment.oldParent>>'s
+<<MoveAndReplaceChildFromOtherContainment.oldContainment>>
+to <<MoveAndReplaceChildFromOtherContainment.newParent>>'s 
+<<MoveAndReplaceChildFromOtherContainment.newContainment>> at 
+<<MoveAndReplaceChildFromOtherContainment.newIndex>>.
+
 Delete <<existing-nodes, current child>> <<MoveAndReplaceChildFromOtherContainment.replacedChild>>{fn-org371} inside <<MoveAndReplaceChildFromOtherContainment.newParent>>'s <<MoveAndReplaceChildFromOtherContainment.newContainment>> at <<MoveAndReplaceChildFromOtherContainment.newIndex>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
 
@@ -22,6 +29,12 @@ include::MoveAndReplaceChildFromOtherContainment-diagram.adoc[]
 
 [[MoveAndReplaceChildFromOtherContainment.newIndex, `newIndex`]]newIndex:: <<indexType>>
 
+[[MoveAndReplaceChildFromOtherContainment.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+
+[[MoveAndReplaceChildFromOtherContainment.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+
+[[MoveAndReplaceChildFromOtherContainment.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
 [[MoveAndReplaceChildFromOtherContainment.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
 
 [[MoveAndReplaceChildFromOtherContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
@@ -32,9 +45,11 @@ include::MoveAndReplaceChildFromOtherContainment-diagram.adoc[]
 
 .Errors
 * <<err-unknownNode>> for <<MoveAndReplaceChildFromOtherContainment.newParent>>
+* <<err-unknownNode>> for <<MoveAndReplaceChildFromOtherContainment.oldParent>>
 * <<err-unknownIndex>> for <<MoveAndReplaceChildFromOtherContainment.newIndex>> (is beyond the number of <<MoveAndReplaceChildFromOtherContainment.newContainment>> entries in <<MoveAndReplaceChildFromOtherContainment.newParent>>)
 * <<err-unknownNode>> for <<MoveAndReplaceChildFromOtherContainment.movedChild>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromOtherContainment.newContainment>>/<<MoveAndReplaceChildFromOtherContainment.newIndex>> and <<MoveAndReplaceChildFromOtherContainment.replacedChild>>
+* <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromOtherContainment.oldContainment>>/<<MoveAndReplaceChildFromOtherContainment.oldIndex>> and <<MoveAndReplaceChildFromOtherContainment.movedChild>>
 * ##?## <<MoveAndReplaceChildFromOtherContainment.movedChild>> is already a child of <<MoveAndReplaceChildFromOtherContainment.newParent>>
 * <<err-invalidParticipation>>
 
