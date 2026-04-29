@@ -350,9 +350,9 @@
           "type": "string"
         },
         "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/AdditionalInfoData"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       },
@@ -368,23 +368,6 @@
     "additionalInfoDistribute": {
       "type": "boolean",
       "default": false
-    },
-    "AdditionalInfoData": {
-      "properties": {
-        "key": {
-          "$ref": "#/$defs/additionalInfoDataKey"
-        },
-        "value": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "key",
-        "value"
-      ],
-      "additionalProperties": false,
-      "minProperties": 2,
-      "maxProperties": 2
     },
     "QueryRequests": {
       "anyOf": [

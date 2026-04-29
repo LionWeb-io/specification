@@ -19,6 +19,8 @@ The combination of all continued chunks MUST adhere to the same constraints as t
 
 [[ChunkedEvent.continuedChunkCompleted, `continuedChunkCompleted`]]continuedChunkCompleted:: <<continuedChunkCompletedFlagType>>
 
+[[ChunkedEvent.continuedChunkSequenceNumber, `continuedChunkSequenceNumber`]]continuedChunkSequenceNumber:: <<continuedChunkSequenceNumberType>>
+
 [[ChunkedEvent.chunkedEventSequenceNumber]]chunkedEventSequenceNumber:: <<event-sequence-number>>
 Sequence number of the related <<splittableMessage, splittable event>>
 
