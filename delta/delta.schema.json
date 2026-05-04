@@ -72,7 +72,7 @@
       "type": "integer",
       "minimum": 0
     },
-    "DeltaSerializationChunk": {
+    "DeltaChunk": {
       "type": "object",
       "properties": {
         "nodes": {
@@ -584,7 +584,7 @@
           "const": "SubscribeToPartitionContentsResponse"
         },
         "contents": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "split": {
           "$ref": "#/$defs/split"
@@ -900,7 +900,7 @@
           "const": "ListPartitionsResponse"
         },
         "partitions": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "split": {
           "$ref": "#/$defs/split"
@@ -949,7 +949,7 @@
           "const": "ListAndSubscribePartitionsResponse"
         },
         "partitions": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "split": {
           "$ref": "#/$defs/split"
@@ -1046,7 +1046,7 @@
           "const": "ChunkedQueryResponse"
         },
         "chunk": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "continuedChunkCompleted": {
           "$ref": "#/$defs/continuedChunkCompleted"
@@ -1166,7 +1166,7 @@
           "const": "AddPartition"
         },
         "newPartition": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "split": {
           "$ref": "#/$defs/split"
@@ -1346,7 +1346,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "containment": {
           "$ref": "#/$defs/metaPointer"
@@ -1423,7 +1423,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "containment": {
           "$ref": "#/$defs/metaPointer"
@@ -1749,7 +1749,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "index": {
           "$ref": "#/$defs/index"
@@ -1818,7 +1818,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "index": {
           "$ref": "#/$defs/index"
@@ -2170,7 +2170,7 @@
           "const": "ChunkedCommand"
         },
         "chunk": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "continuedChunkCompleted": {
           "$ref": "#/$defs/continuedChunkCompleted"
@@ -2317,7 +2317,7 @@
           "const": "PartitionAdded"
         },
         "newPartition": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "split": {
           "$ref": "#/$defs/split"
@@ -2537,7 +2537,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "containment": {
           "$ref": "#/$defs/metaPointer"
@@ -2623,7 +2623,7 @@
           "const": "ChildReplaced"
         },
         "newChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "replacedChild": {
           "$ref": "#/$defs/targetNode"
@@ -2996,7 +2996,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "index": {
           "$ref": "#/$defs/index"
@@ -3074,7 +3074,7 @@
           "const": "AnnotationReplaced"
         },
         "newAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "replacedAnnotation": {
           "$ref": "#/$defs/targetNode"
@@ -3535,7 +3535,7 @@
           "const": "ChunkedEvent"
         },
         "chunk": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "continuedChunkCompleted": {
           "$ref": "#/$defs/continuedChunkCompleted"

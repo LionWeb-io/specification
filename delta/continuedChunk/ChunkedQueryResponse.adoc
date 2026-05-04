@@ -11,7 +11,7 @@ A <<continuedChunk>> for a <<splittableMessage, splittable>> response of one of 
 
 [horizontal]
 .Response parameters
-[[ChunkedQueryResponse.chunk, `chunk`]]chunk:: <<unconstrainedChunkType>>
+[[ChunkedQueryResponse.chunk, `chunk`]]chunk:: <<deltaChunkType>>
 The continued chunk.
 The combination of all continued chunks MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
 

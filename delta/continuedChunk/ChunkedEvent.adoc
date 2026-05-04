@@ -13,7 +13,7 @@ A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> 
 
 [horizontal]
 .Parameters
-[[ChunkedEvent.chunk, `chunk`]]chunk:: <<unconstrainedChunkType>>
+[[ChunkedEvent.chunk, `chunk`]]chunk:: <<deltaChunkType>>
 The continued chunk.
 The combination of all continued chunks MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
 
