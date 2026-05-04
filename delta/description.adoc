@@ -184,7 +184,7 @@ It is only valid in <<commands>>, i.e. MUST NOT be used for <<events>> or <<quer
 If present and set to `true`, the repository MUST copy the additional info to all events that result from the command, and distribute the additional info to all participants receiving the event.
 
 * [[additionalInfo.message]]`message` is a human-readable string describing the additional info.
-* [[additionalInfo.data]]`data` is a map – meaning, a dictionary-like JSON object – with 0 or more arbitrary keys and values.{fn-org471}
+* [[additionalInfo.data]]`data` is a map with 0 or more arbitrary keys and values.{fn-org471}
 All keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible and MUST be unique within the same additional info.
 All values MUST be strings.
 A _kind_ might imply the presence of specific keys in `data`.
