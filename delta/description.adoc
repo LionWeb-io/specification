@@ -100,8 +100,8 @@ The exceptions are <<splittableMessage, splittable messages>>.
 .Message identity
 Each message has some id unique to the <<participation>> and <<category>>:
 
-* Queries have a <<queryIdType>> (for <<qry-ChunkedQueryResponse>> together with its <<continuedChunkSequenceNumberType>>).
-* Commands have a <<commandIdType>> (for <<cmd-ChunkedCommand>> together with its <<continuedChunkSequenceNumberType>>).{fn-org305}
+* Queries have a <<queryIdType>> (for <<qry-ContinuedQueryResponse>> together with its <<continuedChunkSequenceNumberType>>).
+* Commands have a <<commandIdType>> (for <<cmd-ContinuedCommand>> together with its <<continuedChunkSequenceNumberType>>).{fn-org305}
 * Events have <<eventSequenceType>>.{fn-org423}
 
 [[technicalName, technical name]]
@@ -151,14 +151,14 @@ The _continued chunk_ contains a chunk, a consecutive sequence number, and a <<c
 If the flag is `true`, this is the last _continued chunk_.
 If the flag is `false`, one or more _continued chunk_ messages will follow.{fn-org425}
 
-There MUST NOT be any message in the same <<channel>> between the _chunked message_ and all related _continued chunks_.
+There MUST NOT be any message in the same <<channel>> between the _split message_ and all related _continued chunks_.
 The continued chunks SHOULD be sent across the <<channel>> in increasing order of consecutive sequence number.
 
 _Continued chunks_ include:
 
-* <<qry-ChunkedQueryResponse>>
-* <<cmd-ChunkedCommand>>
-* <<evnt-ChunkedEvent>>
+* <<qry-ContinuedQueryResponse>>
+* <<cmd-ContinuedCommand>>
+* <<evnt-ContinuedEvent>>
 
 .Errors
 * Split message already completed: continued chunk received with a higher consecutive sequence number than the first one for which the <<continuedChunkCompletedFlagType>> was `true`.

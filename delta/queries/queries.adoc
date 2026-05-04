@@ -5,7 +5,7 @@
 
 include::ErrorResponse.adoc[]
 
-include::../continuedChunk/ChunkedQueryResponse.adoc[]
+include::../continuedChunk/ContinuedQueryResponse.adoc[]
 
 include::subscription/Subscription.adoc[]
 

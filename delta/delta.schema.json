@@ -442,7 +442,7 @@
           "$ref": "#/$defs/ErrorResponse"
         },
         {
-          "$ref": "#/$defs/ChunkedQueryResponse"
+          "$ref": "#/$defs/ContinuedQueryResponse"
         },
         {
           "$ref": "#/$defs/CustomQueryResponse"
@@ -1040,10 +1040,10 @@
       "minProperties": 5,
       "maxProperties": 5
     },
-    "ChunkedQueryResponse": {
+    "ContinuedQueryResponse": {
       "properties": {
         "messageKind": {
-          "const": "ChunkedQueryResponse"
+          "const": "ContinuedQueryResponse"
         },
         "chunk": {
           "$ref": "#/$defs/DeltaChunk"
@@ -1153,7 +1153,7 @@
           "$ref": "#/$defs/CompositeCommand"
         },
         {
-          "$ref": "#/$defs/ChunkedCommand"
+          "$ref": "#/$defs/ContinuedCommand"
         },
         {
           "$ref": "#/$defs/CustomCommand"
@@ -2164,10 +2164,10 @@
       "minProperties": 4,
       "maxProperties": 4
     },
-    "ChunkedCommand": {
+    "ContinuedCommand": {
       "properties": {
         "messageKind": {
-          "const": "ChunkedCommand"
+          "const": "ContinuedCommand"
         },
         "chunk": {
           "$ref": "#/$defs/DeltaChunk"
@@ -2304,7 +2304,7 @@
           "$ref": "#/$defs/ErrorEvent"
         },
         {
-          "$ref": "#/$defs/ChunkedEvent"
+          "$ref": "#/$defs/ContinuedEvent"
         },
         {
           "$ref": "#/$defs/CustomEvent"
@@ -3529,10 +3529,10 @@
       "minProperties": 6,
       "maxProperties": 6
     },
-    "ChunkedEvent": {
+    "ContinuedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ChunkedEvent"
+          "const": "ContinuedEvent"
         },
         "chunk": {
           "$ref": "#/$defs/DeltaChunk"
@@ -3543,7 +3543,7 @@
         "continuedChunkSequenceNumber": {
           "$ref": "#/$defs/continuedChunkSequenceNumber"
         },
-        "chunkedEventSequenceNumber": {
+        "continuedEventSequenceNumber": {
           "$ref": "#/$defs/eventSequenceNumber"
         },
         "sequenceNumber": {
@@ -3558,7 +3558,7 @@
         "chunk",
         "continuedChunkCompleted",
         "continuedChunkSequenceNumber",
-        "chunkedEventSequenceNumber",
+        "continuedEventSequenceNumber",
         "sequenceNumber",
         "additionalInfos"
       ],
