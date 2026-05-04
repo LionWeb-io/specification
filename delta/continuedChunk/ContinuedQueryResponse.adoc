@@ -1,6 +1,6 @@
 [[qry-ContinuedQueryResponse]]
 ===== Continued query response
-A <<continuedChunk>> for a <<splittableMessage, splittable>> response of one of the following queries:
+A <<continuedChunk>> for a <<splittableMessage, splittable>> response of one of the following queries:{fn-org472}
 
 * <<qry-SubscribeToPartitionContents>> response <<SubscribeToPartitionContents.contents>>
 * <<qry-ListPartitions>> response <<ListPartitions.partitions>>

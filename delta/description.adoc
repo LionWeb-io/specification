@@ -102,7 +102,7 @@ Each message has some id unique to the <<participation>> and <<category>>:
 
 * Queries have a <<queryIdType>> (for <<qry-ContinuedQueryResponse>> together with its <<continuedChunkSequenceNumberType>>).
 * Commands have a <<commandIdType>> (for <<cmd-ContinuedCommand>> together with its <<continuedChunkSequenceNumberType>>).{fn-org305}
-* Events have <<eventSequenceType>>.{fn-org423}
+* Events have <<eventSequenceType>> (for <<evnt-ContinuedEvent>> together with its <<continuedChunkSequenceNumberType>>).{fn-org423}{fn-org475}
 
 [[technicalName, technical name]]
 .Technical name
@@ -147,12 +147,16 @@ Events::
 .Continued chunks
 _Continued chunks_ continue the chunk from the related <<splittableMessage>>.
 Each _continued chunk_ refers to the <<splittableMessage>> it belongs to.
-The _continued chunk_ contains a chunk, a consecutive sequence number, and a <<continuedChunkCompletedFlagType>> to signal whether it is the last _continued chunk_, or more will follow.
+The _continued chunk_ contains a <<deltaChunkType>>, a <<continuedChunkSequenceNumberType>>, and a <<continuedChunkCompletedFlagType>> to signal whether it is the last _continued chunk_, or more will follow.
 If the flag is `true`, this is the last _continued chunk_.
 If the flag is `false`, one or more _continued chunk_ messages will follow.{fn-org425}
+A <<deltaChunkType>> from a continued chunk is to be “merged” into the chunk from the related <<splittableMessage>> simply by appending the contents of its top-level `nodes` field to the `nodes` field of the chunk of the related <<splittableMessage>>.{fn-org473}
 
 There MUST NOT be any message in the same <<channel>> between the _split message_ and all related _continued chunks_.
-The continued chunks SHOULD be sent across the <<channel>> in increasing order of consecutive sequence number.
+The continued chunks SHOULD be sent across the <<channel>> in increasing order of <<continuedChunkSequenceNumberType>>.
+
+A continued chunk MUST NOT appear as part of a <<cmd-CompositeCommand>> or <<evnt-CompositeEvent>>.
+(That also implies that the <<splitFlagType>> of a <<splittableMessage>> appearing inside a composite MUST either be unset or set to `false`.){fn-org462}
 
 _Continued chunks_ include:
 
@@ -161,11 +165,12 @@ _Continued chunks_ include:
 * <<evnt-ContinuedEvent>>
 
 .Errors
-* Split message already completed: continued chunk received with a higher consecutive sequence number than the first one for which the <<continuedChunkCompletedFlagType>> was `true`.
-* Continued chunk sequence declared complete more than once: multiple continued chunks (with different consecutive sequence numbers) had their <<continuedChunkCompletedFlagType>> set to `true`.
-* Received continued chunk with consecutive sequence number that was already seen.
-* Continued chunks refers to a non-existent query/command/event.
+* Split message already completed: continued chunk received with a higher <<continuedChunkSequenceNumberType>> than a previous one for which the <<continuedChunkSequenceNumberType>> was `true`.
+* <<continuedChunkSequenceNumberType>> declared complete more than once: multiple continued chunks (with different <<continuedChunkSequenceNumberType>>s) had their <<continuedChunkCompletedFlagType>> set to `true`.
+* Received continued chunk with <<continuedChunkSequenceNumberType>> that was already seen.
+* Continued chunk refers to a non-existent query/command/event.
 * Continued chunk refers to a query/command/event that’s not splittable or doesn’t have its <<splitFlagType>> set to `true`.
+* Received message on this <<channel>> before the sequence of continued chunks had finished.
 
 [[additionalInfo, additional info]]
 ==== Additional Info
@@ -179,7 +184,7 @@ It is only valid in <<commands>>, i.e. MUST NOT be used for <<events>> or <<quer
 If present and set to `true`, the repository MUST copy the additional info to all events that result from the command, and distribute the additional info to all participants receiving the event.
 
 * [[additionalInfo.message]]`message` is a human-readable string describing the additional info.
-* [[additionalInfo.data]]`data` is a map – meaning, a dictionary-like JSON object – with 0 or more arbitrary keys and values.
+* [[additionalInfo.data]]`data` is a map – meaning, a dictionary-like JSON object – with 0 or more arbitrary keys and values.{fn-org471}
 All keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible and MUST be unique within the same additional info.
 All values MUST be strings.
 A _kind_ might imply the presence of specific keys in `data`.

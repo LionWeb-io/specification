@@ -1,6 +1,6 @@
 [[cmd-ContinuedCommand]]
 ==== Continued Command
-A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> commands:
+A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> commands:{fn-org472}
 
 * <<cmd-AddPartition>> <<AddPartition.newPartition>>
 * <<cmd-AddChild>> <<AddChild.newChild>>

@@ -1,6 +1,6 @@
 [[evnt-ContinuedEvent]]
 ==== Continued Event
-A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> events:
+A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> events:{fn-org472}
 
 * <<evnt-PartitionAdded>> <<PartitionAdded.newPartition>>
 * <<evnt-ChildAdded>> <<ChildAdded.newChild>>
@@ -19,7 +19,7 @@ The combination of all continued chunks MUST adhere to the same constraints as t
 
 [[ContinuedEvent.continuedChunkCompleted, `continuedChunkCompleted`]]continuedChunkCompleted:: <<continuedChunkCompletedFlagType>>
 
-[[ContinuedEvent.continuedChunkSequenceNumber, `continuedChunkSequenceNumber`]]continuedChunkSequenceNumber:: <<continuedChunkSequenceNumberType>>
+[[ContinuedEvent.continuedChunkSequenceNumber, `continuedChunkSequenceNumber`]]continuedChunkSequenceNumber:: <<continuedChunkSequenceNumberType>>{fn-org475}
 
 [[ContinuedEvent.ContinuedEventSequenceNumber]]ContinuedEventSequenceNumber:: <<event-sequence-number>>
 Sequence number of the related <<splittableMessage, splittable event>>
