@@ -1,7 +1,7 @@
 [[commands]]
 === Commands
 
-include::../continuedChunk/ChunkedCommand.adoc[]
+include::../continuedChunk/ContinuedCommand.adoc[]
 
 include::partitions/CommandPartitions.adoc[]
 

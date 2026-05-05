@@ -53,6 +53,7 @@ A client can try to <<qry-Reconnect, reconnect>> a participation if the client s
 Each event contains a sequence number.{fn-org341}
 This number is a positive integer that increments by one for each consecutive event.
 It is unique per participation.{fn-org343}
+Events SHOULD be sent across the <<channel>> in increasing order of sequence number.
 
 A <<client>> SHOULD use this number to order incoming events, and check whether the client missed any event.
 
@@ -99,9 +100,9 @@ The exceptions are <<splittableMessage, splittable messages>>.
 .Message identity
 Each message has some id unique to the <<participation>> and <<category>>:
 
-* Queries have a <<queryIdType>> (for <<qry-ChunkedQueryResponse>> together with its <<continuedChunkSequenceNumberType>>).
-* Commands have a <<commandIdType>> (for <<cmd-ChunkedCommand>> together with its <<continuedChunkSequenceNumberType>>).{fn-org305}
-* Events have <<eventSequenceType>>.{fn-org423}
+* Queries have a <<queryIdType>> (for <<qry-ContinuedQueryResponse>> together with its <<continuedChunkSequenceNumberType>>).
+* Commands have a <<commandIdType>> (for <<cmd-ContinuedCommand>> together with its <<continuedChunkSequenceNumberType>>).{fn-org305}
+* Events have <<eventSequenceType>> (for <<evnt-ContinuedEvent>> together with its <<continuedChunkSequenceNumberType>>).{fn-org423}{fn-org475}
 
 [[technicalName, technical name]]
 .Technical name
@@ -112,7 +113,7 @@ For example, a JSON binding might have a member containing the technical name of
 
 [[splittableMessage, splittable message]]
 ==== Splittable messages
-All messages containing a <<unconstrainedChunkType>>.
+All messages containing a <<deltaChunkType>>.
 
 A client or repository CAN decide to split up a _splittable message_ if that message would exceed the acceptable message size.
 LionWeb does not define the acceptable message size, it SHOULD be a parameter for each implementation.
@@ -146,21 +147,34 @@ Events::
 .Continued chunks
 _Continued chunks_ continue the chunk from the related <<splittableMessage>>.
 Each _continued chunk_ refers to the <<splittableMessage>> it belongs to.
-The _continued chunk_ contains a chunk, a consecutive sequence number, and a <<continuedChunkCompletedFlagType>> to signal whether it is the last _continued chunk_, or more will follow.
+The _continued chunk_ contains a <<deltaChunkType>>, a <<continuedChunkSequenceNumberType>>, and a <<continuedChunkCompletedFlagType>> to signal whether it is the last _continued chunk_, or more will follow.
 If the flag is `true`, this is the last _continued chunk_.
 If the flag is `false`, one or more _continued chunk_ messages will follow.{fn-org425}
+A <<deltaChunkType>> from a continued chunk is to be “merged” into the chunk from the related <<splittableMessage>> simply by appending the contents of its top-level `nodes` field to the `nodes` field of the chunk of the related <<splittableMessage>>.{fn-org473}
 
-There MUST NOT be any message in the same <<channel>> between the _chunked message_ and all related _continued chunks_.
+There MUST NOT be any message in the same <<channel>> between the _split message_ and all related _continued chunks_.
+The continued chunks SHOULD be sent across the <<channel>> in increasing order of <<continuedChunkSequenceNumberType>>.
+
+A continued chunk MUST NOT appear as part of a <<cmd-CompositeCommand>> or <<evnt-CompositeEvent>>.
+(That also implies that the <<splitFlagType>> of a <<splittableMessage>> appearing inside a composite MUST either be unset or set to `false`.){fn-org462}
 
 _Continued chunks_ include:
 
-* <<qry-ChunkedQueryResponse>>
-* <<cmd-ChunkedCommand>>
-* <<evnt-ChunkedEvent>>
+* <<qry-ContinuedQueryResponse>>
+* <<cmd-ContinuedCommand>>
+* <<evnt-ContinuedEvent>>
+
+.Errors
+* Split message already completed: continued chunk received with a higher <<continuedChunkSequenceNumberType>> than a previous one for which the <<continuedChunkSequenceNumberType>> was `true`.
+* <<continuedChunkSequenceNumberType>> declared complete more than once: multiple continued chunks (with different <<continuedChunkSequenceNumberType>>s) had their <<continuedChunkCompletedFlagType>> set to `true`.
+* Received continued chunk with <<continuedChunkSequenceNumberType>> that was already seen.
+* Continued chunk refers to a non-existent query/command/event.
+* Continued chunk refers to a query/command/event that’s not splittable or doesn’t have its <<splitFlagType>> set to `true`.
+* Received message on this <<channel>> before the sequence of continued chunks had finished.
 
 [[additionalInfo, additional info]]
 ==== Additional Info
-Each message optionally can have one or more _additional infos_ consisting of:{fn-org331}{fn-org332}{fn-org430}
+Each message has zero or more _additional infos_ – i.e., these appear as an optionally empty list – consisting of:{fn-org331}{fn-org332}{fn-org430}
 
 * [[additionalInfo.kind]]`kind` is an <<{m3}.adoc#identifiers, identifier>>-compatible string identifying the additional info type.
 Some kinds are pre-defined in this specification.
@@ -170,9 +184,9 @@ It is only valid in <<commands>>, i.e. MUST NOT be used for <<events>> or <<quer
 If present and set to `true`, the repository MUST copy the additional info to all events that result from the command, and distribute the additional info to all participants receiving the event.
 
 * [[additionalInfo.message]]`message` is a human-readable string describing the additional info.
-* [[additionalInfo.data]]`data` is a flat map with 0 or more arbitrary keys and values.
+* [[additionalInfo.data]]`data` is a map with 0 or more arbitrary keys and values.{fn-org471}
 All keys MUST be <<{m3}.adoc#identifiers, identifier>>-compatible and MUST be unique within the same additional info.
 All values MUST be strings.
-A _kind_ might imply presence of specific keys in `data`.
+A _kind_ might imply the presence of specific keys in `data`.
 
 This additional info is symmetric to <<{bulk}.adoc#additionalInfo, additional infos in bulk API>>.

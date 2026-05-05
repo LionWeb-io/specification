@@ -1,0 +1,25 @@
+[[qry-ContinuedQueryResponse]]
+===== Continued query response
+A <<continuedChunk>> for a <<splittableMessage, splittable>> response of one of the following queries:{fn-org472}
+
+* <<qry-SubscribeToPartitionContents>> response <<SubscribeToPartitionContents.contents>>
+* <<qry-ListPartitions>> response <<ListPartitions.partitions>>
+* <<qry-ListAndSubscribePartitions>> response <<ListAndSubscribePartitions.partitions>>
+
+.Technical name
+`ContinuedQueryResponse`
+
+[horizontal]
+.Response parameters
+[[ContinuedQueryResponse.chunk, `chunk`]]chunk:: <<unconstrainedChunkType>>
+The continued chunk.
+The combination of all continued chunks MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
+
+[[ContinuedQueryResponse.continuedChunkCompleted, `continuedChunkCompleted`]]continuedChunkCompleted:: <<continuedChunkCompletedFlagType>>
+
+[[ContinuedQueryResponse.continuedChunkSequenceNumber, `continuedChunkSequenceNumber`]]continuedChunkSequenceNumber:: <<continuedChunkSequenceNumberType>>
+
+[[ContinuedQueryResponse.queryId, `queryId`]]queryId:: <<queryIdType>>
+Id of the related <<splittableMessage, splittable query>>
+
+[[ContinuedQueryResponse.additionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>

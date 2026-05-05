@@ -72,7 +72,7 @@
       "type": "integer",
       "minimum": 0
     },
-    "DeltaSerializationChunk": {
+    "DeltaChunk": {
       "type": "object",
       "properties": {
         "nodes": {
@@ -350,9 +350,9 @@
           "type": "string"
         },
         "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/AdditionalInfoData"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       },
@@ -368,23 +368,6 @@
     "additionalInfoDistribute": {
       "type": "boolean",
       "default": false
-    },
-    "AdditionalInfoData": {
-      "properties": {
-        "key": {
-          "$ref": "#/$defs/additionalInfoDataKey"
-        },
-        "value": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "key",
-        "value"
-      ],
-      "additionalProperties": false,
-      "minProperties": 2,
-      "maxProperties": 2
     },
     "QueryRequests": {
       "anyOf": [
@@ -459,7 +442,7 @@
           "$ref": "#/$defs/ErrorResponse"
         },
         {
-          "$ref": "#/$defs/ChunkedQueryResponse"
+          "$ref": "#/$defs/ContinuedQueryResponse"
         },
         {
           "$ref": "#/$defs/CustomQueryResponse"
@@ -601,7 +584,7 @@
           "const": "SubscribeToPartitionContentsResponse"
         },
         "contents": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "split": {
           "$ref": "#/$defs/split"
@@ -917,7 +900,7 @@
           "const": "ListPartitionsResponse"
         },
         "partitions": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "split": {
           "$ref": "#/$defs/split"
@@ -966,7 +949,7 @@
           "const": "ListAndSubscribePartitionsResponse"
         },
         "partitions": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "split": {
           "$ref": "#/$defs/split"
@@ -1057,13 +1040,13 @@
       "minProperties": 5,
       "maxProperties": 5
     },
-    "ChunkedQueryResponse": {
+    "ContinuedQueryResponse": {
       "properties": {
         "messageKind": {
-          "const": "ChunkedQueryResponse"
+          "const": "ContinuedQueryResponse"
         },
         "chunk": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "continuedChunkCompleted": {
           "$ref": "#/$defs/continuedChunkCompleted"
@@ -1170,7 +1153,7 @@
           "$ref": "#/$defs/CompositeCommand"
         },
         {
-          "$ref": "#/$defs/ChunkedCommand"
+          "$ref": "#/$defs/ContinuedCommand"
         },
         {
           "$ref": "#/$defs/CustomCommand"
@@ -1183,7 +1166,7 @@
           "const": "AddPartition"
         },
         "newPartition": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "split": {
           "$ref": "#/$defs/split"
@@ -1363,7 +1346,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "containment": {
           "$ref": "#/$defs/metaPointer"
@@ -1440,7 +1423,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "containment": {
           "$ref": "#/$defs/metaPointer"
@@ -1766,7 +1749,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "index": {
           "$ref": "#/$defs/index"
@@ -1835,7 +1818,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "index": {
           "$ref": "#/$defs/index"
@@ -2181,13 +2164,13 @@
       "minProperties": 4,
       "maxProperties": 4
     },
-    "ChunkedCommand": {
+    "ContinuedCommand": {
       "properties": {
         "messageKind": {
-          "const": "ChunkedCommand"
+          "const": "ContinuedCommand"
         },
         "chunk": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "continuedChunkCompleted": {
           "$ref": "#/$defs/continuedChunkCompleted"
@@ -2321,7 +2304,7 @@
           "$ref": "#/$defs/ErrorEvent"
         },
         {
-          "$ref": "#/$defs/ChunkedEvent"
+          "$ref": "#/$defs/ContinuedEvent"
         },
         {
           "$ref": "#/$defs/CustomEvent"
@@ -2334,7 +2317,7 @@
           "const": "PartitionAdded"
         },
         "newPartition": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "split": {
           "$ref": "#/$defs/split"
@@ -2554,7 +2537,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "containment": {
           "$ref": "#/$defs/metaPointer"
@@ -2640,7 +2623,7 @@
           "const": "ChildReplaced"
         },
         "newChild": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "replacedChild": {
           "$ref": "#/$defs/targetNode"
@@ -3013,7 +2996,7 @@
           "$ref": "#/$defs/targetNode"
         },
         "newAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "index": {
           "$ref": "#/$defs/index"
@@ -3091,7 +3074,7 @@
           "const": "AnnotationReplaced"
         },
         "newAnnotation": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "replacedAnnotation": {
           "$ref": "#/$defs/targetNode"
@@ -3546,13 +3529,13 @@
       "minProperties": 6,
       "maxProperties": 6
     },
-    "ChunkedEvent": {
+    "ContinuedEvent": {
       "properties": {
         "messageKind": {
-          "const": "ChunkedEvent"
+          "const": "ContinuedEvent"
         },
         "chunk": {
-          "$ref": "#/$defs/DeltaSerializationChunk"
+          "$ref": "#/$defs/DeltaChunk"
         },
         "continuedChunkCompleted": {
           "$ref": "#/$defs/continuedChunkCompleted"
@@ -3560,7 +3543,7 @@
         "continuedChunkSequenceNumber": {
           "$ref": "#/$defs/continuedChunkSequenceNumber"
         },
-        "chunkedEventSequenceNumber": {
+        "continuedEventSequenceNumber": {
           "$ref": "#/$defs/eventSequenceNumber"
         },
         "sequenceNumber": {
@@ -3575,7 +3558,7 @@
         "chunk",
         "continuedChunkCompleted",
         "continuedChunkSequenceNumber",
-        "chunkedEventSequenceNumber",
+        "continuedEventSequenceNumber",
         "sequenceNumber",
         "additionalInfos"
       ],

@@ -27,12 +27,12 @@ activate clientQuery
 clientQuery -> clientQuery: bufferPartialResponse
 deactivate clientQuery
 
-repoQuery -->> clientQuery: <i>ChunkedQueryResponse</i> \n  chunk:[nodeB]\n  continuedChunkCompleted: false\n  continuedChunkSequenceNumber: 0\n  queryId: "qry-1"
+repoQuery -->> clientQuery: <i>ContinuedQueryResponse</i> \n  chunk:[nodeB]\n  continuedChunkCompleted: false\n  continuedChunkSequenceNumber: 0\n  queryId: "qry-1"
 activate clientQuery
 clientQuery -> clientQuery: bufferPartialResponse
 deactivate clientQuery
 
-repoQuery -->> clientQuery: <i>ChunkedQueryResponse</i> \n  chunk:[nodeC, annotationD]\n  continuedChunkCompleted: true\n  continuedChunkSequenceNumber: 1\n  queryId: "qry-1"
+repoQuery -->> clientQuery: <i>ContinuedQueryResponse</i> \n  chunk:[nodeC, annotationD]\n  continuedChunkCompleted: true\n  continuedChunkSequenceNumber: 1\n  queryId: "qry-1"
 deactivate repoQuery
 activate clientQuery
 clientQuery -> clientQuery: composeResponse
@@ -50,11 +50,11 @@ editor -> editor: draw(nodeA, nodeB, nodeC)
 5. Repository responds to query with id `qry-1` with contents of 2 nodes: `partitionNode`, `nodeA` (details omitted).
 Repository decided the response is too big, and splits it up (`split: true`).
 6. Client receives split query result and buffers partial response.
-7. Repository continues its response to query with id `qry-1` with another <<qry-ChunkedQueryResponse>> with chunk of 1 node: `nodeB` (details omitted).
-This is the first in the sequence of chunked responses (`continuedChunkSequenceNumber: 0`) and there will be another response (`continuedChunkCompleted: false`).
+7. Repository continues its response to query with id `qry-1` with another <<qry-ContinuedQueryResponse>> with chunk of 1 node: `nodeB` (details omitted).
+This is the first in the sequence of continued chunks (`continuedChunkSequenceNumber: 0`) and there will be another continued chunk (`continuedChunkCompleted: false`).
 8. Client receives the next split query result and buffers partial response.
-9. Repository continues its response to query with id `qry-1` with another <<qry-ChunkedQueryResponse>> with chunk of 2 nodes: `nodeC`, `annotationD` (details omitted).
-This is the second in the sequence of chunked responses (`continuedChunkSequenceNumber: 1`) and there will _not_ be another response (`continuedChunkCompleted: true`).
+9. Repository continues its response to query with id `qry-1` with another <<qry-ContinuedQueryResponse>> with chunk of 2 nodes: `nodeC`, `annotationD` (details omitted).
+This is the second in the sequence of continued chunks (`continuedChunkSequenceNumber: 1`) and there will _not_ be another continued chunk (`continuedChunkCompleted: true`).
 10. Client receives the final next split query result and composes the response.
 11. Client forwards information to editor.
 12. Client draws `nodeA` and `nodeB`.
