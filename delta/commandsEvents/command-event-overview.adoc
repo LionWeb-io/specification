@@ -149,8 +149,8 @@ include::children/MoveAndReplaceChildFromOtherContainmentInSameParent/MoveAndRep
 <<evnt-ChildMovedAndReplacedInSameContainment>>
 
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
-inside ``parent``'s `containment` at `newIndex`, replacing `replacedChild` that was previously inside ``parent``'s `containment` at `newIndex`.
-include::children/MoveAndReplaceChildInSameContainment/MoveAndReplaceChildInSameContainment-diagram.adoc[]
+inside ``parent``'s `containment`, replacing `replacedChild` that was previously inside ``parent``'s `containment` at `oldIndex` + `indexOffset`.
+include::children/MoveAndReplaceChildInSameContainment/MoveAndReplaceChildInSameContainment-diagram-offset-positive.adoc[] (if `indexOffset` > 0)
 
 |===
 

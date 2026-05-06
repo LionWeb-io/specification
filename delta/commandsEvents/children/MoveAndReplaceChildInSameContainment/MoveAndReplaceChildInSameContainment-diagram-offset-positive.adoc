@@ -1,5 +1,5 @@
 |
-[plantuml,moveAndReplaceChildInSameContainment-before,svg]
+[plantuml,moveAndReplaceChildInSameContainment-positive-offset-before,svg]
 ----
 !include commandEventOverviewStyle.puml
 left to right direction
@@ -21,16 +21,15 @@ replacedChild *-> replacedDescendant #Red
 parent *--> siblingA: containment\n[oldIndex - 1]
 parent *--> movedChild: containment\n[<color #red>oldIndex</color>]
 parent *--> siblingB: containment\n[oldIndex + 1]
-parent *--> replacedChild #Red: containment\n[newIndex]
-parent *--> siblingC: containment\n[newIndex + 1]
+parent *--> siblingC: containment\n[oldIndex + indexOffset - 1]
+parent *--> replacedChild #Red: containment\n[oldIndex + indexOffset]
 
 movedChild *-> descendant
 
-siblingA -[hidden]> movedChild
-siblingB -[hidden]> replacedChild
+descendant -[hidden] siblingC
 ----
 |
-[plantuml, moveAndReplaceChildInSameContainment-after, svg]
+[plantuml, moveAndReplaceChildInSameContainment-positive-offset-after, svg]
 ----
 !include commandEventOverviewStyle.puml
 left to right direction
@@ -46,11 +45,9 @@ class descendant #Orange
 
 parent *--> siblingA: containment\n[oldIndex - 1]
 parent *--> siblingB: containment\n[oldIndex]
-parent *--> movedChild: containment\n[<color #Blue>newIndex</color>]
-parent *--> siblingC: containment\n[newIndex + 1]
+parent *--> siblingC: containment\n[oldIndex + indexOffset - 2]
+parent *--> movedChild: containment\n[<color #Blue>oldIndex + indexOffset - 1</color>]
 
 movedChild *-> descendant
-
-siblingA -[hidden]> siblingB
-siblingB -[hidden]> movedChild
+siblingC -[hidden]> movedChild
 ----

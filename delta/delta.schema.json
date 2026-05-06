@@ -319,6 +319,9 @@
       "type": "integer",
       "minimum": 0
     },
+    "relativeIndex": {
+      "type": "integer"
+    },
     "additionalInfoKind": {
       "$ref": "#/$defs/id"
     },
@@ -1721,11 +1724,11 @@
         "containment": {
           "$ref": "#/$defs/metaPointer"
         },
-        "newIndex": {
-          "$ref": "#/$defs/index"
-        },
         "oldIndex": {
           "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/relativeIndex"
         },
         "replacedChild": {
           "$ref": "#/$defs/targetNode"
@@ -1744,8 +1747,8 @@
         "messageKind",
         "parent",
         "containment",
-        "newIndex",
         "oldIndex",
+        "indexOffset",
         "replacedChild",
         "movedChild",
         "commandId",
@@ -2976,6 +2979,9 @@
         "oldIndex": {
           "$ref": "#/$defs/index"
         },
+        "indexOffset": {
+          "$ref": "#/$defs/relativeIndex"
+        },
         "replacedChild": {
           "$ref": "#/$defs/targetNode"
         },
@@ -2999,6 +3005,7 @@
         "parent",
         "containment",
         "oldIndex",
+        "indexOffset",
         "replacedChild",
         "replacedDescendants",
         "originCommands",
