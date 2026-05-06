@@ -33,7 +33,7 @@ Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<part
 [[queryIdType]]QueryId:: Id of a query.
 Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique per <<participation>>.
 
-[[deltaChunkType]]SerializationChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>, but without top-level `serializationFormatVersion` and `languages`  members.
+[[deltaChunkType]]DeltaChunk:: Chunk of nodes as described in <<{serialization}.adoc, serialization specification>>, but without top-level `serializationFormatVersion` and `languages`  members.
 Thus, the serialization chunk has only the top-level member `nodes`.{fn-org358}{fn-org474}
 +
 --
