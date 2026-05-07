@@ -410,6 +410,16 @@
     "QueryResponses": {
       "oneOf": [
         {
+          "$ref": "#/$defs/NonContinuedQueryResponses"
+        },
+        {
+          "$ref": "#/$defs/ContinuedQueryResponse"
+        }
+      ]
+    },
+    "NonContinuedQueryResponses": {
+      "oneOf": [
+        {
           "$ref": "#/$defs/SubscribeToChangingPartitionsResponse"
         },
         {
@@ -441,9 +451,6 @@
         },
         {
           "$ref": "#/$defs/ErrorResponse"
-        },
-        {
-          "$ref": "#/$defs/ContinuedQueryResponse"
         },
         {
           "$ref": "#/$defs/CustomQueryResponse"
@@ -1076,6 +1083,16 @@
     "Commands": {
       "oneOf": [
         {
+          "$ref": "#/$defs/NonContinuedCommands"
+        },
+        {
+          "$ref": "#/$defs/ContinuedCommand"
+        }
+      ]
+    },
+    "NonContinuedCommands": {
+      "oneOf": [
+        {
           "$ref": "#/$defs/AddPartition"
         },
         {
@@ -1152,9 +1169,6 @@
         },
         {
           "$ref": "#/$defs/CompositeCommand"
-        },
-        {
-          "$ref": "#/$defs/ContinuedCommand"
         },
         {
           "$ref": "#/$defs/CustomCommand"
@@ -2145,7 +2159,7 @@
         "parts": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/Commands"
+            "$ref": "#/$defs/NonContinuedCommands"
           }
         },
         "commandId": {
@@ -2219,6 +2233,16 @@
       "minProperties": 3
     },
     "Events": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NonContinuedEvents"
+        },
+        {
+          "$ref": "#/$defs/ContinuedEvent"
+        }
+      ]
+    },
+    "NonContinuedEvents": {
       "oneOf": [
         {
           "$ref": "#/$defs/PartitionAdded"
@@ -2303,9 +2327,6 @@
         },
         {
           "$ref": "#/$defs/ErrorEvent"
-        },
-        {
-          "$ref": "#/$defs/ContinuedEvent"
         },
         {
           "$ref": "#/$defs/CustomEvent"
@@ -3448,7 +3469,7 @@
         "parts": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/Events"
+            "$ref": "#/$defs/NonContinuedEvents"
           }
         },
         "originCommands": {
