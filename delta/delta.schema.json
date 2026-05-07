@@ -4,6 +4,7 @@
   "title": "LionWeb Delta Protocol",
   "description": "Version: 0",
   "type": "object",
+  "$comment": "using anyOf for this sum type, because because CustomQuery{Request|Response} are indistinguishable; for all other sum types, using oneOf to make matching as exclusive as possible",
   "anyOf": [
     {
       "$ref": "#/$defs/QueryRequests"
@@ -370,7 +371,7 @@
       "default": false
     },
     "QueryRequests": {
-      "anyOf": [
+      "oneOf": [
         {
           "$ref": "#/$defs/SubscribeToChangingPartitionsRequest"
         },
@@ -407,7 +408,7 @@
       ]
     },
     "QueryResponses": {
-      "anyOf": [
+      "oneOf": [
         {
           "$ref": "#/$defs/SubscribeToChangingPartitionsResponse"
         },
@@ -1073,7 +1074,7 @@
       "maxProperties": 6
     },
     "Commands": {
-      "anyOf": [
+      "oneOf": [
         {
           "$ref": "#/$defs/AddPartition"
         },
@@ -2218,7 +2219,7 @@
       "minProperties": 3
     },
     "Events": {
-      "anyOf": [
+      "oneOf": [
         {
           "$ref": "#/$defs/PartitionAdded"
         },
