@@ -4,6 +4,7 @@
   "title": "LionWeb Delta Protocol",
   "description": "Version: 0",
   "type": "object",
+  "$comment": "using anyOf for this sum type, because because CustomQuery{Request|Response} are indistinguishable; for all other sum types, using oneOf to make matching as exclusive as possible",
   "anyOf": [
     {
       "$ref": "#/$defs/QueryRequests"
@@ -370,7 +371,7 @@
       "default": false
     },
     "QueryRequests": {
-      "anyOf": [
+      "oneOf": [
         {
           "$ref": "#/$defs/SubscribeToChangingPartitionsRequest"
         },
@@ -407,7 +408,17 @@
       ]
     },
     "QueryResponses": {
-      "anyOf": [
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NonContinuedQueryResponses"
+        },
+        {
+          "$ref": "#/$defs/ContinuedQueryResponse"
+        }
+      ]
+    },
+    "NonContinuedQueryResponses": {
+      "oneOf": [
         {
           "$ref": "#/$defs/SubscribeToChangingPartitionsResponse"
         },
@@ -440,9 +451,6 @@
         },
         {
           "$ref": "#/$defs/ErrorResponse"
-        },
-        {
-          "$ref": "#/$defs/ContinuedQueryResponse"
         },
         {
           "$ref": "#/$defs/CustomQueryResponse"
@@ -1073,7 +1081,17 @@
       "maxProperties": 6
     },
     "Commands": {
-      "anyOf": [
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NonContinuedCommands"
+        },
+        {
+          "$ref": "#/$defs/ContinuedCommand"
+        }
+      ]
+    },
+    "NonContinuedCommands": {
+      "oneOf": [
         {
           "$ref": "#/$defs/AddPartition"
         },
@@ -1151,9 +1169,6 @@
         },
         {
           "$ref": "#/$defs/CompositeCommand"
-        },
-        {
-          "$ref": "#/$defs/ContinuedCommand"
         },
         {
           "$ref": "#/$defs/CustomCommand"
@@ -2144,7 +2159,7 @@
         "parts": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/Commands"
+            "$ref": "#/$defs/NonContinuedCommands"
           }
         },
         "commandId": {
@@ -2218,7 +2233,17 @@
       "minProperties": 3
     },
     "Events": {
-      "anyOf": [
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NonContinuedEvents"
+        },
+        {
+          "$ref": "#/$defs/ContinuedEvent"
+        }
+      ]
+    },
+    "NonContinuedEvents": {
+      "oneOf": [
         {
           "$ref": "#/$defs/PartitionAdded"
         },
@@ -2302,9 +2327,6 @@
         },
         {
           "$ref": "#/$defs/ErrorEvent"
-        },
-        {
-          "$ref": "#/$defs/ContinuedEvent"
         },
         {
           "$ref": "#/$defs/CustomEvent"
@@ -3447,7 +3469,7 @@
         "parts": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/Events"
+            "$ref": "#/$defs/NonContinuedEvents"
           }
         },
         "originCommands": {
