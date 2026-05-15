@@ -5,7 +5,7 @@ The <<ChildMovedAndReplacedInSameContainment.movedChild>> was previously at inde
 The new index of the moved child equals <<ChildMovedAndReplacedInSameContainment.newIndex>>.
 <<ChildMovedAndReplacedInSameContainment.replacedChild>>, and all its <<ChildMovedAndReplacedInSameContainment.replacedDescendants>>{fn-org370}, have been deleted, WITHOUT changing references to any of the deleted nodes.{fn-org469}
 
-In case <<ChildMovedAndReplacedInSameContainment.indexOffset>> > 0: all children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> whose indices previously were > <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to the next lower index, *except* the one that was previously at index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>).
+In case <<ChildMovedAndReplacedInSameContainment.indexOffset>> > 0: all children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> whose indices previously were > <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to the next lower index, _except_ the one that was previously at index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>).
 The value of <<ChildMovedAndReplacedInSameContainment.newIndex>> (which is the new index of <<ChildMovedAndReplacedInSameContainment.movedChild>>) is then (calculated as): (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>> - 1).
 Example: +
 `oldIndex=3`:    `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +

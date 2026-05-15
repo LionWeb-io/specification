@@ -190,3 +190,70 @@ All values MUST be strings.
 A _kind_ might imply the presence of specific keys in `data`.
 
 This additional info is symmetric to <<{bulk}.adoc#additionalInfo, additional infos in bulk API>>.
+
+
+[[manipulationInsideSingleList, manipulation inside a single list]]
+=== Characteristics of manipulation inside a single list
+
+There are two scenarios that involve manipulating a single list, and which benefit from some clarification with regard to how they work index-wise:
+
+1. Moving an item to a different index – the _target_ index – in a list, moving other list items aside as necessary.
+2. Moving an item to a different index – the _target_ index – in a list, *and* replacing the list item at that target index.
+
+For both scenarios, assume we have a list of _n_ > 1 items of some type.
+In our context, the items would be nodes, and the type one declared by a classifier’s feature.
+We also have an _old index_ `oldIndex`, which is an integer from 0 upto n-1.
+
+.Notation/shorthand
+We write _l_..._r_ for the set of integers _l_, (_l_ + 1), (_l_ + 2), ..., _r_; which includes _l_ and _r_ themselves.
+In effect: `oldIndex` MUST be in 0...(_n_ - 1).
+
+
+[[justMovingAnItem, moving an item (without replacing)]]
+==== Moving an item (without replacing)
+
+In addition to an `oldIndex`, we get passed a `newIndex`: an integer from 0...(_n_ - 1), that is NOT equal to `oldIndex` (as that would mean an idempotent action).
+The result of moving the item that’s initially at index `oldIndex` is at index `newIndex` afterwards, with other items moved out of the way, as necessary.
+
+Example (with `newIndex` > `oldIndex`): +
+`oldIndex=3`: `A[0] B[1] C[2] *D[3]* E[4] F[5] G[6] H[7]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _E[3] F[4]_ *D[5]* _G[6]_ H[7]` +
+
+Example (with `newIndex` < `oldIndex`): +
+`oldIndex=3`: `A[0] B[1] C[2] *D[3]* E[4] F[5] G[6] H[7]` -> +
+`newIndex=1`: `A[0] *D[1]* _B[2] C[3]_ E[4] F[5] D[5] G[6] H[7]` +
+
+In both cases, only the items with initial indices in min(`oldIndex`, `newIndex`)...max(`oldIndex`, `newIndex`) are affected.
+If `newIndex` > `oldIndex`, then the items with initial indices in (`oldIndex` + 1)...`newIndex` are moved to the next lower index.
+If `newIndex` < `oldIndex`, then the items with initial indices in `newIndex`..(`oldIndex` - 1) are moved to the next higher index.
+
+// .Pathological cases
+//
+// `oldIndex=0`: `*A[0]* B[1] C[2] D[3] E[4] F[5] G[6] H[7]` -> +
+// `newIndex=7`: `_B[0] C[1] D[2] E[3] F[4] G[5] H[6]_ *A[7]*` +
+//
+// `oldIndex=7`: `A[0] B[1] C[2] D[3] E[4] F[5] G[6] *H[7]*` -> +
+// `newIndex=0`: `*H[0]* _A[1] B[2] C[3] D[4] E[5] F[6] G[7]_` +
+
+// The item at index `oldIndex` is moved `indexOffset` indices forward/down/to the right (if `indexOffset` > 0) or backward/up/to the left (if `indexOffset` < 0), shifting other items out of way.
+// The result of moving the item at index `oldIndex` by `indexOffset` indices is the same as moving that item `indexOffset` times 1 index forward/down/to the right (if `indexOffset` > 0), or (-`indexOffset`) times 1 index backward/up/to the left (if `indexOffset` < 0).
+
+
+[[movingAndReplacing, moving an item and replacing another item]]
+==== Moving an item and replacing another item
+
+To avoid any potential ambiguities and misunderstanding, we decided to describe this scenario on the basis of an initial (“old”) situation and an _index offset_ that determines the target index.
+So, in addition to an `oldIndex`, we get passed an _index offset_ `indexOffset`, which is an integer unequal to 0, and such that (`oldIndex` + `indexOffset`) is an integer from 0 upto n-1.
+Set `targetIndex` = (`oldIndex` + `indexOffset`).
+
+We describe this scenario as a two-step process:
+
+1. The list’s item with index `targetIndex` is set to item with initial index `oldIndex`, overwriting and effectively replacing the item to replace, which gets deleted as a result.
+Now, the list contains the same number of items as before, just with two occurrences of the item with initial inde `oldIndex`, namely at indices `oldIndex` and `targetIndex`.
+2. The item with index `oldIndex` is removed from the list, with the items after it being moved to the next lower index — this includes the item moved in step 1 itself if (`indexOffset` > 0).
+Now, the list contains one less item than before.
+
+For clarity, we can discuss two distinct “sub” scenarios depending on whether `indexOffset` is positive or negative.
+
+*TODO*
+

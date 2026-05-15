@@ -1,7 +1,7 @@
 [[cmd-MoveAndReplaceChildInSameContainment]]
 ===== Move child in same containment and replace existing child
 Move <<existing-nodes, existing node>> <<MoveAndReplaceChildInSameContainment.movedChild>> within <<MoveAndReplaceChildInSameContainment.containment>>
-from index <<MoveAndReplaceChildInSameContainment.oldIndex>> to the target index <<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>,
+from index <<MoveAndReplaceChildInSameContainment.oldIndex>> to the target index (<<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>),
 replacing <<existing-nodes, current child>> <<MoveAndReplaceChildInSameContainment.replacedChild>>{fn-org371} inside <<MoveAndReplaceChildInSameContainment.containment>> at the target index,
 including all its descendants (including annotation instances).{fn-org469}
 <<MoveAndReplaceChildInSameContainment.replacedChild>> subsequently gets deleted.
