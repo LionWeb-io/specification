@@ -1,38 +1,48 @@
 [[evnt-ChildMovedAndReplacedInSameContainment]]
 ===== Child moved in same containment and replaced existing child
-<<existing-nodes, Existing node>> <<ChildMovedAndReplacedInSameContainment.movedChild>> (previously inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> at <<ChildMovedAndReplacedInSameContainment.oldIndex>>) has replaced the <<existing-nodes, existing>> <<ChildMovedAndReplacedInSameContainment.replacedChild>> inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> at <<ChildMovedAndReplacedInSameContainment.newIndex>>.
-<<ChildMovedAndReplacedInSameContainment.replacedChild>>, and all its <<ChildMovedAndReplacedInSameContainment.replacedDescendants>>{fn-org370}, have been deleted.
+<<existing-nodes, Existing node>> <<ChildMovedAndReplacedInSameContainment.movedChild>> moved to replace <<existing-nodes, existing node>> <<ChildMovedAndReplacedInSameContainment.replacedChild>> inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>>.
+The <<ChildMovedAndReplacedInSameContainment.movedChild>> was previously at index <<ChildMovedAndReplacedInSameContainment.oldIndex>>, and the <<ChildMovedAndReplacedInSameContainment.replacedChild>> was previously at index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>).
+The new index of the moved child equals <<ChildMovedAndReplacedInSameContainment.newIndex>>.
+<<ChildMovedAndReplacedInSameContainment.replacedChild>>, and all its <<ChildMovedAndReplacedInSameContainment.replacedDescendants>>{fn-org370}, have been deleted, WITHOUT changing references to any of the deleted nodes.{fn-org469}
 
-If <<ChildMovedAndReplacedInSameContainment.oldIndex>> < <<ChildMovedAndReplacedInSameContainment.newIndex>>: All other children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> with previous index > <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to next lower index.
+In case <<ChildMovedAndReplacedInSameContainment.indexOffset>> > 0: all children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> whose indices previously were > <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to the next lower index, _except_ the one that was previously at index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>).
+The value of <<ChildMovedAndReplacedInSameContainment.newIndex>> (which is the new index of <<ChildMovedAndReplacedInSameContainment.movedChild>>) is then (calculated as): (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>> - 1).
 Example: +
-`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
-`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_`
+`oldIndex=3`:    `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`indexOffset=3`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_` +
+`newIndex=5`
 
-If <<ChildMovedAndReplacedInSameContainment.oldIndex>> > <<ChildMovedAndReplacedInSameContainment.newIndex>>: All other children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> with previous index >= <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to next lower index.
+In case <<ChildMovedAndReplacedInSameContainment.indexOffset>> <  0: all children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> whose indices previously were > <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to next lower index.
+The value of <<ChildMovedAndReplacedInSameContainment.newIndex>> (which is the new index of <<ChildMovedAndReplacedInSameContainment.movedChild>>) is then (calculated as): (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>).
 Example: +
 `oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
-`newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
-
-<<ChildMovedAndReplacedInSameContainment.oldIndex>> MUST NOT be equal to <<ChildMovedAndReplacedInSameContainment.newIndex>>.
+`indexOffset=-3`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_` +
+`newIndex=1`
 
 .Technical name
 `ChildMovedAndReplacedInSameContainment`
 
 [horizontal]
 .Parameters
-[[ChildMovedAndReplacedInSameContainment.newIndex, `newIndex`]]newIndex:: <<indexType>>
-
-[[ChildMovedAndReplacedInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
-
 [[ChildMovedAndReplacedInSameContainment.parent, `parent`]]parent:: <<targetNodeType>>
 
 [[ChildMovedAndReplacedInSameContainment.containment, `containment`]]containment:: <<metaPointerType>>
 
 [[ChildMovedAndReplacedInSameContainment.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
+[[ChildMovedAndReplacedInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+
+[[ChildMovedAndReplacedInSameContainment.indexOffset, `indexOffset`]]indexOffset:: <<relativeIndexType>>
+MUST NOT be 0. +
+(<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>) MUST NOT be < 0, or >= (the number of children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>>).
+
 [[ChildMovedAndReplacedInSameContainment.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
 
 [[ChildMovedAndReplacedInSameContainment.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+
+[[ChildMovedAndReplacedInSameContainment.newIndex, `newIndex`]]newIndex:: <<indexType>>
+MUST NOT be equal to <<ChildMovedAndReplacedInSameContainment.oldIndex>>. +
+MUST be equal to (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>> - 1) if <<ChildMovedAndReplacedInSameContainment.indexOffset>> > 0, and equal to (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>) if <<ChildMovedAndReplacedInSameContainment.indexOffset>> < 0.
 
 [[ChildMovedAndReplacedInSameContainment.originCommands]]originCommands:: <<commandSourceType>>[]
 
