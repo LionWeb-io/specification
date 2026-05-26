@@ -26,6 +26,9 @@ parent *--> siblingC: containment\n[oldIndex + 1]
 
 movedChild *-> descendant
 
+siblingA -[hidden]> replacedChild
+replacedDescendant -[hidden]> siblingB
+siblingB -[hidden]> movedChild
 descendant -[hidden]> siblingC
 ----
 |
@@ -50,5 +53,7 @@ parent *--> siblingC: containment\n[oldIndex]
 
 movedChild *-> descendant
 
-descendant -[hidden] siblingB
+siblingA -[hidden]> movedChild
+descendant -[hidden]> siblingB
+siblingB -[hidden]> siblingC
 ----

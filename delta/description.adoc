@@ -195,24 +195,27 @@ This additional info is symmetric to <<{bulk}.adoc#additionalInfo, additional in
 [[manipulationInsideSingleList, manipulation inside a single list]]
 === Characteristics of manipulation inside a single list
 
+To help keeping this description succinct, we (re-)establish some:
+
+.Notation/shorthand
+We write _lower_.._upper_ for the set of integers _lower_, (_lower_ + 1), (_lower_ + 2), ..., _upper_; which includes _lower_ and _upper_ themselves.
+
 There are two scenarios that involve manipulating a single list, and which benefit from some clarification with regard to how they work index-wise:
 
 1. Moving an item to a different index – the _target_ index – in a list, moving other list items aside as necessary.
 2. Moving an item to a different index – the _target_ index – in a list, *and* replacing the list item at that target index.
 
-For both scenarios, assume we have a list of _n_ > 1 items of some type.
-In our context, the items would be nodes, and the type one declared by a classifier’s feature.
-We also have an _old index_ `oldIndex`, which is an integer from 0 upto n-1.
+For both scenarios, assume we have a list of _n_ > 1 items of some type — presumably nodes, either children or annotations.
+We also have an _old index_ `oldIndex`, which MUST be an integer in 0..(_n_ - 1).
 
-.Notation/shorthand
-We write _l_..._r_ for the set of integers _l_, (_l_ + 1), (_l_ + 2), ..., _r_; which includes _l_ and _r_ themselves.
-In effect: `oldIndex` MUST be in 0...(_n_ - 1).
 
 
 [[justMovingAnItem, moving an item (without replacing)]]
 ==== Moving an item (without replacing)
 
-In addition to an `oldIndex`, we get passed a `newIndex`: an integer from 0...(_n_ - 1), that is NOT equal to `oldIndex` (as that would mean an idempotent action).
+This pertains to the following commands and events: <<cmd-MoveChildInSameContainment>>, <<cmd-MoveAnnotationInSameParent>>, <<evnt-ChildMovedInSameContainment>>, <<evnt-AnnotationMovedInSameParent>>.
+
+In addition to an `oldIndex`, we get passed a `newIndex`: an integer from 0..(_n_ - 1), that is NOT equal to `oldIndex` (as that would mean an idempotent action).
 The result of moving the item that’s initially at index `oldIndex` is at index `newIndex` afterwards, with other items moved out of the way, as necessary.
 
 Example (with `newIndex` > `oldIndex`): +
@@ -223,8 +226,8 @@ Example (with `newIndex` < `oldIndex`): +
 `oldIndex=3`: `A[0] B[1] C[2] *D[3]* E[4] F[5] G[6] H[7]` -> +
 `newIndex=1`: `A[0] *D[1]* _B[2] C[3]_ E[4] F[5] D[5] G[6] H[7]` +
 
-In both cases, only the items with initial indices in min(`oldIndex`, `newIndex`)...max(`oldIndex`, `newIndex`) are affected.
-If `newIndex` > `oldIndex`, then the items with initial indices in (`oldIndex` + 1)...`newIndex` are moved to the next lower index.
+In both cases, only the items with initial indices in min(`oldIndex`, `newIndex`)..max(`oldIndex`, `newIndex`) are affected.
+If `newIndex` > `oldIndex`, then the items with initial indices in (`oldIndex` + 1)..`newIndex` are moved to the next lower index.
 If `newIndex` < `oldIndex`, then the items with initial indices in `newIndex`..(`oldIndex` - 1) are moved to the next higher index.
 
 // .Pathological cases
@@ -241,6 +244,8 @@ If `newIndex` < `oldIndex`, then the items with initial indices in `newIndex`..(
 
 [[movingAndReplacing, moving an item and replacing another item]]
 ==== Moving an item and replacing another item
+
+This pertains to the following commands and events: <<cmd-MoveAndReplaceChildInSameContainment>>, <<cmd-MoveAndReplaceAnnotationInSameParent>>, <<evnt-ChildMovedAndReplacedInSameContainment>>, <<evnt-AnnotationMovedAndReplacedInSameParent>>.
 
 To avoid any potential ambiguities and misunderstanding, we decided to describe this scenario on the basis of an initial (“old”) situation and an _index offset_ that determines the target index.
 So, in addition to an `oldIndex`, we get passed an _index offset_ `indexOffset`, which is an integer unequal to 0, and such that (`oldIndex` + `indexOffset`) is an integer from 0 upto n-1.

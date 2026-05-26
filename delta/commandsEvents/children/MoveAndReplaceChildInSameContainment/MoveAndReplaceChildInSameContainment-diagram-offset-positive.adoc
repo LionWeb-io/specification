@@ -26,7 +26,9 @@ parent *--> replacedChild #Red: containment\n[oldIndex + indexOffset]
 
 movedChild *-> descendant
 
-descendant -[hidden] siblingC
+siblingA -[hidden]> movedChild
+descendant -[hidden]> siblingB
+siblingB -[hidden]> siblingC
 ----
 |
 [plantuml, moveAndReplaceChildInSameContainment-positive-offset-after, svg]
@@ -49,5 +51,7 @@ parent *--> siblingC: containment\n[oldIndex + indexOffset - 2]
 parent *--> movedChild: containment\n[<color #Blue>oldIndex + indexOffset - 1</color>]
 
 movedChild *-> descendant
+siblingA -[hidden]> siblingB
+siblingB -[hidden]> siblingC
 siblingC -[hidden]> movedChild
 ----
