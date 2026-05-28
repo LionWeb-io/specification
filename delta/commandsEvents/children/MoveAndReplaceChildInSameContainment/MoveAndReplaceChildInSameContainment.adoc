@@ -8,13 +8,18 @@ including all its descendants (including annotation instances).{fn-org469}
 This does NOT change references to any of the deleted nodes.{fn-org285}
 The containment is inside <<MoveAndReplaceChildInSameContainment.parent>>.
 
-The corresponding manipulation of a list of – implementation-level! – references to contained nodes can be described as a two-step process:
+The corresponding manipulation of a list of pointersfootnote:[I.e., language-level references to objects] to contained nodes can be described as a two-step process:
 
 Set `targetIndex =` <<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>.
 
-1. The list’s entry with index `targetIndex` is set to the child to move (at index <<MoveAndReplaceChildInSameContainment.oldIndex>>), overwriting and effectively replacing the child to replace, which gets deleted as a result.
-Now, the list contains the same number of elements as before, just with two references to <<MoveAndReplaceChildInSameContainment.movedChild>>, namely at indices <<MoveAndReplaceChildInSameContainment.oldIndex>> and `targetIndex`.
-2. The entry with index `oldIndex` is removed from the list, with elements after being moved to the next lower index — this includes the moved child itself if <<MoveAndReplaceChildInSameContainment.indexOffset>> > 0.
+1. The list’s entry with index `targetIndex` is set to the child to move (at index <<MoveAndReplaceChildInSameContainment.oldIndex>>),
+overwriting and effectively replacing the child to replace, which gets deleted as a result.
+Now, the list contains the same number of elements as before,
+just with two pointers to <<MoveAndReplaceChildInSameContainment.movedChild>>,
+namely at indices <<MoveAndReplaceChildInSameContainment.oldIndex>> and `targetIndex`.
+2. The entry with index `oldIndex` is removed from the list,
+with elements after being moved to the next lower index
+— this includes the moved child itself if <<MoveAndReplaceChildInSameContainment.indexOffset>> > 0.
 Now, the list contains one less element than before.
 
 This leaves two distinct scenarios depending on whether <<MoveAndReplaceChildInSameContainment.indexOffset>> is positive or negative.
@@ -63,7 +68,8 @@ MUST NOT be 0.
 [[MoveAndReplaceChildInSameContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-unknownIndex>> for <<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>> is smaller than 0 or greater than (the number of entries in <<MoveAndReplaceChildInSameContainment.containment>> in <<MoveAndReplaceChildInSameContainment.parent>> - 1)
+* <<err-unknownIndex>> for <<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>
+is smaller than 0 or greater than (the number of entries in <<MoveAndReplaceChildInSameContainment.containment>> in <<MoveAndReplaceChildInSameContainment.parent>> - 1)
 * <<err-parentMismatch>> <<MoveAndReplaceChildInSameContainment.parent>> does not have <<MoveAndReplaceChildInSameContainment.movedChild>> as child.
 * <<err-unknownNode>> for <<MoveAndReplaceChildInSameContainment.movedChild>>
 * <<err-unknownNode>> for <<MoveAndReplaceChildInSameContainment.replacedChild>>

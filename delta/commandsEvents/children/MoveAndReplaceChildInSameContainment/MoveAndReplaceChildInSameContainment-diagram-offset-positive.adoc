@@ -10,6 +10,7 @@ class siblingA
 class movedChild #Orange
 class siblingB
 class siblingC
+class siblingC
 
 class descendant #Orange
 
@@ -23,12 +24,15 @@ parent *--> movedChild: containment\n[<color #red>oldIndex</color>]
 parent *--> siblingB: containment\n[oldIndex + 1]
 parent *--> siblingC: containment\n[oldIndex + indexOffset - 1]
 parent *--> replacedChild #Red: containment\n[oldIndex + indexOffset]
+parent *--> siblingD: containment\n[oldIndex + indexOffset + 1]
 
 movedChild *-> descendant
 
 siblingA -[hidden]> movedChild
 descendant -[hidden]> siblingB
 siblingB -[hidden]> siblingC
+siblingC -[hidden]> replacedChild
+replacedDescendant -[hidden]> siblingD
 ----
 |
 [plantuml, moveAndReplaceChildInSameContainment-positive-offset-after, svg]
@@ -42,6 +46,7 @@ class siblingA
 class movedChild #Orange
 class siblingB
 class siblingC
+class siblingD
 
 class descendant #Orange
 
@@ -49,9 +54,12 @@ parent *--> siblingA: containment\n[oldIndex - 1]
 parent *--> siblingB: containment\n[oldIndex]
 parent *--> siblingC: containment\n[oldIndex + indexOffset - 2]
 parent *--> movedChild: containment\n[<color #Blue>oldIndex + indexOffset - 1</color>]
+parent *--> siblingD: containment\n[oldIndex + indexOffset]
 
 movedChild *-> descendant
+
 siblingA -[hidden]> siblingB
 siblingB -[hidden]> siblingC
 siblingC -[hidden]> movedChild
+descendant -[hidden]> siblingD
 ----
