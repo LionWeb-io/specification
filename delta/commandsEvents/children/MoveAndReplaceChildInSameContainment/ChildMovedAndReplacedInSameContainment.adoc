@@ -41,7 +41,7 @@ Example: +
 
 [[ChildMovedAndReplacedInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
 
-[[ChildMovedAndReplacedInSameContainment.indexOffset, `indexOffset`]]indexOffset:: <<relativeIndexType>>
+[[ChildMovedAndReplacedInSameContainment.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
 MUST NOT be 0. +
 (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>)
 MUST NOT be < 0,

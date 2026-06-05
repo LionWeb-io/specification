@@ -25,7 +25,7 @@ Can be `null`.
 Cannot be `null`.
 Use value `0` for <<{m3}.adoc#multiplicity, single links>>.
 
-[[relativeIndexType]]Index:: Relative position inside a multiple link or annotations as integer.
+[[indexOffsetType]]Index:: Relative position inside a multiple link or annotations as integer.
 Cannot be `0` or `null`.
 
 [[commandType]]Command:: Any <<commands, command>>.

@@ -1,34 +1,28 @@
 [[evnt-ChildMovedInSameContainment]]
 ===== Child moved in same containment
-<<existing-nodes, Existing node>> <<ChildMovedInSameContainment.movedChild>> (previously inside <<ChildMovedInSameContainment.parent>>'s <<ChildMovedInSameContainment.containment>> at <<ChildMovedInSameContainment.oldIndex>>) has been moved
-inside <<ChildMovedInSameContainment.parent>>'s <<ChildMovedInSameContainment.containment>> at <<ChildMovedInSameContainment.newIndex>>.
+<<existing-nodes, Existing node>> <<MoveChildInSameContainment.movedChild>>
+that was initially at index <<MoveChildInSameContainment.oldIndex>>
+within the <<MoveChildInSameContainment.containment>> inside <<MoveChildInSameContainment.parent>>
+is moved by <<MoveChildInSameContainment.indexOffset>> indices
+to index (<<MoveChildInSameContainment.oldIndex>> + <<MoveChildInSameContainment.indexOffset>>).
 
-If <<ChildMovedInSameContainment.oldIndex>> < <<ChildMovedInSameContainment.newIndex>>: All other children inside <<ChildMovedInSameContainment.parent>>'s <<ChildMovedInSameContainment.containment>> with previous index > <<ChildMovedInSameContainment.oldIndex>> and previous index <= <<ChildMovedInSameContainment.newIndex>> have been moved to next lower index.
-Example: +
-`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
-`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* F[6]`
-
-If <<ChildMovedInSameContainment.oldIndex>> > <<ChildMovedInSameContainment.newIndex>>: All other children inside <<ChildMovedInSameContainment.parent>>'s <<ChildMovedInSameContainment.containment>> with previous index >= <<ChildMovedInSameContainment.newIndex>> and previous index < <<ChildMovedInSameContainment.oldIndex>> have been moved to next lower index.
-Example: +
-`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6]` -> +
-`newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6]`
-
-<<ChildMovedInSameContainment.oldIndex>> MUST NOT be equal to <<ChildMovedInSameContainment.newIndex>>.
+This conforms to <<justMovingANode, the action of moving a node in a single list>> — see that section for more information, diagrams, and examples.
 
 .Technical name
 `ChildMovedInSameContainment`
 
 [horizontal]
 .Parameters
-[[ChildMovedInSameContainment.newIndex, `newIndex`]]newIndex:: <<indexType>>
-
-[[ChildMovedInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
-
 [[ChildMovedInSameContainment.parent, `parent`]]parent:: <<targetNodeType>>
 
 [[ChildMovedInSameContainment.containment, `containment`]]containment:: <<metaPointerType>>
 
 [[ChildMovedInSameContainment.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[ChildMovedInSameContainment.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
+MUST NOT be 0.
+
+[[ChildMovedInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
 
 [[ChildMovedInSameContainment.originCommands]]originCommands:: <<commandSourceType>>[]
 

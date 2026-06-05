@@ -2,9 +2,8 @@
 ===== Move child in same containment and replace existing child
 Move <<existing-nodes, existing node>> <<MoveAndReplaceChildInSameContainment.movedChild>> within <<MoveAndReplaceChildInSameContainment.containment>>
 from index <<MoveAndReplaceChildInSameContainment.oldIndex>> to the target index (<<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>),
-replacing <<existing-nodes, current child>> <<MoveAndReplaceChildInSameContainment.replacedChild>>{fn-org371} inside <<MoveAndReplaceChildInSameContainment.containment>> at the target index,
-including all its descendants (including annotation instances).{fn-org469}
-<<MoveAndReplaceChildInSameContainment.replacedChild>> subsequently gets deleted.
+replacing <<existing-nodes, current child>> <<MoveAndReplaceChildInSameContainment.replacedChild>>{fn-org371} inside <<MoveAndReplaceChildInSameContainment.containment>> at the target index.{fn-org469}
+<<MoveAndReplaceChildInSameContainment.replacedChild>> subsequently gets deleted, including all its descendants (including annotation instances.
 This does NOT change references to any of the deleted nodes.{fn-org285}
 The containment is inside <<MoveAndReplaceChildInSameContainment.parent>>.
 
@@ -57,7 +56,7 @@ The new index of the moved child can be calculated as follows: `newIndex` = `old
 
 [[MoveAndReplaceChildInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
 
-[[MoveAndReplaceChildInSameContainment.indexOffset, `indexOffset`]]indexOffset:: <<relativeIndexType>>
+[[MoveAndReplaceChildInSameContainment.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
 MUST NOT be 0.
 
 [[MoveAndReplaceChildInSameContainment.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
