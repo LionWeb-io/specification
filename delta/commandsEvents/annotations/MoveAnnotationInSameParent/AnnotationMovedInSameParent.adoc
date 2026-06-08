@@ -1,10 +1,10 @@
 [[evnt-AnnotationMovedInSameParent]]
 ===== Annotation moved in same parent
-<<existing-nodes, Existing node>> <<MoveAnnotationInSameParent.movedAnnotation>>
-that was initially at index <<MoveAnnotationInSameParent.oldIndex>>
-in <<MoveAnnotationInSameParent.parent>>'s annotations
-is moved by <<MoveAnnotationInSameParent.indexOffset>> indices
-to index (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAnnotationInSameParent.indexOffset>>).
+<<existing-nodes, Existing node>> <<AnnotationMovedInSameParent.movedAnnotation>>
+that was initially at index <<AnnotationMovedInSameParent.oldIndex>>
+in <<AnnotationMovedInSameParent.parent>>'s annotations
+is moved by <<AnnotationMovedInSameParent.indexOffset>> indices
+to index (<<AnnotationMovedInSameParent.oldIndex>> + <<AnnotationMovedInSameParent.indexOffset>>).
 
 This conforms to <<justMovingANode, the action of moving a node in a single list>> — see that section for more information, diagrams, and examples.
 
