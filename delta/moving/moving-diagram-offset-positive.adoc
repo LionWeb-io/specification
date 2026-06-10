@@ -7,7 +7,7 @@ left to right direction
 class parent
 
 class siblingA
-class childToMove #Orange
+class nodeToMove #Orange
 class siblingB
 class siblingC
 class siblingD
@@ -15,20 +15,21 @@ class siblingD
 class descendant #Orange
 
 parent *--> siblingA: containment\n[oldIndex - 1]
-parent *--> childToMove: containment\n[<color #red>oldIndex</color>]
+parent *--> nodeToMove: containment\n[<color #red>oldIndex</color>]
 parent *--> siblingB: containment\n[oldIndex + 1]
 parent *--> siblingC: containment\n[oldIndex + indexOffset]
 parent *--> siblingD: containment\n[oldIndex + indexOffset + 1]
 
-childToMove *-> descendant
+nodeToMove *-> descendant
 
-siblingA -[hidden]> childToMove
+siblingA -[hidden]> nodeToMove
 descendant -[hidden]> siblingB
 siblingB -[hidden]> siblingC
 siblingC -[hidden]> siblingD
 ----
 |
-[plantuml, moving-after-offset-positive, svg]
+
+[plantuml,moving-after-offset-positive,svg]
 ----
 !include commandEventOverviewStyle.puml
 left to right direction
@@ -36,7 +37,7 @@ left to right direction
 class parent
 
 class siblingA
-class movedChild #Orange
+class movedNode #Orange
 class siblingB
 class siblingC
 class siblingC
@@ -46,13 +47,13 @@ class descendant #Orange
 parent *--> siblingA: containment\n[oldIndex - 1]
 parent *--> siblingB: containment\n[oldIndex]
 parent *--> siblingC: containment\n[oldIndex + indexOffset - 1]
-parent *--> movedChild: containment\n[<color #Blue>oldIndex + indexOffset</color>]
+parent *--> movedNode: containment\n[<color #Blue>oldIndex + indexOffset</color>]
 parent *--> siblingD: containment\n[oldIndex + indexOffset + 1]
 
-movedChild *-> descendant
+movedNode *-> descendant
 
 siblingA -[hidden]> siblingB
 siblingB -[hidden]> siblingC
-siblingC -[hidden]> movedChild
+siblingC -[hidden]> movedNode
 descendant -[hidden]> siblingD
 ----

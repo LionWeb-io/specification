@@ -6,7 +6,7 @@ in <<AnnotationMovedInSameParent.parent>>'s annotations
 is moved by <<AnnotationMovedInSameParent.indexOffset>> indices
 to index (<<AnnotationMovedInSameParent.oldIndex>> + <<AnnotationMovedInSameParent.indexOffset>>).
 
-This conforms to <<justMovingANode, the action of moving a node in a single list>> — see that section for more information, diagrams, and examples.
+This conforms to <<justMovingANode, the action of moving a node in one specific list>> — see that section for more information, diagrams, and examples.
 
 .Technical name
 `AnnotationMovedInSameParent`

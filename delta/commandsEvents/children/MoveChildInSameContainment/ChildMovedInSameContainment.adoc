@@ -6,7 +6,7 @@ within the <<ChildMovedInSameContainment.containment>> inside <<ChildMovedInSame
 is moved by <<ChildMovedInSameContainment.indexOffset>> indices
 to index (<<ChildMovedInSameContainment.oldIndex>> + <<ChildMovedInSameContainment.indexOffset>>).
 
-This conforms to <<justMovingANode, the action of moving a node in a single list>> — see that section for more information, diagrams, and examples.
+This conforms to <<justMovingANode, the action of moving a node in one specific list>> — see that section for more information, diagrams, and examples.
 
 .Technical name
 `ChildMovedInSameContainment`
