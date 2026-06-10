@@ -29,11 +29,11 @@ MUST NOT be 0.
 [[MoveChildInSameContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-unknownIndex>> for <<MoveChildInSameContainment.oldIndex>> is not an integer in the set 0..(the number of containment entries in <<MoveChildInSameContainment.containment>> - 1) — see <<justMovingANode>> for an explanation of the `left`..`right` notation
+* <<err-unknownIndex>> for <<MoveChildInSameContainment.oldIndex>> is not an integer in the set [0..(the number of containment entries in <<MoveChildInSameContainment.containment>> - 1)] — see <<justMovingANode>> for an explanation of the [`left`..`right`] notation
 * <<err-unknownNode>> for <<MoveChildInSameContainment.movedChild>> is not at <<MoveChildInSameContainment.oldIndex>> of <<MoveAnnotationInSameParent.parent>>
 * <<err-unknownNode>> for <<MoveChildInSameContainment.parent>> is not the parent of <<MoveChildInSameContainment.movedChild>>
 * <<err-moveWithoutParent>> for <<MoveChildInSameContainment.movedChild>>
-* <<err-invalidIndexOffset>> for <<MoveChildInSameContainment.indexOffset>> if <<MoveChildInSameContainment.indexOffset>> equals 0, or if (<<MoveChildInSameContainment.oldIndex>> + <<MoveChildInSameContainment.indexOffset>>) is not in the set 0..(the number of containment entries in <<MoveChildInSameContainment.containment>> - 1)
+* <<err-invalidIndexOffset>> for <<MoveChildInSameContainment.indexOffset>> if <<MoveChildInSameContainment.indexOffset>> equals 0, or if (<<MoveChildInSameContainment.oldIndex>> + <<MoveChildInSameContainment.indexOffset>>) is not in the set [0..(the number of containment entries in <<MoveChildInSameContainment.containment>> - 1)]
 * <<err-indexEntryMismatch>> for <<MoveChildInSameContainment.containment>>/<<MoveChildInSameContainment.oldIndex>> and
 <<MoveChildInSameContainment.movedChild>>
 * <<err-invalidMove>> as <<MoveChildInSameContainment.movedChild>> is already at (<<MoveChildInSameContainment.oldIndex>> + <<MoveChildInSameContainment.indexOffset>>)

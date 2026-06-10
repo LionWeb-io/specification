@@ -319,7 +319,7 @@
       "type": "integer",
       "minimum": 0
     },
-    "relativeIndex": {
+    "indexOffset": {
       "type": "integer"
     },
     "additionalInfoKind": {
@@ -1581,11 +1581,11 @@
         "containment": {
           "$ref": "#/$defs/metaPointer"
         },
-        "newIndex": {
-          "$ref": "#/$defs/index"
-        },
         "oldIndex": {
           "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
         },
         "movedChild": {
           "$ref": "#/$defs/targetNode"
@@ -1728,7 +1728,7 @@
           "$ref": "#/$defs/index"
         },
         "indexOffset": {
-          "$ref": "#/$defs/relativeIndex"
+          "$ref": "#/$defs/indexOffset"
         },
         "replacedChild": {
           "$ref": "#/$defs/targetNode"
@@ -1916,11 +1916,11 @@
         "parent": {
           "$ref": "#/$defs/targetNode"
         },
-        "newIndex": {
-          "$ref": "#/$defs/index"
-        },
         "oldIndex": {
           "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
         },
         "movedAnnotation": {
           "$ref": "#/$defs/targetNode"
@@ -2801,9 +2801,6 @@
         "messageKind": {
           "const": "ChildMovedInSameContainment"
         },
-        "newIndex": {
-          "$ref": "#/$defs/index"
-        },
         "movedChild": {
           "$ref": "#/$defs/targetNode"
         },
@@ -2815,6 +2812,9 @@
         },
         "oldIndex": {
           "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"
@@ -2980,7 +2980,7 @@
           "$ref": "#/$defs/index"
         },
         "indexOffset": {
-          "$ref": "#/$defs/relativeIndex"
+          "$ref": "#/$defs/indexOffset"
         },
         "replacedChild": {
           "$ref": "#/$defs/targetNode"
@@ -3195,9 +3195,6 @@
         "messageKind": {
           "const": "AnnotationMovedInSameParent"
         },
-        "newIndex": {
-          "$ref": "#/$defs/index"
-        },
         "movedAnnotation": {
           "$ref": "#/$defs/targetNode"
         },
@@ -3206,6 +3203,9 @@
         },
         "oldIndex": {
           "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"

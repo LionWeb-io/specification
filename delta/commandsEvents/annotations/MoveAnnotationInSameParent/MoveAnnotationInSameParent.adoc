@@ -27,13 +27,13 @@ MUST NOT be 0.
 [[MoveAnnotationInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-unknownIndex>> for <<MoveAnnotationInSameParent.oldIndex>> is not an integer in the set 0..(the number of annotations on <<MoveChildInSameContainment.parent>> - 1) — see <<justMovingANode>> for an explanation of the `left`..`right` notation
+* <<err-unknownIndex>> for <<MoveAnnotationInSameParent.oldIndex>> is not an integer in the set [0..(the number of annotations on <<MoveChildInSameContainment.parent>> - 1)] — see <<justMovingANode>> for an explanation of the [`left`..`right`] notation
 * <<err-unknownIndex>> <<MoveAnnotationInSameParent.movedAnnotation>> is not at <<MoveAnnotationInSameParent.oldIndex>> of <<MoveAnnotationInSameParent.parent>>
 * <<err-parentMismatch>> <<MoveAnnotationInSameParent.parent>> is not the parent of <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-unknownNode>> for <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-unknownNode>> for <<MoveAnnotationInSameParent.parent>>
 * <<err-moveWithoutParent>> for <<MoveAnnotationInSameParent.movedAnnotation>>
-* <<err-invalidIndexOffset>> for <<MoveAnnotationInSameParent.indexOffset>> if <<MoveAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAnnotationInSameParent.indexOffset>>) is not in the set 0..(the number of annotations on <<MoveAnnotationInSameParent.parent>> - 1)
+* <<err-invalidIndexOffset>> for <<MoveAnnotationInSameParent.indexOffset>> if <<MoveAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAnnotationInSameParent.indexOffset>>) is not in the set [0..(the number of annotations on <<MoveAnnotationInSameParent.parent>> - 1)]
 * <<err-indexEntryMismatch>> for <<MoveAnnotationInSameParent.oldIndex>> and <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-invalidMove>> as <<MoveChildInSameContainment.movedChild>> is already at (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAnnotationInSameParent.indexOffset>>)
 * <<err-invalidParticipation>>
