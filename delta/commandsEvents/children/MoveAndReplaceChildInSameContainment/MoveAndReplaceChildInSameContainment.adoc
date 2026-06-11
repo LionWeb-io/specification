@@ -1,47 +1,14 @@
 [[cmd-MoveAndReplaceChildInSameContainment]]
 ===== Move child in same containment and replace existing child
-Move <<existing-nodes, existing node>> <<MoveAndReplaceChildInSameContainment.movedChild>> within <<MoveAndReplaceChildInSameContainment.containment>>
-from index <<MoveAndReplaceChildInSameContainment.oldIndex>> to the target index (<<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>),
-replacing <<existing-nodes, current child>> <<MoveAndReplaceChildInSameContainment.replacedChild>>{fn-org371} inside <<MoveAndReplaceChildInSameContainment.containment>> at the target index.{fn-org469}
-<<MoveAndReplaceChildInSameContainment.replacedChild>> subsequently gets deleted, including all its descendants (including annotation instances.
+Move <<existing-nodes, existing node>> <<MoveAndReplaceChildInSameContainment.movedChild>>
+that’s initially at index <<MoveAndReplaceChildInSameContainment.oldIndex>>
+within the <<MoveAndReplaceChildInSameContainment.containment>> inside <<MoveAndReplaceChildInSameContainment.parent>>
+to the target index (<<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>),
+replacing <<existing-nodes, current child>> <<MoveAndReplaceChildInSameContainment.replacedChild>>{fn-org371} at the target index.{fn-org469}
+<<MoveAndReplaceChildInSameContainment.replacedChild>> subsequently gets deleted, including all its descendants (including annotation instances).
 This does NOT change references to any of the deleted nodes.{fn-org285}
-The containment is inside <<MoveAndReplaceChildInSameContainment.parent>>.
 
-The corresponding manipulation of a list of pointersfootnote:[I.e., language-level references to objects] to contained nodes can be described as a two-step process:
-
-Set `targetIndex =` <<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>.
-
-1. The list’s entry with index `targetIndex` is set to the child to move (at index <<MoveAndReplaceChildInSameContainment.oldIndex>>),
-overwriting and effectively replacing the child to replace, which gets deleted as a result.
-Now, the list contains the same number of elements as before,
-just with two pointers to <<MoveAndReplaceChildInSameContainment.movedChild>>,
-namely at indices <<MoveAndReplaceChildInSameContainment.oldIndex>> and `targetIndex`.
-2. The entry with index `oldIndex` is removed from the list,
-with elements after being moved to the next lower index
-— this includes the moved child itself if <<MoveAndReplaceChildInSameContainment.indexOffset>> > 0.
-Now, the list contains one less element than before.
-
-This leaves two distinct scenarios depending on whether <<MoveAndReplaceChildInSameContainment.indexOffset>> is positive or negative.
-
-In the scenario with <<MoveAndReplaceChildInSameContainment.indexOffset>> > 0:
-
-[cols="a,a"]
-|===
-|Before |After
-include::MoveAndReplaceChildInSameContainment-diagram-offset-positive.adoc[]
-|===
-
-The new index of the moved child can be calculated as follows: `newIndex` = `oldIndex` + `indexOffset` - 1.
-
-In the scenario with <<MoveAndReplaceChildInSameContainment.indexOffset>> < 0:
-
-[cols="a,a"]
-|===
-|Before |After
-include::MoveAndReplaceChildInSameContainment-diagram-offset-negative.adoc[]
-|===
-
-The new index of the moved child can be calculated as follows: `newIndex` = `oldIndex` + `indexOffset`.
+This conforms to <<movingAndReplacingNodes, the action of moving a node and replacing another one in one specific list>> — see that section for more information, diagrams, and examples.
 
 .Technical name
 `MoveAndReplaceChildInSameContainment`
@@ -54,32 +21,34 @@ The new index of the moved child can be calculated as follows: `newIndex` = `old
 
 [[MoveAndReplaceChildInSameContainment.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
-[[MoveAndReplaceChildInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
-
 [[MoveAndReplaceChildInSameContainment.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
 MUST NOT be 0.
 
-[[MoveAndReplaceChildInSameContainment.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+[[MoveAndReplaceChildInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
 
+[[MoveAndReplaceChildInSameContainment.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
 
 [[MoveAndReplaceChildInSameContainment.commandId]]commandId:: <<commandIdType>>
 
 [[MoveAndReplaceChildInSameContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-unknownIndex>> for <<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>
-is smaller than 0 or greater than (the number of entries in <<MoveAndReplaceChildInSameContainment.containment>> in <<MoveAndReplaceChildInSameContainment.parent>> - 1)
-* <<err-parentMismatch>> <<MoveAndReplaceChildInSameContainment.parent>> does not have <<MoveAndReplaceChildInSameContainment.movedChild>> as child.
-* <<err-unknownNode>> for <<MoveAndReplaceChildInSameContainment.movedChild>>
-* <<err-unknownNode>> for <<MoveAndReplaceChildInSameContainment.replacedChild>>
 * <<err-unknownNode>> for <<MoveAndReplaceChildInSameContainment.parent>>
-* <<err-parentMismatch>> The node <<MoveAndReplaceChildInSameContainment.parent>> does not have <<MoveAndReplaceChildInSameContainment.movedChild>> as a child.
+* <<err-unknownIndex>> for <<MoveAndReplaceChildInSameContainment.oldIndex>>
+is not an integer in the set [0..(the number of containment entries in <<MoveAndReplaceChildInSameContainment.containment>> of <<MoveAndReplaceChildInSameContainment.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
+* <<err-invalidIndexOffset>> for <<MoveAndReplaceChildInSameContainment.indexOffset>>
+if <<MoveAndReplaceChildInSameContainment.indexOffset>> equals 0, or if (<<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>) is not in the set [0..(the number of containment entries in <<MoveAndReplaceChildInSameContainment.containment>> of <<MoveAndReplaceChildInSameContainment.parent>> - 1)]
+* <<err-unknownNode>> for <<MoveAndReplaceChildInSameContainment.movedChild>>
+* <<err-parentMismatch>> <<MoveAndReplaceChildInSameContainment.parent>> is not the parent of <<MoveAndReplaceChildInSameContainment.movedChild>>
+* <<err-indexEntryMismatch>> for <<MoveAndReplaceChildInSameContainment.oldIndex>> and <<MoveAndReplaceChildInSameContainment.movedChild>>
+if <<MoveAndReplaceChildInSameContainment.movedChild>> is not at index <<MoveAndReplaceChildInSameContainment.oldIndex>> of the containment entries in <<MoveAndReplaceChildInSameContainment.containment>> of <<MoveAndReplaceChildInSameContainment.parent>>
 * <<err-moveWithoutParent>> for <<MoveAndReplaceChildInSameContainment.movedChild>>
-* <<err-indexEntryMismatch>> for <<MoveAndReplaceChildInSameContainment.containment>>/<<MoveAndReplaceChildInSameContainment.oldIndex>> 
-and <<MoveAndReplaceChildInSameContainment.movedChild>>
+* <<err-unknownNode>> for <<MoveAndReplaceChildInSameContainment.replacedChild>>
+* <<err-parentMismatch>> <<MoveAndReplaceChildInSameContainment.parent>> is not the parent of <<MoveAndReplaceChildInSameContainment.replacedChild>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceChildInSameContainment.containment>>/(<<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>)
 and <<MoveAndReplaceChildInSameContainment.replacedChild>>
-* <<err-invalidMove>> <<MoveAndReplaceChildInSameContainment.indexOffset>> = 0
+if <<MoveAndReplaceChildInSameContainment.replacedChild>> is not at index (<<MoveChildInSameContainment.oldIndex>> + <<MoveChildInSameContainment.indexOffset>>) of the containment entries in <<MoveChildInSameContainment.containment>> of <<MoveAnnotationInSameParent.parent>>
+* <<err-moveWithoutParent>> for <<MoveAndReplaceChildInSameContainment.movedChild>>
 * <<err-invalidParticipation>>
 
 .Related event

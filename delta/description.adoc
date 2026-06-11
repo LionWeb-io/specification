@@ -210,6 +210,7 @@ To avoid ambiguities in the description of such operations, and reduce the chanc
 
 For convenience, we first establish some notation/shorthand:
 
+[[integerRangeNotation, notation/shorthand for integer ranges]]
 .Integer ranges
 We write [_lower_.._upper_] for the set of integers consisting of: _lower_, (_lower_ + 1), (_lower_ + 2), ..., _upper_.
 The *integer range* [_lower_.._upper_] includes _lower_ and _upper_ themselves.
@@ -217,7 +218,7 @@ The *integer range* [_lower_.._upper_] includes _lower_ and _upper_ themselves.
 For both scenarios above, assume we have a list of _n_ > 1 distinct nodes.
 We also have an _old index_ `oldIndex`, which MUST be an integer in [0..(_n_ - 1)]: the position that the *node to move* appears at in the list.
 Finally, we have an _index offset_ `indexOffset`, which MUST be an integer unequal to 0, and such that the _target index_ (`oldIndex` + `indexOffset`) is in [0..(_n_ - 1)].
-`indexOffset` can be either positive or negative, meaning the movement will be towards higher indices (positive), or towards lower indices (negative).
+`indexOffset` can be either positive or negative, meaning the movement will be towards higher positions (positive), or towards lower positions (negative).
 
 
 [[justMovingANode, moving a node (without replacing)]]
@@ -227,7 +228,7 @@ This pertains to the following commands and events:
 <<cmd-MoveChildInSameContainment>>, <<cmd-MoveAnnotationInSameParent>>, <<evnt-ChildMovedInSameContainment>>, <<evnt-AnnotationMovedInSameParent>>.
 
 Set `newIndex` = (`oldIndex` + `indexOffset`), which in this scenario is also the _target index_.
-The result of moving the node that’s initially at index `oldIndex` by `indexOffset` indices is that that node has been moved `indexOffset` indices up (if `indexOffset` > 0), or (-`indexOffset`) indices down (if `indexOffset` < 0).
+The result of moving the node that’s initially at index `oldIndex` by `indexOffset` positions is that that node has been moved `indexOffset` positions up (if `indexOffset` > 0), or (-`indexOffset`) positions down (if `indexOffset` < 0).
 Afterward, the moved node resides at index `newIndex` in the list.
 
 For clarity, we discuss two distinct “sub” scenarios depending on whether `indexOffset` is positive or negative.
@@ -270,14 +271,43 @@ We describe this scenario as a two-step process:
 Set `targetIndex` = (`oldIndex` + `indexOffset`).
 We don’t use `newIndex` (yet): we want to reserve that name for the index that the moved node resides at after this operation, which can be different from `targetIndex`.
 
-1. The node with index `targetIndex` in the list is set to the node with initial index `oldIndex`.
-This action overwrites and effectively replaces the *node to replace*, which gets deleted as a result.
-(The node to replace initially appears at index `targetIndex` in the list.)
-Now, the list contains the same number of nodes as before, just with two occurrences of the node with initial index `oldIndex`, namely at indices `oldIndex` and `targetIndex`.
-2. The node with index `oldIndex` is removed from the list, with the nodes after it being moved to the next lower index — this includes the node moved in step 1 itself if (`indexOffset` > 0).
+The node that appears at index `oldIndex` in the list is the *node to move*.
+The node that appears at index `targetIndex` in the list is the *node to replace*.
+
+1. Set the node at index `targetIndex` to the node with initial index `oldIndex`.
+This action overwrites and effectively replaces the node to replace with the node to move.
+The node to replace gets deleted as a result.
+Now, the list contains the same number of nodes as before, just with two occurrences of the node to move, namely at indices `oldIndex` and `targetIndex`, and no occurrences of the node to replace.
+2. The node with index `oldIndex` is removed from the list, with the nodes after it being moved to the next lower position — this includes the node moved in step 1 itself if (`indexOffset` > 0).
 Now, the list contains one less node than before.
 
-For clarity, we can discuss two distinct “sub” scenarios depending on whether `indexOffset` is positive or negative.
+For clarity, we discuss two distinct “sub” scenarios depending on whether `indexOffset` is positive or negative.
 
-*TODO*
+For `indexOffset` > 0:
+[cols="a,a","a"]
+|===
+|Before |After
+include::moving/moving-and-replacing-diagram-offset-positive.adoc[]
+|===
+
+The new index of the moved child can be calculated as follows: `newIndex` = `oldIndex` + `indexOffset` - 1.
+
+Example moving `X` with `indexOffset` = 3, and replacing `F`: +
+`oldIndex=3`:    `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`indexOffset=3`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_` +
+`newIndex=5` and `F` is replaced with `X`
+
+For `indexOffset` < 0:
+[cols="a,a","a"]
+|===
+|Before |After
+include::moving/moving-and-replacing-diagram-offset-negative.adoc[]
+|===
+
+The new index of the moved child can be calculated as follows: `newIndex` = `oldIndex` + `indexOffset`.
+
+Example moving `X` with `indexOffset` = -3, and replacing `B`: +
+`oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
+`indexOffset=-3`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_` +
+`newIndex=1` and `B` is replaced with `X`
 

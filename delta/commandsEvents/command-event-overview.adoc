@@ -122,8 +122,9 @@ include::children/MoveChildFromOtherContainmentInSameParent/MoveChildFromOtherCo
 <<evnt-ChildMovedInSameContainment>>
 
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
-inside ``parent``'s `containment` at `newIndex`.
-include::children/MoveChildInSameContainment/MoveChildInSameContainment-diagram.adoc[]
+inside ``parent``'s `containment` to (`oldIndex` + `indexOffset`).
+(Showing diagram for `indexOffset` positive.)
+include::../moving/moving-diagram-offset-positive.adoc[]
 
 |
 <<cmd-MoveAndReplaceChildFromOtherContainment>>
@@ -149,8 +150,9 @@ include::children/MoveAndReplaceChildFromOtherContainmentInSameParent/MoveAndRep
 <<evnt-ChildMovedAndReplacedInSameContainment>>
 
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
-inside ``parent``'s `containment`, replacing `replacedChild` that was previously inside ``parent``'s `containment` at `oldIndex` + `indexOffset`.
-include::children/MoveAndReplaceChildInSameContainment/MoveAndReplaceChildInSameContainment-diagram-offset-positive.adoc[] (if `indexOffset` > 0)
+inside ``parent``'s `containment`, replacing `replacedChild` that was previously inside ``parent``'s `containment` at (`oldIndex` + `indexOffset`).
+(Showing diagram for `indexOffset` negative.)
+include::../moving/moving-and-replacing-diagram-offset-negative.adoc[]
 
 |===
 
@@ -199,8 +201,9 @@ include::annotations/MoveAnnotationFromOtherParent/MoveAnnotationFromOtherParent
 <<evnt-AnnotationMovedInSameParent>>
 
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
-inside ``parent``'s annotations at `newIndex`.
-include::annotations/MoveAnnotationInSameParent/MoveAnnotationInSameParent-diagram.adoc[]
+inside ``parent``'s annotations to (`oldIndex` + `indexOffset`).
+(Showing diagram for `indexOffset` positive.)
+include::../moving/moving-diagram-offset-positive.adoc[]
 
 |
 <<cmd-MoveAndReplaceAnnotationFromOtherParent>>
@@ -217,8 +220,9 @@ include::annotations/MoveAndReplaceAnnotationFromOtherParent/MoveAndReplaceAnnot
 <<evnt-AnnotationMovedAndReplacedInSameParent>>
 
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
-inside ``parent``'s annotations at `newIndex`, replacing `replacedAnnotation` that was previously inside ``parent``'s annotations at `newIndex`.
-include::annotations/MoveAndReplaceAnnotationInSameParent/MoveAndReplaceAnnotationInSameParent-diagram.adoc[]
+inside ``parent``'s annotations at `newIndex`, replacing `replacedAnnotation` that was previously inside ``parent``'s annotations at (`oldIndex` + `indexOffset`).
+(Showing diagram for `indexOffset` negative.)
+include::../moving/moving-and-replacing-diagram-offset-negative.adoc[]
 
 |===
 

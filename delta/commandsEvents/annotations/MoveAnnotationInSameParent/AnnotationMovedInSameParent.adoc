@@ -3,7 +3,7 @@
 <<existing-nodes, Existing node>> <<AnnotationMovedInSameParent.movedAnnotation>>
 that was initially at index <<AnnotationMovedInSameParent.oldIndex>>
 in <<AnnotationMovedInSameParent.parent>>'s annotations
-is moved by <<AnnotationMovedInSameParent.indexOffset>> indices
+was moved by <<AnnotationMovedInSameParent.indexOffset>> positions
 to index (<<AnnotationMovedInSameParent.oldIndex>> + <<AnnotationMovedInSameParent.indexOffset>>).
 
 This conforms to <<justMovingANode, the action of moving a node in one specific list>> — see that section for more information, diagrams, and examples.

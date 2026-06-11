@@ -3,7 +3,7 @@
 Move <<existing-nodes, existing node>> <<MoveAnnotationInSameParent.movedAnnotation>>
 that’s initially at index <<MoveAnnotationInSameParent.oldIndex>>
 in <<MoveAnnotationInSameParent.parent>>'s annotations
-by <<MoveAnnotationInSameParent.indexOffset>> indices
+by <<MoveAnnotationInSameParent.indexOffset>> positions
 to index (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAnnotationInSameParent.indexOffset>>).
 
 This conforms to <<justMovingANode, the action of moving a node in one specific list>> — see that section for more information, diagrams, and examples.
@@ -27,15 +27,17 @@ MUST NOT be 0.
 [[MoveAnnotationInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-unknownIndex>> for <<MoveAnnotationInSameParent.oldIndex>> is not an integer in the set [0..(the number of annotations on <<MoveChildInSameContainment.parent>> - 1)] — see <<justMovingANode>> for an explanation of the [`left`..`right`] notation
-* <<err-unknownIndex>> <<MoveAnnotationInSameParent.movedAnnotation>> is not at <<MoveAnnotationInSameParent.oldIndex>> of <<MoveAnnotationInSameParent.parent>>
-* <<err-parentMismatch>> <<MoveAnnotationInSameParent.parent>> is not the parent of <<MoveAnnotationInSameParent.movedAnnotation>>
-* <<err-unknownNode>> for <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-unknownNode>> for <<MoveAnnotationInSameParent.parent>>
-* <<err-moveWithoutParent>> for <<MoveAnnotationInSameParent.movedAnnotation>>
-* <<err-invalidIndexOffset>> for <<MoveAnnotationInSameParent.indexOffset>> if <<MoveAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAnnotationInSameParent.indexOffset>>) is not in the set [0..(the number of annotations on <<MoveAnnotationInSameParent.parent>> - 1)]
+* <<err-unknownIndex>> for <<MoveAnnotationInSameParent.oldIndex>>
+is not an integer in the set [0..(the number of annotations on <<MoveChildInSameContainment.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
+* <<err-invalidIndexOffset>> for <<MoveAnnotationInSameParent.indexOffset>>
+if <<MoveAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAnnotationInSameParent.indexOffset>>) is not in the set [0..(the number of annotations on <<MoveAnnotationInSameParent.parent>> - 1)]
+* <<err-unknownNode>> for <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-indexEntryMismatch>> for <<MoveAnnotationInSameParent.oldIndex>> and <<MoveAnnotationInSameParent.movedAnnotation>>
-* <<err-invalidMove>> as <<MoveChildInSameContainment.movedChild>> is already at (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAnnotationInSameParent.indexOffset>>)
+* <<err-parentMismatch>> <<MoveAnnotationInSameParent.parent>> is not the parent of <<MoveAnnotationInSameParent.movedAnnotation>>
+* <<err-moveWithoutParent>> for <<MoveAnnotationInSameParent.movedAnnotation>>
+* <<err-indexEntryMismatch>> for <<MoveAnnotationInSameParent.oldIndex>> and <<MoveAnnotationInSameParent.movedAnnotation>>
+if <<MoveAnnotationInSameParent.movedAnnotation>> is not at index <<MoveAnnotationInSameParent.oldIndex>> in the annotations on <<MoveAnnotationInSameParent.parent>>
 * <<err-invalidParticipation>>
 
 .Related event

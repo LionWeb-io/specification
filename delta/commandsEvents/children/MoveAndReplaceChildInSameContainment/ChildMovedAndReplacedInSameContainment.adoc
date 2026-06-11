@@ -1,32 +1,15 @@
 [[evnt-ChildMovedAndReplacedInSameContainment]]
 ===== Child moved in same containment and replaced existing child
 <<existing-nodes, Existing node>> <<ChildMovedAndReplacedInSameContainment.movedChild>>
-moved to replace <<existing-nodes, existing node>> <<ChildMovedAndReplacedInSameContainment.replacedChild>>
-inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>>.
-The <<ChildMovedAndReplacedInSameContainment.movedChild>> was previously at index <<ChildMovedAndReplacedInSameContainment.oldIndex>>,
-and the <<ChildMovedAndReplacedInSameContainment.replacedChild>> was previously at index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>).
-<<ChildMovedAndReplacedInSameContainment.replacedChild>>,
-and all its <<ChildMovedAndReplacedInSameContainment.replacedDescendants>>{fn-org370},
-have been deleted, WITHOUT changing references to any of the deleted nodes.{fn-org469}
+that was initially at index <<ChildMovedAndReplacedInSameContainment.oldIndex>>
+in <<ChildMovedAndReplacedInSameContainment.parent>>'s annotations
+was moved by <<ChildMovedAndReplacedInSameContainment.indexOffset>> positions
+to index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<AnnotationMovedInSameParent.indexOffset>>),
+replacing <<existing-nodes, current child>> <<ChildMovedAndReplacedInSameContainment.replacedChild>>{fn-org371} at the target index.{fn-org469}
+<<ChildMovedAndReplacedInSameContainment.replacedChild>> subsequently gets deleted, including all its descendants (including annotation instances).
+This does NOT change references to any of the deleted nodes.{fn-org285}
 
-In case <<ChildMovedAndReplacedInSameContainment.indexOffset>> > 0:
-all children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>>
-whose indices previously were > <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to the next lower index,
-_except_ the replaced one that was previously at index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>).
-The moved child now resides at the index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>> - 1).
-Example: +
-`oldIndex=3`:    `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
-`indexOffset=3`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_` +
-`newIndex=5` and `F` is replaced with `X`
-
-In case <<ChildMovedAndReplacedInSameContainment.indexOffset>> <  0:
-all children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>>
-whose indices previously were > <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to next lower index.
-The moved child now resides at the index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>).
-Example: +
-`oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
-`indexOffset=-3`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_` +
-`newIndex=1` and `X` is replaced with `B`
+This conforms to <<movingAndReplacingNodes, the action of moving a node and replacing another one in one specific list>> — see that section for more information, diagrams, and examples.
 
 .Technical name
 `ChildMovedAndReplacedInSameContainment`
@@ -39,13 +22,13 @@ Example: +
 
 [[ChildMovedAndReplacedInSameContainment.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
-[[ChildMovedAndReplacedInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
-
 [[ChildMovedAndReplacedInSameContainment.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
 MUST NOT be 0. +
 (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>)
 MUST NOT be < 0,
 or >= (the number of children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>>).
+
+[[ChildMovedAndReplacedInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
 
 [[ChildMovedAndReplacedInSameContainment.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
 

@@ -1,5 +1,6 @@
 |
-[plantuml,moveAndReplaceChildInSameContainment-positive-offset-before,svg]
+
+[plantuml,moving-and-replacing-positive-offset-before,svg]
 ----
 !include commandEventOverviewStyle.puml
 left to right direction
@@ -7,35 +8,35 @@ left to right direction
 class parent
 
 class siblingA
-class movedChild #Orange
+class nodeToMove #Orange
 class siblingB
 class siblingC
 class siblingC
 
 class descendant #Orange
 
-class replacedChild #Red
+class nodeToReplace #Red
 
 class "replaced\nDescendant" as replacedDescendant #red
-replacedChild *-> replacedDescendant #Red
+nodeToReplace *-> replacedDescendant #Red
 
 parent *--> siblingA: containment\n[oldIndex - 1]
-parent *--> movedChild: containment\n[<color #red>oldIndex</color>]
+parent *--> nodeToMove: containment\n[<color #red>oldIndex</color>]
 parent *--> siblingB: containment\n[oldIndex + 1]
 parent *--> siblingC: containment\n[oldIndex + indexOffset - 1]
-parent *--> replacedChild #Red: containment\n[oldIndex + indexOffset]
+parent *--> nodeToReplace #Red: containment\n[oldIndex + indexOffset]
 parent *--> siblingD: containment\n[oldIndex + indexOffset + 1]
 
-movedChild *-> descendant
+nodeToMove *-> descendant
 
-siblingA -[hidden]> movedChild
+siblingA -[hidden]> nodeToMove
 descendant -[hidden]> siblingB
 siblingB -[hidden]> siblingC
-siblingC -[hidden]> replacedChild
+siblingC -[hidden]> nodeToReplace
 replacedDescendant -[hidden]> siblingD
 ----
 |
-[plantuml, moveAndReplaceChildInSameContainment-positive-offset-after, svg]
+[plantuml, moving-and-replacing-positive-offset-after, svg]
 ----
 !include commandEventOverviewStyle.puml
 left to right direction
@@ -43,7 +44,7 @@ left to right direction
 class parent
 
 class siblingA
-class movedChild #Orange
+class movedNode #Orange
 class siblingB
 class siblingC
 class siblingD
@@ -53,13 +54,13 @@ class descendant #Orange
 parent *--> siblingA: containment\n[oldIndex - 1]
 parent *--> siblingB: containment\n[oldIndex]
 parent *--> siblingC: containment\n[oldIndex + indexOffset - 2]
-parent *--> movedChild: containment\n[<color #Blue>oldIndex + indexOffset - 1</color>]
+parent *--> movedNode: containment\n[<color #Blue>oldIndex + indexOffset - 1</color>]
 parent *--> siblingD: containment\n[oldIndex + indexOffset]
 
-movedChild *-> descendant
+movedNode *-> descendant
 
 siblingA -[hidden]> siblingB
 siblingB -[hidden]> siblingC
-siblingC -[hidden]> movedChild
+siblingC -[hidden]> movedNode
 descendant -[hidden]> siblingD
 ----
