@@ -34,9 +34,9 @@ MUST NOT be 0.
 .Errors
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationInSameParent.parent>>
 * <<err-unknownIndex>> for <<MoveAndReplaceAnnotationInSameParent.oldIndex>>
-is not an integer in the set [0..(the number of annotations on <<MoveAndReplaceAnnotationInSameParent.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
+is not an integer in the range [0..(the number of annotations on <<MoveAndReplaceAnnotationInSameParent.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
 * <<err-invalidIndexOffset>> for <<MoveAndReplaceAnnotationInSameParent.indexOffset>>
-if <<MoveAndReplaceAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveAndReplaceAnnotationInSameParent.oldIndex>> + <<MoveAndReplaceAnnotationInSameParent.indexOffset>>) is not in the set [0..(the number of annotations on <<MoveAnnotationInSameParent.parent>> - 1)]
+if <<MoveAndReplaceAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveAndReplaceAnnotationInSameParent.oldIndex>> + <<MoveAndReplaceAnnotationInSameParent.indexOffset>>) is not in the range [0..(the number of annotations on <<MoveAnnotationInSameParent.parent>> - 1)]
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceAnnotationInSameParent.oldIndex>> and <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>
 if <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>> is not at index <<MoveAndReplaceAnnotationInSameParent.oldIndex>> in the annotations on <<MoveAndReplaceAnnotationInSameParent.parent>>

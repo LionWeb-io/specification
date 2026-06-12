@@ -233,6 +233,8 @@ Afterward, the moved node resides at index `newIndex` in the list.
 
 For clarity, we discuss two distinct “sub” scenarios depending on whether `indexOffset` is positive or negative.
 
+.Moving up
+
 For `indexOffset` > 0:
 [cols="a,a","a"]
 |===
@@ -243,6 +245,8 @@ include::moving/moving-diagram-offset-positive.adoc[]
 Example moving `X` with `indexOffset` = 2: +
 `oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
 `newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _F[6]_ G[7]` +
+
+.Moving down
 
 For `indexOffset` < 0:
 [cols="a,a","a"]
@@ -283,6 +287,8 @@ Now, the list contains one less node than before.
 
 For clarity, we discuss two distinct “sub” scenarios depending on whether `indexOffset` is positive or negative.
 
+.Moving up
+
 For `indexOffset` > 0:
 [cols="a,a","a"]
 |===
@@ -295,7 +301,9 @@ The new index of the moved child can be calculated as follows: `newIndex` = `old
 Example moving `X` with `indexOffset` = 3, and replacing `F`: +
 `oldIndex=3`:    `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
 `indexOffset=3`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_` +
-`newIndex=5` and `F` is replaced with `X`
+`targetIndex=6`, `newIndex=5` and `F` is replaced with `X`
+
+.Moving down
 
 For `indexOffset` < 0:
 [cols="a,a","a"]
@@ -309,5 +317,5 @@ The new index of the moved child can be calculated as follows: `newIndex` = `old
 Example moving `X` with `indexOffset` = -3, and replacing `B`: +
 `oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
 `indexOffset=-3`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_` +
-`newIndex=1` and `B` is replaced with `X`
+`targetIndex=1`, `newIndex=1` and `B` is replaced with `X`
 

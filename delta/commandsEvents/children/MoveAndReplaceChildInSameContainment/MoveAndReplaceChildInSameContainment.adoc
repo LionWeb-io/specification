@@ -35,9 +35,9 @@ MUST NOT be 0.
 .Errors
 * <<err-unknownNode>> for <<MoveAndReplaceChildInSameContainment.parent>>
 * <<err-unknownIndex>> for <<MoveAndReplaceChildInSameContainment.oldIndex>>
-is not an integer in the set [0..(the number of containment entries in <<MoveAndReplaceChildInSameContainment.containment>> of <<MoveAndReplaceChildInSameContainment.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
+is not an integer in the range [0..(the number of containment entries in <<MoveAndReplaceChildInSameContainment.containment>> of <<MoveAndReplaceChildInSameContainment.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
 * <<err-invalidIndexOffset>> for <<MoveAndReplaceChildInSameContainment.indexOffset>>
-if <<MoveAndReplaceChildInSameContainment.indexOffset>> equals 0, or if (<<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>) is not in the set [0..(the number of containment entries in <<MoveAndReplaceChildInSameContainment.containment>> of <<MoveAndReplaceChildInSameContainment.parent>> - 1)]
+if <<MoveAndReplaceChildInSameContainment.indexOffset>> equals 0, or if (<<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>) is not in the range [0..(the number of containment entries in <<MoveAndReplaceChildInSameContainment.containment>> of <<MoveAndReplaceChildInSameContainment.parent>> - 1)]
 * <<err-unknownNode>> for <<MoveAndReplaceChildInSameContainment.movedChild>>
 * <<err-parentMismatch>> <<MoveAndReplaceChildInSameContainment.parent>> is not the parent of <<MoveAndReplaceChildInSameContainment.movedChild>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceChildInSameContainment.oldIndex>> and <<MoveAndReplaceChildInSameContainment.movedChild>>
@@ -47,7 +47,7 @@ if <<MoveAndReplaceChildInSameContainment.movedChild>> is not at index <<MoveAnd
 * <<err-parentMismatch>> <<MoveAndReplaceChildInSameContainment.parent>> is not the parent of <<MoveAndReplaceChildInSameContainment.replacedChild>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceChildInSameContainment.containment>>/(<<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>)
 and <<MoveAndReplaceChildInSameContainment.replacedChild>>
-if <<MoveAndReplaceChildInSameContainment.replacedChild>> is not at index (<<MoveChildInSameContainment.oldIndex>> + <<MoveChildInSameContainment.indexOffset>>) of the containment entries in <<MoveChildInSameContainment.containment>> of <<MoveAnnotationInSameParent.parent>>
+if <<MoveAndReplaceChildInSameContainment.replacedChild>> is not at index (<<MoveAndReplaceChildInSameContainment.oldIndex>> + <<MoveAndReplaceChildInSameContainment.indexOffset>>) of the containment entries in <<MoveAndReplaceChildInSameContainment.containment>> of <<MoveAndReplaceChildInSameContainment.parent>>
 * <<err-moveWithoutParent>> for <<MoveAndReplaceChildInSameContainment.movedChild>>
 * <<err-invalidParticipation>>
 

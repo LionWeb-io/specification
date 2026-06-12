@@ -31,9 +31,9 @@ MUST NOT be 0.
 .Errors
 * <<err-unknownNode>> for <<MoveChildInSameContainment.parent>>
 * <<err-unknownIndex>> for <<MoveChildInSameContainment.oldIndex>>
-is not an integer in the set [0..(the number of containment entries in <<MoveChildInSameContainment.containment>> of <<MoveAndReplaceChildInSameContainment.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
+is not an integer in the range [0..(the number of containment entries in <<MoveChildInSameContainment.containment>> of <<MoveAndReplaceChildInSameContainment.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
 * <<err-invalidIndexOffset>> for <<MoveChildInSameContainment.indexOffset>>
-if <<MoveChildInSameContainment.indexOffset>> equals 0, or if (<<MoveChildInSameContainment.oldIndex>> + <<MoveChildInSameContainment.indexOffset>>) is not in the set [0..(the number of containment entries in <<MoveChildInSameContainment.containment>> of <<MoveAnnotationInSameParent.parent>> - 1)]
+if <<MoveChildInSameContainment.indexOffset>> equals 0, or if (<<MoveChildInSameContainment.oldIndex>> + <<MoveChildInSameContainment.indexOffset>>) is not in the range [0..(the number of containment entries in <<MoveChildInSameContainment.containment>> of <<MoveAnnotationInSameParent.parent>> - 1)]
 * <<err-unknownNode>> for <<MoveChildInSameContainment.movedChild>>
 * <<err-parentMismatch>> <<MoveChildInSameContainment.parent>> is not the parent of <<MoveChildInSameContainment.movedChild>>
 * <<err-indexEntryMismatch>> for <<MoveChildInSameContainment.oldIndex>> and <<MoveChildInSameContainment.movedChild>>

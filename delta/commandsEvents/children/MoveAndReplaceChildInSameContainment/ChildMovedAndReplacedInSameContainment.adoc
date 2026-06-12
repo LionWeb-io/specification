@@ -2,9 +2,9 @@
 ===== Child moved in same containment and replaced existing child
 <<existing-nodes, Existing node>> <<ChildMovedAndReplacedInSameContainment.movedChild>>
 that was initially at index <<ChildMovedAndReplacedInSameContainment.oldIndex>>
-in <<ChildMovedAndReplacedInSameContainment.parent>>'s annotations
+within the <<ChildMovedAndReplacedInSameContainment.containment>> inside <<ChildMovedAndReplacedInSameContainment.parent>>
 was moved by <<ChildMovedAndReplacedInSameContainment.indexOffset>> positions
-to index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<AnnotationMovedInSameParent.indexOffset>>),
+to index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>),
 replacing <<existing-nodes, current child>> <<ChildMovedAndReplacedInSameContainment.replacedChild>>{fn-org371} at the target index.{fn-org469}
 <<ChildMovedAndReplacedInSameContainment.replacedChild>> subsequently gets deleted, including all its descendants (including annotation instances).
 This does NOT change references to any of the deleted nodes.{fn-org285}
