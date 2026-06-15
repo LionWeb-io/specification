@@ -1601,8 +1601,8 @@
         "messageKind",
         "parent",
         "containment",
-        "newIndex",
         "oldIndex",
+        "indexOffset",
         "movedChild",
         "commandId",
         "additionalInfos"
@@ -1935,8 +1935,8 @@
       "required": [
         "messageKind",
         "parent",
-        "newIndex",
         "oldIndex",
+        "indexOffset",
         "movedAnnotation",
         "commandId",
         "additionalInfos"
@@ -1998,11 +1998,11 @@
         "parent": {
           "$ref": "#/$defs/targetNode"
         },
-        "newIndex": {
-          "$ref": "#/$defs/index"
-        },
         "oldIndex": {
           "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
         },
         "replacedAnnotation": {
           "$ref": "#/$defs/targetNode"
@@ -2020,8 +2020,8 @@
       "required": [
         "messageKind",
         "parent",
-        "newIndex",
         "oldIndex",
+        "indexOffset",
         "replacedAnnotation",
         "movedAnnotation",
         "commandId",
@@ -2828,11 +2828,11 @@
       },
       "required": [
         "messageKind",
-        "newIndex",
         "movedChild",
         "parent",
         "containment",
         "oldIndex",
+        "indexOffset",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
@@ -2964,9 +2964,6 @@
         "messageKind": {
           "const": "ChildMovedAndReplacedInSameContainment"
         },
-        "newIndex": {
-          "$ref": "#/$defs/index"
-        },
         "movedChild": {
           "$ref": "#/$defs/targetNode"
         },
@@ -3000,7 +2997,6 @@
       },
       "required": [
         "messageKind",
-        "newIndex",
         "movedChild",
         "parent",
         "containment",
@@ -3219,10 +3215,10 @@
       },
       "required": [
         "messageKind",
-        "newIndex",
         "movedAnnotation",
         "parent",
         "oldIndex",
+        "indexOffset",
         "originCommands",
         "sequenceNumber",
         "additionalInfos"
@@ -3289,9 +3285,6 @@
         "messageKind": {
           "const": "AnnotationMovedAndReplacedInSameParent"
         },
-        "newIndex": {
-          "$ref": "#/$defs/index"
-        },
         "movedAnnotation": {
           "$ref": "#/$defs/targetNode"
         },
@@ -3300,6 +3293,9 @@
         },
         "oldIndex": {
           "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
         },
         "replacedAnnotation": {
           "$ref": "#/$defs/targetNode"
@@ -3319,10 +3315,10 @@
       },
       "required": [
         "messageKind",
-        "newIndex",
         "movedAnnotation",
         "parent",
         "oldIndex",
+        "indexOffset",
         "replacedAnnotation",
         "replacedDescendants",
         "originCommands",
