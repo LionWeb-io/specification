@@ -208,16 +208,17 @@ Note that for this operation, the moved node might not reside at that target ind
 
 To avoid ambiguities in the description of such operations, and reduce the chance of misunderstanding the specification as much as possible, we chose to phrase such operations in terms of an _index offset_ — i.e., “in relative coordinates”.
 
-For convenience, we first establish some notation/shorthand:
+For convenience, we first establish some notation/shorthand and definitions:
 
 [[integerRangeNotation, notation/shorthand for integer ranges]]
 .Integer ranges
 We write [_lower_.._upper_] for the set of integers consisting of: _lower_, (_lower_ + 1), (_lower_ + 2), ..., _upper_.
 The *integer range* [_lower_.._upper_] includes _lower_ and _upper_ themselves.
 
+.Input data
 For both scenarios above, assume we have a list of _n_ > 1 distinct nodes.
-We also have an _old index_ `oldIndex`, which MUST be an integer in [0..(_n_ - 1)]: the position that the *node to move* appears at in the list.
-Finally, we have an _index offset_ `indexOffset`, which MUST be an integer unequal to 0, and such that the _target index_ (`oldIndex` + `indexOffset`) is in [0..(_n_ - 1)].
+We also have an _old index_ `oldIndex`, which MUST be an integer in the integer range [0..(_n_ - 1)]: the position that the *node to move* appears at in the list.
+Finally, we have an _index offset_ `indexOffset`, which MUST be an integer unequal to 0, and such that the _target index_ (`oldIndex` + `indexOffset`) is in  the integer range [0..(_n_ - 1)].
 `indexOffset` can be either positive or negative, meaning the movement will be towards higher positions (positive), or towards lower positions (negative).
 
 
@@ -259,7 +260,7 @@ Example moving `X` with `indexOffset` = -2: +
 `oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
 `newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6] G[7]` +
 
-In both cases, only the nodes with initial indices in [**min**(`oldIndex`, `newIndex`)..**max**(`oldIndex`, `newIndex`)] are affected.
+In both cases, only the nodes with initial indices in [min(`oldIndex`, `newIndex`)..max(`oldIndex`, `newIndex`)] are affected.
 If `indexOffset` > 0, then the nodes with initial indices in [(`oldIndex` + 1)..`newIndex`] are moved to the next lower position.
 If `indexOffset` < 0, then the nodes with initial indices in [`newIndex`..(`oldIndex` - 1)] are moved to the next higher position.
 
@@ -275,7 +276,7 @@ We describe this scenario as a two-step process:
 Set `targetIndex` = (`oldIndex` + `indexOffset`).
 We don’t use `newIndex` (yet): we want to reserve that name for the index that the moved node resides at after this operation, which can be different from `targetIndex`.
 
-The node that appears at index `oldIndex` in the list is the *node to move*.
+The node that appears at index `oldIndex` in the list is the node to move.
 The node that appears at index `targetIndex` in the list is the *node to replace*.
 
 1. Set the node at index `targetIndex` to the node with initial index `oldIndex`.
@@ -302,6 +303,8 @@ Example moving `X` with `indexOffset` = 3, and replacing `F`: +
 `oldIndex=3`:    `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
 `indexOffset=3`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_` +
 `targetIndex=6`, `newIndex=5` and `F` is replaced with `X`
+
+Note that moving and replacing another node with `indexOffset=1` has the same effect as (just) deleting the node with (`oldIndex` + 1).
 
 .Moving down
 

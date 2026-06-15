@@ -1,10 +1,10 @@
 [[cmd-MoveAndReplaceAnnotationInSameParent]]
 ===== Move annotation in same parent and replace existing annotation
-Move <<existing-nodes, existing node>> <<MoveAnnotationInSameParent.movedAnnotation>>
-that’s initially at index <<MoveAnnotationInSameParent.oldIndex>>
-in <<MoveAnnotationInSameParent.parent>>'s annotations
-by <<MoveAnnotationInSameParent.indexOffset>> positions
-to index (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAnnotationInSameParent.indexOffset>>),
+Move <<existing-nodes, existing node>> <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>
+that’s initially at index <<MoveAndReplaceAnnotationInSameParent.oldIndex>>
+in <<MoveAndReplaceAnnotationInSameParent.parent>>'s annotations
+by <<MoveAndReplaceAnnotationInSameParent.indexOffset>> positions
+to index (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAndReplaceAnnotationInSameParent.indexOffset>>),
 replacing <<existing-nodes, current node>> <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>{fn-org371}.
 This deletes <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
