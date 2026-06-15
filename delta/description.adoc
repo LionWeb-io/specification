@@ -322,3 +322,5 @@ Example moving `X` with `indexOffset` = -3, and replacing `B`: +
 `indexOffset=-3`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_` +
 `targetIndex=1`, `newIndex=1` and `B` is replaced with `X`
 
+Note that moving and replacing another node with `indexOffset=-1` has the same effect as (just) deleting the node with (`oldIndex` - 1).
+
