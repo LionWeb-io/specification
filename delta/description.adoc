@@ -190,3 +190,135 @@ All values MUST be strings.
 A _kind_ might imply the presence of specific keys in `data`.
 
 This additional info is symmetric to <<{bulk}.adoc#additionalInfo, additional infos in bulk API>>.
+
+
+[[manipulationInsideSingleList, manipulation inside a single list]]
+=== Characteristics of manipulation of a list
+
+A number of commands and events deal with moving a node in one specific listfootnote:[We assume all our lists to be ordered.], and possibly replacing another node in the same list.
+Such a list will either consist of the child nodes of a <<containment>> on a `parent` node, or of the annotation nodes on a `parent` node.
+More precisely: from the viewpoint of the GPL that this functionality is implemented in, such a list consists of _pointers_ to nodes (which happen to be objects).
+There’s chance for confusion with regard to the indices before and after completion of the intended operation — more so than with commands and events that involve moving a node _between_ lists.
+
+There are two types of operations that involve manipulating a single list, and which benefit from clarification with regard to how they work position-wise:
+
+1. Moving a node to a different position – the _target_ index – in a list, moving other list nodes aside as necessary.
+2. Moving a node to a different position – the _target_ index – in a list, *and* replacing the list node at that target index.
+Note that for this operation, the moved node might not reside at that target index afterward, because of the replacing!
+
+To avoid ambiguities in the description of such operations, and reduce the chance of misunderstanding the specification as much as possible, we chose to phrase such operations in terms of an _index offset_ — i.e., “in relative coordinates”.
+
+For convenience, we first establish some notation/shorthand and definitions:
+
+[[integerRangeNotation, notation/shorthand for integer ranges]]
+.Integer ranges
+We write [_lower_.._upper_] for the set of integers consisting of: _lower_, (_lower_ + 1), (_lower_ + 2), ..., _upper_.
+The *integer range* [_lower_.._upper_] includes _lower_ and _upper_ themselves.
+
+.Input data
+For both scenarios above, assume we have a list of _n_ > 1 distinct nodes.
+We also have an _old index_ `oldIndex`, which MUST be an integer in the integer range [0..(_n_ - 1)]: the position that the *node to move* appears at in the list.
+Finally, we have an _index offset_ `indexOffset`, which MUST be an integer unequal to 0, and such that the _target index_ (`oldIndex` + `indexOffset`) is in  the integer range [0..(_n_ - 1)].
+`indexOffset` can be either positive or negative, meaning the movement will be towards higher positions (positive), or towards lower positions (negative).
+
+
+[[justMovingANode, moving a node (without replacing)]]
+==== Moving a node (without replacing)
+
+This pertains to the following commands and events:
+<<cmd-MoveChildInSameContainment>>, <<cmd-MoveAnnotationInSameParent>>, <<evnt-ChildMovedInSameContainment>>, <<evnt-AnnotationMovedInSameParent>>.
+
+Set `newIndex` = (`oldIndex` + `indexOffset`), which in this scenario is also the _target index_.
+The result of moving the node that’s initially at index `oldIndex` by `indexOffset` positions is that that node has been moved `indexOffset` positions up (if `indexOffset` > 0), or (-`indexOffset`) positions down (if `indexOffset` < 0).
+Afterward, the moved node resides at index `newIndex` in the list.
+
+For clarity, we discuss two distinct “sub” scenarios depending on whether `indexOffset` is positive or negative.
+
+.Moving up
+
+For `indexOffset` > 0:
+[cols="a,a","a"]
+|===
+|Before |After
+include::moving/moving-diagram-offset-positive.adoc[]
+|===
+
+Example moving `X` with `indexOffset` = 2: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _F[6]_ G[7]` +
+
+.Moving down
+
+For `indexOffset` < 0:
+[cols="a,a","a"]
+|===
+|Before |After
+include::moving/moving-diagram-offset-negative.adoc[]
+|===
+
+Example moving `X` with `indexOffset` = -2: +
+`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`newIndex=1`: `A[0] *X[1]* _B[2] C[3]_ D[4] E[5] F[6] G[7]` +
+
+In both cases, only the nodes with initial indices in [min(`oldIndex`, `newIndex`)..max(`oldIndex`, `newIndex`)] are affected.
+If `indexOffset` > 0, then the nodes with initial indices in [(`oldIndex` + 1)..`newIndex`] are moved to the next lower position.
+If `indexOffset` < 0, then the nodes with initial indices in [`newIndex`..(`oldIndex` - 1)] are moved to the next higher position.
+
+
+[[movingAndReplacingNodes, moving a node and replacing another node]]
+==== Moving a node and replacing another node
+
+This pertains to the following commands and events:
+<<cmd-MoveAndReplaceChildInSameContainment>>, <<cmd-MoveAndReplaceAnnotationInSameParent>>, <<evnt-ChildMovedAndReplacedInSameContainment>>, <<evnt-AnnotationMovedAndReplacedInSameParent>>.
+
+We describe this scenario as a two-step process:
+
+Set `targetIndex` = (`oldIndex` + `indexOffset`).
+We don’t use `newIndex` (yet): we want to reserve that name for the index that the moved node resides at after this operation, which can be different from `targetIndex`.
+
+The node that appears at index `oldIndex` in the list is the node to move.
+The node that appears at index `targetIndex` in the list is the *node to replace*.
+
+1. Set the node at index `targetIndex` to the node with initial index `oldIndex`.
+This action overwrites and effectively replaces the node to replace with the node to move.
+The node to replace gets deleted as a result.
+Now, the list contains the same number of nodes as before, just with two occurrences of the node to move, namely at indices `oldIndex` and `targetIndex`, and no occurrences of the node to replace.
+2. The node with index `oldIndex` is removed from the list, with the nodes after it being moved to the next lower position — this includes the node moved in step 1 itself if (`indexOffset` > 0).
+Now, the list contains one less node than before.
+
+For clarity, we discuss two distinct “sub” scenarios depending on whether `indexOffset` is positive or negative.
+
+.Moving up
+
+For `indexOffset` > 0:
+[cols="a,a","a"]
+|===
+|Before |After
+include::moving/moving-and-replacing-diagram-offset-positive.adoc[]
+|===
+
+The new index of the moved child can be calculated as follows: `newIndex` = `oldIndex` + `indexOffset` - 1.
+
+Example moving `X` with `indexOffset` = 3, and replacing `F`: +
+`oldIndex=3`:    `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
+`indexOffset=3`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_` +
+`targetIndex=6`, `newIndex=5` and `F` is replaced with `X`
+
+Note that moving and replacing another node with `indexOffset=1` has the same effect as (just) deleting the node with (`oldIndex` + 1).
+
+.Moving down
+
+For `indexOffset` < 0:
+[cols="a,a","a"]
+|===
+|Before |After
+include::moving/moving-and-replacing-diagram-offset-negative.adoc[]
+|===
+
+The new index of the moved child can be calculated as follows: `newIndex` = `oldIndex` + `indexOffset`.
+
+Example moving `X` with `indexOffset` = -3, and replacing `B`: +
+`oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
+`indexOffset=-3`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_` +
+`targetIndex=1`, `newIndex=1` and `B` is replaced with `X`
+

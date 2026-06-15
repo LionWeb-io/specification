@@ -21,9 +21,12 @@ Encoded as <<{serialization}.adoc#meta-pointer, meta-pointer>>.
 [[resolveInfoType]]ResolveInfo:: ResolveInfo of a reference as string.
 Can be `null`.
 
-[[indexType]]Index:: Position inside a multiple link or annotations as integer >= 0.
+[[indexType]]Index:: Position inside a (list of) multiple link or annotations as integer >= 0.
 Cannot be `null`.
 Use value `0` for <<{m3}.adoc#multiplicity, single links>>.
+
+[[indexOffsetType]]IndexOffset:: Relative position inside a (list of) multiple link or annotations as integer.
+Cannot be `0` or `null`.
 
 [[commandType]]Command:: Any <<commands, command>>.
 

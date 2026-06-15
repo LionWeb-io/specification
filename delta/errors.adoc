@@ -38,12 +38,19 @@ Client tries to operate on an index beyond the number of existing elements.
 .Technical name
 `unknownIndex`
 
+
 [[err-indexEntryMismatch]]
 ==== Entry at index is not the given entry
 Client provided an entry (either a node or a target/resolveInfo) and an index, but the entry is not at the given index.
 
 .Technical name
 `indexNodeMismatch`
+
+
+[[err-invalidIndexOffset]]
+==== Index offset is invalid
+Client provided an index offset which is either 0, or an integer such that a given “old” index + the index offset is not a valid index (in the list that’s the subject of the action triggering this error).
+
 
 [[err-unknownParentNode]]
 ==== The parent of a node does not exist 
@@ -52,6 +59,7 @@ Client provided a node with a parent, but the parent node does not exist.
 .Technical name
 `unknownParentNode`
 
+
 [[err-parentMismatch]]
 ==== The given parent of a node is not its parent 
 Client provided an existing node N with a parent id in its parent property, but the node with this parent-id
@@ -59,6 +67,7 @@ does not have the existing node N as a child (annotation or containment).
 
 .Technical name
 `parentMismatch`
+
 
 [[err-moveWithoutParent]]
 ==== Move without parent

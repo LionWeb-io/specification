@@ -1,0 +1,66 @@
+|
+
+[plantuml,moving-and-replacing-positive-offset-before,svg]
+----
+!include commandEventOverviewStyle.puml
+left to right direction
+
+class parent
+
+class siblingA
+class nodeToMove #Orange
+class siblingB
+class siblingC
+class siblingC
+
+class descendant #Orange
+
+class nodeToReplace #Red
+
+class "replaced\nDescendant" as replacedDescendant #red
+nodeToReplace *-> replacedDescendant #Red
+
+parent *--> siblingA: containment\n[oldIndex - 1]
+parent *--> nodeToMove: containment\n[<color #red>oldIndex</color>]
+parent *--> siblingB: containment\n[oldIndex + 1]
+parent *--> siblingC: containment\n[oldIndex + indexOffset - 1]
+parent *--> nodeToReplace #Red: containment\n[oldIndex + indexOffset]
+parent *--> siblingD: containment\n[oldIndex + indexOffset + 1]
+
+nodeToMove *-> descendant
+
+siblingA -[hidden]> nodeToMove
+descendant -[hidden]> siblingB
+siblingB -[hidden]> siblingC
+siblingC -[hidden]> nodeToReplace
+replacedDescendant -[hidden]> siblingD
+----
+|
+[plantuml, moving-and-replacing-positive-offset-after, svg]
+----
+!include commandEventOverviewStyle.puml
+left to right direction
+
+class parent
+
+class siblingA
+class movedNode #Orange
+class siblingB
+class siblingC
+class siblingD
+
+class descendant #Orange
+
+parent *--> siblingA: containment\n[oldIndex - 1]
+parent *--> siblingB: containment\n[oldIndex]
+parent *--> siblingC: containment\n[oldIndex + indexOffset - 2]
+parent *--> movedNode: containment\n[<color #Blue>oldIndex + indexOffset - 1</color>]
+parent *--> siblingD: containment\n[oldIndex + indexOffset]
+
+movedNode *-> descendant
+
+siblingA -[hidden]> siblingB
+siblingB -[hidden]> siblingC
+siblingC -[hidden]> movedNode
+descendant -[hidden]> siblingD
+----

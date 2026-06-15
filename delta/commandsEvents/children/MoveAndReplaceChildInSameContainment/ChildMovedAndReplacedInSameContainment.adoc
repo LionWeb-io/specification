@@ -1,34 +1,34 @@
 [[evnt-ChildMovedAndReplacedInSameContainment]]
 ===== Child moved in same containment and replaced existing child
-<<existing-nodes, Existing node>> <<ChildMovedAndReplacedInSameContainment.movedChild>> (previously inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> at <<ChildMovedAndReplacedInSameContainment.oldIndex>>) has replaced the <<existing-nodes, existing>> <<ChildMovedAndReplacedInSameContainment.replacedChild>> inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> at <<ChildMovedAndReplacedInSameContainment.newIndex>>.
-<<ChildMovedAndReplacedInSameContainment.replacedChild>>, and all its <<ChildMovedAndReplacedInSameContainment.replacedDescendants>>{fn-org370}, have been deleted.
+<<existing-nodes, Existing node>> <<ChildMovedAndReplacedInSameContainment.movedChild>>
+that was initially at index <<ChildMovedAndReplacedInSameContainment.oldIndex>>
+within the <<ChildMovedAndReplacedInSameContainment.containment>> inside <<ChildMovedAndReplacedInSameContainment.parent>>
+was moved by <<ChildMovedAndReplacedInSameContainment.indexOffset>> positions
+to index (<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>),
+replacing <<existing-nodes, current child>> <<ChildMovedAndReplacedInSameContainment.replacedChild>>{fn-org371} at the target index.{fn-org469}
+<<ChildMovedAndReplacedInSameContainment.replacedChild>> subsequently gets deleted, including all its descendants (including annotation instances).
+This does NOT change references to any of the deleted nodes.{fn-org285}
 
-If <<ChildMovedAndReplacedInSameContainment.oldIndex>> < <<ChildMovedAndReplacedInSameContainment.newIndex>>: All other children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> with previous index > <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to next lower index.
-Example: +
-`oldIndex=3`: `A[0] B[1] C[2] *X[3]* D[4] E[5] F[6] G[7]` -> +
-`newIndex=5`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_`
-
-If <<ChildMovedAndReplacedInSameContainment.oldIndex>> > <<ChildMovedAndReplacedInSameContainment.newIndex>>: All other children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>> with previous index >= <<ChildMovedAndReplacedInSameContainment.oldIndex>> have been moved to next lower index.
-Example: +
-`oldIndex=4`: `A[0] B[1] C[2] D[3] *X[4]* E[5] F[6]` -> +
-`newIndex=1`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_`
-
-<<ChildMovedAndReplacedInSameContainment.oldIndex>> MUST NOT be equal to <<ChildMovedAndReplacedInSameContainment.newIndex>>.
+This conforms to <<movingAndReplacingNodes, the action of moving a node and replacing another one in one specific list>> — see that section for more information, diagrams, and examples.
 
 .Technical name
 `ChildMovedAndReplacedInSameContainment`
 
 [horizontal]
 .Parameters
-[[ChildMovedAndReplacedInSameContainment.newIndex, `newIndex`]]newIndex:: <<indexType>>
-
-[[ChildMovedAndReplacedInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
-
 [[ChildMovedAndReplacedInSameContainment.parent, `parent`]]parent:: <<targetNodeType>>
 
 [[ChildMovedAndReplacedInSameContainment.containment, `containment`]]containment:: <<metaPointerType>>
 
 [[ChildMovedAndReplacedInSameContainment.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[ChildMovedAndReplacedInSameContainment.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
+MUST NOT be 0. +
+(<<ChildMovedAndReplacedInSameContainment.oldIndex>> + <<ChildMovedAndReplacedInSameContainment.indexOffset>>)
+MUST NOT be < 0,
+or >= (the number of children inside <<ChildMovedAndReplacedInSameContainment.parent>>'s <<ChildMovedAndReplacedInSameContainment.containment>>).
+
+[[ChildMovedAndReplacedInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
 
 [[ChildMovedAndReplacedInSameContainment.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
 
