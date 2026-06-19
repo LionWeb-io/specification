@@ -3571,6 +3571,9 @@
         "continuedEventSequenceNumber": {
           "$ref": "#/$defs/eventSequenceNumber"
         },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
         "sequenceNumber": {
           "$ref": "#/$defs/eventSequenceNumber"
         },
@@ -3584,12 +3587,13 @@
         "continuedChunkCompleted",
         "continuedChunkSequenceNumber",
         "continuedEventSequenceNumber",
+        "originCommands",
         "sequenceNumber",
         "additionalInfos"
       ],
       "additionalProperties": false,
-      "minProperties": 7,
-      "maxProperties": 7
+      "minProperties": 8,
+      "maxProperties": 8
     },
     "CustomEvent": {
       "properties": {

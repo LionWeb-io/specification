@@ -19,7 +19,7 @@ Subsequently, any (directly or indirectly) contained <<splittableMessage, splitt
 .Technical name
 `CompositeEvent` footnote:[
 This event is the only one to have a `Event` suffix, which is necessary to distinguish it from its <<cmd-CompositeCommand, `CompositeCommand`>> counterpart.
-All other events can be distinguished from their command counterparts by looking at whether the technical name reads as an imperative (“add child” — for commands), or in past perfect tense (”child [has been\] added” — for events).
+All other events can be distinguished from their command counterparts by looking at whether the technical name reads as an imperative (“add child” — for commands), or in past perfect tense (“child [has been\] added” — for events).
 (The <<evnt-NoOp, `NoOp`>> and <<evnt-ErrorEvent, `Error`>> don't have command counterparts.)
 ]
 
