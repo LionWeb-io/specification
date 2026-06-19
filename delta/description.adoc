@@ -59,7 +59,8 @@ This protocol is agnostic of its underlying transport or technical implementatio
 By default, this protocol uses JSON encoding over a text-based, single channel, stateful, bi-directional, asynchronous, reliable, and trustworthy transport.{fn-org429}
 Any transport that fits these criteria (e.g. WebSocketfootnote:[https://websockets.spec.whatwg.org/]) MUST use the same encoding and MUST adhere to the <<deltaJsonSchema>>.{fn-org428}
 
-We assume the underlying protocol handles quality of service concerns (i.e. guaranteed one-time complete delivery of messages), they are out of scope of this API.
+We assume the underlying protocol handles quality of service concerns (i.e. guaranteed in-order{fn-org485} one-time complete delivery of messages), they are out of scope of this API.
+Outside of <<conflict-resolution>>, a repository MUST apply commands in the received order.{fn-org484}
 
 [[participation, participation]]
 === Participation characteristics
@@ -83,7 +84,7 @@ This number is a positive integer that increments by one for each consecutive ev
 It is unique per participation.{fn-org343}
 Events SHOULD be sent across the <<channel>> in increasing order of sequence number.
 
-A <<client>> SHOULD use this number to order incoming events, and check whether the client missed any event.
+A <<client>> MUST use this number to order incoming events{fn-org483}, and SHOULD check whether the client missed any event.
 
 [[subscription, subscription]]
 === Subscription characteristics
