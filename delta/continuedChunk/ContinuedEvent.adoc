@@ -24,7 +24,7 @@ The combination of all continued chunks MUST adhere to the same constraints as t
 [[ContinuedEvent.continuedEventSequenceNumber]]continuedEventSequenceNumber:: <<event-sequence-number>>
 Sequence number of the related <<splittableMessage, splittable event>>
 
-[[ContinuedEvent.originCommands]]originCommands:: <<commandSourceType>>[]
+[[ContinuedEvent.originCommands]]originCommands:: <<commandSourceType>>[]{fn-org477}
 The contents of this field MUST be exactly the same as those of the `originCommands` field of the corresponding event — i.e., the event designated by <<ContinuedEvent.continuedEventSequenceNumber>>.
 The client MUST reject any differences as an error.
 
