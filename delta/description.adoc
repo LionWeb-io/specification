@@ -11,12 +11,41 @@ A repository is “its own universe”: nodes within it can't reference nodes, o
 All nodes within the same repository MUST have unique IDs.
 Nodes can refer to nodes from the LionCore and built-in languages.
 
+[[repository-contents]]
+==== Contents
+The repository is always the ultimate arbiter of its contents.{fn-org339}
+It can decide to apply each command verbatim, with some tweaks (e.g. because of <<conflict-resolution, concurrent changes>>), or not at all (e.g. because the command would introduce containment loops).
+
+[[conflict-resolution]]
+==== Conflict resolution
+Each repository might introduce its own strategy how to handle commands.{fn-org291}
+For example, assume client 1 sends a `DeleteChild` command to delete node `X`, and then client 2 sends a `SetProperty` command on node `X`.
+The repository has to _resolve that conflict_ somehow.
+
+* Repository A applies all commands in order, thus deletes node `X` and ignores the second command, i.e. does not set any property, but attaches both commands' `commandId` to the resulting `ChildDeleted` event.
+
+* Repository B keeps an internal "trash can" of all deleted nodes.
+It deletes node `X` on the first command, but resurrects node `X` on the second command and changes the property as requested.
+It first emits a `ChildDeleted` event (correlated to the first command), but later `ChildAdded` and `PropertyChanged` events (both correlated to the second command).
+
+* Repository C batches command processing.
+It looks at both messages together, and decides it's more important to keep the new property value around.
+It emits one `PropertyChanged` event, correlated with both commands.
+
+Conflict resolution might depend on which commands a repository considers to arrive together, i.e. at the same time.
+A repository is free to chose its own interpretation of "at the same time".
+Examples include "never, every command stands on its own", "sliding window of 10 ms", or "within one processing cycle".
+
 [[client, client]]
 === Client characteristics
 A client is a program connecting to a <<repository>>.
 Each client has exactly one <<participation>> with one repository at one point in time.
-The same client can have several consecutive participations with the same repository, but never at the same time.
+The same client can have several consecutive participations with the same repository, but never at the same time.  +
 A client might interact with several repositories, but they are completely independent (i.e. same as two clients connecting to two repositories).{fn-org337}
+
+A client stays up-to-date with the repository's contents if it applies all events in order.{fn-org297}
+The order is defined by the event's sequence number.{fn-org341}  +
+A client can either decide to apply its own change immediately and filter out events based on that command, or wait for the correlated event to arrive and apply the change only then.
 
 The client has the responsibility to guarantee uniqueness of <<queryIdType, query ids>> and <<commandIdType, command ids>> within the same participation.
 
@@ -31,7 +60,8 @@ This protocol is agnostic of its underlying transport or technical implementatio
 By default, this protocol uses JSON encoding over a text-based, single channel, stateful, bidirectional, asynchronous, reliable, and trustworthy transport.{fn-org429}
 Any transport that fits these criteria (e.g. WebSocketfootnote:[https://websockets.spec.whatwg.org/]) MUST use the same encoding and MUST adhere to the <<deltaJsonSchema>>.{fn-org428}
 
-We assume the underlying protocol handles quality of service concerns (i.e. guaranteed one-time complete delivery of messages), they are out of scope of this API.
+We assume the underlying protocol handles quality of service concerns (i.e. guaranteed in-order{fn-org485} one-time complete delivery of messages), they are out of scope of this API.
+Outside of <<conflict-resolution>>, a repository SHOULD apply commands in the received order.{fn-org484}
 
 [[participation, participation]]
 === Participation characteristics
@@ -55,7 +85,7 @@ This number is a positive integer that increments by one for each consecutive ev
 It is unique per participation.{fn-org343}
 Events SHOULD be sent across the <<channel>> in increasing order of sequence number.
 
-A <<client>> SHOULD use this number to order incoming events, and check whether the client missed any event.
+A <<client>> MUST use this number to order incoming events{fn-org483}, and SHOULD check whether the client missed any event.
 
 [[subscription, subscription]]
 === Subscription characteristics
