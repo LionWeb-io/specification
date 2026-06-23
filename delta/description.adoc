@@ -19,17 +19,18 @@ It can decide to apply each command verbatim, with some tweaks (e.g. because of 
 [[conflict-resolution]]
 ==== Conflict resolution
 Each repository might introduce its own strategy how to handle commands.{fn-org291}
-For example, assume client 1 sends a `deleteChild` command to delete node `X`, and then client 2 sends a `setProperty` command on node `X`.
+For example, assume client 1 sends a `DeleteChild` command to delete node `X`, and then client 2 sends a `SetProperty` command on node `X`.
 The repository has to _resolve that conflict_ somehow.
 
-* Repository A applies all commands in order, thus deletes node `X` and ignores the second command.
-It emits one `childDeleted` event, correlated to both commands.
+* Repository A applies all commands in order, thus deletes node `X` and ignores the second command, i.e. does not set any property, but attaches both commands' `commandId` to the resulting `ChildDeleted` event.
+
 * Repository B keeps an internal "trash can" of all deleted nodes.
 It deletes node `X` on the first command, but resurrects node `X` on the second command and changes the property as requested.
-It first emits a `childDeleted` event (correlated to the first command), but later `childAdded` and `propertyChanged` events (both correlated to the second command).
+It first emits a `ChildDeleted` event (correlated to the first command), but later `ChildAdded` and `PropertyChanged` events (both correlated to the second command).
+
 * Repository C batches command processing.
 It looks at both messages together, and decides it's more important to keep the new property value around.
-It emits one `propertyChanged` event, correlated with both commands.
+It emits one `PropertyChanged` event, correlated with both commands.
 
 Conflict resolution might depend on which commands a repository considers to arrive together, i.e. at the same time.
 A repository is free to chose its own interpretation of "at the same time".
@@ -60,7 +61,7 @@ By default, this protocol uses JSON encoding over a text-based, single channel, 
 Any transport that fits these criteria (e.g. WebSocketfootnote:[https://websockets.spec.whatwg.org/]) MUST use the same encoding and MUST adhere to the <<deltaJsonSchema>>.{fn-org428}
 
 We assume the underlying protocol handles quality of service concerns (i.e. guaranteed in-order{fn-org485} one-time complete delivery of messages), they are out of scope of this API.
-Outside of <<conflict-resolution>>, a repository MUST apply commands in the received order.{fn-org484}
+Outside of <<conflict-resolution>>, a repository SHOULD apply commands in the received order.{fn-org484}
 
 [[participation, participation]]
 === Participation characteristics
