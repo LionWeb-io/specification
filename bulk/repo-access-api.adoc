@@ -175,9 +175,10 @@ Example: `he!!o`
 
 [[responses]]
 == Responses
-The repository
+The repository signals _success_ or _failure_ with each response.
+We call this part of the response <<successType, success flag>>.
 
-Besides the main response, the repository can reply each command with zero or more additional
+Besides the main response, the repository can reply each command with zero or more <<additionalInfosType, additional infos>>.
 
 [[parameter-syntax]]
 === Parameter syntax
