@@ -64,7 +64,7 @@ We assume mapping API is separate from bulk API{fn-org94}.
 
 For now, we do not support paging, as paging tree nodes is non-trivial.{fn-org204}
 
-For now, we don't include any specific protections agains denial-of-service attacks.{fn-org237}
+For now, we don't include any specific protections against denial-of-service attacks.{fn-org237}
 
 We don't describe the binding to any specific protocol (e.g. HTTP) as part of this specification; We only describe the semantics.{fn-org148}
 
@@ -208,12 +208,12 @@ We need to omit the parameter if we don't want to limit the depth.
 
 [[integerType]]integer:: An integer.
 
-[[commandIdType]]commandId:: Each _modifying_ command MUST contain a _[[commandId, commmand id]]command id_.{fn-org313}
+[[commandIdType]]commandId:: Each _modifying_ command MUST contain a _[[commandId, command id]]command id_.{fn-org313}
 It has the same format as <<{m3}.adoc#identifiers, node ids>> and must be unique for all changes of this client.
 +
 Modifying commands are <<createPartitions>>, <<deletePartitions>>, and <<store>>.
 
-[[successType]]success:: A boolean flag signalling _success_ or _failure_ with each response.
+[[successType]]success:: A boolean flag signaling _success_ or _failure_ with each response.
 
 [[additionalInfosType]]additionalInfos:: Optionally empty{fn-org402} list of [[additionalInfo]] _additional infos_ in either request or response.{fn-org236}{fn-org375}{fn-org430}
 Each additional info consists of:
