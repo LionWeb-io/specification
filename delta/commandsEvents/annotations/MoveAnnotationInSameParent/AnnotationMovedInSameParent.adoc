@@ -17,7 +17,7 @@ This conforms to <<justMovingANode, the action of moving a node in one specific 
 
 [[AnnotationMovedInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<targetNodeType>>
 
-[[AnnotationMovedInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
+[[AnnotationMovedInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>{fn-org482}
 
 [[AnnotationMovedInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
 
