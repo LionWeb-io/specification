@@ -331,7 +331,7 @@
     "customMessageKind": {
       "type": "string",
       "minLength": 8,
-      "pattern": "^custom_[a-zA-Z0-9_-]+$"
+      "pattern": "^Custom_[a-zA-Z0-9_-]+$"
     },
     "additionalInfoDataKey": {
       "$ref": "#/$defs/id"
