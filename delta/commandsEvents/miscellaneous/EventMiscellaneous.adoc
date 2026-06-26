@@ -3,6 +3,6 @@
 
 include::CompositeCommand/CompositeEvent.adoc[]
 
-include::NoOp/NoOp.adoc[]
+include::NoOpEvent/NoOpEvent.adoc[]
 
 include::ErrorEvent/ErrorEvent.adoc[]

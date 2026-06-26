@@ -1,9 +1,10 @@
 [[evnt-NoOp]]
-===== No-op
+[[evnt-NoOpEvent]]
+===== No-op Event
 Nothing happened as result of one or more command(s).{fn-org314}
 
 .Technical name
-`NoOp`
+`NoOpEvent`{fn-org492}
 
 [horizontal]
 .Parameters

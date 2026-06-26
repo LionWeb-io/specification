@@ -3,7 +3,7 @@
 ===== Composite
 The events in <<CompositeEvent.parts>> have happened in the given order.{fn-org281}
 
-We CAN nest composite events arbitrarily{fn-org360}, and CAN include <<evnt-ErrorEvent>> and/or <<evnt-NoOp>>{fn-org491}.
+We CAN nest composite events arbitrarily{fn-org360}, and CAN include <<evnt-ErrorEvent>> and/or <<evnt-NoOpEvent>>{fn-org491}.
 
 The repository MUST NOT create composite events on its own — (only as a result of composite commands).{fn-org353}
 
@@ -20,7 +20,7 @@ Subsequently, any (directly or indirectly) contained <<splittableMessage, splitt
 `CompositeEvent` footnote:[
 This event is the only one to have a `Event` suffix, which is necessary to distinguish it from its <<cmd-CompositeCommand, `CompositeCommand`>> counterpart.
 All other events can be distinguished from their command counterparts by looking at whether the technical name reads as an imperative (“add child” — for commands), or in past perfect tense (“child [has been\] added” — for events).
-(The <<evnt-NoOp, `NoOp`>> and <<evnt-ErrorEvent, `Error`>> don't have command counterparts.)
+(The <<evnt-NoOpEvent, `NoOp`>> and <<evnt-ErrorEvent, `Error`>> don't have command counterparts.)
 ]
 
 [horizontal]
