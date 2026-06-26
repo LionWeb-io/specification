@@ -374,3 +374,5 @@
 :fn-org484: footnote:org484[https://github.com/LionWeb-io/specification/issues/484[Do we always apply commands of one client in the order they arrive at the repo? #484]]
 :fn-org485: footnote:org485[https://github.com/LionWeb-io/specification/issues/485[Channel MUST guarantee delivering messages in the order sent #485]]
 :fn-org487: footnote:org487[https://github.com/LionWeb-io/specification/issues/487[Composite implementation issues #487]]
+:fn-org491: footnote:org491[https://github.com/LionWeb-io/specification/issues/491[Can `ErrorEvent` / `NoOpEvent` appear inside `CompositeEvent`? #491]]
+:fn-org492: footnote:org492[https://github.com/LionWeb-io/specification/issues/492[Naming: `NoOp` or `NoOpEvent`? #492]]

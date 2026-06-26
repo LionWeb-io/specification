@@ -8,7 +8,7 @@ Command groups don't guarantee anything; the repository MAY take the group as a 
 
 Whenever a composite command is syntactically incorrect in one of its <<CompositeCommand.parts>>, the repository MUST reject the complete composite command – as if the composite command didn’t even start executing – as the command as a whole is (deemed) syntactically incorrect.{fn-org454}
 
-We can nest composite commands arbitrarily.{fn-org360}
+We CAN nest composite commands arbitrarily.{fn-org360}
 
 Semantics:{fn-org420}
 

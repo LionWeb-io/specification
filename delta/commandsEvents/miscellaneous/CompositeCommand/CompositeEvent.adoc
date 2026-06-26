@@ -3,7 +3,7 @@
 ===== Composite
 The events in <<CompositeEvent.parts>> have happened in the given order.{fn-org281}
 
-We can nest composite events arbitrarily.{fn-org360}
+We CAN nest composite events arbitrarily{fn-org360}, and CAN include <<evnt-ErrorEvent>> and/or <<evnt-NoOp>>{fn-org491}.
 
 The repository MUST NOT create composite events on its own — (only as a result of composite commands).{fn-org353}
 
