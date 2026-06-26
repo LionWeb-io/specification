@@ -226,7 +226,7 @@ This additional info is symmetric to <<{bulk}.adoc#additionalInfo, additional in
 === Characteristics of manipulation of a list
 
 A number of commands and events deal with moving a node in one specific listfootnote:[We assume all our lists to be ordered.], and possibly replacing another node in the same list.
-Such a list will either consist of the child nodes of a <<containment>> on a `parent` node, or of the annotation nodes on a `parent` node.
+Such a list will either consist of the child nodes of a <<{m3}.adoc#Containment>> on a `parent` node, or of the annotation nodes on a `parent` node.
 More precisely: from the viewpoint of the GPL that this functionality is implemented in, such a list consists of _pointers_ to nodes (which happen to be objects).
 There’s chance for confusion with regard to the indices before and after completion of the intended operation — more so than with commands and events that involve moving a node _between_ lists.
 
