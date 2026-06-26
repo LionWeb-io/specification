@@ -1,7 +1,7 @@
 [[evnt-miscellaneous]]
 ==== Miscellaneous
 
-include::CompositeCommand/CompositeEvent.adoc[]
+include::Composite/CompositeEvent.adoc[]
 
 include::NoOpEvent/NoOpEvent.adoc[]
 
