@@ -2323,7 +2323,7 @@
           "$ref": "#/$defs/ReferenceChanged"
         },
         {
-          "$ref": "#/$defs/NoOp"
+          "$ref": "#/$defs/NoOpEvent"
         },
         {
           "$ref": "#/$defs/CompositeEvent"
@@ -3496,10 +3496,10 @@
       "minProperties": 5,
       "maxProperties": 5
     },
-    "NoOp": {
+    "NoOpEvent": {
       "properties": {
         "messageKind": {
-          "const": "NoOp"
+          "const": "NoOpEvent"
         },
         "originCommands": {
           "$ref": "#/$defs/commandSources"

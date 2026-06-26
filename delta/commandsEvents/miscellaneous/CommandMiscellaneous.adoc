@@ -1,4 +1,4 @@
 [[cmd-composite-section]]
 ==== Composite
 
-include::CompositeCommand/CompositeCommand.adoc[]
+include::Composite/CompositeCommand.adoc[]

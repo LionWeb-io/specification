@@ -20,7 +20,7 @@ This conforms to <<justMovingANode, the action of moving a node in one specific 
 [[ChildMovedInSameContainment.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
 [[ChildMovedInSameContainment.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
-MUST NOT be 0.
+MUST NOT be 0.{fn-org482}
 
 [[ChildMovedInSameContainment.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
 
