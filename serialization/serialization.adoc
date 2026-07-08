@@ -299,7 +299,7 @@ Each <<{m3}.adoc#Field, Field>> forms one _member_, with the field's <<{m3}.adoc
 For fields of type <<string>>, <<boolean>>, <<integer>>, and <<literal>>, the _value_ is encoded as JSON _string_ in the same way as for a property.
 For fields of type <<structuredDatatype>>, the value is encoded as JSON _object_.
 
-.Structured datatypes used in the examples
+.Structured data types used in the examples
 --
 
 NOTE: The format used in this example is non-normative.
@@ -310,16 +310,16 @@ enumeration Currency                   [id aa, key currency]
   literal EUR                          [id a0, key cur-eur]
   literal GBP                          [id a1, key cur-gbp]
 
-structured datatype Amount             [id 10, key amount]
+structured data type Amount             [id 10, key amount]
   value: Integer                       [id 11, key amount-val]
   currency: Currency                   [id 12, key amount-cur]
   digital: Boolean                     [id 13, key digital]
 
-structured datatype Decimal            [id 20, key decimal]
+structured data type Decimal            [id 20, key decimal]
   int: Integer                         [id 21, key decimal-int]
   frac: Integer                        [id 22, key decimal-frac]
 
-structured datatype ComplexNumber      [id 30, key complex]
+structured data type ComplexNumber      [id 30, key complex]
   real: Decimal                        [id 31, key complex-real]
   imaginary: Decimal                   [id 32, key complex-imaginary]
 ----
@@ -428,7 +428,7 @@ unescaped content:
 {"decimal-int": "42", "decimal-frac": "0", "decimal-comment": "life question?"}
 ----
 
-* ComplexNumber with recursively nested structured datatype: `"{\n\"complex-real\": \"{ \\\"decimal-int\\\": \\\"23\\\", \\\"decimal-frac\\\": \\\"17\\\"}\",\n\"complex-imaginary\": { \"decimal-int\": \"42\", \"decimal-frac\": \"0\"}\n}"`
+* ComplexNumber with recursively nested structured data type: `"{\n\"complex-real\": \"{ \\\"decimal-int\\\": \\\"23\\\", \\\"decimal-frac\\\": \\\"17\\\"}\",\n\"complex-imaginary\": { \"decimal-int\": \"42\", \"decimal-frac\": \"0\"}\n}"`
 +
 unescaped content:
 +
@@ -577,7 +577,7 @@ Refer to <<{roadmap}.adoc#release-2026.1, roadmap>> for details.
 === 2024.1
 Technical name: `2024.1`
 
-* Repurposed `JSON` primitive datatype serialization for <<{m3}.adoc#StructuredDataType, StructuredDataType>>
+* Repurposed `JSON` primitive data type serialization for <<{m3}.adoc#StructuredDataType, StructuredDataType>>
 
 Refer to <<{roadmap}.adoc#release-2024.1, roadmap>> for details.
 

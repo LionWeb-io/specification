@@ -127,7 +127,7 @@ For example, I might query via bulk only for _Dog_ concepts, or only receive del
 In source code it's very common to _comment out_ a part of the contents.
 We might come up with a standard way to support similar functionality to _comment out_ some nodes.{fn-org15}
 
-[[custom-datatypes]]
+[[custom-dataTypes]]
 ==== Support custom DataTypes
 A user might define their own <<{m3}.adoc#DataType, DataTypes>> and support their (de-)serialization.{fn-org10}
 
@@ -174,7 +174,7 @@ It is used to store and retrieve nodes in batches at the moment of invocation.{f
 It is intended for CRUD operations on (larger) sets of nodes, and enables integration with "simple" editor (i.e. no real-time collaboration).
 Additionally, this API allows to list the available <<{m3}.adoc#partition, Partitions>>, get Languages known to the repository, and request unused <<{m3}.adoc#identifiers, node ids>>.
 
-* Removed built-in `JSON` primitive datatype{fn-org277}
+* Removed built-in `JSON` primitive data type{fn-org277}
 
 * Added <<{m3}.adoc#StructuredDataType, StructuredDataType>>{fn-org265}
 
