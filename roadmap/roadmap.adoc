@@ -127,6 +127,7 @@ For example, I might query via bulk only for _Dog_ concepts, or only receive del
 In source code it's very common to _comment out_ a part of the contents.
 We might come up with a standard way to support similar functionality to _comment out_ some nodes.{fn-org15}
 
+[[custom-datatypes]]
 [[custom-dataTypes]]
 ==== Support custom DataTypes
 A user might define their own <<{m3}.adoc#DataType, DataTypes>> and support their (de-)serialization.{fn-org10}
