@@ -138,7 +138,7 @@ even though other representations  might be better fit for some clients.
 Do we use _int_ or _BigInt_ or anything else for _integer_?
 Or should we use string with a specified format?
 
-Do we want to define a mapping to a non-standard datatype?
+Do we want to define a mapping to a non-standard data type?
 Like in TypeScript using js-jodatime for date, or BigNumber for numbers?
 Since JavaScript/TypeScript lacks any standardization, it is not easy to make a choice.
 Do we want to depend on other libraries that might change and/or disappear at any moment?
