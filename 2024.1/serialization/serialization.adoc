@@ -287,8 +287,7 @@ Booleans MUST NOT be encoded with leading or trailing whitespace, uppercase char
 * `"-6 "`
 
 [[structuredDatatype]]
-[[structuredDataType]]
-==== Structured Data Type
+==== Structured Datatype
 <<{m3}.adoc#StructuredDataType, LionCore StructuredDataType>> MUST be encoded as JSON _string_.
 The string contains a JSON _object_ according to spec (RFC 8259) with proper escaping: all double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
 
