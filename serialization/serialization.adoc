@@ -289,7 +289,8 @@ An implementation MAY refuse a model containing an integer value outside the sup
 * `"-6 "`
 
 [[structuredDatatype]]
-==== Structured Datatype
+[[structuredDataType]]
+==== Structured Data Type
 <<{m3}.adoc#StructuredDataType, LionCore StructuredDataType>> MUST be encoded as JSON _string_.
 The string contains a JSON _object_ according to spec (RFC 8259) with proper escaping: all double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
 
