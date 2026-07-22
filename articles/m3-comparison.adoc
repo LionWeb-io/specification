@@ -139,7 +139,7 @@ Annotating{zwsp}Element
 |
 |Classifier
 |Abstract{zwsp}Concept{zwsp}Declaration
-|(type)
+|
 
 |<<Concept>>
 |class
@@ -260,7 +260,7 @@ Annotating{zwsp}Element
 |package
 |Package
 |(Language)footnote:[Languages are a core structural idea of MPS, but not present in their M3.]
-|(package)
+|
 
 |<<LanguageEntity, Language{zwsp}Entity>>
 |
@@ -337,7 +337,7 @@ Annotating{zwsp}Element
 |value object
 |Structure
 |
-|(type)
+|
 |===
 
 === Not supported by LionWeb
