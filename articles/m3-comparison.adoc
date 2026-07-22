@@ -14,7 +14,7 @@ We show that all of these M3s are similar, and highlight the most important diff
 All systems describe structural aspects in a similar way, only differing in details.
 The foundational ideas are well understood and stable.
 
-Everybody supports <<Classifier, Classifiers>> and some variant of contained <<Feature, Features>>.
+Everybody supports <<Classifier, Classifiers>> (including the variations of <<Concept>> vs. <<Interface>>) and some variant of contained <<Feature, Features>>.
 Not very surprising, as this is the basic building block for composing structures.
 
 Modeling systems distinguish between features with identity-free values (<<Property, Properties>>), parent/child semantics (<<Containment, Containments>>) and relation semantics (<<Reference, References>>), whereas programming languages treat them all the same.
