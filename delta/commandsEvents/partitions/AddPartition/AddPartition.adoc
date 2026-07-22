@@ -2,7 +2,7 @@
 ===== Add partition
 Add <<AddPartition.newPartition>> node as <<new-nodes, new>> partition.
 
-The client implicitly subscribes to any changes to <<PartitionAdded.newPartition>> or any of its descendants.
+The client implicitly subscribes to any changes to <<PartitionAdded.newPartition>> or any of its descendants.{fn-org417}
 
 [cols="a,a"]
 |===
