@@ -335,7 +335,7 @@
 :fn-org414: footnote:org414[https://github.com/LionWeb-io/specification/issues/414[Small inconsistency between Bulk and Delta APIs #414]]
 :fn-org415: footnote:org415[https://github.com/LionWeb-io/specification/issues/415[Events should have at least 1 origin command (+ unicity of their IDs) #415]]
 :fn-org416: footnote:org416[https://github.com/LionWeb-io/specification/issues/416[Replace CompositeCommand by group label? #416]]
-:fn-org417: footnote:org417[https://github.com/LionWeb-io/specification/issues/417[AddPartition command should automatically subscribe the sending client to the partition. #417]]
+:fn-org417: footnote:org417[https://github.com/LionWeb-io/specification/issues/417[AddPartition command should automatically subscribe the sending client to the partition #417]]
 :fn-org418: footnote:org418[https://github.com/LionWeb-io/specification/issues/418[SerializationVersionFormat in Delta Protocol unspecified #418]]
 :fn-org419: footnote:org419[https://github.com/LionWeb-io/specification/issues/419[PartitionAddedEvent may be too big #419]]
 :fn-org420: footnote:org420[https://github.com/LionWeb-io/specification/issues/420[Clarify CompositeCommand / CompositeEvent semantics #420]]
@@ -376,3 +376,4 @@
 :fn-org487: footnote:org487[https://github.com/LionWeb-io/specification/issues/487[Composite implementation issues #487]]
 :fn-org491: footnote:org491[https://github.com/LionWeb-io/specification/issues/491[Can `ErrorEvent` / `NoOpEvent` appear inside `CompositeEvent`? #491]]
 :fn-org492: footnote:org492[https://github.com/LionWeb-io/specification/issues/492[Naming: `NoOp` or `NoOpEvent`? #492]]
+:fn-org498: footnote:org498[https://github.com/LionWeb-io/specification/issues/498[Introduce Clear Messages? #498]]
