@@ -4,7 +4,7 @@
 :!sectnums:
 :!figure-caption:
 
-This article compares meta-meta-models of LionWeb, EMF, EMOF, MPS, KerML, Freon, Daga, Java, C#, and TypeScript.
+This article compares meta-meta-models of LionWeb, C#, EMOF, Ecore, Essential, Freon, Java, KerML, MPS, and TypeScript.
 A meta-meta-model, also known as https://en.wikipedia.org/wiki/Meta-Object_Facility[M3], describes what kind of structures can be represented in a (modeling) system.
 We show that all of these M3s are similar, and highlight the most important differences.
 
@@ -301,7 +301,7 @@ Annotating{zwsp}Element
 |EData{zwsp}Type
 |Primitive{zwsp}Type
 |
-|Value{zwsp}Class
+|
 |Data{zwsp}Type
 |Primitive{zwsp}Data{zwsp}Type{zwsp}Declaration
 |

@@ -19,3 +19,4 @@
 == Articles
 
 * xref:articles/model-anatomy.adoc[Anatomy of a LionWeb Model]
+* xref:articles/m3-comparison.adoc[LionWeb's Meta-meta-model in Comparison]
