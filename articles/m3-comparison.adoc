@@ -1,0 +1,512 @@
+= LionWeb's Meta-meta-model in Comparison
+:toc: preamble
+:toclevels: 3
+:!sectnums:
+:!figure-caption:
+
+This article compares meta-meta-models of LionWeb, EMF, EMOF, MPS, KerML, Freon, Daga, Java, C#, and TypeScript.
+A meta-meta-model, also known as https://en.wikipedia.org/wiki/Meta-Object_Facility[M3], describes what kind of structures can be represented in a (modeling) system.
+We show that all of these M3s are similar, and highlight the most important differences.
+
+== Summary
+
+.Structural aspects
+All systems describe structural aspects in a similar way, only differing in details.
+The foundational ideas are well understood and stable.
+
+Everybody supports <<Classifier, Classifiers>> (including the variations of <<Concept>> vs. <<Interface>>) and some variant of contained <<Feature, Features>>.
+Not very surprising, as this is the basic building block for composing structures.
+
+Modeling systems distinguish between features with identity-free values (<<Property, Properties>>), parent/child semantics (<<Containment, Containments>>) and relation semantics (<<Reference, References>>), whereas programming languages treat them all the same.
+
+Out of necessity, everybody supports <<PrimitiveType, Primitive types>>.
+<<Enumeration, Enumerations>> are supported by every system except KerML (they are present in SysMLv2).
+Identity-free <<StructuredDataType, Structured data types>> are supported by newer systems, both model-oriented and programming languages.
+
+.Not supported by LionWeb
+A few aspects are present in several systems, but not supported by LionWeb.
+
+Methods are out of scope for LionWeb.
+This is a deliberate choice: our protocols are meant to transmit _state_, not _behavior_.
+It also avoids nasty edge cases for inheritance, especially diamond inheritance.
+
+Only programming languages and Ecore support generics.
+Experience shows that generic data structures aren't worth the additional complexity --
+and without behavior LionWeb wouldn't have a use case for them.
+
+Similarly, LionWeb has no use for special type support.
+We can _transport_ information about types as https://lionweb.io/#reference-architecture[derived models],
+but don't need to represent them in M3.
+
+
+== Comparison tables
+
+=== Supported by LionWeb
+
+.Definitions
+[horizontal]
+[[Annotation]]Annotation::
+Declares an additional piece of information attached to potentially any element.
+
+[[Classifier]]Classifier::
+A container for <<Feature, Features>>.
+
+[[Concept]]Concept::
+Declares a category of elements sharing the same structure.
+
+[[Containment]]Containment::
+Declares a parent/child relation between <<Classifier, Classifiers>>.
+
+[[DataType]]DataType::
+A value without identity.
+
+[[Enumeration]]Enumeration::
+Declares a <<DataType>> with finite, pre-defined, known set of possible values.
+
+[[EnumerationLiteral]]EnumerationLiteral::
+Declares one of the possible values of an <<Enumeration>>.
+
+[[Feature]]Feature::
+A part of a <<Classifier>>.
+
+[[Field]]Field::
+Declares a part of a <<StructuredDataType>>.
+
+[[IKeyed]]IKeyed::
+An element of M2 that can be addressed from M1.
+
+[[INamed]]INamed::
+An element with a name.
+
+[[Interface]]Interface::
+Declares a category of <<Classifier, Classifiers>> sharing some similar structure.
+
+[[Language]]Language::
+Declares a grouping of M2 elements.
+
+[[LanguageEntity]]LanguageEntity::
+A part of a <<Language>>.
+
+[[Link]]Link::
+A relation between <<Classifier, classifiers>>.
+
+[[Node]]Node::
+The base thing every <<Classifier>> inherits from.
+
+[[PrimitiveType]]PrimitiveType::
+Declares an atomic <<DataType>>.
+
+[[Property]]Property::
+Declares a part of a <<Classifier>> with identity-free value.
+
+[[Reference]]Reference::
+Declares an unrestricted relation between <<Classifier, Classifiers>>.
+
+[[StructuredDataType]]StructuredDataType::
+Declares a <<DataType>> with pre-defined structure.
+
+[%header,cols="h,9*"]
+|===
+|LionCore
+|C#
+|EMOF
+|Ecore
+|Essential
+|Freon
+|Java
+|KerML
+|MPS
+|TypeScript
+
+|<<Annotation>>
+|
+|Comment
+|EAnnotation
+|Attribute
+|
+|
+|
+Annotating{zwsp}Element
+|Node{zwsp}Attribute
+|
+
+|<<Classifier>>
+|Type
+|Classifier
+|EClassifier
+|
+|
+|
+|Classifier
+|Abstract{zwsp}Concept{zwsp}Declaration
+|
+
+|<<Concept>>
+|class
+|Class
+|EClass _interface=false_
+|Class
+|Concept
+|class
+|Class
+|Concept{zwsp}Declaration
+|class
+
+|<<Containment>>
+|property
+|Association
+|EReference _containment=true_
+|Property _composition=true_
+|PartProperty
+|field
+|Feature
+|Link{zwsp}Declaration _metaClass=aggregation_
+|property
+
+|<<DataType>>
+|
+|Data{zwsp}Type
+|EData{zwsp}Type
+|
+|
+|
+|Data{zwsp}Type
+|Data{zwsp}Type{zwsp}Declaration
+|
+
+|<<Enumeration>>
+|enum
+|Enumeration
+|EEnum
+|Enumeration
+|
+|enum
+|
+|Enumeration{zwsp}Declaration
+|enum
+
+|<<EnumerationLiteral, Enumeration{zwsp}Literal>>
+|enum literal
+|Enumeration{zwsp}Literal
+|EEnum{zwsp}Literal
+|Enumeration{zwsp}Item
+|Limited{zwsp}Concept
+|enum literal
+|
+|Enumeration{zwsp}Member{zwsp}Declaration
+|enum literal
+
+|<<Feature>>
+|
+|Structural{zwsp}Feature
+|EStructural{zwsp}Feature
+|Property
+|
+|
+|Feature
+|
+|
+
+|<<Field>>
+|property
+|
+|
+|Property
+|
+|field
+|Feature
+|
+|property
+
+|<<IKeyed>>
+|
+|Named{zwsp}Element
+|EModel{zwsp}Element
+|
+|
+|
+|Element
+|INamed{zwsp}Structure{zwsp}Element
+|
+
+|<<INamed>>
+|
+|
+|ENamed{zwsp}Element
+|
+|
+|
+|Element
+|
+|
+
+|<<Interface>>
+|interface
+|Class
+|EClass _interface=true_
+|Class _abstract=true_
+|Interface
+|interface
+|Class
+|Interface{zwsp}Concept{zwsp}Declaration
+|interface
+
+|<<Language>>
+|namespace
+|Package
+|EPackage
+|Class _root=true_
+|Language
+|package
+|Package
+|(Language)footnote:[Languages are a core structural idea of MPS, but not present in their M3.]
+|
+
+|<<LanguageEntity, Language{zwsp}Entity>>
+|
+|Packageable{zwsp}Element
+|EClassifier
+|
+|
+|
+|Element
+|IStructure{zwsp}Element
+|
+
+|<<Link>>
+|property
+|Association
+|EReference
+|
+|
+|field
+|Feature
+|Link{zwsp}Declaration
+|property
+
+|<<Node>>
+|object
+|Element
+|EObject
+|Object
+|
+|Object
+|Element
+|Node
+|object
+
+|<<PrimitiveType, Primitive{zwsp}Type>>
+|Value{zwsp}Type
+|Primitive{zwsp}Type
+|EData{zwsp}Type
+|Primitive{zwsp}Type
+|
+|Value{zwsp}Class
+|Data{zwsp}Type
+|Primitive{zwsp}Data{zwsp}Type{zwsp}Declaration
+|
+
+|<<Property>>
+|
+|Property
+|EAttribute
+|Property
+|Primitive{zwsp}Property
+|
+|Feature
+|Property{zwsp}Declaration
+|
+
+|<<Reference>>
+|property
+|Association
+|EReference _containment=false_
+|Reference
+|Reference{zwsp}Property
+|field
+|Feature
+|Link{zwsp}Declaration _metaClass=reference_
+|property
+
+|<<StructuredDataType, Structured{zwsp}Data{zwsp}Type>>
+|struct
+|
+|
+|Class _structure=true_
+|
+|value object
+|Structure
+|
+|
+|===
+
+=== Not supported by LionWeb
+
+[%header,cols="h,8*"]
+|===
+|Description
+|C#
+|EMOF
+|Ecore
+|Freon
+|Java
+|KerML
+|MPS
+|TypeScript
+
+
+|method
+|method
+|Operation
+|EOperation
+|
+|method
+|Behavior
+|Concept{zwsp}Method{zwsp}Declaration
+|function
+
+|method parameter
+|parameter
+|Parameter
+|EParameter
+|
+|parameter
+|Feature
+|Parameter{zwsp}Declaration
+|parameter
+
+|typed element
+|
+|Typed{zwsp}Element
+|ETyped{zwsp}Element
+|
+|
+|
+|
+|
+
+|generic type
+|type
+|
+|EGeneric{zwsp}Type
+|
+|type
+|
+|
+|type
+
+|generic type parameter
+|generic type parameter
+|
+|EType{zwsp}Parameter
+|
+|type parameter
+|
+|
+|type parameter
+
+|type
+|type
+|Type
+|
+|
+|type
+|Type
+|
+|type
+|===
+
+=== Singular elements
+
+==== EMOF
+* Feature
+
+==== Ecore
+* EFactory
+* EString{zwsp}To{zwsp}String{zwsp}Map{zwsp}Entry
+
+==== KerML
+* Association{zwsp}Structure
+* Binding{zwsp}Connector
+* Comment
+* Conjugation
+* Connector
+* Cross{zwsp}Subsetting
+* Differencing
+* Disjoining
+* Documentation
+* Element{zwsp}Filter{zwsp}Membership
+* End{zwsp}Feature{zwsp}Membership
+* Expression
+* Feature{zwsp}Chaining
+* Feature{zwsp}Value
+* Flow
+* Function
+* Import
+* Interaction
+* Intersecting
+* Membership{zwsp}Import
+* Metaclass
+* Metadata{zwsp}Feature
+* Multiplicity
+* Namespace
+* Parameter{zwsp}Membership
+* Predicate
+* Redefinition
+* Reference{zwsp}Subsetting
+* Relationship
+* Result{zwsp}Expression{zwsp}Membership
+* Return{zwsp}Parameter{zwsp}Membership
+* Specialization
+* Step
+* Subsetting
+* Succession
+* Succession{zwsp}Flow
+* Textual{zwsp}Representation
+* Unioning
+
+==== MPS
+* Children{zwsp}Incoming{zwsp}References{zwsp}Policy
+* Constrained{zwsp}Data{zwsp}Type{zwsp}Declaration
+* Enumeration{zwsp}Member{zwsp}Identifier{zwsp}Policy
+* IConcept{zwsp}Aspect
+* INamed{zwsp}Aspect
+* Instance{zwsp}Incoming{zwsp}References{zwsp}Policy
+* Link{zwsp}Metaclass
+* Marker{zwsp}Interface{zwsp}Attribute
+* Static{zwsp}Scope
+
+== Data sources
+
+We compare the following meta-meta-models:
+
+[horizontal]
+C#::
+Microsoft's https://learn.microsoft.com/en-us/dotnet/csharp/[C# programming language].
+
+EMOF::
+OMG's (Object Management Group) https://www.omg.org/mof/[Essential MetaObject Facility], the basis of UML.
+
+Ecore::
+EMF's (Eclipse Modeling Framework) https://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/package-summary.html#package_description[meta-meta-model].
+
+Essential::
+Metadev's https://essential.metadev.pro/assets/docs/[Essential], a language workbench.
+
+Freon::
+Freon's https://www.freon4dsl.dev/Documentation/Creating_the_Metamodel/Language_Structure[Language structure], the basis for their language workbench.
+
+Java::
+Oracle's https://dev.java/[Java programming language].
+
+KerML::
+OMG's (Object Management Group) https://www.omg.org/spec/KerML[Kernel Modeling Language], the basis for SysML v2.
+
+LionCore::
+LionWeb's https://lionweb.io/specification/metametamodel/metametamodel.html[meta-meta-model].
+
+MPS::
+JetBrains MPS (Meta Programming System) https://www.jetbrains.com/help/mps/structure.html[Structure language].
+
+TypeScript::
+Microsoft's https://www.typescriptlang.org/[TypeScript programming language].
