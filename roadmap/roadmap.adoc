@@ -5,8 +5,8 @@ include::../shared/issue-footnotes.adoc[]
 :serialization: ../serialization/serialization
 :bulk: ../bulk/repo-access-api
 :delta: ../delta/delta-api
-:v2023-1: ../2023.1/
-:v2024-1: ../2024.1/
+:v2023-1: ../2023.1
+:v2024-1: ../2024.1
 
 = LionWeb Roadmap, Releases, and History
 :toc:

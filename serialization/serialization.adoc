@@ -299,7 +299,7 @@ The contents of the string are formed as follows:
 A <<{m3}.adoc#StructuredDataType, LionCore StructuredDataType>> is encoded as JSON _object_.
 Each <<{m3}.adoc#Field, Field>> forms one _member_, with the field's <<{m3}.adoc#IKeyed.key, key>> as JSON _name_ and the field's value as JSON _value_.
 For fields of type <<string>>, <<boolean>>, <<integer>>, and <<literal>>, the _value_ is encoded as JSON _string_ in the same way as for a property.
-For fields of type <<structuredDatatype>>, the value is encoded as JSON _object_.
+For fields of type <<structuredDataType>>, the value is encoded as JSON _object_.
 
 .Structured data types used in the examples
 --
