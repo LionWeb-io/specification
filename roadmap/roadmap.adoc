@@ -172,8 +172,8 @@ Afterward, the client continues to receive changes (aka deltas) from the repo; i
 * Adjusted <<{bulk}.adoc, Bulk Repository Access API>> to changes in Delta Repository Access API:
 ** Renamed <<{bulk}.adoc#responses, "additional messages">> to "additional infos".{fn-org430}
 ** Explicitly added <<{bulk}.adoc#additionalInfosType, `additionalInfos`>> parameter to all command requests and responses.{fn-org375}
-** Explicitly Added <<{bulk}.adoc#commandIdType, `commandId`>> parameter to all command requests.{fn-org313}
-** Explicitly Added <<{bulk}.adoc#successType, `success`>> parameter to all command responses.{fn-org313}
+** Explicitly added <<{bulk}.adoc#commandIdType, `commandId`>> parameter to all command requests.{fn-org313}
+** Explicitly added <<{bulk}.adoc#successType, `success`>> parameter to all command responses.{fn-org313}
 ** Clarified <<{bulk}.adoc#parameter-syntax, parameter syntax>> used in the specification.{fn-org427}
 ** Removed unwarranted distinction of language- and other partitions for <<{bulk}.adoc#listPartitions, `listPartitions` command>>.{fn-org450}
 ** Added <<{bulk}.adoc#listPartitions.depthLimit, `depthLimit`>> parameter to `listPartitions` command.{fn-org425}
