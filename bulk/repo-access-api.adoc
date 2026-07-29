@@ -279,7 +279,7 @@ NOTE: We might add filter capabilities in the future.
 
 .Request parameters
 [horizontal]
-[[listPartitions.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>? Optionally limit the depth of retrieved partitions.
+[[listPartitions.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>? Optionally limit the depth of retrieved partitions.{fn-org425}
 [[listPartitions.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
 [[listPartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
