@@ -165,7 +165,18 @@ Model-to-model generators would be implemented as <<{refarch}.adoc#processor, Pr
 === 2026.1
 * [[delta-protocol]] Specified <<{delta}.adoc#delta, Delta Repository Access API>> +
 As described in our <<{refarch}.adoc#delta, reference architecture>>, via delta protocol a client receives an initial snapshot similar to the bulk case.
-Afterwards, the client continues to receive changes (aka deltas) from the repo; it also writes back changes continuously.{fn-org28}
+Afterward, the client continues to receive changes (aka deltas) from the repo; it also writes back changes continuously.{fn-org28}
+* Clarified <<{serialization}.adoc, Serialization specification>> on
+** <<{serialization}.adoc#reference, references>> on `resolveInfo` vs. `reference`.{fn-org396}
+** <<{serialization}.adoc#parent, parent>> `null` conditions{fn-org228}
+* Adjusted <<{bulk}.adoc, Bulk Repository Access API>> to changes in Delta Repository Access API:
+** Renamed <<{bulk}.adoc#responses, "additional messages">> to "additional infos".{fn-org430}
+** Explicitly added <<{bulk}.adoc#additionalInfosType, `additionalInfos`>> parameter to all command requests and responses.{fn-org375}
+** Explicitly Added <<{bulk}.adoc#commandIdType, `commandId`>> parameter to all command requests.{fn-org313}
+** Explicitly Added <<{bulk}.adoc#successType, `success`>> parameter to all command responses.{fn-org313}
+** Clarified <<{bulk}.adoc#parameter-syntax, parameter syntax>> used in the specification.{fn-org427}
+** Removed unwarranted distinction of language- and other partitions for <<{bulk}.adoc#listPartitions, `listPartitions` command>>.{fn-org450}
+** Added <<{bulk}.adoc#listPartitions.depthLimit, `depthLimit`>> parameter to `listPartitions` command.{fn-org425}
 
 [[release-2024.1]]
 [[version-2024.1]]

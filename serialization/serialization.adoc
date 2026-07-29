@@ -572,6 +572,8 @@ This section lists all versions as they appear in <<SerializationChunk.serializa
 === 2026.1
 Technical name: `2026.1`
 
+* <<reference, references>> on `resolveInfo` vs. `reference`.{fn-org396}
+* <<parent, parent>> `null` conditions{fn-org228}
 * Editorial changes and clarifications.
 
 Refer to <<{roadmap}.adoc#release-2026.1, roadmap>> for details.
