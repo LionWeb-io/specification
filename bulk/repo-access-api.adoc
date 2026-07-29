@@ -207,6 +207,8 @@ NOTE: There's no _magic value_ of <<retrieve.depthLimit>> to express _infinite_ 
 We need to omit the parameter if we don't want to limit the depth.
 [[nodeIdType]]nodeId:: A <<{m3}.adoc#identifiers, valid node id>>.
 
+[[booleanType]]boolean:: A boolean value, i.e. either `true` or `false`.
+
 [[integerType]]integer:: An integer.
 
 [[commandIdType]]commandId:: Each _modifying_ command MUST contain a _[[commandId, command id]]command id_.{fn-org313}
@@ -268,8 +270,8 @@ This additional info is symmetric to <<{delta}.adoc#additionalInfo, additional i
 
 
 
-[[listPartitions, listPartitions]]
 [[partitions, listPartitions]]
+[[listPartitions, listPartitions]]
 === listPartitions: List available partitions
 Lists all partitions{fn-org450} accessible in the repository.
 
@@ -279,7 +281,7 @@ NOTE: We might add filter capabilities in the future.
 
 .Request parameters
 [horizontal]
-[[listPartitions.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>? Optionally limit the depth of retrieved partitions.
+[[listPartitions.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>? Optionally limit the depth of retrieved partitions.{fn-org425}
 [[listPartitions.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
 [[listPartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
