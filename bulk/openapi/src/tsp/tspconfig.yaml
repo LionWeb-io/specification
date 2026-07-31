@@ -1,0 +1,32 @@
+emit:
+  - "@typespec/openapi3"
+  - "@typespec/json-schema"
+  - "@typespec/http-client-js"
+  - "@typespec/http-client-csharp"
+  - "@typespec/http-server-js"
+  - "@typespec/http-server-csharp"
+options:
+  "@typespec/openapi3":
+    emitter-output-dir: "{output-dir}/openapi3"
+    file-type:
+      - json
+      - yaml
+    openapi-versions:
+      - 3.1.0
+      - 3.2.0
+  "@typespec/json-schema":
+    emitter-output-dir: "{output-dir}/json-schema"
+    file-type: yaml
+    int64-strategy: string
+    emitAllModels: true
+  "@typespec/http-client-js":
+    emitter-output-dir: "{output-dir}/clients/ts"
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/clients/csharp"
+  "@typespec/http-server-js":
+    emitter-output-dir: "{output-dir}/servers/ts"
+  "@typespec/http-server-csharp":
+    emitter-output-dir: "{output-dir}/servers/csharp"
+linter:
+  extends:
+    - "@typespec/http/all"

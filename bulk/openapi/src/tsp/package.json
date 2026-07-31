@@ -1,0 +1,42 @@
+{
+  "name": "bulk-spec",
+  "version": "0.0.1",
+  "description": "Bulk Spec API with TypeSpec",
+  "keywords": [
+    "bulk",
+    "lionweb",
+    "typespec"
+  ],
+  "license": "Apache-2.0",
+  "author": "LionWeb Team, Pedro J. Molina",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "tsp": "tsp",
+    "tsp:install": "tsp install",
+    "prebuild": "npm i",
+    "build": "tsp compile .",
+    "format": "tsp format **/*.tsp",
+    "info": "tsp info",
+    "publish": "cp tsp-output/openapi3/3.2.0/openapi.yaml ../../bulk-openapi.yaml && cp tsp-output/openapi3/3.2.0/openapi.json ../../bulk-openapi.json && cp tsp-output/openapi3/3.2.0/openapi.yaml ../zudoku/apis/openapi.yaml"
+  },
+  "dependencies": {
+    "@typespec/compiler": "^1.14.0",
+    "@typespec/http": "^1.14.0",
+    "@typespec/http-client-csharp": "^1.0.0-alpha.20260730.11",
+    "@typespec/http-client-js": "^0.16.0",
+    "@typespec/http-server-csharp": "^0.58.0-alpha.30",
+    "@typespec/http-server-js": "^0.58.0-alpha.28",
+    "@typespec/json-schema": "^1.14.0",
+    "@typespec/openapi": "^1.14.0",
+    "@typespec/openapi3": "^1.14.0",
+    "@typespec/rest": "^0.84.0",
+    "@typespec/versioning": "^0.84.0"
+  },
+  "overrides": {
+    "@typespec/http-server-csharp": {
+      "@alloy-js/core": "0.24.1"
+    }
+  },
+  "packageManager": "npm@12.0.2"
+}

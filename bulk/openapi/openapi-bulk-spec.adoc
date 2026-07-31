@@ -1,0 +1,48 @@
+= OpenAPI LionWeb Bulk Spec
+
+This is a __proof of concept__ (incomplete right now) using the link:https://spec.openapis.org/oas/v3.2.0.html[**OpenAPI Specification**] describing the operations in the protocol for the **LionWeb Bulk Protocol**.
+This spec formally describes the REST API, paths, operations and types to be used.
+
+== Spec
+
+Reference Spec: link:https://lionweb.io/specification/bulk/repo-access-api.html[Bulk Spec].
+
+**Artifacts:**
+
+- **Input:** the API written in Typespec (textual DSL) link:./src/tsp/main.tsp[definition]. Located at `src/tsp/`.
+- **Output:**
+    1. The Bulk Spec as link:./bulk-openapi.yaml[YAML], generated, for machines. Located at `/bulk-openapi.yaml`.
+    2. The Bulk Spec as link:./bulk-openapi.json[JSON], generated, for machines. Located at `/bulk-openapi.json`.
+    3. Explore as link:src/zudoku/dist/introduction.html[HTML documentation], generated,for humans. Located at `src/zudoku/dist/`.
+    4. Sample proxy clients and server skeletons in diferent languages in the `src/tsp/tsp-output/` folder.
+
+== How to use it
+
+1. It can be better consumed for humans as **documentation** derived with SwaggerUI, Scalar, ReDoc or Zudoku interpreters or code generators.
+2. **Server-side skeletons** can be generated from the spec in different languages to mock the façade of a server implementation. 
+3. **Client-side proxies** can be generated from the spec in different languages to consume the API.
+
+== Sources
+
+- To build the Spec, we have used link:https://typespec.io[TypeSpec] a DSL for describing APIs able to emit OpenAPI. See the link:src/tsp/README.md[`src/tsp/README.md`] in the `src/` folder.
+
+- Index for the spec starts at link:src/tsp/main.tsp[`src/tsp/main.tsp`] in the `src/` folder.
+
+- Final documentation at link:src/zudoku/dist/introduction.html[`src/zudoku/dist/index.html`].
+
+== Build Instructions
+
+```bash
+# 1. Build the API contract -------------------
+cd src/tsp
+npm i
+npm run build
+npm run publish
+
+# 2. Build the HTML docs from API contract ----
+cd ../zudoku
+npm i
+npm run preview
+```
+
+On the preview page, (typically at http://localhost:4000/introduction) click on the **API Reference** link to explore it.
