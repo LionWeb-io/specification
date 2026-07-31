@@ -108,10 +108,15 @@ However, a client MUST NOT mix <<qry-InformAboutChangingPartitions>> and <<qry-S
 If any <<qry-InformAboutChangingPartitions>> query is active, the same client MUST NOT issue a <<qry-SubscribeToChangingPartitions>> query, and vice versa.
 Once all <<qry-InformAboutChangingPartitions>> are disabled (i.e. both <<InformAboutChangingPartitions.creation>> and <<InformAboutChangingPartitions.deletion>> are `false`), the client MAY issue a <<qry-SubscribeToChangingPartitions>> query.{fn-org438}
 
-A client can send commands for any node id, independent of the client's subscription.
+A client CAN send commands for any node id, independent of the client's subscription.
 Assume a client sends a command for a node that's part of a partition that client is not subscribed to.
 The repository treats that command the same as from a client that was subscribed to the containing partition, i.e. applies it in accordance with the repository's policy.
-The repository also sends out the same events to subscribed clients, thus _not_ to the sending client.{fn-org352}
+The repository sends out the same events to subscribed clients, and _also_ to the sending client.{fn-org352}
+
+This means a client:
+
+* _always_ gets the events for its own commands, event if it relates to a node outside the client's subscription scope.
+* _can_ get an event it didn't subscribe to, if the event originates in the client's own command.
 
 [[compositeEvents, composite events]]
 ==== Composite events
