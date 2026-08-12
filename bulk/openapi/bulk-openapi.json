@@ -15,50 +15,32 @@
   },
   "tags": [
     {
-      "name": "Database"
-    },
-    {
-      "name": "Repository"
-    },
-    {
-      "name": "Partitions"
-    },
-    {
-      "name": "Nodes"
-    },
-    {
-      "name": "Additional"
+      "name": "Bulk"
     }
   ],
   "paths": {
-    "/additional/get-node-tree/{clientId}/repository/{repository}": {
+    "/bulk/createPartitions": {
       "post": {
-        "operationId": "AdditionalOperations_getNodeTree",
-        "description": "Get the tree structure below nodes.",
+        "operationId": "BulkOperations_bulkCreatePartitions",
+        "description": "Creates new partitions in the repository. Each sent node with no parent node id is its own partition. All other nodes MUST NOT exist in the repository, and they MUST be descendants of on of the partition nodes. We cannot use move semantics. We MAY reference nodes already existing in the repository. Nodes MUST use Unknown node ids.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/RepositoryContext.clientId"
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
           },
           {
-            "$ref": "#/components/parameters/RepositoryContext.repository"
-          },
-          {
-            "$ref": "#/components/parameters/GetNodeTreeRequest.depthLimit"
+            "$ref": "#/components/parameters/RespositoryContext.repository"
           }
         ],
         "responses": {
           "200": {
-            "description": "Result of the operation. `success` is `false` when the operation failed.",
+            "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LionwebResponse"
+                  "$ref": "#/components/schemas/CreatePartitionResponse"
                 }
               }
             }
-          },
-          "400": {
-            "description": "Bad Request 400. The request is malformed."
           },
           "401": {
             "description": "Unauthorized 401. Invalid token or no token provided."
@@ -75,114 +57,39 @@
           }
         },
         "tags": [
-          "Additional"
+          "Bulk"
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/IdsRequest"
+                "$ref": "#/components/schemas/CreatePartitionRequest"
               }
             }
           }
         }
       }
     },
-    "/bulk/import/{clientId}/repository/{repository}": {
-      "post": {
-        "operationId": "AdditionalOperations_bulkImport",
-        "description": " Bulk import of new nodes.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/RepositoryContext.clientId"
-          },
-          {
-            "$ref": "#/components/parameters/RepositoryContext.repository"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Result of the operation. `success` is `false` when the operation failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LionwebResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request 400. The request is malformed."
-          },
-          "401": {
-            "description": "Unauthorized 401. Invalid token or no token provided."
-          }
-        },
-        "tags": [
-          "Additional"
-        ]
-      }
-    },
-    "/bulk/partition/{clientId}/repository/{repository}": {
-      "post": {
-        "operationId": "PartitionOperations_bulkCreatePartitions",
-        "description": "Creates the partitions contained in the chunk. Partition nodes must have no parent, no children and no annotations. The chunk is validated (syntax, references and LionWeb version compatibility with the repository) before being stored.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/RepositoryContext.clientId"
-          },
-          {
-            "$ref": "#/components/parameters/RepositoryContext.repository"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Result of the operation. `success` is `false` when the operation failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LionwebResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized 401. Invalid token or no token provided."
-          },
-          "412": {
-            "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PreconditionFailed"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Partitions"
-        ]
-      },
+    "/bulk/deletePartitions": {
       "delete": {
-        "operationId": "PartitionOperations_bulkDeletePartitions",
-        "description": "Deletes the partitions with the given node ids, including all their contents.",
+        "operationId": "BulkOperations_bulkDeletePartitions",
+        "description": "Deletes all mentioned partitions, including all (transitive) annotations and children. All mentioned node ids MUST be ids of partition nodes. All (transitive) annotations and children become orphans.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/RepositoryContext.clientId"
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
           },
           {
-            "$ref": "#/components/parameters/RepositoryContext.repository"
+            "$ref": "#/components/parameters/RespositoryContext.repository"
           }
         ],
         "responses": {
           "200": {
-            "description": "Result of the operation. `success` is `false` when the operation failed.",
+            "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LionwebResponse"
+                  "$ref": "#/components/schemas/DeletePartitionResponse"
                 }
               }
             }
@@ -202,7 +109,7 @@
           }
         },
         "tags": [
-          "Partitions"
+          "Bulk"
         ],
         "requestBody": {
           "required": true,
@@ -216,44 +123,25 @@
         }
       }
     },
-    "/bulk/partition/{clientId}/repository/{repository}/list": {
+    "/bulk/ids": {
       "post": {
-        "operationId": "PartitionOperations_bulkListPartitions",
-        "description": "List partitions",
+        "operationId": "BulkOperations_bulkIds",
+        "description": "Reserve free node ids. Provides unused valid node ids.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/RepositoryContext.clientId"
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
           },
           {
-            "$ref": "#/components/parameters/RepositoryContext.repository"
-          },
-          {
-            "name": "depthLimit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "explode": false
-          },
-          {
-            "name": "commandId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/Identifier"
-            },
-            "explode": false
+            "$ref": "#/components/parameters/RespositoryContext.repository"
           }
         ],
         "responses": {
           "200": {
-            "description": "Result of the operation. `success` is `false` when the operation failed.",
+            "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LionwebResponse"
+                  "$ref": "#/components/schemas/IdsResponse"
                 }
               }
             }
@@ -273,96 +161,7 @@
           }
         },
         "tags": [
-          "Partitions"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/AdditionalInfo"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/bulk/{clientId}/repository/{repository}/ids": {
-      "post": {
-        "operationId": "NodeOperations_bulkIds",
-        "description": "Reserve free node ids",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/RepositoryContext.clientId"
-          },
-          {
-            "$ref": "#/components/parameters/RepositoryContext.repository"
-          },
-          {
-            "$ref": "#/components/parameters/BulkIdsRequest.count"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "401": {
-            "description": "Unauthorized 401. Invalid token or no token provided."
-          },
-          "412": {
-            "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PreconditionFailed"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Nodes"
-        ]
-      }
-    },
-    "/bulk/{clientId}/repository/{repository}/retrieve": {
-      "post": {
-        "operationId": "NodeOperations_bulkRetrieve",
-        "description": " Retrieve nodes",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/RepositoryContext.clientId"
-          },
-          {
-            "$ref": "#/components/parameters/RepositoryContext.repository"
-          },
-          {
-            "$ref": "#/components/parameters/BulkRetriveRequest.depthLimit"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "401": {
-            "description": "Unauthorized 401. Invalid token or no token provided."
-          },
-          "412": {
-            "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PreconditionFailed"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Nodes"
+          "Bulk"
         ],
         "requestBody": {
           "required": true,
@@ -376,86 +175,16 @@
         }
       }
     },
-    "/bulk/{clientId}/repository/{repository}/store": {
+    "/bulk/listPartitions": {
       "post": {
-        "operationId": "NodeOperations_bulkStore",
-        "description": "Reserve free node ids",
+        "operationId": "BulkOperations_bulkListPartitions",
+        "description": "Lists all partitions accessible in the repository.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/RepositoryContext.clientId"
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
           },
           {
-            "$ref": "#/components/parameters/RepositoryContext.repository"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Result of the operation. `success` is `false` when the operation failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LionwebResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized 401. Invalid token or no token provided."
-          },
-          "412": {
-            "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PreconditionFailed"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Nodes"
-        ]
-      }
-    },
-    "/database": {
-      "post": {
-        "operationId": "DatabaseOperations_createDatabase",
-        "description": "Creates the database used to store the repositories.",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Result of the operation. `success` is `false` when the operation failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LionwebResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized 401. Invalid token or no token provided."
-          }
-        },
-        "tags": [
-          "Database"
-        ]
-      }
-    },
-    "/repositories": {
-      "get": {
-        "operationId": "RepositoryOperations_listRepositories",
-        "description": "List repositories in a database.",
-        "parameters": [
-          {
-            "name": "clientLog",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
+            "$ref": "#/components/parameters/RespositoryContext.repository"
           }
         ],
         "responses": {
@@ -464,39 +193,52 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Repository"
-                  }
+                  "$ref": "#/components/schemas/ListPartitionResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized 401. Invalid token or no token provided."
+          },
+          "412": {
+            "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreconditionFailed"
                 }
               }
             }
           }
         },
         "tags": [
-          "Repository"
+          "Bulk"
         ]
       }
     },
-    "/repositories/{clientId}/repository/{repository}": {
+    "/bulk/retrieve": {
       "post": {
-        "operationId": "RepositoryOperations_createRepository",
-        "description": "Creates a repository.",
+        "operationId": "BulkOperations_bulkRetrieve",
+        "description": "Retrieves subtrees nested in the listed node ids. Calling this command MUST NOT change repository contents. Note: We might add advanced filtering capabilities in the future, or introduce an additional querying API.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/RepositoryContext.clientId"
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
           },
           {
-            "$ref": "#/components/parameters/RepositoryContext.repository"
+            "$ref": "#/components/parameters/RespositoryContext.repository"
+          },
+          {
+            "$ref": "#/components/parameters/RetriveRequest.depthLimit"
           }
         ],
         "responses": {
           "200": {
-            "description": "Result of the operation. `success` is `false` when the operation failed.",
+            "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LionwebResponse"
+                  "$ref": "#/components/schemas/RetrieveResponse"
                 }
               }
             }
@@ -516,27 +258,39 @@
           }
         },
         "tags": [
-          "Repository"
-        ]
-      },
-      "delete": {
-        "operationId": "RepositoryOperations_deleteRepository",
-        "description": "Deletes a repository.",
+          "Bulk"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetriveRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulk/store": {
+      "post": {
+        "operationId": "BulkOperations_bulkStore",
+        "description": "Creates new nodes, or updates existing nodes in the repository. We always process one node in its entirety, i.e. we cannot update parts of the node with this command. A node id referenced as parent, containment, reference, or annotation can be mentioned in the same request, but can be omitted if a node with that id already exists in the repository. This way, we can move subtrees and add arbitrary references without sending unchanged nodes. We consider that node to be new if it has an unknown node id. Otherwise, we consider the node to be updated (i.e. if a node with the same id already exists in the repository). We do not support different modes.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/RepositoryContext.clientId"
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
           },
           {
-            "$ref": "#/components/parameters/RepositoryContext.repository"
+            "$ref": "#/components/parameters/RespositoryContext.repository"
           }
         ],
         "responses": {
           "200": {
-            "description": "Result of the operation. `success` is `false` when the operation failed.",
+            "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LionwebResponse"
+                  "$ref": "#/components/schemas/StoreResponse"
                 }
               }
             }
@@ -556,8 +310,18 @@
           }
         },
         "tags": [
-          "Repository"
-        ]
+          "Bulk"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreRequest"
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -568,54 +332,34 @@
   ],
   "components": {
     "parameters": {
-      "BulkIdsRequest.count": {
-        "name": "count",
-        "in": "query",
-        "required": false,
-        "description": "Number of ids to reserve.",
-        "schema": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "explode": false
-      },
-      "BulkRetriveRequest.depthLimit": {
-        "name": "depthLimit",
-        "in": "query",
+      "RespositoryContext.clientId": {
+        "name": "client-id",
+        "in": "header",
         "required": true,
-        "schema": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "explode": false
-      },
-      "GetNodeTreeRequest.depthLimit": {
-        "name": "depthLimit",
-        "in": "query",
-        "required": true,
-        "schema": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "explode": false
-      },
-      "RepositoryContext.clientId": {
-        "name": "clientId",
-        "in": "path",
-        "required": true,
-        "description": "Cliente Id",
+        "description": "Client Id",
         "schema": {
           "$ref": "#/components/schemas/Identifier"
         }
       },
-      "RepositoryContext.repository": {
+      "RespositoryContext.repository": {
         "name": "repository",
-        "in": "path",
+        "in": "header",
         "required": true,
         "description": "Repository",
         "schema": {
           "$ref": "#/components/schemas/Identifier"
         }
+      },
+      "RetriveRequest.depthLimit": {
+        "name": "depthLimit",
+        "in": "query",
+        "required": false,
+        "description": "Optionally limit the depth of retrieved subtrees.",
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "explode": false
       }
     },
     "schemas": {
@@ -644,85 +388,105 @@
           }
         }
       },
-      "BulkImport": {
-        "type": "object"
-      },
-      "BulkImportRequest": {
+      "BadRequest": {
         "type": "object",
-        "required": [
-          "clientId",
-          "repository"
-        ],
-        "properties": {
-          "clientId": {
-            "$ref": "#/components/schemas/Identifier",
-            "description": "Cliente Id"
-          },
-          "repository": {
-            "$ref": "#/components/schemas/Identifier",
-            "description": "Repository"
-          }
-        }
-      },
-      "BulkStoreRequest": {
-        "type": "object",
-        "required": [
-          "clientId",
-          "repository"
-        ],
-        "properties": {
-          "clientId": {
-            "$ref": "#/components/schemas/Identifier",
-            "description": "Cliente Id"
-          },
-          "repository": {
-            "$ref": "#/components/schemas/Identifier",
-            "description": "Repository"
-          }
-        }
+        "description": "Bad Request 400. The request is malformed."
       },
       "Chunk": {
-        "type": "object"
+        "type": "object",
+        "description": "Chunk (To be defined)"
       },
       "CreatePartitionRequest": {
         "type": "object",
         "required": [
-          "clientId",
-          "repository"
+          "nodes",
+          "commandId",
+          "additionalInfos"
         ],
         "properties": {
-          "clientId": {
-            "$ref": "#/components/schemas/Identifier",
-            "description": "Cliente Id"
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Chunk"
+            },
+            "description": "chunk containing all nodes we want to add as new partitions."
           },
-          "repository": {
-            "$ref": "#/components/schemas/Identifier",
-            "description": "Repository"
+          "commandId": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
           }
         }
       },
-      "Database": {
+      "CreatePartitionResponse": {
         "type": "object",
         "required": [
-          "name"
+          "success",
+          "additionalInfos"
         ],
         "properties": {
-          "name": {
-            "type": "string"
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
           }
         }
       },
       "DeletePartitionRequest": {
         "type": "object",
         "required": [
-          "ids"
+          "nodeIds",
+          "commandId",
+          "additionalInfos"
         ],
         "properties": {
-          "ids": {
+          "nodeIds": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LionWebId"
-            }
+            },
+            "description": "List of node ids to delete."
+          },
+          "commandId": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "DeletePartitionResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "additionalInfos"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
           }
         }
       },
@@ -734,17 +498,54 @@
       "IdsRequest": {
         "type": "object",
         "required": [
+          "count",
+          "additionalInfos"
+        ],
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of ids requested. The repository MUST return between one (inclusive) and count (inclusive) ids. It MAY return less than count ids."
+          },
+          "commandId": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "IdsResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "additionalInfos",
           "ids"
         ],
         "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          },
           "ids": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/LionWebId"
-            }
+              "$ref": "#/components/schemas/Identifier"
+            },
+            "description": "List of ids guaranteed to be free."
           }
-        },
-        "description": "Array of LionWeb ids."
+        }
       },
       "KeyValue": {
         "type": "object"
@@ -753,10 +554,6 @@
         "type": "string",
         "pattern": "[a-zA-Z0-9_-]+",
         "description": "A LionWeb node id."
-      },
-      "LionWebJsonChunk": {
-        "type": "object",
-        "description": "LionWeb JSON Chunck."
       },
       "LionwebResponse": {
         "type": "object",
@@ -786,13 +583,33 @@
         },
         "description": "Result of the operation. `success` is `false` when the operation failed."
       },
-      "ListPartitionsResponse": {
-        "type": "object",
-        "description": "List of partition response"
+      "ListPartitionRequest": {
+        "type": "object"
       },
-      "NodeTreeResult": {
+      "ListPartitionResponse": {
         "type": "object",
-        "description": "Node Tree Result"
+        "required": [
+          "success",
+          "additionalInfos",
+          "chunk"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          },
+          "chunk": {
+            "$ref": "#/components/schemas/Chunk",
+            "description": "Chunk with all accessible Partitions in the Repository. The partitions are sent as complete nodes.[25] Does NOT include any children or annotations of the root partition nodes. Does NOT include Languages or partition children/annotations."
+          }
+        }
       },
       "PreconditionFailed": {
         "type": "object",
@@ -806,14 +623,23 @@
         },
         "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed."
       },
-      "Repository": {
+      "ResponseBase": {
         "type": "object",
         "required": [
-          "name"
+          "success",
+          "additionalInfos"
         ],
         "properties": {
-          "name": {
-            "type": "string"
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
           }
         }
       },
@@ -830,6 +656,101 @@
           },
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "RetrieveResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "additionalInfos",
+          "chunk"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          },
+          "chunk": {
+            "$ref": "#/components/schemas/Chunk",
+            "description": "Chunk containing all nodes according to nodeIds and depthLimit parameters. Does NOT include the definition of UsedLanguages, only their MetaPointers."
+          }
+        }
+      },
+      "RetriveRequest": {
+        "type": "object",
+        "required": [
+          "nodeIds",
+          "additionalInfos"
+        ],
+        "properties": {
+          "nodeIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LionWebId"
+            },
+            "description": "List of node ids we want to retrieve from the repository. Can be partition node ids and/or nested node ids."
+          },
+          "commandId": {
+            "$ref": "#/components/schemas/Identifier",
+            "description": "Optional as this is not a modifying command."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "StoreRequest": {
+        "type": "object",
+        "required": [
+          "nodes",
+          "additionalInfos"
+        ],
+        "properties": {
+          "nodes": {
+            "$ref": "#/components/schemas/Chunk",
+            "description": "Chunk containing all nodes to store to the repository."
+          },
+          "commandId": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "StoreResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "additionalInfos"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
           }
         }
       }
