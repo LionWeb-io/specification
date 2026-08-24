@@ -237,7 +237,44 @@ components:
       description: Bad Request 400. The request is malformed.
     Chunk:
       type: object
-      description: Chunk (To be defined)
+      required:
+        - serializationFormatVersion
+        - languages
+        - nodes
+      properties:
+        serializationFormatVersion:
+          $ref: '#/components/schemas/SerializationFormatVersion'
+        languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/LionWebLanguage'
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Node'
+      description: LionWeb Serialization Chunk
+      examples:
+        - serializationFormatVersion: '2026.1'
+          languages:
+            - key: myLanguage
+              version: '2'
+            - key: BaseLanguage
+              version: '1'
+            - key: LionWeb-M3
+              version: '2026.1'
+          nodes:
+            - id: node01
+              classifier:
+                language: myLanguage
+                version: '2'
+                key: '61'
+              properties: []
+              containments: []
+              references: []
+              annotations:
+                - marker
+                - docu1
+              parent: null
     CreatePartitionRequest:
       type: object
       required:
@@ -281,7 +318,7 @@ components:
         nodeIds:
           type: array
           items:
-            $ref: '#/components/schemas/LionWebId'
+            $ref: '#/components/schemas/Identifier'
           description: List of node ids to delete.
         commandId:
           $ref: '#/components/schemas/Identifier'
@@ -306,8 +343,10 @@ components:
           description: Extension point for custom properties.
     Identifier:
       type: string
-      pattern: '[a-zA-Z0-9_-]+'
-      description: LionWeb Idenfier
+      pattern: ^[a-zA-Z0-9_-]+$
+      description: LionWeb Identifier
+      examples:
+        - uniqueId-0501
     IdsRequest:
       type: object
       required:
@@ -345,12 +384,69 @@ components:
           items:
             $ref: '#/components/schemas/Identifier'
           description: List of ids guaranteed to be free.
+    Key:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]+$
+      description: LionWeb Key
+      examples:
+        - uniqueKey-0501
     KeyValue:
       type: object
-    LionWebId:
-      type: string
-      pattern: '[a-zA-Z0-9_-]+'
-      description: A LionWeb node id.
+    LionWebContainment:
+      type: object
+      required:
+        - containment
+        - children
+      properties:
+        containment:
+          $ref: '#/components/schemas/MetaPointer'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+      description: LionWeb Containment
+      examples:
+        - containment:
+            language: java
+            version: '10'
+            key: java-10-32
+          children:
+            - a
+            - b
+            - c
+    LionWebLanguage:
+      type: object
+      required:
+        - key
+        - version
+      properties:
+        key:
+          $ref: '#/components/schemas/Identifier'
+        version:
+          type: string
+      description: LionWeb Language
+      examples:
+        - key: Logo
+          version: '1.618'
+    LionWebProperty:
+      type: object
+      required:
+        - property
+        - value
+      properties:
+        property:
+          $ref: '#/components/schemas/MetaPointer'
+        value:
+          anyOf:
+            - type: string
+            - type: 'null'
+      description: LionWeb Property
+      examples:
+        - property:
+            language: scala
+            version: '2.718'
+            key: scala-lang
+          value: This is a foundation for the Scala Language
     LionwebResponse:
       type: object
       required:
@@ -390,6 +486,73 @@ components:
         chunk:
           $ref: '#/components/schemas/Chunk'
           description: Chunk with all accessible Partitions in the Repository. The partitions are sent as complete nodes.[25] Does NOT include any children or annotations of the root partition nodes. Does NOT include Languages or partition children/annotations.
+    MetaPointer:
+      type: object
+      required:
+        - language
+        - version
+        - key
+      properties:
+        language:
+          $ref: '#/components/schemas/Key'
+        version:
+          $ref: '#/components/schemas/Version'
+        key:
+          $ref: '#/components/schemas/Key'
+      description: LionWeb Meta Pointer
+      examples:
+        - language: java
+          version: '10'
+          key: java-10-constructor
+    Node:
+      type: object
+      required:
+        - id
+        - classifier
+        - properties
+        - containments
+        - references
+        - annotations
+        - parent
+      properties:
+        id:
+          $ref: '#/components/schemas/Identifier'
+        classifier:
+          $ref: '#/components/schemas/MetaPointer'
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/LionWebProperty'
+        containments:
+          type: array
+          items:
+            $ref: '#/components/schemas/LionWebContainment'
+        references:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reference'
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+        parent:
+          anyOf:
+            - $ref: '#/components/schemas/Identifier'
+            - type: 'null'
+      description: LionWeb Node
+      examples:
+        - id: node01
+          classifier:
+            language: myLanguage
+            version: '2'
+            key: '61'
+          properties: []
+          containments: []
+          references: []
+          annotations:
+            - marker
+            - docu1
+          parent: null
     PreconditionFailed:
       type: object
       required:
@@ -398,6 +561,29 @@ components:
         error:
           type: string
       description: PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.
+    Reference:
+      type: object
+      required:
+        - reference
+        - targets
+      properties:
+        reference:
+          $ref: '#/components/schemas/MetaPointer'
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetReference'
+      description: LionWeb Reference
+      examples:
+        - reference:
+            language: myLanguage
+            version: '10'
+            key: myLanguage-symbol-12
+          targets:
+            - resolveInfo: null
+              reference: javaClass
+            - resolveInfo: null
+              reference: javaEnum
     ResponseBase:
       type: object
       required:
@@ -450,7 +636,7 @@ components:
         nodeIds:
           type: array
           items:
-            $ref: '#/components/schemas/LionWebId'
+            $ref: '#/components/schemas/Identifier'
           description: List of node ids we want to retrieve from the repository. Can be partition node ids and/or nested node ids.
         commandId:
           $ref: '#/components/schemas/Identifier'
@@ -460,6 +646,12 @@ components:
           items:
             $ref: '#/components/schemas/AdditionalInfo'
           description: Extension point for custom properties.
+    SerializationFormatVersion:
+      type: string
+      pattern: ^\S+(.*\S)?$
+      description: Serialization Format Version.
+      examples:
+        - '2026.1'
     StoreRequest:
       type: object
       required:
@@ -490,6 +682,29 @@ components:
           items:
             $ref: '#/components/schemas/AdditionalInfo'
           description: Extension point for custom properties.
+    TargetReference:
+      type: object
+      required:
+        - resolveInfo
+        - reference
+      properties:
+        resolveInfo:
+          anyOf:
+            - type: string
+            - type: 'null'
+        reference:
+          anyOf:
+            - $ref: '#/components/schemas/Identifier'
+            - type: 'null'
+      description: LionWeb Target Reference
+      examples:
+        - resolveInfo: self-reference
+          reference: mapping
+    Version:
+      type: string
+      description: Version
+      examples:
+        - '3.14'
   securitySchemes:
     BearerAuth:
       type: http

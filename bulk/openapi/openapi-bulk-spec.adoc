@@ -1,11 +1,12 @@
 = OpenAPI LionWeb Bulk Spec
 
-This is a __proof of concept__ (incomplete right now) using the link:https://spec.openapis.org/oas/v3.2.0.html[**OpenAPI Specification**] describing the operations in the protocol for the **LionWeb Bulk Protocol**.
-This spec formally describes the REST API, paths, operations and types to be used.
+This is a __proof of concept__ using the link:https://spec.openapis.org/oas/v3.2.0.html[**OpenAPI Specification**] describing the operations in the protocol for the **LionWeb Bulk Protocol**.
+This specification formally describes the REST API, paths, operations and types to be used.
 
 == Spec
 
 Reference Spec: link:https://lionweb.io/specification/bulk/repo-access-api.html[Bulk Spec].
+Definition of `LionWeb Chunk` adapted from: link:https://github.com/LionWeb-io/specification/blob/main/serialization/serialization.schema.json
 
 **Artifacts:**
 
@@ -15,5 +16,4 @@ Reference Spec: link:https://lionweb.io/specification/bulk/repo-access-api.html[
 
 == Pending work
 
-- Define whant is a chunk. Where is defined?
-- Bulk Spec do not preescribe routes or HTTP verb. They are needed to provide a complete OpenAPI spec. Where to look? Need pointers to current implementations.
+- Bulk Specification as it is does not prescribe routes or HTTP verb. They are needed to provide a complete OpenAPI spec. Where to look? Need pointers to current implementations.
