@@ -12,7 +12,7 @@ We identify the client by its <<clientIdType>>.
 
 [horizontal]
 .Request parameters
-[[GetAvailableIds.count, `count`]]count:: <<integerType>>
+[[GetAvailableIds.count, `count`]]count:: <<countType>>
 Number of ids requested.
 
 [[GetAvailableIds.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
