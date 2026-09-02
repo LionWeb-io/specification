@@ -9,9 +9,9 @@ See also <<evnt-ErrorEvent>>.
 
 [horizontal]
 .Response parameters
-[[ErrorResponse.errorCode, `errorCode`]]errorCode:: `String`
+[[ErrorResponse.errorCode, `errorCode`]]errorCode:: <<errorCodeType>>
 
-[[ErrorResponse.message, `message`]]message:: `String`
+[[ErrorResponse.message, `message`]]message:: <<errorMessageType>>
 
 [[ErrorResponse.queryId, `queryId`]]queryId:: <<queryIdType>>
 Id of the related query.
