@@ -2,6 +2,8 @@
 ===== Add annotation
 Add <<new-nodes, new node>> <<AddAnnotation.newAnnotation>> to <<AddAnnotation.parent>>'s annotations at <<AddAnnotation.index>>.
 
+See also <<splittableMessage>>.
+
 [cols="a,a"]
 |===
 |Before |After

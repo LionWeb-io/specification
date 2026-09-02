@@ -3,6 +3,8 @@
 ===== Subscribe to partition contents
 This client wants to receive events on any changes to <<SubscribeToPartitionContents.partition>> or any of its descendants.{fn-org270}{fn-org269}
 
+See also <<splittableMessage>> and <<subscription>>.
+
 .Technical name
 `SubscribeToPartitionContents`
 

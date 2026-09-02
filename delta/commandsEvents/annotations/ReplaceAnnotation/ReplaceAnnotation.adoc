@@ -5,6 +5,8 @@ Does NOT change references to any of the deleted nodes.{fn-org285}
 
 Replace <<existing-nodes, existing node>> <<ReplaceAnnotation.replacedAnnotation>> inside <<ReplaceAnnotation.parent>>'s annotations at <<ReplaceAnnotation.index>> with <<new-nodes, new>> or <<reused-nodes, reused>> node <<ReplaceAnnotation.newAnnotation>>.
 
+See also <<splittableMessage>>.
+
 [cols="a,a"]
 |===
 |Before |After

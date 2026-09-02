@@ -4,6 +4,8 @@
 
 All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> with index >= <<ChildAdded.index>> have been moved to next higher index.
 
+See also <<splittableMessage>>.
+
 .Technical name
 `ChildAdded`
 

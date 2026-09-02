@@ -3,7 +3,7 @@
 Lists all partitions{fn-org450} accessible in the repository, and subscribes the client to all of them.{fn-org361}
 The client receives the full contents of all listed partitions.{fn-org425}
 
-See also <<qry-ListPartitions>>.
+See also <<splittableMessage>>, <<subscription>>, and <<qry-ListPartitions>>.
 
 .Technical name
 `ListAndSubscribePartitions`

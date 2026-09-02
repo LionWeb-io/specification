@@ -5,6 +5,8 @@ Does NOT change references to any of the deleted nodes.{fn-org285}
 
 Replace <<existing-nodes, existing node>> <<ReplaceChild.replacedChild>> inside <<ReplaceChild.parent>>'s <<ReplaceChild.containment>> at <<ReplaceChild.index>> with <<new-nodes, new>> or <<reused-nodes, reused>> node <<ReplaceChild.newChild>>.
 
+See also <<splittableMessage>>.
+
 [cols="a,a"]
 |===
 |Before |After
