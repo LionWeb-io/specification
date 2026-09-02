@@ -1,5 +1,6 @@
 [[errors]]
 === Errors
+Commonly used errors, referred to by their _technical name_ as <<errorCodeType>>.
 
 [[err-invalidParticipation]]
 ==== Invalid participation
@@ -44,13 +45,15 @@ Client tries to operate on an index beyond the number of existing elements.
 Client provided an entry (either a node or a target/resolveInfo) and an index, but the entry is not at the given index.
 
 .Technical name
-`indexNodeMismatch`
+`indexEntryMismatch`
 
 
 [[err-invalidIndexOffset]]
 ==== Index offset is invalid
 Client provided an index offset which is either 0, or an integer such that a given “old” index + the index offset is not a valid index (in the list that’s the subject of the action triggering this error).
 
+.Technical name
+`invalidIndexOffset`
 
 [[err-unknownParentNode]]
 ==== The parent of a node does not exist 
@@ -91,3 +94,40 @@ Client tries to set a reference with neither `target` nor `resolveInfo`
 
 .Technical name
 `undefinedReferenceTarget`
+
+[[err-mixedInformAboutAndSubscribeToChangingPartitions]]
+==== Mixed Inform about / Subscribe to Changing Partitions
+Client already <<qry-SubscribeToChangingPartitions, subscribed to changing partitions>>, and now requests to be <<qry-InformAboutChangingPartitions, informed about changing partitions>> -- or vice versa.
+
+.Technical name
+`mixedInformAboutAndSubscribeToChangingPartitions`
+
+[[err-invalidAnchorNode]]
+==== Invalid anchor node
+A <<singleChunkType>> doesn't have exactly one <<anchorNode>>, or the anchor node's id or parent is invalid.
+
+.Technical name
+`invalidAnchorNode`
+
+[[err-featureAlreadySet]]
+==== Feature already set
+A <<{m3}.adoc#Feature, Feature>> has already been set to a value, and cannot be set new with this command.
+Use a _change_ or _replace_ command instead.
+
+.Technical name
+`featureAlreadySet`
+
+[[err-featureNotSet]]
+==== Feature not set
+A <<{m3}.adoc#Feature, Feature>> has no value, and cannot be changed with this command.
+Use an _add_ or _set_ command instead.
+
+.Technical name
+`featureNotSet`
+
+[[err-featureUnchanged]]
+==== Feature unchanged
+The new and old value of a <<{m3}.adoc#Feature, Feature>> are the same.{fn-org511}
+
+.Technical name
+`featureUnchanged`

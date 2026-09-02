@@ -35,6 +35,7 @@ Id of this command.
 
 .Errors
 * <<err-nodeAlreadyExists>> for <<AddPartition.newPartition>>
+* <<err-invalidAnchorNode>> for <<AddPartition.newPartition>>
 * <<err-invalidParticipation>>
 
 .Related event

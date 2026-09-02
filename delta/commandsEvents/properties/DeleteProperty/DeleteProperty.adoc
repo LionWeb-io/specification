@@ -15,8 +15,10 @@ include::DeleteProperty-diagram.adoc[]
 [horizontal]
 .Parameters
 [[DeleteProperty.node, `node`]]node:: <<targetNodeType>>
+of the node we want to delete a property from.
 
 [[DeleteProperty.property, `property`]]property:: <<metaPointerType>>
+<<{m3}.adoc#Property, Property>> we want to delete from  <<DeleteProperty.node>>.
 
 [[DeleteProperty.commandId]]commandId:: <<commandIdType>>
 
@@ -24,7 +26,7 @@ include::DeleteProperty-diagram.adoc[]
 
 .Errors
 * <<err-unknownNode>> for <<DeleteProperty.node>>
-* ##?## <<DeleteProperty.property>> is not set in <<DeleteProperty.node>>
+* <<err-featureNotSet>> for <<DeleteProperty.property>> in <<DeleteProperty.node>>
 * <<err-invalidParticipation>>
 
 .Related event
