@@ -4,6 +4,8 @@
 
 <<AnnotationReplaced.replacedAnnotation>>, and all its descendants, have been deleted.
 
+See also <<splittableMessage>>.
+
 .Technical name
 `AnnotationReplaced`
 

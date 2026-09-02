@@ -2,6 +2,8 @@
 ===== Add child
 Add <<new-nodes, new node>> <<AddChild.newChild>> to <<AddChild.parent>> in <<AddChild.containment>> at <<AddChild.index>>.
 
+See also <<splittableMessage>>.
+
 [cols="a,a"]
 |===
 |Before |After

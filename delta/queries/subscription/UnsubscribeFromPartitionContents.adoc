@@ -3,6 +3,8 @@
 ===== Unsubscribe from partition contents
 This client does not want to receive events on any changes to <<UnsubscribeFromPartitionContents.partition>> or any of its descendants anymore.{fn-org270}
 
+See also and <<subscription>>.
+
 .Technical name
 `UnsubscribeFromPartitionContents`
 
