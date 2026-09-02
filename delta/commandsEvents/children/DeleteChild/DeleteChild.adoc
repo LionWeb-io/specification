@@ -16,12 +16,16 @@ include::DeleteChild-diagram.adoc[]
 [horizontal]
 .Parameters
 [[DeleteChild.parent, `parent`]]parent:: <<targetNodeType>>
+of the node we want to delete a child from.
 
 [[DeleteChild.containment, `containment`]]containment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> we want to delete <<DeleteChild.deletedChild>> from in <<DeleteChild.parent>>.
 
 [[DeleteChild.index, `index`]]index:: <<indexType>>
+where we want to delete <<DeleteChild.deletedChild>> from in <<DeleteChild.containment>> of <<DeleteChild.parent>>.
 
 [[DeleteChild.deletedChild, `deletedChild`]]deletedChild:: <<targetNodeType>>
+of the node we want to delete in <<DeleteChild.containment>> of <<DeleteChild.parent>> at <<DeleteChild.index>>.
 
 [[DeleteChild.commandId]]commandId:: <<commandIdType>>
 
@@ -29,7 +33,7 @@ include::DeleteChild-diagram.adoc[]
 
 .Errors
 * <<err-unknownNode>> for <<DeleteChild.parent>>
-* ##?## <<DeleteChild.index>> is beyond (the number of <<DeleteChild.containment>> entries in <<DeleteChild.parent>>) - 1
+* <<err-parentMismatch>> for <<DeleteChild.parent>> and <<DeleteChild.deletedChild>>
 * <<err-indexEntryMismatch>> for <<DeleteChild.containment>>/<<DeleteChild.index>> and <<DeleteChild.deletedChild>>
 * <<err-invalidParticipation>>
 

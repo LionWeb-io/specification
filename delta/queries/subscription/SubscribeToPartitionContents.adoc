@@ -31,5 +31,6 @@ Id of this query.
 [[SubscribeToPartitionContents.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* already subscribed to <<SubscribeToPartitionContents.partition>>
+* `alreadySubscribedToPartition`: Participation is already subscribed to <<SubscribeToPartitionContents.partition>>.
+* <<err-unknownNode>> for <<SubscribeToPartitionContents.partition>>.
 * <<err-invalidParticipation>>
