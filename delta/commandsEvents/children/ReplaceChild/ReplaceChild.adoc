@@ -20,17 +20,21 @@ include::ReplaceChild-diagram.adoc[]
 [horizontal]
 .Parameters
 [[ReplaceChild.newChild, `newChild`]]newChild:: <<singleChunkType>>
-Subtree to form a new child.
+Subtree to form the new child that replaces <<ReplaceChild.replacedChild>>.
 The _anchor node_ MUST contain the <<ReplaceChild.parent>> as _parent_.{fn-org357}
 All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 
 [[ReplaceChild.parent, `parent`]]parent:: <<targetNodeType>>
+of the node we want to replace a child in.
 
 [[ReplaceChild.containment, `containment`]]containment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> we want to replace <<ReplaceChild.replacedChild>> in <<ReplaceChild.parent>>.
 
 [[ReplaceChild.index, `index`]]index:: <<indexType>>
+where we want to replace <<ReplaceChild.replacedChild>> at in <<ReplaceChild.containment>> of <<ReplaceChild.parent>>.
 
 [[ReplaceChild.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+of the node we want to replace in <<ReplaceChild.containment>> of <<ReplaceChild.parent>> at <<ReplaceChild.index>>.
 
 [[ReplaceChild.split, `split`]]split?:: <<splitFlagType>>
 
@@ -39,10 +43,11 @@ All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 [[ReplaceChild.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-nodeAlreadyExists>> for <<ReplaceChild.newChild>>
 * <<err-unknownNode>> for <<ReplaceChild.parent>>
+* <<err-nodeAlreadyExists>> for <<ReplaceChild.newChild>>
+* <<err-invalidAnchorNode>> for <<ReplaceChild.newChild>>
+* <<err-parentMismatch>> for <<ReplaceChild.parent>> and <<ReplaceChild.replacedChild>>
 * <<err-indexEntryMismatch>> for <<ReplaceChild.containment>>/<<ReplaceChild.index>> and <<ReplaceChild.replacedChild>>
-* ##?## <<ReplaceChild.index>> is beyond (the number of <<ReplaceChild.containment>> entries in <<ReplaceChild.parent>>) - 1
 * <<err-invalidParticipation>>
 
 .Related event

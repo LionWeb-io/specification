@@ -17,15 +17,18 @@ include::AddChild-diagram.adoc[]
 [horizontal]
 .Parameters
 [[AddChild.parent, `parent`]]parent:: <<targetNodeType>>
+of the node we want to add a new child to.
 
 [[AddChild.newChild, `newChild`]]newChild:: <<singleChunkType>>
-Subtree to form a new child.
+Subtree to form the new child.
 The _anchor node_ MUST contain the <<AddChild.parent>> as _parent_.{fn-org357}
 All nodes in that subtree MUST be <<new-nodes>>.
 
 [[AddChild.containment, `containment`]]containment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> we want to add <<AddChild.newChild>> to in <<AddChild.parent>>.
 
 [[AddChild.index, `index`]]index:: <<indexType>>
+where we want to add <<AddChild.newChild>> at in <<AddChild.containment>> of <<AddChild.parent>>.
 
 [[AddChild.split, `split`]]split?:: <<splitFlagType>>
 
@@ -36,6 +39,7 @@ All nodes in that subtree MUST be <<new-nodes>>.
 .Errors
 * <<err-unknownNode>> for <<AddChild.parent>>
 * <<err-nodeAlreadyExists>> for <<AddChild.newChild>>
+* <<err-invalidAnchorNode>> for <<AddChild.newChild>>
 * <<err-unknownIndex>> for <<AddChild.index>> (is beyond the number of <<AddChild.containment>> entries in <<AddChild.parent>>)
 * <<err-invalidParticipation>>
 

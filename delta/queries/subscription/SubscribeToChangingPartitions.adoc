@@ -37,4 +37,4 @@ Id of this query.
 
 .Errors
 * <<err-invalidParticipation>>
-* Client already requested <<qry-InformAboutChangingPartitions>>
+* <<err-mixedInformAboutAndSubscribeToChangingPartitions>>
