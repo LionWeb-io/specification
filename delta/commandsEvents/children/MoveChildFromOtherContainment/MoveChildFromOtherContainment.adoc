@@ -50,7 +50,7 @@ of the node we want to move from <<MoveChildFromOtherContainment.oldParent>> to 
 * <<err-indexEntryMismatch>> for <<MoveChildFromOtherContainment.oldContainment>>/<<MoveChildFromOtherContainment.oldIndex>> and
 <<MoveChildFromOtherContainment.movedChild>>
 * <<err-unknownIndex>> for <<MoveChildFromOtherContainment.newIndex>> (is beyond the number of <<MoveChildFromOtherContainment.newContainment>> entries in <<MoveChildFromOtherContainment.newParent>>)
-* <<err-invalidMove>> as <<MoveChildFromOtherContainment.movedChild>> is already a child of <<MoveChildFromOtherContainment.newParent>>.
+* <<err-invalidMove>> as <<MoveChildFromOtherContainment.oldParent>> == <<MoveChildFromOtherContainment.newParent>>.
 Use <<cmd-MoveChildFromOtherContainmentInSameParent>> or <<cmd-MoveChildInSameContainment>> instead.
 * <<err-invalidParticipation>>
 
