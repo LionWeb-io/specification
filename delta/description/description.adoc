@@ -1,0 +1,18 @@
+[[description]]
+== Description
+
+include::repository.adoc[]
+
+include::client.adoc[]
+
+include::channel.adoc[]
+
+include::participation.adoc[]
+
+include::eventSequenceNumber.adoc[]
+
+include::subscription.adoc[]
+
+include::message.adoc[]
+
+include::moving/moving.adoc[]
