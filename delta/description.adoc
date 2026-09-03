@@ -342,7 +342,7 @@ Example moving `X` with `indexOffset` = 3, and replacing `F`: +
 `indexOffset=3`: `A[0] B[1] C[2] _D[3] E[4]_ *X[5]* _G[6]_` +
 `targetIndex=6`, `newIndex=5` and `F` is replaced with `X`
 
-Note that moving and replacing another node with `indexOffset=1` has the same effect as (just) deleting the node with (`oldIndex` + 1).
+Note that moving and replacing another node with `indexOffset=1` has the same effect as (just) deleting the node with index (`oldIndex` + 1).
 
 .Moving down
 
@@ -360,5 +360,5 @@ Example moving `X` with `indexOffset` = -3, and replacing `B`: +
 `indexOffset=-3`: `A[0] *X[1]* C[2] D[3] _E[4] F[5]_` +
 `targetIndex=1`, `newIndex=1` and `B` is replaced with `X`
 
-Note that moving and replacing another node with `indexOffset=-1` has the same effect as (just) deleting the node with (`oldIndex` - 1).
+Note that moving and replacing another node with `indexOffset=-1` has the same effect as (just) deleting the node with index (`oldIndex` - 1).
 
