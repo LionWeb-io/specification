@@ -4,7 +4,7 @@ Commonly used errors, referred to by their _technical name_ as <<errorCodeType>>
 
 include::generic.adoc[]
 
-include::newNode.adoc[]
+include::createNode.adoc[]
 
 include::move.adoc[]
 
