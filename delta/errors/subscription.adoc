@@ -1,0 +1,9 @@
+[[errors-subscription]]
+==== Subscription errors
+
+[[err-mixedInformAboutAndSubscribeToChangingPartitions]]
+===== Mixed Inform about / Subscribe to Changing Partitions
+Client already <<qry-SubscribeToChangingPartitions, subscribed to changing partitions>>, and now requests to be <<qry-InformAboutChangingPartitions, informed about changing partitions>> -- or vice versa.
+
+.Technical name
+`mixedInformAboutAndSubscribeToChangingPartitions`

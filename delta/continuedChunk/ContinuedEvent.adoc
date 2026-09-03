@@ -33,10 +33,10 @@ The client MUST reject any differences as an error.
 [[ContinuedEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<splitMessageAlreadyCompleted>>
-* <<multipleContinuedChunksCompleted>>
-* <<duplicateContinuedChunk>>
-* <<unknownSplittableMessageInContinuedChunk>>
-* <<invalidSplittableMessageInContinuedChunk>>
-* <<interruptedContinuedChunk>>
+* <<err-splitMessageAlreadyCompleted>>
+* <<err-multipleContinuedChunksCompleted>>
+* <<err-duplicateContinuedChunk>>
+* <<err-unknownSplittableMessageInContinuedChunk>>
+* <<err-invalidSplittableMessageInContinuedChunk>>
+* <<err-interruptedContinuedChunk>>
 * <<err-invalidParticipation>>
