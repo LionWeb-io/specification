@@ -23,7 +23,7 @@ Can be `null`.
 Cannot be `null`.
 Use value `0` for <<{m3}.adoc#multiplicity, single links>>.
 
-[[indexOffsetType]]IndexOffset:: <<indexOffset, Relative position>> inside a (list of) multiple link or annotations as integer.
+[[indexOffsetType]]IndexOffset:: Relative position inside a (list of) multiple link or annotations as integer.
 Cannot be `0` or `null`.
 
 [[commandType]]Command:: Any <<commands, command>>.
@@ -67,9 +67,9 @@ MUST be an integer >= 0, with
 
 [[splitFlagType]]SplitFlag:: boolean flag whether the chunk is complete within this <<splittableMessage>>.{fn-org425}
 
-[[continuedChunkCompletedFlagType]]ContinuedChunkCompletedFlag:: boolean flag whether this <<continuedChunk>> completes its <<splittableMessage>>.{fn-org425}
+[[continuedChunkCompletedFlagType]]ContinuedChunk{zwsp}CompletedFlag:: boolean flag whether this <<continuedChunk>> completes its <<splittableMessage>>.{fn-org425}
 
-[[continuedChunkSequenceNumberType]]ContinuedChunkSequenceNumber:: orders connected <<continuedChunk, continued chunks>>.
+[[continuedChunkSequenceNumberType]]ContinuedChunk{zwsp}SequenceNumber:: orders connected <<continuedChunk, continued chunks>>.
 Positive integer that starts at 0 and increments by one for each consecutive <<continuedChunk>>.{fn-org425}
 
 [[eventType]]Event:: Any <<events, event>>.
@@ -87,11 +87,11 @@ LionWeb doesn't specify the scope of the context.{fn-org401}
 [[commandSourceType]]CommandSource:: _(<<participationIdType>>, <<commandIdType>>)_ tuple{fn-org306} an event is based on.
 This allows a client to know when its command has been processed (either successful or not).
 
-[[eventSequenceType]]EventSequenceNumber:: <<event-sequence-number>> of this event.
+[[eventSequenceType]]Event{zwsp}SequenceNumber:: <<event-sequence-number>> of this event.
 
 [[freeIdType]]FreeId:: Free <<{m3}.adoc#node-id, node id>>.
 
-[[deltaProtocolVersionType]]DeltaProtocolVersion:: Version of the delta protocol, e.g. `2026.1`.
+[[deltaProtocolVersionType]]DeltaProtocol{zwsp}Version:: Version of the delta protocol, e.g. `2026.1`.
 
 [[errorCodeType]]ErrorCode:: Code of an error.
 Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique for reported errors.
