@@ -103,6 +103,16 @@ Can be any string, including empty string.
 
 [[countType]]count:: An integer value in the range of 0 to 2147483647 (i.e. 2^31^ − 1).
 
+[[featureValueType]]FeatureValue:: The value of a feature, only used in error messages.
++
+The value depends on the feature kind referred to by the error message:
+
+[horizontal]
+containment or annotation::: <<targetNodeType>>
+property::: <<propertyValueType>>
+reference::: serialized <<resolveInfoType>>
+
+
 [[new-nodes, new nodes]]
 ==== New nodes
 The term "new node" refers to nodes that MUST NOT yet exist in the repository.{fn-org327}
