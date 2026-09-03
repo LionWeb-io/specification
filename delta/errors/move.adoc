@@ -1,38 +1,7 @@
 [[errors-move]]
 ==== Move errors
 
-_MoveChild_ commands include:
-
-* <<cmd-MoveChildFromOtherContainment>>
-* <<cmd-MoveChildFromOtherContainmentInSameParent>>
-* <<cmd-MoveChildInSameContainment>>
-* <<cmd-MoveAndReplaceChildFromOtherContainment>>
-* <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
-* <<cmd-MoveAndReplaceChildInSameContainment>>
-
-_MoveAnnotation_ commands include:
-
-* <<cmd-MoveAnnotationFromOtherParent>>
-* <<cmd-MoveAnnotationInSameParent>>
-* <<cmd-MoveAndReplaceAnnotationFromOtherParent>>
-* <<cmd-MoveAndReplaceAnnotationInSameParent>>
-
-_move from other parent_ commands include:
-
-* <<cmd-MoveChildFromOtherContainment>>
-* <<cmd-MoveAndReplaceChildFromOtherContainment>>
-* <<cmd-MoveAnnotationFromOtherParent>>
-* <<cmd-MoveAndReplaceAnnotationFromOtherParent>>
-
-_same containment_ moves include:
-
-* <<cmd-MoveChildInSameContainment>>
-* <<cmd-MoveAndReplaceChildInSameContainment>>
-
-_other containment_ moves include:
-
-* <<cmd-MoveChildFromOtherContainmentInSameParent>>
-* <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
+Reported by all <<group-move>> commands.
 
 If we're trying to move a node in an invalid way, we report the following errors in the given order:
 
@@ -41,21 +10,21 @@ If we're trying to move a node in an invalid way, we report the following errors
 
 . <<err-invalidMove>> if:
 ** the moved node is a partition.
-** the moved node is an annotation, and we use a _MoveChild_ command.
-** the moved node is not an annotation, and we use a _MoveAnnotation_ command.
-** the moved node is a child (or annotation) of the target parent node, and we use a _move from other parent_ command.
-** the moved node is not a child (or annotation) of the target parent node, and we don't use a _move from other parent_ command.
-** we use a _move from other parent_ command, and _old parent_ parameter is same as _new parent_ parameter.
-** we use a _same containment_ move, and _old containment_ parameter is same as _new containment_ parameter.
+** the moved node is an annotation, and we use a <<group-move-child>> command.
+** the moved node is not an annotation, and we use a <<group-move-annotation>> command.
+** the moved node is a child (or annotation) of the target parent node, and we use a <<group-move-from-other-parent>> command.
+** the moved node is not a child (or annotation) of the target parent node, and we use a <<group-move-in-same-parent>> command.
+** we use a <<group-move-from-other-parent>> command, and _old parent_ parameter is same as _new parent_ parameter.
+** we use a <<group-move-in-same-containment>> command, and _old containment_ parameter is same as _new containment_ parameter.
 
 . <<err-parentMismatch>> if:
 ** the moved node is not a child (or annotation) of the source parent node.
 ** the replaced node is not a child (or annotation) of the target parent node.
 
 . <<err-indexEntryMismatch>> if:
-** the moved node is a child in another containment of the same parent, and we use a _same containment_ move.
+** the moved node is a child in another containment of the same parent, and we use a <<group-move-in-same-containment>> command.
 #TODO# or <<err-invalidMove>>?
-** the moved node is a child in the same containment of the same parent, and we use an _other containment_ move.
+** the moved node is a child in the same containment of the same parent, and we use a <<group-move-from-other-containment>> command.
 #TODO# or <<err-invalidMove>>?
 ** the moved node is not the child (or annotation) at the given index in the given containment.
 ** the replaced node is not the child (or annotation) at the given index in the given containment.

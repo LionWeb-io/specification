@@ -1,6 +1,8 @@
 [[errors-splittable]]
 ==== Splittable message errors
 
+Reported by all <<continuedChunk>> messages.
+
 [[err-splitMessageAlreadyCompleted]]
 ===== Split message already completed
 Split message already completed: continued chunk received with a higher <<continuedChunkSequenceNumberType>> than a previous one for which the <<continuedChunkSequenceNumberType>> was `true`.
