@@ -28,6 +28,8 @@ Client tries to create a node with an id that already exists.
 ==== Unknown node
 Client tries to operate on a node unknown to the repository.
 
+See also <<move-error-overview>>.
+
 .Technical name
 `unknownNode`
 
@@ -35,6 +37,8 @@ Client tries to operate on a node unknown to the repository.
 [[err-unknownIndex]]
 ==== Unknown index
 Client tries to operate on an index beyond the number of existing elements.
+
+See also <<move-error-overview>>.
 
 .Technical name
 `unknownIndex`
@@ -44,6 +48,8 @@ Client tries to operate on an index beyond the number of existing elements.
 ==== Entry at index is not the given entry
 Client provided an entry (either a node or a target/resolveInfo) and an index, but the entry is not at the given index.
 
+See also <<move-error-overview>>.
+
 .Technical name
 `indexEntryMismatch`
 
@@ -51,6 +57,8 @@ Client provided an entry (either a node or a target/resolveInfo) and an index, b
 [[err-invalidIndexOffset]]
 ==== Index offset is invalid
 Client provided an index offset which is either 0, or an integer such that a given “old” index + the index offset is not a valid index (in the list that’s the subject of the action triggering this error).
+
+See also <<move-error-overview>>.
 
 .Technical name
 `invalidIndexOffset`
@@ -68,6 +76,8 @@ Client provided a node with a parent, but the parent node does not exist.
 Client provided an existing node N with a parent id in its parent property, but the node with this parent-id
 does not have the existing node N as a child (annotation or containment).
 
+See also <<move-error-overview>>.
+
 .Technical name
 `parentMismatch`
 
@@ -83,6 +93,8 @@ Client tries to move a node that doesn't have a parent.
 [[err-invalidMove]]
 ==== Invalid move
 Client tries to move a node incompatible with the emitted command.
+
+See also <<move-error-overview>>.
 
 .Technical name
 `invalidMove`
@@ -131,3 +143,90 @@ The new and old value of a <<{m3}.adoc#Feature, Feature>> are the same.{fn-org51
 
 .Technical name
 `featureUnchanged`
+
+[[move-error-overview]]
+==== Overview of move errors
+
+_MoveChild_ commands include:
+
+* <<cmd-MoveChildFromOtherContainment>>
+* <<cmd-MoveChildFromOtherContainmentInSameParent>>
+* <<cmd-MoveChildInSameContainment>>
+* <<cmd-MoveAndReplaceChildFromOtherContainment>>
+* <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
+* <<cmd-MoveAndReplaceChildInSameContainment>>
+
+_MoveAnnotation_ commands include:
+
+* <<cmd-MoveAnnotationFromOtherParent>>
+* <<cmd-MoveAnnotationInSameParent>>
+* <<cmd-MoveAndReplaceAnnotationFromOtherParent>>
+* <<cmd-MoveAndReplaceAnnotationInSameParent>>
+
+_move from other parent_ commands include:
+
+* <<cmd-MoveChildFromOtherContainment>>
+* <<cmd-MoveAndReplaceChildFromOtherContainment>>
+* <<cmd-MoveAnnotationFromOtherParent>>
+* <<cmd-MoveAndReplaceAnnotationFromOtherParent>>
+
+_same containment_ moves include:
+
+* <<cmd-MoveChildInSameContainment>>
+* <<cmd-MoveAndReplaceChildInSameContainment>>
+
+_other containment_ moves include:
+
+* <<cmd-MoveChildFromOtherContainmentInSameParent>>
+* <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
+
+If we're trying to move a node in an invalid way, we report the following errors in the given order:
+
+. <<err-unknownNode>> if:
+** any of the involved nodes is unknown.
+
+. <<err-invalidMove>> if:
+** the moved node is a partition.
+** the moved node is an annotation, and we use a _MoveChild_ command.
+** the moved node is not an annotation, and we use a _MoveAnnotation_ command.
+** the moved node is a child (or annotation) of the target parent node, and we use a _move from other parent_ command.
+** the moved node is not a child (or annotation) of the target parent node, and we don't use a _move from other parent_ command.
+** we use a _move from other parent_ command, and _old parent_ parameter is same as _new parent_ parameter.
+** we use a _same containment_ move, and _old containment_ parameter is same as _new containment_ parameter.
+
+. <<err-parentMismatch>> if:
+** the moved node is not a child (or annotation) of the source parent node.
+** the replaced node is not a child (or annotation) of the target parent node.
+
+. <<err-indexEntryMismatch>> if:
+** the moved node is a child in another containment of the same parent, and we use a _same containment_ move.
+#TODO# or <<err-invalidMove>>?
+** the moved node is a child in the same containment of the same parent, and we use an _other containment_ move.
+#TODO# or <<err-invalidMove>>?
+** the moved node is not the child (or annotation) at the given index in the given containment.
+** the replaced node is not the child (or annotation) at the given index in the given containment.
+
+. <<err-unknownIndex>> if:
+** the index is < 0.
+** the target parent contains less than the given number of elements in the given containment (or annotations).
+
+. <<err-invalidIndexOffset>> if:
+** the offset is 0.
+** the offset is out of bounds of the given containment (or annotations) of the target parent.
+
+.Tabular overview of move errors
+[cols="<h,<,<,<,<,<",]
+|===
+|  h|moved node has different parent h|old parent == new parent 3+h|moved node has same parent
+|  h| h|  h|different containment h|old containment == new containment h|same containment
+|<<cmd-MoveChildFromOtherContainment>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
+|<<cmd-MoveAnnotationFromOtherParent>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
+|<<cmd-MoveChildFromOtherContainmentInSameParent>> 2+|<<err-invalidMove>> |✓ |<<err-invalidMove>>|<<err-indexEntryMismatch>>
+|<<cmd-MoveChildInSameContainment>> 2+|<<err-invalidMove>> |<<err-indexEntryMismatch>>|_n/a_ |✓
+|<<cmd-MoveAnnotationInSameParent>> 2+|<<err-invalidMove>> |_n/a_ |_n/a_ |✓
+|<<cmd-MoveAndReplaceChildFromOtherContainment>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
+|<<cmd-MoveAndReplaceAnnotationFromOtherParent>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
+|<<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>> 2+|<<err-invalidMove>> |✓ |<<err-invalidMove>> |<<err-indexEntryMismatch>>
+|<<cmd-MoveAndReplaceChildInSameContainment>> 2+|<<err-invalidMove>> |<<err-indexEntryMismatch>> |_n/a_ |✓
+|<<cmd-MoveAndReplaceAnnotationInSameParent>> 2+|<<err-invalidMove>> |_n/a_ |_n/a_ |✓
+|===
