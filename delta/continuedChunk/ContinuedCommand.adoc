@@ -25,3 +25,12 @@ The combination of all continued chunks MUST adhere to the same constraints as t
 Id of the related <<splittableMessage, splittable command>>
 
 [[ContinuedCommand.additionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+
+.Errors
+* <<splitMessageAlreadyCompleted>>
+* <<multipleContinuedChunksCompleted>>
+* <<duplicateContinuedChunk>>
+* <<unknownSplittableMessageInContinuedChunk>>
+* <<invalidSplittableMessageInContinuedChunk>>
+* <<interruptedContinuedChunk>>
+* <<err-invalidParticipation>>
