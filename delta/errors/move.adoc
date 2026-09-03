@@ -1,7 +1,7 @@
 [[errors-move]]
 ==== Move errors
 
-Reported by all <<group-move>> commands.
+Reported by all <<group-move-or-replace>> commands.
 
 If we're trying to move a node in an invalid way, we report the following errors in the given order:
 
@@ -10,21 +10,21 @@ If we're trying to move a node in an invalid way, we report the following errors
 
 . <<err-invalidMove>> if:
 ** the moved node is a partition.
-** the moved node is an annotation, and we use a <<group-move-child>> command.
-** the moved node is not an annotation, and we use a <<group-move-annotation>> command.
-** the moved node is a child (or annotation) of the target parent node, and we use a <<group-move-from-other-parent>> command.
-** the moved node is not a child (or annotation) of the target parent node, and we use a <<group-move-in-same-parent>> command.
-** we use a <<group-move-from-other-parent>> command, and _old parent_ parameter is same as _new parent_ parameter.
-** we use a <<group-move-in-same-containment>> command, and _old containment_ parameter is same as _new containment_ parameter.
+** the moved node is an annotation, and we use a <<group-move-or-replace-child>> command.
+** the moved node is not an annotation, and we use a <<group-move-or-replace-annotation>> command.
+** the moved node is a child (or annotation) of the target parent node, and we use a <<group-move-or-replace-from-other-parent>> command.
+** the moved node is not a child (or annotation) of the target parent node, and we use a <<group-move-or-replace-in-same-parent>> command.
+** we use a <<group-move-or-replace-from-other-parent>> command, and _old parent_ parameter is same as _new parent_ parameter.
+** we use a <<group-move-or-replace-in-same-containment>> command, and _old containment_ parameter is same as _new containment_ parameter.
 
 . <<err-parentMismatch>> if:
 ** the moved node is not a child (or annotation) of the source parent node.
 ** the replaced node is not a child (or annotation) of the target parent node.
 
 . <<err-indexEntryMismatch>> if:
-** the moved node is a child in another containment of the same parent, and we use a <<group-move-in-same-containment>> command.
+** the moved node is a child in another containment of the same parent, and we use a <<group-move-or-replace-in-same-containment>> command.
 #TODO# or <<err-invalidMove>>?
-** the moved node is a child in the same containment of the same parent, and we use a <<group-move-from-other-containment>> command.
+** the moved node is a child in the same containment of the same parent, and we use a <<group-move-or-replace-from-other-containment>> command.
 #TODO# or <<err-invalidMove>>?
 ** the moved node is not the child (or annotation) at the given index in the given containment.
 ** the replaced node is not the child (or annotation) at the given index in the given containment.
@@ -79,6 +79,19 @@ Client provided an entry (either a node or a target/resolveInfo) and an index, b
 .Technical name
 `indexEntryMismatch`
 
+.Additional infos
+[horizontal]
+[[indexEntryMismatch.parent]]parent:: <<targetNodeType>>
+of the parent.
+[[indexEntryMismatch.feature]]feature:: <<metaPointerType>>
+Serialized meta-pointer of given feature.
+Empty for annotations.
+[[indexEntryMismatch.index]]index:: <<indexType>>
+given index.
+[[indexEntryMismatch.entry]]entry:: <<featureValueType>>
+given entry.
+[[indexEntryMismatch.actual]]actual:: <<featureValueType>>
+actual entry at the given feature and index.
 
 [[err-invalidIndexOffset]]
 ===== Index offset is invalid
@@ -86,6 +99,20 @@ Client provided an index offset which is either 0, or an integer such that a giv
 
 .Technical name
 `invalidIndexOffset`
+
+.Additional infos
+[horizontal]
+[[invalidIndexOffset.parent]]parent:: <<targetNodeType>>
+of the parent.
+[[invalidIndexOffset.feature]]feature:: <<metaPointerType>>
+Serialized meta-pointer of given feature.
+Empty for annotations.
+[[invalidIndexOffset.offset]]offset:: <<indexOffsetType>>
+given offset.
+[[invalidIndexOffset.min]]min:: <<indexOffsetType>>
+Minimal valid offset.
+[[invalidIndexOffset.max]]max:: <<indexOffsetType>>
+Maximal valid offset.
 
 
 [[err-moveWithoutParent]]

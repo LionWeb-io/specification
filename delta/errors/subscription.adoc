@@ -7,3 +7,12 @@ Client already <<qry-SubscribeToChangingPartitions, subscribed to changing parti
 
 .Technical name
 `mixedInformAboutAndSubscribeToChangingPartitions`
+
+.Additional infos
+[horizontal]
+[[mixedInformAboutAndSubscribeToChangingPartitions.currentMode]]currentMode::
+The technical name of the current subscription mode, i.e. either <<qry-InformAboutChangingPartitions>> or <<qry-SubscribeToChangingPartitions>>.
+[[mixedInformAboutAndSubscribeToChangingPartitions.creation]]creation:: <<booleanType>>
+Whether the participation is currently subscribed to newly created partitions.
+[[mixedInformAboutAndSubscribeToChangingPartitions.deletion]]deletion:: <<booleanType>>
+Whether the participation is currently subscribed to deleted partitions.
