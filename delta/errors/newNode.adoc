@@ -1,0 +1,17 @@
+[[errors-new-node]]
+==== New node errors
+
+[[err-nodeAlreadyExists]]
+===== Node already exists
+Client tries to create a node with an id that already exists.
+
+.Technical name
+`nodeAlreadyExists`
+
+
+[[err-invalidAnchorNode]]
+===== Invalid anchor node
+A <<singleChunkType>> doesn't have exactly one <<anchorNode>>, or the anchor node's id or parent is invalid.
+
+.Technical name
+`invalidAnchorNode`

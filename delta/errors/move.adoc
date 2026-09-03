@@ -1,151 +1,5 @@
-[[errors]]
-=== Errors
-Commonly used errors, referred to by their _technical name_ as <<errorCodeType>>.
-
-[[err-invalidParticipation]]
-==== Invalid participation
-The <<participation>> the <<client>> uses to communicate with the repository is not valid.
-
-Possible reasons:
-
-* The participation never has been valid.
-* The client <<qry-SignOff, signed off>>.
-* The client <<participation, disconnected>>.
-
-.Technical name
-`invalidParticipation`
-
-
-[[err-nodeAlreadyExists]]
-==== Node already exists
-Client tries to create a node with an id that already exists.
-
-.Technical name
-`nodeAlreadyExists`
-
-
-[[err-unknownNode]]
-==== Unknown node
-Client tries to operate on a node unknown to the repository.
-
-See also <<move-error-overview>>.
-
-.Technical name
-`unknownNode`
-
-
-[[err-unknownIndex]]
-==== Unknown index
-Client tries to operate on an index beyond the number of existing elements.
-
-See also <<move-error-overview>>.
-
-.Technical name
-`unknownIndex`
-
-
-[[err-indexEntryMismatch]]
-==== Entry at index is not the given entry
-Client provided an entry (either a node or a target/resolveInfo) and an index, but the entry is not at the given index.
-
-See also <<move-error-overview>>.
-
-.Technical name
-`indexEntryMismatch`
-
-
-[[err-invalidIndexOffset]]
-==== Index offset is invalid
-Client provided an index offset which is either 0, or an integer such that a given “old” index + the index offset is not a valid index (in the list that’s the subject of the action triggering this error).
-
-See also <<move-error-overview>>.
-
-.Technical name
-`invalidIndexOffset`
-
-[[err-unknownParentNode]]
-==== The parent of a node does not exist 
-Client provided a node with a parent, but the parent node does not exist.
-
-.Technical name
-`unknownParentNode`
-
-
-[[err-parentMismatch]]
-==== The given parent of a node is not its parent 
-Client provided an existing node N with a parent id in its parent property, but the node with this parent-id
-does not have the existing node N as a child (annotation or containment).
-
-See also <<move-error-overview>>.
-
-.Technical name
-`parentMismatch`
-
-
-[[err-moveWithoutParent]]
-==== Move without parent
-Client tries to move a node that doesn't have a parent.
-
-.Technical name
-`moveWithoutParent`
-
-
-[[err-invalidMove]]
-==== Invalid move
-Client tries to move a node incompatible with the emitted command.
-
-See also <<move-error-overview>>.
-
-.Technical name
-`invalidMove`
-
-
-[[err-undefinedReferenceTarget]]
-==== Undefined reference target
-Client tries to set a reference with neither `target` nor `resolveInfo`
-
-.Technical name
-`undefinedReferenceTarget`
-
-[[err-mixedInformAboutAndSubscribeToChangingPartitions]]
-==== Mixed Inform about / Subscribe to Changing Partitions
-Client already <<qry-SubscribeToChangingPartitions, subscribed to changing partitions>>, and now requests to be <<qry-InformAboutChangingPartitions, informed about changing partitions>> -- or vice versa.
-
-.Technical name
-`mixedInformAboutAndSubscribeToChangingPartitions`
-
-[[err-invalidAnchorNode]]
-==== Invalid anchor node
-A <<singleChunkType>> doesn't have exactly one <<anchorNode>>, or the anchor node's id or parent is invalid.
-
-.Technical name
-`invalidAnchorNode`
-
-[[err-featureAlreadySet]]
-==== Feature already set
-A <<{m3}.adoc#Feature, Feature>> has already been set to a value, and cannot be set new with this command.
-Use a _change_ or _replace_ command instead.
-
-.Technical name
-`featureAlreadySet`
-
-[[err-featureNotSet]]
-==== Feature not set
-A <<{m3}.adoc#Feature, Feature>> has no value, and cannot be changed with this command.
-Use an _add_ or _set_ command instead.
-
-.Technical name
-`featureNotSet`
-
-[[err-featureUnchanged]]
-==== Feature unchanged
-The new and old value of a <<{m3}.adoc#Feature, Feature>> are the same.{fn-org511}
-
-.Technical name
-`featureUnchanged`
-
-[[move-error-overview]]
-==== Overview of move errors
+[[errors-move]]
+==== Move errors
 
 _MoveChild_ commands include:
 
@@ -230,3 +84,44 @@ If we're trying to move a node in an invalid way, we report the following errors
 |<<cmd-MoveAndReplaceChildInSameContainment>> 2+|<<err-invalidMove>> |<<err-indexEntryMismatch>> |_n/a_ |✓
 |<<cmd-MoveAndReplaceAnnotationInSameParent>> 2+|<<err-invalidMove>> |_n/a_ |_n/a_ |✓
 |===
+
+
+[[err-invalidMove]]
+===== Invalid move
+Client tries to move a node incompatible with the emitted command.
+
+.Technical name
+`invalidMove`
+
+
+[[err-parentMismatch]]
+===== The given parent of a node is not its parent
+Client provided an existing node N with a parent id in its parent property, but the node with this parent-id
+does not have the existing node N as a child (annotation or containment).
+
+.Technical name
+`parentMismatch`
+
+
+[[err-indexEntryMismatch]]
+===== Entry at index is not the given entry
+Client provided an entry (either a node or a target/resolveInfo) and an index, but the entry is not at the given index.
+
+.Technical name
+`indexEntryMismatch`
+
+
+[[err-invalidIndexOffset]]
+===== Index offset is invalid
+Client provided an index offset which is either 0, or an integer such that a given “old” index + the index offset is not a valid index (in the list that’s the subject of the action triggering this error).
+
+.Technical name
+`invalidIndexOffset`
+
+
+[[err-moveWithoutParent]]
+===== Move without parent
+Client tries to move a node that doesn't have a parent.
+
+.Technical name
+`moveWithoutParent`

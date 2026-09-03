@@ -1,0 +1,61 @@
+[[errors-generic]]
+==== Generic errors
+
+[[err-invalidParticipation]]
+===== Invalid participation
+The <<participation>> the <<client>> uses to communicate with the repository is not valid.
+
+Possible reasons:
+
+* The participation never has been valid.
+* The client <<qry-SignOff, signed off>>.
+* The client <<participation, disconnected>>.
+
+.Technical name
+`invalidParticipation`
+
+
+[[err-unknownNode]]
+===== Unknown node
+Client tries to operate on a node unknown to the repository.
+
+See also <<errors-move>>.
+
+.Technical name
+`unknownNode`
+
+
+[[err-unknownIndex]]
+===== Unknown index
+Client tries to operate on an index beyond the number of existing elements.
+
+See also <<errors-move>>.
+
+.Technical name
+`unknownIndex`
+
+
+[[err-featureAlreadySet]]
+===== Feature already set
+A <<{m3}.adoc#Feature, Feature>> has already been set to a value, and cannot be set new with this command.
+Use a _change_ or _replace_ command instead.
+
+.Technical name
+`featureAlreadySet`
+
+
+[[err-featureNotSet]]
+===== Feature not set
+A <<{m3}.adoc#Feature, Feature>> has no value, and cannot be changed with this command.
+Use an _add_ or _set_ command instead.
+
+.Technical name
+`featureNotSet`
+
+
+[[err-featureUnchanged]]
+===== Feature unchanged
+The new and old value of a <<{m3}.adoc#Feature, Feature>> are the same.{fn-org511}
+
+.Technical name
+`featureUnchanged`

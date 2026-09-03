@@ -1,0 +1,26 @@
+[[errors]]
+=== Errors
+Commonly used errors, referred to by their _technical name_ as <<errorCodeType>>.
+
+include::generic.adoc[]
+
+include::newNode.adoc[]
+
+include::move.adoc[]
+
+include::reference.adoc[]
+
+include::subscription.adoc[]
+
+include::splittable.adoc[]
+
+==== Not sure yet
+
+#TODO#
+
+[[err-unknownParentNode]]
+===== The parent of a node does not exist
+Client provided a node with a parent, but the parent node does not exist.
+
+.Technical name
+`unknownParentNode`
