@@ -1,0 +1,36 @@
+[[errors-create-node]]
+==== Create node errors
+
+Reported by all <<group-create-node>> commands.
+
+[[err-nodeAlreadyExists]]
+===== Node already exists
+Client tries to create a node with an id that already exists.
+
+.Technical name
+`nodeAlreadyExists`
+
+
+[[err-invalidAnchorNode]]
+===== Invalid anchor node
+A <<singleChunkType>> doesn't have exactly one <<anchorNode>>, or the anchor node's id or parent is invalid.
+
+.Technical name
+`invalidAnchorNode`
+
+
+[[err-parentContainmentMismatch]]
+===== Parent / containment mismatch
+A parent node `P` has a child (containment or annotation) node `C`, but `C` doesn't mention `P` as parent.
+
+.Technical name
+`parentContainmentMismatch`
+
+
+[[err-circularContainment]]
+===== Circular containment
+A parent node `P` contains a child (containment or annotation) node `C`, that directly or indirectly contains `P`.
+Includes the edge case `P` contains `P`.
+
+.Technical name
+`circularContainment`
