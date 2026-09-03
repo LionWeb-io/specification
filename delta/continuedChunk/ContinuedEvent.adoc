@@ -31,3 +31,12 @@ The client MUST reject any differences as an error.
 [[ContinuedEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
 
 [[ContinuedEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+
+.Errors
+* <<splitMessageAlreadyCompleted>>
+* <<multipleContinuedChunksCompleted>>
+* <<duplicateContinuedChunk>>
+* <<unknownSplittableMessageInContinuedChunk>>
+* <<invalidSplittableMessageInContinuedChunk>>
+* <<interruptedContinuedChunk>>
+* <<err-invalidParticipation>>
