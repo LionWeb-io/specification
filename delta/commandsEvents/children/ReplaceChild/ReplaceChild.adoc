@@ -44,8 +44,10 @@ of the node we want to replace in <<ReplaceChild.containment>> of <<ReplaceChild
 
 .Errors
 * <<err-unknownNode>> for <<ReplaceChild.parent>>
-* <<err-nodeAlreadyExists>> for <<ReplaceChild.newChild>>
 * <<err-invalidAnchorNode>> for <<ReplaceChild.newChild>>
+* <<err-nodeAlreadyExists>> for <<ReplaceChild.newChild>>
+* <<err-parentContainmentMismatch>> for <<ReplaceChild.newChild>>
+* <<err-circularContainment>> for <<ReplaceChild.newChild>>
 * <<err-parentMismatch>> for <<ReplaceChild.parent>> and <<ReplaceChild.replacedChild>>
 * <<err-indexEntryMismatch>> for <<ReplaceChild.containment>>/<<ReplaceChild.index>> and <<ReplaceChild.replacedChild>>
 * <<err-invalidParticipation>>

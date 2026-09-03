@@ -34,8 +34,10 @@ Id of this command.
 [[AddPartition.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-nodeAlreadyExists>> for <<AddPartition.newPartition>>
 * <<err-invalidAnchorNode>> for <<AddPartition.newPartition>>
+* <<err-nodeAlreadyExists>> for <<AddPartition.newPartition>>
+* <<err-parentContainmentMismatch>> for <<AddPartition.newPartition>>
+* <<err-circularContainment>> for <<AddPartition.newPartition>>
 * <<err-invalidParticipation>>
 
 .Related event

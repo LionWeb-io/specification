@@ -38,8 +38,10 @@ where we want to add <<AddChild.newChild>> at in <<AddChild.containment>> of <<A
 
 .Errors
 * <<err-unknownNode>> for <<AddChild.parent>>
-* <<err-nodeAlreadyExists>> for <<AddChild.newChild>>
 * <<err-invalidAnchorNode>> for <<AddChild.newChild>>
+* <<err-nodeAlreadyExists>> for <<AddChild.newChild>>
+* <<err-parentContainmentMismatch>> for <<AddChild.newChild>>
+* <<err-circularContainment>> for <<AddChild.newChild>>
 * <<err-unknownIndex>> for <<AddChild.index>> (is beyond the number of <<AddChild.containment>> entries in <<AddChild.parent>>)
 * <<err-invalidParticipation>>
 

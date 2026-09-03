@@ -37,8 +37,11 @@ All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 [[ReplaceAnnotation.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* <<err-nodeAlreadyExists>> for <<ReplaceAnnotation.newAnnotation>>
 * <<err-unknownNode>> for <<ReplaceAnnotation.parent>>
+* <<err-invalidAnchorNode>> for <<ReplaceAnnotation.newAnnotation>>
+* <<err-nodeAlreadyExists>> for <<ReplaceAnnotation.newAnnotation>>
+* <<err-parentContainmentMismatch>> for <<ReplaceAnnotation.newAnnotation>>
+* <<err-circularContainment>> for <<ReplaceAnnotation.newAnnotation>>
 * <<err-unknownIndex>> for <<ReplaceAnnotation.index>> (is beyond (the number of annotations of <<ReplaceAnnotation.parent>>) - 1)
 * <<err-indexEntryMismatch>> for <<ReplaceAnnotation.index>> and <<ReplaceAnnotation.replacedAnnotation>>
 * <<err-invalidParticipation>>

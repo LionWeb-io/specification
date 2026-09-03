@@ -33,7 +33,10 @@ All nodes in that subtree MUST be <<new-nodes>>.
 
 .Errors
 * <<err-unknownNode>> for <<AddAnnotation.parent>>
+* <<err-invalidAnchorNode>> for <<AddAnnotation.newAnnotation>>
 * <<err-nodeAlreadyExists>> for <<AddAnnotation.newAnnotation>>
+* <<err-parentContainmentMismatch>> for <<AddAnnotation.newAnnotation>>
+* <<err-circularContainment>> for <<AddAnnotation.newAnnotation>>
 * <<err-unknownIndex>> for <<AddAnnotation.index>> (is beyond the number of annotations of <<AddAnnotation.parent>>)
 * <<err-invalidParticipation>>
 
