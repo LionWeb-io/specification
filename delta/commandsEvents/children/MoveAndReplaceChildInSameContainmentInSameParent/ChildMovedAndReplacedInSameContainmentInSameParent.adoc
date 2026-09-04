@@ -1,0 +1,45 @@
+[[evnt-ChildMovedAndReplacedInSameContainment]]
+[[evnt-ChildMovedAndReplacedInSameContainmentInSameParent]]
+===== Child moved in same containment in same parent and replaced existing child
+<<existing-nodes, Existing node>> <<ChildMovedAndReplacedInSameContainmentInSameParent.movedChild>>
+that was initially at index <<ChildMovedAndReplacedInSameContainmentInSameParent.oldIndex>>
+within the <<ChildMovedAndReplacedInSameContainmentInSameParent.containment>> inside <<ChildMovedAndReplacedInSameContainmentInSameParent.parent>>
+was moved by <<ChildMovedAndReplacedInSameContainmentInSameParent.indexOffset>> positions
+to index (<<ChildMovedAndReplacedInSameContainmentInSameParent.oldIndex>> + <<ChildMovedAndReplacedInSameContainmentInSameParent.indexOffset>>),
+replacing <<existing-nodes, current child>> <<ChildMovedAndReplacedInSameContainmentInSameParent.replacedChild>>{fn-org371} at the target index.{fn-org469}
+<<ChildMovedAndReplacedInSameContainmentInSameParent.replacedChild>> subsequently gets deleted, including all its descendants (including annotation instances).
+This does NOT change references to any of the deleted nodes.{fn-org285}
+
+This conforms to <<movingAndReplacingNodes, the action of moving a node and replacing another one in one specific list>> — see that section for more information, diagrams, and examples.
+
+.Technical name
+`ChildMovedAndReplacedInSameContainmentInSameParent`{fn-org514}
+
+[horizontal]
+.Parameters
+[[ChildMovedAndReplacedInSameContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[ChildMovedAndReplacedInSameContainmentInSameParent.containment, `containment`]]containment:: <<metaPointerType>>
+
+[[ChildMovedAndReplacedInSameContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[ChildMovedAndReplacedInSameContainmentInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
+MUST NOT be 0. +
+(<<ChildMovedAndReplacedInSameContainmentInSameParent.oldIndex>> + <<ChildMovedAndReplacedInSameContainmentInSameParent.indexOffset>>)
+MUST NOT be < 0,
+or >= (the number of children inside <<ChildMovedAndReplacedInSameContainmentInSameParent.parent>>'s <<ChildMovedAndReplacedInSameContainmentInSameParent.containment>>).
+
+[[ChildMovedAndReplacedInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+
+[[ChildMovedAndReplacedInSameContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+
+[[ChildMovedAndReplacedInSameContainmentInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+
+[[ChildMovedAndReplacedInSameContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ChildMovedAndReplacedInSameContainmentInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ChildMovedAndReplacedInSameContainmentInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+
+.Related command
+<<cmd-MoveAndReplaceChildInSameContainmentInSameParent>>

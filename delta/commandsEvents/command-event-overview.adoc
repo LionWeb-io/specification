@@ -147,7 +147,7 @@ include::children/MoveAndReplaceChildFromOtherContainmentInSameParent/MoveAndRep
 |
 <<cmd-MoveAndReplaceChildInSameContainmentInSameParent>>
 
-<<evnt-ChildMovedAndReplacedInSameContainment>>
+<<evnt-ChildMovedAndReplacedInSameContainmentInSameParent>>
 
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
 inside ``parent``'s `containment`, replacing `replacedChild` that was previously inside ``parent``'s `containment` at (`oldIndex` + `indexOffset`).

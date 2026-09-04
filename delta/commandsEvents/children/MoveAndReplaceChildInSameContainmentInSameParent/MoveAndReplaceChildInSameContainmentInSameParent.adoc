@@ -53,4 +53,4 @@ if <<MoveAndReplaceChildInSameContainmentInSameParent.replacedChild>> is not at 
 * <<err-invalidParticipation>>
 
 .Related event
-<<evnt-ChildMovedAndReplacedInSameContainment>>
+<<evnt-ChildMovedAndReplacedInSameContainmentInSameParent>>

@@ -2290,7 +2290,7 @@
           "$ref": "#/$defs/ChildMovedAndReplacedFromOtherContainmentInSameParent"
         },
         {
-          "$ref": "#/$defs/ChildMovedAndReplacedInSameContainment"
+          "$ref": "#/$defs/ChildMovedAndReplacedInSameContainmentInSameParent"
         },
         {
           "$ref": "#/$defs/AnnotationAdded"
@@ -2959,10 +2959,10 @@
       "minProperties": 12,
       "maxProperties": 12
     },
-    "ChildMovedAndReplacedInSameContainment": {
+    "ChildMovedAndReplacedInSameContainmentInSameParent": {
       "properties": {
         "messageKind": {
-          "const": "ChildMovedAndReplacedInSameContainment"
+          "const": "ChildMovedAndReplacedInSameContainmentInSameParent"
         },
         "movedChild": {
           "$ref": "#/$defs/targetNode"
