@@ -32,7 +32,7 @@ Finally, we have an _index offset_ `indexOffset`, which MUST be an integer unequ
 ==== Moving a node (without replacing)
 
 This pertains to the following commands and events:
-<<cmd-MoveChildInSameContainment>>, <<cmd-MoveAnnotationInSameParent>>, <<evnt-ChildMovedInSameContainment>>, <<evnt-AnnotationMovedInSameParent>>.
+<<cmd-MoveChildInSameContainmentInSameParent>>, <<cmd-MoveAnnotationInSameParent>>, <<evnt-ChildMovedInSameContainmentInSameParent>>, <<evnt-AnnotationMovedInSameParent>>.
 
 Set `newIndex` = (`oldIndex` + `indexOffset`), which in this scenario is also the _target index_.
 The result of moving the node that’s initially at index `oldIndex` by `indexOffset` positions is that that node has been moved `indexOffset` positions up (if `indexOffset` > 0), or (-`indexOffset`) positions down (if `indexOffset` < 0).
@@ -75,7 +75,7 @@ If `indexOffset` < 0, then the nodes with initial indices in [`newIndex`..(`oldI
 ==== Moving a node and replacing another node
 
 This pertains to the following commands and events:
-<<cmd-MoveAndReplaceChildInSameContainment>>, <<cmd-MoveAndReplaceAnnotationInSameParent>>, <<evnt-ChildMovedAndReplacedInSameContainment>>, <<evnt-AnnotationMovedAndReplacedInSameParent>>.
+<<cmd-MoveAndReplaceChildInSameContainmentInSameParent>>, <<cmd-MoveAndReplaceAnnotationInSameParent>>, <<evnt-ChildMovedAndReplacedInSameContainmentInSameParent>>, <<evnt-AnnotationMovedAndReplacedInSameParent>>.
 
 We describe this scenario as a two-step process:
 

@@ -8,15 +8,15 @@ include::DeleteChild/DeleteChild.adoc[]
 include::ReplaceChild/ReplaceChild.adoc[]
 
 
-include::MoveChildFromOtherContainment/MoveChildFromOtherContainment.adoc[]
+include::MoveChildFromContainmentInOtherParent/MoveChildFromContainmentInOtherParent.adoc[]
 
 include::MoveChildFromOtherContainmentInSameParent/MoveChildFromOtherContainmentInSameParent.adoc[]
 
-include::MoveChildInSameContainment/MoveChildInSameContainment.adoc[]
+include::MoveChildInSameContainmentInSameParent/MoveChildInSameContainmentInSameParent.adoc[]
 
 
-include::MoveAndReplaceChildFromOtherContainment/MoveAndReplaceChildFromOtherContainment.adoc[]
+include::MoveAndReplaceChildFromContainmentInOtherParent/MoveAndReplaceChildFromContainmentInOtherParent.adoc[]
 
 include::MoveAndReplaceChildFromOtherContainmentInSameParent/MoveAndReplaceChildFromOtherContainmentInSameParent.adoc[]
 
-include::MoveAndReplaceChildInSameContainment/MoveAndReplaceChildInSameContainment.adoc[]
+include::MoveAndReplaceChildInSameContainmentInSameParent/MoveAndReplaceChildInSameContainmentInSameParent.adoc[]

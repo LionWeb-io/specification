@@ -99,13 +99,13 @@ Delete `replacedChild`.
 include::children/ReplaceChild/ReplaceChild-diagram.adoc[]
 
 |
-<<cmd-MoveChildFromOtherContainment>>
+<<cmd-MoveChildFromContainmentInOtherParent>>
 
-<<evnt-ChildMovedFromOtherContainment>>
+<<evnt-ChildMovedFromContainmentInOtherParent>>
 
 Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
 inside ``newParent``'s `newContainment` at `newIndex`.
-include::children/MoveChildFromOtherContainment/MoveChildFromOtherContainment-diagram.adoc[]
+include::children/MoveChildFromContainmentInOtherParent/MoveChildFromContainmentInOtherParent-diagram.adoc[]
 |
 
 <<cmd-MoveChildFromOtherContainmentInSameParent>>
@@ -117,9 +117,9 @@ inside ``parent``'s `newContainment` at `newIndex`.
 include::children/MoveChildFromOtherContainmentInSameParent/MoveChildFromOtherContainmentInSameParent-diagram.adoc[]
 
 |
-<<cmd-MoveChildInSameContainment>>
+<<cmd-MoveChildInSameContainmentInSameParent>>
 
-<<evnt-ChildMovedInSameContainment>>
+<<evnt-ChildMovedInSameContainmentInSameParent>>
 
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
 inside ``parent``'s `containment` to (`oldIndex` + `indexOffset`).
@@ -127,13 +127,13 @@ inside ``parent``'s `containment` to (`oldIndex` + `indexOffset`).
 include::../description/moving/moving-diagram-offset-positive.adoc[]
 
 |
-<<cmd-MoveAndReplaceChildFromOtherContainment>>
+<<cmd-MoveAndReplaceChildFromContainmentInOtherParent>>
 
-<<evnt-ChildMovedAndReplacedFromOtherContainment>>
+<<evnt-ChildMovedAndReplacedFromContainmentInOtherParent>>
 
 Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
 inside ``newParent``'s `newContainment` at `newIndex`, replacing `replacedChild` that was previously inside ``newParent``'s `newContainment` at `newIndex`.
-include::children/MoveAndReplaceChildFromOtherContainment/MoveAndReplaceChildFromOtherContainment-diagram.adoc[]
+include::children/MoveAndReplaceChildFromContainmentInOtherParent/MoveAndReplaceChildFromContainmentInOtherParent-diagram.adoc[]
 |
 
 <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>
@@ -145,9 +145,9 @@ inside ``parent``'s `newContainment` at `newIndex`, replacing `replacedChild` th
 include::children/MoveAndReplaceChildFromOtherContainmentInSameParent/MoveAndReplaceChildFromOtherContainmentInSameParent-diagram.adoc[]
 
 |
-<<cmd-MoveAndReplaceChildInSameContainment>>
+<<cmd-MoveAndReplaceChildInSameContainmentInSameParent>>
 
-<<evnt-ChildMovedAndReplacedInSameContainment>>
+<<evnt-ChildMovedAndReplacedInSameContainmentInSameParent>>
 
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
 inside ``parent``'s `containment`, replacing `replacedChild` that was previously inside ``parent``'s `containment` at (`oldIndex` + `indexOffset`).
