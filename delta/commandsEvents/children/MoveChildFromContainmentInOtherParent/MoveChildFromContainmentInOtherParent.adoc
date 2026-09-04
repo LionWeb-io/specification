@@ -1,0 +1,53 @@
+[[cmd-MoveChildFromOtherContainment]]
+[[cmd-MoveChildFromContainmentInOtherParent]]
+===== Move child from containment in other parent
+Move <<existing-nodes, existing node>> <<MoveChildFromContainmentInOtherParent.movedChild>>
+from <<MoveChildFromContainmentInOtherParent.oldContainment>> at <<MoveChildFromContainmentInOtherParent.oldIndex>>
+in <<MoveChildFromContainmentInOtherParent.oldParent>>
+to <<MoveChildFromContainmentInOtherParent.newParent>>'s <<MoveChildFromContainmentInOtherParent.newContainment>> at <<MoveChildFromContainmentInOtherParent.newIndex>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::MoveChildFromContainmentInOtherParent-diagram.adoc[]
+|===
+
+.Technical name
+`MoveChildFromContainmentInOtherParent`{fn-org513}
+
+[horizontal]
+.Parameters
+[[MoveChildFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+
+[[MoveChildFromContainmentInOtherParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
+
+[[MoveChildFromContainmentInOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[MoveChildFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+
+[[MoveChildFromContainmentInOtherParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+
+[[MoveChildFromContainmentInOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[MoveChildFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+
+[[MoveChildFromContainmentInOtherParent.commandId]]commandId:: <<commandIdType>>
+
+[[MoveChildFromContainmentInOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+
+.Errors
+* <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.oldParent>>
+* <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.newParent>>
+* <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.movedChild>>
+* <<err-parentMismatch>> The node <<MoveChildFromContainmentInOtherParent.oldParent>> does not have
+<<MoveChildFromContainmentInOtherParent.movedChild>> as child.
+* <<err-indexEntryMismatch>> for <<MoveChildFromContainmentInOtherParent.oldContainment>>/<<MoveChildFromContainmentInOtherParent.oldIndex>> and
+<<MoveChildFromContainmentInOtherParent.movedChild>>
+* <<err-unknownIndex>> for <<MoveChildFromContainmentInOtherParent.newIndex>> (is beyond the number of <<MoveChildFromContainmentInOtherParent.newContainment>> entries in <<MoveChildFromContainmentInOtherParent.newParent>>)
+* <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.movedChild>>
+* ##?## <<MoveChildFromContainmentInOtherParent.movedChild>> is already a child of <<MoveChildFromContainmentInOtherParent.newParent>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ChildMovedFromOtherContainment>>

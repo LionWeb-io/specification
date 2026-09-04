@@ -1,5 +1,5 @@
 |
-[plantuml,moveChildFromOtherContainment-before,svg]
+[plantuml,moveChildFromContainmentInOtherParent-before,svg]
 ----
 !include commandEventOverviewStyle.puml
 
@@ -30,7 +30,7 @@ newParent *-[hidden]-> dummy #Blue: new\nContainment\n[newIndex]
 newParent *--> newNextSibling: new\nContainment\n[newIndex]
 ----
 |
-[plantuml, moveChildFromOtherContainment-after, svg]
+[plantuml, moveChildFromContainmentInOtherParent-after, svg]
 ----
 !include commandEventOverviewStyle.puml
 

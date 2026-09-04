@@ -33,4 +33,4 @@ All other children inside <<ChildMovedFromOtherContainment.newParent>>'s <<Child
 [[ChildMovedFromOtherContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
-<<cmd-MoveChildFromOtherContainment>>
+<<cmd-MoveChildFromContainmentInOtherParent>>

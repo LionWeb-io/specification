@@ -99,13 +99,13 @@ Delete `replacedChild`.
 include::children/ReplaceChild/ReplaceChild-diagram.adoc[]
 
 |
-<<cmd-MoveChildFromOtherContainment>>
+<<cmd-MoveChildFromContainmentInOtherParent>>
 
 <<evnt-ChildMovedFromOtherContainment>>
 
 Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
 inside ``newParent``'s `newContainment` at `newIndex`.
-include::children/MoveChildFromOtherContainment/MoveChildFromOtherContainment-diagram.adoc[]
+include::children/MoveChildFromContainmentInOtherParent/MoveChildFromContainmentInOtherParent-diagram.adoc[]
 |
 
 <<cmd-MoveChildFromOtherContainmentInSameParent>>

@@ -1123,7 +1123,7 @@
           "$ref": "#/$defs/ReplaceChild"
         },
         {
-          "$ref": "#/$defs/MoveChildFromOtherContainment"
+          "$ref": "#/$defs/MoveChildFromContainmentInOtherParent"
         },
         {
           "$ref": "#/$defs/MoveChildFromOtherContainmentInSameParent"
@@ -1476,10 +1476,10 @@
       "minProperties": 8,
       "maxProperties": 9
     },
-    "MoveChildFromOtherContainment": {
+    "MoveChildFromContainmentInOtherParent": {
       "properties": {
         "messageKind": {
-          "const": "MoveChildFromOtherContainment"
+          "const": "MoveChildFromContainmentInOtherParent"
         },
         "newParent": {
           "$ref": "#/$defs/targetNode"

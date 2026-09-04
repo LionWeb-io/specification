@@ -8,7 +8,7 @@ include::DeleteChild/DeleteChild.adoc[]
 include::ReplaceChild/ReplaceChild.adoc[]
 
 
-include::MoveChildFromOtherContainment/MoveChildFromOtherContainment.adoc[]
+include::MoveChildFromContainmentInOtherParent/MoveChildFromContainmentInOtherParent.adoc[]
 
 include::MoveChildFromOtherContainmentInSameParent/MoveChildFromOtherContainmentInSameParent.adoc[]
 
