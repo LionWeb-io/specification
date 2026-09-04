@@ -124,7 +124,7 @@ include::children/MoveChildFromOtherContainmentInSameParent/MoveChildFromOtherCo
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
 inside ``parent``'s `containment` to (`oldIndex` + `indexOffset`).
 (Showing diagram for `indexOffset` positive.)
-include::../moving/moving-diagram-offset-positive.adoc[]
+include::../description/moving/moving-diagram-offset-positive.adoc[]
 
 |
 <<cmd-MoveAndReplaceChildFromOtherContainment>>
@@ -152,7 +152,7 @@ include::children/MoveAndReplaceChildFromOtherContainmentInSameParent/MoveAndRep
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
 inside ``parent``'s `containment`, replacing `replacedChild` that was previously inside ``parent``'s `containment` at (`oldIndex` + `indexOffset`).
 (Showing diagram for `indexOffset` negative.)
-include::../moving/moving-and-replacing-diagram-offset-negative.adoc[]
+include::../description/moving/moving-and-replacing-diagram-offset-negative.adoc[]
 
 |===
 
@@ -203,7 +203,7 @@ include::annotations/MoveAnnotationFromOtherParent/MoveAnnotationFromOtherParent
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
 inside ``parent``'s annotations to (`oldIndex` + `indexOffset`).
 (Showing diagram for `indexOffset` positive.)
-include::../moving/moving-diagram-offset-positive.adoc[]
+include::../description/moving/moving-diagram-offset-positive.adoc[]
 
 |
 <<cmd-MoveAndReplaceAnnotationFromOtherParent>>
@@ -222,7 +222,7 @@ include::annotations/MoveAndReplaceAnnotationFromOtherParent/MoveAndReplaceAnnot
 Move existing node `movedAnnotation` (currently inside ``parent``'s annotations at `oldIndex`)
 inside ``parent``'s annotations at `newIndex`, replacing `replacedAnnotation` that was previously inside ``parent``'s annotations at (`oldIndex` + `indexOffset`).
 (Showing diagram for `indexOffset` negative.)
-include::../moving/moving-and-replacing-diagram-offset-negative.adoc[]
+include::../description/moving/moving-and-replacing-diagram-offset-negative.adoc[]
 
 |===
 
