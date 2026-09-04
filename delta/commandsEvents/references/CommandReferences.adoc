@@ -1,8 +1,0 @@
-[[cmd-references]]
-==== References
-
-include::AddReference/AddReference.adoc[]
-
-include::DeleteReference/DeleteReference.adoc[]
-
-include::ChangeReference/ChangeReference.adoc[]

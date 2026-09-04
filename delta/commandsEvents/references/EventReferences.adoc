@@ -1,8 +1,0 @@
-[[evnt-references]]
-==== References
-
-include::AddReference/ReferenceAdded.adoc[]
-
-include::DeleteReference/ReferenceDeleted.adoc[]
-
-include::ChangeReference/ReferenceChanged.adoc[]
