@@ -75,7 +75,7 @@ If `indexOffset` < 0, then the nodes with initial indices in [`newIndex`..(`oldI
 ==== Moving a node and replacing another node
 
 This pertains to the following commands and events:
-<<cmd-MoveAndReplaceChildInSameContainment>>, <<cmd-MoveAndReplaceAnnotationInSameParent>>, <<evnt-ChildMovedAndReplacedInSameContainment>>, <<evnt-AnnotationMovedAndReplacedInSameParent>>.
+<<cmd-MoveAndReplaceChildInSameContainmentInSameParent>>, <<cmd-MoveAndReplaceAnnotationInSameParent>>, <<evnt-ChildMovedAndReplacedInSameContainment>>, <<evnt-AnnotationMovedAndReplacedInSameParent>>.
 
 We describe this scenario as a two-step process:
 

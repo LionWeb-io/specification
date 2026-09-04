@@ -1138,7 +1138,7 @@
           "$ref": "#/$defs/MoveAndReplaceChildFromOtherContainmentInSameParent"
         },
         {
-          "$ref": "#/$defs/MoveAndReplaceChildInSameContainment"
+          "$ref": "#/$defs/MoveAndReplaceChildInSameContainmentInSameParent"
         },
         {
           "$ref": "#/$defs/AddAnnotation"
@@ -1713,10 +1713,10 @@
       "minProperties": 10,
       "maxProperties": 10
     },
-    "MoveAndReplaceChildInSameContainment": {
+    "MoveAndReplaceChildInSameContainmentInSameParent": {
       "properties": {
         "messageKind": {
-          "const": "MoveAndReplaceChildInSameContainment"
+          "const": "MoveAndReplaceChildInSameContainmentInSameParent"
         },
         "parent": {
           "$ref": "#/$defs/targetNode"

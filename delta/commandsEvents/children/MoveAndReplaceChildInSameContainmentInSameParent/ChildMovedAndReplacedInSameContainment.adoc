@@ -41,4 +41,4 @@ or >= (the number of children inside <<ChildMovedAndReplacedInSameContainment.pa
 [[ChildMovedAndReplacedInSameContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
-<<cmd-MoveAndReplaceChildInSameContainment>>
+<<cmd-MoveAndReplaceChildInSameContainmentInSameParent>>

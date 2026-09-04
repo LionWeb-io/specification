@@ -145,7 +145,7 @@ inside ``parent``'s `newContainment` at `newIndex`, replacing `replacedChild` th
 include::children/MoveAndReplaceChildFromOtherContainmentInSameParent/MoveAndReplaceChildFromOtherContainmentInSameParent-diagram.adoc[]
 
 |
-<<cmd-MoveAndReplaceChildInSameContainment>>
+<<cmd-MoveAndReplaceChildInSameContainmentInSameParent>>
 
 <<evnt-ChildMovedAndReplacedInSameContainment>>
 

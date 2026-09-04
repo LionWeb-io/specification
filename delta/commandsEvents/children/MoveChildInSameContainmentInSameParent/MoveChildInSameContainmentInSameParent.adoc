@@ -32,7 +32,7 @@ MUST NOT be 0.{fn-org482}
 .Errors
 * <<err-unknownNode>> for <<MoveChildInSameContainmentInSameParent.parent>>
 * <<err-unknownIndex>> for <<MoveChildInSameContainmentInSameParent.oldIndex>>
-is not an integer in the range [0..(the number of containment entries in <<MoveChildInSameContainmentInSameParent.containment>> of <<MoveAndReplaceChildInSameContainment.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
+is not an integer in the range [0..(the number of containment entries in <<MoveChildInSameContainmentInSameParent.containment>> of <<MoveAndReplaceChildInSameContainmentInSameParent.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
 * <<err-invalidIndexOffset>> for <<MoveChildInSameContainmentInSameParent.indexOffset>>
 if <<MoveChildInSameContainmentInSameParent.indexOffset>> equals 0, or if (<<MoveChildInSameContainmentInSameParent.oldIndex>> + <<MoveChildInSameContainmentInSameParent.indexOffset>>) is not in the range [0..(the number of containment entries in <<MoveChildInSameContainmentInSameParent.containment>> of <<MoveAnnotationInSameParent.parent>> - 1)]
 * <<err-unknownNode>> for <<MoveChildInSameContainmentInSameParent.movedChild>>
