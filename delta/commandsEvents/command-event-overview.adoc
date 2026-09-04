@@ -127,13 +127,13 @@ inside ``parent``'s `containment` to (`oldIndex` + `indexOffset`).
 include::../description/moving/moving-diagram-offset-positive.adoc[]
 
 |
-<<cmd-MoveAndReplaceChildFromOtherContainment>>
+<<cmd-MoveAndReplaceChildFromContainmentInOtherParent>>
 
 <<evnt-ChildMovedAndReplacedFromOtherContainment>>
 
 Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
 inside ``newParent``'s `newContainment` at `newIndex`, replacing `replacedChild` that was previously inside ``newParent``'s `newContainment` at `newIndex`.
-include::children/MoveAndReplaceChildFromOtherContainment/MoveAndReplaceChildFromOtherContainment-diagram.adoc[]
+include::children/MoveAndReplaceChildFromContainmentInOtherParent/MoveAndReplaceChildFromContainmentInOtherParent-diagram.adoc[]
 |
 
 <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>

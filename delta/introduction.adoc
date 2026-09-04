@@ -97,7 +97,7 @@ This table provides an overview of actions (rows) and element they apply to (col
 |
 
 |Move from other node and replace existing{fn-org321}
-|<<cmd-MoveAndReplaceChildFromOtherContainment>>
+|<<cmd-MoveAndReplaceChildFromContainmentInOtherParent>>
 |<<cmd-MoveAndReplaceAnnotationFromOtherParent>>
 |
 |

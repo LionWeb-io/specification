@@ -37,4 +37,4 @@ No other children inside <<ChildMovedAndReplacedFromOtherContainment.newParent>>
 [[ChildMovedAndReplacedFromOtherContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
-<<cmd-MoveAndReplaceChildFromOtherContainment>>
+<<cmd-MoveAndReplaceChildFromContainmentInOtherParent>>

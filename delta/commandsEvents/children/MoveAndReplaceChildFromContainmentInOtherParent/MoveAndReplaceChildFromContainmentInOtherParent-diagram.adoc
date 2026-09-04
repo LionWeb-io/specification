@@ -1,5 +1,5 @@
 |
-[plantuml,moveAndReplaceChildFromOtherContainment-before,svg]
+[plantuml,moveAndReplaceChildFromContainmentInOtherParent-before,svg]
 ----
 !include commandEventOverviewStyle.puml
 
@@ -33,7 +33,7 @@ newParent *--> replacedChild #Red: new\nContainment\n[newIndex]
 newParent *--> newNextSibling: new\nContainment\n[newIndex + 1]
 ----
 |
-[plantuml, moveAndReplaceChildFromOtherContainment-after, svg]
+[plantuml, moveAndReplaceChildFromContainmentInOtherParent-after, svg]
 ----
 !include commandEventOverviewStyle.puml
 

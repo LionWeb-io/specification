@@ -15,7 +15,7 @@ include::MoveChildFromOtherContainmentInSameParent/MoveChildFromOtherContainment
 include::MoveChildInSameContainment/MoveChildInSameContainment.adoc[]
 
 
-include::MoveAndReplaceChildFromOtherContainment/MoveAndReplaceChildFromOtherContainment.adoc[]
+include::MoveAndReplaceChildFromContainmentInOtherParent/MoveAndReplaceChildFromContainmentInOtherParent.adoc[]
 
 include::MoveAndReplaceChildFromOtherContainmentInSameParent/MoveAndReplaceChildFromOtherContainmentInSameParent.adoc[]
 
