@@ -86,7 +86,7 @@ They contain the parent, the id of the deleted node, and ids of all deleted desc
 [[group-move-or-replace]]
 ==== Move or replace messages
 All messages that move and/or replace a node.
-They contain the old and new parent (might be the same), and the moved node.
+They contain the old and new parent, and the moved node.
 
 * <<cmd-MoveChildFromOtherContainment>> / <<evnt-ChildMovedFromOtherContainment>>
 * <<cmd-MoveChildFromOtherContainmentInSameParent>> / <<evnt-ChildMovedFromOtherContainmentInSameParent>>
@@ -103,7 +103,7 @@ They contain the old and new parent (might be the same), and the moved node.
 [[group-move-only]]
 ==== Move-only messages
 All messages that move a node.
-They contain the old and new parent (might be the same), and the moved node.
+They contain the old and new parent, and the moved node.
 
 * <<cmd-MoveChildFromOtherContainment>> / <<evnt-ChildMovedFromOtherContainment>>
 * <<cmd-MoveChildFromOtherContainmentInSameParent>> / <<evnt-ChildMovedFromOtherContainmentInSameParent>>
@@ -115,7 +115,7 @@ They contain the old and new parent (might be the same), and the moved node.
 [[group-move-and-replace]]
 ==== Move and replace messages
 All messages that move and replace a node.
-They contain the old and new parent (might be the same), the moved node, and the replaced node.
+They contain the old and new parent, the moved node, and the replaced node.
 
 * <<cmd-MoveAndReplaceChildFromOtherContainment>> / <<evnt-ChildMovedAndReplacedFromOtherContainment>>
 * <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>> / <<evnt-ChildMovedAndReplacedFromOtherContainmentInSameParent>>
@@ -127,7 +127,7 @@ They contain the old and new parent (might be the same), the moved node, and the
 [[group-move-or-replace-child]]
 ==== Move or replace child messages
 All messages that move and/or replace a child node in a containment (_not_ an annotation).
-They contain the old and new parent (might be the same), the moved node, and the old and new containment (might be the same).
+They contain the old and new parent, the moved node, and the old and new containment.
 
 * <<cmd-MoveChildFromOtherContainment>> / <<evnt-ChildMovedFromOtherContainment>>
 * <<cmd-MoveChildFromOtherContainmentInSameParent>> / <<evnt-ChildMovedFromOtherContainmentInSameParent>>
@@ -140,7 +140,7 @@ They contain the old and new parent (might be the same), the moved node, and the
 [[group-move-or-replace-annotation]]
 ==== Move or replace annotation messages
 All messages that move and/or replace an annotation node (_not_ a child node in a containment).
-They contain the old and new parent (might be the same), and the moved node.
+They contain the old and new parent, and the moved node.
 
 * <<cmd-MoveAnnotationFromOtherParent>> / <<evnt-AnnotationMovedFromOtherParent>>
 * <<cmd-MoveAnnotationInSameParent>> / <<evnt-AnnotationMovedInSameParent>>
