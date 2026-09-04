@@ -43,4 +43,4 @@ if <<MoveChildInSameContainmentInSameParent.movedChild>> is not at index <<MoveC
 * <<err-invalidParticipation>>
 
 .Related event
-<<evnt-ChildMovedInSameContainment>>
+<<evnt-ChildMovedInSameContainmentInSameParent>>

@@ -119,7 +119,7 @@ include::children/MoveChildFromOtherContainmentInSameParent/MoveChildFromOtherCo
 |
 <<cmd-MoveChildInSameContainmentInSameParent>>
 
-<<evnt-ChildMovedInSameContainment>>
+<<evnt-ChildMovedInSameContainmentInSameParent>>
 
 Move existing node `movedChild` (currently inside ``parent``'s `containment` at `oldIndex`)
 inside ``parent``'s `containment` to (`oldIndex` + `indexOffset`).
