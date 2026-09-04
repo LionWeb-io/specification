@@ -90,7 +90,7 @@ This table provides an overview of actions (rows) and element they apply to (col
 |
 
 |Move in same feature in same node
-|<<cmd-MoveChildInSameContainment>>
+|<<cmd-MoveChildInSameContainmentInSameParent>>
 |<<cmd-MoveAnnotationInSameParent>>
 |
 |

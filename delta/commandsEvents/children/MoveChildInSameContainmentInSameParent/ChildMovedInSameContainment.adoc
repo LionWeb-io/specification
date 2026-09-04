@@ -31,4 +31,4 @@ MUST NOT be 0.{fn-org482}
 [[ChildMovedInSameContainment.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Related command
-<<cmd-MoveChildInSameContainment>>
+<<cmd-MoveChildInSameContainmentInSameParent>>

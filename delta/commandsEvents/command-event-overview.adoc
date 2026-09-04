@@ -117,7 +117,7 @@ inside ``parent``'s `newContainment` at `newIndex`.
 include::children/MoveChildFromOtherContainmentInSameParent/MoveChildFromOtherContainmentInSameParent-diagram.adoc[]
 
 |
-<<cmd-MoveChildInSameContainment>>
+<<cmd-MoveChildInSameContainmentInSameParent>>
 
 <<evnt-ChildMovedInSameContainment>>
 
