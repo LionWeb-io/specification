@@ -125,6 +125,8 @@ The `reference` value has preference over the `resolveInfo` value in the followi
 
 include::customMessages.adoc[]
 
+include::messageGroups.adoc[]
+
 include::errors.adoc[]
 
 include::queries/queries.adoc[]
