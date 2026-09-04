@@ -55,4 +55,4 @@ include::MoveAndReplaceChildFromContainmentInOtherParent-diagram.adoc[]
 * <<err-invalidParticipation>>
 
 .Related event
-<<evnt-ChildMovedAndReplacedFromOtherContainment>>
+<<evnt-ChildMovedAndReplacedFromContainmentInOtherParent>>

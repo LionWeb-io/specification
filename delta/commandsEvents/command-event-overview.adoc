@@ -129,7 +129,7 @@ include::../description/moving/moving-diagram-offset-positive.adoc[]
 |
 <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>>
 
-<<evnt-ChildMovedAndReplacedFromOtherContainment>>
+<<evnt-ChildMovedAndReplacedFromContainmentInOtherParent>>
 
 Move existing node `movedChild` (currently inside ``oldParent``'s `oldContainment` at `oldIndex`)
 inside ``newParent``'s `newContainment` at `newIndex`, replacing `replacedChild` that was previously inside ``newParent``'s `newContainment` at `newIndex`.

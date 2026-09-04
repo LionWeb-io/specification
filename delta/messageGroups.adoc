@@ -23,7 +23,7 @@ They contain the id of the removed node, and ids of all removed descendants.
 * <<cmd-DeletePartition>> / <<evnt-PartitionDeleted>>
 * <<cmd-DeleteChild>> / <<evnt-ChildDeleted>>
 * <<cmd-DeleteAnnotation>> / <<evnt-AnnotationDeleted>>
-* <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> / <<evnt-ChildMovedAndReplacedFromOtherContainment>>
+* <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> / <<evnt-ChildMovedAndReplacedFromContainmentInOtherParent>>
 * <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>> / <<evnt-ChildMovedAndReplacedFromOtherContainmentInSameParent>>
 * <<cmd-MoveAndReplaceChildInSameContainment>> / <<evnt-ChildMovedAndReplacedInSameContainment>>
 * <<cmd-MoveAndReplaceAnnotationFromOtherParent>> / <<evnt-AnnotationMovedAndReplacedFromOtherParent>>
@@ -91,7 +91,7 @@ They contain the old and new parent, and the moved node.
 * <<cmd-MoveChildFromContainmentInOtherParent>> / <<evnt-ChildMovedFromContainmentInOtherParent>>
 * <<cmd-MoveChildFromOtherContainmentInSameParent>> / <<evnt-ChildMovedFromOtherContainmentInSameParent>>
 * <<cmd-MoveChildInSameContainment>> / <<evnt-ChildMovedInSameContainment>>
-* <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> / <<evnt-ChildMovedAndReplacedFromOtherContainment>>
+* <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> / <<evnt-ChildMovedAndReplacedFromContainmentInOtherParent>>
 * <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>> / <<evnt-ChildMovedAndReplacedFromOtherContainmentInSameParent>>
 * <<cmd-MoveAndReplaceChildInSameContainment>> / <<evnt-ChildMovedAndReplacedInSameContainment>>
 * <<cmd-MoveAnnotationFromOtherParent>> / <<evnt-AnnotationMovedFromOtherParent>>
@@ -117,7 +117,7 @@ They contain the old and new parent, and the moved node.
 All messages that move and replace a node.
 They contain the old and new parent, the moved node, and the replaced node.
 
-* <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> / <<evnt-ChildMovedAndReplacedFromOtherContainment>>
+* <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> / <<evnt-ChildMovedAndReplacedFromContainmentInOtherParent>>
 * <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>> / <<evnt-ChildMovedAndReplacedFromOtherContainmentInSameParent>>
 * <<cmd-MoveAndReplaceChildInSameContainment>> / <<evnt-ChildMovedAndReplacedInSameContainment>>
 * <<cmd-MoveAndReplaceAnnotationFromOtherParent>> / <<evnt-AnnotationMovedAndReplacedFromOtherParent>>
@@ -132,7 +132,7 @@ They contain the old and new parent, the moved node, and the old and new contain
 * <<cmd-MoveChildFromContainmentInOtherParent>> / <<evnt-ChildMovedFromContainmentInOtherParent>>
 * <<cmd-MoveChildFromOtherContainmentInSameParent>> / <<evnt-ChildMovedFromOtherContainmentInSameParent>>
 * <<cmd-MoveChildInSameContainment>> / <<evnt-ChildMovedInSameContainment>>
-* <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> / <<evnt-ChildMovedAndReplacedFromOtherContainment>>
+* <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> / <<evnt-ChildMovedAndReplacedFromContainmentInOtherParent>>
 * <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>> / <<evnt-ChildMovedAndReplacedFromOtherContainmentInSameParent>>
 * <<cmd-MoveAndReplaceChildInSameContainment>> / <<evnt-ChildMovedAndReplacedInSameContainment>>
 
@@ -154,7 +154,7 @@ All messages that move and/or replace a node from another parent.
 They contain the old parent, the new parent, and the moved node.
 
 * <<cmd-MoveChildFromContainmentInOtherParent>> / <<evnt-ChildMovedFromContainmentInOtherParent>>
-* <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> / <<evnt-ChildMovedAndReplacedFromOtherContainment>>
+* <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> / <<evnt-ChildMovedAndReplacedFromContainmentInOtherParent>>
 * <<cmd-MoveAnnotationFromOtherParent>> / <<evnt-AnnotationMovedFromOtherParent>>
 * <<cmd-MoveAndReplaceAnnotationFromOtherParent>> / <<evnt-AnnotationMovedAndReplacedFromOtherParent>>
 
