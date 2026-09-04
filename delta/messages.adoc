@@ -5,6 +5,8 @@ include::parameters.adoc[]
 
 include::customMessages.adoc[]
 
+include::messageGroups.adoc[]
+
 include::errors.adoc[]
 
 include::queries/queries.adoc[]
