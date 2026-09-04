@@ -1,0 +1,100 @@
+[[errors-generic]]
+==== Generic errors
+
+[[err-invalidParticipation]]
+===== Invalid participation
+The <<participation>> the <<client>> uses to communicate with the repository is not valid.
+
+Possible reasons:
+
+* The participation never has been valid.
+* The client <<qry-SignOff, signed off>>.
+* The client <<participation, disconnected>>.
+
+.Technical name
+`invalidParticipation`
+
+
+[[err-unknownNode]]
+===== Unknown node
+Client tries to operate on a node unknown to the repository.
+
+See also <<errors-move>>.
+
+.Technical name
+`unknownNode`
+
+.Additional infos
+[horizontal]
+[[unknownNode.node]]node:: <<targetNodeType>>
+of the unknown node.
+
+
+[[err-unknownIndex]]
+===== Unknown index
+Client tries to operate on an index beyond the number of existing elements.
+
+See also <<errors-move>>.
+
+.Technical name
+`unknownIndex`
+
+.Additional infos
+[horizontal]
+[[unknownIndex.parent]]parent:: <<targetNodeType>>
+of the parent containing the feature with unknown index.
+[[unknownIndex.feature]]feature:: <<metaPointerType>>
+Serialized meta-pointer of the feature with unknown index.
+[[unknownIndex.size]]size:: <<indexType>>
+The actual size of the feature.
+[[unknownIndex.index]]index:: <<indexType>>
+Unknown index.
+
+
+[[err-featureAlreadySet]]
+===== Feature already set
+A <<{m3}.adoc#Feature, Feature>> has already been set to a value, and cannot be set new with this command.
+Use a <<group-value-change>> or <<group-node-replace>> command instead.
+
+.Technical name
+`featureAlreadySet`
+
+.Additional infos
+[horizontal]
+[[featureAlreadySet.parent]]parent:: <<targetNodeType>>
+of the parent containing the already set feature.
+[[featureAlreadySet.feature]]feature:: <<metaPointerType>>
+Serialized meta-pointer of the already set feature.
+[[featureAlreadySet.value]]value:: <<featureValueType>>
+Current value of the feature.
+
+
+[[err-featureNotSet]]
+===== Feature not set
+A <<{m3}.adoc#Feature, Feature>> has no value, and cannot be changed with this command.
+Use an <<group-value-add>> or <<group-node-replace>> command instead.
+
+.Technical name
+`featureNotSet`
+
+.Additional infos
+[horizontal]
+[[featureNotSet.parent]]parent:: <<targetNodeType>>
+of the parent containing the unset feature.
+[[featureNotSet.feature]]feature:: <<metaPointerType>>
+Serialized meta-pointer of the unset feature.
+
+
+[[err-featureUnchanged]]
+===== Feature unchanged
+The new and old value of a <<{m3}.adoc#Feature, Feature>> are the same.{fn-org511}
+
+.Technical name
+`featureUnchanged`
+
+.Additional infos
+[horizontal]
+[[featureUnchanged.parent]]parent:: <<targetNodeType>>
+of the parent containing unchanged feature.
+[[featureUnchanged.feature]]feature:: <<metaPointerType>>
+Serialized meta-pointer of the unchanged feature.

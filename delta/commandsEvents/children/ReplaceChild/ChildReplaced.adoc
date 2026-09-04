@@ -4,6 +4,8 @@
 
 <<ChildReplaced.replacedChild>>, and all its descendants, have been deleted.
 
+See also <<splittableMessage>>.
+
 .Technical name
 `ChildReplaced`
 

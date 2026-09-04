@@ -4,6 +4,8 @@ Add <<AddPartition.newPartition>> node as <<new-nodes, new>> partition.
 
 The client implicitly subscribes to any changes to <<PartitionAdded.newPartition>> or any of its descendants.{fn-org417}
 
+See also <<splittableMessage>> and  <<subscription>>.
+
 [cols="a,a"]
 |===
 |Before |After
@@ -32,7 +34,10 @@ Id of this command.
 [[AddPartition.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
+* <<err-invalidAnchorNode>> for <<AddPartition.newPartition>>
 * <<err-nodeAlreadyExists>> for <<AddPartition.newPartition>>
+* <<err-parentContainmentMismatch>> for <<AddPartition.newPartition>>
+* <<err-circularContainment>> for <<AddPartition.newPartition>>
 * <<err-invalidParticipation>>
 
 .Related event

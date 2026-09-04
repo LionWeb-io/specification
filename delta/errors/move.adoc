@@ -1,0 +1,123 @@
+[[errors-move]]
+==== Move errors
+
+Reported by all <<group-move-or-replace>> commands.
+
+If we're trying to move a node in an invalid way, we report the following errors in the given order:
+
+. <<err-unknownNode>> if:
+** any of the involved nodes is unknown.
+
+. <<err-invalidMove>> if:
+** the moved node is a partition.
+** the moved node is an annotation, and we use a <<group-move-or-replace-child>> command.
+** the moved node is not an annotation, and we use a <<group-move-or-replace-annotation>> command.
+** the moved node is a child (or annotation) of the target parent node, and we use a <<group-move-or-replace-from-other-parent>> command.
+** the moved node is not a child (or annotation) of the target parent node, and we use a <<group-move-or-replace-in-same-parent>> command.
+** we use a <<group-move-or-replace-from-other-parent>> command, and _old parent_ parameter is same as _new parent_ parameter.
+** we use a <<group-move-or-replace-in-same-containment>> command, and _old containment_ parameter is same as _new containment_ parameter.
+
+. <<err-parentMismatch>> if:
+** the moved node is not a child (or annotation) of the source parent node.
+** the replaced node is not a child (or annotation) of the target parent node.
+
+. <<err-indexEntryMismatch>> if:
+** the moved node is a child in another containment of the same parent, and we use a <<group-move-or-replace-in-same-containment>> command.
+#TODO# or <<err-invalidMove>>?
+** the moved node is a child in the same containment of the same parent, and we use a <<group-move-or-replace-from-other-containment>> command.
+#TODO# or <<err-invalidMove>>?
+** the moved node is not the child (or annotation) at the given index in the given containment.
+** the replaced node is not the child (or annotation) at the given index in the given containment.
+
+. <<err-unknownIndex>> if:
+** the index is < 0.
+** the target parent contains less than the given number of elements in the given containment (or annotations).
+
+. <<err-invalidIndexOffset>> if:
+** the offset is 0.
+** the offset is out of bounds of the given containment (or annotations) of the target parent.
+
+.Tabular overview of move errors
+[cols="<h,<,<,<,<,<",]
+|===
+|  h|moved node has different parent h|old parent == new parent 3+h|moved node has same parent
+|  h| h|  h|different containment h|old containment == new containment h|same containment
+|<<cmd-MoveChildFromOtherContainment>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
+|<<cmd-MoveAnnotationFromOtherParent>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
+|<<cmd-MoveChildFromOtherContainmentInSameParent>> 2+|<<err-invalidMove>> |✓ |<<err-invalidMove>>|<<err-indexEntryMismatch>>
+|<<cmd-MoveChildInSameContainment>> 2+|<<err-invalidMove>> |<<err-indexEntryMismatch>>|_n/a_ |✓
+|<<cmd-MoveAnnotationInSameParent>> 2+|<<err-invalidMove>> |_n/a_ |_n/a_ |✓
+|<<cmd-MoveAndReplaceChildFromOtherContainment>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
+|<<cmd-MoveAndReplaceAnnotationFromOtherParent>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
+|<<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>> 2+|<<err-invalidMove>> |✓ |<<err-invalidMove>> |<<err-indexEntryMismatch>>
+|<<cmd-MoveAndReplaceChildInSameContainment>> 2+|<<err-invalidMove>> |<<err-indexEntryMismatch>> |_n/a_ |✓
+|<<cmd-MoveAndReplaceAnnotationInSameParent>> 2+|<<err-invalidMove>> |_n/a_ |_n/a_ |✓
+|===
+
+
+[[err-invalidMove]]
+===== Invalid move
+Client tries to move a node incompatible with the emitted command.
+
+.Technical name
+`invalidMove`
+
+
+[[err-parentMismatch]]
+===== The given parent of a node is not its parent
+Client provided an existing node N with a parent id in its parent property, but the node with this parent-id
+does not have the existing node N as a child (annotation or containment).
+
+.Technical name
+`parentMismatch`
+
+
+[[err-indexEntryMismatch]]
+===== Entry at index is not the given entry
+Client provided an entry (either a node or a target/resolveInfo) and an index, but the entry is not at the given index.
+
+.Technical name
+`indexEntryMismatch`
+
+.Additional infos
+[horizontal]
+[[indexEntryMismatch.parent]]parent:: <<targetNodeType>>
+of the parent.
+[[indexEntryMismatch.feature]]feature:: <<metaPointerType>>
+Serialized meta-pointer of given feature.
+Empty for annotations.
+[[indexEntryMismatch.index]]index:: <<indexType>>
+given index.
+[[indexEntryMismatch.entry]]entry:: <<featureValueType>>
+given entry.
+[[indexEntryMismatch.actual]]actual:: <<featureValueType>>
+actual entry at the given feature and index.
+
+[[err-invalidIndexOffset]]
+===== Index offset is invalid
+Client provided an index offset which is either 0, or an integer such that a given “old” index + the index offset is not a valid index (in the list that’s the subject of the action triggering this error).
+
+.Technical name
+`invalidIndexOffset`
+
+.Additional infos
+[horizontal]
+[[invalidIndexOffset.parent]]parent:: <<targetNodeType>>
+of the parent.
+[[invalidIndexOffset.feature]]feature:: <<metaPointerType>>
+Serialized meta-pointer of given feature.
+Empty for annotations.
+[[invalidIndexOffset.offset]]offset:: <<indexOffsetType>>
+given offset.
+[[invalidIndexOffset.min]]min:: <<indexOffsetType>>
+Minimal valid offset.
+[[invalidIndexOffset.max]]max:: <<indexOffsetType>>
+Maximal valid offset.
+
+
+[[err-moveWithoutParent]]
+===== Move without parent
+Client tries to move a node that doesn't have a parent.
+
+.Technical name
+`moveWithoutParent`

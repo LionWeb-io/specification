@@ -5,7 +5,12 @@ This client wants to receive <<evnt-PartitionAdded>> events on newly created (if
 or <<evnt-PartitionDeleted>> events on deleted (if <<SubscribeToChangingPartitions.deletion>> is true) partitions.
 The client automatically subscribes to newly created partitions (if <<SubscribeToChangingPartitions.creation>> is true), and receives the full contents of partitions.
 
-See also <<qry-InformAboutChangingPartitions>>.
+Subsequent calls to this query update the client's subscription.
+For example, let's assume the client first issued this query with <<SubscribeToChangingPartitions.creation>> = `true` and <<SubscribeToChangingPartitions.deletion>> = `false`.
+Later the same client issues this query with <<SubscribeToChangingPartitions.creation>> = `true` and <<SubscribeToChangingPartitions.deletion>> = `true`.
+Afterward, the client will receive <<evnt-PartitionDeleted>> events.{fn-org438}
+
+See also <<subscription>> and <<qry-InformAboutChangingPartitions>>.
 
 .Technical name
 `SubscribeToChangingPartitions`
@@ -32,4 +37,4 @@ Id of this query.
 
 .Errors
 * <<err-invalidParticipation>>
-* Client already requested <<qry-InformAboutChangingPartitions>>
+* <<err-mixedInformAboutAndSubscribeToChangingPartitions>>

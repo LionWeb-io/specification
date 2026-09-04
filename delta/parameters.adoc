@@ -23,7 +23,7 @@ Can be `null`.
 Cannot be `null`.
 Use value `0` for <<{m3}.adoc#multiplicity, single links>>.
 
-[[indexOffsetType]]IndexOffset:: Relative position inside a (list of) multiple link or annotations as integer.
+[[indexOffsetType]]IndexOffset:: <<indexOffset, Relative position>> inside a (list of) multiple link or annotations as integer.
 Cannot be `0` or `null`.
 
 [[commandType]]Command:: Any <<commands, command>>.
@@ -102,6 +102,16 @@ Can be any string, including empty string.
 [[booleanType]]boolean:: A boolean value, i.e. either `true` or `false`.
 
 [[countType]]count:: An integer value in the range of 0 to 2147483647 (i.e. 2^31^ − 1).
+
+[[featureValueType]]FeatureValue:: The value of a feature, only used in error messages.
++
+The value depends on the feature kind referred to by the error message:
+
+[horizontal]
+containment or annotation::: <<targetNodeType>>
+property::: <<propertyValueType>>
+reference::: serialized <<resolveInfoType>>
+
 
 [[new-nodes, new nodes]]
 ==== New nodes
