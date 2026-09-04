@@ -114,7 +114,7 @@ They contain the old and new parent (might be the same), and the moved node.
 
 [[group-move-and-replace]]
 ==== Move and replace messages
-All messages that move andr replace a node.
+All messages that move and replace a node.
 They contain the old and new parent (might be the same), the moved node, and the replaced node.
 
 * <<cmd-MoveAndReplaceChildFromOtherContainment>> / <<evnt-ChildMovedAndReplacedFromOtherContainment>>
