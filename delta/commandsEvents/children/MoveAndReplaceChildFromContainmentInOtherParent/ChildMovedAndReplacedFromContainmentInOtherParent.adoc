@@ -1,0 +1,41 @@
+[[evnt-ChildMovedAndReplacedFromOtherContainment]]
+[[evnt-ChildMovedAndReplacedFromContainmentInOtherParent]]
+===== Child moved from containment in other parent and replaced existing child
+<<existing-nodes, Existing node>> <<ChildMovedAndReplacedFromContainmentInOtherParent.movedChild>> (previously inside <<ChildMovedAndReplacedFromContainmentInOtherParent.oldParent>>'s <<ChildMovedAndReplacedFromContainmentInOtherParent.oldContainment>> at <<ChildMovedAndReplacedFromContainmentInOtherParent.oldIndex>>) has replaced the <<existing-nodes, existing>> <<ChildMovedAndReplacedFromContainmentInOtherParent.replacedChild>> inside <<ChildMovedAndReplacedFromContainmentInOtherParent.newParent>>'s <<ChildMovedAndReplacedFromContainmentInOtherParent.newContainment>> at <<ChildMovedAndReplacedFromContainmentInOtherParent.newIndex>>.
+<<ChildMovedAndReplacedFromContainmentInOtherParent.replacedChild>>, and all its <<ChildMovedAndReplacedFromContainmentInOtherParent.replacedDescendants>>{fn-org370}, have been deleted.
+
+All other children inside <<ChildMovedAndReplacedFromContainmentInOtherParent.oldParent>>'s <<ChildMovedAndReplacedFromContainmentInOtherParent.oldContainment>> with index > <<ChildMovedAndReplacedFromContainmentInOtherParent.oldIndex>> have been moved to next lower index.
+
+No other children inside <<ChildMovedAndReplacedFromContainmentInOtherParent.newParent>>'s <<ChildMovedAndReplacedFromContainmentInOtherParent.newContainment>> have been moved.
+
+.Technical name
+`ChildMovedAndReplacedFromContainmentInOtherParent`{fn-org513}
+
+[horizontal]
+.Parameters
+[[ChildMovedAndReplacedFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+
+[[ChildMovedAndReplacedFromContainmentInOtherParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
+
+[[ChildMovedAndReplacedFromContainmentInOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[ChildMovedAndReplacedFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+
+[[ChildMovedAndReplacedFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+
+[[ChildMovedAndReplacedFromContainmentInOtherParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+
+[[ChildMovedAndReplacedFromContainmentInOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[ChildMovedAndReplacedFromContainmentInOtherParent.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+
+[[ChildMovedAndReplacedFromContainmentInOtherParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+
+[[ChildMovedAndReplacedFromContainmentInOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ChildMovedAndReplacedFromContainmentInOtherParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ChildMovedAndReplacedFromContainmentInOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+
+.Related command
+<<cmd-MoveAndReplaceChildFromContainmentInOtherParent>>

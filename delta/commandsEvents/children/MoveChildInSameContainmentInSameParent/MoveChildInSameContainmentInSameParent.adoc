@@ -1,0 +1,46 @@
+[[cmd-MoveChildInSameContainment]]
+[[cmd-MoveChildInSameContainmentInSameParent]]
+===== Move child in same containment in same parent
+Move <<existing-nodes, existing node>> <<MoveChildInSameContainmentInSameParent.movedChild>>
+that’s initially at index <<MoveChildInSameContainmentInSameParent.oldIndex>>
+within the <<MoveChildInSameContainmentInSameParent.containment>> inside <<MoveChildInSameContainmentInSameParent.parent>>
+by <<MoveChildInSameContainmentInSameParent.indexOffset>> positions
+to index (<<MoveChildInSameContainmentInSameParent.oldIndex>> + <<MoveChildInSameContainmentInSameParent.indexOffset>>).
+
+This conforms to <<justMovingANode, the action of moving a node in one specific list>> — see that section for more information, diagrams, and examples.
+
+.Technical name
+`MoveChildInSameContainmentInSameParent`{fn-org514}
+
+[horizontal]
+.Parameters
+[[MoveChildInSameContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[MoveChildInSameContainmentInSameParent.containment, `containment`]]containment:: <<metaPointerType>>
+
+[[MoveChildInSameContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[MoveChildInSameContainmentInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
+MUST NOT be 0.{fn-org482}
+
+[[MoveChildInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+
+[[MoveChildInSameContainmentInSameParent.commandId]]commandId:: <<commandIdType>>
+
+[[MoveChildInSameContainmentInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+
+.Errors
+* <<err-unknownNode>> for <<MoveChildInSameContainmentInSameParent.parent>>
+* <<err-unknownIndex>> for <<MoveChildInSameContainmentInSameParent.oldIndex>>
+is not an integer in the range [0..(the number of containment entries in <<MoveChildInSameContainmentInSameParent.containment>> of <<MoveAndReplaceChildInSameContainmentInSameParent.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
+* <<err-invalidIndexOffset>> for <<MoveChildInSameContainmentInSameParent.indexOffset>>
+if <<MoveChildInSameContainmentInSameParent.indexOffset>> equals 0, or if (<<MoveChildInSameContainmentInSameParent.oldIndex>> + <<MoveChildInSameContainmentInSameParent.indexOffset>>) is not in the range [0..(the number of containment entries in <<MoveChildInSameContainmentInSameParent.containment>> of <<MoveAnnotationInSameParent.parent>> - 1)]
+* <<err-unknownNode>> for <<MoveChildInSameContainmentInSameParent.movedChild>>
+* <<err-parentMismatch>> <<MoveChildInSameContainmentInSameParent.parent>> is not the parent of <<MoveChildInSameContainmentInSameParent.movedChild>>
+* <<err-indexEntryMismatch>> for <<MoveChildInSameContainmentInSameParent.oldIndex>> and <<MoveChildInSameContainmentInSameParent.movedChild>>
+if <<MoveChildInSameContainmentInSameParent.movedChild>> is not at index <<MoveChildInSameContainmentInSameParent.oldIndex>> of the containment entries in <<MoveChildInSameContainmentInSameParent.containment>> of <<MoveAnnotationInSameParent.parent>>
+* <<err-moveWithoutParent>> for <<MoveChildInSameContainmentInSameParent.movedChild>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ChildMovedInSameContainmentInSameParent>>

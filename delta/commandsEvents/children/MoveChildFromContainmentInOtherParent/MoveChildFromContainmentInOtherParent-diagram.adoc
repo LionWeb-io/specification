@@ -1,5 +1,5 @@
 |
-[plantuml,moveAndReplaceChildFromOtherContainment-before,svg]
+[plantuml,moveChildFromContainmentInOtherParent-before,svg]
 ----
 !include commandEventOverviewStyle.puml
 
@@ -22,18 +22,15 @@ descendant -[hidden]- newParent
 class newParent
 
 class "new\nPrevious\nSibling" as newPreviousSibling
-class "replaced\nChild" as replacedChild #Red
+class " " as dummy <<h>>
 class "new\nNext\nSibling" as newNextSibling
 
-class "replaced\nDescendant" as replacedDescendant #red
-replacedChild *--> replacedDescendant #Red
-
 newParent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
-newParent *--> replacedChild #Red: new\nContainment\n[newIndex]
-newParent *--> newNextSibling: new\nContainment\n[newIndex + 1]
+newParent *-[hidden]-> dummy #Blue: new\nContainment\n[newIndex]
+newParent *--> newNextSibling: new\nContainment\n[newIndex]
 ----
 |
-[plantuml, moveAndReplaceChildFromOtherContainment-after, svg]
+[plantuml, moveChildFromContainmentInOtherParent-after, svg]
 ----
 !include commandEventOverviewStyle.puml
 

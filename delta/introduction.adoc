@@ -76,7 +76,7 @@ This table provides an overview of actions (rows) and element they apply to (col
 |<<cmd-ChangeClassifier>>
 
 |Move from other node
-|<<cmd-MoveChildFromOtherContainment>>
+|<<cmd-MoveChildFromContainmentInOtherParent>>
 |<<cmd-MoveAnnotationFromOtherParent>>
 |
 |
@@ -90,14 +90,14 @@ This table provides an overview of actions (rows) and element they apply to (col
 |
 
 |Move in same feature in same node
-|<<cmd-MoveChildInSameContainment>>
+|<<cmd-MoveChildInSameContainmentInSameParent>>
 |<<cmd-MoveAnnotationInSameParent>>
 |
 |
 |
 
 |Move from other node and replace existing{fn-org321}
-|<<cmd-MoveAndReplaceChildFromOtherContainment>>
+|<<cmd-MoveAndReplaceChildFromContainmentInOtherParent>>
 |<<cmd-MoveAndReplaceAnnotationFromOtherParent>>
 |
 |
@@ -111,7 +111,7 @@ This table provides an overview of actions (rows) and element they apply to (col
 |
 
 |Move in same feature in same node and replace existing{fn-org321}
-|<<cmd-MoveAndReplaceChildInSameContainment>>
+|<<cmd-MoveAndReplaceChildInSameContainmentInSameParent>>
 |<<cmd-MoveAndReplaceAnnotationInSameParent>>
 |
 |
