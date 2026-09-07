@@ -1,0 +1,56 @@
+[[errors-create-node]]
+==== Create node errors
+
+Reported by all <<group-create-node>> commands.
+
+[[err-invalidAnchorNode]]
+===== Invalid anchor node
+A <<singleChunkType>> doesn't have exactly one <<anchorNode>>, or the anchor node's id or parent is invalid.
+
+.Technical name
+`invalidAnchorNode`
+
+
+[[err-nodeAlreadyExists]]
+===== Node already exists
+Client tries to create a node with an id that already exists.
+
+.Technical name
+`nodeAlreadyExists`
+
+.Additional infos
+[horizontal]
+[[nodeAlreadyExists.duplicate]]duplicate:: <<targetNodeType>>
+of the already existing node.
+
+
+[[err-parentContainmentMismatch]]
+===== Parent / containment mismatch
+A parent node `P` has a child (containment or annotation) node `C`, but `C` doesn't mention `P` as parent.
+
+.Technical name
+`parentContainmentMismatch`
+
+.Additional infos
+[horizontal]
+[[parentContainmentMismatch.parent]]parent:: <<targetNodeType>>
+of the parent node.
+[[parentContainmentMismatch.child]]child:: <<targetNodeType>>
+of the child node.
+[[parentContainmentMismatch.parentId]]parentId:: <<targetNodeType>>
+of the parent mentioned in the child.
+
+
+[[err-circularContainment]]
+===== Circular containment
+A parent node `P` contains a child (containment or annotation) node `C`, that directly or indirectly contains `P`.
+Includes the edge case `P` contains `P`.
+
+.Additional infos
+[horizontal]
+[[circularContainment.cycle]]cycle:: <<targetNodeType>>[]
+Comma-separated list of all node ids that are part of the containment cycle.
+MUST NOT contain any whitespace.
+
+.Technical name
+`circularContainment`

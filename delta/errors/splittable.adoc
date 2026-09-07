@@ -1,0 +1,51 @@
+[[errors-splittable]]
+==== Splittable message errors
+
+Reported by all <<continuedChunk>> messages.
+
+[[err-splitMessageAlreadyCompleted]]
+===== Split message already completed
+Split message already completed: continued chunk received with a higher <<continuedChunkSequenceNumberType>> than a previous one for which the <<continuedChunkSequenceNumberType>> was `true`.
+
+.Technical name
+`splitMessageAlreadyCompleted`
+
+
+[[err-multipleContinuedChunksCompleted]]
+===== Multiple continued chunks completed
+<<continuedChunkSequenceNumberType>> declared complete more than once: multiple continued chunks (with different <<continuedChunkSequenceNumberType>>s) had their <<continuedChunkCompletedFlagType>> set to `true`.
+
+.Technical name
+`multipleContinuedChunksCompleted`
+
+
+[[err-duplicateContinuedChunk]]
+===== Duplicate continued chunk
+Received continued chunk with <<continuedChunkSequenceNumberType>> that was already seen.
+
+.Technical name
+`duplicateContinuedChunk`
+
+
+[[err-unknownSplittableMessageInContinuedChunk]]
+===== Unknown splittable message in continued chunk
+Continued chunk refers to a non-existent query/command/event.
+
+.Technical name
+`unknownSplittableMessageInContinuedChunk`
+
+
+[[err-invalidSplittableMessageInContinuedChunk]]
+===== Invalid splittable message in continued chunk
+Continued chunk refers to a query/command/event that’s not splittable or doesn’t have its <<splitFlagType>> set to `true`.
+
+.Technical name
+`invalidSplittableMessageInContinuedChunk`
+
+
+[[err-interruptedContinuedChunk]]
+===== Interrupted continued chunk
+Received message on this <<channel>> before the sequence of continued chunks had finished.
+
+.Technical name
+`interruptedContinuedChunk`

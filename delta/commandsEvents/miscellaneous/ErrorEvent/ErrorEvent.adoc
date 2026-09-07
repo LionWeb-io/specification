@@ -12,9 +12,9 @@ See also <<qry-ErrorResponse>>.
 
 [horizontal]
 .Parameters
-[[Error.errorCode, `errorCode`]]errorCode:: `String`
+[[Error.errorCode, `errorCode`]]errorCode:: <<errorCodeType>>
 
-[[Error.message, `message`]]message:: `String`
+[[Error.message, `message`]]message:: <<errorMessageType>>
 
 [[Error.originCommands]]originCommands:: <<commandSourceType>>[]
 

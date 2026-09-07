@@ -4,6 +4,8 @@
 
 All other annotations inside <<AnnotationAdded.parent>>'s annotations with index >= <<AnnotationAdded.index>> have been moved to next higher index.
 
+See also <<splittableMessage>>.
+
 .Technical name
 `AnnotationAdded`
 

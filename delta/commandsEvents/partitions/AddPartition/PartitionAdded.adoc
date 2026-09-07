@@ -2,6 +2,8 @@
 ===== Partition added
 <<new-nodes, New>> partition <<PartitionAdded.newPartition>> has been added to the repository.
 
+See also <<splittableMessage>>.
+
 .Technical name
 `PartitionAdded`
 

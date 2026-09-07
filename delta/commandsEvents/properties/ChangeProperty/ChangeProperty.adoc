@@ -15,10 +15,13 @@ include::ChangeProperty-diagram.adoc[]
 [horizontal]
 .Parameters
 [[ChangeProperty.node, `node`]]node:: <<targetNodeType>>
+of the node we want to change a property of.
 
 [[ChangeProperty.property, `property`]]property:: <<metaPointerType>>
+<<{m3}.adoc#Property, Property>> we want to change in <<ChangeProperty.node>>.
 
 [[ChangeProperty.newValue, `newValue`]]newValue:: <<propertyValueType>>
+Value we want to change <<AddProperty.property>> in <<ChangeProperty.node>> to.
 
 [[ChangeProperty.commandId]]commandId:: <<commandIdType>>
 
@@ -26,8 +29,8 @@ include::ChangeProperty-diagram.adoc[]
 
 .Errors
 * <<err-unknownNode>> for <<ChangeProperty.node>>
-* ##?## <<ChangeProperty.property>> is not set in <<ChangeProperty.node>>
-* ##?## <<ChangeProperty.property>> already has <<ChangeProperty.newValue>> in <<ChangeProperty.node>>
+* <<err-featureNotSet>> for <<ChangeProperty.property>> in <<ChangeProperty.node>>
+* <<err-featureUnchanged>> for <<ChangeProperty.property>> in <<ChangeProperty.node>>
 * <<err-invalidParticipation>>
 
 

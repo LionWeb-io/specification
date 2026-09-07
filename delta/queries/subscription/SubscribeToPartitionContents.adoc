@@ -3,6 +3,8 @@
 ===== Subscribe to partition contents
 This client wants to receive events on any changes to <<SubscribeToPartitionContents.partition>> or any of its descendants.{fn-org270}{fn-org269}
 
+See also <<splittableMessage>> and <<subscription>>.
+
 .Technical name
 `SubscribeToPartitionContents`
 
@@ -29,5 +31,6 @@ Id of this query.
 [[SubscribeToPartitionContents.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* already subscribed to <<SubscribeToPartitionContents.partition>>
+* `alreadySubscribedToPartition`: Participation is already subscribed to <<SubscribeToPartitionContents.partition>>.
+* <<err-unknownNode>> for <<SubscribeToPartitionContents.partition>>.
 * <<err-invalidParticipation>>
