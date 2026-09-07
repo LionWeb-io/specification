@@ -1,8 +1,0 @@
-= Overview of supporting documents
-
-* xref:interface.adoc[Interface]
-* xref:m3-goal-and-scope.adoc[Meta-Metamodel Goal and Scope]
-* xref:metametamodel-implementation-examples.adoc[Example of an Interface Implementation in Kotlin]
-* xref:model-representations.adoc[Models Representations]
-* xref:nodes.adoc[Nodes]
-* xref:references.adoc[References]
