@@ -19,18 +19,25 @@ include::MoveChildFromContainmentInOtherParent-diagram.adoc[]
 [horizontal]
 .Parameters
 [[MoveChildFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+of the node we want to move a new child to.
 
 [[MoveChildFromContainmentInOtherParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> we want to move <<MoveChildFromContainmentInOtherParent.movedChild>> to in <<MoveChildFromContainmentInOtherParent.newParent>>.
 
 [[MoveChildFromContainmentInOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+where we want to move <<MoveChildFromContainmentInOtherParent.movedChild>> at in <<MoveChildFromContainmentInOtherParent.newContainment>> of <<MoveChildFromContainmentInOtherParent.newParent>>.
 
 [[MoveChildFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+of the node we want to move an existing child from.
 
 [[MoveChildFromContainmentInOtherParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> we want to move <<MoveChildFromContainmentInOtherParent.movedChild>> from in <<MoveChildFromContainmentInOtherParent.oldParent>>.
 
 [[MoveChildFromContainmentInOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where we want to move <<MoveChildFromContainmentInOtherParent.movedChild>> from in <<MoveChildFromContainmentInOtherParent.oldContainment>> of <<MoveChildFromContainmentInOtherParent.oldParent>>.
 
 [[MoveChildFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+of the node we want to move from <<MoveChildFromContainmentInOtherParent.oldParent>> to <<MoveChildFromContainmentInOtherParent.newParent>>.
 
 [[MoveChildFromContainmentInOtherParent.commandId]]commandId:: <<commandIdType>>
 
@@ -40,13 +47,12 @@ include::MoveChildFromContainmentInOtherParent-diagram.adoc[]
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.oldParent>>
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.newParent>>
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.movedChild>>
-* <<err-parentMismatch>> The node <<MoveChildFromContainmentInOtherParent.oldParent>> does not have
-<<MoveChildFromContainmentInOtherParent.movedChild>> as child.
+* <<err-parentMismatch>> for <<MoveChildFromContainmentInOtherParent.oldParent>> and <<MoveChildFromContainmentInOtherParent.movedChild>>
 * <<err-indexEntryMismatch>> for <<MoveChildFromContainmentInOtherParent.oldContainment>>/<<MoveChildFromContainmentInOtherParent.oldIndex>> and
 <<MoveChildFromContainmentInOtherParent.movedChild>>
 * <<err-unknownIndex>> for <<MoveChildFromContainmentInOtherParent.newIndex>> (is beyond the number of <<MoveChildFromContainmentInOtherParent.newContainment>> entries in <<MoveChildFromContainmentInOtherParent.newParent>>)
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.movedChild>>
-* ##?## <<MoveChildFromContainmentInOtherParent.movedChild>> is already a child of <<MoveChildFromContainmentInOtherParent.newParent>>
+Use <<cmd-MoveChildFromOtherContainmentInSameParent>> or <<cmd-MoveChildInSameContainmentInSameParent>> instead.
 * <<err-invalidParticipation>>
 
 .Related event
