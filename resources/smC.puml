@@ -1,0 +1,10 @@
+@startuml
+hide empty members
+    class "state machine" as smC
+    class "state" as stateC
+    class "transition" as transC
+    smC *- stateC: states
+    smC *-- transC: transitions
+    stateC -> transC: outgoingTransitions
+    stateC -> transC: incomingTransitions
+@enduml
