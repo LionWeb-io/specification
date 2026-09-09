@@ -10,7 +10,7 @@ See also and <<subscription>>.
 
 [horizontal]
 .Request parameters
-[[UnsubscribeFromPartitionContents.partition, `partition`]]partition:: <<targetNodeType>>
+[[UnsubscribeFromPartitionContents.partition, `partition`]]partition:: <<nodeIdType>>
 Node id of the partition this client wants to stop receiving events of.
 
 [[UnsubscribeFromPartitionContents.requestQueryId, `queryId`]]queryId:: <<queryIdType>>

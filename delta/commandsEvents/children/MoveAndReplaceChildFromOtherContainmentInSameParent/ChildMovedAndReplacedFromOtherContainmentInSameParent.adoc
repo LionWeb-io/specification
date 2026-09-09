@@ -16,17 +16,17 @@ No other children inside <<ChildMovedAndReplacedFromOtherContainmentInSameParent
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
 
-[[ChildMovedAndReplacedFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[ChildMovedAndReplacedFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 
-[[ChildMovedAndReplacedFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+[[ChildMovedAndReplacedFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
-[[ChildMovedAndReplacedFromOtherContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+[[ChildMovedAndReplacedFromOtherContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
 
-[[ChildMovedAndReplacedFromOtherContainmentInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+[[ChildMovedAndReplacedFromOtherContainmentInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 

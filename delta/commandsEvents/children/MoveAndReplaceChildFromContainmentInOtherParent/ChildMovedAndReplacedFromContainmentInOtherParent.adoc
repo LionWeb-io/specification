@@ -13,23 +13,23 @@ No other children inside <<ChildMovedAndReplacedFromContainmentInOtherParent.new
 
 [horizontal]
 .Parameters
-[[ChildMovedAndReplacedFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+[[ChildMovedAndReplacedFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
 
 [[ChildMovedAndReplacedFromContainmentInOtherParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
 
 [[ChildMovedAndReplacedFromContainmentInOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
 
-[[ChildMovedAndReplacedFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[ChildMovedAndReplacedFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 
-[[ChildMovedAndReplacedFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+[[ChildMovedAndReplacedFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
 
 [[ChildMovedAndReplacedFromContainmentInOtherParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
 
 [[ChildMovedAndReplacedFromContainmentInOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
-[[ChildMovedAndReplacedFromContainmentInOtherParent.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+[[ChildMovedAndReplacedFromContainmentInOtherParent.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
 
-[[ChildMovedAndReplacedFromContainmentInOtherParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+[[ChildMovedAndReplacedFromContainmentInOtherParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
 
 [[ChildMovedAndReplacedFromContainmentInOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
 

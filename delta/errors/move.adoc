@@ -81,7 +81,7 @@ Client provided an entry (either a node or a target/resolveInfo) and an index, b
 
 .Additional infos
 [horizontal]
-[[indexEntryMismatch.parent]]parent:: <<targetNodeType>>
+[[indexEntryMismatch.parent]]parent:: <<nodeIdType>>
 of the parent.
 [[indexEntryMismatch.feature]]feature:: <<metaPointerType>>
 Serialized meta-pointer of given feature.
@@ -102,7 +102,7 @@ Client provided an index offset which is either 0, or an integer such that a giv
 
 .Additional infos
 [horizontal]
-[[invalidIndexOffset.parent]]parent:: <<targetNodeType>>
+[[invalidIndexOffset.parent]]parent:: <<nodeIdType>>
 of the parent.
 [[invalidIndexOffset.feature]]feature:: <<metaPointerType>>
 Serialized meta-pointer of given feature.

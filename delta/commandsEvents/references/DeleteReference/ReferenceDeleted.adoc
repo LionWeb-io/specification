@@ -8,13 +8,13 @@ All other entries inside <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.refere
 
 [horizontal]
 .Parameters
-[[ReferenceDeleted.parent, `parent`]]parent:: <<targetNodeType>>
+[[ReferenceDeleted.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[ReferenceDeleted.reference, `reference`]]reference:: <<metaPointerType>>
 
 [[ReferenceDeleted.index, `index`]]index:: <<indexType>>
 
-[[ReferenceDeleted.deletedReference, `deletedReference`]]deletedReference:: <<targetNodeType>>?
+[[ReferenceDeleted.deletedReference, `deletedReference`]]deletedReference:: <<nodeIdType>>?
 
 [[ReferenceDeleted.deletedResolveInfo, `deletedResolveInfo`]]deletedResolveInfo:: <<resolveInfoType>>?
 

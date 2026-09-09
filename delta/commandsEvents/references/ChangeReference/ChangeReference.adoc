@@ -14,17 +14,17 @@ include::ChangeReference-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[ChangeReference.parent, `parent`]]parent:: <<targetNodeType>>
+[[ChangeReference.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[ChangeReference.reference, `reference`]]reference:: <<metaPointerType>>
 
 [[ChangeReference.index, `index`]]index:: <<indexType>>
 
-[[ChangeReference.oldReference, `oldReference`]]oldReference:: <<targetNodeType>>?
+[[ChangeReference.oldReference, `oldReference`]]oldReference:: <<nodeIdType>>?
 
 [[ChangeReference.oldResolveInfo, `oldResolveInfo`]]oldResolveInfo:: <<resolveInfoType>>?
 
-[[ChangeReference.newReference, `newReference`]]newReference:: <<targetNodeType>>?
+[[ChangeReference.newReference, `newReference`]]newReference:: <<nodeIdType>>?
 
 [[ChangeReference.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
 

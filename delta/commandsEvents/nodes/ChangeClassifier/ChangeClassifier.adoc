@@ -14,7 +14,7 @@ include::ChangeClassifier-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[ChangeClassifier.node, `node`]]node:: <<targetNodeType>>
+[[ChangeClassifier.node, `node`]]node:: <<nodeIdType>>
 of the node we want to change the classifier.
 
 [[ChangeClassifier.newClassifier, `newClassifier`]]newClassifier:: <<metaPointerType>>

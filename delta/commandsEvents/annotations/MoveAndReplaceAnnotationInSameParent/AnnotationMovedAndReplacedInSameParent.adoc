@@ -16,17 +16,17 @@ This conforms to <<movingAndReplacingNodes, the action of moving a node and repl
 
 [horizontal]
 .Parameters
-[[AnnotationMovedAndReplacedInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
 
-[[AnnotationMovedAndReplacedInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<nodeIdType>>
 
 [[AnnotationMovedAndReplacedInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
 
-[[AnnotationMovedAndReplacedInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
 
-[[AnnotationMovedAndReplacedInSameParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedInSameParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
 
-[[AnnotationMovedAndReplacedInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+[[AnnotationMovedAndReplacedInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
 
 [[AnnotationMovedAndReplacedInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 

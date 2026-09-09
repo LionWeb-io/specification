@@ -10,7 +10,7 @@ See also <<splittableMessage>> and <<subscription>>.
 
 [horizontal]
 .Request parameters
-[[SubscribeToPartitionContents.partition, `partition`]]partition:: <<targetNodeType>>
+[[SubscribeToPartitionContents.partition, `partition`]]partition:: <<nodeIdType>>
 Node id of the partition this client wants to receive events of.
 
 [[SubscribeToPartitionContents.requestQueryId, `queryId`]]queryId:: <<queryIdType>>

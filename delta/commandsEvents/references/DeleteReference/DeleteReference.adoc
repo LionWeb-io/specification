@@ -14,13 +14,13 @@ include::DeleteReference-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[DeleteReference.parent, `parent`]]parent:: <<targetNodeType>>
+[[DeleteReference.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[DeleteReference.reference, `reference`]]reference:: <<metaPointerType>>
 
 [[DeleteReference.index, `index`]]index:: <<indexType>>
 
-[[DeleteReference.deletedReference, `deletedReference`]]deletedReference:: <<targetNodeType>>?
+[[DeleteReference.deletedReference, `deletedReference`]]deletedReference:: <<nodeIdType>>?
 
 [[DeleteReference.deletedResolveInfo, `deletedResolveInfo`]]deletedResolveInfo:: <<resolveInfoType>>?
 

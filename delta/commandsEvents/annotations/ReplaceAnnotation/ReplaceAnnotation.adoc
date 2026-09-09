@@ -24,11 +24,11 @@ Subtree to form a new annotation.
 The _anchor node_ MUST contain the <<ReplaceAnnotation.parent>> as _parent_.{fn-org357}
 All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 
-[[ReplaceAnnotation.parent, `parent`]]parent:: <<targetNodeType>>
+[[ReplaceAnnotation.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[ReplaceAnnotation.index, `index`]]index:: <<indexType>>
 
-[[ReplaceAnnotation.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
+[[ReplaceAnnotation.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
 
 [[ReplaceAnnotation.split, `split`]]split?:: <<splitFlagType>>
 

@@ -17,7 +17,7 @@ This conforms to <<movingAndReplacingNodes, the action of moving a node and repl
 
 [horizontal]
 .Parameters
-[[ChildMovedAndReplacedInSameContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+[[ChildMovedAndReplacedInSameContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[ChildMovedAndReplacedInSameContainmentInSameParent.containment, `containment`]]containment:: <<metaPointerType>>
 
@@ -29,11 +29,11 @@ MUST NOT be 0. +
 MUST NOT be < 0,
 or >= (the number of children inside <<ChildMovedAndReplacedInSameContainmentInSameParent.parent>>'s <<ChildMovedAndReplacedInSameContainmentInSameParent.containment>>).
 
-[[ChildMovedAndReplacedInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[ChildMovedAndReplacedInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 
-[[ChildMovedAndReplacedInSameContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+[[ChildMovedAndReplacedInSameContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
 
-[[ChildMovedAndReplacedInSameContainmentInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+[[ChildMovedAndReplacedInSameContainmentInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
 
 [[ChildMovedAndReplacedInSameContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 

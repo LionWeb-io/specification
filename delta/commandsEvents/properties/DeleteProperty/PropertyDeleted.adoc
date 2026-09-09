@@ -7,7 +7,7 @@ Existing <<PropertyDeleted.property>> of <<PropertyDeleted.node>> with <<Propert
 
 [horizontal]
 .Parameters
-[[PropertyDeleted.node, `node`]]node:: <<targetNodeType>>
+[[PropertyDeleted.node, `node`]]node:: <<nodeIdType>>
 
 [[PropertyDeleted.property, `property`]]property:: <<metaPointerType>>
 

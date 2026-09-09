@@ -13,13 +13,13 @@ This conforms to <<justMovingANode, the action of moving a node in one specific 
 
 [horizontal]
 .Parameters
-[[AnnotationMovedInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+[[AnnotationMovedInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
 
-[[AnnotationMovedInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<targetNodeType>>
+[[AnnotationMovedInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<nodeIdType>>
 
 [[AnnotationMovedInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>{fn-org482}
 
-[[AnnotationMovedInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
+[[AnnotationMovedInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
 
 [[AnnotationMovedInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 

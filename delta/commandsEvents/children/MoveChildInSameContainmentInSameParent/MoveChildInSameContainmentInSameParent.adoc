@@ -14,7 +14,7 @@ This conforms to <<justMovingANode, the action of moving a node in one specific 
 
 [horizontal]
 .Parameters
-[[MoveChildInSameContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+[[MoveChildInSameContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
 of the node we want to move children in.
 
 [[MoveChildInSameContainmentInSameParent.containment, `containment`]]containment:: <<metaPointerType>>
@@ -26,7 +26,7 @@ where we want to move <<MoveChildInSameContainmentInSameParent.movedChild>> from
 [[MoveChildInSameContainmentInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
 how much we want to move <<MoveChildInSameContainmentInSameParent.movedChild>> in <<MoveChildInSameContainmentInSameParent.containment>> of <<MoveChildInSameContainmentInSameParent.parent>>.
 
-[[MoveChildInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[MoveChildInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 of the node we want to move in <<MoveChildInSameContainmentInSameParent.containment>>.
 
 [[MoveChildInSameContainmentInSameParent.commandId]]commandId:: <<commandIdType>>

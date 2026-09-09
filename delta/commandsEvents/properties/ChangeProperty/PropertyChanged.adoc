@@ -7,7 +7,7 @@ Existing <<PropertyChanged.property>> of <<PropertyChanged.node>> has been chang
 
 [horizontal]
 .Parameters
-[[PropertyChanged.node, `node`]]node:: <<targetNodeType>>
+[[PropertyChanged.node, `node`]]node:: <<nodeIdType>>
 
 [[PropertyChanged.property, `property`]]property:: <<metaPointerType>>
 

@@ -14,7 +14,7 @@ include::AddProperty-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[AddProperty.node, `node`]]node:: <<targetNodeType>>
+[[AddProperty.node, `node`]]node:: <<nodeIdType>>
 of the node we want to add a property to.
 
 [[AddProperty.property, `property`]]property:: <<metaPointerType>>

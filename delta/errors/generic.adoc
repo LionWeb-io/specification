@@ -26,7 +26,7 @@ See also <<errors-move>>.
 
 .Additional infos
 [horizontal]
-[[unknownNode.node]]node:: <<targetNodeType>>
+[[unknownNode.node]]node:: <<nodeIdType>>
 of the unknown node.
 
 
@@ -41,7 +41,7 @@ See also <<errors-move>>.
 
 .Additional infos
 [horizontal]
-[[unknownIndex.parent]]parent:: <<targetNodeType>>
+[[unknownIndex.parent]]parent:: <<nodeIdType>>
 of the parent containing the feature with unknown index.
 [[unknownIndex.feature]]feature:: <<metaPointerType>>
 Serialized meta-pointer of the feature with unknown index.
@@ -61,7 +61,7 @@ Use a <<group-value-change>> or <<group-node-replace>> command instead.
 
 .Additional infos
 [horizontal]
-[[featureAlreadySet.parent]]parent:: <<targetNodeType>>
+[[featureAlreadySet.parent]]parent:: <<nodeIdType>>
 of the parent containing the already set feature.
 [[featureAlreadySet.feature]]feature:: <<metaPointerType>>
 Serialized meta-pointer of the already set feature.
@@ -79,7 +79,7 @@ Use an <<group-value-add>> or <<group-node-replace>> command instead.
 
 .Additional infos
 [horizontal]
-[[featureNotSet.parent]]parent:: <<targetNodeType>>
+[[featureNotSet.parent]]parent:: <<nodeIdType>>
 of the parent containing the unset feature.
 [[featureNotSet.feature]]feature:: <<metaPointerType>>
 Serialized meta-pointer of the unset feature.
@@ -94,7 +94,7 @@ The new and old value of a <<{m3}.adoc#Feature, Feature>> are the same.{fn-org51
 
 .Additional infos
 [horizontal]
-[[featureUnchanged.parent]]parent:: <<targetNodeType>>
+[[featureUnchanged.parent]]parent:: <<nodeIdType>>
 of the parent containing unchanged feature.
 [[featureUnchanged.feature]]feature:: <<metaPointerType>>
 Serialized meta-pointer of the unchanged feature.

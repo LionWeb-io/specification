@@ -7,7 +7,7 @@ Classifier of <<ClassifierChanged.node>> has been changed from <<ClassifierChang
 
 [horizontal]
 .Parameters
-[[ClassifierChanged.node, `node`]]node:: <<targetNodeType>>
+[[ClassifierChanged.node, `node`]]node:: <<nodeIdType>>
 
 [[ClassifierChanged.newClassifier, `newClassifier`]]newClassifier:: <<metaPointerType>>
 

@@ -24,21 +24,21 @@ include::MoveAndReplaceChildFromContainmentInOtherParent-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[MoveAndReplaceChildFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+[[MoveAndReplaceChildFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
 
 [[MoveAndReplaceChildFromContainmentInOtherParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
 
 [[MoveAndReplaceChildFromContainmentInOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
 
-[[MoveAndReplaceChildFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+[[MoveAndReplaceChildFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
 
 [[MoveAndReplaceChildFromContainmentInOtherParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
 
 [[MoveAndReplaceChildFromContainmentInOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
-[[MoveAndReplaceChildFromContainmentInOtherParent.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+[[MoveAndReplaceChildFromContainmentInOtherParent.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
 
-[[MoveAndReplaceChildFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[MoveAndReplaceChildFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 
 [[MoveAndReplaceChildFromContainmentInOtherParent.commandId]]commandId:: <<commandIdType>>
 

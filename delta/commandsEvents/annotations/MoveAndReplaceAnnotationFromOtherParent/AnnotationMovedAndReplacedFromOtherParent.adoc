@@ -15,19 +15,19 @@ No other annotations inside <<AnnotationMovedAndReplacedFromOtherParent.newParen
 
 [horizontal]
 .Parameters
-[[AnnotationMovedAndReplacedFromOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedFromOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
 
 [[AnnotationMovedAndReplacedFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
 
-[[AnnotationMovedAndReplacedFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
 
-[[AnnotationMovedAndReplacedFromOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedFromOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
 
 [[AnnotationMovedAndReplacedFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
-[[AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
 
-[[AnnotationMovedAndReplacedFromOtherParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+[[AnnotationMovedAndReplacedFromOtherParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
 
 [[AnnotationMovedAndReplacedFromOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
 

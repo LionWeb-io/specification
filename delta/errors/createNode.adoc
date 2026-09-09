@@ -20,7 +20,7 @@ Client tries to create a node with an id that already exists.
 
 .Additional infos
 [horizontal]
-[[nodeAlreadyExists.duplicate]]duplicate:: <<targetNodeType>>
+[[nodeAlreadyExists.duplicate]]duplicate:: <<nodeIdType>>
 of the already existing node.
 
 
@@ -33,11 +33,11 @@ A parent node `P` has a child (containment or annotation) node `C`, but `C` does
 
 .Additional infos
 [horizontal]
-[[parentContainmentMismatch.parent]]parent:: <<targetNodeType>>
+[[parentContainmentMismatch.parent]]parent:: <<nodeIdType>>
 of the parent node.
-[[parentContainmentMismatch.child]]child:: <<targetNodeType>>
+[[parentContainmentMismatch.child]]child:: <<nodeIdType>>
 of the child node.
-[[parentContainmentMismatch.parentId]]parentId:: <<targetNodeType>>
+[[parentContainmentMismatch.parentId]]parentId:: <<nodeIdType>>
 of the parent mentioned in the child.
 
 
@@ -48,7 +48,7 @@ Includes the edge case `P` contains `P`.
 
 .Additional infos
 [horizontal]
-[[circularContainment.cycle]]cycle:: <<targetNodeType>>[]
+[[circularContainment.cycle]]cycle:: <<nodeIdType>>[]
 Comma-separated list of all node ids that are part of the containment cycle.
 MUST NOT contain any whitespace.
 

@@ -16,7 +16,7 @@ include::AddChild-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[AddChild.parent, `parent`]]parent:: <<targetNodeType>>
+[[AddChild.parent, `parent`]]parent:: <<nodeIdType>>
 of the node we want to add a new child to.
 
 [[AddChild.newChild, `newChild`]]newChild:: <<singleChunkType>>
