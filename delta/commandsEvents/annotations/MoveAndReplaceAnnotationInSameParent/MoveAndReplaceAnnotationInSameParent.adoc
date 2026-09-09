@@ -16,16 +16,16 @@ This conforms to <<movingAndReplacingNodes, the action of moving a node and repl
 
 [horizontal]
 .Parameters
-[[MoveAndReplaceAnnotationInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+[[MoveAndReplaceAnnotationInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
 
-[[MoveAndReplaceAnnotationInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<targetNodeType>>
+[[MoveAndReplaceAnnotationInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<nodeIdType>>
 
 [[MoveAndReplaceAnnotationInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
 MUST NOT be 0.
 
-[[MoveAndReplaceAnnotationInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
+[[MoveAndReplaceAnnotationInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
 
-[[MoveAndReplaceAnnotationInSameParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
+[[MoveAndReplaceAnnotationInSameParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
 
 [[MoveAndReplaceAnnotationInSameParent.commandId]]commandId:: <<commandIdType>>
 

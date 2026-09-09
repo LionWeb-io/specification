@@ -7,17 +7,17 @@ Existing reference with <<ReferenceChanged.oldReference>>/<<ReferenceChanged.old
 
 [horizontal]
 .Parameters
-[[ReferenceChanged.parent, `parent`]]parent:: <<targetNodeType>>
+[[ReferenceChanged.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[ReferenceChanged.reference, `reference`]]reference:: <<metaPointerType>>
 
 [[ReferenceChanged.index, `index`]]index:: <<indexType>>
 
-[[ReferenceChanged.newReference, `newReference`]]newReference:: <<targetNodeType>>?
+[[ReferenceChanged.newReference, `newReference`]]newReference:: <<nodeIdType>>?
 
 [[ReferenceChanged.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
 
-[[ReferenceChanged.oldReference, `oldReference`]]oldReference:: <<targetNodeType>>?
+[[ReferenceChanged.oldReference, `oldReference`]]oldReference:: <<nodeIdType>>?
 
 [[ReferenceChanged.oldResolveInfo, `oldResolveInfo`]]oldResolveInfo:: <<resolveInfoType>>?
 

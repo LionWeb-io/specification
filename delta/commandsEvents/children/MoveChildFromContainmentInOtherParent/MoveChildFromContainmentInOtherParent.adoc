@@ -18,7 +18,7 @@ include::MoveChildFromContainmentInOtherParent-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[MoveChildFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+[[MoveChildFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
 of the node we want to move a new child to.
 
 [[MoveChildFromContainmentInOtherParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
@@ -27,7 +27,7 @@ of the node we want to move a new child to.
 [[MoveChildFromContainmentInOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
 where we want to move <<MoveChildFromContainmentInOtherParent.movedChild>> at in <<MoveChildFromContainmentInOtherParent.newContainment>> of <<MoveChildFromContainmentInOtherParent.newParent>>.
 
-[[MoveChildFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+[[MoveChildFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
 of the node we want to move an existing child from.
 
 [[MoveChildFromContainmentInOtherParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
@@ -36,7 +36,7 @@ of the node we want to move an existing child from.
 [[MoveChildFromContainmentInOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 where we want to move <<MoveChildFromContainmentInOtherParent.movedChild>> from in <<MoveChildFromContainmentInOtherParent.oldContainment>> of <<MoveChildFromContainmentInOtherParent.oldParent>>.
 
-[[MoveChildFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[MoveChildFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 of the node we want to move from <<MoveChildFromContainmentInOtherParent.oldParent>> to <<MoveChildFromContainmentInOtherParent.newParent>>.
 
 [[MoveChildFromContainmentInOtherParent.commandId]]commandId:: <<commandIdType>>

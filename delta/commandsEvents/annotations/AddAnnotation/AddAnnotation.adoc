@@ -16,7 +16,7 @@ include::AddAnnotation-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[AddAnnotation.parent, `parent`]]parent:: <<targetNodeType>>
+[[AddAnnotation.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[AddAnnotation.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
 Subtree to form a new annotation.

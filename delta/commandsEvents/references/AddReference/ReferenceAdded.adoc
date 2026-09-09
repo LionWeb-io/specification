@@ -8,13 +8,13 @@ All other entries inside <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>
 
 [horizontal]
 .Parameters
-[[ReferenceAdded.parent, `parent`]]parent:: <<targetNodeType>>
+[[ReferenceAdded.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[ReferenceAdded.reference, `reference`]]reference:: <<metaPointerType>>
 
 [[ReferenceAdded.index, `index`]]index:: <<indexType>>
 
-[[ReferenceAdded.newReference, `newReference`]]newReference:: <<targetNodeType>>?
+[[ReferenceAdded.newReference, `newReference`]]newReference:: <<nodeIdType>>?
 
 [[ReferenceAdded.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
 

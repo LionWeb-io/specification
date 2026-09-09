@@ -19,7 +19,7 @@ include::MoveChildFromOtherContainmentInSameParent-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[MoveChildFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+[[MoveChildFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
 of the node we want to move children in.
 
 [[MoveChildFromOtherContainmentInSameParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
@@ -34,7 +34,7 @@ where we want to move <<MoveChildFromOtherContainmentInSameParent.movedChild>> a
 [[MoveChildFromOtherContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 where we want to move <<MoveChildFromOtherContainmentInSameParent.movedChild>> from in <<MoveChildFromOtherContainmentInSameParent.oldContainment>> of <<MoveChildFromOtherContainmentInSameParent.parent>>.
 
-[[MoveChildFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[MoveChildFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 of the node we want to move from <<MoveChildFromOtherContainmentInSameParent.oldContainment>> to <<MoveChildFromOtherContainmentInSameParent.newContainment>>.
 
 [[MoveChildFromOtherContainmentInSameParent.commandId]]commandId:: <<commandIdType>>

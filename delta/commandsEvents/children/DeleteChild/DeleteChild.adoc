@@ -15,7 +15,7 @@ include::DeleteChild-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[DeleteChild.parent, `parent`]]parent:: <<targetNodeType>>
+[[DeleteChild.parent, `parent`]]parent:: <<nodeIdType>>
 of the node we want to delete a child from.
 
 [[DeleteChild.containment, `containment`]]containment:: <<metaPointerType>>
@@ -24,7 +24,7 @@ of the node we want to delete a child from.
 [[DeleteChild.index, `index`]]index:: <<indexType>>
 where we want to delete <<DeleteChild.deletedChild>> from in <<DeleteChild.containment>> of <<DeleteChild.parent>>.
 
-[[DeleteChild.deletedChild, `deletedChild`]]deletedChild:: <<targetNodeType>>
+[[DeleteChild.deletedChild, `deletedChild`]]deletedChild:: <<nodeIdType>>
 of the node we want to delete in <<DeleteChild.containment>> of <<DeleteChild.parent>> at <<DeleteChild.index>>.
 
 [[DeleteChild.commandId]]commandId:: <<commandIdType>>

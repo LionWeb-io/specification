@@ -21,17 +21,17 @@ include::MoveAndReplaceAnnotationFromOtherParent-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[MoveAndReplaceAnnotationFromOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+[[MoveAndReplaceAnnotationFromOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
 
 [[MoveAndReplaceAnnotationFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
 
-[[MoveAndReplaceAnnotationFromOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+[[MoveAndReplaceAnnotationFromOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
 
 [[MoveAndReplaceAnnotationFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
-[[MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
+[[MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
 
-[[MoveAndReplaceAnnotationFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
+[[MoveAndReplaceAnnotationFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
 
 [[MoveAndReplaceAnnotationFromOtherParent.commandId]]commandId:: <<commandIdType>>
 

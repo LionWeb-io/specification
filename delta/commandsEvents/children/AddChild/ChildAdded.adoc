@@ -11,7 +11,7 @@ See also <<splittableMessage>>.
 
 [horizontal]
 .Parameters
-[[ChildAdded.parent, `parent`]]parent:: <<targetNodeType>>
+[[ChildAdded.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[ChildAdded.newChild, `newChild`]]newChild:: <<singleChunkType>>
 Subtree that formed the new child.

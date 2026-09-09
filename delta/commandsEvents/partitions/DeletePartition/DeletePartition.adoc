@@ -15,7 +15,7 @@ include::DeletePartition-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[DeletePartition.deletedPartition, `deletedPartition`]]deletedPartition:: <<targetNodeType>>
+[[DeletePartition.deletedPartition, `deletedPartition`]]deletedPartition:: <<nodeIdType>>
 of the partition to delete.
 
 [[DeletePartition.commandId]]commandId:: <<commandIdType>>

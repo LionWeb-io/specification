@@ -16,11 +16,11 @@ Subtree that formed the new annotation.
 The _anchor node_ MUST contain the <<ReplaceAnnotation.newAnnotation>> as _parent_.{fn-org357}
 All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.{fn-org326}
 
-[[AnnotationReplaced.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
+[[AnnotationReplaced.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
 
-[[AnnotationReplaced.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+[[AnnotationReplaced.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
 
-[[AnnotationReplaced.parent, `parent`]]parent:: <<targetNodeType>>
+[[AnnotationReplaced.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[AnnotationReplaced.index, `index`]]index:: <<indexType>>
 

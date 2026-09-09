@@ -14,7 +14,7 @@ include::DeleteProperty-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[DeleteProperty.node, `node`]]node:: <<targetNodeType>>
+[[DeleteProperty.node, `node`]]node:: <<nodeIdType>>
 of the node we want to delete a property from.
 
 [[DeleteProperty.property, `property`]]property:: <<metaPointerType>>

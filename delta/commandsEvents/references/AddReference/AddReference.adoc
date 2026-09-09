@@ -14,13 +14,13 @@ include::AddReference-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[AddReference.parent, `parent`]]parent:: <<targetNodeType>>
+[[AddReference.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[AddReference.reference, `reference`]]reference:: <<metaPointerType>>
 
 [[AddReference.index, `index`]]index:: <<indexType>>
 
-[[AddReference.newReference, `newReference`]]newReference:: <<targetNodeType>>?
+[[AddReference.newReference, `newReference`]]newReference:: <<nodeIdType>>?
 
 [[AddReference.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
 

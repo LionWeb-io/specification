@@ -14,7 +14,7 @@ This conforms to <<justMovingANode, the action of moving a node in one specific 
 
 [horizontal]
 .Parameters
-[[ChildMovedInSameContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+[[ChildMovedInSameContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[ChildMovedInSameContainmentInSameParent.containment, `containment`]]containment:: <<metaPointerType>>
 
@@ -23,7 +23,7 @@ This conforms to <<justMovingANode, the action of moving a node in one specific 
 [[ChildMovedInSameContainmentInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
 MUST NOT be 0.{fn-org482}
 
-[[ChildMovedInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[ChildMovedInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 
 [[ChildMovedInSameContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 

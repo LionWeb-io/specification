@@ -11,7 +11,7 @@ See also <<splittableMessage>>.
 
 [horizontal]
 .Parameters
-[[AnnotationAdded.parent, `parent`]]parent:: <<targetNodeType>>
+[[AnnotationAdded.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[AnnotationAdded.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
 Subtree that formed the new annotation.

@@ -16,11 +16,11 @@ Subtree that formed the new child.
 The _anchor node_ MUST contain the <<ChildReplaced.parent>> as _parent_.{fn-org357}
 All nodes in that subtree MUST be <<new-nodes>> or <<reused-nodes>>.{fn-org326}
 
-[[ChildReplaced.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+[[ChildReplaced.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
 
-[[ChildReplaced.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+[[ChildReplaced.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
 
-[[ChildReplaced.parent, `parent`]]parent:: <<targetNodeType>>
+[[ChildReplaced.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[ChildReplaced.containment, `containment`]]containment:: <<metaPointerType>>
 

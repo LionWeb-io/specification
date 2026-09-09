@@ -16,7 +16,7 @@ This conforms to <<movingAndReplacingNodes, the action of moving a node and repl
 
 [horizontal]
 .Parameters
-[[MoveAndReplaceChildInSameContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+[[MoveAndReplaceChildInSameContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[MoveAndReplaceChildInSameContainmentInSameParent.containment, `containment`]]containment:: <<metaPointerType>>
 
@@ -25,9 +25,9 @@ This conforms to <<movingAndReplacingNodes, the action of moving a node and repl
 [[MoveAndReplaceChildInSameContainmentInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
 MUST NOT be 0.
 
-[[MoveAndReplaceChildInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[MoveAndReplaceChildInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 
-[[MoveAndReplaceChildInSameContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+[[MoveAndReplaceChildInSameContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
 
 [[MoveAndReplaceChildInSameContainmentInSameParent.commandId]]commandId:: <<commandIdType>>
 

@@ -24,7 +24,7 @@ Subtree to form the new child that replaces <<ReplaceChild.replacedChild>>.
 The _anchor node_ MUST contain the <<ReplaceChild.parent>> as _parent_.{fn-org357}
 All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 
-[[ReplaceChild.parent, `parent`]]parent:: <<targetNodeType>>
+[[ReplaceChild.parent, `parent`]]parent:: <<nodeIdType>>
 of the node we want to replace a child in.
 
 [[ReplaceChild.containment, `containment`]]containment:: <<metaPointerType>>
@@ -33,7 +33,7 @@ of the node we want to replace a child in.
 [[ReplaceChild.index, `index`]]index:: <<indexType>>
 where we want to replace <<ReplaceChild.replacedChild>> at in <<ReplaceChild.containment>> of <<ReplaceChild.parent>>.
 
-[[ReplaceChild.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+[[ReplaceChild.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
 of the node we want to replace in <<ReplaceChild.containment>> of <<ReplaceChild.parent>> at <<ReplaceChild.index>>.
 
 [[ReplaceChild.split, `split`]]split?:: <<splitFlagType>>

@@ -9,7 +9,7 @@ Both representations express the parameter to be unset.{fn-org427}
 [horizontal]
 [[additionalInfosType]]AdditionalInfos:: Optionally empty{fn-org402} list of <<additionalInfo>>s.
 
-[[targetNodeType]]TargetNode:: Target's node as <<{m3}.adoc#node-id, id>>.
+[[nodeIdType]]NodeId:: A node represented by its <<{m3}.adoc#node-id, id>>.
 
 [[metaPointerType]]MetaPointer:: MetaPointer-tuple to describe an M2 element (classifier, feature, etc.).
 Encoded as <<{serialization}.adoc#meta-pointer, meta-pointer>>.
@@ -108,7 +108,7 @@ Can be any string, including empty string.
 The value depends on the feature kind referred to by the error message:
 
 [horizontal]
-containment or annotation::: <<targetNodeType>>
+containment or annotation::: <<nodeIdType>>
 property::: <<propertyValueType>>
 reference::: serialized <<resolveInfoType>>
 

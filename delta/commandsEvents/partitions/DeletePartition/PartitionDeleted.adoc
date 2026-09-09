@@ -9,9 +9,9 @@ This client is now unsubscribed from any changes to <<PartitionDeleted.deletedPa
 
 [horizontal]
 .Parameters
-[[PartitionDeleted.deletedPartition, `deletedPartition`]]deletedPartition:: <<targetNodeType>>
+[[PartitionDeleted.deletedPartition, `deletedPartition`]]deletedPartition:: <<nodeIdType>>
 
-[[PartitionDeleted.deletedDescendants, `deletedDescendants`]]deletedDescendants:: <<targetNodeType>>[]
+[[PartitionDeleted.deletedDescendants, `deletedDescendants`]]deletedDescendants:: <<nodeIdType>>[]
 
 [[PartitionDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
 

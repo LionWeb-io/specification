@@ -20,7 +20,7 @@ include::MoveAndReplaceChildFromOtherContainmentInSameParent-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[MoveAndReplaceChildFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+[[MoveAndReplaceChildFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
 
@@ -30,9 +30,9 @@ include::MoveAndReplaceChildFromOtherContainmentInSameParent-diagram.adoc[]
 
 [[MoveAndReplaceChildFromOtherContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
-[[MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+[[MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
 
-[[MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 
 [[MoveAndReplaceChildFromOtherContainmentInSameParent.commandId]]commandId:: <<commandIdType>>
 

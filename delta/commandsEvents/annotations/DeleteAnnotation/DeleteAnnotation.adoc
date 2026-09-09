@@ -15,11 +15,11 @@ include::DeleteAnnotation-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[DeleteAnnotation.parent, `parent`]]parent:: <<targetNodeType>>
+[[DeleteAnnotation.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[DeleteAnnotation.index, `index`]]index:: <<indexType>>
 
-[[DeleteAnnotation.deletedAnnotation, `deletedAnnotation`]]deletedAnnotation:: <<targetNodeType>>
+[[DeleteAnnotation.deletedAnnotation, `deletedAnnotation`]]deletedAnnotation:: <<nodeIdType>>
 
 [[DeleteAnnotation.commandId]]commandId:: <<commandIdType>>
 
