@@ -37,3 +37,7 @@
 * Week of 7 september: produce draft slide deck, based on (the styling of) the existing slide decks (in PowerPoint format; `.pptx` — from before the `langdev2026-slides` branch of the `specification` repo), especially the “outer shell”.
 	* Fully flesh out one use case, so we can judge whether the format works.
 
+### Use cases
+
+[Proton document](https://docs.proton.me/?mode=open-url&linkId=hEoOoUSyM9EdJJsJErqCx5EM24DXTiUff9XEg6MzWOGpjQxUq7mHAjIfe3RLYWebfjnBxJ1o6Zkkb--sXEistQ%3D%3D&token=NZCREXS2B4#fhMCGbUaNaIi)
+
