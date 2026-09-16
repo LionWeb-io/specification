@@ -1,0 +1,43 @@
+= Conference talks
+
+This folder holds references to talks we’ve given at various conferences.
+References can consist of: slide deck (in both PDF and PowerPoint format), a video recording of the talk (when and where available), conference website.
+
+== LangDev
+
+2023::
+    xref:LangDev/2023/LangDev 2023 Talk.pdf[slides (PDF)], xref:LangDev/2023/LangDev 2023 Talk.pptx[slides (PowerPoint)], https://www.youtube.com/watch?v=ZuR2C7DZ_r0[video]
+
+2024::
+    xref:LangDev/2024/LangDev 2024 Talk.pdf[slides (PDF)], xref:LangDev/2024/LangDev 2024 Talk.pptx[slides (PowerPoint)], https://www.youtube.com/watch?v=2KW-xalM2yE[video]
+
+2025::
+    xref:LangDev/2025/LangDev 2025 Talk.pdf[slides (PDF)], xref:LangDev/2025/LangDev 2025 Talk.pptx[slides (PowerPoint)]
+
+
+== MODELS
+
+2023::
+    xref:MODELS/2023/MODELS education Talk.pdf[slides (PDF)], xref:MODELS/2023/MODELS education Talk.pptx[slides (PowerPoint)]
+
+2024::
+    https://conf.researchr.org/details/models-2024/models-2024-industry-day/6/LionWeb-Language-Interfaces-on-the-Web[conference]
+
+2026::
+    _Industry Day_
+
+
+== MBSE
+
+2025::
+    xref:MBSE/2025/MBSE 11-2025.pdf[slides (PDF)], xref:MBSE/2025/MBSE 11-2025.pptx[slides (PowerPoint)]
+
+
+== Other
+
+SEN Symposium 2024::
+    xref:SEN 2024/SEN-symposium 2024.pdf[slides (PDF)], xref:SEN 2024/SEN-symposium 2024.pptx[slides (PowerPoint)], xref:SEN 2024/SEN-symposium-poster-layers.pdf[poster (PDF)]
+
+Strumenta Panel 2024::
+    xref:Strumenta Panel 2024/StrumentaPanel Talk.pdf[slides (PDF)], xref:Strumenta Panel 2024/StrumentaPanel Talk.pptx[slides (PowerPoint)]
+

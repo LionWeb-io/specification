@@ -19,3 +19,13 @@
 == Articles
 
 * xref:articles/model-anatomy.adoc[Anatomy of a LionWeb Model]
+* xref:articles/m3-comparison.adoc[LionWeb's Meta-meta-model in Comparison]
+
+== Conference talks
+
+* Conference talks with their slide decks, and recorded videos (when available) — see their own xref:conference-talks/conference-talks.adoc[index].
+
+== Resources
+
+* Artifacts that might be useful to LionWeb developers — see their own xref:resources/resources.adoc[index].
+

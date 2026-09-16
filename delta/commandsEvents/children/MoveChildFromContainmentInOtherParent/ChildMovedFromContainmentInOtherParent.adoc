@@ -1,0 +1,37 @@
+[[evnt-ChildMovedFromOtherContainment]]
+[[evnt-ChildMovedFromContainmentInOtherParent]]
+===== Child moved from containment in other parent
+<<existing-nodes, Existing node>> <<ChildMovedFromContainmentInOtherParent.movedChild>> (previously inside <<ChildMovedFromContainmentInOtherParent.oldParent>>'s <<ChildMovedFromContainmentInOtherParent.oldContainment>> at <<ChildMovedFromContainmentInOtherParent.oldIndex>>) has been moved
+inside <<ChildMovedFromContainmentInOtherParent.newParent>>'s <<ChildMovedFromContainmentInOtherParent.newContainment>> at <<ChildMovedFromContainmentInOtherParent.newIndex>>.
+
+All other children inside <<ChildMovedFromContainmentInOtherParent.oldParent>>'s <<ChildMovedFromContainmentInOtherParent.oldContainment>> with index > <<ChildMovedFromContainmentInOtherParent.oldIndex>> have been moved to next lower index.
+
+All other children inside <<ChildMovedFromContainmentInOtherParent.newParent>>'s <<ChildMovedFromContainmentInOtherParent.newContainment>> with index >= <<ChildMovedFromContainmentInOtherParent.newIndex>> have been moved to next higher index.
+
+.Technical name
+`ChildMovedFromContainmentInOtherParent`{fn-org513}
+
+[horizontal]
+.Parameters
+[[ChildMovedFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+
+[[ChildMovedFromContainmentInOtherParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
+
+[[ChildMovedFromContainmentInOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+
+[[ChildMovedFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+
+[[ChildMovedFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+
+[[ChildMovedFromContainmentInOtherParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+
+[[ChildMovedFromContainmentInOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[ChildMovedFromContainmentInOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ChildMovedFromContainmentInOtherParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ChildMovedFromContainmentInOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+
+.Related command
+<<cmd-MoveChildFromContainmentInOtherParent>>

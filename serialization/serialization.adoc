@@ -203,7 +203,8 @@ NOTE: The referred *node* can be contained in the processed document, but also c
 *** _null_ if the *id* of the target *node* is not known.
 +
 `resolveInfo` and `reference` MUST NOT both be `null`.
-The `reference` value has preference over the `resolveInfo` value in the following sense: if the `reference` value resolves to a node _n~1~_ and the `resolveInfo` value resolves to a different node _n~2~_, then the reference (as a whole) MUST resolve to _n~1~_.
+The `reference` value has preference over the `resolveInfo` value in the following sense:
+if the `reference` value resolves to a node _n~1~_ and the `resolveInfo` value resolves to a different node _n~2~_, then the reference (as a whole) MUST resolve to _n~1~_.{fn-org96}{fn-org396}
 
 [[annotation]]
 ==== Annotation
@@ -289,7 +290,8 @@ An implementation MAY refuse a model containing an integer value outside the sup
 * `"-6 "`
 
 [[structuredDatatype]]
-==== Structured Datatype
+[[structuredDataType]]
+==== Structured Data Type
 <<{m3}.adoc#StructuredDataType, LionCore StructuredDataType>> MUST be encoded as JSON _string_.
 The string contains a JSON _object_ according to spec (RFC 8259) with proper escaping: all double quotes, line breaks, etc. MUST be escaped to form a proper JSON _string_.
 
@@ -297,9 +299,9 @@ The contents of the string are formed as follows:
 A <<{m3}.adoc#StructuredDataType, LionCore StructuredDataType>> is encoded as JSON _object_.
 Each <<{m3}.adoc#Field, Field>> forms one _member_, with the field's <<{m3}.adoc#IKeyed.key, key>> as JSON _name_ and the field's value as JSON _value_.
 For fields of type <<string>>, <<boolean>>, <<integer>>, and <<literal>>, the _value_ is encoded as JSON _string_ in the same way as for a property.
-For fields of type <<structuredDatatype>>, the value is encoded as JSON _object_.
+For fields of type <<structuredDataType>>, the value is encoded as JSON _object_.
 
-.Structured datatypes used in the examples
+.Structured data types used in the examples
 --
 
 NOTE: The format used in this example is non-normative.
@@ -310,16 +312,16 @@ enumeration Currency                   [id aa, key currency]
   literal EUR                          [id a0, key cur-eur]
   literal GBP                          [id a1, key cur-gbp]
 
-structured datatype Amount             [id 10, key amount]
+structured data type Amount             [id 10, key amount]
   value: Integer                       [id 11, key amount-val]
   currency: Currency                   [id 12, key amount-cur]
   digital: Boolean                     [id 13, key digital]
 
-structured datatype Decimal            [id 20, key decimal]
+structured data type Decimal            [id 20, key decimal]
   int: Integer                         [id 21, key decimal-int]
   frac: Integer                        [id 22, key decimal-frac]
 
-structured datatype ComplexNumber      [id 30, key complex]
+structured data type ComplexNumber      [id 30, key complex]
   real: Decimal                        [id 31, key complex-real]
   imaginary: Decimal                   [id 32, key complex-imaginary]
 ----
@@ -428,7 +430,7 @@ unescaped content:
 {"decimal-int": "42", "decimal-frac": "0", "decimal-comment": "life question?"}
 ----
 
-* ComplexNumber with recursively nested structured datatype: `"{\n\"complex-real\": \"{ \\\"decimal-int\\\": \\\"23\\\", \\\"decimal-frac\\\": \\\"17\\\"}\",\n\"complex-imaginary\": { \"decimal-int\": \"42\", \"decimal-frac\": \"0\"}\n}"`
+* ComplexNumber with recursively nested structured data type: `"{\n\"complex-real\": \"{ \\\"decimal-int\\\": \\\"23\\\", \\\"decimal-frac\\\": \\\"17\\\"}\",\n\"complex-imaginary\": { \"decimal-int\": \"42\", \"decimal-frac\": \"0\"}\n}"`
 +
 unescaped content:
 +
@@ -570,6 +572,8 @@ This section lists all versions as they appear in <<SerializationChunk.serializa
 === 2026.1
 Technical name: `2026.1`
 
+* <<reference, references>> on `resolveInfo` vs. `reference`.{fn-org396}
+* <<parent, parent>> `null` conditions{fn-org228}
 * Editorial changes and clarifications.
 
 Refer to <<{roadmap}.adoc#release-2026.1, roadmap>> for details.
@@ -577,7 +581,7 @@ Refer to <<{roadmap}.adoc#release-2026.1, roadmap>> for details.
 === 2024.1
 Technical name: `2024.1`
 
-* Repurposed `JSON` primitive datatype serialization for <<{m3}.adoc#StructuredDataType, StructuredDataType>>
+* Repurposed `JSON` primitive data type serialization for <<{m3}.adoc#StructuredDataType, StructuredDataType>>
 
 Refer to <<{roadmap}.adoc#release-2024.1, roadmap>> for details.
 

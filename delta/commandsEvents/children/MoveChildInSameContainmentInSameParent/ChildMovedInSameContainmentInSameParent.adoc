@@ -1,0 +1,35 @@
+[[evnt-ChildMovedInSameContainment]]
+[[evnt-ChildMovedInSameContainmentInSameParent]]
+===== Child moved in same containment in same parent
+<<existing-nodes, Existing node>> <<ChildMovedInSameContainmentInSameParent.movedChild>>
+that was initially at index <<ChildMovedInSameContainmentInSameParent.oldIndex>>
+within the <<ChildMovedInSameContainmentInSameParent.containment>> inside <<ChildMovedInSameContainmentInSameParent.parent>>
+was moved by <<ChildMovedInSameContainmentInSameParent.indexOffset>> positions
+to index (<<ChildMovedInSameContainmentInSameParent.oldIndex>> + <<ChildMovedInSameContainmentInSameParent.indexOffset>>).
+
+This conforms to <<justMovingANode, the action of moving a node in one specific list>> — see that section for more information, diagrams, and examples.
+
+.Technical name
+`ChildMovedInSameContainmentInSameParent`{fn-org514}
+
+[horizontal]
+.Parameters
+[[ChildMovedInSameContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+
+[[ChildMovedInSameContainmentInSameParent.containment, `containment`]]containment:: <<metaPointerType>>
+
+[[ChildMovedInSameContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+
+[[ChildMovedInSameContainmentInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
+MUST NOT be 0.{fn-org482}
+
+[[ChildMovedInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+
+[[ChildMovedInSameContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
+
+[[ChildMovedInSameContainmentInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+
+[[ChildMovedInSameContainmentInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+
+.Related command
+<<cmd-MoveChildInSameContainmentInSameParent>>

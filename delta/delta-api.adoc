@@ -23,7 +23,7 @@ it is *not* intended as a bulk API that updates large chunks of the model at onc
 
 include::introduction.adoc[]
 
-include::description.adoc[]
+include::description/description.adoc[]
 
 include::scenarios/scenarios.adoc[]
 
