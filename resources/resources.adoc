@@ -1,6 +1,0 @@
-= Resources
-
-This folder holds “resources”: documents and artifacts that don’t fall in any of the other top-level categories, but might be useful to either the LionWeb developers themselves, or other people wanting to further the cause.
-
-* `logo/`: the LionWeb logo in various variants and formats — see its xref:logo/README.md[README.md].
-
