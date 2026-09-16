@@ -23,9 +23,6 @@ References can consist of: slide deck (in both PDF and PowerPoint format), a vid
 2024::
     https://conf.researchr.org/details/models-2024/models-2024-industry-day/6/LionWeb-Language-Interfaces-on-the-Web[conference]
 
-2025::
-    https://conf.researchr.org/details/models-2024/models-2024-industry-day/6/LionWeb-Language-Interfaces-on-the-Web[conference]
-
 2026::
     _Industry Day_
 
