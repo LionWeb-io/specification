@@ -15,18 +15,25 @@ include::ChangeReference-diagram.adoc[]
 [horizontal]
 .Parameters
 [[ChangeReference.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to change a reference of.
 
 [[ChangeReference.reference, `reference`]]reference:: <<metaPointerType>>
+<<{m3}.adoc#Reference, Reference>> we want to change in <<ChangeReference.parent>>.
 
 [[ChangeReference.index, `index`]]index:: <<indexType>>
+where we want to change <<ChangeReference.oldReference>> / <<ChangeReference.oldResolveInfo>> at in <<ChangeReference.reference>> of <<ChangeReference.parent>>.
 
 [[ChangeReference.oldReference, `oldReference`]]oldReference:: <<nodeIdType>>?
+of the node <<ChangeReference.reference>> is currently set to in <<ChangeReference.parent>>, if any.
 
 [[ChangeReference.oldResolveInfo, `oldResolveInfo`]]oldResolveInfo:: <<resolveInfoType>>?
+of the node <<ChangeReference.reference>> is currently set to in <<ChangeReference.parent>>, if any.
 
 [[ChangeReference.newReference, `newReference`]]newReference:: <<nodeIdType>>?
+of the node we want to set <<ChangeReference.reference>> in <<ChangeReference.parent>> to, if any.
 
 [[ChangeReference.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
+of the node we want to set <<ChangeReference.reference>> in <<ChangeReference.parent>> to, if any.
 
 [[ChangeReference.commandId]]commandId:: <<commandIdType>>
 

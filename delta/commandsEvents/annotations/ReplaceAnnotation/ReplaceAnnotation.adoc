@@ -20,15 +20,18 @@ include::ReplaceAnnotation-diagram.adoc[]
 [horizontal]
 .Parameters
 [[ReplaceAnnotation.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
-Subtree to form a new annotation.
+Subtree to form a new annotation that replaces <<ReplaceAnnotation.replacedAnnotation>>.
 The _anchor node_ MUST contain the <<ReplaceAnnotation.parent>> as _parent_.{fn-org357}
 All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 
 [[ReplaceAnnotation.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to replace an annotation in.
 
 [[ReplaceAnnotation.index, `index`]]index:: <<indexType>>
+where we want to replace <<ReplaceAnnotation.replacedAnnotation>> at in annotations of <<ReplaceAnnotation.parent>>.
 
 [[ReplaceAnnotation.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
+of the node we want to replace in annotations of <<ReplaceAnnotation.parent>> at <<ReplaceAnnotation.index>>.
 
 [[ReplaceAnnotation.split, `split`]]split?:: <<splitFlagType>>
 
@@ -38,6 +41,7 @@ All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.
 
 .Errors
 * <<err-unknownNode>> for <<ReplaceAnnotation.parent>>
+* <<err-unknownNode>> for <<ReplaceAnnotation.replacedAnnotation>>
 * <<err-invalidAnchorNode>> for <<ReplaceAnnotation.newAnnotation>>
 * <<err-nodeAlreadyExists>> for <<ReplaceAnnotation.newAnnotation>>
 * <<err-parentContainmentMismatch>> for <<ReplaceAnnotation.newAnnotation>>

@@ -4,7 +4,7 @@ Move <<existing-nodes, existing node>> <<MoveAndReplaceAnnotationInSameParent.mo
 that’s initially at index <<MoveAndReplaceAnnotationInSameParent.oldIndex>>
 in <<MoveAndReplaceAnnotationInSameParent.parent>>'s annotations
 by <<MoveAndReplaceAnnotationInSameParent.indexOffset>> positions
-to index (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAndReplaceAnnotationInSameParent.indexOffset>>),
+to index (<<MoveAndReplaceAnnotationInSameParent.oldIndex>> + <<MoveAndReplaceAnnotationInSameParent.indexOffset>>),
 replacing <<existing-nodes, current node>> <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>{fn-org371}.
 This deletes <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>, and all its descendants (including annotation instances).
 Does NOT change references to any of the deleted nodes.{fn-org285}
@@ -17,15 +17,19 @@ This conforms to <<movingAndReplacingNodes, the action of moving a node and repl
 [horizontal]
 .Parameters
 [[MoveAndReplaceAnnotationInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to move an annotation in.
 
 [[MoveAndReplaceAnnotationInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<nodeIdType>>
+where we want to move <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>> from in annotations of <<MoveAndReplaceAnnotationInSameParent.parent>>.
 
 [[MoveAndReplaceAnnotationInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
-MUST NOT be 0.
+how much we want to move <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>> in annotations of <<MoveAndReplaceAnnotationInSameParent.parent>>.
 
 [[MoveAndReplaceAnnotationInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
+of the node we want to move in annotations in <<MoveAndReplaceAnnotationInSameParent.parent>>.
 
 [[MoveAndReplaceAnnotationInSameParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
+of the node we want to replace in annotations in <<MoveAndReplaceAnnotationInSameParent.parent>>.
 
 [[MoveAndReplaceAnnotationInSameParent.commandId]]commandId:: <<commandIdType>>
 
@@ -33,17 +37,17 @@ MUST NOT be 0.
 
 .Errors
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationInSameParent.parent>>
+* <<err-unknownNode>> for <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>
+* <<err-unknownNode>> for <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>
 * <<err-unknownIndex>> for <<MoveAndReplaceAnnotationInSameParent.oldIndex>>
 is not an integer in the range [0..(the number of annotations on <<MoveAndReplaceAnnotationInSameParent.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
 * <<err-invalidIndexOffset>> for <<MoveAndReplaceAnnotationInSameParent.indexOffset>>
-if <<MoveAndReplaceAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveAndReplaceAnnotationInSameParent.oldIndex>> + <<MoveAndReplaceAnnotationInSameParent.indexOffset>>) is not in the range [0..(the number of annotations on <<MoveAnnotationInSameParent.parent>> - 1)]
-* <<err-unknownNode>> for <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>
+if <<MoveAndReplaceAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveAndReplaceAnnotationInSameParent.oldIndex>> + <<MoveAndReplaceAnnotationInSameParent.indexOffset>>) is not in the range [0..(the number of annotations on <<MoveAndReplaceAnnotationInSameParent.parent>> - 1)]
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceAnnotationInSameParent.oldIndex>> and <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>
 if <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>> is not at index <<MoveAndReplaceAnnotationInSameParent.oldIndex>> in the annotations on <<MoveAndReplaceAnnotationInSameParent.parent>>
 * <<err-parentMismatch>> <<MoveAndReplaceAnnotationInSameParent.parent>>
 is not the parent of <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>
 * <<err-moveWithoutParent>> for <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>
-* <<err-unknownNode>> for <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceAnnotationInSameParent.oldIndex>>/<<MoveAndReplaceAnnotationInSameParent.indexOffset>> and <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>
 if <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>> is not at index (<<MoveAndReplaceAnnotationInSameParent.oldIndex>> + <<MoveAndReplaceAnnotationInSameParent.indexOffset>>) in the annotations on <<MoveAndReplaceAnnotationInSameParent.parent>>
 * <<err-parentMismatch>> <<MoveAndReplaceAnnotationInSameParent.parent>> is not the parent of <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>

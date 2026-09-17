@@ -21,7 +21,7 @@ of the node we want to change a property of.
 <<{m3}.adoc#Property, Property>> we want to change in <<ChangeProperty.node>>.
 
 [[ChangeProperty.newValue, `newValue`]]newValue:: <<propertyValueType>>
-Value we want to change <<AddProperty.property>> in <<ChangeProperty.node>> to.
+Value we want to change <<ChangeProperty.property>> in <<ChangeProperty.node>> to.
 
 [[ChangeProperty.commandId]]commandId:: <<commandIdType>>
 

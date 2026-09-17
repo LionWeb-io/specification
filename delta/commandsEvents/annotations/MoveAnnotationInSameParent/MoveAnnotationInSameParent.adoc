@@ -14,13 +14,16 @@ This conforms to <<justMovingANode, the action of moving a node in one specific 
 [horizontal]
 .Parameters
 [[MoveAnnotationInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to move an annotation in.
 
 [[MoveAnnotationInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<nodeIdType>>
+where we want to move <<MoveAnnotationInSameParent.movedAnnotation>> from in annotations of <<MoveAnnotationInSameParent.parent>>.
 
 [[MoveAnnotationInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
-MUST NOT be 0.{fn-org482}
+how much we want to move <<MoveAnnotationInSameParent.movedAnnotation>> in annotations of <<MoveAnnotationInSameParent.parent>>.
 
 [[MoveAnnotationInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
+of the annotation we want to move.
 
 [[MoveAnnotationInSameParent.commandId]]commandId:: <<commandIdType>>
 
@@ -28,11 +31,12 @@ MUST NOT be 0.{fn-org482}
 
 .Errors
 * <<err-unknownNode>> for <<MoveAnnotationInSameParent.parent>>
+* <<err-unknownNode>> for <<MoveAnnotationInSameParent.movedAnnotation>>
+* <<err-parentMismatch>> for <<MoveAnnotationInSameParent.parent>> and <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-unknownIndex>> for <<MoveAnnotationInSameParent.oldIndex>>
 is not an integer in the range [0..(the number of annotations on <<MoveAnnotationInSameParent.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
 * <<err-invalidIndexOffset>> for <<MoveAnnotationInSameParent.indexOffset>>
 if <<MoveAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAnnotationInSameParent.indexOffset>>) is not in the range [0..(the number of annotations on <<MoveAnnotationInSameParent.parent>> - 1)]
-* <<err-unknownNode>> for <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-indexEntryMismatch>> for <<MoveAnnotationInSameParent.oldIndex>> and <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-parentMismatch>> <<MoveAnnotationInSameParent.parent>> is not the parent of <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-moveWithoutParent>> for <<MoveAnnotationInSameParent.movedAnnotation>>
