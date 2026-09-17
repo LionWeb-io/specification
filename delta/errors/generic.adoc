@@ -30,6 +30,18 @@ See also <<customMessages>>.
 .Technical name
 `messageKindUnknown`
 
+[[err-missingRequiredMessageParameter]]
+===== Missing required message parameter
+A <<queries, query response>> or <<commands, command>> is missing a required parameter.
+
+.Technical name
+`missingRequiredMessageParameter`
+
+.Additional infos
+[horizontal]
+[[missingRequiredMessageParameter.parameter]]parameter:: <<stringType>>
+Name of the missing parameter.
+
 [[err-unknownNode]]
 ===== Unknown node
 Client tries to operate on a node unknown to the repository.

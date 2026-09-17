@@ -112,6 +112,7 @@ containment or annotation::: <<nodeIdType>>
 property::: <<propertyValueType>>
 reference::: serialized <<resolveInfoType>>
 
+[[stringType]]string:: A string value.
 
 [[new-nodes, new nodes]]
 ==== New nodes
