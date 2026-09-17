@@ -17,6 +17,7 @@ include::AddAnnotation-diagram.adoc[]
 [horizontal]
 .Parameters
 [[AddAnnotation.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to add a new annotation to.
 
 [[AddAnnotation.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
 Subtree to form a new annotation.
@@ -24,6 +25,7 @@ The _anchor node_ MUST contain the <<AddAnnotation.parent>> as _parent_.{fn-org3
 All nodes in that subtree MUST be <<new-nodes>>.
 
 [[AddAnnotation.index, `index`]]index:: <<indexType>>
+where we want to add <<AddAnnotation.newAnnotation>> at annotations of <<AddAnnotation.parent>>.
 
 [[AddAnnotation.split, `split`]]split?:: <<splitFlagType>>
 

@@ -16,10 +16,13 @@ include::DeleteAnnotation-diagram.adoc[]
 [horizontal]
 .Parameters
 [[DeleteAnnotation.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to delete an annotation from.
 
 [[DeleteAnnotation.index, `index`]]index:: <<indexType>>
+where we want to delete <<DeleteAnnotation.deletedAnnotation>> from in annotations of <<DeleteAnnotation.parent>>.
 
 [[DeleteAnnotation.deletedAnnotation, `deletedAnnotation`]]deletedAnnotation:: <<nodeIdType>>
+of the node we want to delete in annotations of <<DeleteAnnotation.parent>> at <<DeleteAnnotation.index>>.
 
 [[DeleteAnnotation.commandId]]commandId:: <<commandIdType>>
 
@@ -27,6 +30,8 @@ include::DeleteAnnotation-diagram.adoc[]
 
 .Errors
 * <<err-unknownNode>> for <<DeleteAnnotation.parent>>
+* <<err-unknownNode>> for <<DeleteAnnotation.deletedAnnotation>>
+* <<err-parentMismatch>> for <<DeleteAnnotation.parent>> and <<DeleteAnnotation.deletedAnnotation>>
 * <<err-unknownIndex>> for <<DeleteAnnotation.index>> (is beyond (the number of annotations of <<DeleteAnnotation.parent>>) - 1)
 * <<err-indexEntryMismatch>> for <<DeleteAnnotation.index>> and <<DeleteAnnotation.deletedAnnotation>>
 * <<err-invalidParticipation>>

@@ -15,14 +15,19 @@ include::AddReference-diagram.adoc[]
 [horizontal]
 .Parameters
 [[AddReference.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to add a reference to.
 
 [[AddReference.reference, `reference`]]reference:: <<metaPointerType>>
+<<{m3}.adoc#Reference, Reference>> we want to add to <<AddReference.parent>>.
 
 [[AddReference.index, `index`]]index:: <<indexType>>
+where we want to add <<AddReference.newReference>> / <<AddReference.newResolveInfo>> at in <<AddReference.reference>> of <<AddReference.parent>>.
 
 [[AddReference.newReference, `newReference`]]newReference:: <<nodeIdType>>?
+of the node we want to set <<AddReference.reference>> in <<AddReference.parent>> to, if any.
 
 [[AddReference.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
+of the node we want to set <<AddReference.reference>> in <<AddReference.parent>> to, if any.
 
 [[AddReference.commandId]]commandId:: <<commandIdType>>
 
