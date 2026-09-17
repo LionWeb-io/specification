@@ -1,3 +1,4 @@
+[[customMessages]]
 === Custom messages
 We support custom messages, i.e. messages that match the general structure of delta messages, but with custom content.{fn-org448}
 
@@ -7,7 +8,7 @@ The technical name of all custom messages and custom errors MUST adhere to the s
 [[qry-custom]]
 ==== Custom queries
 A client CAN send custom query messages.
-If the repository understands the custom query, it replies with a matching response; otherwise, the repository MUST send back an <<qry-ErrorResponse>>.
+If the repository understands the custom query, it replies with a matching response; otherwise, the repository MUST send back an <<qry-ErrorResponse>> with <<err-messageKindUnknown>>.
 
 Custom queries MUST have at least the following parameters:
 
@@ -33,7 +34,7 @@ Id of this query.
 [[cmd-custom]]
 ==== Custom commands
 A client CAN send custom command messages.
-If the repository understands the custom command, it replies with a matching event; otherwise, the repository MUST send back an <<evnt-ErrorEvent>>.
+If the repository understands the custom command, it replies with a matching event; otherwise, the repository MUST send back an <<evnt-ErrorEvent>> with <<err-messageKindUnknown>>.
 
 Custom commands MUST have at least the following parameters:
 
