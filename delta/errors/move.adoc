@@ -3,6 +3,7 @@
 
 Reported by all <<group-move-or-replace>> commands.
 
+##TODO: outdated##
 If we're trying to move a node in an invalid way, we report the following errors in the given order:
 
 . <<err-unknownNode>> if:
