@@ -14,6 +14,21 @@ Possible reasons:
 .Technical name
 `invalidParticipation`
 
+[[err-messageSyntaxIncorrect]]
+===== Message syntax incorrect
+The delta message does not adhere to the syntax defined by this specification.
+
+.Technical name
+`messageSyntaxIncorrect`
+
+[[err-messageKindUnknown]]
+===== Message kind unknown
+The repository does not recognize the message.
+
+See also <<customMessages>>.
+
+.Technical name
+`messageKindUnknown`
 
 [[err-unknownNode]]
 ===== Unknown node
