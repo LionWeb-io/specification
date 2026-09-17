@@ -12,13 +12,13 @@ All other annotations inside <<AnnotationMovedFromOtherParent.newParent>>'s anno
 
 [horizontal]
 .Parameters
-[[AnnotationMovedFromOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+[[AnnotationMovedFromOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
 
 [[AnnotationMovedFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
 
-[[AnnotationMovedFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
+[[AnnotationMovedFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
 
-[[AnnotationMovedFromOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+[[AnnotationMovedFromOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
 
 [[AnnotationMovedFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 

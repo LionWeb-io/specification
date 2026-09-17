@@ -3,12 +3,14 @@
 ===== Unsubscribe from partition contents
 This client does not want to receive events on any changes to <<UnsubscribeFromPartitionContents.partition>> or any of its descendants anymore.{fn-org270}
 
+See also and <<subscription>>.
+
 .Technical name
 `UnsubscribeFromPartitionContents`
 
 [horizontal]
 .Request parameters
-[[UnsubscribeFromPartitionContents.partition, `partition`]]partition:: <<targetNodeType>>
+[[UnsubscribeFromPartitionContents.partition, `partition`]]partition:: <<nodeIdType>>
 Node id of the partition this client wants to stop receiving events of.
 
 [[UnsubscribeFromPartitionContents.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
@@ -24,5 +26,6 @@ Id of this query.
 [[UnsubscribeFromPartitionContents.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* not subscribed to <<UnsubscribeFromPartitionContents.partition>>
+* `notSubscribedToPartition`: Participation is not subscribed to <<UnsubscribeFromPartitionContents.partition>>.
+* <<err-unknownNode>> for <<UnsubscribeFromPartitionContents.partition>>.
 * <<err-invalidParticipation>>

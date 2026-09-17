@@ -1,6 +1,6 @@
 [[evnt-Composite]]
 [[evnt-CompositeEvent]]
-===== Composite
+===== CompositeEvent
 The events in <<CompositeEvent.parts>> have happened in the given order.{fn-org281}
 
 We CAN nest composite events arbitrarily{fn-org360}, and CAN include <<evnt-ErrorEvent>> and/or <<evnt-NoOpEvent>>{fn-org491}.

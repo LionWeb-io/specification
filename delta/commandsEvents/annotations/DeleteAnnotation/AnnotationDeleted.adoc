@@ -8,11 +8,11 @@ All other annotations inside <<AnnotationDeleted.parent>>'s annotations with ind
 
 [horizontal]
 .Parameters
-[[AnnotationDeleted.deletedAnnotation, `deletedAnnotation`]]deletedAnnotation:: <<targetNodeType>>
+[[AnnotationDeleted.deletedAnnotation, `deletedAnnotation`]]deletedAnnotation:: <<nodeIdType>>
 
-[[AnnotationDeleted.deletedDescendants, `deletedDescendants`]]deletedDescendants:: <<targetNodeType>>[]
+[[AnnotationDeleted.deletedDescendants, `deletedDescendants`]]deletedDescendants:: <<nodeIdType>>[]
 
-[[AnnotationDeleted.parent, `parent`]]parent:: <<targetNodeType>>
+[[AnnotationDeleted.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[AnnotationDeleted.index, `index`]]index:: <<indexType>>
 

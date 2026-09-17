@@ -16,9 +16,9 @@ All other children inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'
 
 [[ChildMovedFromOtherContainmentInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
 
-[[ChildMovedFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[ChildMovedFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 
-[[ChildMovedFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<targetNodeType>>
+[[ChildMovedFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[ChildMovedFromOtherContainmentInSameParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
 

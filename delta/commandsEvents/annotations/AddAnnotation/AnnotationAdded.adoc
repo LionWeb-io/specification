@@ -4,12 +4,14 @@
 
 All other annotations inside <<AnnotationAdded.parent>>'s annotations with index >= <<AnnotationAdded.index>> have been moved to next higher index.
 
+See also <<splittableMessage>>.
+
 .Technical name
 `AnnotationAdded`
 
 [horizontal]
 .Parameters
-[[AnnotationAdded.parent, `parent`]]parent:: <<targetNodeType>>
+[[AnnotationAdded.parent, `parent`]]parent:: <<nodeIdType>>
 
 [[AnnotationAdded.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
 Subtree that formed the new annotation.

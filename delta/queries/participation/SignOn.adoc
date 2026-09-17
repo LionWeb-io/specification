@@ -33,4 +33,4 @@ Id of this query.
 [[SignOn.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 
 .Errors
-* Unsupported delta protocol version
+* `unsupportedProtocolVersion`: Unsupported delta protocol version

@@ -24,7 +24,7 @@ Whether this client wants to receive events on newly created partitions (`true`)
 Whether this client wants to receive events on deleted partitions (`true`), or not (`false`).
 
 [[InformAboutChangingPartitions.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>
-Depth of <<evnt-PartitionAdded>>.<<PartitionAdded.newPartition>>.
+Depth of <<PartitionAdded.newPartition>> in received <<evnt-PartitionAdded>> events.
 
 [[InformAboutChangingPartitions.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
@@ -40,4 +40,4 @@ Id of this query.
 
 .Errors
 * <<err-invalidParticipation>>
-* Client already requested <<qry-SubscribeToChangingPartitions>>
+* <<err-mixedInformAboutAndSubscribeToChangingPartitions>>

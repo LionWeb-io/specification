@@ -13,15 +13,15 @@ All other children inside <<ChildMovedFromContainmentInOtherParent.newParent>>'s
 
 [horizontal]
 .Parameters
-[[ChildMovedFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+[[ChildMovedFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
 
 [[ChildMovedFromContainmentInOtherParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
 
 [[ChildMovedFromContainmentInOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
 
-[[ChildMovedFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[ChildMovedFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 
-[[ChildMovedFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+[[ChildMovedFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
 
 [[ChildMovedFromContainmentInOtherParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
 

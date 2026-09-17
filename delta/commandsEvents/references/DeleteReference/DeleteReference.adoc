@@ -14,15 +14,20 @@ include::DeleteReference-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[DeleteReference.parent, `parent`]]parent:: <<targetNodeType>>
+[[DeleteReference.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to delete a reference from.
 
 [[DeleteReference.reference, `reference`]]reference:: <<metaPointerType>>
+<<{m3}.adoc#Reference, Reference>> we want to change in <<DeleteReference.parent>>.
 
 [[DeleteReference.index, `index`]]index:: <<indexType>>
+where we want to delete <<DeleteReference.deletedReference>> / <<DeleteReference.deletedResolveInfo>> at in <<DeleteReference.reference>> of <<DeleteReference.parent>>.
 
-[[DeleteReference.deletedReference, `deletedReference`]]deletedReference:: <<targetNodeType>>?
+[[DeleteReference.deletedReference, `deletedReference`]]deletedReference:: <<nodeIdType>>?
+of the node <<DeleteReference.reference>> was set to before in <<DeleteReference.parent>>, if any.
 
 [[DeleteReference.deletedResolveInfo, `deletedResolveInfo`]]deletedResolveInfo:: <<resolveInfoType>>?
+of the node <<DeleteReference.reference>> was set to before in <<DeleteReference.parent>>, if any.
 
 [[DeleteReference.commandId]]commandId:: <<commandIdType>>
 

@@ -7,7 +7,7 @@
 
 [horizontal]
 .Parameters
-[[PropertyAdded.node, `node`]]node:: <<targetNodeType>>
+[[PropertyAdded.node, `node`]]node:: <<nodeIdType>>
 
 [[PropertyAdded.property, `property`]]property:: <<metaPointerType>>
 
