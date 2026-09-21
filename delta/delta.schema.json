@@ -1074,6 +1074,7 @@
       },
       "required": [
         "messageKind",
+        "chunk",
         "continuedChunkCompleted",
         "continuedChunkSequenceNumber",
         "queryId",
