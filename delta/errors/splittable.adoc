@@ -5,7 +5,7 @@ Reported by all <<continuedChunk>> messages.
 
 [[err-splitMessageAlreadyCompleted]]
 ===== Split message already completed
-Split message already completed: continued chunk received with a higher <<continuedChunkSequenceNumberType>> than a previous one for which the <<continuedChunkSequenceNumberType>> was `true`.
+Split message already completed: continued chunk received with a higher <<continuedChunkSequenceNumberType>> than a previous one for which the <<continuedChunkCompletedFlagType>> was `true`.
 
 .Technical name
 `splitMessageAlreadyCompleted`

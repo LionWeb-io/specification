@@ -14,6 +14,8 @@ Possible reasons:
 .Technical name
 `invalidParticipation`
 
+##TODO##: Do we have a separate "connection state" when the connection is technically established, but the client is not yet signed in?
+
 [[err-messageSyntaxIncorrect]]
 ===== Message syntax incorrect
 The delta message does not adhere to the syntax defined by this specification.
@@ -114,18 +116,3 @@ Use an <<group-value-add>> or <<group-node-replace>> command instead.
 of the parent containing the unset feature.
 [[featureNotSet.feature]]feature:: <<metaPointerType>>
 Serialized meta-pointer of the unset feature.
-
-
-[[err-featureUnchanged]]
-===== Feature unchanged
-The new and old value of a <<{m3}.adoc#Feature, Feature>> are the same.{fn-org511}
-
-.Technical name
-`featureUnchanged`
-
-.Additional infos
-[horizontal]
-[[featureUnchanged.parent]]parent:: <<nodeIdType>>
-of the parent containing unchanged feature.
-[[featureUnchanged.feature]]feature:: <<metaPointerType>>
-Serialized meta-pointer of the unchanged feature.
