@@ -2,6 +2,10 @@
 === Errors
 Commonly used errors, referred to by their _technical name_ as <<errorCodeType>>.
 
+Additional infos of errors are optional.
+A repository SHOULD provide them, if possible.
+A client MUST NOT require them.
+
 include::generic.adoc[]
 
 include::createNode.adoc[]

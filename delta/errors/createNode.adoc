@@ -39,6 +39,8 @@ of the parent node.
 of the child node.
 [[parentContainmentMismatch.parentId]]parentId:: <<nodeIdType>>
 of the parent mentioned in the child.
+[[parentContainmentMismatch.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<parentContainmentMismatch.child>>.
 
 
 [[err-circularContainment]]

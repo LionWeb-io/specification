@@ -7,3 +7,12 @@ Client tries to set a reference with neither `target` nor `resolveInfo`
 
 .Technical name
 `undefinedReferenceTarget`
+
+.Additional infos
+[horizontal]
+[[undefinedReferenceTarget.parent]]parameter:: <<targetNodeType>>
+[[undefinedReferenceTarget.reference]]parameter:: <<metaPointerType>>
+[[undefinedReferenceTarget.target]]parameter:: <<targetNodeType>>?
+[[undefinedReferenceTarget.resolveInfo]]parameter:: <<resolveInfoType>>?
+[[undefinedReferenceTarget.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<undefinedReferenceTarget.reference>>.

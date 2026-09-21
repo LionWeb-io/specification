@@ -99,6 +99,8 @@ Same format as <<{m3}.adoc#identifiers, identifiers>>; must be unique for report
 [[errorMessageType]]ErrorMessage:: Human-readable message of an error.
 Can be any string, including empty string.
 
+[[parameterType]]Parameter:: Technical name of the parameter an error refers to.
+
 [[booleanType]]boolean:: A boolean value, i.e. either `true` or `false`.
 
 [[countType]]count:: An integer value in the range of 0 to 2147483647 (i.e. 2^31^ − 1).

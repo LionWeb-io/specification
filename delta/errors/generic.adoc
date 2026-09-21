@@ -39,7 +39,7 @@ A <<queries, query response>> or <<commands, command>> is missing a required par
 
 .Additional infos
 [horizontal]
-[[missingRequiredMessageParameter.parameter]]parameter:: <<stringType>>
+[[missingRequiredMessageParameter.parameter]]parameter:: <<parameterType>>
 Name of the missing parameter.
 
 [[err-unknownNode]]
@@ -55,6 +55,8 @@ See also <<errors-move>>.
 [horizontal]
 [[unknownNode.node]]node:: <<nodeIdType>>
 of the unknown node.
+[[unknownNode.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<unknownNode.node>>.
 
 
 [[err-unknownIndex]]
@@ -76,6 +78,8 @@ Serialized meta-pointer of the feature with unknown index.
 The actual size of the feature.
 [[unknownIndex.index]]index:: <<indexType>>
 Unknown index.
+[[unknownIndex.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<unknownIndex.index>>.
 
 
 [[err-featureAlreadySet]]

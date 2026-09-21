@@ -93,6 +93,8 @@ given index.
 given entry.
 [[indexEntryMismatch.actual]]actual:: <<featureValueType>>
 actual entry at the given feature and index.
+[[indexEntryMismatch.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<indexEntryMismatch.index>>.
 
 [[err-invalidIndexOffset]]
 ===== Index offset is invalid
@@ -114,6 +116,8 @@ given offset.
 Minimal valid offset.
 [[invalidIndexOffset.max]]max:: <<indexOffsetType>>
 Maximal valid offset.
+[[invalidIndexOffset.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<invalidIndexOffset.offset>>.
 
 
 [[err-moveWithoutParent]]
