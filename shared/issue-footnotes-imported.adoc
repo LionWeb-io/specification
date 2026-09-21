@@ -387,3 +387,7 @@
 :fn-org513: footnote:org513[https://github.com/LionWeb-io/specification/issues/513[naming: `MoveChildFromOtherContainment` or `MoveChildFromOtherParent`? #513]]
 :fn-org514: footnote:org514[https://github.com/LionWeb-io/specification/issues/514[naming: `MoveChildFromOtherContainmentInSameParent` or `MoveChildFromOtherContainment`? #514]]
 :fn-org516: footnote:org516[https://github.com/LionWeb-io/specification/issues/516[Discuss move errors #516]]
+:fn-org521: footnote:org521[https://github.com/LionWeb-io/specification/issues/521[All concepts in a language implicitly inherit from Node, how about Annotations? #521]]
+:fn-org522: footnote:org522[https://github.com/LionWeb-io/specification/issues/522[Structure resources/ folder #522]]
+:fn-org525: footnote:org525[https://github.com/LionWeb-io/specification/issues/525[`DeleteReference` command contains old reference, but `DeleteProperty` not the old property #525]]
+:fn-org527: footnote:org527[https://github.com/LionWeb-io/specification/issues/527[ResolveInfo for builtins SHOULD be different #527]]
