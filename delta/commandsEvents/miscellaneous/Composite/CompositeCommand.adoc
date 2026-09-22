@@ -1,6 +1,6 @@
 [[cmd-Composite]]
 [[cmd-CompositeCommand]]
-===== Composite
+===== CompositeCommand
 Groups several commands into a logical group.{fn-org281}
 The parts are ordered.
 
@@ -28,11 +28,14 @@ All other commands can be distinguished from their event counterparts by looking
 [horizontal]
 .Parameters
 [[CompositeCommand.parts, `parts`]]parts:: <<commandType>>[]
+The commands this composite combines.
 
 [[CompositeCommand.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 Composite commands have their own command id, separate from the command ids of its <<CompositeCommand.parts>>.{fn-org353}
 
 [[CompositeCommand.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * accumulation of all errors of <<CompositeCommand.parts>>

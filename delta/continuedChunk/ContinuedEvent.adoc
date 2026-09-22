@@ -8,6 +8,8 @@ A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> 
 * <<evnt-AnnotationAdded>> <<AnnotationAdded.newAnnotation>>
 * <<evnt-AnnotationReplaced>> <<AnnotationReplaced.newAnnotation>>
 
+We identify the splittable event by its <<ContinuedEvent.continuedEventSequenceNumber>>.
+
 .Technical name
 `ContinuedEvent`
 
@@ -15,19 +17,32 @@ A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> 
 .Parameters
 [[ContinuedEvent.chunk, `chunk`]]chunk:: <<deltaChunkType>>
 The continued chunk.
-The combination of all continued chunks MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
+The combination of all continued chunks MUST adhere to the same constraints as <<ContinuedEvent.continuedEventSequenceNumber>>'s chunk.
 
 [[ContinuedEvent.continuedChunkCompleted, `continuedChunkCompleted`]]continuedChunkCompleted:: <<continuedChunkCompletedFlagType>>
+Whether this message completes <<ContinuedEvent.continuedEventSequenceNumber>>.
 
 [[ContinuedEvent.continuedChunkSequenceNumber, `continuedChunkSequenceNumber`]]continuedChunkSequenceNumber:: <<continuedChunkSequenceNumberType>>{fn-org475}
+Number of this message in the sequence of all continued events relating to the same <<ContinuedEvent.continuedEventSequenceNumber>>.
 
-[[ContinuedEvent.continuedEventSequenceNumber]]continuedEventSequenceNumber:: <<event-sequence-number>>
-Sequence number of the related <<splittableMessage, splittable event>>
+[[ContinuedEvent.continuedEventSequenceNumber, `continuedEventSequenceNumber`]]continuedEventSequenceNumber:: <<eventSequenceType>>
+Sequence number of the related <<splittableMessage, splittable event>>.
 
-[[ContinuedEvent.originCommands]]originCommands:: <<commandSourceType>>[]{fn-org477}
+[[ContinuedEvent.originCommands, `originCommands`]]originCommands:: <<commandSourceType>>[]{fn-org477}
 The contents of this field MUST be exactly the same as those of the `originCommands` field of the corresponding event — i.e., the event designated by <<ContinuedEvent.continuedEventSequenceNumber>>.
 The client MUST reject any differences as an error.
 
-[[ContinuedEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ContinuedEvent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ContinuedEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
+
+.Errors
+* <<err-splitMessageAlreadyCompleted>>
+* <<err-multipleContinuedChunksCompleted>>
+* <<err-duplicateContinuedChunk>>
+* <<err-unknownSplittableMessageInContinuedChunk>>
+* <<err-invalidSplittableMessageInContinuedChunk>>
+* <<err-interruptedContinuedChunk>>
+* <<err-invalidParticipation>>

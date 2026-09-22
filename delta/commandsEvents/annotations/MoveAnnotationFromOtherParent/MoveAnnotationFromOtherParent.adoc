@@ -17,26 +17,37 @@ include::MoveAnnotationFromOtherParent-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[MoveAnnotationFromOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+[[MoveAnnotationFromOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
+of the node we want to move the annotation to.
 
 [[MoveAnnotationFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+where we want to move <<MoveAnnotationFromOtherParent.movedAnnotation>> at in annotations of <<MoveAnnotationFromOtherParent.newParent>>.
 
-[[MoveAnnotationFromOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+[[MoveAnnotationFromOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
+of the node we want to move an existing annotation from.
 
 [[MoveAnnotationFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where we want to move <<MoveAnnotationFromOtherParent.movedAnnotation>> from in annotations of <<MoveAnnotationFromOtherParent.oldParent>>.
 
-[[MoveAnnotationFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
+[[MoveAnnotationFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
+of the annotation we want to move from <<MoveAnnotationFromOtherParent.oldParent>> to <<MoveAnnotationFromOtherParent.newParent>>.
 
 [[MoveAnnotationFromOtherParent.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[MoveAnnotationFromOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
+* <<err-unknownNode>> for <<MoveAnnotationFromOtherParent.oldParent>>
 * <<err-unknownNode>> for <<MoveAnnotationFromOtherParent.newParent>>
+* <<err-unknownNode>> for <<MoveAnnotationFromOtherParent.movedAnnotation>>
+* <<err-parentMismatch>> <<MoveAnnotationFromOtherParent.oldParent>> and <<MoveAnnotationFromOtherParent.movedAnnotation>>
+* <<err-indexEntryMismatch>> for <<MoveAnnotationFromOtherParent.oldIndex>> and
+<<MoveAnnotationFromOtherParent.movedAnnotation>>
+
 * <<err-unknownIndex>> for <<MoveAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.newParent>>)
 * <<err-unknownIndex>> for <<MoveAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.oldParent>>)
-* <<err-parentMismatch>> <<MoveAnnotationFromOtherParent.oldParent>> is not the parent of <<MoveAnnotationFromOtherParent.movedAnnotation>>
-* <<err-unknownNode>> for <<MoveAnnotationFromOtherParent.movedAnnotation>>
 * ##?## <<MoveAnnotationFromOtherParent.movedAnnotation>> is already an annotation of <<MoveAnnotationFromOtherParent.newParent>>
 * <<err-invalidParticipation>>
 

@@ -7,19 +7,26 @@ Existing <<PropertyChanged.property>> of <<PropertyChanged.node>> has been chang
 
 [horizontal]
 .Parameters
-[[PropertyChanged.node, `node`]]node:: <<targetNodeType>>
+[[PropertyChanged.node, `node`]]node:: <<nodeIdType>>
+of the node whose property has been changed.
 
 [[PropertyChanged.property, `property`]]property:: <<metaPointerType>>
+<<{m3}.adoc#Property, Property>> that has been changed in <<PropertyChanged.node>>.
 
 [[PropertyChanged.newValue, `newValue`]]newValue:: <<propertyValueType>>
+Value <<PropertyChanged.property>> in <<PropertyChanged.node>> has been changed to.
 
 [[PropertyChanged.oldValue, `oldValue`]]oldValue:: <<propertyValueType>>
+Value <<PropertyChanged.property>> in <<PropertyChanged.node>> had before.
 
 [[PropertyChanged.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[PropertyChanged.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[PropertyChanged.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[PropertyChanged.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-ChangeProperty>>

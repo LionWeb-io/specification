@@ -14,14 +14,17 @@ include::ChangeClassifier-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[ChangeClassifier.node, `node`]]node:: <<targetNodeType>>
+[[ChangeClassifier.node, `node`]]node:: <<nodeIdType>>
+of the node we want to change the classifier.
 
 [[ChangeClassifier.newClassifier, `newClassifier`]]newClassifier:: <<metaPointerType>>
+New <<{m3}.adoc#Classifier, Classifier>> of <<ChangeClassifier.node>>.
 
 [[ChangeClassifier.commandId]]commandId:: <<commandIdType>>
 Id of this command.
 
 [[ChangeClassifier.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<ChangeClassifier.node>>

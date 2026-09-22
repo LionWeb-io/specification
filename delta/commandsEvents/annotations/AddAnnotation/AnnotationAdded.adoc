@@ -4,12 +4,15 @@
 
 All other annotations inside <<AnnotationAdded.parent>>'s annotations with index >= <<AnnotationAdded.index>> have been moved to next higher index.
 
+See also <<splittableMessage>>.
+
 .Technical name
 `AnnotationAdded`
 
 [horizontal]
 .Parameters
-[[AnnotationAdded.parent, `parent`]]parent:: <<targetNodeType>>
+[[AnnotationAdded.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the new annotation was added to.
 
 [[AnnotationAdded.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
 Subtree that formed the new annotation.
@@ -17,14 +20,19 @@ The _anchor node_ MUST contain the <<AnnotationAdded.parent>> as _parent_.{fn-or
 All nodes in that subtree MUST be <<new-nodes>>.{fn-org326}
 
 [[AnnotationAdded.index, `index`]]index:: <<indexType>>
+where <<AnnotationAdded.newAnnotation>> was added in annotations of <<AnnotationAdded.parent>>.
 
 [[AnnotationAdded.split, `split`]]split?:: <<splitFlagType>>
+Whether <<AnnotationAdded.newAnnotation>> is complete within this message.
 
 [[AnnotationAdded.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[AnnotationAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[AnnotationAdded.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[AnnotationAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-AddAnnotation>>
