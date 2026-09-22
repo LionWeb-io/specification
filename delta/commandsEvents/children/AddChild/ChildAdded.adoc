@@ -12,6 +12,7 @@ See also <<splittableMessage>>.
 [horizontal]
 .Parameters
 [[ChildAdded.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the new child was added to.
 
 [[ChildAdded.newChild, `newChild`]]newChild:: <<singleChunkType>>
 Subtree that formed the new child.
@@ -19,8 +20,10 @@ The _anchor node_ MUST contain the <<ChildAdded.parent>> as _parent_.{fn-org357}
 All nodes in that subtree MUST be <<new-nodes>>.{fn-org326}
 
 [[ChildAdded.containment, `containment`]]containment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildAdded.newChild>> was added to in <<ChildAdded.parent>>.
 
 [[ChildAdded.index, `index`]]index:: <<indexType>>
+where <<ChildAdded.newChild>> was added in <<ChildAdded.containment>> of <<ChildAdded.parent>>.
 
 [[ChildAdded.split, `split`]]split?:: <<splitFlagType>>
 Whether <<ChildAdded.newChild>> is complete within this message.

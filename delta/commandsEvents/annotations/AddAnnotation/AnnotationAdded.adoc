@@ -12,6 +12,7 @@ See also <<splittableMessage>>.
 [horizontal]
 .Parameters
 [[AnnotationAdded.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the new annotation was added to.
 
 [[AnnotationAdded.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
 Subtree that formed the new annotation.
@@ -19,6 +20,7 @@ The _anchor node_ MUST contain the <<AnnotationAdded.parent>> as _parent_.{fn-or
 All nodes in that subtree MUST be <<new-nodes>>.{fn-org326}
 
 [[AnnotationAdded.index, `index`]]index:: <<indexType>>
+where <<AnnotationAdded.newAnnotation>> was added in annotations of <<AnnotationAdded.parent>>.
 
 [[AnnotationAdded.split, `split`]]split?:: <<splitFlagType>>
 Whether <<AnnotationAdded.newAnnotation>> is complete within this message.

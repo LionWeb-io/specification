@@ -9,14 +9,19 @@ All other entries inside <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.refere
 [horizontal]
 .Parameters
 [[ReferenceDeleted.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the reference has been deleted from.
 
 [[ReferenceDeleted.reference, `reference`]]reference:: <<metaPointerType>>
+<<{m3}.adoc#Reference, Reference>> that has been deleted from <<ReferenceDeleted.parent>>.
 
 [[ReferenceDeleted.index, `index`]]index:: <<indexType>>
+where <<ReferenceDeleted.deletedReference>> / <<ReferenceDeleted.deletedResolveInfo>> has been deleted at in <<ReferenceDeleted.reference>> of <<ReferenceDeleted.parent>>.
 
 [[ReferenceDeleted.deletedReference, `deletedReference`]]deletedReference:: <<nodeIdType>>?
+of the node <<ReferenceDeleted.reference>> was set to before in <<ReferenceDeleted.parent>>, if any.
 
 [[ReferenceDeleted.deletedResolveInfo, `deletedResolveInfo`]]deletedResolveInfo:: <<resolveInfoType>>?
+of the node <<ReferenceDeleted.reference>> was set to before in <<ReferenceDeleted.parent>>, if any.
 
 [[ReferenceDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

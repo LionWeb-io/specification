@@ -18,22 +18,30 @@ This conforms to <<movingAndReplacingNodes, the action of moving a node and repl
 [horizontal]
 .Parameters
 [[ChildMovedAndReplacedInSameContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the child was moved in.
 
 [[ChildMovedAndReplacedInSameContainmentInSameParent.containment, `containment`]]containment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildMovedAndReplacedInSameContainmentInSameParent.movedChild>> was moved and <<ChildMovedAndReplacedInSameContainmentInSameParent.replacedChild>> was replaced in <<ChildMovedAndReplacedInSameContainmentInSameParent.parent>>.
 
 [[ChildMovedAndReplacedInSameContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where <<ChildMovedAndReplacedInSameContainmentInSameParent.movedChild>> was moved from in <<ChildMovedAndReplacedInSameContainmentInSameParent.containment>> of <<ChildMovedAndReplacedInSameContainmentInSameParent.parent>>.
 
 [[ChildMovedAndReplacedInSameContainmentInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
-MUST NOT be 0. +
+how much <<ChildMovedAndReplacedInSameContainmentInSameParent.movedChild>> was moved in <<ChildMovedAndReplacedInSameContainmentInSameParent.containment>> of <<ChildMovedAndReplacedInSameContainmentInSameParent.parent>>.
++
 (<<ChildMovedAndReplacedInSameContainmentInSameParent.oldIndex>> + <<ChildMovedAndReplacedInSameContainmentInSameParent.indexOffset>>)
 MUST NOT be < 0,
 or >= (the number of children inside <<ChildMovedAndReplacedInSameContainmentInSameParent.parent>>'s <<ChildMovedAndReplacedInSameContainmentInSameParent.containment>>).
 
 [[ChildMovedAndReplacedInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
+of the node that was moved in <<ChildMovedAndReplacedInSameContainmentInSameParent.containment>> in <<ChildMovedAndReplacedInSameContainmentInSameParent.parent>>.
 
 [[ChildMovedAndReplacedInSameContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
+of the node that was replaced in <<ChildMovedAndReplacedInSameContainmentInSameParent.containment>> in <<ChildMovedAndReplacedInSameContainmentInSameParent.parent>>.
 
 [[ChildMovedAndReplacedInSameContainmentInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
+List of all node ids that used to be descendants (including children and annotations) of <<ChildMovedAndReplacedInSameContainmentInSameParent.replacedChild>>.
+Does not include <<ChildMovedAndReplacedInSameContainmentInSameParent.replacedChild>>.
 
 [[ChildMovedAndReplacedInSameContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

@@ -8,10 +8,13 @@ Existing <<PropertyDeleted.property>> of <<PropertyDeleted.node>> with <<Propert
 [horizontal]
 .Parameters
 [[PropertyDeleted.node, `node`]]node:: <<nodeIdType>>
+of the node the property has been deleted from.
 
 [[PropertyDeleted.property, `property`]]property:: <<metaPointerType>>
+<<{m3}.adoc#Property, Property>> that has been deleted from <<PropertyDeleted.node>>.
 
 [[PropertyDeleted.oldValue, `oldValue`]]oldValue:: <<propertyValueType>>
+Value <<PropertyDeleted.property>> in <<PropertyDeleted.node>> had before.
 
 [[PropertyDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

@@ -10,8 +10,11 @@ This client is now unsubscribed from any changes to <<PartitionDeleted.deletedPa
 [horizontal]
 .Parameters
 [[PartitionDeleted.deletedPartition, `deletedPartition`]]deletedPartition:: <<nodeIdType>>
+of the partition that has been deleted.
 
 [[PartitionDeleted.deletedDescendants, `deletedDescendants`]]deletedDescendants:: <<nodeIdType>>[]
+List of all node ids that used to be descendants (including children and annotations) of <<PartitionDeleted.deletedDescendants>>.
+Does not include <<PartitionDeleted.deletedDescendants>>.
 
 [[PartitionDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

@@ -17,16 +17,23 @@ This conforms to <<movingAndReplacingNodes, the action of moving a node and repl
 [horizontal]
 .Parameters
 [[AnnotationMovedAndReplacedInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the annotation was moved in.
 
 [[AnnotationMovedAndReplacedInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<nodeIdType>>
+where <<AnnotationMovedAndReplacedInSameParent.movedAnnotation>> was moved from in annotations of <<AnnotationMovedAndReplacedInSameParent.parent>>.
 
 [[AnnotationMovedAndReplacedInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
+how much <<AnnotationMovedAndReplacedInSameParent.movedAnnotation>> was moved in annotations of <<AnnotationMovedAndReplacedInSameParent.parent>>.
 
 [[AnnotationMovedAndReplacedInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
+of the node that was moved in annotations in <<AnnotationMovedAndReplacedInSameParent.parent>>.
 
 [[AnnotationMovedAndReplacedInSameParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
+of the node that was replaced in annotations in <<AnnotationMovedAndReplacedInSameParent.parent>>.
 
 [[AnnotationMovedAndReplacedInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
+List of all node ids that used to be descendants (including children and annotations) of <<AnnotationMovedAndReplacedInSameParent.replacedAnnotation>>.
+Does not include <<AnnotationMovedAndReplacedInSameParent.replacedAnnotation>>.
 
 [[AnnotationMovedAndReplacedInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

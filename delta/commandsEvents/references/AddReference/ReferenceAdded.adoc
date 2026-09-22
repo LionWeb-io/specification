@@ -9,14 +9,19 @@ All other entries inside <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>
 [horizontal]
 .Parameters
 [[ReferenceAdded.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the reference has been added to.
 
 [[ReferenceAdded.reference, `reference`]]reference:: <<metaPointerType>>
+<<{m3}.adoc#Reference, Reference>> that has been added to <<ReferenceAdded.parent>>.
 
 [[ReferenceAdded.index, `index`]]index:: <<indexType>>
+where <<ReferenceAdded.newReference>> / <<ReferenceAdded.newResolveInfo>> has been added at in <<ReferenceAdded.reference>> of <<ReferenceAdded.parent>>.
 
 [[ReferenceAdded.newReference, `newReference`]]newReference:: <<nodeIdType>>?
+of the node <<ReferenceAdded.reference>> in <<ReferenceAdded.parent>> has been set to, if any.
 
 [[ReferenceAdded.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
+of the node <<ReferenceAdded.reference>> in <<ReferenceAdded.parent>> has been set to, if any.
 
 [[ReferenceAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

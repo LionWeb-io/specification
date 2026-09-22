@@ -15,15 +15,19 @@ This conforms to <<justMovingANode, the action of moving a node in one specific 
 [horizontal]
 .Parameters
 [[ChildMovedInSameContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the child was moved in.
 
 [[ChildMovedInSameContainmentInSameParent.containment, `containment`]]containment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildMovedInSameContainmentInSameParent.movedChild>> was moved in <<ChildMovedInSameContainmentInSameParent.parent>>.
 
 [[ChildMovedInSameContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where <<ChildMovedInSameContainmentInSameParent.movedChild>> was moved from in <<ChildMovedInSameContainmentInSameParent.containment>> of <<ChildMovedInSameContainmentInSameParent.parent>>.
 
 [[ChildMovedInSameContainmentInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>
-MUST NOT be 0.{fn-org482}
+how much <<ChildMovedInSameContainmentInSameParent.movedChild>> has moved in <<ChildMovedInSameContainmentInSameParent.containment>> of <<ChildMovedInSameContainmentInSameParent.parent>>.
 
 [[ChildMovedInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
+of the node that was moved in <<ChildMovedInSameContainmentInSameParent.containment>>.
 
 [[ChildMovedInSameContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

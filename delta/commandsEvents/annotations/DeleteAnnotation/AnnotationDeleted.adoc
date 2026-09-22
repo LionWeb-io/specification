@@ -9,12 +9,17 @@ All other annotations inside <<AnnotationDeleted.parent>>'s annotations with ind
 [horizontal]
 .Parameters
 [[AnnotationDeleted.deletedAnnotation, `deletedAnnotation`]]deletedAnnotation:: <<nodeIdType>>
+of the node that was deleted in annotations of <<AnnotationDeleted.parent>> at <<AnnotationDeleted.index>>.
 
 [[AnnotationDeleted.deletedDescendants, `deletedDescendants`]]deletedDescendants:: <<nodeIdType>>[]
+List of all node ids that used to be descendants (including children and annotations) of <<AnnotationDeleted.deletedAnnotation>>.
+Does not include <<AnnotationDeleted.deletedAnnotation>>.
 
 [[AnnotationDeleted.parent, `parent`]]parent:: <<nodeIdType>>
+of the node an annotation was deleted from.
 
 [[AnnotationDeleted.index, `index`]]index:: <<indexType>>
+where <<AnnotationDeleted.deletedAnnotation>> was deleted from in annotations of <<AnnotationDeleted.parent>>.
 
 [[AnnotationDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

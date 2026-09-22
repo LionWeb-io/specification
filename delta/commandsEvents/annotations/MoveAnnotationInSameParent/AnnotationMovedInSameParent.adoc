@@ -14,12 +14,16 @@ This conforms to <<justMovingANode, the action of moving a node in one specific 
 [horizontal]
 .Parameters
 [[AnnotationMovedInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the annotation was moved in.
 
 [[AnnotationMovedInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<nodeIdType>>
+where <<AnnotationMovedInSameParent.movedAnnotation>> was moved from in annotations of <<AnnotationMovedInSameParent.parent>>.
 
 [[AnnotationMovedInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>{fn-org482}
+how much <<AnnotationMovedInSameParent.movedAnnotation>> was moved in annotations of <<AnnotationMovedInSameParent.parent>>.
 
 [[AnnotationMovedInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
+of the annotation that was moved.
 
 [[AnnotationMovedInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

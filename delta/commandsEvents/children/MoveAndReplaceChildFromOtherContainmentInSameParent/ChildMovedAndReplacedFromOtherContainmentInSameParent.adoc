@@ -13,20 +13,29 @@ No other children inside <<ChildMovedAndReplacedFromOtherContainmentInSameParent
 [horizontal]
 .Parameters
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildMovedAndReplacedFromOtherContainmentInSameParent.movedChild>> was moved to in <<ChildMovedAndReplacedFromOtherContainmentInSameParent.parent>>.
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+where <<ChildMovedAndReplacedFromOtherContainmentInSameParent.movedChild>> was moved to in <<ChildMovedAndReplacedFromOtherContainmentInSameParent.newContainment>> of <<ChildMovedAndReplacedFromOtherContainmentInSameParent.parent>>.
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
+of the node that was moved from <<ChildMovedAndReplacedFromOtherContainmentInSameParent.oldContainment>> to <<ChildMovedAndReplacedFromOtherContainmentInSameParent.newContainment>> in <<ChildMovedAndReplacedFromOtherContainmentInSameParent.parent>>.
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the child was moved in.
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildMovedAndReplacedFromOtherContainmentInSameParent.movedChild>> was moved from in <<ChildMovedAndReplacedFromOtherContainmentInSameParent.parent>>.
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where <<ChildMovedAndReplacedFromOtherContainmentInSameParent.movedChild>> was moved from in <<ChildMovedAndReplacedFromOtherContainmentInSameParent.oldContainment>> of <<ChildMovedAndReplacedFromOtherContainmentInSameParent.parent>>.
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
+of the node that was replaced at <<ChildMovedAndReplacedFromOtherContainmentInSameParent.newIndex>> of <<ChildMovedAndReplacedFromOtherContainmentInSameParent.newContainment>> in <<ChildMovedAndReplacedFromOtherContainmentInSameParent.parent>>.
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
+List of all node ids that used to be descendants (including children and annotations) of <<ChildMovedAndReplacedFromOtherContainmentInSameParent.replacedChild>>.
+Does not include <<ChildMovedAndReplacedFromOtherContainmentInSameParent.replacedChild>>.
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

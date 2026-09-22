@@ -8,10 +8,13 @@
 [horizontal]
 .Parameters
 [[PropertyAdded.node, `node`]]node:: <<nodeIdType>>
+of the node the property has been added to.
 
 [[PropertyAdded.property, `property`]]property:: <<metaPointerType>>
+<<{m3}.adoc#Property, Property>> that has been added to <<PropertyAdded.node>>.
 
 [[PropertyAdded.newValue, `newValue`]]newValue:: <<propertyValueType>>
+Value <<PropertyAdded.property>> in <<PropertyAdded.node>> has been set to.
 
 [[PropertyAdded.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

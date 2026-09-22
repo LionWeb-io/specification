@@ -13,14 +13,19 @@ All other annotations inside <<AnnotationMovedFromOtherParent.newParent>>'s anno
 [horizontal]
 .Parameters
 [[AnnotationMovedFromOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
+of the node the annotation was moved to.
 
 [[AnnotationMovedFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+where <<AnnotationMovedFromOtherParent.movedAnnotation>> was moved to in annotations of <<AnnotationMovedFromOtherParent.newParent>>.
 
 [[AnnotationMovedFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
+of the annotation that was moved from <<AnnotationMovedFromOtherParent.oldParent>> to <<AnnotationMovedFromOtherParent.newParent>>.
 
 [[AnnotationMovedFromOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
+of the node the annotation was moved from.
 
 [[AnnotationMovedFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where <<AnnotationMovedFromOtherParent.movedAnnotation>> was moved from in annotations of <<AnnotationMovedFromOtherParent.oldParent>>.
 
 [[AnnotationMovedFromOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

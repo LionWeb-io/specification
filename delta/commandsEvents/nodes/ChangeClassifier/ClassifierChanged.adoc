@@ -8,10 +8,13 @@ Classifier of <<ClassifierChanged.node>> has been changed from <<ClassifierChang
 [horizontal]
 .Parameters
 [[ClassifierChanged.node, `node`]]node:: <<nodeIdType>>
+of the node whose classifier has been changed.
 
 [[ClassifierChanged.newClassifier, `newClassifier`]]newClassifier:: <<metaPointerType>>
+New <<{m3}.adoc#Classifier, Classifier>> of <<ClassifierChanged.node>>.
 
 [[ClassifierChanged.oldClassifier, `oldClassifier`]]oldClassifier:: <<metaPointerType>>
+Old <<{m3}.adoc#Classifier, Classifier>> of <<ClassifierChanged.node>>.
 
 [[ClassifierChanged.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

@@ -13,16 +13,22 @@ All other children inside <<ChildMovedFromOtherContainmentInSameParent.parent>>'
 [horizontal]
 .Parameters
 [[ChildMovedFromOtherContainmentInSameParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildMovedFromOtherContainmentInSameParent.movedChild>> was moved to in <<ChildMovedFromOtherContainmentInSameParent.parent>>.
 
 [[ChildMovedFromOtherContainmentInSameParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+where <<ChildMovedFromOtherContainmentInSameParent.movedChild>> was moved to in <<ChildMovedFromOtherContainmentInSameParent.newContainment>> of <<ChildMovedFromOtherContainmentInSameParent.parent>>.
 
 [[ChildMovedFromOtherContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
+of the node that was moved from <<ChildMovedFromOtherContainmentInSameParent.oldContainment>> to <<ChildMovedFromOtherContainmentInSameParent.newContainment>>.
 
 [[ChildMovedFromOtherContainmentInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the child was moved in.
 
 [[ChildMovedFromOtherContainmentInSameParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildMovedFromOtherContainmentInSameParent.movedChild>> was moved from in <<ChildMovedFromOtherContainmentInSameParent.parent>>.
 
 [[ChildMovedFromOtherContainmentInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where <<ChildMovedFromOtherContainmentInSameParent.movedChild>> was moved from in <<ChildMovedFromOtherContainmentInSameParent.oldContainment>> of <<ChildMovedFromOtherContainmentInSameParent.parent>>.
 
 [[ChildMovedFromOtherContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

@@ -18,7 +18,7 @@ include::DeleteReference-diagram.adoc[]
 of the node we want to delete a reference from.
 
 [[DeleteReference.reference, `reference`]]reference:: <<metaPointerType>>
-<<{m3}.adoc#Reference, Reference>> we want to change in <<DeleteReference.parent>>.
+<<{m3}.adoc#Reference, Reference>> we want to delete from <<DeleteReference.parent>>.
 
 [[DeleteReference.index, `index`]]index:: <<indexType>>
 where we want to delete <<DeleteReference.deletedReference>> / <<DeleteReference.deletedResolveInfo>> at in <<DeleteReference.reference>> of <<DeleteReference.parent>>.

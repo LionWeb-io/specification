@@ -13,16 +13,21 @@ See also <<splittableMessage>>.
 .Parameters
 [[AnnotationReplaced.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
 Subtree that formed the new annotation.
-The _anchor node_ MUST contain the <<ReplaceAnnotation.newAnnotation>> as _parent_.{fn-org357}
+The _anchor node_ MUST contain the <<AnnotationReplaced.parent>> as _parent_.{fn-org357}
 All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.{fn-org326}
 
 [[AnnotationReplaced.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
+of the node that was replaced in annotations of <<AnnotationReplaced.parent>> at <<AnnotationReplaced.index>>.
 
 [[AnnotationReplaced.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
+List of all node ids that used to be descendants (including children and annotations) of <<AnnotationReplaced.replacedAnnotation>>.
+Does not include <<AnnotationReplaced.replacedAnnotation>>.
 
 [[AnnotationReplaced.parent, `parent`]]parent:: <<nodeIdType>>
+of the node an annotation was replaced in.
 
 [[AnnotationReplaced.index, `index`]]index:: <<indexType>>
+where <<AnnotationReplaced.replacedAnnotation>> was replaced in annotations of <<AnnotationReplaced.parent>>.
 
 [[AnnotationReplaced.split, `split`]]split?:: <<splitFlagType>>
 Whether <<AnnotationReplaced.newAnnotation>> is complete within this message.

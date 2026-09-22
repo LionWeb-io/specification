@@ -8,18 +8,25 @@ Existing reference with <<ReferenceChanged.oldReference>>/<<ReferenceChanged.old
 [horizontal]
 .Parameters
 [[ReferenceChanged.parent, `parent`]]parent:: <<nodeIdType>>
+of the node whose reference has been changed.
 
 [[ReferenceChanged.reference, `reference`]]reference:: <<metaPointerType>>
+<<{m3}.adoc#Reference, Reference>> that has been changed in <<ReferenceChanged.parent>>.
 
 [[ReferenceChanged.index, `index`]]index:: <<indexType>>
+where <<ReferenceChanged.oldReference>> / <<ReferenceChanged.oldResolveInfo>> has been changed at in <<ReferenceChanged.reference>> of <<ReferenceChanged.parent>>.
 
 [[ReferenceChanged.newReference, `newReference`]]newReference:: <<nodeIdType>>?
+of the node <<ReferenceChanged.reference>> in <<ReferenceChanged.parent>> has been set to, if any.
 
 [[ReferenceChanged.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
+of the node <<ReferenceChanged.reference>> in <<ReferenceChanged.parent>> has been set to, if any.
 
 [[ReferenceChanged.oldReference, `oldReference`]]oldReference:: <<nodeIdType>>?
+of the node <<ReferenceChanged.reference>> was previously set to in <<ReferenceChanged.parent>>, if any.
 
 [[ReferenceChanged.oldResolveInfo, `oldResolveInfo`]]oldResolveInfo:: <<resolveInfoType>>?
+of the node <<ReferenceChanged.reference>> was previously set to in <<ReferenceChanged.parent>>, if any.
 
 [[ReferenceChanged.originCommands]]originCommands:: <<commandSourceType>>[]
 List of `(participationId, commandId)` pairs this event is based on.

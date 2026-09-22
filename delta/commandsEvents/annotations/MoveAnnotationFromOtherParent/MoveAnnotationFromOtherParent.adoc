@@ -18,7 +18,7 @@ include::MoveAnnotationFromOtherParent-diagram.adoc[]
 [horizontal]
 .Parameters
 [[MoveAnnotationFromOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
-of the node we want to move a new annotation to.
+of the node we want to move the annotation to.
 
 [[MoveAnnotationFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
 where we want to move <<MoveAnnotationFromOtherParent.movedAnnotation>> at in annotations of <<MoveAnnotationFromOtherParent.newParent>>.

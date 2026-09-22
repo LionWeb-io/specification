@@ -17,14 +17,20 @@ The _anchor node_ MUST contain the <<ChildReplaced.parent>> as _parent_.{fn-org3
 All nodes in that subtree MUST be <<new-nodes>> or <<reused-nodes>>.{fn-org326}
 
 [[ChildReplaced.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
+of the node that was replaced in <<ChildReplaced.containment>> of <<ChildReplaced.parent>> at <<ChildReplaced.index>>.
 
 [[ChildReplaced.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
+List of all node ids that used to be descendants (including children and annotations) of <<ChildReplaced.replacedChild>>.
+Does not include <<ChildReplaced.replacedChild>>.
 
 [[ChildReplaced.parent, `parent`]]parent:: <<nodeIdType>>
+of the node a child was replaced in.
 
 [[ChildReplaced.containment, `containment`]]containment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildReplaced.replacedChild>> was replaced in <<ChildReplaced.parent>>.
 
 [[ChildReplaced.index, `index`]]index:: <<indexType>>
+where <<ChildReplaced.replacedChild>> was replaced in <<ChildReplaced.containment>> of <<ChildReplaced.parent>>.
 
 [[ChildReplaced.split, `split`]]split?:: <<splitFlagType>>
 Whether <<ChildReplaced.newChild>> is complete within this message.
