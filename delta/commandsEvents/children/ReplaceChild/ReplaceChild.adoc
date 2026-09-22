@@ -37,10 +37,13 @@ where we want to replace <<ReplaceChild.replacedChild>> at in <<ReplaceChild.con
 of the node we want to replace in <<ReplaceChild.containment>> of <<ReplaceChild.parent>> at <<ReplaceChild.index>>.
 
 [[ReplaceChild.split, `split`]]split?:: <<splitFlagType>>
+Whether <<ReplaceChild.newChild>> is complete within this message.
 
 [[ReplaceChild.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[ReplaceChild.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<ReplaceChild.parent>>

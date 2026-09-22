@@ -28,9 +28,11 @@ Sequence number of the related <<splittableMessage, splittable event>>
 The contents of this field MUST be exactly the same as those of the `originCommands` field of the corresponding event — i.e., the event designated by <<ContinuedEvent.continuedEventSequenceNumber>>.
 The client MUST reject any differences as an error.
 
-[[ContinuedEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ContinuedEvent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ContinuedEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-splitMessageAlreadyCompleted>>

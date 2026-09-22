@@ -29,10 +29,13 @@ This conforms to <<movingAndReplacingNodes, the action of moving a node and repl
 [[AnnotationMovedAndReplacedInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
 
 [[AnnotationMovedAndReplacedInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[AnnotationMovedAndReplacedInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[AnnotationMovedAndReplacedInSameParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[AnnotationMovedAndReplacedInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-MoveAndReplaceAnnotationInSameParent>>

@@ -28,8 +28,10 @@ where we want to delete <<DeleteChild.deletedChild>> from in <<DeleteChild.conta
 of the node we want to delete in <<DeleteChild.containment>> of <<DeleteChild.parent>> at <<DeleteChild.index>>.
 
 [[DeleteChild.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[DeleteChild.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<DeleteChild.parent>>

@@ -24,6 +24,7 @@ New <<{m3}.adoc#Classifier, Classifier>> of <<ChangeClassifier.node>>.
 Id of this command.
 
 [[ChangeClassifier.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<ChangeClassifier.node>>

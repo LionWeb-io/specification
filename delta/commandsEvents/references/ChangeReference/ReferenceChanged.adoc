@@ -22,10 +22,13 @@ Existing reference with <<ReferenceChanged.oldReference>>/<<ReferenceChanged.old
 [[ReferenceChanged.oldResolveInfo, `oldResolveInfo`]]oldResolveInfo:: <<resolveInfoType>>?
 
 [[ReferenceChanged.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ReferenceChanged.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ReferenceChanged.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ReferenceChanged.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-ChangeReference>>

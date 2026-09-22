@@ -32,8 +32,10 @@ of the node we want to move in annotations in <<MoveAndReplaceAnnotationInSamePa
 of the node we want to replace in annotations in <<MoveAndReplaceAnnotationInSameParent.parent>>.
 
 [[MoveAndReplaceAnnotationInSameParent.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[MoveAndReplaceAnnotationInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationInSameParent.parent>>

@@ -23,10 +23,13 @@ All other annotations inside <<AnnotationMovedFromOtherParent.newParent>>'s anno
 [[AnnotationMovedFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
 [[AnnotationMovedFromOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[AnnotationMovedFromOtherParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[AnnotationMovedFromOtherParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[AnnotationMovedFromOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-MoveAnnotationFromOtherParent>>

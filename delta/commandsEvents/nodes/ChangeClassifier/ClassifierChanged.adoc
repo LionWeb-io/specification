@@ -14,10 +14,13 @@ Classifier of <<ClassifierChanged.node>> has been changed from <<ClassifierChang
 [[ClassifierChanged.oldClassifier, `oldClassifier`]]oldClassifier:: <<metaPointerType>>
 
 [[ClassifierChanged.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ClassifierChanged.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ClassifierChanged.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ClassifierChanged.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-ChangeClassifier>>

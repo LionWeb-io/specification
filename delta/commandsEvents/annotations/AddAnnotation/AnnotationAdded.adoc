@@ -21,12 +21,16 @@ All nodes in that subtree MUST be <<new-nodes>>.{fn-org326}
 [[AnnotationAdded.index, `index`]]index:: <<indexType>>
 
 [[AnnotationAdded.split, `split`]]split?:: <<splitFlagType>>
+Whether <<AnnotationAdded.newAnnotation>> is complete within this message.
 
 [[AnnotationAdded.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[AnnotationAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[AnnotationAdded.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[AnnotationAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-AddAnnotation>>

@@ -29,10 +29,13 @@ No other children inside <<ChildMovedAndReplacedFromOtherContainmentInSameParent
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ChildMovedAndReplacedFromOtherContainmentInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ChildMovedAndReplacedFromOtherContainmentInSameParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ChildMovedAndReplacedFromOtherContainmentInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>>

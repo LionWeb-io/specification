@@ -24,8 +24,10 @@ of the node we want to change a property of.
 Value we want to change <<ChangeProperty.property>> in <<ChangeProperty.node>> to.
 
 [[ChangeProperty.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[ChangeProperty.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<ChangeProperty.node>>

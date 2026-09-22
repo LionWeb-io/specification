@@ -28,10 +28,13 @@ All nodes in that subtree MUST be <<new-nodes>>.
 where we want to add <<AddAnnotation.newAnnotation>> at annotations of <<AddAnnotation.parent>>.
 
 [[AddAnnotation.split, `split`]]split?:: <<splitFlagType>>
+Whether <<AddAnnotation.newAnnotation>> is complete within this message.
 
 [[AddAnnotation.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[AddAnnotation.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<AddAnnotation.parent>>

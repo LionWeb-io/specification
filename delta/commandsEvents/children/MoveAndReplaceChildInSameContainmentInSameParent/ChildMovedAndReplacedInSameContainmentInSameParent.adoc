@@ -36,10 +36,13 @@ or >= (the number of children inside <<ChildMovedAndReplacedInSameContainmentInS
 [[ChildMovedAndReplacedInSameContainmentInSameParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
 
 [[ChildMovedAndReplacedInSameContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ChildMovedAndReplacedInSameContainmentInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ChildMovedAndReplacedInSameContainmentInSameParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ChildMovedAndReplacedInSameContainmentInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-MoveAndReplaceChildInSameContainmentInSameParent>>

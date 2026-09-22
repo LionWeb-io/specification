@@ -29,6 +29,8 @@ All other events can be distinguished from their command counterparts by looking
 Events contained in <<CompositeEvent.parts>> MUST appear in ascending order of their sequence numbers.{fn-org351}
 
 [[CompositeEvent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
++
 The following constraints apply:{fn-org353}
 +
 * The originCommands of a composite event MUST only mention command ids of composite commands — (owing to semantics item 1).
@@ -41,11 +43,13 @@ As an example of relations of composite command `A` with sub-command `B` to comp
 
 (Note that command `B` can be composite, in which case event `D` would be composite as well.)
 
-[[CompositeEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[CompositeEvent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 Composite events have their own sequence number, separate from the sequence numbers of its <<CompositeEvent.parts>>.{fn-org351}
 This sequence number MUST precede the sequence numbers of all its <<CompositeEvent.parts>>.{fn-org351}
 
 [[CompositeEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-CompositeCommand>>

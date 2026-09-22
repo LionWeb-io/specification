@@ -30,6 +30,7 @@ Depth of <<PartitionAdded.newPartition>> in received <<evnt-PartitionAdded>> eve
 Id of this query.
 
 [[InformAboutChangingPartitions.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Response parameters
@@ -37,6 +38,7 @@ Id of this query.
 Id of this query.
 
 [[InformAboutChangingPartitions.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>

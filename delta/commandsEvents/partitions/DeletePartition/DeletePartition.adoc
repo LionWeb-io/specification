@@ -22,6 +22,7 @@ of the partition to delete.
 Id of this command.
 
 [[DeletePartition.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<DeletePartition.deletedPartition>>

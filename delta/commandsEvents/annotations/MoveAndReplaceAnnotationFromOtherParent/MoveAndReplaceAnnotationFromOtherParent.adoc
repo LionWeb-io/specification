@@ -40,8 +40,10 @@ of the node we want to replace at <<MoveAndReplaceAnnotationFromOtherParent.newI
 of the node we want to move from annotations in <<MoveAndReplaceAnnotationFromOtherParent.oldParent>> to annotations in <<MoveAndReplaceAnnotationFromOtherParent.newParent>>.
 
 [[MoveAndReplaceAnnotationFromOtherParent.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[MoveAndReplaceAnnotationFromOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.newParent>>

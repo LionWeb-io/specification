@@ -30,8 +30,10 @@ how much we want to move <<MoveChildInSameContainmentInSameParent.movedChild>> i
 of the node we want to move in <<MoveChildInSameContainmentInSameParent.containment>>.
 
 [[MoveChildInSameContainmentInSameParent.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[MoveChildInSameContainmentInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<MoveChildInSameContainmentInSameParent.parent>>

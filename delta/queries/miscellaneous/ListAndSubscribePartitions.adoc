@@ -14,6 +14,7 @@ See also <<splittableMessage>>, <<subscription>>, and <<qry-ListPartitions>>.
 Id of this query.
 
 [[ListAndSubscribePartitions.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Response parameters
@@ -21,11 +22,13 @@ Id of this query.
 All accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
 
 [[ListAndSubscribePartitions.split, `split`]]split?:: <<splitFlagType>>
+Whether <<ListAndSubscribePartitions.partitions>> is complete within this message.
 
 [[ListAndSubscribePartitions.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
 [[ListAndSubscribePartitions.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>

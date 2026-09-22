@@ -21,6 +21,7 @@ Id of the repository to which the client wants to establish a participation.
 Id of this query.
 
 [[SignOn.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Response parameters
@@ -31,6 +32,7 @@ the repository assigns to this participation.
 Id of this query.
 
 [[SignOn.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * `unsupportedProtocolVersion`: Unsupported delta protocol version

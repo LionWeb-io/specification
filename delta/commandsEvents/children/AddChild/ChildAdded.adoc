@@ -23,12 +23,16 @@ All nodes in that subtree MUST be <<new-nodes>>.{fn-org326}
 [[ChildAdded.index, `index`]]index:: <<indexType>>
 
 [[ChildAdded.split, `split`]]split?:: <<splitFlagType>>
+Whether <<ChildAdded.newChild>> is complete within this message.
 
 [[ChildAdded.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ChildAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ChildAdded.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ChildAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-AddChild>>

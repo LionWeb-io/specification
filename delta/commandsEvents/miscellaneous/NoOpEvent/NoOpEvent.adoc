@@ -9,10 +9,13 @@ Nothing happened as result of one or more command(s).{fn-org314}
 [horizontal]
 .Parameters
 [[NoOp.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[NoOp.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[NoOp.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[NoOp.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 _none_

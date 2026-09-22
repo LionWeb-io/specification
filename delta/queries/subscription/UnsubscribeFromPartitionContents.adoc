@@ -17,6 +17,7 @@ Node id of the partition this client wants to stop receiving events of.
 Id of this query.
 
 [[UnsubscribeFromPartitionContents.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Response parameters
@@ -24,6 +25,7 @@ Id of this query.
 Id of this query.
 
 [[UnsubscribeFromPartitionContents.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * `notSubscribedToPartition`: Participation is not subscribed to <<UnsubscribeFromPartitionContents.partition>>.

@@ -19,6 +19,7 @@ Number of ids requested.
 Id of this query.
 
 [[GetAvailableIds.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Response parameters
@@ -31,6 +32,7 @@ It MAY return less than <<GetAvailableIds.count>> ids.
 Id of this query.
 
 [[GetAvailableIds.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>

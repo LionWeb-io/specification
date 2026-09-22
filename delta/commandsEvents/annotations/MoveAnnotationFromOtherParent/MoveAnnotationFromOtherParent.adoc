@@ -33,8 +33,10 @@ where we want to move <<MoveAnnotationFromOtherParent.movedAnnotation>> from in 
 of the annotation we want to move from <<MoveAnnotationFromOtherParent.oldParent>> to <<MoveAnnotationFromOtherParent.newParent>>.
 
 [[MoveAnnotationFromOtherParent.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[MoveAnnotationFromOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<MoveAnnotationFromOtherParent.oldParent>>

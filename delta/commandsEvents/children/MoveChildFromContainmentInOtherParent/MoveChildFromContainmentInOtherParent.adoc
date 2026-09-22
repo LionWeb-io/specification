@@ -40,8 +40,10 @@ where we want to move <<MoveChildFromContainmentInOtherParent.movedChild>> from 
 of the node we want to move from <<MoveChildFromContainmentInOtherParent.oldParent>> to <<MoveChildFromContainmentInOtherParent.newParent>>.
 
 [[MoveChildFromContainmentInOtherParent.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[MoveChildFromContainmentInOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.oldParent>>

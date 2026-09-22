@@ -14,10 +14,13 @@
 [[PropertyAdded.newValue, `newValue`]]newValue:: <<propertyValueType>>
 
 [[PropertyAdded.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[PropertyAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[PropertyAdded.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[PropertyAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-AddProperty>>

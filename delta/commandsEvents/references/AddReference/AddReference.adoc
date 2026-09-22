@@ -30,8 +30,10 @@ of the node we want to set <<AddReference.reference>> in <<AddReference.parent>>
 of the node we want to set <<AddReference.reference>> in <<AddReference.parent>> to, if any.
 
 [[AddReference.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[AddReference.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<AddReference.parent>>

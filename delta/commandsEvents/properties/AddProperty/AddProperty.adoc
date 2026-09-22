@@ -24,8 +24,10 @@ of the node we want to add a property to.
 Value we want to set <<AddProperty.property>> in <<AddProperty.node>> to.
 
 [[AddProperty.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[AddProperty.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<AddProperty.node>>

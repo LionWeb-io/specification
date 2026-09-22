@@ -36,8 +36,10 @@ of the node we want to set <<ChangeReference.reference>> in <<ChangeReference.pa
 of the node we want to set <<ChangeReference.reference>> in <<ChangeReference.parent>> to, if any.
 
 [[ChangeReference.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[ChangeReference.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<ChangeReference.parent>>

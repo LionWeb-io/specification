@@ -49,8 +49,10 @@ of the node we want to replace at <<MoveAndReplaceChildFromContainmentInOtherPar
 of the node we want to move from <<MoveAndReplaceChildFromContainmentInOtherParent.oldContainment>> in <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>> to <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>> in <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>.
 
 [[MoveAndReplaceChildFromContainmentInOtherParent.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[MoveAndReplaceChildFromContainmentInOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>

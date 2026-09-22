@@ -21,8 +21,10 @@ of the node we want to delete a property from.
 <<{m3}.adoc#Property, Property>> we want to delete from  <<DeleteProperty.node>>.
 
 [[DeleteProperty.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[DeleteProperty.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<DeleteProperty.node>>

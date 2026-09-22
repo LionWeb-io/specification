@@ -14,10 +14,13 @@ Existing <<PropertyDeleted.property>> of <<PropertyDeleted.node>> with <<Propert
 [[PropertyDeleted.oldValue, `oldValue`]]oldValue:: <<propertyValueType>>
 
 [[PropertyDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[PropertyDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[PropertyDeleted.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[PropertyDeleted.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-DeleteProperty>>

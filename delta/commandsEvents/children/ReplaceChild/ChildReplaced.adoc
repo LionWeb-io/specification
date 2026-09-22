@@ -27,12 +27,16 @@ All nodes in that subtree MUST be <<new-nodes>> or <<reused-nodes>>.{fn-org326}
 [[ChildReplaced.index, `index`]]index:: <<indexType>>
 
 [[ChildReplaced.split, `split`]]split?:: <<splitFlagType>>
+Whether <<ChildReplaced.newChild>> is complete within this message.
 
 [[ChildReplaced.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ChildReplaced.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ChildReplaced.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ChildReplaced.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-ReplaceChild>>

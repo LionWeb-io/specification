@@ -22,10 +22,13 @@ This conforms to <<justMovingANode, the action of moving a node in one specific 
 [[AnnotationMovedInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
 
 [[AnnotationMovedInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[AnnotationMovedInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[AnnotationMovedInSameParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[AnnotationMovedInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-MoveAnnotationInSameParent>>

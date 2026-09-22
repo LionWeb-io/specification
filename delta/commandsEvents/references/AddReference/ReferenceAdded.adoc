@@ -19,10 +19,13 @@ All other entries inside <<ReferenceAdded.parent>>'s <<ReferenceAdded.reference>
 [[ReferenceAdded.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
 
 [[ReferenceAdded.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ReferenceAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ReferenceAdded.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ReferenceAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-AddReference>>

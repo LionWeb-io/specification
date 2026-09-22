@@ -26,10 +26,13 @@ MUST NOT be 0.{fn-org482}
 [[ChildMovedInSameContainmentInSameParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
 
 [[ChildMovedInSameContainmentInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ChildMovedInSameContainmentInSameParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ChildMovedInSameContainmentInSameParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ChildMovedInSameContainmentInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-MoveChildInSameContainmentInSameParent>>

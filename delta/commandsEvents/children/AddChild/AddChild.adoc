@@ -31,10 +31,13 @@ All nodes in that subtree MUST be <<new-nodes>>.
 where we want to add <<AddChild.newChild>> at in <<AddChild.containment>> of <<AddChild.parent>>.
 
 [[AddChild.split, `split`]]split?:: <<splitFlagType>>
+Whether <<AddChild.newChild>> is complete within this message.
 
 [[AddChild.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[AddChild.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<AddChild.parent>>

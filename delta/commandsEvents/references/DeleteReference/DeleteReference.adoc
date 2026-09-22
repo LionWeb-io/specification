@@ -30,8 +30,10 @@ of the node <<DeleteReference.reference>> was set to before in <<DeleteReference
 of the node <<DeleteReference.reference>> was set to before in <<DeleteReference.parent>>, if any.
 
 [[DeleteReference.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[DeleteReference.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<DeleteReference.parent>>

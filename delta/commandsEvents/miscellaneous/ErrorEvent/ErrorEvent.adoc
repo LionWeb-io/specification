@@ -13,14 +13,19 @@ See also <<qry-ErrorResponse>>.
 [horizontal]
 .Parameters
 [[Error.errorCode, `errorCode`]]errorCode:: <<errorCodeType>>
+Code of the reported error.
 
 [[Error.message, `message`]]message:: <<errorMessageType>>
+Human-readable message of the error.
 
 [[Error.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[Error.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[Error.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[Error.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 _none_

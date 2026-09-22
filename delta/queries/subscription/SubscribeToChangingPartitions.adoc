@@ -27,6 +27,7 @@ Whether this client wants to receive events on deleted partitions (`true`), or n
 Id of this query.
 
 [[SubscribeToChangingPartitions.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Response parameters
@@ -34,6 +35,7 @@ Id of this query.
 Id of this query.
 
 [[SubscribeToChangingPartitions.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>

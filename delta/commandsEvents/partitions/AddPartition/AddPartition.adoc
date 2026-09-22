@@ -27,11 +27,13 @@ NOTE: This parameter differs from the <<PartitionAdded.newPartition, correspondi
 The command's parameter contains a whole subtree, whereas the event's parameter may contain only the top of the subtree.{fn-org425}
 
 [[AddPartition.split, `split`]]split?:: <<splitFlagType>>
+Whether <<AddPartition.newPartition>> is complete within this message.
 
 [[AddPartition.commandId]]commandId:: <<commandIdType>>
 Id of this command.
 
 [[AddPartition.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidAnchorNode>> for <<AddPartition.newPartition>>

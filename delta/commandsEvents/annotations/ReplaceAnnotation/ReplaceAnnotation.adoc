@@ -34,10 +34,13 @@ where we want to replace <<ReplaceAnnotation.replacedAnnotation>> at in annotati
 of the node we want to replace in annotations of <<ReplaceAnnotation.parent>> at <<ReplaceAnnotation.index>>.
 
 [[ReplaceAnnotation.split, `split`]]split?:: <<splitFlagType>>
+Whether <<ReplaceAnnotation.newAnnotation>> is complete within this message.
 
 [[ReplaceAnnotation.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[ReplaceAnnotation.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<ReplaceAnnotation.parent>>

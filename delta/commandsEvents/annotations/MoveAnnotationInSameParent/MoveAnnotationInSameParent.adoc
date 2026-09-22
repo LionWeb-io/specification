@@ -26,8 +26,10 @@ how much we want to move <<MoveAnnotationInSameParent.movedAnnotation>> in annot
 of the annotation we want to move.
 
 [[MoveAnnotationInSameParent.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[MoveAnnotationInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<MoveAnnotationInSameParent.parent>>

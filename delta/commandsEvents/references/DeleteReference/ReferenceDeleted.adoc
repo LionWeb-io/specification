@@ -19,10 +19,13 @@ All other entries inside <<ReferenceDeleted.parent>>'s <<ReferenceDeleted.refere
 [[ReferenceDeleted.deletedResolveInfo, `deletedResolveInfo`]]deletedResolveInfo:: <<resolveInfoType>>?
 
 [[ReferenceDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ReferenceDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ReferenceDeleted.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ReferenceDeleted.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-DeleteReference>>

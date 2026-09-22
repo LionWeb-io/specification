@@ -29,6 +29,7 @@ Last <<event-sequence-number>> _received_ by the _client_.
 Id of this query.
 
 [[Reconnect.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Response parameters
@@ -39,6 +40,7 @@ Last <<event-sequence-number>> _sent_ by the _repository_.
 Id of this query.
 
 [[Reconnect.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>> If the participation is not valid, or the participation doesn't match with <<Reconnect.deltaProtocolVersion>> and/or <<Reconnect.clientId>> and/or <<Reconnect.repositoryId>>.{fn-org354}

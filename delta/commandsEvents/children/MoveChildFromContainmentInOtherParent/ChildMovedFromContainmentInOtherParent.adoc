@@ -28,10 +28,13 @@ All other children inside <<ChildMovedFromContainmentInOtherParent.newParent>>'s
 [[ChildMovedFromContainmentInOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
 
 [[ChildMovedFromContainmentInOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ChildMovedFromContainmentInOtherParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ChildMovedFromContainmentInOtherParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ChildMovedFromContainmentInOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-MoveChildFromContainmentInOtherParent>>

@@ -25,12 +25,16 @@ All nodes in that subtree MUST either be <<new-nodes>> or <<reused-nodes>>.{fn-o
 [[AnnotationReplaced.index, `index`]]index:: <<indexType>>
 
 [[AnnotationReplaced.split, `split`]]split?:: <<splitFlagType>>
+Whether <<AnnotationReplaced.newAnnotation>> is complete within this message.
 
 [[AnnotationReplaced.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[AnnotationReplaced.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[AnnotationReplaced.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[AnnotationReplaced.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-ReplaceAnnotation>>

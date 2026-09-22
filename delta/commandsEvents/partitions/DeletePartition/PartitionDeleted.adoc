@@ -14,10 +14,13 @@ This client is now unsubscribed from any changes to <<PartitionDeleted.deletedPa
 [[PartitionDeleted.deletedDescendants, `deletedDescendants`]]deletedDescendants:: <<nodeIdType>>[]
 
 [[PartitionDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[PartitionDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[PartitionDeleted.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[PartitionDeleted.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-DeletePartition>>

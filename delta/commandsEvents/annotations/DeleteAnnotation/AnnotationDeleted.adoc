@@ -17,10 +17,13 @@ All other annotations inside <<AnnotationDeleted.parent>>'s annotations with ind
 [[AnnotationDeleted.index, `index`]]index:: <<indexType>>
 
 [[AnnotationDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[AnnotationDeleted.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[AnnotationDeleted.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[AnnotationDeleted.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-DeleteAnnotation>>
