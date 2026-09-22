@@ -42,15 +42,15 @@ If we're trying to move a node in an invalid way, we report the following errors
 |===
 |  h|moved node has different parent h|old parent == new parent 3+h|moved node has same parent
 |  h| h|  h|different containment h|old containment == new containment h|same containment
-|<<cmd-MoveChildFromOtherContainment>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
+|<<cmd-MoveChildFromContainmentInOtherParent>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
 |<<cmd-MoveAnnotationFromOtherParent>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
 |<<cmd-MoveChildFromOtherContainmentInSameParent>> 2+|<<err-invalidMove>> |✓ |<<err-invalidMove>>|<<err-indexEntryMismatch>>
-|<<cmd-MoveChildInSameContainment>> 2+|<<err-invalidMove>> |<<err-indexEntryMismatch>>|_n/a_ |✓
+|<<cmd-MoveChildInSameContainmentInSameParent>> 2+|<<err-invalidMove>> |<<err-indexEntryMismatch>>|_n/a_ |✓
 |<<cmd-MoveAnnotationInSameParent>> 2+|<<err-invalidMove>> |_n/a_ |_n/a_ |✓
-|<<cmd-MoveAndReplaceChildFromOtherContainment>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
+|<<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
 |<<cmd-MoveAndReplaceAnnotationFromOtherParent>> |✓ |<<err-invalidMove>> 3+|<<err-invalidMove>>
 |<<cmd-MoveAndReplaceChildFromOtherContainmentInSameParent>> 2+|<<err-invalidMove>> |✓ |<<err-invalidMove>> |<<err-indexEntryMismatch>>
-|<<cmd-MoveAndReplaceChildInSameContainment>> 2+|<<err-invalidMove>> |<<err-indexEntryMismatch>> |_n/a_ |✓
+|<<cmd-MoveAndReplaceChildInSameContainmentInSameParent>> 2+|<<err-invalidMove>> |<<err-indexEntryMismatch>> |_n/a_ |✓
 |<<cmd-MoveAndReplaceAnnotationInSameParent>> 2+|<<err-invalidMove>> |_n/a_ |_n/a_ |✓
 |===
 

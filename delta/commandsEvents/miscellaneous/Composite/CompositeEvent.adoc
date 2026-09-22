@@ -40,7 +40,7 @@ As an example of relations of composite command `A` with sub-command `B` to comp
 * `C` MUST mention `A` in its own <<CompositeEvent.originCommands>>
 * `D` MUST mention `B` in its <<CompositeEvent.originCommands>>
 * `D` MUST NOT mention `A` in its <<CompositeEvent.originCommands>>
-
++
 (Note that command `B` can be composite, in which case event `D` would be composite as well.)
 
 [[CompositeEvent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
