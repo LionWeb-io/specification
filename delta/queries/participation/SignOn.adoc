@@ -10,6 +10,7 @@ NOTE: signing on is not the same as logging in: The latter includes some authent
 [horizontal]
 .Request parameters
 [[SignOn.deltaProtocolVersion, `deltaProtocolVersion`]]deltaProtocolVersion:: <<deltaProtocolVersionType>>
+Version of the delta protocol this client wishes to communicate in.
 
 [[SignOn.clientId, `clientId`]]clientId:: <<clientIdType>>
 Id of the client signing on.{fn-org337}

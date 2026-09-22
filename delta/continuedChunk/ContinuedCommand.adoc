@@ -26,7 +26,7 @@ Whether this message completes <<ContinuedCommand.commandId>>.
 Number of this message in the sequence of all continued commands relating to the same <<ContinuedCommand.commandId>>.
 
 [[ContinuedCommand.commandId, `commandId`]]commandId:: <<commandIdType>>
-Id of the related <<splittableMessage, splittable command>>
+Id of the related <<splittableMessage, splittable command>>.
 
 [[ContinuedCommand.additionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 Optionally empty list of <<additionalInfo>>s.

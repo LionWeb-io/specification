@@ -26,7 +26,7 @@ Whether this message completes <<ContinuedEvent.continuedEventSequenceNumber>>.
 Number of this message in the sequence of all continued events relating to the same <<ContinuedEvent.continuedEventSequenceNumber>>.
 
 [[ContinuedEvent.continuedEventSequenceNumber, `continuedEventSequenceNumber`]]continuedEventSequenceNumber:: <<eventSequenceType>>
-Sequence number of the related <<splittableMessage, splittable event>>
+Sequence number of the related <<splittableMessage, splittable event>>.
 
 [[ContinuedEvent.originCommands, `originCommands`]]originCommands:: <<commandSourceType>>[]{fn-org477}
 The contents of this field MUST be exactly the same as those of the `originCommands` field of the corresponding event — i.e., the event designated by <<ContinuedEvent.continuedEventSequenceNumber>>.
