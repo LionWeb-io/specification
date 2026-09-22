@@ -6,6 +6,8 @@ A <<continuedChunk>> for a <<splittableMessage, splittable>> response of one of 
 * <<qry-ListPartitions>> response <<ListPartitions.partitions>>
 * <<qry-ListAndSubscribePartitions>> response <<ListAndSubscribePartitions.partitions>>
 
+We identify the splittable response by its <<ContinuedQueryResponse.queryId>>.
+
 .Technical name
 `ContinuedQueryResponse`
 
@@ -13,14 +15,16 @@ A <<continuedChunk>> for a <<splittableMessage, splittable>> response of one of 
 .Response parameters
 [[ContinuedQueryResponse.chunk, `chunk`]]chunk:: <<deltaChunkType>>
 The continued chunk.
-The combination of all continued chunks MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
+The combination of all continued chunks MUST adhere to the same constraints as <<ContinuedQueryResponse.queryId>>'s chunk.
 
 [[ContinuedQueryResponse.continuedChunkCompleted, `continuedChunkCompleted`]]continuedChunkCompleted:: <<continuedChunkCompletedFlagType>>
+Whether this message completes <<ContinuedQueryResponse.queryId>>.
 
 [[ContinuedQueryResponse.continuedChunkSequenceNumber, `continuedChunkSequenceNumber`]]continuedChunkSequenceNumber:: <<continuedChunkSequenceNumberType>>
+Number of this message in the sequence of all continued query responses relating to the same <<ContinuedQueryResponse.queryId>>.
 
 [[ContinuedQueryResponse.queryId, `queryId`]]queryId:: <<queryIdType>>
-Id of the related <<splittableMessage, splittable query>>
+Id of the related <<splittableMessage, splittable query>>.
 
 [[ContinuedQueryResponse.additionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
 Optionally empty list of <<additionalInfo>>s.
