@@ -37,3 +37,4 @@ Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unsupportedProtocolVersion>> for <<SignOn.deltaProtocolVersion>>
+* <<err-unknownRepository>> for <<SignOn.repositoryId>>

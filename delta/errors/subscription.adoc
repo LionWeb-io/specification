@@ -17,6 +17,7 @@ Whether the participation is currently subscribed to newly created partitions.
 [[mixedInformAboutAndSubscribeToChangingPartitions.deletion]]deletion:: <<booleanType>>
 Whether the participation is currently subscribed to deleted partitions.
 
+
 [[err-alreadySubscribedToPartition]]
 ===== Already subscribed to partition
 Participation is already subscribed to the requested partition.
@@ -28,6 +29,7 @@ Participation is already subscribed to the requested partition.
 [horizontal]
 [[alreadySubscribedToPartition.partition]]partition:: <<nodeIdType>>
 of the already subscribed partition.
+
 
 [[err-notSubscribedToPartition]]
 ===== Not subscribed to partition
@@ -41,6 +43,7 @@ Participation is not subscribed to the requested partition.
 [[notSubscribedToPartition.partition]]partition:: <<nodeIdType>>
 of the not subscribed partition.
 
+
 [[err-unsupportedProtocolVersion]]
 ===== Unsupported protocol version
 
@@ -51,3 +54,16 @@ of the not subscribed partition.
 [horizontal]
 [[unsupportedProtocolVersion.protocolVersion]]protocolVersion:: <<deltaProtocolVersionType>>
 of the unsupported protocol version.
+
+
+[[err-unknownRepository]]
+===== Unknown repository
+The requested repository is not known.
+
+.Technical name
+`unknownRepository`
+
+.Additional infos
+[horizontal]
+[[unknownRepository.repository]]repository:: <<repositoryIdType>>
+of the unknown repository.
