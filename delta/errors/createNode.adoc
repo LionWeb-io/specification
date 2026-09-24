@@ -3,6 +3,7 @@
 
 Reported by all <<group-create-node>> commands.
 
+
 [[err-invalidAnchorNode]]
 ===== Invalid anchor node
 A <<singleChunkType>> doesn't have exactly one <<anchorNode>>, or the anchor node's id or parent is invalid.

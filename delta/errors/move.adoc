@@ -84,8 +84,8 @@ Client provided an entry (either a node or a target/resolveInfo) and an index, b
 [horizontal]
 [[indexEntryMismatch.parent]]parent:: <<nodeIdType>>
 of the parent.
-[[indexEntryMismatch.feature]]feature:: <<metaPointerType>>
-Serialized meta-pointer of given feature.
+[[indexEntryMismatch.feature]]feature:: <<serializedMetaPointerType>>
+of given feature.
 Empty for annotations.
 [[indexEntryMismatch.index]]index:: <<indexType>>
 given index.
@@ -95,6 +95,7 @@ given entry.
 actual entry at the given feature and index.
 [[indexEntryMismatch.parameter]]parameter:: <<parameterType>>
 Name of the parameter containing <<indexEntryMismatch.index>>.
+
 
 [[err-invalidIndexOffset]]
 ===== Index offset is invalid
@@ -107,8 +108,8 @@ Client provided an index offset which is either 0, or an integer such that a giv
 [horizontal]
 [[invalidIndexOffset.parent]]parent:: <<nodeIdType>>
 of the parent.
-[[invalidIndexOffset.feature]]feature:: <<metaPointerType>>
-Serialized meta-pointer of given feature.
+[[invalidIndexOffset.feature]]feature:: <<serializedMetaPointerType>>
+of given feature.
 Empty for annotations.
 [[invalidIndexOffset.offset]]offset:: <<indexOffsetType>>
 given offset.

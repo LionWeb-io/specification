@@ -1,6 +1,7 @@
 [[errors-custom]]
 ==== Custom messages
 
+
 [[err-unsupportedCustomQuery]]
 ===== Unsupported custom query
 
@@ -14,6 +15,7 @@ Repository does not support this custom query.
 [[unsupportedCustomQuery.query]]query:: <<stringType>>
 Technical name of the unsupported query message.
 See also <<customMessages>>.
+
 
 [[err-unsupportedCustomCommand]]
 ===== Unsupported custom command

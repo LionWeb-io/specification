@@ -10,9 +10,9 @@ Client tries to set a reference with neither `target` nor `resolveInfo`
 
 .Additional infos
 [horizontal]
-[[undefinedReferenceTarget.parent]]parameter:: <<targetNodeType>>
-[[undefinedReferenceTarget.reference]]parameter:: <<metaPointerType>>
-[[undefinedReferenceTarget.target]]parameter:: <<targetNodeType>>?
+[[undefinedReferenceTarget.parent]]parameter:: <<nodeIdType>>
+[[undefinedReferenceTarget.reference]]parameter:: <<serializedMetaPointerType>>
+[[undefinedReferenceTarget.target]]parameter:: <<nodeIdType>>?
 [[undefinedReferenceTarget.resolveInfo]]parameter:: <<resolveInfoType>>?
 [[undefinedReferenceTarget.parameter]]parameter:: <<parameterType>>
 Name of the parameter containing <<undefinedReferenceTarget.reference>>.
