@@ -37,12 +37,3 @@ Event sequence number of this event.
 
 [[ContinuedEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
 Optionally empty list of <<additionalInfo>>s.
-
-.Errors
-* <<err-splitMessageAlreadyCompleted>>
-* <<err-multipleContinuedChunksCompleted>>
-* <<err-duplicateContinuedChunk>>
-* <<err-unknownSplittableMessageInContinuedChunk>>
-* <<err-invalidSplittableMessageInContinuedChunk>>
-* <<err-interruptedContinuedChunk>>
-* <<err-invalidParticipation>>
