@@ -38,6 +38,7 @@ Optionally empty list of <<additionalInfo>>s.
 .Errors
 * <<err-unknownNode>> for <<MoveChildInSameContainmentInSameParent.parent>>
 * <<err-unknownNode>> for <<MoveChildInSameContainmentInSameParent.movedChild>>
+* <<err-unknownContainment>> for <<MoveChildInSameContainmentInSameParent.containment>> in <<MoveChildInSameContainmentInSameParent.parent>>
 * <<err-parentMismatch>> for <<MoveChildInSameContainmentInSameParent.parent>> and <<MoveChildInSameContainmentInSameParent.movedChild>>
 * <<err-indexEntryMismatch>> for <<MoveChildInSameContainmentInSameParent.containment>>/<<MoveChildInSameContainmentInSameParent.oldIndex>> and <<MoveChildInSameContainmentInSameParent.movedChild>>
 * <<err-invalidIndexOffset>> for <<MoveChildInSameContainmentInSameParent.indexOffset>>

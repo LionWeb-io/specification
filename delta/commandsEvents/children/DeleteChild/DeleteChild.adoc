@@ -36,6 +36,7 @@ Optionally empty list of <<additionalInfo>>s.
 .Errors
 * <<err-unknownNode>> for <<DeleteChild.parent>>
 * <<err-unknownNode>> for <<DeleteChild.deletedChild>>
+* <<err-unknownContainment>> for <<DeleteChild.containment>> in <<DeleteChild.parent>>
 * <<err-parentMismatch>> for <<DeleteChild.parent>> and <<DeleteChild.deletedChild>>
 * <<err-indexEntryMismatch>> for <<DeleteChild.containment>>/<<DeleteChild.index>> and <<DeleteChild.deletedChild>>
 * <<err-invalidParticipation>>

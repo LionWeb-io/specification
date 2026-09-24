@@ -49,6 +49,7 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.oldParent>>
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.newParent>>
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.movedChild>>
+* <<err-unknownContainment>> for <<MoveChildFromContainmentInOtherParent.oldContainment>> in <<MoveChildFromContainmentInOtherParent.oldParent>>
 * <<err-parentMismatch>> for <<MoveChildFromContainmentInOtherParent.oldParent>> and <<MoveChildFromContainmentInOtherParent.movedChild>>
 * <<err-indexEntryMismatch>> for <<MoveChildFromContainmentInOtherParent.oldContainment>>/<<MoveChildFromContainmentInOtherParent.oldIndex>> and
 <<MoveChildFromContainmentInOtherParent.movedChild>>

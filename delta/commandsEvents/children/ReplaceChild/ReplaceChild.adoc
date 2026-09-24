@@ -48,6 +48,7 @@ Optionally empty list of <<additionalInfo>>s.
 .Errors
 * <<err-unknownNode>> for <<ReplaceChild.parent>>
 * <<err-unknownNode>> for <<ReplaceChild.replacedChild>>
+* <<err-unknownContainment>> for <<ReplaceChild.containment>> in <<ReplaceChild.parent>>
 * <<err-invalidAnchorNode>> for <<ReplaceChild.newChild>>
 * <<err-nodeAlreadyExists>> for <<ReplaceChild.newChild>>
 * <<err-parentContainmentMismatch>> for <<ReplaceChild.newChild>>

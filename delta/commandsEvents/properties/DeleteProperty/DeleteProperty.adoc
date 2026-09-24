@@ -28,7 +28,7 @@ Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<DeleteProperty.node>>
-* <<err-featureNotSet>> for <<DeleteProperty.property>> in <<DeleteProperty.node>>
+* <<err-unknownProperty>> for <<DeleteProperty.property>> in <<DeleteProperty.node>>
 * <<err-invalidParticipation>>
 
 .Related event

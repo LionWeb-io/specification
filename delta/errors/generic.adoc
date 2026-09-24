@@ -1,6 +1,7 @@
 [[errors-generic]]
 ==== Generic errors
 
+
 [[err-invalidParticipation]]
 ===== Invalid participation
 The <<participation>> the <<client>> uses to communicate with the repository is not valid.
@@ -16,12 +17,14 @@ Possible reasons:
 
 ##TODO##: Do we have a separate "connection state" when the connection is technically established, but the client is not yet signed in?
 
+
 [[err-messageSyntaxIncorrect]]
 ===== Message syntax incorrect
 The delta message does not adhere to the syntax defined by this specification.
 
 .Technical name
 `messageSyntaxIncorrect`
+
 
 [[err-messageKindUnknown]]
 ===== Message kind unknown
@@ -31,6 +34,7 @@ See also <<customMessages>>.
 
 .Technical name
 `messageKindUnknown`
+
 
 [[err-missingRequiredMessageParameter]]
 ===== Missing required message parameter
@@ -43,6 +47,7 @@ A <<queries, query response>> or <<commands, command>> is missing a required par
 [horizontal]
 [[missingRequiredMessageParameter.parameter]]parameter:: <<parameterType>>
 Name of the missing parameter.
+
 
 [[err-unknownNode]]
 ===== Unknown node
@@ -74,14 +79,59 @@ See also <<errors-move>>.
 [horizontal]
 [[unknownIndex.parent]]parent:: <<nodeIdType>>
 of the parent containing the feature with unknown index.
-[[unknownIndex.feature]]feature:: <<metaPointerType>>
-Serialized meta-pointer of the feature with unknown index.
+[[unknownIndex.feature]]feature:: <<serializedMetaPointerType>>
+of the feature with unknown index.
 [[unknownIndex.size]]size:: <<indexType>>
 The actual size of the feature.
 [[unknownIndex.index]]index:: <<indexType>>
 Unknown index.
 [[unknownIndex.parameter]]parameter:: <<parameterType>>
 Name of the parameter containing <<unknownIndex.index>>.
+
+
+[[err-unknownProperty]]
+===== Unknown property
+Client tries to change or delete a property not present in the parent node.
+
+.Technical name
+`unknownProperty`
+
+.Additional infos
+[horizontal]
+[[unknownProperty.parent]]parent:: <<nodeIdType>>
+of the parent missing the requested property.
+[[unknownProperty.property]]property:: <<serializedMetaPointerType>>
+of the requested <<{m3}.adoc#Property, Property>>.
+
+
+[[err-unknownReference]]
+===== Unknown reference
+Client tries to change or delete a reference not present in the parent node.
+
+.Technical name
+`unknownReference`
+
+.Additional infos
+[horizontal]
+[[unknownReference.parent]]parent:: <<nodeIdType>>
+of the parent missing the requested property.
+[[unknownReference.reference]]reference:: <<serializedMetaPointerType>>
+of the requested <<{m3}.adoc#Reference, Reference>>.
+
+
+[[err-unknownContainment]]
+===== Unknown containment
+Client tries to change or delete a containment not present in the parent node.
+
+.Technical name
+`unknownContainment`
+
+.Additional infos
+[horizontal]
+[[unknownContainment.parent]]parent:: <<nodeIdType>>
+of the parent missing the requested property.
+[[unknownContainment.containment]]containment:: <<serializedMetaPointerType>>
+of the requested <<{m3}.adoc#Containment, Containment>>.
 
 
 [[err-featureAlreadySet]]
@@ -96,8 +146,8 @@ Use a <<group-value-change>> or <<group-node-replace>> command instead.
 [horizontal]
 [[featureAlreadySet.parent]]parent:: <<nodeIdType>>
 of the parent containing the already set feature.
-[[featureAlreadySet.feature]]feature:: <<metaPointerType>>
-Serialized meta-pointer of the already set feature.
+[[featureAlreadySet.feature]]feature:: <<serializedMetaPointerType>>
+of the already set feature.
 [[featureAlreadySet.value]]value:: <<featureValueType>>
 Current value of the feature.
 
@@ -114,5 +164,5 @@ Use an <<group-value-add>> or <<group-node-replace>> command instead.
 [horizontal]
 [[featureNotSet.parent]]parent:: <<nodeIdType>>
 of the parent containing the unset feature.
-[[featureNotSet.feature]]feature:: <<metaPointerType>>
-Serialized meta-pointer of the unset feature.
+[[featureNotSet.feature]]feature:: <<serializedMetaPointerType>>
+of the unset feature.
