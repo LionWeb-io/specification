@@ -6,6 +6,24 @@ Additional infos of errors are optional.
 A repository SHOULD provide them, if possible.
 A client MUST NOT require them.
 
+==== Error additional info types
+Some types can only occur in additional infos of errors.
+
+[[parameterType]]Parameter:: Technical name of the parameter an error refers to.
+
+[[featureValueType]]FeatureValue:: The value of a feature, only used in error messages.
++
+The value depends on the feature kind referred to by the error message:
+
+[horizontal]
+containment or annotation::: <<nodeIdType>>
+property::: <<propertyValueType>>
+reference::: serialized <<resolveInfoType>>
+
+[[stringType]]string:: A string value.
+
+[[serializedMetaPointerType]]Serialized MetaPointer:: string serialization of JSON representation of a <<{serialization}.adoc#meta-pointer, MetaPointer>>.
+
 include::generic.adoc[]
 
 include::createNode.adoc[]
