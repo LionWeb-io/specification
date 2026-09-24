@@ -30,7 +30,7 @@ Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>
-* `unsupportedCustomQuery`: Repository does not support this custom query.
+* <<err-unsupportedCustomQuery>>
 
 
 [[cmd-custom]]
@@ -50,7 +50,7 @@ Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>
-* `unsupportedCustomCommand`: Repository does not support this custom command.
+* <<err-unsupportedCustomCommand>>
 
 
 [[evnt-custom]]

@@ -18,6 +18,8 @@ include::subscription.adoc[]
 
 include::splittable.adoc[]
 
+include::custom.adoc[]
+
 ==== Not sure yet
 
 #TODO#
