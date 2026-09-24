@@ -49,3 +49,16 @@ Received message on this <<channel>> before the sequence of continued chunks had
 
 .Technical name
 `interruptedContinuedChunk`
+
+
+[[err-compositeCommandContainsSplittable]]
+===== Composite command contains splittable
+A <<cmd-CompositeCommand>> contains <<continuedChunk, continued chunks>> or declares a <<splittableMessage>> as split.{fn-org462}
+
+.Technical name
+`compositeCommandContainsSplittable`
+
+.Additional infos
+[horizontal]
+[[compositeCommandContainsSplittable.commandId]]commandId:: <<commandIdType>>
+of the splittable or continued command.
