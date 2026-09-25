@@ -14,27 +14,37 @@ include::ChangeReference-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[ChangeReference.parent, `parent`]]parent:: <<targetNodeType>>
+[[ChangeReference.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to change a reference of.
 
 [[ChangeReference.reference, `reference`]]reference:: <<metaPointerType>>
+<<{m3}.adoc#Reference, Reference>> we want to change in <<ChangeReference.parent>>.
 
 [[ChangeReference.index, `index`]]index:: <<indexType>>
+where we want to change <<ChangeReference.oldReference>> / <<ChangeReference.oldResolveInfo>> at in <<ChangeReference.reference>> of <<ChangeReference.parent>>.
 
-[[ChangeReference.oldReference, `oldReference`]]oldReference:: <<targetNodeType>>?
+[[ChangeReference.oldReference, `oldReference`]]oldReference:: <<nodeIdType>>?
+of the node <<ChangeReference.reference>> is currently set to in <<ChangeReference.parent>>, if any.
 
 [[ChangeReference.oldResolveInfo, `oldResolveInfo`]]oldResolveInfo:: <<resolveInfoType>>?
+of the node <<ChangeReference.reference>> is currently set to in <<ChangeReference.parent>>, if any.
 
-[[ChangeReference.newReference, `newReference`]]newReference:: <<targetNodeType>>?
+[[ChangeReference.newReference, `newReference`]]newReference:: <<nodeIdType>>?
+of the node we want to set <<ChangeReference.reference>> in <<ChangeReference.parent>> to, if any.
 
 [[ChangeReference.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
+of the node we want to set <<ChangeReference.reference>> in <<ChangeReference.parent>> to, if any.
 
 [[ChangeReference.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[ChangeReference.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<ChangeReference.parent>>
-* <<err-unknownIndex>> for <<ChangeReference.index>> (is beyond (the number of <<ChangeReference.reference>> entries of <<ChangeReference.parent>>) - 1)
+* <<err-unknownReference>> for <<ChangeReference.reference>> in <<ChangeReference.parent>>
+* <<err-indexOutOfRange>> for <<ChangeReference.index>> (is beyond (the number of <<ChangeReference.reference>> entries of <<ChangeReference.parent>>) - 1)
 * <<err-undefinedReferenceTarget>> for <<ChangeReference.newReference>> and <<ChangeReference.newResolveInfo>>
 * <<err-indexEntryMismatch>> for <<ChangeReference.reference>>/<<ChangeReference.index>> and <<ChangeReference.oldReference>>/<<ChangeReference.oldResolveInfo>>
 * <<err-undefinedReferenceTarget>> for <<ChangeReference.oldReference>>/<<ChangeReference.oldResolveInfo>>

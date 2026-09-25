@@ -1,0 +1,56 @@
+[[errors-chunk]]
+==== Chunk errors
+
+[[err-invalidAnchorNode]]
+===== Invalid anchor node
+A <<singleChunkType>> doesn't have exactly one <<anchorNode>>, or the anchor node's id or parent is invalid.
+
+.Technical name
+`invalidAnchorNode`
+
+
+[[err-duplicateNodeId]]
+===== Duplicate node id
+Chunk contains duplicate node id
+
+.Technical name
+`duplicateNodeId`
+
+.Additional infos
+[horizontal]
+[[duplicateNodeId.duplicate]]duplicate:: <<nodeIdType>>
+of the already duplicate node.
+
+
+[[err-parentContainmentMismatch]]
+===== Parent / containment mismatch
+A parent node `P` has a child (containment or annotation) node `C`, but `C` doesn't mention `P` as parent.
+
+.Technical name
+`parentContainmentMismatch`
+
+.Additional infos
+[horizontal]
+[[parentContainmentMismatch.parent]]parent:: <<nodeIdType>>
+of the parent node.
+[[parentContainmentMismatch.child, `child`]]child:: <<nodeIdType>>
+of the child node.
+[[parentContainmentMismatch.parentId]]parentId:: <<nodeIdType>>
+of the parent mentioned in the child.
+[[parentContainmentMismatch.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<parentContainmentMismatch.child>>.
+
+
+[[err-circularContainment]]
+===== Circular containment
+A parent node `P` contains a child (containment or annotation) node `C`, that directly or indirectly contains `P`.
+Includes the edge case `P` contains `P`.
+
+.Additional infos
+[horizontal]
+[[circularContainment.cycle]]cycle:: <<nodeIdType>>[]
+Comma-separated list of all node ids that are part of the containment cycle.
+MUST NOT contain any whitespace.
+
+.Technical name
+`circularContainment`

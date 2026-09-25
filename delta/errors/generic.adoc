@@ -1,0 +1,87 @@
+[[errors-generic]]
+==== Generic errors
+
+
+[[err-invalidParticipation]]
+===== Invalid participation
+The <<participation>> the <<client>> uses to communicate with the repository is not valid.
+
+Possible reasons:
+
+* The participation never has been valid.{fn-org530}
+* The client <<qry-SignOff, signed off>>.
+* The client <<participation, disconnected>>.
+
+.Technical name
+`invalidParticipation`
+
+
+[[err-messageSyntaxIncorrect]]
+===== Message syntax incorrect
+The delta message does not adhere to the syntax defined by this specification.
+
+.Technical name
+`messageSyntaxIncorrect`
+
+
+[[err-messageKindUnknown]]
+===== Message kind unknown
+The repository does not recognize the message.
+
+See also <<customMessages>>.
+
+.Technical name
+`messageKindUnknown`
+
+
+[[err-missingRequiredMessageParameter]]
+===== Missing required message parameter
+A <<queries, query response>> or <<commands, command>> is missing a required parameter.
+
+.Technical name
+`missingRequiredMessageParameter`
+
+.Additional infos
+[horizontal]
+[[missingRequiredMessageParameter.parameter]]parameter:: <<parameterType>>
+Name of the missing parameter.
+
+
+[[err-unknownNode]]
+===== Unknown node
+Client tries to operate on a node unknown to the repository.
+
+See also <<errors-move>>.
+
+.Technical name
+`unknownNode`
+
+.Additional infos
+[horizontal]
+[[unknownNode.node, `node`]]node:: <<nodeIdType>>
+of the unknown node.
+[[unknownNode.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<unknownNode.node>>.
+
+
+[[err-indexOutOfRange]]
+===== Index out of range
+Client tries to operate on an index beyond the number of existing elements.
+
+See also <<errors-move>>.
+
+.Technical name
+`indexOutOfRange`
+
+.Additional infos
+[horizontal]
+[[indexOutOfRange.parent]]parent:: <<nodeIdType>>
+of the parent containing the feature with unknown index.
+[[indexOutOfRange.feature]]feature:: <<serializedMetaPointerType>>
+of the feature with unknown index.
+[[indexOutOfRange.size]]size:: <<indexType>>
+The actual size of the feature.
+[[indexOutOfRange.index, `index`]]index:: <<indexType>>
+Unknown index.
+[[indexOutOfRange.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<indexOutOfRange.index>>.

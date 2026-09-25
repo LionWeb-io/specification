@@ -14,23 +14,31 @@ include::DeleteReference-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[DeleteReference.parent, `parent`]]parent:: <<targetNodeType>>
+[[DeleteReference.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to delete a reference from.
 
 [[DeleteReference.reference, `reference`]]reference:: <<metaPointerType>>
+<<{m3}.adoc#Reference, Reference>> we want to delete from <<DeleteReference.parent>>.
 
 [[DeleteReference.index, `index`]]index:: <<indexType>>
+where we want to delete <<DeleteReference.deletedReference>> / <<DeleteReference.deletedResolveInfo>> at in <<DeleteReference.reference>> of <<DeleteReference.parent>>.
 
-[[DeleteReference.deletedReference, `deletedReference`]]deletedReference:: <<targetNodeType>>?
+[[DeleteReference.deletedReference, `deletedReference`]]deletedReference:: <<nodeIdType>>?
+of the node <<DeleteReference.reference>> was set to before in <<DeleteReference.parent>>, if any.
 
 [[DeleteReference.deletedResolveInfo, `deletedResolveInfo`]]deletedResolveInfo:: <<resolveInfoType>>?
+of the node <<DeleteReference.reference>> was set to before in <<DeleteReference.parent>>, if any.
 
 [[DeleteReference.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[DeleteReference.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<DeleteReference.parent>>
-* <<err-unknownIndex>> for <<DeleteReference.index>> (is beyond (the number of <<DeleteReference.reference>> entries of <<DeleteReference.parent>>) - 1)
+* <<err-unknownReference>> for <<DeleteReference.reference>> in <<DeleteReference.parent>>
+* <<err-indexOutOfRange>> for <<DeleteReference.index>> (is beyond (the number of <<DeleteReference.reference>> entries of <<DeleteReference.parent>>) - 1)
 * <<err-indexEntryMismatch>> for <<DeleteReference.reference>>/<<DeleteReference.index>> and <<DeleteReference.deletedReference>>/<<DeleteReference.deletedResolveInfo>>
 * <<err-undefinedReferenceTarget>> for <<DeleteReference.deletedReference>>/<<DeleteReference.deletedResolveInfo>>
 * <<err-invalidParticipation>>

@@ -12,13 +12,14 @@ We identify the client by its <<clientIdType>>.
 
 [horizontal]
 .Request parameters
-[[GetAvailableIds.count, `count`]]count:: <<integerType>>
+[[GetAvailableIds.count, `count`]]count:: <<countType>>
 Number of ids requested.
 
 [[GetAvailableIds.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
 [[GetAvailableIds.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Response parameters
@@ -31,6 +32,7 @@ It MAY return less than <<GetAvailableIds.count>> ids.
 Id of this query.
 
 [[GetAvailableIds.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>

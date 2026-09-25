@@ -1,0 +1,69 @@
+[[errors-subscription]]
+==== Subscription errors
+
+[[err-mixedInformAboutAndSubscribeToChangingPartitions]]
+===== Mixed Inform about / Subscribe to Changing Partitions
+Client already <<qry-SubscribeToChangingPartitions, subscribed to changing partitions>>, and now requests to be <<qry-InformAboutChangingPartitions, informed about changing partitions>> -- or vice versa.
+
+.Technical name
+`mixedInformAboutAndSubscribeToChangingPartitions`
+
+.Additional infos
+[horizontal]
+[[mixedInformAboutAndSubscribeToChangingPartitions.currentMode]]currentMode:: <<stringType>>
+The technical name of the current subscription mode, i.e. either <<qry-InformAboutChangingPartitions>> or <<qry-SubscribeToChangingPartitions>>.
+[[mixedInformAboutAndSubscribeToChangingPartitions.creation]]creation:: <<booleanType>>
+Whether the participation is currently subscribed to newly created partitions.
+[[mixedInformAboutAndSubscribeToChangingPartitions.deletion]]deletion:: <<booleanType>>
+Whether the participation is currently subscribed to deleted partitions.
+
+
+[[err-alreadySubscribedToPartition]]
+===== Already subscribed to partition
+Participation is already subscribed to the requested partition.
+
+.Technical name
+`alreadySubscribedToPartition`
+
+.Additional infos
+[horizontal]
+[[alreadySubscribedToPartition.partition]]partition:: <<nodeIdType>>
+of the already subscribed partition.
+
+
+[[err-notSubscribedToPartition]]
+===== Not subscribed to partition
+Participation is not subscribed to the requested partition.
+
+.Technical name
+`notSubscribedToPartition`
+
+.Additional infos
+[horizontal]
+[[notSubscribedToPartition.partition]]partition:: <<nodeIdType>>
+of the not subscribed partition.
+
+
+[[err-unsupportedProtocolVersion]]
+===== Unsupported protocol version
+
+.Technical name
+`unsupportedProtocolVersion`
+
+.Additional infos
+[horizontal]
+[[unsupportedProtocolVersion.protocolVersion]]protocolVersion:: <<deltaProtocolVersionType>>
+of the unsupported protocol version.
+
+
+[[err-unknownRepository]]
+===== Unknown repository
+The requested repository is not known.
+
+.Technical name
+`unknownRepository`
+
+.Additional infos
+[horizontal]
+[[unknownRepository.repository]]repository:: <<repositoryIdType>>
+of the unknown repository.

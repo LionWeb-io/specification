@@ -10,6 +10,7 @@ NOTE: signing on is not the same as logging in: The latter includes some authent
 [horizontal]
 .Request parameters
 [[SignOn.deltaProtocolVersion, `deltaProtocolVersion`]]deltaProtocolVersion:: <<deltaProtocolVersionType>>
+Version of the delta protocol this client wishes to communicate in.
 
 [[SignOn.clientId, `clientId`]]clientId:: <<clientIdType>>
 Id of the client signing on.{fn-org337}
@@ -21,6 +22,7 @@ Id of the repository to which the client wants to establish a participation.
 Id of this query.
 
 [[SignOn.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Response parameters
@@ -31,6 +33,8 @@ the repository assigns to this participation.
 Id of this query.
 
 [[SignOn.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
-* Unsupported delta protocol version
+* <<err-unsupportedProtocolVersion>> for <<SignOn.deltaProtocolVersion>>
+* <<err-unknownRepository>> for <<SignOn.repositoryId>>

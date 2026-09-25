@@ -1,3 +1,4 @@
+[[customMessages]]
 === Custom messages
 We support custom messages, i.e. messages that match the general structure of delta messages, but with custom content.{fn-org448}
 
@@ -7,7 +8,7 @@ The technical name of all custom messages and custom errors MUST adhere to the s
 [[qry-custom]]
 ==== Custom queries
 A client CAN send custom query messages.
-If the repository understands the custom query, it replies with a matching response; otherwise, the repository MUST send back an <<qry-ErrorResponse>>.
+If the repository understands the custom query, it replies with a matching response; otherwise, the repository MUST send back an <<qry-ErrorResponse>> with <<err-messageKindUnknown>>.
 
 Custom queries MUST have at least the following parameters:
 
@@ -17,6 +18,7 @@ Custom queries MUST have at least the following parameters:
 Id of this query.
 
 [[CustomQuery.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Required response parameters
@@ -24,16 +26,17 @@ Id of this query.
 Id of this query.
 
 [[CustomQuery.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>
-* `unsupportedCustomQuery`: Repository does not support this custom query.
+* <<err-messageKindUnknown>>
 
 
 [[cmd-custom]]
 ==== Custom commands
 A client CAN send custom command messages.
-If the repository understands the custom command, it replies with a matching event; otherwise, the repository MUST send back an <<evnt-ErrorEvent>>.
+If the repository understands the custom command, it replies with a matching event; otherwise, the repository MUST send back an <<evnt-ErrorEvent>> with <<err-messageKindUnknown>>.
 
 Custom commands MUST have at least the following parameters:
 
@@ -43,10 +46,11 @@ Custom commands MUST have at least the following parameters:
 Id of this command.
 
 [[CustomCommand.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>
-* `unsupportedCustomCommand`: Repository does not support this custom command.
+* <<err-messageKindUnknown>>
 
 
 [[evnt-custom]]
@@ -59,7 +63,10 @@ Custom events MUST have at least the following parameters:
 [horizontal]
 .Parameters
 [[CustomEvent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[CustomEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[CustomEvent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[CustomEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.

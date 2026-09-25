@@ -4,12 +4,15 @@
 
 All other children inside <<ChildAdded.parent>>'s <<ChildAdded.containment>> with index >= <<ChildAdded.index>> have been moved to next higher index.
 
+See also <<splittableMessage>>.
+
 .Technical name
 `ChildAdded`
 
 [horizontal]
 .Parameters
-[[ChildAdded.parent, `parent`]]parent:: <<targetNodeType>>
+[[ChildAdded.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the new child was added to.
 
 [[ChildAdded.newChild, `newChild`]]newChild:: <<singleChunkType>>
 Subtree that formed the new child.
@@ -17,16 +20,22 @@ The _anchor node_ MUST contain the <<ChildAdded.parent>> as _parent_.{fn-org357}
 All nodes in that subtree MUST be <<new-nodes>>.{fn-org326}
 
 [[ChildAdded.containment, `containment`]]containment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildAdded.newChild>> was added to in <<ChildAdded.parent>>.
 
 [[ChildAdded.index, `index`]]index:: <<indexType>>
+where <<ChildAdded.newChild>> was added in <<ChildAdded.containment>> of <<ChildAdded.parent>>.
 
 [[ChildAdded.split, `split`]]split?:: <<splitFlagType>>
+Whether <<ChildAdded.newChild>> is complete within this message.
 
 [[ChildAdded.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ChildAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ChildAdded.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ChildAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-AddChild>>

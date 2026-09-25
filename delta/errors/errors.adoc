@@ -1,0 +1,36 @@
+[[errors]]
+=== Errors
+Commonly used errors, referred to by their _technical name_ as <<errorCodeType>>.
+
+Additional infos of errors are optional.
+A repository SHOULD provide them, if possible.
+A client MUST NOT require them.
+
+==== Error additional info types
+Some types can only occur in additional infos of errors.
+
+[[parameterType]]Parameter:: Technical name of the parameter an error refers to.
+
+[[stringType]]string:: A string value.
+
+[[serializedMetaPointerType]]Serialized MetaPointer:: string serialization of JSON representation of a <<{serialization}.adoc#meta-pointer, MetaPointer>>.
+
+include::generic.adoc[]
+
+include::chunk.adoc[]
+
+include::createNode.adoc[]
+
+include::move.adoc[]
+
+include::annotation.adoc[]
+
+include::containment.adoc[]
+
+include::reference.adoc[]
+
+include::property.adoc[]
+
+include::subscription.adoc[]
+
+include::splittable.adoc[]

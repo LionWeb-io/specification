@@ -9,7 +9,7 @@ Both representations express the parameter to be unset.{fn-org427}
 [horizontal]
 [[additionalInfosType]]AdditionalInfos:: Optionally empty{fn-org402} list of <<additionalInfo>>s.
 
-[[targetNodeType]]TargetNode:: Target's node as <<{m3}.adoc#node-id, id>>.
+[[nodeIdType]]NodeId:: A node represented by its <<{m3}.adoc#node-id, id>>.
 
 [[metaPointerType]]MetaPointer:: MetaPointer-tuple to describe an M2 element (classifier, feature, etc.).
 Encoded as <<{serialization}.adoc#meta-pointer, meta-pointer>>.
@@ -23,7 +23,7 @@ Can be `null`.
 Cannot be `null`.
 Use value `0` for <<{m3}.adoc#multiplicity, single links>>.
 
-[[indexOffsetType]]IndexOffset:: Relative position inside a (list of) multiple link or annotations as integer.
+[[indexOffsetType]]IndexOffset:: <<indexOffset, Relative position>> inside a (list of) multiple link or annotations as integer.
 Cannot be `0` or `null`.
 
 [[commandType]]Command:: Any <<commands, command>>.
@@ -102,6 +102,7 @@ Can be any string, including empty string.
 [[booleanType]]boolean:: A boolean value, i.e. either `true` or `false`.
 
 [[countType]]count:: An integer value in the range of 0 to 2147483647 (i.e. 2^31^ − 1).
+
 
 [[new-nodes, new nodes]]
 ==== New nodes

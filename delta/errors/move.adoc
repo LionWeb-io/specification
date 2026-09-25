@@ -1,0 +1,73 @@
+[[errors-move]]
+==== Move errors
+
+Reported by all <<group-move-or-replace>> commands.
+
+
+[[err-oldAndNewParentIdentical]]
+===== Old and new parent identical
+
+.Technical name
+`oldAndNewParentIdentical`
+
+.Additional infos
+[horizontal]
+[[oldAndNewParentIdentical.parent]]arent:: <<nodeIdType>>
+of both the old and the new parent.
+
+
+[[err-oldAndNewContainmentIdentical]]
+===== Old and new containment identical
+
+.Technical name
+`oldAndNewContainmentIdentical`
+
+.Additional infos
+[horizontal]
+[[oldAndNewContainmentIdentical.containment]]containment:: <<serializedMetaPointerType>>
+of the both the old and the new containment.
+
+
+[[err-oldAndNewIndexIdentical]]
+===== Old and new index identical
+
+.Technical name
+`oldAndNewIndexIdentical`
+
+.Additional infos
+[horizontal]
+[[oldAndNewIndexIdentical.index]]index:: <<indexType>>
+of both the old and new index.
+
+
+[[err-parentMismatch]]
+===== The given parent of a node is not its parent
+Client provided an existing node N with a parent id in its parent field, but the node with this parent-id
+does not have the existing node N as a child (annotation or containment).
+
+.Technical name
+`parentMismatch`
+
+
+[[err-invalidIndexOffset]]
+===== Index offset is invalid
+Client provided an index offset which is either 0, or an integer such that a given “old” index + the index offset is not a valid index (in the list that’s the subject of the action triggering this error).
+
+.Technical name
+`invalidIndexOffset`
+
+.Additional infos
+[horizontal]
+[[invalidIndexOffset.parent]]parent:: <<nodeIdType>>
+of the parent.
+[[invalidIndexOffset.feature]]feature:: <<serializedMetaPointerType>>?
+of given feature.
+Empty for annotations.
+[[invalidIndexOffset.offset, `offset`]]offset:: <<indexOffsetType>>
+given offset.
+[[invalidIndexOffset.min]]min:: <<indexOffsetType>>
+Minimal valid offset.
+[[invalidIndexOffset.max]]max:: <<indexOffsetType>>
+Maximal valid offset.
+[[invalidIndexOffset.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<invalidIndexOffset.offset>>.

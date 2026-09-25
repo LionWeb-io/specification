@@ -2,6 +2,8 @@
 ===== Partition added
 <<new-nodes, New>> partition <<PartitionAdded.newPartition>> has been added to the repository.
 
+See also <<splittableMessage>>.
+
 .Technical name
 `PartitionAdded`
 
@@ -14,12 +16,16 @@ NOTE: This parameter differs from the <<AddPartition.newPartition, corresponding
 The command's parameter always contains a whole subtree, whereas the event's parameter may contain only the top of the subtree.{fn-org425}
 
 [[PartitionAdded.split, `split`]]split?:: <<splitFlagType>>
+Whether <<PartitionAdded.newPartition>> is complete within this message.
 
 [[PartitionAdded.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[PartitionAdded.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[PartitionAdded.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[PartitionAdded.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-AddPartition>>

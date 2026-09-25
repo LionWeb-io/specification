@@ -13,29 +13,42 @@ No other children inside <<ChildMovedAndReplacedFromContainmentInOtherParent.new
 
 [horizontal]
 .Parameters
-[[ChildMovedAndReplacedFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+[[ChildMovedAndReplacedFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
+of the node <<ChildMovedAndReplacedFromContainmentInOtherParent.movedChild>> was moved to.
 
 [[ChildMovedAndReplacedFromContainmentInOtherParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildMovedAndReplacedFromContainmentInOtherParent.movedChild>> was moved to in <<ChildMovedAndReplacedFromContainmentInOtherParent.newParent>>.
 
 [[ChildMovedAndReplacedFromContainmentInOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+where <<ChildMovedAndReplacedFromContainmentInOtherParent.movedChild>> was moved to in <<ChildMovedAndReplacedFromContainmentInOtherParent.newContainment>> of <<ChildMovedAndReplacedFromContainmentInOtherParent.newParent>>.
 
-[[ChildMovedAndReplacedFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[ChildMovedAndReplacedFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
+of the node that was moved from <<ChildMovedAndReplacedFromContainmentInOtherParent.oldContainment>> in <<ChildMovedAndReplacedFromContainmentInOtherParent.oldParent>> to <<ChildMovedAndReplacedFromContainmentInOtherParent.newContainment>> in <<ChildMovedAndReplacedFromContainmentInOtherParent.newParent>>.
 
-[[ChildMovedAndReplacedFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+[[ChildMovedAndReplacedFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
+of the node <<ChildMovedAndReplacedFromContainmentInOtherParent.movedChild>> was moved from.
 
 [[ChildMovedAndReplacedFromContainmentInOtherParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildMovedAndReplacedFromContainmentInOtherParent.movedChild>> was moved from in <<ChildMovedAndReplacedFromContainmentInOtherParent.oldParent>>.
 
 [[ChildMovedAndReplacedFromContainmentInOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where <<ChildMovedAndReplacedFromContainmentInOtherParent.movedChild>> was moved from in <<ChildMovedAndReplacedFromContainmentInOtherParent.oldContainment>> of <<ChildMovedAndReplacedFromContainmentInOtherParent.oldParent>>.
 
-[[ChildMovedAndReplacedFromContainmentInOtherParent.replacedChild, `replacedChild`]]replacedChild:: <<targetNodeType>>
+[[ChildMovedAndReplacedFromContainmentInOtherParent.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
+of the node that was replaced at <<ChildMovedAndReplacedFromContainmentInOtherParent.newIndex>> of <<ChildMovedAndReplacedFromContainmentInOtherParent.newContainment>> in <<ChildMovedAndReplacedFromContainmentInOtherParent.newParent>>.
 
-[[ChildMovedAndReplacedFromContainmentInOtherParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+[[ChildMovedAndReplacedFromContainmentInOtherParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
+List of all node ids that used to be descendants (including children and annotations) of <<ChildMovedAndReplacedFromContainmentInOtherParent.replacedChild>>.
+Does not include <<ChildMovedAndReplacedFromContainmentInOtherParent.replacedChild>>.
 
 [[ChildMovedAndReplacedFromContainmentInOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ChildMovedAndReplacedFromContainmentInOtherParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ChildMovedAndReplacedFromContainmentInOtherParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ChildMovedAndReplacedFromContainmentInOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>>

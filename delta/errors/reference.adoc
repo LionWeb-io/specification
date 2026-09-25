@@ -1,0 +1,79 @@
+[[errors-reference]]
+==== Reference errors
+
+[[err-referenceAlreadySet]]
+===== Property already set
+A <<{m3}.adoc#Property, Property>> has already been set to a value, and cannot be set new with this command.
+Use <<cmd-ChangeProperty>> command instead.
+
+.Technical name
+`referenceAlreadySet`
+
+.Additional infos
+[horizontal]
+[[referenceAlreadySet.parent]]parent:: <<nodeIdType>>
+of the parent containing the already set reference.
+[[referenceAlreadySet.reference]]reference:: <<serializedMetaPointerType>>
+of the already set reference.
+[[referenceAlreadySet.value]]value:: <<propertyValueType>>
+Current value of the property.
+
+
+[[err-referenceNotSet]]
+===== Property not set
+A <<{m3}.adoc#Property, Property>> has no value, and cannot be changed with this command.
+Use <<cmd-AddProperty>> command instead.
+
+.Technical name
+`referenceNotSet`
+
+.Additional infos
+[horizontal]
+[[referenceNotSet.parent]]parent:: <<nodeIdType>>
+of the parent containing the unset reference.
+[[referenceNotSet.reference]]reference:: <<serializedMetaPointerType>>
+of the unset reference.
+
+
+[[err-indexReferenceMismatch]]
+===== Reference at index is not the given reference
+Client provided a target/resolveInfo and an index, but the target/resolveInfo is not at the given index.
+
+.Technical name
+`indexReferenceMismatch`
+
+.Additional infos
+[horizontal]
+[[indexReferenceMismatch.parent]]parent:: <<nodeIdType>>
+of the parent.
+[[indexReferenceMismatch.reference]]reference:: <<serializedMetaPointerType>>
+of given reference.
+[[indexReferenceMismatch.index, `index`]]index:: <<indexType>>
+given index.
+[[indexReferenceMismatch.target]]target:: <<nodeIdType>>?
+of the given target.
+[[indexReferenceMismatch.resolveInfo]]resolveInfo:: <<resolveInfoType>>?
+of the given target.
+[[indexReferenceMismatch.actualTarget]]actualTarget:: <<nodeIdType>>?
+of the actual target at the given reference and index.
+[[indexReferenceMismatch.actualResolveInfo]]actualResolveInfo:: <<resolveInfoType>>?
+of the actual target at the given reference and index.
+[[indexReferenceMismatch.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<indexReferenceMismatch.index>>.
+
+
+[[err-undefinedReferenceTarget]]
+===== Undefined reference target
+Client tries to set a reference with neither `target` nor `resolveInfo`
+
+.Technical name
+`undefinedReferenceTarget`
+
+.Additional infos
+[horizontal]
+[[undefinedReferenceTarget.parent]]parent:: <<nodeIdType>>
+[[undefinedReferenceTarget.reference, `reference`]]reference:: <<serializedMetaPointerType>>
+[[undefinedReferenceTarget.target]]target:: <<nodeIdType>>?
+[[undefinedReferenceTarget.resolveInfo]]resolveInfo:: <<resolveInfoType>>?
+[[undefinedReferenceTarget.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<undefinedReferenceTarget.reference>>.

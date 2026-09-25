@@ -15,25 +15,36 @@ No other annotations inside <<AnnotationMovedAndReplacedFromOtherParent.newParen
 
 [horizontal]
 .Parameters
-[[AnnotationMovedAndReplacedFromOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedFromOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
+of the node the annotation was moved to.
 
 [[AnnotationMovedAndReplacedFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+where <<AnnotationMovedAndReplacedFromOtherParent.movedAnnotation>> was moved to in annotations of <<AnnotationMovedAndReplacedFromOtherParent.newParent>>.
 
-[[AnnotationMovedAndReplacedFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
+of the node that was moved from annotations in <<AnnotationMovedAndReplacedFromOtherParent.oldParent>> to annotations in <<AnnotationMovedAndReplacedFromOtherParent.newParent>>.
 
-[[AnnotationMovedAndReplacedFromOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedFromOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
+of the node the annotation was moved from.
 
 [[AnnotationMovedAndReplacedFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where <<AnnotationMovedAndReplacedFromOtherParent.movedAnnotation>> was moved from in annotations of <<AnnotationMovedAndReplacedFromOtherParent.oldParent>>.
 
-[[AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<targetNodeType>>
+[[AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
+of the node that was replaced at <<AnnotationMovedAndReplacedFromOtherParent.newIndex>> of annotations in <<AnnotationMovedAndReplacedFromOtherParent.newParent>>.
 
-[[AnnotationMovedAndReplacedFromOtherParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<targetNodeType>>[]
+[[AnnotationMovedAndReplacedFromOtherParent.replacedDescendants, `replacedDescendants`]]replacedDescendants:: <<nodeIdType>>[]
+List of all node ids that used to be descendants (including children and annotations) of <<AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation>>.
+Does not include <<AnnotationMovedAndReplacedFromOtherParent.replacedAnnotation>>.
 
 [[AnnotationMovedAndReplacedFromOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[AnnotationMovedAndReplacedFromOtherParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[AnnotationMovedAndReplacedFromOtherParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[AnnotationMovedAndReplacedFromOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-MoveAndReplaceAnnotationFromOtherParent>>
