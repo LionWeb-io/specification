@@ -3,20 +3,12 @@
 
 Reported by all <<continuedChunk>> messages.
 
-[[err-splitMessageAlreadyCompleted]]
-===== Split message already completed
-Split message already completed: continued chunk received with a higher <<continuedChunkSequenceNumberType>> than a previous one for which the <<continuedChunkCompletedFlagType>> was `true`.
+[[err-noActiveSplitMessage]]
+===== No active split message
+Continued chunk received with a higher <<continuedChunkSequenceNumberType>> than a previous one for which the <<continuedChunkCompletedFlagType>> was `true`.
 
 .Technical name
-`splitMessageAlreadyCompleted`
-
-
-[[err-multipleContinuedChunksCompleted]]
-===== Multiple continued chunks completed
-<<continuedChunkSequenceNumberType>> declared complete more than once: multiple continued chunks (with different <<continuedChunkSequenceNumberType>>s) had their <<continuedChunkCompletedFlagType>> set to `true`.
-
-.Technical name
-`multipleContinuedChunksCompleted`
+`noActiveSplitMessage`
 
 
 [[err-duplicateContinuedChunk]]

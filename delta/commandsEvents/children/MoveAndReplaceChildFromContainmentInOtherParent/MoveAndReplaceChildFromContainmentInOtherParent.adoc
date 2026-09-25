@@ -65,8 +65,8 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-parentMismatch>> for <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>> and <<MoveAndReplaceChildFromContainmentInOtherParent.replacedChild>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromContainmentInOtherParent.oldContainment>>/<<MoveAndReplaceChildFromContainmentInOtherParent.oldIndex>> and <<MoveAndReplaceChildFromContainmentInOtherParent.movedChild>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>>/<<MoveAndReplaceChildFromContainmentInOtherParent.newIndex>> and <<MoveAndReplaceChildFromContainmentInOtherParent.replacedChild>>
-* <<err-unknownIndex>> for <<MoveAndReplaceChildFromContainmentInOtherParent.oldIndex>> (is beyond the number of <<MoveAndReplaceChildFromContainmentInOtherParent.oldIndex>> entries in <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>>)
-* <<err-unknownIndex>> for <<MoveAndReplaceChildFromContainmentInOtherParent.newIndex>> (is beyond the number of <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>> entries in <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>)
+* <<err-indexOutOfRange>> for <<MoveAndReplaceChildFromContainmentInOtherParent.oldIndex>> (is beyond the number of <<MoveAndReplaceChildFromContainmentInOtherParent.oldIndex>> entries in <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>>)
+* <<err-indexOutOfRange>> for <<MoveAndReplaceChildFromContainmentInOtherParent.newIndex>> (is beyond the number of <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>> entries in <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>)
 * ##?## <<MoveAndReplaceChildFromContainmentInOtherParent.movedChild>> is already a child of <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>
 * <<err-invalidParticipation>>
 

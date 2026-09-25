@@ -43,13 +43,13 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-indexEntryMismatch>> for <<MoveChildInSameContainmentInSameParent.containment>>/<<MoveChildInSameContainmentInSameParent.oldIndex>> and <<MoveChildInSameContainmentInSameParent.movedChild>>
 * <<err-invalidIndexOffset>> for <<MoveChildInSameContainmentInSameParent.indexOffset>>
 if <<MoveChildInSameContainmentInSameParent.indexOffset>> equals 0, or if (<<MoveChildInSameContainmentInSameParent.oldIndex>> + <<MoveChildInSameContainmentInSameParent.indexOffset>>) is not in the range [0..(the number of containment entries in <<MoveChildInSameContainmentInSameParent.containment>> of <<MoveChildInSameContainmentInSameParent.parent>> - 1)]
-* <<err-unknownIndex>> for <<MoveChildInSameContainmentInSameParent.oldIndex>>
+* <<err-indexOutOfRange>> for <<MoveChildInSameContainmentInSameParent.oldIndex>>
 is not an integer in the range [0..(the number of containment entries in <<MoveChildInSameContainmentInSameParent.containment>> of <<MoveChildInSameContainmentInSameParent.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
 * <<err-unknownNode>> for <<MoveChildInSameContainmentInSameParent.movedChild>>
 * <<err-parentMismatch>> <<MoveChildInSameContainmentInSameParent.parent>> is not the parent of <<MoveChildInSameContainmentInSameParent.movedChild>>
 * <<err-indexEntryMismatch>> for <<MoveChildInSameContainmentInSameParent.oldIndex>> and <<MoveChildInSameContainmentInSameParent.movedChild>>
 if <<MoveChildInSameContainmentInSameParent.movedChild>> is not at index <<MoveChildInSameContainmentInSameParent.oldIndex>> of the containment entries in <<MoveChildInSameContainmentInSameParent.containment>> of <<MoveChildInSameContainmentInSameParent.parent>>
-* <<err-moveWithoutParent>> for <<MoveChildInSameContainmentInSameParent.movedChild>>
+* <<err-parentMismatch>> for <<MoveChildInSameContainmentInSameParent.movedChild>>
 * <<err-invalidParticipation>>
 
 .Related event

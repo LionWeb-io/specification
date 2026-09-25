@@ -11,40 +11,26 @@ Some types can only occur in additional infos of errors.
 
 [[parameterType]]Parameter:: Technical name of the parameter an error refers to.
 
-[[featureValueType]]FeatureValue:: The value of a feature, only used in error messages.
-+
-The value depends on the feature kind referred to by the error message:
-
-[horizontal]
-containment or annotation::: <<nodeIdType>>
-property::: <<propertyValueType>>
-reference::: serialized <<resolveInfoType>>
-
 [[stringType]]string:: A string value.
 
 [[serializedMetaPointerType]]Serialized MetaPointer:: string serialization of JSON representation of a <<{serialization}.adoc#meta-pointer, MetaPointer>>.
 
 include::generic.adoc[]
 
+include::chunk.adoc[]
+
 include::createNode.adoc[]
 
 include::move.adoc[]
 
+include::annotation.adoc[]
+
+include::containment.adoc[]
+
 include::reference.adoc[]
+
+include::property.adoc[]
 
 include::subscription.adoc[]
 
 include::splittable.adoc[]
-
-include::custom.adoc[]
-
-==== Not sure yet
-
-#TODO#
-
-[[err-unknownParentNode]]
-===== The parent of a node does not exist
-Client provided a node with a parent, but the parent node does not exist.
-
-.Technical name
-`unknownParentNode`

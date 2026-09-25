@@ -49,7 +49,7 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-nodeAlreadyExists>> for <<ReplaceAnnotation.newAnnotation>>
 * <<err-parentContainmentMismatch>> for <<ReplaceAnnotation.newAnnotation>>
 * <<err-circularContainment>> for <<ReplaceAnnotation.newAnnotation>>
-* <<err-unknownIndex>> for <<ReplaceAnnotation.index>> (is beyond (the number of annotations of <<ReplaceAnnotation.parent>>) - 1)
+* <<err-indexOutOfRange>> for <<ReplaceAnnotation.index>> (is beyond (the number of annotations of <<ReplaceAnnotation.parent>>) - 1)
 * <<err-indexEntryMismatch>> for <<ReplaceAnnotation.index>> and <<ReplaceAnnotation.replacedAnnotation>>
 * <<err-invalidParticipation>>
 

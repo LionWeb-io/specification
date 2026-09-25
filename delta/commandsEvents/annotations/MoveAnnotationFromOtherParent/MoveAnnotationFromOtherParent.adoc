@@ -46,8 +46,8 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-indexEntryMismatch>> for <<MoveAnnotationFromOtherParent.oldIndex>> and
 <<MoveAnnotationFromOtherParent.movedAnnotation>>
 
-* <<err-unknownIndex>> for <<MoveAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.newParent>>)
-* <<err-unknownIndex>> for <<MoveAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.oldParent>>)
+* <<err-indexOutOfRange>> for <<MoveAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.newParent>>)
+* <<err-indexOutOfRange>> for <<MoveAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.oldParent>>)
 * ##?## <<MoveAnnotationFromOtherParent.movedAnnotation>> is already an annotation of <<MoveAnnotationFromOtherParent.newParent>>
 * <<err-invalidParticipation>>
 

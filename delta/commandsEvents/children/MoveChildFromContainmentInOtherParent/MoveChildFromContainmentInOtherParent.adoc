@@ -53,7 +53,7 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-parentMismatch>> for <<MoveChildFromContainmentInOtherParent.oldParent>> and <<MoveChildFromContainmentInOtherParent.movedChild>>
 * <<err-indexEntryMismatch>> for <<MoveChildFromContainmentInOtherParent.oldContainment>>/<<MoveChildFromContainmentInOtherParent.oldIndex>> and
 <<MoveChildFromContainmentInOtherParent.movedChild>>
-* <<err-unknownIndex>> for <<MoveChildFromContainmentInOtherParent.newIndex>> (is beyond the number of <<MoveChildFromContainmentInOtherParent.newContainment>> entries in <<MoveChildFromContainmentInOtherParent.newParent>>)
+* <<err-indexOutOfRange>> for <<MoveChildFromContainmentInOtherParent.newIndex>> (is beyond the number of <<MoveChildFromContainmentInOtherParent.newContainment>> entries in <<MoveChildFromContainmentInOtherParent.newParent>>)
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.movedChild>>
 Use <<cmd-MoveChildFromOtherContainmentInSameParent>> or <<cmd-MoveChildInSameContainmentInSameParent>> instead.
 * <<err-invalidParticipation>>

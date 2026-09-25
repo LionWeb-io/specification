@@ -45,7 +45,7 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-nodeAlreadyExists>> for <<AddChild.newChild>>
 * <<err-parentContainmentMismatch>> for <<AddChild.newChild>>
 * <<err-circularContainment>> for <<AddChild.newChild>>
-* <<err-unknownIndex>> for <<AddChild.index>> (is beyond the number of <<AddChild.containment>> entries in <<AddChild.parent>>)
+* <<err-indexOutOfRange>> for <<AddChild.index>> (is beyond the number of <<AddChild.containment>> entries in <<AddChild.parent>>)
 * <<err-invalidParticipation>>
 
 .Related event

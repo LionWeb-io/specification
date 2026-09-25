@@ -37,7 +37,7 @@ Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<AddReference.parent>>
-* <<err-unknownIndex>> for <<AddReference.index>> (is beyond the number of <<AddReference.reference>> entries of <<AddReference.parent>>)
+* <<err-indexOutOfRange>> for <<AddReference.index>> (is beyond the number of <<AddReference.reference>> entries of <<AddReference.parent>>)
 * <<err-undefinedReferenceTarget>> for <<AddReference.newReference>> and <<AddReference.newResolveInfo>>
 * <<err-invalidParticipation>>
 

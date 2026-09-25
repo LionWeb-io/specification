@@ -41,7 +41,7 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationInSameParent.parent>>
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>
-* <<err-unknownIndex>> for <<MoveAndReplaceAnnotationInSameParent.oldIndex>>
+* <<err-indexOutOfRange>> for <<MoveAndReplaceAnnotationInSameParent.oldIndex>>
 is not an integer in the range [0..(the number of annotations on <<MoveAndReplaceAnnotationInSameParent.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
 * <<err-invalidIndexOffset>> for <<MoveAndReplaceAnnotationInSameParent.indexOffset>>
 if <<MoveAndReplaceAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveAndReplaceAnnotationInSameParent.oldIndex>> + <<MoveAndReplaceAnnotationInSameParent.indexOffset>>) is not in the range [0..(the number of annotations on <<MoveAndReplaceAnnotationInSameParent.parent>> - 1)]
@@ -49,11 +49,9 @@ if <<MoveAndReplaceAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveA
 if <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>> is not at index <<MoveAndReplaceAnnotationInSameParent.oldIndex>> in the annotations on <<MoveAndReplaceAnnotationInSameParent.parent>>
 * <<err-parentMismatch>> <<MoveAndReplaceAnnotationInSameParent.parent>>
 is not the parent of <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>
-* <<err-moveWithoutParent>> for <<MoveAndReplaceAnnotationInSameParent.movedAnnotation>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceAnnotationInSameParent.oldIndex>>/<<MoveAndReplaceAnnotationInSameParent.indexOffset>> and <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>
 if <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>> is not at index (<<MoveAndReplaceAnnotationInSameParent.oldIndex>> + <<MoveAndReplaceAnnotationInSameParent.indexOffset>>) in the annotations on <<MoveAndReplaceAnnotationInSameParent.parent>>
 * <<err-parentMismatch>> <<MoveAndReplaceAnnotationInSameParent.parent>> is not the parent of <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>
-* <<err-moveWithoutParent>> for <<MoveAndReplaceAnnotationInSameParent.replacedAnnotation>>
 * <<err-invalidParticipation>>
 
 .Related event

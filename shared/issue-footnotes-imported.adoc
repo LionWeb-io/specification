@@ -391,3 +391,5 @@
 :fn-org522: footnote:org522[https://github.com/LionWeb-io/specification/issues/522[Structure resources/ folder #522]]
 :fn-org525: footnote:org525[https://github.com/LionWeb-io/specification/issues/525[`DeleteReference` command contains old reference, but `DeleteProperty` not the old property #525]]
 :fn-org527: footnote:org527[https://github.com/LionWeb-io/specification/issues/527[ResolveInfo for builtins SHOULD be different #527]]
+:fn-org529: footnote:org529[https://github.com/LionWeb-io/specification/issues/529[Clients MUST process continued messages in chunk order #529]]
+:fn-org530: footnote:org530[https://github.com/LionWeb-io/specification/issues/530[We don't separate connected and signedOn state #530]]

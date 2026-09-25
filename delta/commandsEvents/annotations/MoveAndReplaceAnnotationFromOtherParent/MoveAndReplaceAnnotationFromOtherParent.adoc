@@ -50,8 +50,8 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>
-* <<err-unknownIndex>> for <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.newParent>>)
-* <<err-unknownIndex>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>)
+* <<err-indexOutOfRange>> for <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.newParent>>)
+* <<err-indexOutOfRange>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>)
 * <<err-parentMismatch>> <<MoveAndReplaceAnnotationFromOtherParent.oldParent>> is not the parent of <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>
 * <<err-indexEntryMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>

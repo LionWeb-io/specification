@@ -8,14 +8,12 @@ The <<participation>> the <<client>> uses to communicate with the repository is 
 
 Possible reasons:
 
-* The participation never has been valid.
+* The participation never has been valid.{fn-org530}
 * The client <<qry-SignOff, signed off>>.
 * The client <<participation, disconnected>>.
 
 .Technical name
 `invalidParticipation`
-
-##TODO##: Do we have a separate "connection state" when the connection is technically established, but the client is not yet signed in?
 
 
 [[err-messageSyntaxIncorrect]]
@@ -60,109 +58,30 @@ See also <<errors-move>>.
 
 .Additional infos
 [horizontal]
-[[unknownNode.node]]node:: <<nodeIdType>>
+[[unknownNode.node, `node`]]node:: <<nodeIdType>>
 of the unknown node.
 [[unknownNode.parameter]]parameter:: <<parameterType>>
 Name of the parameter containing <<unknownNode.node>>.
 
 
-[[err-unknownIndex]]
-===== Unknown index
+[[err-indexOutOfRange]]
+===== Index out of range
 Client tries to operate on an index beyond the number of existing elements.
 
 See also <<errors-move>>.
 
 .Technical name
-`unknownIndex`
+`indexOutOfRange`
 
 .Additional infos
 [horizontal]
-[[unknownIndex.parent]]parent:: <<nodeIdType>>
+[[indexOutOfRange.parent]]parent:: <<nodeIdType>>
 of the parent containing the feature with unknown index.
-[[unknownIndex.feature]]feature:: <<serializedMetaPointerType>>
+[[indexOutOfRange.feature]]feature:: <<serializedMetaPointerType>>
 of the feature with unknown index.
-[[unknownIndex.size]]size:: <<indexType>>
+[[indexOutOfRange.size]]size:: <<indexType>>
 The actual size of the feature.
-[[unknownIndex.index]]index:: <<indexType>>
+[[indexOutOfRange.index, `index`]]index:: <<indexType>>
 Unknown index.
-[[unknownIndex.parameter]]parameter:: <<parameterType>>
-Name of the parameter containing <<unknownIndex.index>>.
-
-
-[[err-unknownProperty]]
-===== Unknown property
-Client tries to change or delete a property not present in the parent node.
-
-.Technical name
-`unknownProperty`
-
-.Additional infos
-[horizontal]
-[[unknownProperty.parent]]parent:: <<nodeIdType>>
-of the parent missing the requested property.
-[[unknownProperty.property]]property:: <<serializedMetaPointerType>>
-of the requested <<{m3}.adoc#Property, Property>>.
-
-
-[[err-unknownReference]]
-===== Unknown reference
-Client tries to change or delete a reference not present in the parent node.
-
-.Technical name
-`unknownReference`
-
-.Additional infos
-[horizontal]
-[[unknownReference.parent]]parent:: <<nodeIdType>>
-of the parent missing the requested property.
-[[unknownReference.reference]]reference:: <<serializedMetaPointerType>>
-of the requested <<{m3}.adoc#Reference, Reference>>.
-
-
-[[err-unknownContainment]]
-===== Unknown containment
-Client tries to change or delete a containment not present in the parent node.
-
-.Technical name
-`unknownContainment`
-
-.Additional infos
-[horizontal]
-[[unknownContainment.parent]]parent:: <<nodeIdType>>
-of the parent missing the requested property.
-[[unknownContainment.containment]]containment:: <<serializedMetaPointerType>>
-of the requested <<{m3}.adoc#Containment, Containment>>.
-
-
-[[err-featureAlreadySet]]
-===== Feature already set
-A <<{m3}.adoc#Feature, Feature>> has already been set to a value, and cannot be set new with this command.
-Use a <<group-value-change>> or <<group-node-replace>> command instead.
-
-.Technical name
-`featureAlreadySet`
-
-.Additional infos
-[horizontal]
-[[featureAlreadySet.parent]]parent:: <<nodeIdType>>
-of the parent containing the already set feature.
-[[featureAlreadySet.feature]]feature:: <<serializedMetaPointerType>>
-of the already set feature.
-[[featureAlreadySet.value]]value:: <<featureValueType>>
-Current value of the feature.
-
-
-[[err-featureNotSet]]
-===== Feature not set
-A <<{m3}.adoc#Feature, Feature>> has no value, and cannot be changed with this command.
-Use an <<group-value-add>> or <<group-node-replace>> command instead.
-
-.Technical name
-`featureNotSet`
-
-.Additional infos
-[horizontal]
-[[featureNotSet.parent]]parent:: <<nodeIdType>>
-of the parent containing the unset feature.
-[[featureNotSet.feature]]feature:: <<serializedMetaPointerType>>
-of the unset feature.
+[[indexOutOfRange.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<indexOutOfRange.index>>.

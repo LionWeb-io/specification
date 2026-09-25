@@ -10,7 +10,7 @@ Client already <<qry-SubscribeToChangingPartitions, subscribed to changing parti
 
 .Additional infos
 [horizontal]
-[[mixedInformAboutAndSubscribeToChangingPartitions.currentMode]]currentMode::
+[[mixedInformAboutAndSubscribeToChangingPartitions.currentMode]]currentMode:: <<stringType>>
 The technical name of the current subscription mode, i.e. either <<qry-InformAboutChangingPartitions>> or <<qry-SubscribeToChangingPartitions>>.
 [[mixedInformAboutAndSubscribeToChangingPartitions.creation]]creation:: <<booleanType>>
 Whether the participation is currently subscribed to newly created partitions.

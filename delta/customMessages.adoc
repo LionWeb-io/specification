@@ -30,7 +30,7 @@ Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>
-* <<err-unsupportedCustomQuery>>
+* <<err-messageKindUnknown>>
 
 
 [[cmd-custom]]
@@ -50,7 +50,7 @@ Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>
-* <<err-unsupportedCustomCommand>>
+* <<err-messageKindUnknown>>
 
 
 [[evnt-custom]]

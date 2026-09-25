@@ -35,13 +35,12 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-unknownNode>> for <<MoveAnnotationInSameParent.parent>>
 * <<err-unknownNode>> for <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-parentMismatch>> for <<MoveAnnotationInSameParent.parent>> and <<MoveAnnotationInSameParent.movedAnnotation>>
-* <<err-unknownIndex>> for <<MoveAnnotationInSameParent.oldIndex>>
+* <<err-indexOutOfRange>> for <<MoveAnnotationInSameParent.oldIndex>>
 is not an integer in the range [0..(the number of annotations on <<MoveAnnotationInSameParent.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
 * <<err-invalidIndexOffset>> for <<MoveAnnotationInSameParent.indexOffset>>
 if <<MoveAnnotationInSameParent.indexOffset>> equals 0, or if (<<MoveAnnotationInSameParent.oldIndex>> + <<MoveAnnotationInSameParent.indexOffset>>) is not in the range [0..(the number of annotations on <<MoveAnnotationInSameParent.parent>> - 1)]
 * <<err-indexEntryMismatch>> for <<MoveAnnotationInSameParent.oldIndex>> and <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-parentMismatch>> <<MoveAnnotationInSameParent.parent>> is not the parent of <<MoveAnnotationInSameParent.movedAnnotation>>
-* <<err-moveWithoutParent>> for <<MoveAnnotationInSameParent.movedAnnotation>>
 * <<err-indexEntryMismatch>> for <<MoveAnnotationInSameParent.oldIndex>> and <<MoveAnnotationInSameParent.movedAnnotation>>
 if <<MoveAnnotationInSameParent.movedAnnotation>> is not at index <<MoveAnnotationInSameParent.oldIndex>> in the annotations on <<MoveAnnotationInSameParent.parent>>
 * <<err-invalidParticipation>>

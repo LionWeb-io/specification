@@ -1,0 +1,39 @@
+[[errors-containment]]
+==== Containment errors
+
+[[err-unknownContainment]]
+===== Unknown containment
+Client tries to change or delete a containment not present in the parent node.
+
+.Technical name
+`unknownContainment`
+
+.Additional infos
+[horizontal]
+[[unknownContainment.parent]]parent:: <<nodeIdType>>
+of the parent missing the requested property.
+[[unknownContainment.containment]]containment:: <<serializedMetaPointerType>>
+of the requested <<{m3}.adoc#Containment, Containment>>.
+
+
+[[err-indexChildMismatch]]
+===== Child at index is not the given node
+Client provided a child node and an index, but the node is not at the given index.
+
+.Technical name
+`indexChildMismatch`
+
+.Additional infos
+[horizontal]
+[[indexChildMismatch.parent]]parent:: <<nodeIdType>>
+of the parent.
+[[indexChildMismatch.containment]]containment:: <<serializedMetaPointerType>>
+of given containment.
+[[indexChildMismatch.index, `index`]]index:: <<indexType>>
+given index.
+[[indexChildMismatch.child]]child:: <<nodeIdType>>
+of the given child.
+[[indexChildMismatch.actual]]actual:: <<nodeIdType>>
+of the actual child at the given containment and index.
+[[indexChildMismatch.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<indexChildMismatch.index>>.
