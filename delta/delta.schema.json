@@ -343,6 +343,7 @@
       }
     },
     "AdditionalInfo": {
+      "type": "object",
       "properties": {
         "kind": {
           "$ref": "#/$defs/additionalInfoKind"
@@ -461,6 +462,7 @@
       ]
     },
     "SubscribeToChangingPartitionsRequest": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "SubscribeToChangingPartitionsRequest"
@@ -490,6 +492,7 @@
       "maxProperties": 5
     },
     "SubscribeToChangingPartitionsResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "SubscribeToChangingPartitionsResponse"
@@ -511,6 +514,7 @@
       "maxProperties": 3
     },
     "InformAboutChangingPartitionsRequest": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "InformAboutChangingPartitionsRequest"
@@ -544,6 +548,7 @@
       "maxProperties": 6
     },
     "InformAboutChangingPartitionsResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "InformAboutChangingPartitionsResponse"
@@ -565,6 +570,7 @@
       "maxProperties": 3
     },
     "SubscribeToPartitionContentsRequest": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "SubscribeToPartitionContentsRequest"
@@ -590,6 +596,7 @@
       "maxProperties": 4
     },
     "SubscribeToPartitionContentsResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "SubscribeToPartitionContentsResponse"
@@ -618,6 +625,7 @@
       "maxProperties": 5
     },
     "UnsubscribeFromPartitionContentsRequest": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "UnsubscribeFromPartitionContentsRequest"
@@ -643,6 +651,7 @@
       "maxProperties": 4
     },
     "UnsubscribeFromPartitionContentsResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "UnsubscribeFromPartitionContentsResponse"
@@ -664,6 +673,7 @@
       "maxProperties": 3
     },
     "SignOnRequest": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "SignOnRequest"
@@ -697,6 +707,7 @@
       "maxProperties": 6
     },
     "SignOnResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "SignOnResponse"
@@ -722,6 +733,7 @@
       "maxProperties": 4
     },
     "SignOffRequest": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "SignOffRequest"
@@ -743,6 +755,7 @@
       "maxProperties": 3
     },
     "SignOffResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "SignOffResponse"
@@ -764,6 +777,7 @@
       "maxProperties": 3
     },
     "ReconnectRequest": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ReconnectRequest"
@@ -805,6 +819,7 @@
       "maxProperties": 8
     },
     "ReconnectResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ReconnectResponse"
@@ -830,6 +845,7 @@
       "maxProperties": 4
     },
     "GetAvailableIdsRequest": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "GetAvailableIdsRequest"
@@ -856,6 +872,7 @@
       "maxProperties": 4
     },
     "GetAvailableIdsResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "GetAvailableIdsResponse"
@@ -881,6 +898,7 @@
       "maxProperties": 4
     },
     "ListPartitionsRequest": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ListPartitionsRequest"
@@ -906,6 +924,7 @@
       "maxProperties": 4
     },
     "ListPartitionsResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ListPartitionsResponse"
@@ -934,6 +953,7 @@
       "maxProperties": 5
     },
     "ListAndSubscribePartitionsRequest": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ListAndSubscribePartitionsRequest"
@@ -955,6 +975,7 @@
       "maxProperties": 3
     },
     "ListAndSubscribePartitionsResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ListAndSubscribePartitionsResponse"
@@ -983,6 +1004,7 @@
       "maxProperties": 5
     },
     "CustomQueryRequest": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "$ref": "#/$defs/customMessageKind"
@@ -1003,6 +1025,7 @@
       "minProperties": 3
     },
     "CustomQueryResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "$ref": "#/$defs/customMessageKind"
@@ -1023,6 +1046,7 @@
       "minProperties": 3
     },
     "ErrorResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ErrorResponse"
@@ -1052,6 +1076,7 @@
       "maxProperties": 5
     },
     "ContinuedQueryResponse": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ContinuedQueryResponse"
@@ -1180,6 +1205,7 @@
       ]
     },
     "AddPartition": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AddPartition"
@@ -1208,6 +1234,7 @@
       "maxProperties": 5
     },
     "DeletePartition": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "DeletePartition"
@@ -1233,6 +1260,7 @@
       "maxProperties": 4
     },
     "ChangeClassifier": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChangeClassifier"
@@ -1262,6 +1290,7 @@
       "maxProperties": 5
     },
     "AddProperty": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AddProperty"
@@ -1295,6 +1324,7 @@
       "maxProperties": 6
     },
     "DeleteProperty": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "DeleteProperty"
@@ -1324,6 +1354,7 @@
       "maxProperties": 5
     },
     "ChangeProperty": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChangeProperty"
@@ -1357,6 +1388,7 @@
       "maxProperties": 6
     },
     "AddChild": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AddChild"
@@ -1397,6 +1429,7 @@
       "maxProperties": 8
     },
     "DeleteChild": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "DeleteChild"
@@ -1434,6 +1467,7 @@
       "maxProperties": 7
     },
     "ReplaceChild": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ReplaceChild"
@@ -1478,6 +1512,7 @@
       "maxProperties": 9
     },
     "MoveChildFromContainmentInOtherParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "MoveChildFromContainmentInOtherParent"
@@ -1527,6 +1562,7 @@
       "maxProperties": 10
     },
     "MoveChildFromOtherContainmentInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "MoveChildFromOtherContainmentInSameParent"
@@ -1572,6 +1608,7 @@
       "maxProperties": 9
     },
     "MoveChildInSameContainmentInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "MoveChildInSameContainmentInSameParent"
@@ -1613,6 +1650,7 @@
       "maxProperties": 8
     },
     "MoveAndReplaceChildFromContainmentInOtherParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "MoveAndReplaceChildFromContainmentInOtherParent"
@@ -1666,6 +1704,7 @@
       "maxProperties": 11
     },
     "MoveAndReplaceChildFromOtherContainmentInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "MoveAndReplaceChildFromOtherContainmentInSameParent"
@@ -1715,6 +1754,7 @@
       "maxProperties": 10
     },
     "MoveAndReplaceChildInSameContainmentInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "MoveAndReplaceChildInSameContainmentInSameParent"
@@ -1760,6 +1800,7 @@
       "maxProperties": 9
     },
     "AddAnnotation": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AddAnnotation"
@@ -1796,6 +1837,7 @@
       "maxProperties": 7
     },
     "DeleteAnnotation": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "DeleteAnnotation"
@@ -1829,6 +1871,7 @@
       "maxProperties": 6
     },
     "ReplaceAnnotation": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ReplaceAnnotation"
@@ -1869,6 +1912,7 @@
       "maxProperties": 8
     },
     "MoveAnnotationFromOtherParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "MoveAnnotationFromOtherParent"
@@ -1910,6 +1954,7 @@
       "maxProperties": 8
     },
     "MoveAnnotationInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "MoveAnnotationInSameParent"
@@ -1947,6 +1992,7 @@
       "maxProperties": 7
     },
     "MoveAndReplaceAnnotationFromOtherParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "MoveAndReplaceAnnotationFromOtherParent"
@@ -1992,6 +2038,7 @@
       "maxProperties": 9
     },
     "MoveAndReplaceAnnotationInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "MoveAndReplaceAnnotationInSameParent"
@@ -2033,6 +2080,7 @@
       "maxProperties": 8
     },
     "AddReference": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AddReference"
@@ -2072,6 +2120,7 @@
       "maxProperties": 8
     },
     "DeleteReference": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "DeleteReference"
@@ -2111,6 +2160,7 @@
       "maxProperties": 8
     },
     "ChangeReference": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChangeReference"
@@ -2156,6 +2206,7 @@
       "maxProperties": 10
     },
     "CompositeCommand": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "CompositeCommand"
@@ -2184,6 +2235,7 @@
       "maxProperties": 4
     },
     "ContinuedCommand": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ContinuedCommand"
@@ -2217,6 +2269,7 @@
       "maxProperties": 6
     },
     "CustomCommand": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "$ref": "#/$defs/customMessageKind"
@@ -2338,6 +2391,7 @@
       ]
     },
     "PartitionAdded": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "PartitionAdded"
@@ -2370,6 +2424,7 @@
       "maxProperties": 6
     },
     "PartitionDeleted": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "PartitionDeleted"
@@ -2403,6 +2458,7 @@
       "maxProperties": 6
     },
     "ClassifierChanged": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ClassifierChanged"
@@ -2440,6 +2496,7 @@
       "maxProperties": 7
     },
     "PropertyAdded": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "PropertyAdded"
@@ -2477,6 +2534,7 @@
       "maxProperties": 7
     },
     "PropertyDeleted": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "PropertyDeleted"
@@ -2514,6 +2572,7 @@
       "maxProperties": 7
     },
     "PropertyChanged": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "PropertyChanged"
@@ -2555,6 +2614,7 @@
       "maxProperties": 8
     },
     "ChildAdded": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChildAdded"
@@ -2599,6 +2659,7 @@
       "maxProperties": 9
     },
     "ChildDeleted": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChildDeleted"
@@ -2644,6 +2705,7 @@
       "maxProperties": 9
     },
     "ChildReplaced": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChildReplaced"
@@ -2696,6 +2758,7 @@
       "maxProperties": 11
     },
     "ChildMovedFromContainmentInOtherParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChildMovedFromContainmentInOtherParent"
@@ -2749,6 +2812,7 @@
       "maxProperties": 11
     },
     "ChildMovedFromOtherContainmentInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChildMovedFromOtherContainmentInSameParent"
@@ -2798,6 +2862,7 @@
       "maxProperties": 10
     },
     "ChildMovedInSameContainmentInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChildMovedInSameContainmentInSameParent"
@@ -2843,6 +2908,7 @@
       "maxProperties": 9
     },
     "ChildMovedAndReplacedFromContainmentInOtherParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChildMovedAndReplacedFromContainmentInOtherParent"
@@ -2904,6 +2970,7 @@
       "maxProperties": 13
     },
     "ChildMovedAndReplacedFromOtherContainmentInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChildMovedAndReplacedFromOtherContainmentInSameParent"
@@ -2961,6 +3028,7 @@
       "maxProperties": 12
     },
     "ChildMovedAndReplacedInSameContainmentInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ChildMovedAndReplacedInSameContainmentInSameParent"
@@ -3014,6 +3082,7 @@
       "maxProperties": 11
     },
     "AnnotationAdded": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AnnotationAdded"
@@ -3054,6 +3123,7 @@
       "maxProperties": 8
     },
     "AnnotationDeleted": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AnnotationDeleted"
@@ -3095,6 +3165,7 @@
       "maxProperties": 8
     },
     "AnnotationReplaced": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AnnotationReplaced"
@@ -3143,6 +3214,7 @@
       "maxProperties": 10
     },
     "AnnotationMovedFromOtherParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AnnotationMovedFromOtherParent"
@@ -3188,6 +3260,7 @@
       "maxProperties": 9
     },
     "AnnotationMovedInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AnnotationMovedInSameParent"
@@ -3229,6 +3302,7 @@
       "maxProperties": 8
     },
     "AnnotationMovedAndReplacedFromOtherParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AnnotationMovedAndReplacedFromOtherParent"
@@ -3282,6 +3356,7 @@
       "maxProperties": 11
     },
     "AnnotationMovedAndReplacedInSameParent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "AnnotationMovedAndReplacedInSameParent"
@@ -3331,6 +3406,7 @@
       "maxProperties": 10
     },
     "ReferenceAdded": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ReferenceAdded"
@@ -3374,6 +3450,7 @@
       "maxProperties": 9
     },
     "ReferenceDeleted": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ReferenceDeleted"
@@ -3417,6 +3494,7 @@
       "maxProperties": 9
     },
     "ReferenceChanged": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ReferenceChanged"
@@ -3466,6 +3544,7 @@
       "maxProperties": 11
     },
     "CompositeEvent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "CompositeEvent"
@@ -3498,6 +3577,7 @@
       "maxProperties": 5
     },
     "NoOpEvent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "NoOpEvent"
@@ -3523,6 +3603,7 @@
       "maxProperties": 4
     },
     "ErrorEvent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ErrorEvent"
@@ -3556,6 +3637,7 @@
       "maxProperties": 6
     },
     "ContinuedEvent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "const": "ContinuedEvent"
@@ -3597,6 +3679,7 @@
       "maxProperties": 8
     },
     "CustomEvent": {
+      "type": "object",
       "properties": {
         "messageKind": {
           "$ref": "#/$defs/customMessageKind"
