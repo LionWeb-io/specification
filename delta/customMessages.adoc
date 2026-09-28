@@ -17,6 +17,7 @@ Custom queries MUST have at least the following parameters:
 Id of this query.
 
 [[CustomQuery.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Required response parameters
@@ -24,6 +25,7 @@ Id of this query.
 Id of this query.
 
 [[CustomQuery.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>
@@ -43,6 +45,7 @@ Custom commands MUST have at least the following parameters:
 Id of this command.
 
 [[CustomCommand.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>>
@@ -59,7 +62,10 @@ Custom events MUST have at least the following parameters:
 [horizontal]
 .Parameters
 [[CustomEvent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[CustomEvent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[CustomEvent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[CustomEvent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.

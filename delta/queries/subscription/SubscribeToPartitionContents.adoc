@@ -3,18 +3,21 @@
 ===== Subscribe to partition contents
 This client wants to receive events on any changes to <<SubscribeToPartitionContents.partition>> or any of its descendants.{fn-org270}{fn-org269}
 
+See also <<splittableMessage>> and <<subscription>>.
+
 .Technical name
 `SubscribeToPartitionContents`
 
 [horizontal]
 .Request parameters
-[[SubscribeToPartitionContents.partition, `partition`]]partition:: <<targetNodeType>>
+[[SubscribeToPartitionContents.partition, `partition`]]partition:: <<nodeIdType>>
 Node id of the partition this client wants to receive events of.
 
 [[SubscribeToPartitionContents.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
 [[SubscribeToPartitionContents.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Response parameters
@@ -22,12 +25,15 @@ Id of this query.
 Complete contents of <<SubscribeToPartitionContents.partition>>, i.e. the node with id <<SubscribeToPartitionContents.partition>> and all of its descendants (including annotation instances).
 
 [[SubscribeToPartitionContents.split, `split`]]split?:: <<splitFlagType>>
+Whether <<SubscribeToPartitionContents.contents>> is complete within this message.
 
 [[SubscribeToPartitionContents.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
 [[SubscribeToPartitionContents.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
-* already subscribed to <<SubscribeToPartitionContents.partition>>
+* `alreadySubscribedToPartition`: Participation is already subscribed to <<SubscribeToPartitionContents.partition>>.
+* <<err-unknownNode>> for <<SubscribeToPartitionContents.partition>>.
 * <<err-invalidParticipation>>

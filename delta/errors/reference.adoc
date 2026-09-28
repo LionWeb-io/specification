@@ -1,0 +1,9 @@
+[[errors-reference]]
+==== Reference errors
+
+[[err-undefinedReferenceTarget]]
+===== Undefined reference target
+Client tries to set a reference with neither `target` nor `resolveInfo`
+
+.Technical name
+`undefinedReferenceTarget`

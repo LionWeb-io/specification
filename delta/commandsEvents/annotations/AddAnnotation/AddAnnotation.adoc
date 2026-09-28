@@ -2,6 +2,8 @@
 ===== Add annotation
 Add <<new-nodes, new node>> <<AddAnnotation.newAnnotation>> to <<AddAnnotation.parent>>'s annotations at <<AddAnnotation.index>>.
 
+See also <<splittableMessage>>.
+
 [cols="a,a"]
 |===
 |Before |After
@@ -14,7 +16,8 @@ include::AddAnnotation-diagram.adoc[]
 
 [horizontal]
 .Parameters
-[[AddAnnotation.parent, `parent`]]parent:: <<targetNodeType>>
+[[AddAnnotation.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to add a new annotation to.
 
 [[AddAnnotation.newAnnotation, `newAnnotation`]]newAnnotation:: <<singleChunkType>>
 Subtree to form a new annotation.
@@ -22,16 +25,23 @@ The _anchor node_ MUST contain the <<AddAnnotation.parent>> as _parent_.{fn-org3
 All nodes in that subtree MUST be <<new-nodes>>.
 
 [[AddAnnotation.index, `index`]]index:: <<indexType>>
+where we want to add <<AddAnnotation.newAnnotation>> at annotations of <<AddAnnotation.parent>>.
 
 [[AddAnnotation.split, `split`]]split?:: <<splitFlagType>>
+Whether <<AddAnnotation.newAnnotation>> is complete within this message.
 
 [[AddAnnotation.commandId]]commandId:: <<commandIdType>>
+Id of this command.
 
 [[AddAnnotation.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<AddAnnotation.parent>>
+* <<err-invalidAnchorNode>> for <<AddAnnotation.newAnnotation>>
 * <<err-nodeAlreadyExists>> for <<AddAnnotation.newAnnotation>>
+* <<err-parentContainmentMismatch>> for <<AddAnnotation.newAnnotation>>
+* <<err-circularContainment>> for <<AddAnnotation.newAnnotation>>
 * <<err-unknownIndex>> for <<AddAnnotation.index>> (is beyond the number of annotations of <<AddAnnotation.parent>>)
 * <<err-invalidParticipation>>
 

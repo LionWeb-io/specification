@@ -9,11 +9,14 @@ See also <<evnt-ErrorEvent>>.
 
 [horizontal]
 .Response parameters
-[[ErrorResponse.errorCode, `errorCode`]]errorCode:: `String`
+[[ErrorResponse.errorCode, `errorCode`]]errorCode:: <<errorCodeType>>
+Code of the reported error.
 
-[[ErrorResponse.message, `message`]]message:: `String`
+[[ErrorResponse.message, `message`]]message:: <<errorMessageType>>
+Human-readable message of the error.
 
 [[ErrorResponse.queryId, `queryId`]]queryId:: <<queryIdType>>
 Id of the related query.
 
 [[ErrorResponse.additionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.

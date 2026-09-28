@@ -23,22 +23,24 @@ MUST be the same id as used previously for the same <<Reconnect.participationId>
 The previously used <<participation-id>>.
 
 [[Reconnect.lastReceivedSequenceNumber, `lastReceivedSequenceNumber`]]lastReceivedSequenceNumber:: <<eventSequenceType>>
-Last <<event-sequence-number>> received by the client.
+Last <<event-sequence-number>> _received_ by the _client_.
 
 [[Reconnect.requestQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
 [[Reconnect.requestAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 [horizontal]
 .Response parameters
 [[Reconnect.lastSentSequenceNumber, `lastSentSequenceNumber`]]lastSentSequenceNumber:: <<eventSequenceType>>
-Last <<event-sequence-number>> sent by the repository.
+Last <<event-sequence-number>> _sent_ by the _repository_.
 
 [[Reconnect.responseQueryId, `queryId`]]queryId:: <<queryIdType>>
 Id of this query.
 
 [[Reconnect.responseAdditionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>> If the participation is not valid, or the participation doesn't match with <<Reconnect.deltaProtocolVersion>> and/or <<Reconnect.clientId>> and/or <<Reconnect.repositoryId>>.{fn-org354}
