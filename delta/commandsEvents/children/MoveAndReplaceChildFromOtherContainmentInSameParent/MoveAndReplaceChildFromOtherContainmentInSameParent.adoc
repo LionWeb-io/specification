@@ -55,13 +55,14 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-unknownContainment>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>> in <<MoveAndReplaceChildFromOtherContainmentInSameParent.parent>>
 * <<err-parentMismatch>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.parent>> and <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>
 * <<err-parentMismatch>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.parent>> and <<MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild>>
-* <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.oldContainment>>/<<MoveAndReplaceChildFromOtherContainmentInSameParent.oldIndex>> and
-<<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>
-* <<err-indexEntryMismatch>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>>/<<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>> and
-<<MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild>>
 * <<err-indexOutOfRange>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>> (is beyond the number of <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>> entries in <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>'s parent)
-* <<err-parentMismatch>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>
-* <<err-invalidMove>> as <<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>> is already a child inside <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>>
+* <<err-indexOutOfRange>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.oldIndex>> (is beyond the number of <<MoveAndReplaceChildFromOtherContainmentInSameParent.oldContainment>> entries in <<MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild>>'s parent)
+* <<err-indexChildMismatch>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.oldContainment>>/<<MoveAndReplaceChildFromOtherContainmentInSameParent.oldIndex>> and
+<<MoveAndReplaceChildFromOtherContainmentInSameParent.movedChild>>
+* <<err-indexChildMismatch>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>>/<<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>> and
+<<MoveAndReplaceChildFromOtherContainmentInSameParent.replacedChild>>
+* <<err-oldAndNewContainmentIdentical>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.oldContainment>> and <<MoveAndReplaceChildFromOtherContainmentInSameParent.newContainment>>
+* <<err-oldAndNewIndexIdentical>> for <<MoveAndReplaceChildFromOtherContainmentInSameParent.oldIndex>> and <<MoveAndReplaceChildFromOtherContainmentInSameParent.newIndex>>
 * <<err-invalidParticipation>>
 
 .Related event

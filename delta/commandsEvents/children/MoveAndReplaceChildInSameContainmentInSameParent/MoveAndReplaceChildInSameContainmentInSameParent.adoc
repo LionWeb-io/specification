@@ -47,14 +47,13 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-unknownContainment>> for <<MoveAndReplaceChildInSameContainmentInSameParent.containment>> in <<MoveAndReplaceChildInSameContainmentInSameParent.parent>>
 * <<err-parentMismatch>> for <<MoveAndReplaceChildInSameContainmentInSameParent.parent>> and <<MoveAndReplaceChildInSameContainmentInSameParent.movedChild>>
 * <<err-parentMismatch>> for <<MoveAndReplaceChildInSameContainmentInSameParent.parent>> and <<MoveAndReplaceChildInSameContainmentInSameParent.replacedChild>>
-* <<err-indexEntryMismatch>> for <<MoveAndReplaceChildInSameContainmentInSameParent.oldIndex>> and <<MoveAndReplaceChildInSameContainmentInSameParent.movedChild>>
-if <<MoveAndReplaceChildInSameContainmentInSameParent.movedChild>> is not at index <<MoveAndReplaceChildInSameContainmentInSameParent.oldIndex>> of the containment entries in <<MoveAndReplaceChildInSameContainmentInSameParent.containment>> of <<MoveAndReplaceChildInSameContainmentInSameParent.parent>>
+* <<err-indexOutOfRange>> for <<MoveAndReplaceChildInSameContainmentInSameParent.oldIndex>>
+is not an integer in the range [0..(the number of containment entries in <<MoveAndReplaceChildInSameContainmentInSameParent.containment>> of <<MoveAndReplaceChildInSameContainmentInSameParent.parent>> - 1)]
 * <<err-invalidIndexOffset>> for <<MoveAndReplaceChildInSameContainmentInSameParent.indexOffset>>
 if <<MoveAndReplaceChildInSameContainmentInSameParent.indexOffset>> equals 0, or if (<<MoveAndReplaceChildInSameContainmentInSameParent.oldIndex>> + <<MoveAndReplaceChildInSameContainmentInSameParent.indexOffset>>) is not in the range [0..(the number of containment entries in <<MoveAndReplaceChildInSameContainmentInSameParent.containment>> of <<MoveAndReplaceChildInSameContainmentInSameParent.parent>> - 1)]
-* <<err-indexOutOfRange>> for <<MoveAndReplaceChildInSameContainmentInSameParent.oldIndex>>
-is not an integer in the range [0..(the number of containment entries in <<MoveAndReplaceChildInSameContainmentInSameParent.containment>> of <<MoveAndReplaceChildInSameContainmentInSameParent.parent>> - 1)] — see <<integerRangeNotation>> for an explanation of the [`left`..`right`] notation
-* <<err-parentMismatch>> for <<MoveAndReplaceChildInSameContainmentInSameParent.movedChild>>
-* <<err-indexEntryMismatch>> for <<MoveAndReplaceChildInSameContainmentInSameParent.containment>>/(<<MoveAndReplaceChildInSameContainmentInSameParent.oldIndex>> + <<MoveAndReplaceChildInSameContainmentInSameParent.indexOffset>>)
+* <<err-indexChildMismatch>> for <<MoveAndReplaceChildInSameContainmentInSameParent.oldIndex>> and <<MoveAndReplaceChildInSameContainmentInSameParent.movedChild>>
+if <<MoveAndReplaceChildInSameContainmentInSameParent.movedChild>> is not at index <<MoveAndReplaceChildInSameContainmentInSameParent.oldIndex>> of the containment entries in <<MoveAndReplaceChildInSameContainmentInSameParent.containment>> of <<MoveAndReplaceChildInSameContainmentInSameParent.parent>>
+* <<err-indexChildMismatch>> for <<MoveAndReplaceChildInSameContainmentInSameParent.containment>>/(<<MoveAndReplaceChildInSameContainmentInSameParent.oldIndex>> + <<MoveAndReplaceChildInSameContainmentInSameParent.indexOffset>>)
 and <<MoveAndReplaceChildInSameContainmentInSameParent.replacedChild>>
 if <<MoveAndReplaceChildInSameContainmentInSameParent.replacedChild>> is not at index (<<MoveAndReplaceChildInSameContainmentInSameParent.oldIndex>> + <<MoveAndReplaceChildInSameContainmentInSameParent.indexOffset>>) of the containment entries in <<MoveAndReplaceChildInSameContainmentInSameParent.containment>> of <<MoveAndReplaceChildInSameContainmentInSameParent.parent>>
 * <<err-invalidParticipation>>
