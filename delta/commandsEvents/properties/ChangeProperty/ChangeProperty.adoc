@@ -32,6 +32,7 @@ Optionally empty list of <<additionalInfo>>s.
 .Errors
 * <<err-unknownNode>> for <<ChangeProperty.node>>
 * <<err-unknownProperty>> for <<ChangeProperty.property>> in <<ChangeProperty.node>>
+* <<err-propertyNotSet>> for <<ChangeProperty.property>> in <<ChangeProperty.node>>
 * <<err-invalidParticipation>>
 
 
