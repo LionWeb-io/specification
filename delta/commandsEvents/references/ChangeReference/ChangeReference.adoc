@@ -44,10 +44,10 @@ Optionally empty list of <<additionalInfo>>s.
 .Errors
 * <<err-unknownNode>> for <<ChangeReference.parent>>
 * <<err-unknownReference>> for <<ChangeReference.reference>> in <<ChangeReference.parent>>
+* <<err-referenceNotSet>> for <<ChangeReference.reference>> in <<ChangeReference.parent>>
 * <<err-indexOutOfRange>> for <<ChangeReference.index>> (is beyond (the number of <<ChangeReference.reference>> entries of <<ChangeReference.parent>>) - 1)
 * <<err-undefinedReferenceTarget>> for <<ChangeReference.newReference>> and <<ChangeReference.newResolveInfo>>
-* <<err-indexEntryMismatch>> for <<ChangeReference.reference>>/<<ChangeReference.index>> and <<ChangeReference.oldReference>>/<<ChangeReference.oldResolveInfo>>
-* <<err-undefinedReferenceTarget>> for <<ChangeReference.oldReference>>/<<ChangeReference.oldResolveInfo>>
+* <<err-indexReferenceMismatch>> for <<ChangeReference.reference>>/<<ChangeReference.index>> and <<ChangeReference.oldReference>>/<<ChangeReference.oldResolveInfo>>
 * <<err-invalidParticipation>>
 
 .Related event

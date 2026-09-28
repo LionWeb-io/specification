@@ -11,7 +11,7 @@ Client tries to change or delete a containment not present in the parent node.
 .Additional infos
 [horizontal]
 [[unknownContainment.parent]]parent:: <<nodeIdType>>
-of the parent missing the requested property.
+of the parent missing the requested containment.
 [[unknownContainment.containment]]containment:: <<serializedMetaPointerType>>
 of the requested <<{m3}.adoc#Containment, Containment>>.
 

@@ -1,6 +1,21 @@
 [[errors-reference]]
 ==== Reference errors
 
+[[err-unknownReference]]
+===== Unknown reference
+Client tries to change or delete a reference not present in the parent node.
+
+.Technical name
+`unknownReference`
+
+.Additional infos
+[horizontal]
+[[unknownReference.parent]]parent:: <<nodeIdType>>
+of the parent missing the requested reference.
+[[unknownReference.reference]]reference:: <<serializedMetaPointerType>>
+of the requested <<{m3}.adoc#Reference, Reference>>.
+
+
 [[err-referenceAlreadySet]]
 ===== Reference already set
 A <<{m3}.adoc#Reference, Reference>> has already been set to a value, and cannot be set new with this command.
