@@ -38,6 +38,7 @@ Optionally empty list of <<additionalInfo>>s.
 .Errors
 * <<err-invalidAnchorNode>> for <<AddPartition.newPartition>>
 * <<err-nodeAlreadyExists>> for <<AddPartition.newPartition>>
+* <<err-duplicateNodeId>> for <<AddPartition.newPartition>>
 * <<err-parentContainmentMismatch>> for <<AddPartition.newPartition>>
 * <<err-circularContainment>> for <<AddPartition.newPartition>>
 * <<err-invalidParticipation>>
