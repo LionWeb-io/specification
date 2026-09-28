@@ -64,6 +64,29 @@ of the unknown node.
 Name of the parameter containing <<unknownNode.node>>.
 
 
+[[err-parentMismatch]]
+===== The given parent of a node is not its parent
+Client provided an existing node `P` as parent and an existing node `C` as a child of `P`, but `P` does not have `C` as a child (annotation or containment).
+
+NOTE: This error differs from <<err-parentContainmentMismatch>>: This error relates to two already existing nodes, whereas <<err-parentContainmentMismatch>> relates to two nodes in a <<chunkType>>.
+
+.Technical name
+`parentMismatch`
+
+.Additional infos
+[horizontal]
+[[parentMismatch.parent, `parent`]]parent:: <<nodeIdType>>
+of the provided parent.
+[[parentMismatch.child, `child`]]child:: <<nodeIdType>>
+of the provided child.
+[[parentMismatch.actualParent, `actualParent`]]actualParent:: <<nodeIdType>>
+of the actual parent of <<parentMismatch.child>>.
+[[parentMismatch.parentParameter]]parentParameter:: <<parameterType>>
+Name of the parameter containing <<parentMismatch.parent>>.
+[[parentMismatch.childParameter]]childParameter:: <<parameterType>>
+Name of the parameter containing <<parentMismatch.child>>.
+
+
 [[err-indexOutOfRange]]
 ===== Index out of range
 Client tries to operate on an index beyond the number of existing elements.

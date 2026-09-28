@@ -45,12 +45,14 @@ Optionally empty list of <<additionalInfo>>s.
 .Errors
 * <<err-unknownNode>> for <<ReplaceAnnotation.parent>>
 * <<err-unknownNode>> for <<ReplaceAnnotation.replacedAnnotation>>
+* <<err-parentMismatch>> for <<ReplaceAnnotation.parent>> and <<ReplaceAnnotation.replacedAnnotation>>
 * <<err-invalidAnchorNode>> for <<ReplaceAnnotation.newAnnotation>>
-* <<err-nodeAlreadyExists>> for <<ReplaceAnnotation.newAnnotation>>
+* <<err-duplicateNodeId>> for <<ReplaceAnnotation.newAnnotation>>
 * <<err-parentContainmentMismatch>> for <<ReplaceAnnotation.newAnnotation>>
 * <<err-circularContainment>> for <<ReplaceAnnotation.newAnnotation>>
+* <<err-nodeAlreadyExists>> for <<ReplaceAnnotation.newAnnotation>>
 * <<err-indexOutOfRange>> for <<ReplaceAnnotation.index>> (is beyond (the number of annotations of <<ReplaceAnnotation.parent>>) - 1)
-* <<err-indexEntryMismatch>> for <<ReplaceAnnotation.index>> and <<ReplaceAnnotation.replacedAnnotation>>
+* <<err-indexAnnotationMismatch>> for <<ReplaceAnnotation.index>> and <<ReplaceAnnotation.replacedAnnotation>>
 * <<err-invalidParticipation>>
 
 .Related event
