@@ -12,7 +12,7 @@ Reported by all <<group-move-or-replace>> commands.
 
 .Additional infos
 [horizontal]
-[[oldAndNewParentIdentical.parent]]arent:: <<nodeIdType>>
+[[oldAndNewParentIdentical.parent]]parent:: <<nodeIdType>>
 of both the old and the new parent.
 
 
@@ -42,16 +42,30 @@ of both the old and new index.
 
 [[err-parentMismatch]]
 ===== The given parent of a node is not its parent
-Client provided an existing node N with a parent id in its parent field, but the node with this parent-id
-does not have the existing node N as a child (annotation or containment).
+Client provided an existing node `P` as parent and an existing node `C` as a child of `P`, but `P` does not have `C` as a child (annotation or containment).
+
+NOTE: This error differs from <<err-parentContainmentMismatch>>: This error relates to two already existing nodes, whereas <<err-parentContainmentMismatch>> relates to two nodes in a <<chunkType>>.
 
 .Technical name
 `parentMismatch`
 
+.Additional infos
+[horizontal]
+[[parentMismatch.parent, `parent`]]parent:: <<nodeIdType>>
+of the provided parent.
+[[parentMismatch.child, `child`]]child:: <<nodeIdType>>
+of the provided child.
+[[parentMismatch.actualParent, `actualParent`]]actualParent:: <<nodeIdType>>
+of the actual parent of <<parentMismatch.child>>.
+[[parentMismatch.parentParameter]]parentParameter:: <<parameterType>>
+Name of the parameter containing <<parentMismatch.parent>>.
+[[parentMismatch.childParameter]]childParameter:: <<parameterType>>
+Name of the parameter containing <<parentMismatch.child>>.
+
 
 [[err-invalidIndexOffset]]
 ===== Index offset is invalid
-Client provided an index offset which is either 0, or an integer such that a given “old” index + the index offset is not a valid index (in the list that’s the subject of the action triggering this error).
+Client provided an index offset which is either 0, or an integer such that a given "old" index + the index offset is not a valid index (in the list that’s the subject of the action triggering this error).
 
 .Technical name
 `invalidIndexOffset`

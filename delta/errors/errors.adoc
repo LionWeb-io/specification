@@ -11,7 +11,7 @@ Some types can only occur in additional infos of errors.
 
 [[parameterType]]Parameter:: Technical name of the parameter an error refers to.
 
-[[stringType]]string:: A string value.
+[[subscriptionModeType]]Subscription mode:: The technical name of the current subscription mode, i.e. either <<qry-InformAboutChangingPartitions>> or <<qry-SubscribeToChangingPartitions>>.
 
 [[serializedMetaPointerType]]Serialized MetaPointer:: string serialization of JSON representation of a <<{serialization}.adoc#meta-pointer, MetaPointer>>.
 

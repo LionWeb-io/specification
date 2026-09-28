@@ -4,7 +4,6 @@
 Reported by all <<group-create-node>> commands.
 
 
-
 [[err-nodeAlreadyExists]]
 ===== Node already exists
 Client tries to create a node with an id that already exists.
@@ -14,5 +13,7 @@ Client tries to create a node with an id that already exists.
 
 .Additional infos
 [horizontal]
-[[nodeAlreadyExists.duplicate]]duplicate:: <<nodeIdType>>
+[[nodeAlreadyExists.duplicate, `duplicate`]]duplicate:: <<nodeIdType>>
 of the already existing node.
+[[nodeAlreadyExists.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<nodeAlreadyExists.duplicate>>.

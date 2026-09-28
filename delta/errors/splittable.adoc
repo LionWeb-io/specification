@@ -5,7 +5,7 @@ Reported by all <<continuedChunk>> messages.
 
 [[err-noActiveSplitMessage]]
 ===== No active split message
-Continued chunk received with a higher <<continuedChunkSequenceNumberType>> than a previous one for which the <<continuedChunkCompletedFlagType>> was `true`.
+Continued chunk received without any active split message, or with a higher <<continuedChunkSequenceNumberType>> than a previous one for which the <<continuedChunkCompletedFlagType>> was `true`.
 
 .Technical name
 `noActiveSplitMessage`
@@ -18,6 +18,11 @@ Received continued chunk with <<continuedChunkSequenceNumberType>> that was alre
 .Technical name
 `duplicateContinuedChunk`
 
+.Additional infos
+[horizontal]
+[[duplicateContinuedChunk.duplicateSequenceNumber]]duplicateSequenceNumber:: <<continuedChunkSequenceNumberType>>
+The already seen continued chunk sequence number.
+
 
 [[err-unknownSplittableMessageInContinuedChunk]]
 ===== Unknown splittable message in continued chunk
@@ -25,6 +30,11 @@ Continued chunk refers to a non-existent query/command/event.
 
 .Technical name
 `unknownSplittableMessageInContinuedChunk`
+
+.Additional infos
+[horizontal]
+[[unknownSplittableMessageInContinuedChunk.unknownSplitMessage]]unknownSplitMessage::
+The unknown query/command/event id.
 
 
 [[err-invalidSplittableMessageInContinuedChunk]]
@@ -34,6 +44,13 @@ Continued chunk refers to a query/command/event that’s not splittable or doesn
 .Technical name
 `invalidSplittableMessageInContinuedChunk`
 
+.Additional infos
+[horizontal]
+[[invalidSplittableMessageInContinuedChunk.splitMessage]]splitMessage::
+The referenced query/command/event id.
+[[invalidSplittableMessageInContinuedChunk.invalidContinuedChunkSequenceNumber]]invalidContinuedChunkSequenceNumber:: <<continuedChunkSequenceNumberType>>
+The continued message referring to an invalid continued chunk sequence number.
+
 
 [[err-interruptedContinuedChunk]]
 ===== Interrupted continued chunk
@@ -41,6 +58,13 @@ Received message on this <<channel>> before the sequence of continued chunks had
 
 .Technical name
 `interruptedContinuedChunk`
+
+.Additional infos
+[horizontal]
+[[interruptedContinuedChunk.unfinishedSplittableMessage]]unfinishedSplittableMessage::
+The unfinished query/command/event id.
+[[interruptedContinuedChunk.unexpectedMessage]]unexpectedMessage::
+The query/command/event id of the message unexpected because of the still ongoing continued message..
 
 
 [[err-compositeCommandContainsSplittable]]

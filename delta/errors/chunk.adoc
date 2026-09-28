@@ -24,7 +24,7 @@ of the already duplicate node.
 
 [[err-parentContainmentMismatch]]
 ===== Parent / containment mismatch
-A parent node `P` has a child (containment or annotation) node `C`, but `C` doesn't mention `P` as parent.
+Chunk contains a parent node `P` has a child (containment or annotation) node `C`, but `C` doesn't mention `P` as parent.
 
 .Technical name
 `parentContainmentMismatch`
@@ -37,13 +37,11 @@ of the parent node.
 of the child node.
 [[parentContainmentMismatch.parentId]]parentId:: <<nodeIdType>>
 of the parent mentioned in the child.
-[[parentContainmentMismatch.parameter]]parameter:: <<parameterType>>
-Name of the parameter containing <<parentContainmentMismatch.child>>.
 
 
 [[err-circularContainment]]
 ===== Circular containment
-A parent node `P` contains a child (containment or annotation) node `C`, that directly or indirectly contains `P`.
+Chunk contains a parent node `P` contains a child (containment or annotation) node `C`, that directly or indirectly contains `P`.
 Includes the edge case `P` contains `P`.
 
 .Additional infos
