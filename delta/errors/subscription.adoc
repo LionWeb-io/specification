@@ -44,6 +44,19 @@ Participation is not subscribed to the requested partition.
 of the not subscribed partition.
 
 
+[[err-invalidDepthLimit]]
+===== Invalid depth limit
+The provided depth limit is negative or beyond the valid depth.
+
+.Technical name
+`invalidDepthLimit`
+
+.Additional infos
+[horizontal]
+[[invalidDepthLimit.invalidDepthLimit]]invalidDepthLimit:: <<depthLimitType>>
+requested by the client.
+
+
 [[err-unsupportedProtocolVersion]]
 ===== Unsupported protocol version
 
