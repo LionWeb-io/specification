@@ -67,6 +67,9 @@ For now, we do not support paging, as paging tree nodes is non-trivial.{fn-org20
 For now, we don't include any specific protections against denial-of-service attacks.{fn-org237}
 
 We don't describe the binding to any specific protocol (e.g. HTTP) as part of this specification; We only describe the semantics.{fn-org148}
+This protocol is agnostic of its underlying transport or technical implementation. +
+By default, this protocol uses JSON encoding over a text-based, single channel, stateless, unidirectional, synchronous, reliable, and trustworthy transport.
+Any transport that fits these criteria (e.g. HTTP) MUST use the same encoding.{fn-org507}
 
 [[deleted-nodes]]
 == Deleted nodes
