@@ -225,10 +225,10 @@ We need to omit the parameter if we don't want to limit the depth.
 
 [[integerType]]integer:: An integer.
 
-[[commandIdType]]commandId:: Each _modifying_ command MUST contain a _[[commandId, command id]]command id_.{fn-org313}
-It has the same format as <<{m3}.adoc#identifiers, node ids>> and must be unique for all changes of this client.
+[[commandIdType]]commandId:: Each command MUST contain a _[[commandId, command id]]command id_.{fn-org313}
+It has the same format as <<{m3}.adoc#identifiers, node ids>> and must be unique for all commands of this client.
 +
-Modifying commands are <<createPartitions>>, <<deletePartitions>>, and <<store>>.
+This command id is symmetric to <<{delta}.adoc#commandIdType, command id in delta API>>.
 
 [[successType]]success:: A boolean flag signaling _success_ or _failure_ with each response.
 
@@ -297,6 +297,9 @@ NOTE: We might add filter capabilities in the future.
 [horizontal]
 [[listPartitions.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>? Optionally limit the depth of retrieved partitions.{fn-org425}
 [[listPartitions.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
+[[listPartitions.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
 [[listPartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
@@ -323,6 +326,8 @@ Nodes MUST use <<unknown-node-ids>>.
 [horizontal]
 [[createPartitions.nodes]] nodes:: <<chunkType>> containing all nodes we want to add as new partitions.
 [[createPartitions.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
 [[createPartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
@@ -380,6 +385,8 @@ All (transitive) annotations and children become <<orphan, orphans>>.
 [horizontal]
 [[deletePartitions.nodeIds]]nodeIds:: <<nodeIdType>>[] List of node ids to delete.
 [[deletePartitions.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
 [[deletePartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
@@ -421,6 +428,9 @@ NOTE: We might add advanced filtering capabilities in the future, or introduce a
 Can be partition node ids and/or nested node ids.
 [[retrieve.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>? Optionally limit the depth of retrieved subtrees.
 [[retrieve.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
+[[retrieve.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
 [[retrieve.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
@@ -494,6 +504,8 @@ The repository MUST support changing <<{serialization}.adoc#meta-pointer, meta-p
 [horizontal]
 [[store.nodes, `nodes`]]nodes:: <<chunkType>> containing all nodes to store to the repository.
 [[store.commandId, `commandId`]]commandId:: <<commandIdType>>
+Id of this command.
+
 [[store.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
@@ -566,6 +578,9 @@ We assume infinite id space.
 The repository MUST return between one (inclusive) and `count` (inclusive) ids.
 It MAY return less than `count` ids.
 [[ids.commandId, `commandId`]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
+[[ids.commandId, `commandId`]]commandId:: <<commandIdType>>
+Id of this command.
+
 [[ids.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
 
 .Response parameters
