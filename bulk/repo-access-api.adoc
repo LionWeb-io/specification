@@ -296,20 +296,26 @@ NOTE: We might add filter capabilities in the future.
 .Request parameters
 [horizontal]
 [[listPartitions.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>? Optionally limit the depth of retrieved partitions.{fn-org425}
-[[listPartitions.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
+
 [[listPartitions.commandId]]commandId:: <<commandIdType>>
 Id of this command.
 
 [[listPartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
 
 .Response parameters
 [horizontal]
-[[listPartitions.chunk]]chunk:: <<chunkType>> with all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
+[[listPartitions.chunk]]chunk:: <<chunkType>>
+with all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
 The partitions are sent as complete nodes.{fn-org202}
 Does NOT include any children or annotations of the root partition nodes.
 Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
+
 [[listPartitions.success]]success:: <<successType>>
-[[listPartitions.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[] with no special additional info kinds.
+Whether the command has been successful.
+
+[[listPartitions.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
 
 [[createPartitions, createPartitions]]
 === createPartitions: Create new partitions
@@ -324,16 +330,23 @@ Nodes MUST use <<unknown-node-ids>>.
 
 .Request parameters
 [horizontal]
-[[createPartitions.nodes]] nodes:: <<chunkType>> containing all nodes we want to add as new partitions.
+[[createPartitions.nodes]] nodes:: <<chunkType>>
+containing all nodes we want to add as new partitions.
+
 [[createPartitions.commandId]]commandId:: <<commandIdType>>
 Id of this command.
 
 [[createPartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
 
 .Response parameters
 [horizontal]
 [[createPartitions.success]]success:: <<successType>>
+Whether the command has been successful.
+
 [[createPartitions.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
+
 +
 [cols="3h,3,1,7a"]
 |===
@@ -383,16 +396,22 @@ All (transitive) annotations and children become <<orphan, orphans>>.
 
 .Request parameters
 [horizontal]
-[[deletePartitions.nodeIds]]nodeIds:: <<nodeIdType>>[] List of node ids to delete.
+[[deletePartitions.nodeIds]]nodeIds:: <<nodeIdType>>[]
+List of node ids to delete.
+
 [[deletePartitions.commandId]]commandId:: <<commandIdType>>
 Id of this command.
 
 [[deletePartitions.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
 
 .Response parameters
 [horizontal]
 [[deletePartitions.success]]success:: <<successType>>
+Whether the command has been successful.
+
 [[deletePartitions.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
 +
 [cols="3h,3,1,7a"]
 |===
@@ -424,21 +443,30 @@ NOTE: We might add advanced filtering capabilities in the future, or introduce a
 
 .Request parameters
 [horizontal]
-[[retrieve.nodeIds, `nodeIds`]]nodeIds:: <<nodeIdType>>[] List of node ids we want to retrieve from the repository.
+[[retrieve.nodeIds, `nodeIds`]]nodeIds:: <<nodeIdType>>[]
+List of node ids we want to retrieve from the repository.
 Can be partition node ids and/or nested node ids.
-[[retrieve.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>? Optionally limit the depth of retrieved subtrees.
-[[retrieve.commandId]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
+
+[[retrieve.depthLimit, `depthLimit`]]depthLimit:: <<depthLimitType>>?
+Optionally limit the depth of retrieved subtrees.
+
 [[retrieve.commandId]]commandId:: <<commandIdType>>
 Id of this command.
 
 [[retrieve.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
 
 .Response parameters
 [horizontal]
-[[retrieve.chunk]]chunk:: <<chunkType>> containing all nodes according to <<retrieve.nodeIds>> and <<retrieve.depthLimit>> parameters.
+[[retrieve.chunk]]chunk:: <<chunkType>>
+containing all nodes according to <<retrieve.nodeIds>> and <<retrieve.depthLimit>> parameters.
 Does NOT include the definition of <<{serialization}.adoc#UsedLanguage, UsedLanguages>>, only their <<{serialization}.adoc#MetaPointer, MetaPointers>>.
+
 [[retrieve.success]]success:: <<successType>>
+Whether the command has been successful.
+
 [[retrieve.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
 +
 [cols="3h,3,1,7a"]
 |===
@@ -502,16 +530,22 @@ The repository MUST support changing <<{serialization}.adoc#meta-pointer, meta-p
 
 .Request parameters
 [horizontal]
-[[store.nodes, `nodes`]]nodes:: <<chunkType>> containing all nodes to store to the repository.
+[[store.nodes, `nodes`]]nodes:: <<chunkType>>
+containing all nodes to store to the repository.
+
 [[store.commandId, `commandId`]]commandId:: <<commandIdType>>
 Id of this command.
 
 [[store.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
 
 .Response parameters
 [horizontal]
 [[store.success]]success:: <<successType>>
+Whether the command has been successful.
+
 [[store.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
 +
 [cols="3h,3,1,7a"]
 |===
@@ -577,17 +611,23 @@ We assume infinite id space.
 [[ids.count]]count:: <<integerType>> Number of ids requested.
 The repository MUST return between one (inclusive) and `count` (inclusive) ids.
 It MAY return less than `count` ids.
-[[ids.commandId, `commandId`]]commandId:: <<commandIdType>>? Optional as this is not a modifying command.
+
 [[ids.commandId, `commandId`]]commandId:: <<commandIdType>>
 Id of this command.
 
 [[ids.requestAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
 
 .Response parameters
 [horizontal]
-[[ids.ids]]ids:: <<nodeIdType>>[] List of ids guaranteed to be free.
+[[ids.ids]]ids:: <<nodeIdType>>[]
+List of ids guaranteed to be free.
+
 [[ids.success]]success:: <<successType>>
-[[ids.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[] with no special additional info kinds.
+Whether the command has been successful.
+
+[[ids.responseAdditionalInfos]]additionalInfos:: <<additionalInfosType>>[]
+Optionally empty list of additional infos.
 
 
 [[crud-mapping]]
