@@ -68,7 +68,7 @@ Name of the parameter containing <<unknownNode.node>>.
 ===== The given parent of a node is not its parent
 Client provided an existing node `P` as parent and an existing node `C` as a child of `P`, but `P` does not have `C` as a child (annotation or containment).
 
-NOTE: This error differs from <<err-parentContainmentMismatch>>: This error relates to two already existing nodes, whereas <<err-parentContainmentMismatch>> relates to two nodes in a <<chunkType>>.
+NOTE: This error differs from <<err-parentContainmentMismatch>>: This error relates to two already existing nodes, whereas <<err-parentContainmentMismatch>> relates to two nodes in a <<deltaChunkType>>.
 
 .Technical name
 `parentMismatch`

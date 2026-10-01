@@ -32,8 +32,7 @@ Id of the related <<splittableMessage, splittable command>>.
 Optionally empty list of <<additionalInfo>>s.
 
 .Errors
-* <<err-splitMessageAlreadyCompleted>>
-* <<err-multipleContinuedChunksCompleted>>
+* <<err-noActiveSplitMessage>>
 * <<err-duplicateContinuedChunk>>
 * <<err-unknownSplittableMessageInContinuedChunk>>
 * <<err-invalidSplittableMessageInContinuedChunk>>
