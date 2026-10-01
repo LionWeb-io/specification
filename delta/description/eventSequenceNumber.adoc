@@ -1,8 +1,0 @@
-[[event-sequence-number, event sequence number]]
-=== Event sequence numbers
-Each event contains a sequence number.{fn-org341}
-This number is a positive integer that increments by one for each consecutive event.
-It is unique per participation.{fn-org343}
-Events SHOULD be sent across the <<channel>> in increasing order of sequence number.
-
-A <<client>> MUST use this number to order incoming events{fn-org483}, and SHOULD check whether the client missed any event.
