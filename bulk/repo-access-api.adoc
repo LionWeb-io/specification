@@ -95,6 +95,17 @@ A client MAY connect more than once to the same repository at the same time with
 It is out of scope of LionWeb to guarantee the uniqueness of the client id.
 The repository does not apply any uniqueness checks.
 
+This client id is symmetric to <<{delta}.adoc#clientIdType, client id in delta API>>.
+
+[[repository-ids]]
+== Repository ids
+Each client MUST provide the _repository id_ it likes to connect to.{fn-org394}
+The repository id is an <<{m3}.adoc#identifiers, identifier>>-compatible string.
+It must be unique for all repositories in the same context.
+LionWeb doesn't specify the scope of the context.{fn-org401}
+
+This repository id is symmetric to <<{delta}.adoc#repositoryIdType, repository id in delta API>>.
+
 [[unknown-node-ids]]
 == Unknown node ids
 An _unknown node id_ is a node id that's not the node id of any node present in the repository.
