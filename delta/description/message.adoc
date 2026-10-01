@@ -102,7 +102,7 @@ Some kinds are pre-defined in this specification.
 A repository MAY reply with other, additional kinds.
 * [[additionalInfo.distribute]]`distribute`? is an optional <<booleanType>> flag with default value `false`.
 It is only valid in <<commands>>, i.e. MUST NOT be used for <<events>> or <<queries>>.
-If present and set to `true`, the repository MUST copy the additional info to all events that result from the command, and distribute the additional info to all participants receiving the event.
+If present and set to `true`, the repository MUST copy the additional info to all events that result from the command, and distribute the additional info to all participants receiving the event.{fn-org421}
 
 * [[additionalInfo.message]]`message` is a human-readable string describing the additional info.
 * [[additionalInfo.data]]`data` is a map with 0 or more arbitrary keys and values.{fn-org471}
