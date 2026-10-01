@@ -22,6 +22,19 @@ Each binding to a specific protocol might use the technical name in a different 
 For example, a JSON binding might have a member containing the technical name of the message, or a Protobuf binding might use the technical name as type name.
 
 
+[[messageCorrelation, message correlation]]
+==== Message correlation
+Each query uses its <<queryIdType>> to correlate query _request_ and _response_.
+Thus, query ids MUST be unique per participation.
+
+Each event is correlated to one or more commands by its <<commandSourceType>>, consisting of the sending <<participationIdType>> and the <<commandIdType>> of the originating command.{fn-org423}
+Thus, command ids MUST be unique per participation.{fn-org305}{fn-org415}
+
+The repository assigns guaranteed unique <<participationIdType>>s.{fn-org345}
+
+An event can have more than one command source{fn-org306}, and it's possible that the originating command is _not_ the event's twin.
+These situations mostly appear if the repository applied conflict resolution logic.
+
 [[unsuccessfulCommand, unsuccessful command]]
 ==== Unsuccessful commands
 A command can be unsuccessful for the following reasons:
