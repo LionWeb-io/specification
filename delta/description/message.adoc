@@ -63,7 +63,7 @@ If the flag is `false`, one or more _continued chunk_ messages will follow.{fn-o
 A <<deltaChunkType>> from a continued chunk is to be “merged” into the chunk from the related <<splittableMessage>> simply by appending the contents of its top-level `nodes` field to the `nodes` field of the chunk of the related <<splittableMessage>>.{fn-org473}
 
 There MUST NOT be any message in the same <<channel>> between the _split message_ and all related _continued chunks_.
-The continued chunks SHOULD be sent across the <<channel>> in increasing order of <<continuedChunkSequenceNumberType>>.
+The continued chunks MUST be sent across the <<channel>> in increasing order of <<continuedChunkSequenceNumberType>>.{fn-org529}
 
 A continued chunk MUST NOT appear as part of a <<cmd-CompositeCommand>> or <<evnt-CompositeEvent>>.
 (That also implies that the <<splitFlagType>> of a <<splittableMessage>> appearing inside a composite MUST either be unset or set to `false`.){fn-org462}
