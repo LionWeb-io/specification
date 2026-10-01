@@ -48,12 +48,15 @@ Optionally empty list of <<additionalInfo>>s.
 .Errors
 * <<err-unknownNode>> for <<ReplaceChild.parent>>
 * <<err-unknownNode>> for <<ReplaceChild.replacedChild>>
+* <<err-unknownContainment>> for <<ReplaceChild.containment>> in <<ReplaceChild.parent>>
+* <<err-parentMismatch>> for <<ReplaceChild.parent>> and <<ReplaceChild.replacedChild>>
 * <<err-invalidAnchorNode>> for <<ReplaceChild.newChild>>
 * <<err-nodeAlreadyExists>> for <<ReplaceChild.newChild>>
+* <<err-duplicateNodeId>> for <<ReplaceChild.newChild>>
 * <<err-parentContainmentMismatch>> for <<ReplaceChild.newChild>>
 * <<err-circularContainment>> for <<ReplaceChild.newChild>>
-* <<err-parentMismatch>> for <<ReplaceChild.parent>> and <<ReplaceChild.replacedChild>>
-* <<err-indexEntryMismatch>> for <<ReplaceChild.containment>>/<<ReplaceChild.index>> and <<ReplaceChild.replacedChild>>
+* <<err-indexOutOfRange>> for <<ReplaceChild.index>> (is beyond (the number of children in <<ReplaceChild.containment>> of <<ReplaceChild.parent>>) - 1)
+* <<err-indexChildMismatch>> for <<ReplaceChild.containment>>/<<ReplaceChild.index>> and <<ReplaceChild.replacedChild>>
 * <<err-invalidParticipation>>
 
 .Related event

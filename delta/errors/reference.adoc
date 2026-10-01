@@ -1,9 +1,96 @@
 [[errors-reference]]
 ==== Reference errors
 
+[[err-unknownReference]]
+===== Unknown reference
+Client tries to change or delete a reference not present in the parent node.
+
+.Technical name
+`unknownReference`
+
+.Additional infos
+[horizontal]
+[[unknownReference.parent]]parent:: <<nodeIdType>>
+of the parent missing the requested reference.
+[[unknownReference.reference]]reference:: <<serializedMetaPointerType>>
+of the requested <<{m3}.adoc#Reference, Reference>>.
+
+
+[[err-referenceAlreadySet]]
+===== Reference already set
+A <<{m3}.adoc#Reference, Reference>> has already been set to a value, and cannot be set new with this command.
+Use <<cmd-ChangeReference>> command instead.
+
+.Technical name
+`referenceAlreadySet`
+
+.Additional infos
+[horizontal]
+[[referenceAlreadySet.parent]]parent:: <<nodeIdType>>
+of the parent containing the already set reference.
+[[referenceAlreadySet.reference]]reference:: <<serializedMetaPointerType>>
+of the already set reference.
+[[referenceAlreadySet.target]]target:: <<nodeIdType>>?
+of the current target of the reference, if any.
+[[referenceAlreadySet.resolveInfo]]resolveInfo:: <<resolveInfoType>>?
+of the current target of the reference, if any.
+
+
+[[err-referenceNotSet]]
+===== Reference not set
+A <<{m3}.adoc#Reference, Reference>> has no value, and cannot be changed with this command.
+Use <<cmd-AddReference>> command instead.
+
+.Technical name
+`referenceNotSet`
+
+.Additional infos
+[horizontal]
+[[referenceNotSet.parent]]parent:: <<nodeIdType>>
+of the parent containing the unset reference.
+[[referenceNotSet.reference]]reference:: <<serializedMetaPointerType>>
+of the unset reference.
+
+
+[[err-indexReferenceMismatch]]
+===== Reference at index is not the given reference
+Client provided a target/resolveInfo and an index, but the target/resolveInfo is not at the given index.
+
+.Technical name
+`indexReferenceMismatch`
+
+.Additional infos
+[horizontal]
+[[indexReferenceMismatch.parent]]parent:: <<nodeIdType>>
+of the parent.
+[[indexReferenceMismatch.reference]]reference:: <<serializedMetaPointerType>>
+of given reference.
+[[indexReferenceMismatch.index, `index`]]index:: <<indexType>>
+given index.
+[[indexReferenceMismatch.target]]target:: <<nodeIdType>>?
+of the given target, if any.
+[[indexReferenceMismatch.resolveInfo]]resolveInfo:: <<resolveInfoType>>?
+of the given target, if any.
+[[indexReferenceMismatch.actualTarget]]actualTarget:: <<nodeIdType>>?
+of the actual target at the given reference and index, if any.
+[[indexReferenceMismatch.actualResolveInfo]]actualResolveInfo:: <<resolveInfoType>>?
+of the actual target at the given reference and index, if any.
+[[indexReferenceMismatch.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<indexReferenceMismatch.index>>.
+
+
 [[err-undefinedReferenceTarget]]
 ===== Undefined reference target
 Client tries to set a reference with neither `target` nor `resolveInfo`
 
 .Technical name
 `undefinedReferenceTarget`
+
+.Additional infos
+[horizontal]
+[[undefinedReferenceTarget.parent]]parent:: <<nodeIdType>>
+of the parent.
+[[undefinedReferenceTarget.reference, `reference`]]reference:: <<serializedMetaPointerType>>
+of given reference.
+[[undefinedReferenceTarget.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<undefinedReferenceTarget.reference>>.

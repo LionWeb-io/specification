@@ -49,12 +49,16 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.oldParent>>
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.newParent>>
 * <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.movedChild>>
+* <<err-unknownContainment>> for <<MoveChildFromContainmentInOtherParent.oldContainment>> in <<MoveChildFromContainmentInOtherParent.oldParent>>
+* <<err-unknownContainment>> for <<MoveChildFromContainmentInOtherParent.newContainment>> in <<MoveChildFromContainmentInOtherParent.newParent>>
 * <<err-parentMismatch>> for <<MoveChildFromContainmentInOtherParent.oldParent>> and <<MoveChildFromContainmentInOtherParent.movedChild>>
-* <<err-indexEntryMismatch>> for <<MoveChildFromContainmentInOtherParent.oldContainment>>/<<MoveChildFromContainmentInOtherParent.oldIndex>> and
+* <<err-indexOutOfRange>> for <<MoveChildFromContainmentInOtherParent.newIndex>> (is beyond the number of <<MoveChildFromContainmentInOtherParent.newContainment>> entries in <<MoveChildFromContainmentInOtherParent.newParent>>)
+* <<err-indexOutOfRange>> for <<MoveChildFromContainmentInOtherParent.oldIndex>> (is beyond the number of <<MoveChildFromContainmentInOtherParent.oldContainment>> entries in <<MoveChildFromContainmentInOtherParent.oldParent>>)
+* <<err-indexChildMismatch>> for <<MoveChildFromContainmentInOtherParent.oldContainment>>/<<MoveChildFromContainmentInOtherParent.oldIndex>> and
 <<MoveChildFromContainmentInOtherParent.movedChild>>
-* <<err-unknownIndex>> for <<MoveChildFromContainmentInOtherParent.newIndex>> (is beyond the number of <<MoveChildFromContainmentInOtherParent.newContainment>> entries in <<MoveChildFromContainmentInOtherParent.newParent>>)
-* <<err-unknownNode>> for <<MoveChildFromContainmentInOtherParent.movedChild>>
-Use <<cmd-MoveChildFromOtherContainmentInSameParent>> or <<cmd-MoveChildInSameContainmentInSameParent>> instead.
+* <<err-oldAndNewParentIdentical>> for <<MoveChildFromContainmentInOtherParent.oldParent>> and <<MoveChildFromContainmentInOtherParent.newParent>>
+* <<err-oldAndNewContainmentIdentical>> for <<MoveChildFromContainmentInOtherParent.oldContainment>> and <<MoveChildFromContainmentInOtherParent.newContainment>>
+* <<err-oldAndNewIndexIdentical>> for <<MoveChildFromContainmentInOtherParent.oldIndex>> and <<MoveChildFromContainmentInOtherParent.newIndex>>
 * <<err-invalidParticipation>>
 
 .Related event

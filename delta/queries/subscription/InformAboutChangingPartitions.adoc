@@ -43,3 +43,4 @@ Optionally empty list of <<additionalInfo>>s.
 .Errors
 * <<err-invalidParticipation>>
 * <<err-mixedInformAboutAndSubscribeToChangingPartitions>>
+* <<err-invalidDepthLimit>>

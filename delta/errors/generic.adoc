@@ -1,18 +1,50 @@
 [[errors-generic]]
 ==== Generic errors
 
+
 [[err-invalidParticipation]]
 ===== Invalid participation
 The <<participation>> the <<client>> uses to communicate with the repository is not valid.
 
 Possible reasons:
 
-* The participation never has been valid.
+* The participation never has been valid.{fn-org530}
 * The client <<qry-SignOff, signed off>>.
 * The client <<participation, disconnected>>.
 
 .Technical name
 `invalidParticipation`
+
+
+[[err-messageSyntaxIncorrect]]
+===== Message syntax incorrect
+The delta message does not adhere to the syntax defined by this specification.
+
+.Technical name
+`messageSyntaxIncorrect`
+
+
+[[err-messageKindUnknown]]
+===== Message kind unknown
+The repository does not recognize the message.
+
+See also <<customMessages>>.
+
+.Technical name
+`messageKindUnknown`
+
+
+[[err-missingRequiredMessageParameter]]
+===== Missing required message parameter
+A <<queries, query response>> or <<commands, command>> is missing a required parameter.
+
+.Technical name
+`missingRequiredMessageParameter`
+
+.Additional infos
+[horizontal]
+[[missingRequiredMessageParameter.parameter]]parameter:: <<parameterType>>
+Name of the missing parameter.
 
 
 [[err-unknownNode]]
@@ -26,75 +58,53 @@ See also <<errors-move>>.
 
 .Additional infos
 [horizontal]
-[[unknownNode.node]]node:: <<nodeIdType>>
+[[unknownNode.node, `node`]]node:: <<nodeIdType>>
 of the unknown node.
+[[unknownNode.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<unknownNode.node>>.
 
 
-[[err-unknownIndex]]
-===== Unknown index
+[[err-parentMismatch]]
+===== The given parent of a node is not its parent
+Client provided an existing node `P` as parent and an existing node `C` as a child of `P`, but `P` does not have `C` as a child (annotation or containment).
+
+NOTE: This error differs from <<err-parentContainmentMismatch>>: This error relates to two already existing nodes, whereas <<err-parentContainmentMismatch>> relates to two nodes in a <<chunkType>>.
+
+.Technical name
+`parentMismatch`
+
+.Additional infos
+[horizontal]
+[[parentMismatch.parent, `parent`]]parent:: <<nodeIdType>>
+of the provided parent.
+[[parentMismatch.child, `child`]]child:: <<nodeIdType>>
+of the provided child.
+[[parentMismatch.actualParent, `actualParent`]]actualParent:: <<nodeIdType>>
+of the actual parent of <<parentMismatch.child>>.
+[[parentMismatch.parentParameter]]parentParameter:: <<parameterType>>
+Name of the parameter containing <<parentMismatch.parent>>.
+[[parentMismatch.childParameter]]childParameter:: <<parameterType>>
+Name of the parameter containing <<parentMismatch.child>>.
+
+
+[[err-indexOutOfRange]]
+===== Index out of range
 Client tries to operate on an index beyond the number of existing elements.
 
 See also <<errors-move>>.
 
 .Technical name
-`unknownIndex`
+`indexOutOfRange`
 
 .Additional infos
 [horizontal]
-[[unknownIndex.parent]]parent:: <<nodeIdType>>
+[[indexOutOfRange.parent]]parent:: <<nodeIdType>>
 of the parent containing the feature with unknown index.
-[[unknownIndex.feature]]feature:: <<metaPointerType>>
-Serialized meta-pointer of the feature with unknown index.
-[[unknownIndex.size]]size:: <<indexType>>
+[[indexOutOfRange.feature]]feature:: <<serializedMetaPointerType>>
+of the feature with unknown index.
+[[indexOutOfRange.size]]size:: <<indexType>>
 The actual size of the feature.
-[[unknownIndex.index]]index:: <<indexType>>
+[[indexOutOfRange.index, `index`]]index:: <<indexType>>
 Unknown index.
-
-
-[[err-featureAlreadySet]]
-===== Feature already set
-A <<{m3}.adoc#Feature, Feature>> has already been set to a value, and cannot be set new with this command.
-Use a <<group-value-change>> or <<group-node-replace>> command instead.
-
-.Technical name
-`featureAlreadySet`
-
-.Additional infos
-[horizontal]
-[[featureAlreadySet.parent]]parent:: <<nodeIdType>>
-of the parent containing the already set feature.
-[[featureAlreadySet.feature]]feature:: <<metaPointerType>>
-Serialized meta-pointer of the already set feature.
-[[featureAlreadySet.value]]value:: <<featureValueType>>
-Current value of the feature.
-
-
-[[err-featureNotSet]]
-===== Feature not set
-A <<{m3}.adoc#Feature, Feature>> has no value, and cannot be changed with this command.
-Use an <<group-value-add>> or <<group-node-replace>> command instead.
-
-.Technical name
-`featureNotSet`
-
-.Additional infos
-[horizontal]
-[[featureNotSet.parent]]parent:: <<nodeIdType>>
-of the parent containing the unset feature.
-[[featureNotSet.feature]]feature:: <<metaPointerType>>
-Serialized meta-pointer of the unset feature.
-
-
-[[err-featureUnchanged]]
-===== Feature unchanged
-The new and old value of a <<{m3}.adoc#Feature, Feature>> are the same.{fn-org511}
-
-.Technical name
-`featureUnchanged`
-
-.Additional infos
-[horizontal]
-[[featureUnchanged.parent]]parent:: <<nodeIdType>>
-of the parent containing unchanged feature.
-[[featureUnchanged.feature]]feature:: <<metaPointerType>>
-Serialized meta-pointer of the unchanged feature.
+[[indexOutOfRange.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<indexOutOfRange.index>>.

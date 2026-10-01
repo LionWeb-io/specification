@@ -43,12 +43,11 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-unknownNode>> for <<MoveAnnotationFromOtherParent.newParent>>
 * <<err-unknownNode>> for <<MoveAnnotationFromOtherParent.movedAnnotation>>
 * <<err-parentMismatch>> <<MoveAnnotationFromOtherParent.oldParent>> and <<MoveAnnotationFromOtherParent.movedAnnotation>>
-* <<err-indexEntryMismatch>> for <<MoveAnnotationFromOtherParent.oldIndex>> and
-<<MoveAnnotationFromOtherParent.movedAnnotation>>
-
-* <<err-unknownIndex>> for <<MoveAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.newParent>>)
-* <<err-unknownIndex>> for <<MoveAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.oldParent>>)
-* ##?## <<MoveAnnotationFromOtherParent.movedAnnotation>> is already an annotation of <<MoveAnnotationFromOtherParent.newParent>>
+* <<err-indexOutOfRange>> for <<MoveAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.newParent>>)
+* <<err-indexOutOfRange>> for <<MoveAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAnnotationFromOtherParent.oldParent>>)
+* <<err-indexAnnotationMismatch>> for <<MoveAnnotationFromOtherParent.oldIndex>> and <<MoveAnnotationFromOtherParent.movedAnnotation>>
+* <<err-oldAndNewParentIdentical>> for <<MoveAnnotationFromOtherParent.oldParent>> and <<MoveAnnotationFromOtherParent.newParent>>
+* <<err-oldAndNewIndexIdentical>> for <<MoveAnnotationFromOtherParent.oldIndex>> and <<MoveAnnotationFromOtherParent.newIndex>>
 * <<err-invalidParticipation>>
 
 .Related event

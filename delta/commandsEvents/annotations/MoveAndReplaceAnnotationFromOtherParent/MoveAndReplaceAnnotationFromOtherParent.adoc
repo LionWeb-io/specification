@@ -50,12 +50,14 @@ Optionally empty list of <<additionalInfo>>s.
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
 * <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>
-* <<err-unknownIndex>> for <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.newParent>>)
-* <<err-unknownIndex>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>)
-* <<err-parentMismatch>> <<MoveAndReplaceAnnotationFromOtherParent.oldParent>> is not the parent of <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
-* <<err-indexEntryMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>
-* <<err-indexEntryMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
-* ##?## <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>> is already an annotation of <<MoveAndReplaceAnnotationFromOtherParent.newParent>>
+* <<err-parentMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.oldParent>> and <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
+* <<err-parentMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.newParent>> and <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>
+* <<err-indexOutOfRange>> for <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.newParent>>)
+* <<err-indexOutOfRange>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>)
+* <<err-indexAnnotationMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>
+* <<err-indexAnnotationMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
+* <<err-oldAndNewParentIdentical>> for <<MoveAndReplaceAnnotationFromOtherParent.oldParent>> and <<MoveAndReplaceAnnotationFromOtherParent.newParent>>
+* <<err-oldAndNewIndexIdentical>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.newIndex>>
 * <<err-invalidParticipation>>
 
 .Related event

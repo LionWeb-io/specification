@@ -44,3 +44,5 @@ Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-invalidParticipation>> If the participation is not valid, or the participation doesn't match with <<Reconnect.deltaProtocolVersion>> and/or <<Reconnect.clientId>> and/or <<Reconnect.repositoryId>>.{fn-org354}
+* <<err-unsupportedProtocolVersion>> for <<Reconnect.deltaProtocolVersion>>
+* <<err-unknownRepository>> for <<Reconnect.repositoryId>>

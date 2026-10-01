@@ -34,6 +34,6 @@ Id of this query.
 Optionally empty list of <<additionalInfo>>s.
 
 .Errors
-* `alreadySubscribedToPartition`: Participation is already subscribed to <<SubscribeToPartitionContents.partition>>.
+* <<err-alreadySubscribedToPartition>> for <<SubscribeToPartitionContents.partition>>.
 * <<err-unknownNode>> for <<SubscribeToPartitionContents.partition>>.
 * <<err-invalidParticipation>>

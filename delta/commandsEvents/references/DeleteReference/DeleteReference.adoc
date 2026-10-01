@@ -37,8 +37,10 @@ Optionally empty list of <<additionalInfo>>s.
 
 .Errors
 * <<err-unknownNode>> for <<DeleteReference.parent>>
-* <<err-unknownIndex>> for <<DeleteReference.index>> (is beyond (the number of <<DeleteReference.reference>> entries of <<DeleteReference.parent>>) - 1)
-* <<err-indexEntryMismatch>> for <<DeleteReference.reference>>/<<DeleteReference.index>> and <<DeleteReference.deletedReference>>/<<DeleteReference.deletedResolveInfo>>
+* <<err-unknownReference>> for <<DeleteReference.reference>> in <<DeleteReference.parent>>
+* <<err-referenceNotSet>> for <<DeleteReference.reference>> in <<DeleteReference.parent>>
+* <<err-indexOutOfRange>> for <<DeleteReference.index>> (is beyond (the number of <<DeleteReference.reference>> entries of <<DeleteReference.parent>>) - 1)
+* <<err-indexReferenceMismatch>> for <<DeleteReference.reference>>/<<DeleteReference.index>> and <<DeleteReference.deletedReference>>/<<DeleteReference.deletedResolveInfo>>
 * <<err-undefinedReferenceTarget>> for <<DeleteReference.deletedReference>>/<<DeleteReference.deletedResolveInfo>>
 * <<err-invalidParticipation>>
 

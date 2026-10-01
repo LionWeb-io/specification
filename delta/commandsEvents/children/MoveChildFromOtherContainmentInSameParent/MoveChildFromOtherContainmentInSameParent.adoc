@@ -46,11 +46,15 @@ Optionally empty list of <<additionalInfo>>s.
 .Errors
 * <<err-unknownNode>> for <<MoveChildFromOtherContainmentInSameParent.parent>>
 * <<err-unknownNode>> for <<MoveChildFromOtherContainmentInSameParent.movedChild>>
+* <<err-unknownContainment>> for <<MoveChildFromOtherContainmentInSameParent.oldContainment>> in <<MoveChildFromOtherContainmentInSameParent.parent>>
+* <<err-unknownContainment>> for <<MoveChildFromOtherContainmentInSameParent.newContainment>> in <<MoveChildFromOtherContainmentInSameParent.parent>>
 * <<err-parentMismatch>> for <<MoveChildFromOtherContainmentInSameParent.parent>> and <<MoveChildFromOtherContainmentInSameParent.movedChild>>
-* <<err-indexEntryMismatch>> for <<MoveChildFromOtherContainmentInSameParent.oldContainment>>/<<MoveChildFromOtherContainmentInSameParent.oldIndex>> and
+* <<err-indexOutOfRange>> for <<MoveChildFromOtherContainmentInSameParent.newIndex>> (is beyond the number of <<MoveChildFromOtherContainmentInSameParent.newContainment>> entries in <<MoveChildFromOtherContainmentInSameParent.parent>>)
+* <<err-indexOutOfRange>> for <<MoveChildFromOtherContainmentInSameParent.oldIndex>> (is beyond the number of <<MoveChildFromOtherContainmentInSameParent.oldContainment>> entries in <<MoveChildFromOtherContainmentInSameParent.parent>>)
+* <<err-indexChildMismatch>> for <<MoveChildFromOtherContainmentInSameParent.oldContainment>>/<<MoveChildFromOtherContainmentInSameParent.oldIndex>> and
 <<MoveChildFromOtherContainmentInSameParent.movedChild>>
-* <<err-unknownIndex>> for <<MoveChildFromOtherContainmentInSameParent.newIndex>> (is beyond the number of <<MoveChildFromOtherContainmentInSameParent.newContainment>> entries in <<MoveChildFromOtherContainmentInSameParent.parent>>)
-* <<err-invalidMove>> as <<MoveChildFromOtherContainmentInSameParent.movedChild>> is already a child inside <<MoveChildFromOtherContainmentInSameParent.newContainment>> (use <<cmd-MoveChildInSameContainmentInSameParent>> instead) or <<MoveChildFromOtherContainmentInSameParent.movedChild>> is _not_ a child of <<MoveChildFromOtherContainmentInSameParent.parent>> (use <<cmd-MoveChildFromContainmentInOtherParent>> instead)
+* <<err-oldAndNewContainmentIdentical>> for <<MoveChildFromOtherContainmentInSameParent.oldContainment>> and <<MoveChildFromOtherContainmentInSameParent.newContainment>>
+* <<err-oldAndNewIndexIdentical>> for <<MoveChildFromOtherContainmentInSameParent.oldIndex>> and <<MoveChildFromOtherContainmentInSameParent.newIndex>>
 * <<err-invalidParticipation>>
 
 .Related event
