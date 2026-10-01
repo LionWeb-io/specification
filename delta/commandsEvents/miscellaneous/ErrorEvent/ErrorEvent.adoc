@@ -5,7 +5,7 @@ Repository couldn't handle one or more command(s).{fn-org316}{fn-org405}
 
 The repository MAY send an error event to only one participation.{fn-org379}
 
-See also <<qry-ErrorResponse>>.
+See also <<qry-ErrorResponse>> and <<unsuccessfulCommand>>.
 
 .Technical name
 `ErrorEvent`
