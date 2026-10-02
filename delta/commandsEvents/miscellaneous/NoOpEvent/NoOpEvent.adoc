@@ -3,6 +3,8 @@
 ===== No-op Event
 Nothing happened as result of one or more command(s).{fn-org314}
 
+See also <<unsuccessfulCommand>>.
+
 .Technical name
 `NoOpEvent`{fn-org492}
 

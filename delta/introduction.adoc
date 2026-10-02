@@ -8,19 +8,22 @@ Delta API supports these message [[category, category]]categories, loosely follo
 
 * <<queries>> initiated/requested by the client, with synchronous response by the repository.
 A query requests some information from the repository without changing the repository's contents.
++
 The repository gathers all information needed to answer the query, and sends the information back.
 The repository might reply to invalid queries with a failure message.
 We also use queries for managing <<participation, participations>>.{fn-org350}
 
-* <<commands>> initiated/requested by the client, with synchronous response by the repository.
+* <<commands>> sent by the client, with no immediate response by the repository.
 A command requests some change to the repository.
-The repository quickly confirms having _received_ the command, or rejects a _failed_ command.{fn-org298}
-However, the repository processes the command asynchronously, and eventually broadcasts the effect(s) as _event(s)_.
++
+The repository processes the command asynchronously, and eventually broadcasts the effect(s) as _event(s)_.
 
 * <<events>> initiated/broadcast by the repository, without response by the client.
 An event describes some change that has been applied to the repository's contents.
 Events correlate to their originating command(s){fn-org306}; this command might have been sent by this client or another client.{fn-org299}
-All clients receive the same events (given the same subscription scope and disregarding <<event-sequence-number, event sequence numbers>>).
++
+All clients receive the same _successful_ events (given the same subscription scope and disregarding <<event-sequence-number, event sequence numbers>>).
+Only the sending client receives events originating from <<unsuccessfulCommand, unsuccessful commands>>.
 
 A client describes the interesting part of the repository's contents by specifying its <<subscription, subscription scope>>.
 The client receives only events on nodes within that scope.

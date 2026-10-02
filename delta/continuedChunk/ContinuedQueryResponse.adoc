@@ -30,8 +30,7 @@ Id of the related <<splittableMessage, splittable query>>.
 Optionally empty list of <<additionalInfo>>s.
 
 .Errors
-* <<err-splitMessageAlreadyCompleted>>
-* <<err-multipleContinuedChunksCompleted>>
+* <<err-noActiveSplitMessage>>
 * <<err-duplicateContinuedChunk>>
 * <<err-unknownSplittableMessageInContinuedChunk>>
 * <<err-invalidSplittableMessageInContinuedChunk>>

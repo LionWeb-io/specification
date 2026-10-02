@@ -21,6 +21,35 @@ The technical name is a valid programming language identifier as described for <
 Each binding to a specific protocol might use the technical name in a different way.
 For example, a JSON binding might have a member containing the technical name of the message, or a Protobuf binding might use the technical name as type name.
 
+
+[[messageCorrelation, message correlation]]
+==== Message correlation
+Each query uses its <<queryIdType>> to correlate query _request_ and _response_.
+Thus, query ids MUST be unique per participation.
+
+Each event is correlated to one or more commands by its <<commandSourceType>>, consisting of the sending <<participationIdType>> and the <<commandIdType>> of the originating command.{fn-org423}
+Thus, command ids MUST be unique per participation.{fn-org305}{fn-org415}
+
+The repository assigns guaranteed unique <<participationIdType>>s.{fn-org345}
+
+An event can have more than one command source{fn-org306}, and it's possible that the originating command is _not_ the event's twin.
+These situations mostly appear if the repository applied conflict resolution logic.
+
+[[unsuccessfulCommand, unsuccessful command]]
+==== Unsuccessful commands
+A command can be unsuccessful for the following reasons:
+
+* The repository didn't understand the command, resulting in an <<evnt-ErrorEvent>>.{fn-org298}
+
+* The client used the wrong command
+(e.g. <<cmd-AddProperty>> if the property has already been set,
+or <<cmd-MoveAndReplaceChildFromContainmentInOtherParent>> if both the old and new parent are the same).
+This results in an <<evnt-ErrorEvent>>.{fn-org516}
+
+* The command would not change anything in the repository, resulting in a <<evnt-NoOpEvent>>.{fn-org511}
+
+The repository sends the event originating from an unsuccessful command _only_ to the sending participation; it _does not_ broadcast such events.{fn-org379}
+
 [[splittableMessage, splittable message]]
 ==== Splittable messages
 All messages containing a <<deltaChunkType>>.
@@ -63,7 +92,7 @@ If the flag is `false`, one or more _continued chunk_ messages will follow.{fn-o
 A <<deltaChunkType>> from a continued chunk is to be “merged” into the chunk from the related <<splittableMessage>> simply by appending the contents of its top-level `nodes` field to the `nodes` field of the chunk of the related <<splittableMessage>>.{fn-org473}
 
 There MUST NOT be any message in the same <<channel>> between the _split message_ and all related _continued chunks_.
-The continued chunks SHOULD be sent across the <<channel>> in increasing order of <<continuedChunkSequenceNumberType>>.
+The continued chunks MUST be sent across the <<channel>> in increasing order of <<continuedChunkSequenceNumberType>>.{fn-org529}
 
 A continued chunk MUST NOT appear as part of a <<cmd-CompositeCommand>> or <<evnt-CompositeEvent>>.
 (That also implies that the <<splitFlagType>> of a <<splittableMessage>> appearing inside a composite MUST either be unset or set to `false`.){fn-org462}
@@ -86,7 +115,7 @@ Some kinds are pre-defined in this specification.
 A repository MAY reply with other, additional kinds.
 * [[additionalInfo.distribute]]`distribute`? is an optional <<booleanType>> flag with default value `false`.
 It is only valid in <<commands>>, i.e. MUST NOT be used for <<events>> or <<queries>>.
-If present and set to `true`, the repository MUST copy the additional info to all events that result from the command, and distribute the additional info to all participants receiving the event.
+If present and set to `true`, the repository MUST copy the additional info to all events that result from the command, and distribute the additional info to all participants receiving the event.{fn-org421}
 
 * [[additionalInfo.message]]`message` is a human-readable string describing the additional info.
 * [[additionalInfo.data]]`data` is a map with 0 or more arbitrary keys and values.{fn-org471}
