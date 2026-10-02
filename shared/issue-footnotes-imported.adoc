@@ -394,3 +394,4 @@
 :fn-org529: footnote:org529[https://github.com/LionWeb-io/specification/issues/529[Clients MUST process continued messages in chunk order #529]]
 :fn-org530: footnote:org530[https://github.com/LionWeb-io/specification/issues/530[We don't separate connected and signedOn state #530]]
 :fn-org532: footnote:org532[https://github.com/LionWeb-io/specification/issues/532[Should `ContinuedChunkSequenceNumber` start with 1? #532]]
+:fn-org535: footnote:org535[https://github.com/LionWeb-io/specification/issues/535[spec `depthLimit` range as [0..2^31-1] #535]]

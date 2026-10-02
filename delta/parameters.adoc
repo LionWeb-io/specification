@@ -56,7 +56,7 @@ MAY contain more than one _root node_ (i.e. independent subtrees), and each root
 --
 
 [[depthLimitType, depth limit]]DepthLimit:: Depth of returned <<shallowChunkType>>.
-MUST be an integer >= 0, with
+MUST be an integer  in the range of 0 to 2147483647 (i.e. 2^31^ − 1){fn-org535}, with
 +
 --
 * 0 meaning "return only the _root node(s)_",
