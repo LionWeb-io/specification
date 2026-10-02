@@ -70,7 +70,7 @@ MUST be an integer  in the range of 0 to 2147483647 (i.e. 2^31^ − 1){fn-org535
 [[continuedChunkCompletedFlagType]]ContinuedChunk{zwsp}CompletedFlag:: boolean flag whether this <<continuedChunk>> completes its <<splittableMessage>>.{fn-org425}
 
 [[continuedChunkSequenceNumberType]]ContinuedChunk{zwsp}SequenceNumber:: orders connected <<continuedChunk, continued chunks>>.
-Positive integer that starts at 0 and increments by one for each consecutive <<continuedChunk>>.{fn-org425}
+Positive integer that starts at 1 and increments by one for each consecutive <<continuedChunk>>.{fn-org425}{fn-org532}
 
 [[eventType]]Event:: Any <<events, event>>.
 
