@@ -13,25 +13,35 @@ All other children inside <<ChildMovedFromContainmentInOtherParent.newParent>>'s
 
 [horizontal]
 .Parameters
-[[ChildMovedFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<targetNodeType>>
+[[ChildMovedFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
+of the node the child was moved to.
 
 [[ChildMovedFromContainmentInOtherParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildMovedFromContainmentInOtherParent.movedChild>> was moved to in <<ChildMovedFromContainmentInOtherParent.newParent>>.
 
 [[ChildMovedFromContainmentInOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+where <<ChildMovedFromContainmentInOtherParent.movedChild>> was moved to in <<ChildMovedFromContainmentInOtherParent.newContainment>> of <<ChildMovedFromContainmentInOtherParent.newParent>>.
 
-[[ChildMovedFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<targetNodeType>>
+[[ChildMovedFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
+of the node that was moved from <<ChildMovedFromContainmentInOtherParent.oldParent>> to <<ChildMovedFromContainmentInOtherParent.newParent>>.
 
-[[ChildMovedFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<targetNodeType>>
+[[ChildMovedFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
+of the node the child was moved from.
 
 [[ChildMovedFromContainmentInOtherParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildMovedFromContainmentInOtherParent.movedChild>> was moved from in <<ChildMovedFromContainmentInOtherParent.oldParent>>.
 
 [[ChildMovedFromContainmentInOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where <<ChildMovedFromContainmentInOtherParent.movedChild>> was moved from in <<ChildMovedFromContainmentInOtherParent.oldContainment>> of <<ChildMovedFromContainmentInOtherParent.oldParent>>.
 
 [[ChildMovedFromContainmentInOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
 
-[[ChildMovedFromContainmentInOtherParent.sequenceNumber]]sequenceNumber:: <<event-sequence-number>>
+[[ChildMovedFromContainmentInOtherParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
 
 [[ChildMovedFromContainmentInOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
 
 .Related command
 <<cmd-MoveChildFromContainmentInOtherParent>>

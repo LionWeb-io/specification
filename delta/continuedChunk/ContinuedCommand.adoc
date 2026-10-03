@@ -8,6 +8,8 @@ A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> 
 * <<cmd-AddAnnotation>> <<AddAnnotation.parent>>
 * <<cmd-ReplaceAnnotation>> <<ReplaceAnnotation.newAnnotation>>
 
+We identify the splittable command by its <<ContinuedCommand.commandId>>.
+
 .Technical name
 `ContinuedCommand`
 
@@ -15,13 +17,25 @@ A <<continuedChunk>> for one of the following <<splittableMessage, splittable>> 
 .Parameters
 [[ContinuedCommand.chunk, `chunk`]]chunk:: <<deltaChunkType>>
 The continued chunk.
-The combination of all continued chunks MUST adhere to the same constraints as the related <<splittableMessage>>'s chunk.
+The combination of all continued chunks MUST adhere to the same constraints as <<ContinuedCommand.commandId>>'s chunk.
 
 [[ContinuedCommand.continuedChunkCompleted, `continuedChunkCompleted`]]continuedChunkCompleted:: <<continuedChunkCompletedFlagType>>
+Whether this message completes <<ContinuedCommand.commandId>>.
 
 [[ContinuedCommand.continuedChunkSequenceNumber, `continuedChunkSequenceNumber`]]continuedChunkSequenceNumber:: <<continuedChunkSequenceNumberType>>
+Number of this message in the sequence of all continued commands relating to the same <<ContinuedCommand.commandId>>.
 
-[[ContinuedCommand.commandId]]commandId:: <<commandIdType>>
-Id of the related <<splittableMessage, splittable command>>
+[[ContinuedCommand.commandId, `commandId`]]commandId:: <<commandIdType>>
+Id of the related <<splittableMessage, splittable command>>.
 
 [[ContinuedCommand.additionalInfos, `additionalInfos`]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
+
+.Errors
+* <<err-splitMessageAlreadyCompleted>>
+* <<err-multipleContinuedChunksCompleted>>
+* <<err-duplicateContinuedChunk>>
+* <<err-unknownSplittableMessageInContinuedChunk>>
+* <<err-invalidSplittableMessageInContinuedChunk>>
+* <<err-interruptedContinuedChunk>>
+* <<err-invalidParticipation>>
