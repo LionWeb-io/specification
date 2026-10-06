@@ -7,6 +7,7 @@ include::../shared/issue-footnotes.adoc[]
 :delta: ../delta/delta-api
 :v2023-1: ../2023.1
 :v2024-1: ../2024.1
+:v2026-1: ../2026.1
 
 = LionWeb Roadmap, Releases, and History
 :toc:
@@ -158,10 +159,10 @@ Model-to-model generators would be implemented as <<{refarch}.adoc#processor, Pr
 [[versions]]
 == Versions
 
-[[release-2026.1]]
-[[version-2026.1]]
 [[release-2025.1]]
 [[version-2025.1]]
+[[release-2026.1]]
+[[version-2026.1]]
 === 2026.1
 * [[delta-protocol]] Specified <<{delta}.adoc#delta, Delta Repository Access API>> +
 As described in our <<{refarch}.adoc#delta, reference architecture>>, via delta protocol a client receives an initial snapshot similar to the bulk case.
@@ -177,6 +178,9 @@ Afterward, the client continues to receive changes (aka deltas) from the repo; i
 ** Clarified <<{bulk}.adoc#parameter-syntax, parameter syntax>> used in the specification.{fn-org427}
 ** Removed unwarranted distinction of language- and other partitions for <<{bulk}.adoc#listPartitions, `listPartitions` command>>.{fn-org450}
 ** Added <<{bulk}.adoc#listPartitions.depthLimit, `depthLimit`>> parameter to `listPartitions` command.{fn-org425}
+** Added <<{bulk}.adoc#repository-ids, `repositoryId`>> parameter to all commands.{fn-org394}
+** Mentioned default binding to HTTP/JSON.{fn-org507}
+** Clearly separate request and response parameters.
 
 [[release-2024.1]]
 [[version-2024.1]]

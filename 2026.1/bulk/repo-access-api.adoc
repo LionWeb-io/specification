@@ -322,7 +322,7 @@ Optionally empty list of additional infos.
 Creates new partitions in the repository.{fn-org216}
 
 Each sent node with no parent node id is its own partition.
-All other nodes MUST NOT exist in the repository, and they MUST be descendants of on of the partition nodes.
+All other nodes MUST NOT exist in the repository, and they MUST be descendants of one of the partition nodes.
 We cannot use <<store.semantics, move semantics>>.
 We MAY reference nodes already existing in the repository.{fn-org369}
 

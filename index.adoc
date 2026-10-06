@@ -15,6 +15,7 @@
 
 * xref:2023.1/index.adoc[2023.1]
 * xref:2024.1/index.adoc[2024.1]
+* xref:2026.1/index.adoc[2026.1]
 
 == Articles
 
