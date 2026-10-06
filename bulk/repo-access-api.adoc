@@ -7,8 +7,10 @@ include::../shared/issue-footnotes.adoc[]
 
 [[bulk]]
 = Bulk Repository Access API
-:toc: preamble
-:toclevels: 2
+:toc: right
+:toclevels: 4
+:sectnumlevels: 4
+:sectnums:
 
 The bulk API *version 2026.1* is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
 It is intended for CRUD operations on (larger) sets of nodes.

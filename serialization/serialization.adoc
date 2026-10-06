@@ -6,8 +6,10 @@ include::../shared/issue-footnotes.adoc[]
 :fn-mof: footnote:mof[https://en.wikipedia.org/wiki/Meta-Object_Facility[Meta-Object Facility], also known as M3 model]
 
 = LionWeb Serialization Format
-:toc: preamble
-:toclevels: 3
+:toc: right
+:toclevels: 4
+:sectnumlevels: 4
+:sectnums:
 
 This document describes the serialization format for LionWeb *version 2026.1* chunks.
 
