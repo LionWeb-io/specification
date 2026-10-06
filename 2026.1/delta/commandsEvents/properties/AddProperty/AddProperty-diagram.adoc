@@ -1,0 +1,17 @@
+|
+[plantuml, addProperty-before, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class "node"
+----
+|
+[plantuml, addProperty-after, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class "node" {
+  <color: #blue>property = newValue</color>
+}
+----
+

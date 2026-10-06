@@ -1,0 +1,37 @@
+[[evnt-ChildDeleted]]
+===== Child deleted
+<<existing-nodes, Existing node>> <<ChildDeleted.deletedChild>>, and all its <<ChildDeleted.deletedDescendants>>{fn-org370}, have been deleted from <<ChildDeleted.parent>>'s <<ChildDeleted.containment>> at <<ChildDeleted.index>>.{fn-org286}
+All other children inside <<ChildDeleted.parent>>'s <<ChildDeleted.containment>> with index > <<ChildDeleted.index>> have been moved to next lower index.
+
+.Technical name
+`ChildDeleted`
+
+[horizontal]
+.Parameters
+[[ChildDeleted.deletedChild, `deletedChild`]]deletedChild:: <<nodeIdType>>
+of the node that was deleted in <<ChildDeleted.containment>> of <<ChildDeleted.parent>> at <<ChildDeleted.index>>.
+
+[[ChildDeleted.deletedDescendants, `deletedDescendants`]]deletedDescendants:: <<nodeIdType>>[]
+List of all node ids that used to be descendants (including children and annotations) of <<ChildDeleted.deletedChild>>.
+Does not include <<ChildDeleted.deletedChild>>.
+
+[[ChildDeleted.parent, `parent`]]parent:: <<nodeIdType>>
+of the node a child was deleted from.
+
+[[ChildDeleted.containment, `containment`]]containment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> <<ChildDeleted.deletedChild>> was deleted from in <<ChildDeleted.parent>>.
+
+[[ChildDeleted.index, `index`]]index:: <<indexType>>
+where <<ChildDeleted.deletedChild>> was deleted from in <<ChildDeleted.containment>> of <<ChildDeleted.parent>>.
+
+[[ChildDeleted.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
+
+[[ChildDeleted.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
+
+[[ChildDeleted.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
+
+.Related command
+<<cmd-DeleteChild>>

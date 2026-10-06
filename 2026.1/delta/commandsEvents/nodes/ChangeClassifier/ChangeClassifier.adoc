@@ -1,0 +1,34 @@
+[[cmd-ChangeClassifier]]
+===== Change classifier
+Change classifier of <<existing-nodes, existing node>> <<ChangeClassifier.node>> to <<ChangeClassifier.newClassifier>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::ChangeClassifier-diagram.adoc[]
+|===
+
+.Technical name
+`ChangeClassifier`
+
+[horizontal]
+.Parameters
+[[ChangeClassifier.node, `node`]]node:: <<nodeIdType>>
+of the node we want to change the classifier.
+
+[[ChangeClassifier.newClassifier, `newClassifier`]]newClassifier:: <<metaPointerType>>
+New <<{m3}.adoc#Classifier, Classifier>> of <<ChangeClassifier.node>>.
+
+[[ChangeClassifier.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
+[[ChangeClassifier.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
+
+.Errors
+* <<err-unknownNode>> for <<ChangeClassifier.node>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ClassifierChanged>>

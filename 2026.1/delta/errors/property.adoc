@@ -1,0 +1,51 @@
+[[errors-property]]
+==== Property errors
+
+
+[[err-unknownProperty]]
+===== Unknown property
+Client tries to change or delete a property not present in the parent node.
+
+.Technical name
+`unknownProperty`
+
+.Additional infos
+[horizontal]
+[[unknownProperty.parent]]parent:: <<nodeIdType>>
+of the parent missing the requested property.
+[[unknownProperty.property]]property:: <<serializedMetaPointerType>>
+of the requested <<{m3}.adoc#Property, Property>>.
+
+
+[[err-propertyAlreadySet]]
+===== Property already set
+A <<{m3}.adoc#Property, Property>> has already been set to a value, and cannot be set new with this command.
+Use <<cmd-ChangeProperty>> command instead.
+
+.Technical name
+`propertyAlreadySet`
+
+.Additional infos
+[horizontal]
+[[propertyAlreadySet.parent]]parent:: <<nodeIdType>>
+of the parent containing the already set property.
+[[propertyAlreadySet.property]]property:: <<serializedMetaPointerType>>
+of the already set property.
+[[propertyAlreadySet.value]]value:: <<propertyValueType>>
+Current value of the property.
+
+
+[[err-propertyNotSet]]
+===== Property not set
+A <<{m3}.adoc#Property, Property>> has no value, and cannot be changed with this command.
+Use <<cmd-AddProperty>> command instead.
+
+.Technical name
+`propertyNotSet`
+
+.Additional infos
+[horizontal]
+[[propertyNotSet.parent]]parent:: <<nodeIdType>>
+of the parent containing the unset property.
+[[propertyNotSet.property]]property:: <<serializedMetaPointerType>>
+of the unset property.

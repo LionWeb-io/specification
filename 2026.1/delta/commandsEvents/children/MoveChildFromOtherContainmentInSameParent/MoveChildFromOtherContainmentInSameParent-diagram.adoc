@@ -1,0 +1,53 @@
+|
+[plantuml,moveChildFromOtherContainmentInSameParent-before,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class descendant #Orange
+class "moved\nChild" as movedChild #Orange
+class "old\nNext\nSibling" as oldNextSibling
+
+class parent
+
+descendant <--* movedChild
+
+oldPreviousSibling <--* parent: old\nContainment\n[oldIndex - 1]
+movedChild <--* parent #red: old\nContainment\n[oldIndex]
+oldNextSibling <--* parent: old\nContainment\n[oldIndex + 1]
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class " " as dummy <<h>>
+class "new\nNext\nSibling" as newNextSibling
+
+parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+parent *-[hidden]-> dummy #Blue: new\nContainment\n[newIndex]
+parent *--> newNextSibling: new\nContainment\n[newIndex]
+----
+|
+[plantuml, moveChildFromOtherContainmentInSameParent-after, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class " " as dummy <<h>>
+class "old\nNext\nSibling" as oldNextSibling
+
+class parent
+
+oldPreviousSibling <--* parent: old\nContainment\n[oldIndex - 1]
+dummy <-[hidden]-* parent #red: old\nContainment\n[oldIndex]
+oldNextSibling <--* parent: old\nContainment\n[oldIndex]
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "moved\nChild" as movedChild #Orange
+class "new\nNext\nSibling" as newNextSibling
+
+class descendant #Orange
+
+parent *--> newPreviousSibling: new\nContainment\n[newIndex - 1]
+parent *--> movedChild #Blue: new\nContainment\n[newIndex]
+parent *--> newNextSibling: new\nContainment\n[newIndex + 1]
+
+movedChild *--> descendant
+----

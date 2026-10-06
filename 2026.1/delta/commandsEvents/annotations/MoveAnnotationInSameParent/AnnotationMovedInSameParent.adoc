@@ -1,0 +1,38 @@
+[[evnt-AnnotationMovedInSameParent]]
+===== Annotation moved in same parent
+<<existing-nodes, Existing node>> <<AnnotationMovedInSameParent.movedAnnotation>>
+that was initially at index <<AnnotationMovedInSameParent.oldIndex>>
+in <<AnnotationMovedInSameParent.parent>>'s annotations
+was moved by <<AnnotationMovedInSameParent.indexOffset>> positions
+to index (<<AnnotationMovedInSameParent.oldIndex>> + <<AnnotationMovedInSameParent.indexOffset>>).
+
+This conforms to <<justMovingANode, the action of moving a node in one specific list>> — see that section for more information, diagrams, and examples.
+
+.Technical name
+`AnnotationMovedInSameParent`
+
+[horizontal]
+.Parameters
+[[AnnotationMovedInSameParent.parent, `parent`]]parent:: <<nodeIdType>>
+of the node the annotation was moved in.
+
+[[AnnotationMovedInSameParent.oldIndex, `oldIndex`]]oldIndex:: <<nodeIdType>>
+where <<AnnotationMovedInSameParent.movedAnnotation>> was moved from in annotations of <<AnnotationMovedInSameParent.parent>>.
+
+[[AnnotationMovedInSameParent.indexOffset, `indexOffset`]]indexOffset:: <<indexOffsetType>>{fn-org482}
+how much <<AnnotationMovedInSameParent.movedAnnotation>> was moved in annotations of <<AnnotationMovedInSameParent.parent>>.
+
+[[AnnotationMovedInSameParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
+of the annotation that was moved.
+
+[[AnnotationMovedInSameParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
+
+[[AnnotationMovedInSameParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
+
+[[AnnotationMovedInSameParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
+
+.Related command
+<<cmd-MoveAnnotationInSameParent>>

@@ -1,0 +1,16 @@
+|
+[plantuml, deletePartition, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class deletedPartition <<Partition>> #red
+
+class firstLevelChild #red
+
+class secondLevelChild #red
+
+deletedPartition *--> firstLevelChild #red
+firstLevelChild *--> secondLevelChild #red
+----
+|
+_nothing_

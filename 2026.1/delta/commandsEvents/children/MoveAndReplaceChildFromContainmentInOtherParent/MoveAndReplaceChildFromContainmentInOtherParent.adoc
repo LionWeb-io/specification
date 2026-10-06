@@ -1,0 +1,76 @@
+[[cmd-MoveAndReplaceChildFromOtherContainment]]
+[[cmd-MoveAndReplaceChildFromContainmentInOtherParent]]
+===== Move child from containment in other parent and replace existing child
+Move <<existing-nodes, existing node>> <<MoveAndReplaceChildFromContainmentInOtherParent.movedChild>>
+from <<MoveAndReplaceChildFromContainmentInOtherParent.oldIndex>>
+inside <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>>'s
+<<MoveAndReplaceChildFromContainmentInOtherParent.oldContainment>>
+to <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>'s
+<<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>> at
+<<MoveAndReplaceChildFromContainmentInOtherParent.newIndex>>.
+
+Delete <<existing-nodes, current child>> <<MoveAndReplaceChildFromContainmentInOtherParent.replacedChild>>{fn-org371} inside <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>'s <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>> at <<MoveAndReplaceChildFromContainmentInOtherParent.newIndex>>, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::MoveAndReplaceChildFromContainmentInOtherParent-diagram.adoc[]
+|===
+
+.Technical name
+`MoveAndReplaceChildFromContainmentInOtherParent`{fn-org513}
+
+[horizontal]
+.Parameters
+[[MoveAndReplaceChildFromContainmentInOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
+of the node we want to move a child to.
+
+[[MoveAndReplaceChildFromContainmentInOtherParent.newContainment, `newContainment`]]newContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> we want to move <<MoveAndReplaceChildFromContainmentInOtherParent.movedChild>> to in <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>.
+
+[[MoveAndReplaceChildFromContainmentInOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+where we want to move <<MoveAndReplaceChildFromContainmentInOtherParent.movedChild>> to in <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>> of <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>.
+
+[[MoveAndReplaceChildFromContainmentInOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
+of the node we want to move a child from.
+
+[[MoveAndReplaceChildFromContainmentInOtherParent.oldContainment, `oldContainment`]]oldContainment:: <<metaPointerType>>
+<<{m3}.adoc#Containment, Containment>> we want to move <<MoveAndReplaceChildFromContainmentInOtherParent.movedChild>> from in <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>>.
+
+[[MoveAndReplaceChildFromContainmentInOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where we want to move <<MoveAndReplaceChildFromContainmentInOtherParent.movedChild>> from in <<MoveAndReplaceChildFromContainmentInOtherParent.oldContainment>> of <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>>.
+
+[[MoveAndReplaceChildFromContainmentInOtherParent.replacedChild, `replacedChild`]]replacedChild:: <<nodeIdType>>
+of the node we want to replace at <<MoveAndReplaceChildFromContainmentInOtherParent.newIndex>> of <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>> in <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>.
+
+[[MoveAndReplaceChildFromContainmentInOtherParent.movedChild, `movedChild`]]movedChild:: <<nodeIdType>>
+of the node we want to move from <<MoveAndReplaceChildFromContainmentInOtherParent.oldContainment>> in <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>> to <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>> in <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>.
+
+[[MoveAndReplaceChildFromContainmentInOtherParent.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
+[[MoveAndReplaceChildFromContainmentInOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
+
+.Errors
+* <<err-unknownNode>> for <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>
+* <<err-unknownNode>> for <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>>
+* <<err-unknownNode>> for <<MoveAndReplaceChildFromContainmentInOtherParent.movedChild>>
+* <<err-unknownNode>> for <<MoveAndReplaceChildFromContainmentInOtherParent.replacedChild>>
+* <<err-unknownContainment>> for <<MoveAndReplaceChildFromContainmentInOtherParent.oldContainment>> in <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>>
+* <<err-unknownContainment>> for <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>> in <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>
+* <<err-parentMismatch>> for <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>> and <<MoveAndReplaceChildFromContainmentInOtherParent.movedChild>>
+* <<err-parentMismatch>> for <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>> and <<MoveAndReplaceChildFromContainmentInOtherParent.replacedChild>>
+* <<err-indexOutOfRange>> for <<MoveAndReplaceChildFromContainmentInOtherParent.oldIndex>> (is beyond the number of <<MoveAndReplaceChildFromContainmentInOtherParent.oldIndex>> entries in <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>>)
+* <<err-indexOutOfRange>> for <<MoveAndReplaceChildFromContainmentInOtherParent.newIndex>> (is beyond the number of <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>> entries in <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>)
+* <<err-indexChildMismatch>> for <<MoveAndReplaceChildFromContainmentInOtherParent.oldContainment>>/<<MoveAndReplaceChildFromContainmentInOtherParent.oldIndex>> and <<MoveAndReplaceChildFromContainmentInOtherParent.movedChild>>
+* <<err-indexChildMismatch>> for <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>>/<<MoveAndReplaceChildFromContainmentInOtherParent.newIndex>> and <<MoveAndReplaceChildFromContainmentInOtherParent.replacedChild>>
+* <<err-oldAndNewParentIdentical>> for <<MoveAndReplaceChildFromContainmentInOtherParent.oldParent>> and <<MoveAndReplaceChildFromContainmentInOtherParent.newParent>>
+* <<err-oldAndNewContainmentIdentical>> for <<MoveAndReplaceChildFromContainmentInOtherParent.oldContainment>> and <<MoveAndReplaceChildFromContainmentInOtherParent.newContainment>>
+* <<err-oldAndNewIndexIdentical>> for <<MoveAndReplaceChildFromContainmentInOtherParent.oldIndex>> and <<MoveAndReplaceChildFromContainmentInOtherParent.newIndex>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ChildMovedAndReplacedFromContainmentInOtherParent>>

@@ -1,0 +1,3707 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lionweb.io/delta.schema.json",
+  "title": "LionWeb Delta Protocol",
+  "description": "Version: 0",
+  "type": "object",
+  "$comment": "using anyOf for this sum type, because because CustomQuery{Request|Response} are indistinguishable; for all other sum types, using oneOf to make matching as exclusive as possible",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/QueryRequests"
+    },
+    {
+      "$ref": "#/$defs/QueryResponses"
+    },
+    {
+      "$ref": "#/$defs/Commands"
+    },
+    {
+      "$ref": "#/$defs/Events"
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "deltaProtocolVersion": {
+      "enum": [
+        "2026.1"
+      ]
+    },
+    "key": {
+      "$ref": "#/$defs/id"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metaPointer": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/$defs/key"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "key": {
+          "$ref": "#/$defs/key"
+        }
+      },
+      "required": [
+        "language",
+        "version",
+        "key"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    },
+    "depthLimit": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "split": {
+      "type": "boolean"
+    },
+    "continuedChunkCompleted": {
+      "type": "boolean"
+    },
+    "continuedChunkSequenceNumber": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "DeltaChunk": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SerializedNode"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "nodes"
+      ],
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1
+    },
+    "SerializedNode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "classifier": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SerializedProperty"
+          }
+        },
+        "containments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SerializedContainment"
+          }
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SerializedReference"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "parent": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "classifier",
+        "properties",
+        "containments",
+        "references",
+        "annotations",
+        "parent"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 7
+    },
+    "SerializedProperty": {
+      "type": "object",
+      "properties": {
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "value": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/propertyValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "property",
+        "value"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2
+    },
+    "SerializedContainment": {
+      "type": "object",
+      "properties": {
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "containment",
+        "children"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2
+    },
+    "SerializedReference": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SerializedReferenceTarget"
+          }
+        }
+      },
+      "required": [
+        "reference",
+        "targets"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2
+    },
+    "SerializedReferenceTarget": {
+      "type": "object",
+      "properties": {
+        "resolveInfo": {
+          "$ref": "#/$defs/optionalResolveInfo"
+        },
+        "reference": {
+          "$ref": "#/$defs/optionalTargetNode"
+        }
+      },
+      "required": [
+        "resolveInfo",
+        "reference"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2
+    },
+    "queryId": {
+      "$ref": "#/$defs/id"
+    },
+    "commandId": {
+      "$ref": "#/$defs/id"
+    },
+    "commandSource": {
+      "type": "object",
+      "properties": {
+        "participationId": {
+          "$ref": "#/$defs/participationId"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        }
+      },
+      "required": [
+        "participationId",
+        "commandId"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2
+    },
+    "commandSources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/commandSource"
+      },
+      "uniqueItems": true
+    },
+    "participationId": {
+      "$ref": "#/$defs/id"
+    },
+    "repositoryId": {
+      "$ref": "#/$defs/id"
+    },
+    "clientId": {
+      "$ref": "#/$defs/id"
+    },
+    "targetNode": {
+      "$ref": "#/$defs/id"
+    },
+    "optionalTargetNode": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/targetNode"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "targetNodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/targetNode"
+      },
+      "uniqueItems": true
+    },
+    "resolveInfo": {
+      "type": "string"
+    },
+    "optionalResolveInfo": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "eventSequenceNumber": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "propertyValue": {
+      "type": "string"
+    },
+    "index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "indexOffset": {
+      "type": "integer"
+    },
+    "additionalInfoKind": {
+      "$ref": "#/$defs/id"
+    },
+    "errorCode": {
+      "$ref": "#/$defs/id"
+    },
+    "customMessageKind": {
+      "type": "string",
+      "minLength": 8,
+      "pattern": "^Custom_[a-zA-Z0-9_-]+$"
+    },
+    "additionalInfoDataKey": {
+      "$ref": "#/$defs/id"
+    },
+    "additionalInfos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AdditionalInfo"
+      }
+    },
+    "AdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/additionalInfoKind"
+        },
+        "distribute": {
+          "$ref": "#/$defs/additionalInfoDistribute"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "message",
+        "data"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 4
+    },
+    "additionalInfoDistribute": {
+      "type": "boolean",
+      "default": false
+    },
+    "QueryRequests": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SubscribeToChangingPartitionsRequest"
+        },
+        {
+          "$ref": "#/$defs/InformAboutChangingPartitionsRequest"
+        },
+        {
+          "$ref": "#/$defs/SubscribeToPartitionContentsRequest"
+        },
+        {
+          "$ref": "#/$defs/UnsubscribeFromPartitionContentsRequest"
+        },
+        {
+          "$ref": "#/$defs/SignOnRequest"
+        },
+        {
+          "$ref": "#/$defs/SignOffRequest"
+        },
+        {
+          "$ref": "#/$defs/ReconnectRequest"
+        },
+        {
+          "$ref": "#/$defs/GetAvailableIdsRequest"
+        },
+        {
+          "$ref": "#/$defs/ListPartitionsRequest"
+        },
+        {
+          "$ref": "#/$defs/ListAndSubscribePartitionsRequest"
+        },
+        {
+          "$ref": "#/$defs/CustomQueryRequest"
+        }
+      ]
+    },
+    "QueryResponses": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NonContinuedQueryResponses"
+        },
+        {
+          "$ref": "#/$defs/ContinuedQueryResponse"
+        }
+      ]
+    },
+    "NonContinuedQueryResponses": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SubscribeToChangingPartitionsResponse"
+        },
+        {
+          "$ref": "#/$defs/InformAboutChangingPartitionsResponse"
+        },
+        {
+          "$ref": "#/$defs/SubscribeToPartitionContentsResponse"
+        },
+        {
+          "$ref": "#/$defs/UnsubscribeFromPartitionContentsResponse"
+        },
+        {
+          "$ref": "#/$defs/SignOnResponse"
+        },
+        {
+          "$ref": "#/$defs/SignOffResponse"
+        },
+        {
+          "$ref": "#/$defs/ReconnectResponse"
+        },
+        {
+          "$ref": "#/$defs/GetAvailableIdsResponse"
+        },
+        {
+          "$ref": "#/$defs/ListPartitionsResponse"
+        },
+        {
+          "$ref": "#/$defs/ListAndSubscribePartitionsResponse"
+        },
+        {
+          "$ref": "#/$defs/ErrorResponse"
+        },
+        {
+          "$ref": "#/$defs/CustomQueryResponse"
+        }
+      ]
+    },
+    "SubscribeToChangingPartitionsRequest": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "SubscribeToChangingPartitionsRequest"
+        },
+        "creation": {
+          "type": "boolean"
+        },
+        "deletion": {
+          "type": "boolean"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "creation",
+        "deletion",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 5
+    },
+    "SubscribeToChangingPartitionsResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "SubscribeToChangingPartitionsResponse"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    },
+    "InformAboutChangingPartitionsRequest": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "InformAboutChangingPartitionsRequest"
+        },
+        "creation": {
+          "type": "boolean"
+        },
+        "deletion": {
+          "type": "boolean"
+        },
+        "depthLimit": {
+          "$ref": "#/$defs/depthLimit"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "creation",
+        "deletion",
+        "depthLimit",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 6
+    },
+    "InformAboutChangingPartitionsResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "InformAboutChangingPartitionsResponse"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    },
+    "SubscribeToPartitionContentsRequest": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "SubscribeToPartitionContentsRequest"
+        },
+        "partition": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "partition",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "SubscribeToPartitionContentsResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "SubscribeToPartitionContentsResponse"
+        },
+        "contents": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "contents",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "UnsubscribeFromPartitionContentsRequest": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "UnsubscribeFromPartitionContentsRequest"
+        },
+        "partition": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "partition",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "UnsubscribeFromPartitionContentsResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "UnsubscribeFromPartitionContentsResponse"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    },
+    "SignOnRequest": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "SignOnRequest"
+        },
+        "deltaProtocolVersion": {
+          "$ref": "#/$defs/deltaProtocolVersion"
+        },
+        "clientId": {
+          "$ref": "#/$defs/clientId"
+        },
+        "repositoryId": {
+          "$ref": "#/$defs/repositoryId"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "deltaProtocolVersion",
+        "clientId",
+        "repositoryId",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 6
+    },
+    "SignOnResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "SignOnResponse"
+        },
+        "participationId": {
+          "$ref": "#/$defs/participationId"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "participationId",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "SignOffRequest": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "SignOffRequest"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    },
+    "SignOffResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "SignOffResponse"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    },
+    "ReconnectRequest": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ReconnectRequest"
+        },
+        "deltaProtocolVersion": {
+          "$ref": "#/$defs/deltaProtocolVersion"
+        },
+        "clientId": {
+          "$ref": "#/$defs/clientId"
+        },
+        "repositoryId": {
+          "$ref": "#/$defs/repositoryId"
+        },
+        "participationId": {
+          "$ref": "#/$defs/participationId"
+        },
+        "lastReceivedSequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "deltaProtocolVersion",
+        "clientId",
+        "repositoryId",
+        "participationId",
+        "lastReceivedSequenceNumber",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 8
+    },
+    "ReconnectResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ReconnectResponse"
+        },
+        "lastSentSequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "lastSentSequenceNumber",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "GetAvailableIdsRequest": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "GetAvailableIdsRequest"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "count",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "GetAvailableIdsResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "GetAvailableIdsResponse"
+        },
+        "ids": {
+          "$ref": "#/$defs/targetNodes"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "ids",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "ListPartitionsRequest": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ListPartitionsRequest"
+        },
+        "depthLimit": {
+          "$ref": "#/$defs/depthLimit"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "depthLimit",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "ListPartitionsResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ListPartitionsResponse"
+        },
+        "partitions": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "partitions",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "ListAndSubscribePartitionsRequest": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ListAndSubscribePartitionsRequest"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 3,
+      "maxProperties": 3
+    },
+    "ListAndSubscribePartitionsResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ListAndSubscribePartitionsResponse"
+        },
+        "partitions": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "partitions",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "CustomQueryRequest": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "$ref": "#/$defs/customMessageKind"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": true,
+      "minProperties": 3
+    },
+    "CustomQueryResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "$ref": "#/$defs/customMessageKind"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": true,
+      "minProperties": 3
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ErrorResponse"
+        },
+        "errorCode": {
+          "$ref": "#/$defs/errorCode"
+        },
+        "message": {
+          "type": "string"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "errorCode",
+        "message",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 5
+    },
+    "ContinuedQueryResponse": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ContinuedQueryResponse"
+        },
+        "chunk": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "continuedChunkCompleted": {
+          "$ref": "#/$defs/continuedChunkCompleted"
+        },
+        "continuedChunkSequenceNumber": {
+          "$ref": "#/$defs/continuedChunkSequenceNumber"
+        },
+        "queryId": {
+          "$ref": "#/$defs/queryId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "chunk",
+        "continuedChunkCompleted",
+        "continuedChunkSequenceNumber",
+        "queryId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 6
+    },
+    "Commands": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NonContinuedCommands"
+        },
+        {
+          "$ref": "#/$defs/ContinuedCommand"
+        }
+      ]
+    },
+    "NonContinuedCommands": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/AddPartition"
+        },
+        {
+          "$ref": "#/$defs/DeletePartition"
+        },
+        {
+          "$ref": "#/$defs/ChangeClassifier"
+        },
+        {
+          "$ref": "#/$defs/AddProperty"
+        },
+        {
+          "$ref": "#/$defs/DeleteProperty"
+        },
+        {
+          "$ref": "#/$defs/ChangeProperty"
+        },
+        {
+          "$ref": "#/$defs/AddChild"
+        },
+        {
+          "$ref": "#/$defs/DeleteChild"
+        },
+        {
+          "$ref": "#/$defs/ReplaceChild"
+        },
+        {
+          "$ref": "#/$defs/MoveChildFromContainmentInOtherParent"
+        },
+        {
+          "$ref": "#/$defs/MoveChildFromOtherContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveChildInSameContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceChildFromContainmentInOtherParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceChildFromOtherContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceChildInSameContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/AddAnnotation"
+        },
+        {
+          "$ref": "#/$defs/DeleteAnnotation"
+        },
+        {
+          "$ref": "#/$defs/ReplaceAnnotation"
+        },
+        {
+          "$ref": "#/$defs/MoveAnnotationFromOtherParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAnnotationInSameParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceAnnotationFromOtherParent"
+        },
+        {
+          "$ref": "#/$defs/MoveAndReplaceAnnotationInSameParent"
+        },
+        {
+          "$ref": "#/$defs/AddReference"
+        },
+        {
+          "$ref": "#/$defs/DeleteReference"
+        },
+        {
+          "$ref": "#/$defs/ChangeReference"
+        },
+        {
+          "$ref": "#/$defs/CompositeCommand"
+        },
+        {
+          "$ref": "#/$defs/CustomCommand"
+        }
+      ]
+    },
+    "AddPartition": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AddPartition"
+        },
+        "newPartition": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newPartition",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 5
+    },
+    "DeletePartition": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "DeletePartition"
+        },
+        "deletedPartition": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "deletedPartition",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "ChangeClassifier": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChangeClassifier"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newClassifier": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "newClassifier",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 5
+    },
+    "AddProperty": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AddProperty"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "property",
+        "newValue",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 6
+    },
+    "DeleteProperty": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "DeleteProperty"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "property",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 5
+    },
+    "ChangeProperty": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChangeProperty"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "property",
+        "newValue",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 6
+    },
+    "AddChild": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AddChild"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newChild": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newChild",
+        "containment",
+        "index",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "DeleteChild": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "DeleteChild"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "deletedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "containment",
+        "index",
+        "deletedChild",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 7
+    },
+    "ReplaceChild": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ReplaceChild"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newChild": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newChild",
+        "containment",
+        "index",
+        "replacedChild",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 9
+    },
+    "MoveChildFromContainmentInOtherParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "MoveChildFromContainmentInOtherParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newContainment",
+        "newIndex",
+        "oldParent",
+        "oldIndex",
+        "oldContainment",
+        "movedChild",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 10,
+      "maxProperties": 10
+    },
+    "MoveChildFromOtherContainmentInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "MoveChildFromOtherContainmentInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newContainment",
+        "newIndex",
+        "oldContainment",
+        "oldIndex",
+        "movedChild",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 9
+    },
+    "MoveChildInSameContainmentInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "MoveChildInSameContainmentInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "containment",
+        "oldIndex",
+        "indexOffset",
+        "movedChild",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 8
+    },
+    "MoveAndReplaceChildFromContainmentInOtherParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceChildFromContainmentInOtherParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newContainment",
+        "newIndex",
+        "oldParent",
+        "oldContainment",
+        "oldIndex",
+        "replacedChild",
+        "movedChild",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 11,
+      "maxProperties": 11
+    },
+    "MoveAndReplaceChildFromOtherContainmentInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceChildFromOtherContainmentInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newContainment",
+        "newIndex",
+        "oldContainment",
+        "oldIndex",
+        "replacedChild",
+        "movedChild",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 10,
+      "maxProperties": 10
+    },
+    "MoveAndReplaceChildInSameContainmentInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceChildInSameContainmentInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "containment",
+        "oldIndex",
+        "indexOffset",
+        "replacedChild",
+        "movedChild",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 9
+    },
+    "AddAnnotation": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AddAnnotation"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newAnnotation": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newAnnotation",
+        "index",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 7
+    },
+    "DeleteAnnotation": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "DeleteAnnotation"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "deletedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "index",
+        "deletedAnnotation",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 6
+    },
+    "ReplaceAnnotation": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ReplaceAnnotation"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newAnnotation": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newAnnotation",
+        "index",
+        "replacedAnnotation",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "MoveAnnotationFromOtherParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "MoveAnnotationFromOtherParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newIndex",
+        "oldParent",
+        "oldIndex",
+        "movedAnnotation",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 8
+    },
+    "MoveAnnotationInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "MoveAnnotationInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "oldIndex",
+        "indexOffset",
+        "movedAnnotation",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 7
+    },
+    "MoveAndReplaceAnnotationFromOtherParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceAnnotationFromOtherParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newIndex",
+        "oldParent",
+        "oldIndex",
+        "replacedAnnotation",
+        "movedAnnotation",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 9
+    },
+    "MoveAndReplaceAnnotationInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "MoveAndReplaceAnnotationInSameParent"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
+        },
+        "replacedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "oldIndex",
+        "indexOffset",
+        "replacedAnnotation",
+        "movedAnnotation",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 8
+    },
+    "AddReference": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AddReference"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "newReference": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 8
+    },
+    "DeleteReference": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "DeleteReference"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "deletedReference": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "deletedResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 8
+    },
+    "ChangeReference": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChangeReference"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "oldReference": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "newReference": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 10
+    },
+    "CompositeCommand": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "CompositeCommand"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NonContinuedCommands"
+          }
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parts",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "ContinuedCommand": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ContinuedCommand"
+        },
+        "chunk": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "continuedChunkCompleted": {
+          "$ref": "#/$defs/continuedChunkCompleted"
+        },
+        "continuedChunkSequenceNumber": {
+          "$ref": "#/$defs/continuedChunkSequenceNumber"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "chunk",
+        "continuedChunkCompleted",
+        "continuedChunkSequenceNumber",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 6
+    },
+    "CustomCommand": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "$ref": "#/$defs/customMessageKind"
+        },
+        "commandId": {
+          "$ref": "#/$defs/commandId"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "commandId",
+        "additionalInfos"
+      ],
+      "additionalProperties": true,
+      "minProperties": 3
+    },
+    "Events": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NonContinuedEvents"
+        },
+        {
+          "$ref": "#/$defs/ContinuedEvent"
+        }
+      ]
+    },
+    "NonContinuedEvents": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/PartitionAdded"
+        },
+        {
+          "$ref": "#/$defs/PartitionDeleted"
+        },
+        {
+          "$ref": "#/$defs/ClassifierChanged"
+        },
+        {
+          "$ref": "#/$defs/PropertyAdded"
+        },
+        {
+          "$ref": "#/$defs/PropertyDeleted"
+        },
+        {
+          "$ref": "#/$defs/PropertyChanged"
+        },
+        {
+          "$ref": "#/$defs/ChildAdded"
+        },
+        {
+          "$ref": "#/$defs/ChildDeleted"
+        },
+        {
+          "$ref": "#/$defs/ChildReplaced"
+        },
+        {
+          "$ref": "#/$defs/ChildMovedFromContainmentInOtherParent"
+        },
+        {
+          "$ref": "#/$defs/ChildMovedFromOtherContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/ChildMovedInSameContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/ChildMovedAndReplacedFromContainmentInOtherParent"
+        },
+        {
+          "$ref": "#/$defs/ChildMovedAndReplacedFromOtherContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/ChildMovedAndReplacedInSameContainmentInSameParent"
+        },
+        {
+          "$ref": "#/$defs/AnnotationAdded"
+        },
+        {
+          "$ref": "#/$defs/AnnotationDeleted"
+        },
+        {
+          "$ref": "#/$defs/AnnotationReplaced"
+        },
+        {
+          "$ref": "#/$defs/AnnotationMovedFromOtherParent"
+        },
+        {
+          "$ref": "#/$defs/AnnotationMovedInSameParent"
+        },
+        {
+          "$ref": "#/$defs/AnnotationMovedAndReplacedFromOtherParent"
+        },
+        {
+          "$ref": "#/$defs/AnnotationMovedAndReplacedInSameParent"
+        },
+        {
+          "$ref": "#/$defs/ReferenceAdded"
+        },
+        {
+          "$ref": "#/$defs/ReferenceDeleted"
+        },
+        {
+          "$ref": "#/$defs/ReferenceChanged"
+        },
+        {
+          "$ref": "#/$defs/NoOpEvent"
+        },
+        {
+          "$ref": "#/$defs/CompositeEvent"
+        },
+        {
+          "$ref": "#/$defs/ErrorEvent"
+        },
+        {
+          "$ref": "#/$defs/CustomEvent"
+        }
+      ]
+    },
+    "PartitionAdded": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "PartitionAdded"
+        },
+        "newPartition": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newPartition",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 6
+    },
+    "PartitionDeleted": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "PartitionDeleted"
+        },
+        "deletedPartition": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "deletedDescendants": {
+          "$ref": "#/$defs/targetNodes"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "deletedPartition",
+        "deletedDescendants",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 6
+    },
+    "ClassifierChanged": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ClassifierChanged"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newClassifier": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldClassifier": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "newClassifier",
+        "oldClassifier",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 7
+    },
+    "PropertyAdded": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "PropertyAdded"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "property",
+        "newValue",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 7
+    },
+    "PropertyDeleted": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "PropertyDeleted"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "property",
+        "oldValue",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 7
+    },
+    "PropertyChanged": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "PropertyChanged"
+        },
+        "node": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "property": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "newValue": {
+          "$ref": "#/$defs/propertyValue"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "node",
+        "property",
+        "oldValue",
+        "newValue",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 8
+    },
+    "ChildAdded": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChildAdded"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newChild": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newChild",
+        "containment",
+        "index",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 9
+    },
+    "ChildDeleted": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChildDeleted"
+        },
+        "deletedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "deletedDescendants": {
+          "$ref": "#/$defs/targetNodes"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "deletedChild",
+        "deletedDescendants",
+        "parent",
+        "containment",
+        "index",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 9
+    },
+    "ChildReplaced": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChildReplaced"
+        },
+        "newChild": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newChild",
+        "replacedChild",
+        "replacedDescendants",
+        "parent",
+        "containment",
+        "index",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 10,
+      "maxProperties": 11
+    },
+    "ChildMovedFromContainmentInOtherParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedFromContainmentInOtherParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "oldParent",
+        "oldContainment",
+        "oldIndex",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 11,
+      "maxProperties": 11
+    },
+    "ChildMovedFromOtherContainmentInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedFromOtherContainmentInSameParent"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "parent",
+        "oldContainment",
+        "oldIndex",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 10,
+      "maxProperties": 10
+    },
+    "ChildMovedInSameContainmentInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedInSameContainmentInSameParent"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "movedChild",
+        "parent",
+        "containment",
+        "oldIndex",
+        "indexOffset",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 9
+    },
+    "ChildMovedAndReplacedFromContainmentInOtherParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedAndReplacedFromContainmentInOtherParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "oldParent",
+        "oldContainment",
+        "oldIndex",
+        "replacedChild",
+        "replacedDescendants",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 13,
+      "maxProperties": 13
+    },
+    "ChildMovedAndReplacedFromOtherContainmentInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedAndReplacedFromOtherContainmentInSameParent"
+        },
+        "newContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldContainment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newContainment",
+        "newIndex",
+        "movedChild",
+        "parent",
+        "oldContainment",
+        "oldIndex",
+        "replacedChild",
+        "replacedDescendants",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 12,
+      "maxProperties": 12
+    },
+    "ChildMovedAndReplacedInSameContainmentInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ChildMovedAndReplacedInSameContainmentInSameParent"
+        },
+        "movedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "containment": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
+        },
+        "replacedChild": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "movedChild",
+        "parent",
+        "containment",
+        "oldIndex",
+        "indexOffset",
+        "replacedChild",
+        "replacedDescendants",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 11,
+      "maxProperties": 11
+    },
+    "AnnotationAdded": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationAdded"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newAnnotation": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "newAnnotation",
+        "index",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 8
+    },
+    "AnnotationDeleted": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationDeleted"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "deletedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "deletedDescendants": {
+          "$ref": "#/$defs/targetNodes"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "deletedAnnotation",
+        "deletedDescendants",
+        "index",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 8
+    },
+    "AnnotationReplaced": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationReplaced"
+        },
+        "newAnnotation": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "replacedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newAnnotation",
+        "replacedAnnotation",
+        "replacedDescendants",
+        "parent",
+        "index",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 10
+    },
+    "AnnotationMovedFromOtherParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationMovedFromOtherParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newIndex",
+        "movedAnnotation",
+        "oldParent",
+        "oldIndex",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 9,
+      "maxProperties": 9
+    },
+    "AnnotationMovedInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationMovedInSameParent"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "movedAnnotation",
+        "parent",
+        "oldIndex",
+        "indexOffset",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 8
+    },
+    "AnnotationMovedAndReplacedFromOtherParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationMovedAndReplacedFromOtherParent"
+        },
+        "newParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldParent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "replacedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "newParent",
+        "newIndex",
+        "movedAnnotation",
+        "oldParent",
+        "oldIndex",
+        "replacedAnnotation",
+        "replacedDescendants",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 11,
+      "maxProperties": 11
+    },
+    "AnnotationMovedAndReplacedInSameParent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "AnnotationMovedAndReplacedInSameParent"
+        },
+        "movedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldIndex": {
+          "$ref": "#/$defs/index"
+        },
+        "indexOffset": {
+          "$ref": "#/$defs/indexOffset"
+        },
+        "replacedAnnotation": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "replacedDescendants": {
+          "$ref": "#/$defs/targetNodes"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "movedAnnotation",
+        "parent",
+        "oldIndex",
+        "indexOffset",
+        "replacedAnnotation",
+        "replacedDescendants",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 10,
+      "maxProperties": 10
+    },
+    "ReferenceAdded": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ReferenceAdded"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "newReference": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 9
+    },
+    "ReferenceDeleted": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ReferenceDeleted"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "deletedReference": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "deletedResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 9
+    },
+    "ReferenceChanged": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ReferenceChanged"
+        },
+        "parent": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "reference": {
+          "$ref": "#/$defs/metaPointer"
+        },
+        "index": {
+          "$ref": "#/$defs/index"
+        },
+        "newReference": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "newResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "oldReference": {
+          "$ref": "#/$defs/targetNode"
+        },
+        "oldResolveInfo": {
+          "$ref": "#/$defs/resolveInfo"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parent",
+        "reference",
+        "index",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 11
+    },
+    "CompositeEvent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "CompositeEvent"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NonContinuedEvents"
+          }
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "parts",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 5
+    },
+    "NoOpEvent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "NoOpEvent"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "ErrorEvent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ErrorEvent"
+        },
+        "errorCode": {
+          "$ref": "#/$defs/errorCode"
+        },
+        "message": {
+          "type": "string"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "errorCode",
+        "message",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 6,
+      "maxProperties": 6
+    },
+    "ContinuedEvent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "const": "ContinuedEvent"
+        },
+        "chunk": {
+          "$ref": "#/$defs/DeltaChunk"
+        },
+        "continuedChunkCompleted": {
+          "$ref": "#/$defs/continuedChunkCompleted"
+        },
+        "continuedChunkSequenceNumber": {
+          "$ref": "#/$defs/continuedChunkSequenceNumber"
+        },
+        "continuedEventSequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "chunk",
+        "continuedChunkCompleted",
+        "continuedChunkSequenceNumber",
+        "continuedEventSequenceNumber",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": false,
+      "minProperties": 8,
+      "maxProperties": 8
+    },
+    "CustomEvent": {
+      "type": "object",
+      "properties": {
+        "messageKind": {
+          "$ref": "#/$defs/customMessageKind"
+        },
+        "originCommands": {
+          "$ref": "#/$defs/commandSources"
+        },
+        "sequenceNumber": {
+          "$ref": "#/$defs/eventSequenceNumber"
+        },
+        "additionalInfos": {
+          "$ref": "#/$defs/additionalInfos"
+        }
+      },
+      "required": [
+        "messageKind",
+        "originCommands",
+        "sequenceNumber",
+        "additionalInfos"
+      ],
+      "additionalProperties": true,
+      "minProperties": 4
+    }
+  }
+}

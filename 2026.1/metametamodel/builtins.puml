@@ -1,0 +1,20 @@
+@startuml
+
+'class language as "LionCore_builtins" <<(L,lightgray) Language>>
+
+class Node <<Concept>> #LightGreen
+
+interface INamed <<Interface>> #LightGreen {
+  name: String
+}
+
+class String <<(P, darkgray) PrimitiveType>> #LightPink
+class Integer <<(P, darkgray) PrimitiveType>> #LightPink
+class Boolean <<(P, darkgray) PrimitiveType>> #LightPink
+
+Node -[hidden]- String
+
+String -[hidden] Integer
+Integer -[hidden] Boolean
+
+@enduml

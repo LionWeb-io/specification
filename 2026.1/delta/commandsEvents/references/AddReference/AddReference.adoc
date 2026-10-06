@@ -1,0 +1,47 @@
+[[cmd-AddReference]]
+===== Add reference
+Add <<AddReference.newReference>> / <<AddReference.newResolveInfo>> to <<AddReference.parent>>'s <<AddReference.reference>> at <<AddReference.index>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::AddReference-diagram.adoc[]
+|===
+
+.Technical name
+`AddReference`
+
+[horizontal]
+.Parameters
+[[AddReference.parent, `parent`]]parent:: <<nodeIdType>>
+of the node we want to add a reference to.
+
+[[AddReference.reference, `reference`]]reference:: <<metaPointerType>>
+<<{m3}.adoc#Reference, Reference>> we want to add to <<AddReference.parent>>.
+
+[[AddReference.index, `index`]]index:: <<indexType>>
+where we want to add <<AddReference.newReference>> / <<AddReference.newResolveInfo>> at in <<AddReference.reference>> of <<AddReference.parent>>.
+
+[[AddReference.newReference, `newReference`]]newReference:: <<nodeIdType>>?
+of the node we want to set <<AddReference.reference>> in <<AddReference.parent>> to, if any.
+
+[[AddReference.newResolveInfo, `newResolveInfo`]]newResolveInfo:: <<resolveInfoType>>?
+of the node we want to set <<AddReference.reference>> in <<AddReference.parent>> to, if any.
+
+[[AddReference.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
+[[AddReference.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
+
+.Errors
+* <<err-unknownNode>> for <<AddReference.parent>>
+* <<err-unknownReference>> for <<AddReference.reference>> in <<AddReference.parent>>
+* <<err-referenceAlreadySet>> for <<AddReference.reference>> in <<AddReference.parent>>
+* <<err-indexOutOfRange>> for <<AddReference.index>> (is beyond the number of <<AddReference.reference>> entries of <<AddReference.parent>>)
+* <<err-undefinedReferenceTarget>> for <<AddReference.newReference>>/ <<AddReference.newResolveInfo>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-ReferenceAdded>>

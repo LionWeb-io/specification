@@ -1,0 +1,90 @@
+@startuml
+hide empty members
+
+package builtins {
+  interface builtins.INamed {
+    name: String
+  }
+}
+
+class Annotation #LightGreen extends Classifier
+
+class Concept #LightGreen extends Classifier {
+  abstract: Boolean
+  partition: Boolean
+}
+
+class Interface #LightGreen extends Classifier
+
+class Containment #LightBlue extends Link
+
+abstract class DataType #LightPink extends LanguageEntity
+
+class Enumeration #LightPink extends DataType
+
+class EnumerationLiteral #LightPink implements IKeyed
+
+abstract class Feature #LightBlue implements IKeyed {
+  optional: Boolean
+}
+
+class Field #LightPink implements IKeyed
+
+abstract class Classifier #LightGreen extends LanguageEntity
+
+abstract class Link #LightBlue extends Feature {
+  multiple: Boolean
+}
+
+class Language <<partition>> implements IKeyed {
+  version: String
+}
+
+abstract class LanguageEntity implements IKeyed
+
+interface IKeyed extends builtins.INamed {
+  key: Id
+}
+
+class PrimitiveType #LightPink extends DataType
+
+class Property #LightBlue extends Feature
+
+class Reference #LightBlue extends Link
+
+class StructuredDataType #LightPink extends DataType
+
+' relations:
+
+Annotation "*" --> "0..1" Classifier: annotates
+Annotation "*" --> "0..1" Annotation: extends
+Annotation "*" --> "*" Interface: implements
+
+Concept "*" --> "0..1" Concept: extends
+Concept "*" --> "*" Interface: implements
+
+Interface "*" --> "*" Interface: extends
+
+EnumerationLiteral "*" -* "1" Enumeration : literals
+
+Feature "*" -* "1" Classifier: features
+
+Field "*" -> "1" DataType: type
+
+Link "*" --> "1" Classifier: type
+
+Language "*" --> "*" Language: dependsOn
+LanguageEntity "*" -* "1" Language: entities
+
+Property "*" -> "1" DataType: type
+
+Field "1..*" -* "1" StructuredDataType: fields
+
+Language -[hidden]- EnumerationLiteral
+
+legend
+  <#LightGray,#LightGray>| <#LightBlue>Feature |
+  | <#LightGreen>Classifier |
+  | <#LightPink>DataType |
+end legend
+@enduml

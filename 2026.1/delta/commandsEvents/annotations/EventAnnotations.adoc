@@ -1,0 +1,18 @@
+[[evnt-annotations]]
+==== Annotations
+
+include::AddAnnotation/AnnotationAdded.adoc[]
+
+include::DeleteAnnotation/AnnotationDeleted.adoc[]
+
+include::ReplaceAnnotation/AnnotationReplaced.adoc[]
+
+
+include::MoveAnnotationFromOtherParent/AnnotationMovedFromOtherParent.adoc[]
+
+include::MoveAnnotationInSameParent/AnnotationMovedInSameParent.adoc[]
+
+
+include::MoveAndReplaceAnnotationFromOtherParent/AnnotationMovedAndReplacedFromOtherParent.adoc[]
+
+include::MoveAndReplaceAnnotationInSameParent/AnnotationMovedAndReplacedInSameParent.adoc[]

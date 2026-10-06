@@ -1,0 +1,30 @@
+|
+[plantuml,addReference-before,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class newTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[hidden].> newTarget #Blue: reference\n[index]
+parent ..> nextEntry: reference\n[index]
+----
+|
+[plantuml,addReference-after,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class newTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[thickness=2].> newTarget #Blue: reference\n[index]\n<color #blue>{new</color>\n<color #blue>ResolveInfo}</color>
+parent ..> nextEntry: reference\n[index + 1]
+----

@@ -1,0 +1,80 @@
+[[errors-splittable]]
+==== Splittable message errors
+
+Reported by all <<continuedChunk>> messages.
+
+[[err-noActiveSplitMessage]]
+===== No active split message
+Continued chunk received without any active split message, or with a higher <<continuedChunkSequenceNumberType>> than a previous one for which the <<continuedChunkCompletedFlagType>> was `true`.
+
+.Technical name
+`noActiveSplitMessage`
+
+
+[[err-duplicateContinuedChunk]]
+===== Duplicate continued chunk
+Received continued chunk with <<continuedChunkSequenceNumberType>> that was already seen.
+
+.Technical name
+`duplicateContinuedChunk`
+
+.Additional infos
+[horizontal]
+[[duplicateContinuedChunk.duplicateSequenceNumber]]duplicateSequenceNumber:: <<continuedChunkSequenceNumberType>>
+The already seen continued chunk sequence number.
+
+
+[[err-unknownSplittableMessageInContinuedChunk]]
+===== Unknown splittable message in continued chunk
+Continued chunk refers to a non-existent query/command/event.
+
+.Technical name
+`unknownSplittableMessageInContinuedChunk`
+
+.Additional infos
+[horizontal]
+[[unknownSplittableMessageInContinuedChunk.unknownSplitMessage]]unknownSplitMessage::
+The unknown query/command/event id.
+
+
+[[err-invalidSplittableMessageInContinuedChunk]]
+===== Invalid splittable message in continued chunk
+Continued chunk refers to a query/command/event that’s not splittable or doesn’t have its <<splitFlagType>> set to `true`.
+
+.Technical name
+`invalidSplittableMessageInContinuedChunk`
+
+.Additional infos
+[horizontal]
+[[invalidSplittableMessageInContinuedChunk.splitMessage]]splitMessage::
+The referenced query/command/event id.
+[[invalidSplittableMessageInContinuedChunk.invalidContinuedChunkSequenceNumber]]invalidContinuedChunkSequenceNumber:: <<continuedChunkSequenceNumberType>>
+The continued message referring to an invalid continued chunk sequence number.
+
+
+[[err-interruptedContinuedChunk]]
+===== Interrupted continued chunk
+Received message on this <<channel>> before the sequence of continued chunks had finished.
+
+.Technical name
+`interruptedContinuedChunk`
+
+.Additional infos
+[horizontal]
+[[interruptedContinuedChunk.unfinishedSplittableMessage]]unfinishedSplittableMessage::
+The unfinished query/command/event id.
+[[interruptedContinuedChunk.unexpectedMessage]]unexpectedMessage::
+The query/command/event id of the message unexpected because of the still ongoing continued message..
+
+
+[[err-compositeCommandContainsSplittable]]
+===== Composite command contains splittable
+A <<cmd-CompositeCommand>> contains <<continuedChunk, continued chunks>> or declares a <<splittableMessage>> as split.{fn-org462}
+
+.Technical name
+`compositeCommandContainsSplittable`
+
+.Additional infos
+[horizontal]
+[[compositeCommandContainsSplittable.commandId]]commandId:: <<commandIdType>>
+of the splittable or continued command.
