@@ -308,10 +308,8 @@ Optionally empty list of additional infos.
 .Response parameters
 [horizontal]
 [[listPartitions.chunk]]chunk:: <<chunkType>>
-with all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
+with all accessible <<{m3}.adoc#partition, Partitions>> in the Repository up to <<listPartitions.depthLimit>>.
 The partitions are sent as complete nodes.{fn-org202}
-Does NOT include any children or annotations of the root partition nodes.
-Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
 
 [[listPartitions.success]]success:: <<successType>>
 Whether the command has been successful.
