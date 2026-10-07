@@ -1,0 +1,64 @@
+[[cmd-MoveAndReplaceAnnotationFromOtherParent]]
+===== Move annotation from other parent and replace existing annotation
+Move <<existing-nodes, existing node>> <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
+from <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>'s annotations 
+at <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> 
+to <<MoveAndReplaceAnnotationFromOtherParent.newIndex>>
+inside <<MoveAndReplaceAnnotationFromOtherParent.newParent>>'s annotations.
+
+Delete <<existing-nodes, current node>> <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>{fn-org371} at <<MoveAndReplaceAnnotationFromOtherParent.newParent>>'s annotations at <<MoveAndReplaceAnnotationFromOtherParent.newIndex>>, and all its descendants (including annotation instances).
+Does NOT change references to any of the deleted nodes.{fn-org285}
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::MoveAndReplaceAnnotationFromOtherParent-diagram.adoc[]
+|===
+
+.Technical name
+`MoveAndReplaceAnnotationFromOtherParent`
+
+[horizontal]
+.Parameters
+[[MoveAndReplaceAnnotationFromOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
+of the node we want to move an annotation to.
+
+[[MoveAndReplaceAnnotationFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+where we want to move <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>> at in annotations of <<MoveAndReplaceAnnotationFromOtherParent.newParent>>.
+
+[[MoveAndReplaceAnnotationFromOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
+of the node we want to move an existing annotation from.
+
+[[MoveAndReplaceAnnotationFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where we want to move <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>> from in annotations of <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>.
+
+[[MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation, `replacedAnnotation`]]replacedAnnotation:: <<nodeIdType>>
+of the node we want to replace at <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> of annotations in <<MoveAndReplaceAnnotationFromOtherParent.newParent>>.
+
+[[MoveAndReplaceAnnotationFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
+of the node we want to move from annotations in <<MoveAndReplaceAnnotationFromOtherParent.oldParent>> to annotations in <<MoveAndReplaceAnnotationFromOtherParent.newParent>>.
+
+[[MoveAndReplaceAnnotationFromOtherParent.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
+[[MoveAndReplaceAnnotationFromOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
+
+.Errors
+* <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.newParent>>
+* <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>
+* <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
+* <<err-unknownNode>> for <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>
+* <<err-parentMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.oldParent>> and <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
+* <<err-parentMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.newParent>> and <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>
+* <<err-indexOutOfRange>> for <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.newParent>>)
+* <<err-indexOutOfRange>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> (is beyond the number of annotations of <<MoveAndReplaceAnnotationFromOtherParent.oldParent>>)
+* <<err-indexAnnotationMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.newIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.replacedAnnotation>>
+* <<err-indexAnnotationMismatch>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.movedAnnotation>>
+* <<err-oldAndNewParentIdentical>> for <<MoveAndReplaceAnnotationFromOtherParent.oldParent>> and <<MoveAndReplaceAnnotationFromOtherParent.newParent>>
+* <<err-oldAndNewIndexIdentical>> for <<MoveAndReplaceAnnotationFromOtherParent.oldIndex>> and <<MoveAndReplaceAnnotationFromOtherParent.newIndex>>
+* <<err-invalidParticipation>>
+
+.Related event
+<<evnt-AnnotationMovedAndReplacedFromOtherParent>>

@@ -1,0 +1,55 @@
+@startuml
+'title Serialization Format
+
+hide empty members
+
+class SerializationChunk {
+    serializationFormatVersion: String
+}
+
+SerializationChunk *--> "0..*" UsedLanguage: languages
+
+class UsedLanguage {
+    key: Id
+    version: String
+}
+
+SerializationChunk *--> "0..*" Node: nodes
+
+class Node {
+    id: Id
+    parent: Id
+    annotations: Id[] <<ordered>>
+}
+
+Node *--> "1" MetaPointer: classifier
+
+class MetaPointer {
+    language: Id
+    version: String
+    key: Id
+}
+
+Node *--> "0..*" Containment: containments
+class Containment {
+  children: Id[] <<ordered>>
+}
+Containment *--> "1" MetaPointer: containment
+
+Node *--> "0..*" Property: properties
+class Property {
+    value: String
+}
+Property *--> "1" MetaPointer: property
+
+
+Node *--> "0..*" Reference: references
+class Reference
+Reference *--> "1" MetaPointer: reference
+Reference *--> "0..*" ReferenceTarget: <<ordered>>\ntargets
+class ReferenceTarget {
+    reference: Id
+    resolveInfo: String
+}
+
+@enduml

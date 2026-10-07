@@ -1,0 +1,19 @@
+[[errors-create-node]]
+==== Create node errors
+
+Reported by all <<group-create-node>> commands.
+
+
+[[err-nodeAlreadyExists]]
+===== Node already exists
+Client tries to create a node with an id that already exists.
+
+.Technical name
+`nodeAlreadyExists`
+
+.Additional infos
+[horizontal]
+[[nodeAlreadyExists.duplicate, `duplicate`]]duplicate:: <<nodeIdType>>
+of the already existing node.
+[[nodeAlreadyExists.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<nodeAlreadyExists.duplicate>>.

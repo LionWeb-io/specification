@@ -1,0 +1,40 @@
+[[cmd-ChangeProperty]]
+===== Change property
+Change existing <<ChangeProperty.property>> of <<ChangeProperty.node>> to <<ChangeProperty.newValue>>.
+
+[cols="a,a"]
+|===
+|Before |After
+
+include::ChangeProperty-diagram.adoc[]
+|===
+
+.Technical name
+`ChangeProperty`
+
+[horizontal]
+.Parameters
+[[ChangeProperty.node, `node`]]node:: <<nodeIdType>>
+of the node we want to change a property of.
+
+[[ChangeProperty.property, `property`]]property:: <<metaPointerType>>
+<<{m3}.adoc#Property, Property>> we want to change in <<ChangeProperty.node>>.
+
+[[ChangeProperty.newValue, `newValue`]]newValue:: <<propertyValueType>>
+Value we want to change <<ChangeProperty.property>> in <<ChangeProperty.node>> to.
+
+[[ChangeProperty.commandId]]commandId:: <<commandIdType>>
+Id of this command.
+
+[[ChangeProperty.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
+
+.Errors
+* <<err-unknownNode>> for <<ChangeProperty.node>>
+* <<err-unknownProperty>> for <<ChangeProperty.property>> in <<ChangeProperty.node>>
+* <<err-propertyNotSet>> for <<ChangeProperty.property>> in <<ChangeProperty.node>>
+* <<err-invalidParticipation>>
+
+
+.Related event
+<<evnt-PropertyChanged>>

@@ -7,8 +7,10 @@ include::../shared/issue-footnotes.adoc[]
 
 [[bulk]]
 = Bulk Repository Access API
-:toc: preamble
-:toclevels: 2
+:toc: right
+:toclevels: 4
+:sectnumlevels: 4
+:sectnums:
 
 The bulk API *version 2026.1* is used to store and retrieve nodes in batches at the moment of invocation.{fn-org25}
 It is intended for CRUD operations on (larger) sets of nodes.
@@ -306,10 +308,8 @@ Optionally empty list of additional infos.
 .Response parameters
 [horizontal]
 [[listPartitions.chunk]]chunk:: <<chunkType>>
-with all accessible <<{m3}.adoc#partition, Partitions>> in the Repository.
+with all accessible <<{m3}.adoc#partition, Partitions>> in the Repository up to <<listPartitions.depthLimit>>.
 The partitions are sent as complete nodes.{fn-org202}
-Does NOT include any children or annotations of the root partition nodes.
-Does NOT include <<{m3}.adoc#Language, Languages>> or partition children/annotations.
 
 [[listPartitions.success]]success:: <<successType>>
 Whether the command has been successful.
@@ -322,7 +322,7 @@ Optionally empty list of additional infos.
 Creates new partitions in the repository.{fn-org216}
 
 Each sent node with no parent node id is its own partition.
-All other nodes MUST NOT exist in the repository, and they MUST be descendants of on of the partition nodes.
+All other nodes MUST NOT exist in the repository, and they MUST be descendants of one of the partition nodes.
 We cannot use <<store.semantics, move semantics>>.
 We MAY reference nodes already existing in the repository.{fn-org369}
 

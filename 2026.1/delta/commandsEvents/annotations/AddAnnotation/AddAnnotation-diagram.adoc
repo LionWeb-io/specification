@@ -1,0 +1,37 @@
+|
+[plantuml, addAnnotation-before, svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class " " as dummy <<h>>
+class "next\nSibling" as nextSibling
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *-[hidden]-> dummy #Blue: <<annotations>>\n[index]
+parent *--> nextSibling: <<annotations>>\n[index]
+----
+|
+[plantuml,addAnnotation-after,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "newAnnotation:\nRemark" as newAnnotation #LightSkyBlue {
+  text:String="ok"
+}
+class "next\nSibling" as nextSibling
+
+class descendant #LightSkyBlue
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> newAnnotation #Blue: <<annotations>>\n[index]
+parent *--> nextSibling: <<annotations>>\n[index + 1]
+
+newAnnotation *--> descendant #Blue
+previousSibling <.. descendant #Blue
+----

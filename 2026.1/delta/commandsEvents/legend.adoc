@@ -1,0 +1,102 @@
+.Diagram legend
+[plantuml,legend,svg]
+----
+hide empty members
+hide circles
+
+skinparam legendBackgroundColor #transparent
+skinparam legendBorderColor #transparent
+skinparam legendEntrySeparator #transparent
+
+skinparam class<<h>> {
+  borderColor Transparent
+  backgroundColor Transparent
+  stereotypeFontColor Transparent
+}
+
+legend top
+    <b>Colors</b>
+    |<#LightSkyBlue>   | added|
+    |<#red>| deleted |
+    |<#Orange>| moved|
+endlegend
+
+class ExistingNodeId
+note right of ExistingNodeId
+  Existing node with node id "ExistingNodeId".
+end note
+
+class "NodeId:Concept" as NodeId
+note right of NodeId
+  Existing node with node id "NodeId" and classifier "Concept".
+end note
+
+class "NewNodeId:Concept" as NewNodeId {
+  Property : Type = Value
+}
+note right of NewNodeId
+  New node with node id "NewNodeId", classifier "Concept",
+  and one property "Property" of type "Type" with value "Value".
+end note
+
+class "NodeId" as PropertyNode {
+  Property = Value
+}
+note right of PropertyNode
+  Existing node with node id "NewNodeId" has
+  one property "Property" with value "Value".
+end note
+
+class ContainmentParent
+class ContainmentChild
+ContainmentParent *--> ContainmentChild: Containment [Index]
+note right on link
+  Existing node with node id "ContainmentParent" has
+  existing node with node id "ContainmentChild"
+  as child in containment "Containment" at position "Index".
+end note
+
+class AnnotatedNode
+class AnnotationInstance
+AnnotatedNode *--> AnnotationInstance: <<annotations>> [Index]
+note right on link
+  Existing node with node id "AnnotatedNode" has
+  existing node with node id "AnnotationInstance"
+  as annotation at position "Index".
+end note
+
+class ReferenceSource
+class ReferenceTarget
+ReferenceSource ..> ReferenceTarget: Reference [Index] {ResolveInfo}
+note right on link
+  Existing node with node id "ReferenceSource" has reference "Reference"
+  at position "Index" with target node id "ReferenceTarget" and resolve info "ResolveInfo".
+  Node with node id "ReferenceTarget" might or might not exist.
+end note
+
+class UnsetTargetSource
+class " " as HiddenTarget<<h>>
+UnsetTargetSource ..> HiddenTarget: Reference [Index] {ResolveInfo}
+note right on link
+  Existing node with node id "UnsetTargetSource" has reference "Reference"
+  at position "Index" without target node id and resolve info "ResolveInfo".
+end note
+
+class UnsetResolveInfoSource
+class UnsetResolveInfoTarget
+UnsetResolveInfoSource ..> UnsetResolveInfoTarget: Reference [Index] {null}
+note right on link
+  Existing node with node id "UnsetResolveInfoSource" has reference "Reference"
+  at position "Index" with target node id "UnsetResolveInfoTarget" and no resolve info.
+  Node with node id "UnsetResolveInfoTarget" might or might not exist.
+end note
+
+ExistingNodeId -[hidden]down-> NodeId
+NodeId -[hidden]down-> NewNodeId
+NewNodeId -[hidden]down-> PropertyNode
+PropertyNode -[hidden]down-> ContainmentParent
+ContainmentChild -[hidden]down-> AnnotatedNode
+AnnotationInstance -[hidden]down-> ReferenceSource
+ReferenceTarget -[hidden]down-> UnsetTargetSource
+HiddenTarget -[hidden]down-> UnsetResolveInfoSource
+----

@@ -1,0 +1,9 @@
+[[qry-participation]]
+==== Participation
+Even though participation handling does not relate to repository contents, we consider them queries.{fn-org350}.
+
+include::SignOn.adoc[]
+
+include::SignOff.adoc[]
+
+include::Reconnect.adoc[]

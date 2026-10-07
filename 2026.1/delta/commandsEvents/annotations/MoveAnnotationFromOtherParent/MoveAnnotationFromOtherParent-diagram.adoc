@@ -1,0 +1,63 @@
+|
+[plantuml,moveAnnotationFromOtherParent-before,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class "moved\nAnnotation" as movedAnnotation #Orange
+class "old\nNext\nSibling" as oldNextSibling
+
+class descendant #Orange
+
+oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
+oldParent *--> movedAnnotation #red: <<annotations>>\n[oldIndex]
+oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex + 1]
+
+movedAnnotation *--> descendant
+
+descendant -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class " " as dummy <<h>>
+class "new\nNext\nSibling" as newNextSibling
+
+newParent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
+newParent *-[hidden]-> dummy #Blue: <<annotations>>\n[newIndex]
+newParent *--> newNextSibling: <<annotations>>\n[newIndex]
+----
+|
+[plantuml,moveAnnotationFromOtherParent-after,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class oldParent
+
+class "old\nPrevious\nSibling" as oldPreviousSibling
+class " " as dummy <<h>>
+class "old\nNext\nSibling" as oldNextSibling
+
+oldParent *--> oldPreviousSibling: <<annotations>>\n[oldIndex - 1]
+oldParent *-[hidden]-> dummy #red: <<annotations>>\n[oldIndex]
+oldParent *--> oldNextSibling: <<annotations>>\n[oldIndex]
+
+oldPreviousSibling -[hidden]- newParent
+oldNextSibling -[hidden]- newParent
+
+class newParent
+
+class "new\nPrevious\nSibling" as newPreviousSibling
+class "moved\nAnnotation" as movedAnnotation #Orange
+class "new\nNext\nSibling" as newNextSibling
+
+class descendant #Orange
+
+newParent *--> newPreviousSibling: <<annotations>>\n[newIndex - 1]
+newParent *--> movedAnnotation #Blue: <<annotations>>\n[newIndex]
+newParent *--> newNextSibling: <<annotations>>\n[newIndex + 1]
+
+movedAnnotation *--> descendant
+----
