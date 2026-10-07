@@ -1,4 +1,0 @@
-[[cmd-nodes]]
-==== Nodes
-
-include::ChangeClassifier/ChangeClassifier.adoc[]
