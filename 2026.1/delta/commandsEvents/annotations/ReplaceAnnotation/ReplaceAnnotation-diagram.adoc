@@ -1,0 +1,41 @@
+|
+[plantuml,replaceAnnotation-before,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "replaced\nAnnotation" as replacedAnnotation #red
+class "next\nSibling" as nextSibling
+
+class descendant #red
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> replacedAnnotation #red: <<annotations>>\n[index]
+parent *--> nextSibling: <<annotations>>\n[index + 1]
+
+replacedAnnotation *--> descendant #red
+----
+|
+[plantuml,replaceAnnotation-after,svg]
+----
+!include commandEventOverviewStyle.puml
+
+class parent
+
+class "previous\nSibling" as previousSibling
+class "newAnnotation:\nRemark" as newAnnotation #LightSkyBlue {
+  text:String="ok"
+}
+class "next\nSibling" as nextSibling
+
+class descendant #LightSkyBlue
+
+parent *--> previousSibling: <<annotations>>\n[index - 1]
+parent *--> newAnnotation #Blue: <<annotations>>\n[index]
+parent *--> nextSibling: <<annotations>>\n[index + 1]
+
+newAnnotation *--> descendant #Blue
+previousSibling <.. descendant #Blue
+----

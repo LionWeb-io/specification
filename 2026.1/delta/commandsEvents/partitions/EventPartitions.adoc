@@ -1,0 +1,6 @@
+[[evnt-partitions]]
+==== Partitions
+
+include::AddPartition/PartitionAdded.adoc[]
+
+include::DeletePartition/PartitionDeleted.adoc[]

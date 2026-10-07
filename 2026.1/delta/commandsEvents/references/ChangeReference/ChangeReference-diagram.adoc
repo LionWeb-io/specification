@@ -1,0 +1,40 @@
+|
+[plantuml,changeReference-before,svg]
+----
+!include commandEventOverviewStyle.puml
+left to right direction
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class "replaced\nTarget" as replacedTarget
+class "new\nTarget" as newTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[thickness=2].> replacedTarget #red: reference\n[index]\n<color #red>{replaced</color>\n<color #red>ResolveInfo}</color>
+parent .[hidden].> newTarget: reference\n[index]\n{new\nResolveInfo}
+parent ..> nextEntry: reference\n[index + 1]
+
+previousEntry -[hidden]> replacedTarget
+----
+|
+[plantuml, changeReference-after, svg]
+----
+!include commandEventOverviewStyle.puml
+left to right direction
+
+class parent
+
+class "previous\nEntry" as previousEntry
+class "replaced\nTarget" as replacedTarget
+class "new\nTarget" as newTarget
+class "next\nEntry" as nextEntry
+
+parent ..> previousEntry: reference\n[index - 1]
+parent .[hidden].> replacedTarget #red: reference\n[index]\n<color #red>{replaced</color>\n<color #red>ResolveInfo}</color>
+parent .[thickness=2].> newTarget #blue: reference\n[index]\n<color #blue>{new</color>\n<color #blue>ResolveInfo}</color>
+parent ..> nextEntry: reference\n[index + 1]
+
+previousEntry -[hidden]> replacedTarget
+----

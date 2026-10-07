@@ -1,0 +1,40 @@
+[[evnt-AnnotationMovedFromOtherParent]]
+===== Annotation moved from other parent
+<<existing-nodes, Existing node>> <<AnnotationMovedFromOtherParent.movedAnnotation>> (previously inside <<AnnotationMovedFromOtherParent.oldParent>>'s annotations at <<AnnotationMovedFromOtherParent.oldIndex>>) has been moved
+inside <<AnnotationMovedFromOtherParent.newParent>>'s annotations at <<AnnotationMovedFromOtherParent.newIndex>>.
+
+All other annotations inside <<AnnotationMovedFromOtherParent.oldParent>>'s annotations with index > <<AnnotationMovedFromOtherParent.oldIndex>> have been moved to next lower index.
+
+All other annotations inside <<AnnotationMovedFromOtherParent.newParent>>'s annotations with index >= <<AnnotationMovedFromOtherParent.newIndex>> have been moved to next higher index.
+
+.Technical name
+`AnnotationMovedFromOtherParent`
+
+[horizontal]
+.Parameters
+[[AnnotationMovedFromOtherParent.newParent, `newParent`]]newParent:: <<nodeIdType>>
+of the node the annotation was moved to.
+
+[[AnnotationMovedFromOtherParent.newIndex, `newIndex`]]newIndex:: <<indexType>>
+where <<AnnotationMovedFromOtherParent.movedAnnotation>> was moved to in annotations of <<AnnotationMovedFromOtherParent.newParent>>.
+
+[[AnnotationMovedFromOtherParent.movedAnnotation, `movedAnnotation`]]movedAnnotation:: <<nodeIdType>>
+of the annotation that was moved from <<AnnotationMovedFromOtherParent.oldParent>> to <<AnnotationMovedFromOtherParent.newParent>>.
+
+[[AnnotationMovedFromOtherParent.oldParent, `oldParent`]]oldParent:: <<nodeIdType>>
+of the node the annotation was moved from.
+
+[[AnnotationMovedFromOtherParent.oldIndex, `oldIndex`]]oldIndex:: <<indexType>>
+where <<AnnotationMovedFromOtherParent.movedAnnotation>> was moved from in annotations of <<AnnotationMovedFromOtherParent.oldParent>>.
+
+[[AnnotationMovedFromOtherParent.originCommands]]originCommands:: <<commandSourceType>>[]
+List of `(participationId, commandId)` pairs this event is based on.
+
+[[AnnotationMovedFromOtherParent.sequenceNumber]]sequenceNumber:: <<eventSequenceType>>
+Event sequence number of this event.
+
+[[AnnotationMovedFromOtherParent.additionalInfos]]additionalInfos:: <<additionalInfosType>>
+Optionally empty list of <<additionalInfo>>s.
+
+.Related command
+<<cmd-MoveAnnotationFromOtherParent>>

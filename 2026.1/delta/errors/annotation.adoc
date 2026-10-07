@@ -1,0 +1,22 @@
+[[errors-annotation]]
+==== Annotation errors
+
+[[err-indexAnnotationMismatch]]
+===== Annotation at index is not the given annotation
+Client provided an annotation node and an index, but the node is not at the given index.
+
+.Technical name
+`indexAnnotationMismatch`
+
+.Additional infos
+[horizontal]
+[[indexAnnotationMismatch.parent]]parent:: <<nodeIdType>>
+of the parent.
+[[indexAnnotationMismatch.index, `index`]]index:: <<indexType>>
+given index.
+[[indexAnnotationMismatch.annotation]]annotation:: <<nodeIdType>>
+of the given annotation.
+[[indexAnnotationMismatch.actual]]actual:: <<nodeIdType>>
+of the actual annotation at the given index.
+[[indexAnnotationMismatch.parameter]]parameter:: <<parameterType>>
+Name of the parameter containing <<indexAnnotationMismatch.index>>.
