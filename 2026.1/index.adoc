@@ -3,7 +3,7 @@ include::../shared/issue-footnotes.adoc[]
 :m3: metametamodel/metametamodel
 :serialization: serialization/serialization
 :bulk: bulk/repo-access-api
-:bulk: delta/delta-api
+:delta: delta/delta-api
 
 :emquad: &#x2001;
 
