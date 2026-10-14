@@ -1,0 +1,1107 @@
+{
+  "openapi": "3.2.0",
+  "info": {
+    "title": "Bulk Specification API",
+    "version": "2026.1",
+    "summary": "Bulk Specification API",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "externalDocs": {
+    "url": "https://lionweb.io/specification/bulk/repo-access-api.html",
+    "description": "Bulk Protocol"
+  },
+  "tags": [
+    {
+      "name": "Bulk"
+    }
+  ],
+  "paths": {
+    "/bulk/createPartitions": {
+      "post": {
+        "operationId": "BulkOperations_bulkCreatePartitions",
+        "description": "Creates new partitions in the repository. Each sent node with no parent node id is its own partition. All other nodes MUST NOT exist in the repository, and they MUST be descendants of on of the partition nodes. We cannot use move semantics. We MAY reference nodes already existing in the repository. Nodes MUST use Unknown node ids.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
+          },
+          {
+            "$ref": "#/components/parameters/RespositoryContext.repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePartitionResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized 401. Invalid token or no token provided."
+          },
+          "412": {
+            "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreconditionFailed"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bulk"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePartitionRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulk/deletePartitions": {
+      "delete": {
+        "operationId": "BulkOperations_bulkDeletePartitions",
+        "description": "Deletes all mentioned partitions, including all (transitive) annotations and children. All mentioned node ids MUST be ids of partition nodes. All (transitive) annotations and children become orphans.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
+          },
+          {
+            "$ref": "#/components/parameters/RespositoryContext.repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletePartitionResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized 401. Invalid token or no token provided."
+          },
+          "412": {
+            "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreconditionFailed"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bulk"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeletePartitionRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulk/ids": {
+      "post": {
+        "operationId": "BulkOperations_bulkIds",
+        "description": "Reserve free node ids. Provides unused valid node ids.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
+          },
+          {
+            "$ref": "#/components/parameters/RespositoryContext.repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized 401. Invalid token or no token provided."
+          },
+          "412": {
+            "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreconditionFailed"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bulk"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IdsRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulk/listPartitions": {
+      "post": {
+        "operationId": "BulkOperations_bulkListPartitions",
+        "description": "Lists all partitions accessible in the repository.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
+          },
+          {
+            "$ref": "#/components/parameters/RespositoryContext.repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPartitionResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized 401. Invalid token or no token provided."
+          },
+          "412": {
+            "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreconditionFailed"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bulk"
+        ]
+      }
+    },
+    "/bulk/retrieve": {
+      "post": {
+        "operationId": "BulkOperations_bulkRetrieve",
+        "description": "Retrieves subtrees nested in the listed node ids. Calling this command MUST NOT change repository contents. Note: We might add advanced filtering capabilities in the future, or introduce an additional querying API.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
+          },
+          {
+            "$ref": "#/components/parameters/RespositoryContext.repository"
+          },
+          {
+            "$ref": "#/components/parameters/RetriveRequest.depthLimit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetrieveResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized 401. Invalid token or no token provided."
+          },
+          "412": {
+            "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreconditionFailed"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bulk"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetriveRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulk/store": {
+      "post": {
+        "operationId": "BulkOperations_bulkStore",
+        "description": "Creates new nodes, or updates existing nodes in the repository. We always process one node in its entirety, i.e. we cannot update parts of the node with this command. A node id referenced as parent, containment, reference, or annotation can be mentioned in the same request, but can be omitted if a node with that id already exists in the repository. This way, we can move subtrees and add arbitrary references without sending unchanged nodes. We consider that node to be new if it has an unknown node id. Otherwise, we consider the node to be updated (i.e. if a node with the same id already exists in the repository). We do not support different modes.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RespositoryContext.clientId"
+          },
+          {
+            "$ref": "#/components/parameters/RespositoryContext.repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized 401. Invalid token or no token provided."
+          },
+          "412": {
+            "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreconditionFailed"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bulk"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreRequest"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "components": {
+    "parameters": {
+      "RespositoryContext.clientId": {
+        "name": "client-id",
+        "in": "header",
+        "required": true,
+        "description": "Client Id",
+        "schema": {
+          "$ref": "#/components/schemas/Identifier"
+        }
+      },
+      "RespositoryContext.repository": {
+        "name": "repository",
+        "in": "header",
+        "required": true,
+        "description": "Repository",
+        "schema": {
+          "$ref": "#/components/schemas/Identifier"
+        }
+      },
+      "RetriveRequest.depthLimit": {
+        "name": "depthLimit",
+        "in": "query",
+        "required": false,
+        "description": "Optionally limit the depth of retrieved subtrees.",
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "explode": false
+      }
+    },
+    "schemas": {
+      "AdditionalInfo": {
+        "type": "object",
+        "required": [
+          "kind",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "distribute": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KeyValue"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "type": "object",
+        "description": "Bad Request 400. The request is malformed."
+      },
+      "Chunk": {
+        "type": "object",
+        "required": [
+          "serializationFormatVersion",
+          "languages",
+          "nodes"
+        ],
+        "properties": {
+          "serializationFormatVersion": {
+            "$ref": "#/components/schemas/SerializationFormatVersion"
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LionWebLanguage"
+            }
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Node"
+            }
+          }
+        },
+        "description": "LionWeb Serialization Chunk",
+        "examples": [
+          {
+            "serializationFormatVersion": "2026.1",
+            "languages": [
+              {
+                "key": "myLanguage",
+                "version": "2"
+              },
+              {
+                "key": "BaseLanguage",
+                "version": "1"
+              },
+              {
+                "key": "LionWeb-M3",
+                "version": "2026.1"
+              }
+            ],
+            "nodes": [
+              {
+                "id": "node01",
+                "classifier": {
+                  "language": "myLanguage",
+                  "version": "2",
+                  "key": "61"
+                },
+                "properties": [],
+                "containments": [],
+                "references": [],
+                "annotations": [
+                  "marker",
+                  "docu1"
+                ],
+                "parent": null
+              }
+            ]
+          }
+        ]
+      },
+      "CreatePartitionRequest": {
+        "type": "object",
+        "required": [
+          "nodes",
+          "commandId",
+          "additionalInfos"
+        ],
+        "properties": {
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Chunk"
+            },
+            "description": "chunk containing all nodes we want to add as new partitions."
+          },
+          "commandId": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "CreatePartitionResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "additionalInfos"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "DeletePartitionRequest": {
+        "type": "object",
+        "required": [
+          "nodeIds",
+          "commandId",
+          "additionalInfos"
+        ],
+        "properties": {
+          "nodeIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Identifier"
+            },
+            "description": "List of node ids to delete."
+          },
+          "commandId": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "DeletePartitionResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "additionalInfos"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "Identifier": {
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9_-]+$",
+        "description": "LionWeb Identifier",
+        "examples": [
+          "uniqueId-0501"
+        ]
+      },
+      "IdsRequest": {
+        "type": "object",
+        "required": [
+          "count",
+          "additionalInfos"
+        ],
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of ids requested. The repository MUST return between one (inclusive) and count (inclusive) ids. It MAY return less than count ids."
+          },
+          "commandId": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "IdsResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "additionalInfos",
+          "ids"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          },
+          "ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Identifier"
+            },
+            "description": "List of ids guaranteed to be free."
+          }
+        }
+      },
+      "Key": {
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9_-]+$",
+        "description": "LionWeb Key",
+        "examples": [
+          "uniqueKey-0501"
+        ]
+      },
+      "KeyValue": {
+        "type": "object"
+      },
+      "LionWebContainment": {
+        "type": "object",
+        "required": [
+          "containment",
+          "children"
+        ],
+        "properties": {
+          "containment": {
+            "$ref": "#/components/schemas/MetaPointer"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Identifier"
+            }
+          }
+        },
+        "description": "LionWeb Containment",
+        "examples": [
+          {
+            "containment": {
+              "language": "java",
+              "version": "10",
+              "key": "java-10-32"
+            },
+            "children": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        ]
+      },
+      "LionWebLanguage": {
+        "type": "object",
+        "required": [
+          "key",
+          "version"
+        ],
+        "properties": {
+          "key": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "description": "LionWeb Language",
+        "examples": [
+          {
+            "key": "Logo",
+            "version": "1.618"
+          }
+        ]
+      },
+      "LionWebProperty": {
+        "type": "object",
+        "required": [
+          "property",
+          "value"
+        ],
+        "properties": {
+          "property": {
+            "$ref": "#/components/schemas/MetaPointer"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "LionWeb Property",
+        "examples": [
+          {
+            "property": {
+              "language": "scala",
+              "version": "2.718",
+              "key": "scala-lang"
+            },
+            "value": "This is a foundation for the Scala Language"
+          }
+        ]
+      },
+      "LionwebResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "chunk"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "chunk": {
+            "$ref": "#/components/schemas/Chunk"
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseMessage"
+            }
+          }
+        },
+        "description": "Result of the operation. `success` is `false` when the operation failed."
+      },
+      "ListPartitionRequest": {
+        "type": "object"
+      },
+      "ListPartitionResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "additionalInfos",
+          "chunk"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          },
+          "chunk": {
+            "$ref": "#/components/schemas/Chunk",
+            "description": "Chunk with all accessible Partitions in the Repository. The partitions are sent as complete nodes.[25] Does NOT include any children or annotations of the root partition nodes. Does NOT include Languages or partition children/annotations."
+          }
+        }
+      },
+      "MetaPointer": {
+        "type": "object",
+        "required": [
+          "language",
+          "version",
+          "key"
+        ],
+        "properties": {
+          "language": {
+            "$ref": "#/components/schemas/Key"
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "key": {
+            "$ref": "#/components/schemas/Key"
+          }
+        },
+        "description": "LionWeb Meta Pointer",
+        "examples": [
+          {
+            "language": "java",
+            "version": "10",
+            "key": "java-10-constructor"
+          }
+        ]
+      },
+      "Node": {
+        "type": "object",
+        "required": [
+          "id",
+          "classifier",
+          "properties",
+          "containments",
+          "references",
+          "annotations",
+          "parent"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "classifier": {
+            "$ref": "#/components/schemas/MetaPointer"
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LionWebProperty"
+            }
+          },
+          "containments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LionWebContainment"
+            }
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reference"
+            }
+          },
+          "annotations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Identifier"
+            }
+          },
+          "parent": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Identifier"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "LionWeb Node",
+        "examples": [
+          {
+            "id": "node01",
+            "classifier": {
+              "language": "myLanguage",
+              "version": "2",
+              "key": "61"
+            },
+            "properties": [],
+            "containments": [],
+            "references": [],
+            "annotations": [
+              "marker",
+              "docu1"
+            ],
+            "parent": null
+          }
+        ]
+      },
+      "PreconditionFailed": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        },
+        "description": "PreconditionFailed 412. A parameter or the request body is missing or invalid, or validation failed."
+      },
+      "Reference": {
+        "type": "object",
+        "required": [
+          "reference",
+          "targets"
+        ],
+        "properties": {
+          "reference": {
+            "$ref": "#/components/schemas/MetaPointer"
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TargetReference"
+            }
+          }
+        },
+        "description": "LionWeb Reference",
+        "examples": [
+          {
+            "reference": {
+              "language": "myLanguage",
+              "version": "10",
+              "key": "myLanguage-symbol-12"
+            },
+            "targets": [
+              {
+                "resolveInfo": null,
+                "reference": "javaClass"
+              },
+              {
+                "resolveInfo": null,
+                "reference": "javaEnum"
+              }
+            ]
+          }
+        ]
+      },
+      "ResponseBase": {
+        "type": "object",
+        "required": [
+          "success",
+          "additionalInfos"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "ResponseMessage": {
+        "type": "object",
+        "required": [
+          "kind",
+          "message"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Kind of message, e.g. `Info`, `PartitionHasParent`, `PartitionHasChildren`,`PartitionHasAnnotations`, `EmptyChunk`, `NullChunk`, `IdsIncorrect`,`PartitionAlreadyExists`, `NodeIsNotPartition`, `EmptyIdList`, `IdsNotFound`,`ParentMissing`, `NotImplemented`, `DepthLimitIncorrect`, or a validation issue kind."
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "RetrieveResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "additionalInfos",
+          "chunk"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          },
+          "chunk": {
+            "$ref": "#/components/schemas/Chunk",
+            "description": "Chunk containing all nodes according to nodeIds and depthLimit parameters. Does NOT include the definition of UsedLanguages, only their MetaPointers."
+          }
+        }
+      },
+      "RetriveRequest": {
+        "type": "object",
+        "required": [
+          "nodeIds",
+          "additionalInfos"
+        ],
+        "properties": {
+          "nodeIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Identifier"
+            },
+            "description": "List of node ids we want to retrieve from the repository. Can be partition node ids and/or nested node ids."
+          },
+          "commandId": {
+            "$ref": "#/components/schemas/Identifier",
+            "description": "Optional as this is not a modifying command."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "SerializationFormatVersion": {
+        "type": "string",
+        "pattern": "^\\S+(.*\\S)?$",
+        "description": "Serialization Format Version.",
+        "examples": [
+          "2026.1"
+        ]
+      },
+      "StoreRequest": {
+        "type": "object",
+        "required": [
+          "nodes",
+          "additionalInfos"
+        ],
+        "properties": {
+          "nodes": {
+            "$ref": "#/components/schemas/Chunk",
+            "description": "Chunk containing all nodes to store to the repository."
+          },
+          "commandId": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "StoreResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "additionalInfos"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean flag signaling success or failure with each response."
+          },
+          "additionalInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalInfo"
+            },
+            "description": "Extension point for custom properties."
+          }
+        }
+      },
+      "TargetReference": {
+        "type": "object",
+        "required": [
+          "resolveInfo",
+          "reference"
+        ],
+        "properties": {
+          "resolveInfo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Identifier"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "LionWeb Target Reference",
+        "examples": [
+          {
+            "resolveInfo": "self-reference",
+            "reference": "mapping"
+          }
+        ]
+      },
+      "Version": {
+        "type": "string",
+        "description": "Version",
+        "examples": [
+          "3.14"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "Bearer"
+      }
+    }
+  }
+}
