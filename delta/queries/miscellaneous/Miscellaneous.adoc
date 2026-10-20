@@ -1,8 +1,0 @@
-[[qry-misc]]
-==== Miscellaneous
-
-include::GetAvailableIds.adoc[]
-
-include::ListPartitions.adoc[]
-
-include::ListAndSubscribePartitions.adoc[]
