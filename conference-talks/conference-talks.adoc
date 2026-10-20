@@ -15,7 +15,7 @@ References can consist of: slide deck (in both PDF and PowerPoint format), a vid
     xref:LangDev/2025/LangDev 2025 Talk.pdf[slides (PDF)], xref:LangDev/2025/LangDev 2025 Talk.pptx[slides (PowerPoint)]
 
 2026::
-    xref:LangDev/2026/LangDev 2026 Talk.pdf[slides (PDF)], xref:LangDev/2026/LangDev 2026 Talk.pptx[slides (PowerPoint)]
+    xref:LangDev/2026/LangDev 2026 Talk.pdf[slides (PDF)], xref:LangDev/2026/LangDev 2026 Talk.pptx[slides (PowerPoint)], https://www.youtube.com/watch?v=AN4tVrDGZiE[video (YouTube)]
 
 
 == MODELS
