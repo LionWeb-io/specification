@@ -1,0 +1,38 @@
+name: LionWeb specification JSON checks
+
+on: [push, workflow_dispatch]
+
+env:
+  NuGetDirectory: ${{github.workspace}}/nuget
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+
+jobs:
+
+  JSON-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Download meta JSON Schema
+        run: curl -o meta.schema.json https://raw.githubusercontent.com/ajv-validator/ajv/refs/heads/master/lib/refs/json-schema-draft-07.json
+
+      - name: Validate JSON Schemas against meta JSON Schema
+        uses: cardinalby/schema-validator-action@v3
+        with:
+          schema: 'meta.schema.json'
+          file:
+            'delta/delta.schema.json|serialization/serialization.schema.json'
+
+      - name: Validate meta-metamodel JSONs against serialization JSON Schema
+        uses: cardinalby/schema-validator-action@v3
+        with:
+          schema: 'serialization/serialization.schema.json'
+          file:
+            'metametamodel/*.json'
+
+      - name: Run all JSON checks
+        run: ./check-JSONs.sh
+
