@@ -19,7 +19,7 @@ jobs:
       - name: Download meta JSON Schema
         run: curl -o meta.schema.json https://raw.githubusercontent.com/ajv-validator/ajv/refs/heads/master/lib/refs/json-schema-draft-07.json
 
-      - name: Validate meta-metamodel JSONs against serialization JSON Schema
+      - name: Validate JSON Schemas against meta JSON Schema
         uses: cardinalby/schema-validator-action@v3
         with:
           schema: 'meta.schema.json'
