@@ -770,7 +770,15 @@ Refer to <<keys>> for more constraints.
 [[predefined-keys]]
 === Pre-defined keys and resolveInfos
 We can serialize <<Language, languages>> as regular nodes.
-To keep the serialized form of the language compatible with multiple LionWeb versions. we SHOULD serialize references to M3 elements and <<builtins>> _without_ <<{serialization}.adoc#Reference.reference.reference, target reference id>>, and include the <<{serialization}.adoc#Reference.reference.resolveInfo, resolveInfo>> as listed in this section.{fn-org279}
+To keep the serialized form of the language compatible with multiple LionWeb versions,
+we SHOULD serialize references to M3 elements and <<builtins>> _without_
+<<{serialization}.adoc#Reference.reference.reference, target reference id>>,
+and include the
+<<{serialization}.adoc#Reference.reference.resolveInfo, resolveInfo>>
+as listed in this section.{fn-org279}
+
+We aim  at keeping pre-defined _keys_ and _resolveInfos_ stable over different LionWeb versions.
+The _ids_ of pre-defined elements are NOT stable, but CAN differ between LionWeb versions.{fn-org279}
 
 [[predefined-m3-keys]]
 ==== Keys and resolveInfos of M3 elements
@@ -821,11 +829,7 @@ The language itself has key `LionCore-M3`{fn-org91} and is named `LionCore_M3`{f
 
 [[predefined-builtins-keys]]
 ==== Keys and resolveInfos of built-in elements
-The language hosting built-in elements has id and key `LionCore-builtins`{fn-org141}, its name is `LionCore_builtins`{fn-org195}.
-
-Every language implicitly depends on this language.{fn-org9-implicit}
-Thus, the ids in this language MUST be stable.
-This means the id MUST be identical to the key for each node in this language.
+The language hosting built-in elements has key `LionCore-builtins`{fn-org141}, its name is `LionCore_builtins`{fn-org195}.
 
 [cols="d,d,m,m"]
 |===
@@ -845,6 +849,7 @@ This means the id MUST be identical to the key for each node in this language.
 Each LionWeb implementation ships with a set of built-in elements, akin to a _standard library_.{fn-org195}
 These elements are part of the M2 language <<predefined-builtins-keys, `LionCore_builtins`>>.
 It can be used in any user-defined Language.{fn-org196}
+Every language implicitly depends on this language.{fn-org9-implicit}
 
 plantuml::builtins.puml[format=svg]
 
