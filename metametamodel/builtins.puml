@@ -2,7 +2,11 @@
 
 'class language as "LionCore_builtins" <<(L,lightgray) Language>>
 
-class Node <<Concept>> #LightGreen
+class Node <<Concept>> #LightGreen implements INodeLike
+class Annotation <<Concept>> #LightGreen implements INodeLike 
+
+interface INodeLike <<Interface>> #LightGreen {
+}
 
 interface INamed <<Interface>> #LightGreen {
   name: String
