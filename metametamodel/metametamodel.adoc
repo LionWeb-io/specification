@@ -777,7 +777,7 @@ and include the
 <<{serialization}.adoc#Reference.reference.resolveInfo, resolveInfo>>
 as listed in this section.{fn-org279}
 
-We aim  at keeping pre-defined _keys_ and _resolveInfos_ stable over different LionWeb versions.
+We aim at keeping pre-defined _keys_ and _resolveInfos_ stable over different LionWeb versions.
 The _ids_ of pre-defined elements are NOT stable, but CAN differ between LionWeb versions.{fn-org279}
 
 [[predefined-m3-keys]]
