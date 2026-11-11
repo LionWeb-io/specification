@@ -1,0 +1,136 @@
+{
+  "presenters": {
+    "ftomassetti": { "name": "Federico Tomassetti" },
+    "markusvoelter": { "name": "Markus Voelter" },
+    "dslmeinte": { "name": "Meinte Boersma" },
+    "pjmolina": { "name": "Pedro J. Molina" },
+    "joswarmer": { "name": "Jos Warmer" },
+    "enikao": { "name": "Niko Stotz" },
+    "erk-dik": { "name": "Erkan Diken" },
+    "Ulyana-F1re": { "name": "Ulyana Tikhonova" },
+    "mfekkers": { "name": "Maarten Fekkers" },
+    "alessiostalla": { "name": "Alessio Stalla" }
+  },
+  "talks": [
+    {
+      "series": "LangDev",
+      "year": 2023,
+      "presenters": [ "enikao", "joswarmer" ],
+      "title": "The LionWeb Initiative",
+      "pdf": "LangDev/2023/LangDev 2023 Talk.pdf",
+      "pptx": "LangDev/2023/LangDev 2023 Talk.pptx",
+      "video": "https://www.youtube.com/watch?v=ZuR2C7DZ_r0"
+    },
+    {
+      "series": "LangDev",
+      "year": 2024,
+      "presenters": [ "enikao", "joswarmer" ],
+      "title": "LionWeb: Status Update",
+      "pdf": "LangDev/2024/LangDev 2024 Talk.pdf",
+      "pptx": "LangDev/2024/LangDev 2024 Talk.pptx",
+      "video": "https://www.youtube.com/watch?v=2KW-xalM2yE"
+    },
+    {
+      "series": "LangDev",
+      "year": 2025,
+      "presenters": [ "dslmeinte", "enikao", "Ulyana-F1re" ],
+      "title": "LionWeb: Status + Delta Protocol",
+      "pdf": "LangDev/2025/LangDev 2025 Talk.pdf",
+      "pptx": "LangDev/2025/LangDev 2025 Talk.pptx"
+    },
+    {
+      "series": "LangDev",
+      "year": 2026,
+      "presenters": [ "dslmeinte", "enikao" ],
+      "title": "LionWeb: Status update and use cases",
+      "pdf": "LangDev/2026/LangDev 2026 Talk.pdf",
+      "pptx": "LangDev/2026/LangDev 2026 Talk.pptx",
+      "video": "https://www.youtube.com/watch?v=AN4tVrDGZiE"
+    },
+    {
+      "series": "MODELS",
+      "year": 2023,
+      "presenters": [ "enikao" ],
+      "title": "The LionWeb Initiative",
+      "pdf": "MODELS/2023/MODELS education Talk.pdf",
+      "pptx": "MODELS/2023/MODELS education Talk.pptx"
+    },
+    {
+      "series": "MODELS",
+      "year": 2024,
+      "conference": {
+        "site": "https://conf.researchr.org/details/models-2024/models-2024-industry-day/6/LionWeb-Language-Interfaces-on-the-Web"
+      }
+    },
+    {
+      "series": "MODELS",
+      "year": 2026,
+      "presenters": [ "dslmeinte", "pjmolina" ],
+      "title": "LionWeb: Standards for Models Interoperability",
+      "conference": {
+        "site": "https://conf.researchr.org/track/models-2026/models-2026-industry-day",
+        "designation": "_Industry Day_ (1-day track)"
+      },
+      "pdf": "MODELS/2026/LionWeb - Standards for Models Interoperability.pdf",
+      "pptx": "MODELS/2026/LionWeb - Standards for Models Interoperability.pptx"
+    },
+    {
+      "series": "MBSE",
+      "year": 2025,
+      "presenters": [ "Ulyana-F1re", "dslmeinte", "mfekkers", "pjmolina" ],
+      "title": "Why settle for one MBSE tool when you can have an ecosystem?",
+      "pdf": "MBSE/2025/MBSE 11-2025.pdf",
+      "pptx": "MBSE/2025/MBSE 11-2025.pptx"
+    },
+    {
+      "other": "SEN Symposium 2024",
+      "presenters": [ "dslmeinte", "joswarmer" ],
+      "title": "The LionWeb Initiative",
+      "pdf": "SEN 2024/SEN-symposium 2024.pdf",
+      "pptx": "SEN 2024/SEN-symposium 2024.pptx",
+      "poster": "SEN 2024/SEN-symposium-poster-layers.pdf"
+    },
+    {
+      "other": "Strumenta Panel 2024",
+      "presenters": [ "enikao", "joswarmer" ],
+      "title": "The LionWeb Initiative",
+      "pdf": "Strumenta Panel 2024/StrumentaPanel Talk.pdf",
+      "pptx": "Strumenta Panel 2024/StrumentaPanel Talk.pptx"
+    },
+    {
+      "other": "MPS Meetup 2023",
+      "presenters": [ "markusvoelter", "enikao", "ftomassetti" ],
+      "title": "The LIonWeb Initiative",
+      "pdf": "https://voelter.de/data/presentations/lionweb2023.pdf",
+      "video": "https://www.youtube.com/watch?v=dzZdjqbRzuU"
+    },
+    {
+      "series": "LangDev",
+      "year": "2024",
+      "title": "Implementing LionWeb in Rascal",
+      "presenters": [ "Ulyana-F1re" ],
+      "pdf": "https://langdevcon.org/assets/2024/slides/LionWeb-Rascal%20LangDev%202024.pdf",
+      "video": "https://www.youtube.com/watch?v=Uq414dBALg4"
+    },
+    {
+      "series": "LangDev",
+      "year": "2024",
+      "title": "A Case Study Execution of LionWeb nodes in Truffle Language Framework",
+      "presenters": [ "erk-dik" ],
+      "video": "https://www.youtube.com/watch?v=CGPAWbidX8k"
+    },
+    {
+      "series": "LangDev",
+      "year": "2024",
+      "title": "LionWeb and Kolasu: an integration story",
+      "presenters": [ "alessiostalla" ],
+      "video": "https://www.youtube.com/watch?v=sUfSoEkXTuM"
+    },
+    {
+      "other": "Annual Symposium 2023 of MDENet",
+      "title": "The LionWeb Initiative: interoperability of language tools on the Web",
+      "presenters": [ "joswarmer" ],
+      "video": "https://www.youtube.com/watch?v=m8BWvaq4lW4"
+    }
+  ]
+}

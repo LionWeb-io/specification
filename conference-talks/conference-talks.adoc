@@ -1,46 +1,56 @@
 = Conference talks
 
-This folder holds references to talks we’ve given at various conferences.
+This folder holds references to talks we, or other people, have given at various conferences.
 References can consist of: slide deck (in both PDF and PowerPoint format), a video recording of the talk (when and where available), conference website.
+
 
 == LangDev
 
 2023::
-    xref:LangDev/2023/LangDev 2023 Talk.pdf[slides (PDF)], xref:LangDev/2023/LangDev 2023 Talk.pptx[slides (PowerPoint)], https://www.youtube.com/watch?v=ZuR2C7DZ_r0[video]
+    * __The LionWeb Initiative__, Niko Stotz, Jos Warmer, xref:LangDev/2023/LangDev 2023 Talk.pdf[slides (PDF)], xref:LangDev/2023/LangDev 2023 Talk.pptx[slides (PowerPoint)], https://www.youtube.com/watch?v=ZuR2C7DZ_r0&t=0s[video (YouTube)]
 
 2024::
-    xref:LangDev/2024/LangDev 2024 Talk.pdf[slides (PDF)], xref:LangDev/2024/LangDev 2024 Talk.pptx[slides (PowerPoint)], https://www.youtube.com/watch?v=2KW-xalM2yE[video]
+    * __LionWeb: Status Update__, Niko Stotz, Jos Warmer, xref:LangDev/2024/LangDev 2024 Talk.pdf[slides (PDF)], xref:LangDev/2024/LangDev 2024 Talk.pptx[slides (PowerPoint)], https://www.youtube.com/watch?v=2KW-xalM2yE&t=0s[video (YouTube)]
+    * __Implementing LionWeb in Rascal__, Ulyana Tikhonova, xref:https://langdevcon.org/assets/2024/slides/LionWeb-Rascal%20LangDev%202024.pdf[slides (PDF)], https://www.youtube.com/watch?v=Uq414dBALg4&t=0s[video (YouTube)]
+    * __A Case Study Execution of LionWeb nodes in Truffle Language Framework__, Erkan Diken, https://www.youtube.com/watch?v=CGPAWbidX8k&t=0s[video (YouTube)]
+    * __LionWeb and Kolasu: an integration story__, Alessio Stalla, https://www.youtube.com/watch?v=sUfSoEkXTuM&t=0s[video (YouTube)]
 
 2025::
-    xref:LangDev/2025/LangDev 2025 Talk.pdf[slides (PDF)], xref:LangDev/2025/LangDev 2025 Talk.pptx[slides (PowerPoint)]
+    * __LionWeb: Status + Delta Protocol__, Meinte Boersma, Niko Stotz, Ulyana Tikhonova, xref:LangDev/2025/LangDev 2025 Talk.pdf[slides (PDF)], xref:LangDev/2025/LangDev 2025 Talk.pptx[slides (PowerPoint)]
 
 2026::
-    xref:LangDev/2026/LangDev 2026 Talk.pdf[slides (PDF)], xref:LangDev/2026/LangDev 2026 Talk.pptx[slides (PowerPoint)], https://www.youtube.com/watch?v=AN4tVrDGZiE[video (YouTube)]
+    * __LionWeb: Status update and use cases__, Meinte Boersma, Niko Stotz, xref:LangDev/2026/LangDev 2026 Talk.pdf[slides (PDF)], xref:LangDev/2026/LangDev 2026 Talk.pptx[slides (PowerPoint)], https://www.youtube.com/watch?v=AN4tVrDGZiE&t=0s[video (YouTube)]
 
 
 == MODELS
 
 2023::
-    xref:MODELS/2023/MODELS education Talk.pdf[slides (PDF)], xref:MODELS/2023/MODELS education Talk.pptx[slides (PowerPoint)]
+    * __The LionWeb Initiative__, Niko Stotz, xref:MODELS/2023/MODELS education Talk.pdf[slides (PDF)], xref:MODELS/2023/MODELS education Talk.pptx[slides (PowerPoint)]
 
 2024::
-    https://conf.researchr.org/details/models-2024/models-2024-industry-day/6/LionWeb-Language-Interfaces-on-the-Web[conference]
+    * https://conf.researchr.org/details/models-2024/models-2024-industry-day/6/LionWeb-Language-Interfaces-on-the-Web[conference site]
 
 2026::
-    https://conf.researchr.org/track/models-2026/models-2026-industry-day[_Industry Day_ (1-day track)], xref:MODELS/2026/LionWeb - Standards for Models Interoperability.pdf[slides (PDF)], xref:MODELS/2026/LionWeb - Standards for Models Interoperability.pptx[slides (PowerPoint)]
+    * __LionWeb: Standards for Models Interoperability__, Meinte Boersma, Pedro J. Molina, https://conf.researchr.org/track/models-2026/models-2026-industry-day[_Industry Day_ (1-day track)], xref:MODELS/2026/LionWeb - Standards for Models Interoperability.pdf[slides (PDF)], xref:MODELS/2026/LionWeb - Standards for Models Interoperability.pptx[slides (PowerPoint)]
 
 
 == MBSE
 
 2025::
-    xref:MBSE/2025/MBSE 11-2025.pdf[slides (PDF)], xref:MBSE/2025/MBSE 11-2025.pptx[slides (PowerPoint)]
+    * __Why settle for one MBSE tool when you can have an ecosystem?__, Ulyana Tikhonova, Meinte Boersma, Maarten Fekkers, Pedro J. Molina, xref:MBSE/2025/MBSE 11-2025.pdf[slides (PDF)], xref:MBSE/2025/MBSE 11-2025.pptx[slides (PowerPoint)]
 
 
 == Other
 
 SEN Symposium 2024::
-    xref:SEN 2024/SEN-symposium 2024.pdf[slides (PDF)], xref:SEN 2024/SEN-symposium 2024.pptx[slides (PowerPoint)], xref:SEN 2024/SEN-symposium-poster-layers.pdf[poster (PDF)]
+    __The LionWeb Initiative__, Meinte Boersma, Jos Warmer, xref:SEN 2024/SEN-symposium 2024.pdf[slides (PDF)], xref:SEN 2024/SEN-symposium 2024.pptx[slides (PowerPoint)], xref:SEN 2024/SEN-symposium-poster-layers.pdf[poster (PDF)]
 
 Strumenta Panel 2024::
-    xref:Strumenta Panel 2024/StrumentaPanel Talk.pdf[slides (PDF)], xref:Strumenta Panel 2024/StrumentaPanel Talk.pptx[slides (PowerPoint)]
+    __The LionWeb Initiative__, Niko Stotz, Jos Warmer, xref:Strumenta Panel 2024/StrumentaPanel Talk.pdf[slides (PDF)], xref:Strumenta Panel 2024/StrumentaPanel Talk.pptx[slides (PowerPoint)]
+
+MPS Meetup 2023::
+    __The LIonWeb Initiative__, Markus Voelter, Niko Stotz, Federico Tomassetti, xref:https://voelter.de/data/presentations/lionweb2023.pdf[slides (PDF)], https://www.youtube.com/watch?v=dzZdjqbRzuU&t=0s[video (YouTube)]
+
+Annual Symposium 2023 of MDENet::
+    __The LionWeb Initiative: interoperability of language tools on the Web__, Jos Warmer, https://www.youtube.com/watch?v=m8BWvaq4lW4&t=0s[video (YouTube)]
 
