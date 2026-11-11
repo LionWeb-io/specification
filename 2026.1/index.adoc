@@ -39,4 +39,61 @@ xref:{m3}.adoc#Integer[Integer]
 
 == Known issues
 
-None.
+[inconsistent-stability-claims-pre-defined-keys-resolveinfos]
+=== Meta-metamodel: Inconsistent stability claims for pre-defined keys and resolveInfos
+
+==== Issue
+
+In and xref:{m3}.adoc#predefined-builtins-keys[Meta-metamodel doc, section 3.4.2 Keys and resolveInfos of built-in elements], the specification reads:
+
+[quote, Meta-metamodel, section Keys and resolveInfos of built-in elements]
+____
+The language hosting built-in elements has id and key `LionCore-builtins`{fn-org141}, its name is `LionCore_builtins`{fn-org195}.
+
+Every language implicitly depends on this language.{fn-org9-implicit}
+Thus, the ids in this language MUST be stable.
+This means the id MUST be identical to the key for each node in this language.
+____
+
+This contradicts xref:{m3}.adoc#predefined-keys[Meta-metamodel doc, section 3.4 Pre-defined keys and resolveInfos] on the value of pre-defined node ids:
+
+[quote, Meta-metamodel, section Pre-defined keys and resolveInfos]
+____
+We can serialize xref:{m3}.adoc#Language[languages] as regular nodes.
+To keep the serialized form of the language compatible with multiple LionWeb versions,
+we SHOULD serialize references to M3 elements and xref:{m3}.adoc#builtins[builtins] _without_
+xref:{serialization}.adoc#Reference.reference.reference[target reference id],
+and include the
+xref:{serialization}.adoc#Reference.reference.resolveInfo[resolveInfo]
+as listed in this section.{fn-org279}
+____
+
+==== Correction
+
+Section 3.4 is correct.
+We revised section 3.4.2, and added clarifications at the end of sections 3.4 and 3.5.
+
+The revised sections read:
+
+===== 3.4 Pre-defined keys and resolveInfos
+We can serialize xref:{m3}.adoc#Language[languages] as regular nodes.
+To keep the serialized form of the language compatible with multiple LionWeb versions,
+we SHOULD serialize references to M3 elements and xref:{m3}.adoc#builtins[builtins] _without_
+xref:{serialization}.adoc#Reference.reference.reference[target reference id],
+and include the
+xref:{serialization}.adoc#Reference.reference.resolveInfo[resolveInfo]
+as listed in this section.{fn-org279}
+
+We aim  at keeping pre-defined _keys_ and _resolveInfos_ stable over different LionWeb versions.
+The _ids_ of pre-defined elements are NOT stable, but CAN differ between LionWeb versions.{fn-org279}
+
+===== 3.4.1 Keys and resolveInfos of built-in elements
+The language hosting built-in elements has key `LionCore-builtins`{fn-org141}, its name is `LionCore_builtins`{fn-org195}.
+
+===== 3.5 Built-in elements
+Each LionWeb implementation ships with a set of built-in elements, akin to a _standard library_.{fn-org195}
+These elements are part of the M2 language xref:{m3}.adoc#predefined-builtins-keys[`LionCore_builtins`].
+It can be used in any user-defined Language.{fn-org196}
+Every language implicitly depends on this language.{fn-org9-implicit}
+
+plantuml::metametamodel/builtins.puml[format=svg]
